@@ -1,7 +1,7 @@
     .section .data
 
-    .global gUnknown_08111E18
-gUnknown_08111E18:
+    .global gGameProcesses
+gGameProcesses:
     .incbin "baserom.gba", 0x00111E18, 0x3C
 
     .global gUnknown_08111E54

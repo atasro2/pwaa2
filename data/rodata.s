@@ -1,7 +1,7 @@
     .section .rodata
 
-    .global gUnknown_0801AD88
-gUnknown_0801AD88:
+    .global IntrTableFunctionPtrs
+IntrTableFunctionPtrs:
     .incbin "baserom.gba", 0x0001AD88, 0x40
 
     .global gUnknown_0801ADC8

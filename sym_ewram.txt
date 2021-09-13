@@ -1,4 +1,4 @@
-. = 0x00000000; gUnknown_02000000 = .;
+. = 0x00000000; gSaveDataBuffer = .;
 . = 0x00000004; gUnknown_02000004 = .;
 . = 0x00000007; gUnknown_02000007 = .;
 . = 0x0000000B; gUnknown_0200000B = .;

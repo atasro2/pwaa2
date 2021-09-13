@@ -19,19 +19,31 @@ struct Joypad
 
 struct Main
 {
-    u32 unk0;
-    u32 unk4;
-    u8 process[0x4];
-    u8 processCopy[0x4];
-    u8 vblankWaitCounter;
-    u8 vblankWaitAmount;
-    u8 filler12[0x1C];
-    u16 currentBG;
-    u16 unk30;
-    s16 previousBG;
-    s8 currentBgStripe;
-    u8 filler35[0x2C0 - 0x35];
-};
+    /* +0x000 */ u32 unk0;
+    /* +0x004 */ u32 unk4;
+    /* +0x008 */ u8 process[0x4];
+    /* +0x00C */ u8 processCopy[0x4];
+    /* +0x010 */ u8 vblankWaitCounter;
+    /* +0x011 */ u8 vblankWaitAmount;
+    /* +0x012 */ s8 shakeAmountX; // unity: Quake_x
+    /* +0x013 */ s8 shakeAmountY; // unity: Quake_y
+    /* +0x014 */ u16 shakeTimer; // unity: Quake_timer
+    /* +0x016 */ u8 shakeIntensity; // unity: Quake_power
+    u8 filler17[0x2A - 0x17];
+    /* +0x02A */ u16 rngSeed; // unity: Random_seed
+    /* +0x02C */ u8 gottenEvidenceType; // unity: get_note_file / only written to 
+    /* +0x02D */ u8 gottenEvidenceId; // unity: get_note_id
+    /* +0x02E */ u16 currentBG;
+    /* +0x030 */ u16 unk30;
+    /* +0x032 */ s16 previousBG;
+    /* +0x034 */ s8 currentBgStripe;
+    u8 filler35[0xB3 - 0x35];
+    /* +0x0B3 */ u8 scenarioIdx;
+    /* +0x0B4 */ u8 caseEnabledFlags;
+    u8 fillerB5[0xDC - 0xB5];
+    /* +0x0DC */ u32 gameStateFlags;
+    u8 fillerE0[0x2C0 - 0xE0];
+}; /* size 0x2C0 */
 
 struct IORegisters
 {
@@ -100,13 +112,13 @@ extern struct OamAttrs gOamObjects[128];
 #define BACKUP_PROCESS_PTR(main) (*(u32*)main->processCopy = *(u32*)gMain.process)
 #define RESTORE_PROCESS_PTR(main) (*(u32*)gMain.process = *(u32*)main->processCopy)
 
-void ClearRamAndInitGame();
-void HideAllSprites();
-void SetLCDIORegs();
+void ClearRamAndInitGame(void);
+void HideAllSprites(void);
+void SetLCDIORegs(void);
 void SetTimedKeysAndDelay(u32 keyBits, u32 delay);
-u32 ReadKeysAndTestResetCombo();
+u32 ReadKeysAndTestResetCombo(void);
 void StartHardwareBlend(u32 mode, u32 delay, u32 deltaY, u32 target);
 void InitCourtScroll(u8 *, u32, u32, u32);
-void ResetGameState();
+void ResetGameState(void);
 
 #endif//GUARD_MAIN_H
