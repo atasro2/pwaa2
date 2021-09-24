@@ -33,11 +33,33 @@ struct Main
     /* +0x02A */ u16 rngSeed; // unity: Random_seed
     /* +0x02C */ u8 gottenEvidenceType; // unity: get_note_file / only written to 
     /* +0x02D */ u8 gottenEvidenceId; // unity: get_note_id
-    /* +0x02E */ u16 currentBG;
-    /* +0x030 */ u16 unk30;
-    /* +0x032 */ s16 previousBG;
-    /* +0x034 */ s8 currentBgStripe;
-    u8 filler35[0xB3 - 0x35];
+    /* +0x02E */ u16 currentBG; // unity AA4: Bg256_no? BG related code not in GlobalWork struct, this might be another struct on its own but i'm not sure
+    /* +0x030 */ u16 unk30; // unity AA4: Bg256_load_no?
+    /* +0x032 */ s16 previousBG; // unity AA4: Bg256_no_old? probably wrong
+    /* +0x034 */ s8 currentBgStripe; // maybe Bg256_rno_0?
+    /* +0x035 */ u8 unk2D; // unused field maybe Bg256_SP_Flag?
+    /* +0x036 */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
+    /* +0x037 */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
+    /* +0x038 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x
+    /* +0x03A */ s16 Bg256_scroll_y; // unity AA4: Bg256_scroll_y
+    /* +0x03C */ s16 Bg256_pos_x; // unity AA4: Bg256_pos_x
+    /* +0x03E */ s16 Bg256_pos_y; // unity AA4: Bg256_pos_y
+    /* +0x040 */ u16 unk38; // unity AA4: Bg256_add? unused but is background related 100%
+    /* +0x042 */ s16 Bg256_dir; // unity AA4: Bg256_dir
+    /* +0x044 */ s8 horizontolBGScrollSpeed; // unity AA4: Bg256_scroll_speed_x
+    /* +0x045 */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
+    /* +0x046 */ s8 Bg256_next_line; // unity AA4: Bg256_next_line
+    /* +0x047 */ s8 Bg256_buff_pos; // unity AA4: Bg256_buff_pos
+    /* +0x048 */ u8 * bgStripeDestPtr; // unity AA4: Bg256_buff_adr
+    /* +0x04C */ u32 bgStripeOffsets[12]; // unity AA4: Bg256_offset
+    /* +0x07C */ u16 blendTarget; // unity: Fade_object
+    /* +0x07E */ u16 blendMode; // unity: Fade_status
+    /* +0x080 */ u16 blendCounter; // unity: Fade_timer
+    /* +0x082 */ u8 blendDelay; // unity: fade_time
+    /* +0x083 */ u8 blendDeltaY; // unity: fade_speed
+    u8 filler84[0x90 - 0x84];
+    u8 unk90;
+    u8 filler91[0xB3 - 0x91];
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;
     u8 fillerB5[0xDC - 0xB5];

@@ -17,12 +17,12 @@ extern void (* const IntrTableFunctionPtrs[16])(void);
 
 extern void (*gIntrTable[0x10]);
 
-extern void DoGameProcess();
-extern void VBlankIntr();
-extern void HBlankIntr();
-extern void IntrDummy();
-extern void UpdateHardwareBlend();
-extern void UpdateCourtScroll(struct CourtScroll * );
+extern void DoGameProcess(void);
+extern void VBlankIntr(void);
+extern void HBlankIntr(void);
+extern void IntrDummy(void);
+static void UpdateHardwareBlend(void);
+static void UpdateCourtScroll(struct CourtScroll * );
 extern void sub_8000A80(void);
 
 void CheckAButtonAndGoToClearSaveScreen(void)
@@ -220,7 +220,7 @@ void ClearRamAndInitGame(void)
     REG_IME = TRUE;
 }
 
-void ResetGameState()
+void ResetGameState(void)
 {
     struct IORegisters *ioRegsp = &gIORegisters;
     struct Main *main = &gMain;
@@ -253,4 +253,218 @@ void ResetGameState()
     sub_8017910();
     SetTimedKeysAndDelay(DPAD_RIGHT | DPAD_LEFT, 15);
     m4aMPlayAllStop();
+}
+
+void HideAllSprites(void)
+{
+    u32 i;
+    for (i = 0; i < MAX_OAM_OBJ_COUNT; i++)
+        gOamObjects[i].attr0 = SPRITE_ATTR0_CLEAR;
+}
+
+void SetLCDIORegs(void)
+{
+    struct IORegisters *ioRegsp = &gIORegisters;
+    REG_IE = ioRegsp->iwp_ie;
+    REG_DISPSTAT = ioRegsp->lcd_dispstat;
+    REG_DISPCNT = ioRegsp->lcd_dispcnt;
+    DataCopy32(&REG_BG0CNT, &ioRegsp->lcd_bg0cnt);
+    DataCopy32(&REG_BG0HOFS, &ioRegsp->lcd_bg0hofs);
+    DataCopy32(&REG_BG1HOFS, &ioRegsp->lcd_bg1hofs);
+    DataCopy32(&REG_BG2CNT, &ioRegsp->lcd_bg2cnt);
+    DataCopy32(&REG_BG2HOFS, &ioRegsp->lcd_bg2hofs);
+    DataCopy32(&REG_BG3HOFS, &ioRegsp->lcd_bg3hofs);
+    DataCopy32(&REG_BG2PA, &ioRegsp->lcd_bg2pa);
+    DataCopy32(&REG_BG2PC, &ioRegsp->lcd_bg2pc);
+    REG_BG2X = ioRegsp->lcd_bg2x;
+    REG_BG2Y = ioRegsp->lcd_bg2y;
+    DataCopy32(&REG_BG3PA, &ioRegsp->lcd_bg3pa);
+    DataCopy32(&REG_BG3PC, &ioRegsp->lcd_bg3pc);
+    REG_BG3X = ioRegsp->lcd_bg3x;
+    REG_BG3Y = ioRegsp->lcd_bg3y;
+    DataCopy32(&REG_WIN0H, &ioRegsp->lcd_win0h);
+    DataCopy32(&REG_WIN0V, &ioRegsp->lcd_win0v);
+    DataCopy32(&REG_WININ, &ioRegsp->lcd_winin);
+    DataCopy32(&REG_MOSAIC, &ioRegsp->lcd_mosaic); // this writes to REG_BLDCNT, it shouldn't, should theoretically just write 0.
+    REG_BLDCNT = ioRegsp->lcd_bldcnt;
+    REG_BLDALPHA = ioRegsp->lcd_bldalpha;
+    REG_BLDY = ioRegsp->lcd_bldy;
+}
+
+void ReadKeys(void)
+{
+    struct Joypad *joypadCtrl = &gJoypad;
+    u16 keyInput = KEY_NEW();
+
+    joypadCtrl->previousHeldKeys = joypadCtrl->heldKeys;
+    joypadCtrl->previousPressedKeys = joypadCtrl->pressedKeys;
+    joypadCtrl->heldKeys = KEY_NEW();
+    joypadCtrl->pressedKeys = keyInput & ~joypadCtrl->previousHeldKeys;
+    joypadCtrl->activeTimedKeys = 0;
+
+    if (KEY_NEW() & joypadCtrl->timedKeys)
+    {
+        if (joypadCtrl->timedHoldTimer >= joypadCtrl->timedHoldDelay)
+        {
+            joypadCtrl->timedHoldTimer = 0;
+            joypadCtrl->activeTimedKeys = keyInput & joypadCtrl->timedKeys;
+        }
+        else
+        {
+            joypadCtrl->timedHoldTimer++;
+        }
+    }
+    else
+    {
+        joypadCtrl->timedHoldTimer = joypadCtrl->timedHoldDelay;
+    }
+}
+
+void SetTimedKeysAndDelay(u32 keyBits, u32 delay)
+{
+    gJoypad.timedKeys = keyBits;
+    gJoypad.timedHoldDelay = delay;
+}
+
+u32 ReadKeysAndTestResetCombo(void)
+{
+    struct Joypad *joypadCtrl = &gJoypad;
+    if (gMain.currentBgStripe == 0)
+        ReadKeys();
+
+    gMain.vblankWaitAmount = 1;
+
+    if (joypadCtrl->heldKeys == (A_BUTTON|B_BUTTON|START_BUTTON|SELECT_BUTTON))
+        return 1;
+
+    return 0;
+}
+
+void InitCourtScroll(u8 * arg0, u32 arg1, u32 arg2, u32 arg3)
+{
+    gCourtScroll.frameDataPtr = arg0;
+    gCourtScroll.state = arg3;
+    gCourtScroll.frameCounter = arg1;
+    gCourtScroll.endFrame = arg2;
+    gMain.isBGScrolling = FALSE;
+}
+
+
+static void UpdateCourtScroll(struct CourtScroll * courtScroll)
+{
+    if (courtScroll->state & 1)
+    {
+        courtScroll->frameCounter--;
+        if (courtScroll->frameCounter < 0)
+        {
+            courtScroll->state = 0;
+        }
+    }
+    else
+    {
+        courtScroll->frameCounter++;
+        if (courtScroll->frameCounter >= courtScroll->endFrame)
+        {
+            courtScroll->state &= 1;
+        }
+    }
+}
+
+void StartHardwareBlend(u32 mode, u32 delay, u32 deltaY, u32 target)
+{
+    gMain.blendTarget = target;
+    gMain.blendMode = mode;
+    gMain.blendDelay = delay;
+    gMain.blendDeltaY = deltaY;
+    gMain.blendCounter = 0;
+}
+
+void UpdateHardwareBlend(void)
+{
+    struct Main * main = &gMain;
+    struct IORegisters * ioRegs = &gIORegisters;
+    
+    gIORegisters.lcd_dispcnt &= ~DISPCNT_WIN0_ON;
+    gIORegisters.lcd_win0h = 0;
+    gIORegisters.lcd_win0v = 0;
+    gIORegisters.lcd_winin = 0;
+    gIORegisters.lcd_winout = 0;
+
+    switch(main->blendMode)
+    {
+        case 0:
+            break;
+        case 1:
+            ioRegs->lcd_bldcnt = main->blendTarget | BLDCNT_EFFECT_DARKEN;
+            if(++main->blendCounter >= main->blendDelay)
+            {
+                main->blendCounter = 0;
+                ioRegs->lcd_bldy -= main->blendDeltaY;
+            }
+            ioRegs->lcd_bldy &= 0x1F;
+            if(ioRegs->lcd_bldy == 0 || main->blendDeltaY == 0)
+            {
+                ioRegs->lcd_bldy = 0;
+                ioRegs->lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND;
+                ioRegs->lcd_bldalpha = BLDALPHA_BLEND(0x1F, 0x7);
+                main->blendMode = 0;
+            }
+            break;
+        case 2:
+            ioRegs->lcd_bldcnt = main->blendTarget | BLDCNT_EFFECT_DARKEN;
+            if(++main->blendCounter >= main->blendDelay)
+            {
+                main->blendCounter = 0;
+                ioRegs->lcd_bldy += main->blendDeltaY;
+            }
+            ioRegs->lcd_bldy &= 0x1F;
+            if(ioRegs->lcd_bldy == 0x10 || main->blendDeltaY == 0)
+            {
+                ioRegs->lcd_bldy = 0x10;
+                main->blendMode = 0;
+                main->blendCounter |= 0xFFFF;
+            }
+            break;
+        case 3:
+            ioRegs->lcd_bldcnt = main->blendTarget | BLDCNT_EFFECT_LIGHTEN;
+            if(++main->blendCounter >= main->blendDelay)
+            {
+                main->blendCounter = 0;
+                ioRegs->lcd_bldy -= main->blendDeltaY;
+            }
+            ioRegs->lcd_bldy &= 0x1F;
+            if(ioRegs->lcd_bldy == 0 || main->blendDeltaY == 0)
+            {
+                ioRegs->lcd_bldy = 0;
+                ioRegs->lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND;
+                ioRegs->lcd_bldalpha = BLDALPHA_BLEND(0x1F, 0x7);
+                main->blendMode = 0;
+            }
+            break;
+        case 4:
+            ioRegs->lcd_bldcnt = main->blendTarget | BLDCNT_EFFECT_LIGHTEN;
+            if(++main->blendCounter >= main->blendDelay)
+            {
+                main->blendCounter = 0;
+                ioRegs->lcd_bldy += main->blendDeltaY;
+            }
+            ioRegs->lcd_bldy &= 0x1F;
+            if(ioRegs->lcd_bldy == 0x10 || main->blendDeltaY == 0)
+            {
+                ioRegs->lcd_bldy = 0x10;
+                main->blendMode = 0;
+                main->blendCounter |= 0xFFFF;
+            }
+            break;
+    }
+    if(gMain.unk90 == 1
+    && gMain.blendMode == 0
+    && gMain.blendCounter != 0xFFFF)
+    {
+        gIORegisters.lcd_dispcnt |= DISPCNT_WIN0_ON;
+        gIORegisters.lcd_win0h = 239;
+        gIORegisters.lcd_win0v = 100;
+        gIORegisters.lcd_winin = WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ;
+        gIORegisters.lcd_winout = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR;
+    }
 }
