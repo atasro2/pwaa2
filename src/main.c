@@ -13,17 +13,35 @@
 #include "court.h"
 
 extern void (*gGameProcesses[])(struct Main *);
-extern void (* const IntrTableFunctionPtrs[16])(void);
-
 extern void (*gIntrTable[0x10]);
 
-extern void DoGameProcess(void);
-extern void VBlankIntr(void);
-extern void HBlankIntr(void);
-extern void IntrDummy(void);
+static void DoGameProcess(void);
+static void VBlankIntr(void);
+static void HBlankIntr(void);
+static void IntrDummy(void);
 static void UpdateHardwareBlend(void);
 static void UpdateCourtScroll(struct CourtScroll * );
-extern void sub_8000A80(void);
+static void sub_8000A80(void);
+
+static void (* const IntrTableFunctionPtrs[])() =
+{
+    VBlankIntr,
+    HBlankIntr,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy,
+    IntrDummy
+};
 
 void CheckAButtonAndGoToClearSaveScreen(void)
 {
@@ -651,4 +669,39 @@ void sub_8000A80(void)
             }
             break;
     }
+}
+
+void sub_8000E78(u32 unk0, u32 unk1, u32 unk2)
+{
+    struct Main * main = &gMain;
+    struct IORegisters * ioRegs = &gIORegisters;
+    main->unk84 = unk0;
+    main->unk88 = unk1;
+    main->unk89 = unk2;
+    ioRegs->lcd_bg3cnt |= BGCNT_MOSAIC;
+    ioRegs->lcd_bg2cnt |= BGCNT_MOSAIC;
+    main->unk86 = 0;
+}
+
+void sub_8000EB4(u32 unk0, u32 unk1, u32 unk2)
+{
+    struct Main * main = &gMain;
+    main->unk84 = unk0;
+    main->unk88 = unk1;
+    main->unk89 = unk2;
+    main->unk86 = 0;
+}
+
+void VBlankIntr()
+{
+    m4aSoundVSync();
+    gMain.vblankWaitCounter++;
+}
+
+void HBlankIntr()
+{
+}
+
+void IntrDummy()
+{
 }

@@ -28,14 +28,15 @@ SECTIONS {
         *libgcc.a:*_call_via_rX*.o(.text*);
         *libgcc.a:*_divsi3*.o(.text*);
         *libgcc.a:*_dvmd_tls*.o(.text*);
-	*libgcc.a:*_modsi3*.o(.text*);        
-	*libgcc.a:*_udivsi3*.o(.text*);
+	    *libgcc.a:*_modsi3*.o(.text*);        
+	    *libgcc.a:*_udivsi3*.o(.text*);
         *libgcc.a:*_umodsi3*.o(.text*);
     } =0
     .rodata :
     ALIGN(4)
     {
-	data/rodata.o(.rodata);
+        src/main.o(.rodata);
+	    data/rodata.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound.o(.rodata);
         src/agb_sram.o(.rodata); 
