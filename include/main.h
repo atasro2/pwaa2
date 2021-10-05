@@ -57,7 +57,11 @@ struct Main
     /* +0x080 */ u16 blendCounter; // unity: Fade_timer
     /* +0x082 */ u8 blendDelay; // unity: fade_time
     /* +0x083 */ u8 blendDeltaY; // unity: fade_speed
-    u8 filler84[0x90 - 0x84];
+    /* +0x084 */ u16 unk84; // unity AA4: SpEf_status?
+    /* +0x086 */ u16 unk86; // unity AA4: SpEf_timer?
+    /* +0x088 */ u8 unk88; // unity AA4: SpEf_time?
+    /* +0x088 */ u8 unk89; // unity AA4: SpEf_speed?
+    u8 filler8A[0x90 - 0x8A];
     u8 unk90;
     u8 filler91[0xB3 - 0x91];
     /* +0x0B3 */ u8 scenarioIdx;
@@ -99,8 +103,7 @@ struct IORegisters
     /* +0x3E */ u16 lcd_win1v;
     /* +0x40 */ u16 lcd_winin;
     /* +0x42 */ u16 lcd_winout;
-    /* +0x44 */ u16 lcd_mosaic;
-    /* +0x46 */ u8 filler46[2]; 
+    /* +0x44 */ u32 lcd_mosaic;
     /* +0x48 */ u16 lcd_bldcnt;
     /* +0x4A */ u16 lcd_dispcnt;
     /* +0x4C */ u16 lcd_bldalpha;

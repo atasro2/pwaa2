@@ -468,3 +468,187 @@ void UpdateHardwareBlend(void)
         gIORegisters.lcd_winout = WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR;
     }
 }
+
+void sub_8000A80(void)
+{
+    struct Main * main = &gMain; //r5 
+    struct IORegisters * ioRegs = &gIORegisters; //r3
+
+    switch(main->unk84)
+    {
+        case 0:     // cases required for matching
+        case 0xFFFD:
+        case 0xFFFE:
+        case 0xFFFF:
+            break;
+        case 1:
+            //_08000AE2:
+            main->unk86++;
+            if(main->unk86 >= main->unk88)
+            {
+                u32 temp = main->unk89 << 8;
+                main->unk86 = 0;
+                if((ioRegs->lcd_mosaic & 0xFF) < main->unk89)
+                    ioRegs->lcd_mosaic &= 0xFFFF;
+                else
+                    ioRegs->lcd_mosaic -= temp + main->unk89;
+                ioRegs--;ioRegs++;
+            }
+            if((ioRegs->lcd_mosaic & 0xFF) == 0)
+            {
+                ioRegs->lcd_bg3cnt &= ~BGCNT_MOSAIC;
+                ioRegs->lcd_bg2cnt &= ~BGCNT_MOSAIC;
+                main->unk84 = 0;
+            }
+            break;
+        case 2:
+            //_08000B54:
+            main->unk86++;
+            if(main->unk86 >= main->unk88)
+            {
+                u32 temp = main->unk89 << 8;
+                main->unk86 = 0;
+                if(0x100 <= (ioRegs->lcd_mosaic & 0xFF)+main->unk89)
+                    ioRegs->lcd_mosaic |= 0xFFFF;
+                else
+                    ioRegs->lcd_mosaic += temp + main->unk89;
+            }
+            if((ioRegs->lcd_mosaic & 0xFF) == 0xFF)
+                main->unk84 = 0xFFFF;
+            break;
+        case 3:
+        case 7:
+            //_08000BB8:
+            main->unk86++;
+            if(main->unk86 >= main->unk88)
+            {
+                main->unk86 = 0;
+                main->unk89++;
+                sub_8003988(main->currentBG, main->unk89, 0);
+                if(main->unk84 == 3 && gAnimation[1].unk4 & 0x11000000)
+                    sub_8003A7C(main->unk89, 0);
+                if(main->currentBG == 4 
+                || main->currentBG == 5 
+                || main->currentBG == 6)
+                    sub_8003B1C(main->currentBG, main->unk89, 0);
+            }
+            
+            if(main->unk89 == 0x20)
+                main->unk84 = 0xFFFD;
+            break;
+        case 4:
+        case 8:
+            //_08000C38:
+            main->unk86++;
+            if(main->unk86 >= main->unk88)
+            {
+                main->unk86 = 0;
+                main->unk89--;
+                sub_8003988(main->currentBG, main->unk89, 0);
+                if(main->unk84 == 4 && gAnimation[1].unk4 & 0x11000000)
+                    sub_8003A7C(main->unk89, 0);
+                if(main->currentBG == 4 
+                || main->currentBG == 5 
+                || main->currentBG == 6)
+                    sub_8003B1C(main->currentBG, main->unk89, 0);
+            }
+            
+            if(main->unk89 == 0)
+                main->unk84 = 0;
+            break;
+        case 5:
+            //_08000CA0:
+            main->unk86++;
+            if(main->unk86 >= main->unk88)
+            {
+                main->unk86 = 0;
+                main->unk89--;
+                sub_8003988(main->currentBG, main->unk89, 1);
+                if(gAnimation[1].unk4 & 0x11000000)
+                    sub_8003A7C(main->unk89, 1);
+                if(main->currentBG == 4 
+                || main->currentBG == 5 
+                || main->currentBG == 6)
+                    sub_8003B1C(main->currentBG, main->unk89, 1);
+            }
+            
+            if(main->unk89 == 0)
+                main->unk84 = 0;
+            break;
+        case 6:
+            //_08000D10:
+            main->unk86++;
+            if(main->unk86 >= main->unk88)
+            {
+                main->unk86 = 0;
+                main->unk89++;
+                sub_8003988(main->currentBG, main->unk89, 1);
+                if(gAnimation[1].unk4 & 0x11000000)
+                    sub_8003A7C(main->unk89, 1);
+                if(main->currentBG == 4 
+                || main->currentBG == 5 
+                || main->currentBG == 6)
+                    sub_8003B1C(main->currentBG, main->unk89, 1);
+                if(main->currentBG == 0x80)
+                {
+                    if(gAnimation[1].unk12 == 0x26)
+                        sub_8003B1C(6, main->unk89, 1);
+                }
+            }
+            
+            if(main->unk89 == 0x20)
+                main->unk84 = 0xFFFE;
+            break;
+        case 9:
+        case 11:
+            //_08000DA0:
+            if(main->unk88 != 0)
+            {
+                main->unk86++;
+                if(main->unk86 >= main->unk88)
+                {
+                    u32 temp = main->unk89 << 8;
+                    main->unk86 = 0;
+                    main->unk89++;
+                    if(main->unk84 == 11)
+                        sub_8003B8C(main->unk89, 2);
+                    else
+                        sub_8003B8C(main->unk89, 0);
+                }
+            }
+            if(main->unk89 == 0x20)
+            {
+                if(main->unk84 == 11)
+                    sub_8003B8C(main->unk89, 2);
+                else
+                    sub_8003B8C(main->unk89, 0);
+                main->unk84 = 0;
+            }
+            break;
+        case 10:
+        case 12:
+            //_08000DFE:
+            if(main->unk88 != 0)
+            {
+                main->unk86++;
+                if(main->unk86 >= main->unk88)
+                {
+                    main->unk86 = 0;
+                    main->unk89--;
+                    if(main->unk84 == 12)
+                        sub_8003B8C(main->unk89, 2);
+                    else
+                        sub_8003B8C(main->unk89, 0);
+                }
+            }
+            if(main->unk89 == 0)
+            {
+                if(main->unk84 == 12)
+                    sub_8003B8C(main->unk89, 2);
+                else
+                    sub_8003B8C(main->unk89, 0);
+                main->unk84 = 0;
+            }
+            break;
+    }
+}
