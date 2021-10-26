@@ -79,7 +79,7 @@ ifeq ($(DINFO),1)
 CFLAGS += -g
 endif
 
-NAME := pwaa1
+NAME := pwaa2
 ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
 TITLE := GYAKUTEN_SA2
@@ -101,6 +101,7 @@ compare:
 	@$(MAKE) COMPARE=1
 
 realclean: clean clean-tools clean-assets
+mostlyclean: clean clean-assets
 
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
