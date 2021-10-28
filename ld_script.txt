@@ -19,6 +19,11 @@ SECTIONS {
     {
         src/crt0.o(.text);
         src/main.o(.text);
+        asm/bg.o(.text);
+        src/utils.o(.text);
+        src/case_data.o(.text);
+        asm/investigation_segments.o(.text);
+        src/script_main.o(.text);
         asm/code.o(.text);
         /* library functions */
         src/m4a_1.o(.text);

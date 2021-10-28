@@ -27,7 +27,11 @@ struct InvestigationStruct // unity: tantei_work_
 {
     /* +0x00 */ u16 unk0; // unity AA4: finger_pos_x
     /* +0x02 */ u16 unk2; // unity AA4: finger_pos_y
-    u8 filler0[0x18];
+    /* +0x04 */ u8 filler04[0x2];
+    /* +0x06 */ u8 unk6;
+    /* +0x06 */ u8 filler07[0x9];
+    /* +0x10 */ u8 unk10;
+    /* +0x11 */ u8 filler11[0x8];
     ///* +0x04 */ u8 unk4; // unity AA4: sel_place
     ///* +0x05 */ u8 unk5; // unity: person_flag // is person in current room?
     ///* +0x06 */ u8 unk6; // unity AA4: ckeck_no_flag
@@ -182,7 +186,7 @@ extern const struct ExaminationData gUnknown_08018678[5];
 extern const struct ExaminationData gUnknown_080186DC[5];
 /* end data stuff from segments */
 
-void sub_800B7A8(struct InvestigationStruct *, u32);
+void sub_800EB24(struct InvestigationStruct *, u32);
 extern u32 sub_800D5B0(struct InvestigationStruct *);
 void sub_800D674(void);
 void sub_800D6C8(void);

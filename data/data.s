@@ -20,8 +20,8 @@ gUnknown_08111EBC:
 gUnknown_08111ED0:
     .incbin "baserom.gba", 0x00111ED0, 0x38
 
-    .global gUnknown_08111F08
-gUnknown_08111F08:
+    .global gFlagPtrs
+gFlagPtrs:
     .incbin "baserom.gba", 0x00111F08, 0xC
 
     .global gUnknown_08111F14
@@ -48,8 +48,8 @@ gUnknown_08112074:
 gUnknown_081120CC:
     .incbin "baserom.gba", 0x001120CC, 0x58
 
-    .global gUnknown_08112124
-gUnknown_08112124:
+    .global gScriptCmdFuncs
+gScriptCmdFuncs:
     .incbin "baserom.gba", 0x00112124, 0x1D4
 
     .global gUnknown_081122F8
@@ -1342,12 +1342,12 @@ gUnknown_081ADB68_gfx:
 
 @ BEGIN CHARSETS
 
-    .global gUnknown_081AE388
-gUnknown_081AE388:
+    .global gTextPal
+gTextPal:
     .incbin "graphics/charset.gbapal"
 
-    .global gUnknown_081AE3A8
-gUnknown_081AE3A8:
+    .global gCharSet
+gCharSet:
     .incbin "graphics/charset.4bpp"
 
 @ END CHARSETS
@@ -2208,7 +2208,7 @@ gUnknown_086EB860:
 gUnknown_0872D184:
     .incbin "baserom.gba", 0x0072D184, 0x3968
 
-    .global gUnknown_08730AEC
-gUnknown_08730AEC:
+    .global std_scripts
+std_scripts:
     .incbin "baserom.gba", 0x00730AEC, 0xCF514
 

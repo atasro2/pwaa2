@@ -32,8 +32,8 @@ gUnknown_0801B8D8:
 gUnknown_0801BBD8:
     .incbin "baserom.gba", 0x0001BBD8, 0x580
 
-    .global gUnknown_0801C158
-gUnknown_0801C158:
+    .global gSineTable
+gSineTable:
     .incbin "baserom.gba", 0x0001C158, 0x80
 
     .global gUnknown_0801C1D8
@@ -488,8 +488,8 @@ gUnknown_08022ABC:
 gUnknown_08022B5C:
     .incbin "baserom.gba", 0x00022B5C, 0xA0
 
-    .global gUnknown_08022BFC
-gUnknown_08022BFC:
+    .global gScriptTable
+gScriptTable:
     .incbin "baserom.gba", 0x00022BFC, 0x58
 
     .global gUnknown_08022C54

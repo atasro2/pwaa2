@@ -29,7 +29,10 @@ struct Main
     /* +0x013 */ s8 shakeAmountY; // unity: Quake_y
     /* +0x014 */ u16 shakeTimer; // unity: Quake_timer
     /* +0x016 */ u8 shakeIntensity; // unity: Quake_power
-    u8 filler17[0x2A - 0x17];
+    /* +0x017 */ u8 selectedButton; // unity: Cursol
+    /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
+    /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
+    u8 filler1A[0x2A - 0x1A];
     /* +0x02A */ u16 rngSeed; // unity: Random_seed
     /* +0x02C */ u8 gottenEvidenceType; // unity: get_note_file / only written to 
     /* +0x02D */ u8 gottenEvidenceId; // unity: get_note_id
@@ -66,9 +69,20 @@ struct Main
     u8 filler91[0xB3 - 0x91];
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;
-    u8 fillerB5[0xDC - 0xB5];
-    /* +0x0DC */ u32 gameStateFlags;
-    u8 fillerE0[0x2C0 - 0xE0];
+    /* +0x0B5 */ s8 health; // unity: rest
+    /* +0x0B6 */ u16 talkingAnimationOffset; // unity: Def_talk_foa
+    /* +0x0B8 */ u16 idleAnimationOffset; // unity: Def_wait_foa
+    //2 byte filler
+    /* +0x0BC */ u32 scriptFlags[8]; // unity: sce_flag matches debug menu
+    /* +0x0DC */ u32 gameStateFlags; // unity: status_flag matches debug menu
+    /* +0x0E0 */ u32 talkEndFlags[8]; // unity: talk_end_flag // TODO: find right size
+    /* +0x100 */ u32 unk100[8]; // script related, apollo's FW_Mess_flag??
+    /* +0x120 */ u8 roomData[16][8]; // unity: Map_data //TODO: first size might be wrong
+    u8 filler1A0[0x1A4 - 0x1A0];
+    /* +0x1A4 */ struct PsycheLock unk1A4[4];
+    u8 filler244[0x254 - 0x244];
+    /* +0x254 */ u32 soundFlags;
+    u8 filler258[0x2C0 - 0x258];
 }; /* size 0x2C0 */
 
 struct IORegisters
