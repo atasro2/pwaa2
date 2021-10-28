@@ -24,7 +24,11 @@ SECTIONS {
         src/case_data.o(.text);
         asm/investigation_segments.o(.text);
         src/script_main.o(.text);
-        asm/code.o(.text);
+        asm/script_commands.o(.text);
+        asm/romA7A8.o(.text);
+        asm/sound.o(.text);
+        asm/animation.o(.text);
+        asm/rom15CE0.o(.text);
         /* library functions */
         src/m4a_1.o(.text);
         src/m4a.o(.text);
