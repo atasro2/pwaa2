@@ -226,7 +226,7 @@ _08007F0A:
 	adds r0, #2
 	str r0, [r4, #4]
 	ldr r1, _08007FA0 @ =0x040000D4
-	ldr r0, _08007FA4 @ =gUnknown_081AE3A8+0x7100
+	ldr r0, _08007FA4 @ =gCharSet+0x7100
 	str r0, [r1]
 	ldr r0, _08007FA8 @ =0x06011F80
 	str r0, [r1, #4]
@@ -288,7 +288,7 @@ _08007F94: .4byte 0x000004DC
 _08007F98: .4byte 0x000004DE
 _08007F9C: .4byte 0x0000FFFC
 _08007FA0: .4byte 0x040000D4
-_08007FA4: .4byte gUnknown_081AE3A8+0x7100
+_08007FA4: .4byte gCharSet+0x7100
 _08007FA8: .4byte 0x06011F80
 _08007FAC: .4byte 0x80000040
 _08007FB0: .4byte gMapMarker
@@ -10716,7 +10716,7 @@ _0800D116:
 	ands r0, r3
 	cmp r0, #0
 	beq _0800D18A
-	ldr r0, _0800D220 @ =gUnknown_081AE3A8+0x7100
+	ldr r0, _0800D220 @ =gCharSet+0x7100
 	str r0, [r5]
 	ldr r0, _0800D224 @ =0x06011F80
 	str r0, [r5, #4]
@@ -10791,7 +10791,7 @@ _0800D210: .4byte gScriptContext
 _0800D214: .4byte gUnknown_03002080
 _0800D218: .4byte 0x80000400
 _0800D21C: .4byte gUnknown_03002FA0
-_0800D220: .4byte gUnknown_081AE3A8+0x7100
+_0800D220: .4byte gCharSet+0x7100
 _0800D224: .4byte 0x06011F80
 _0800D228: .4byte 0x80000040
 _0800D22C: .4byte gUnknown_081426FC
