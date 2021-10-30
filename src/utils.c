@@ -330,7 +330,7 @@ const s16 gSineTable[256+64] =
     Q_8_8(0.99609375),  // sin(319*(π/128))
 };
 */
-void MoveSpritesToOAM()
+void MoveSpritesToOAM(void)
 {
     DmaCopy16(3, gOamObjects, OAM, sizeof(gOamObjects));
 }
@@ -414,7 +414,7 @@ union s32asBitfields
     s32 w:32;
 };
 
-u8 Random()
+u8 Random(void)
 {
     struct Main * main = &gMain;
     union s32asBitfields unk0;

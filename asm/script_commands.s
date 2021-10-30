@@ -178,7 +178,7 @@ _08007EAC:
 _08007EBC:
 	movs r0, #0x2f
 	bl PlaySE
-	ldr r0, _08007F90 @ =gUnknown_03002080
+	ldr r0, _08007F90 @ =gBG1MapBuffer
 	ldr r2, _08007F94 @ =0x000004DC
 	adds r1, r0, r2
 	ldrh r0, [r1]
@@ -189,7 +189,7 @@ _08007EBC:
 	movs r0, #9
 	strh r0, [r1]
 _08007ED6:
-	ldr r0, _08007F90 @ =gUnknown_03002080
+	ldr r0, _08007F90 @ =gBG1MapBuffer
 	ldr r3, _08007F98 @ =0x000004DE
 	adds r1, r0, r3
 	ldrh r0, [r1]
@@ -283,7 +283,7 @@ _08007F76:
 	.align 2, 0
 _08007F88: .4byte gMain
 _08007F8C: .4byte gJoypad
-_08007F90: .4byte gUnknown_03002080
+_08007F90: .4byte gBG1MapBuffer
 _08007F94: .4byte 0x000004DC
 _08007F98: .4byte 0x000004DE
 _08007F9C: .4byte 0x0000FFFC
@@ -341,7 +341,7 @@ _08007FFA:
 	ldrh r4, [r4, #0xc]
 	cmp r4, #2
 	bne _080080F2
-	ldr r0, _08008028 @ =gUnknown_03000844
+	ldr r0, _08008028 @ =gAnimation+0x44
 	ldr r1, _0800802C @ =gMain
 	adds r1, #0xb6
 	ldrh r1, [r1]
@@ -350,14 +350,14 @@ _08007FFA:
 	.align 2, 0
 _08008020: .4byte 0x00007FFF
 _08008024: .4byte gTextBoxCharacters
-_08008028: .4byte gUnknown_03000844
+_08008028: .4byte gAnimation+0x44
 _0800802C: .4byte gMain
 _08008030:
 	movs r0, #1
 	ands r0, r1
 	cmp r0, #0
 	bne _0800804C
-	ldr r0, _08008078 @ =gUnknown_03000844
+	ldr r0, _08008078 @ =gAnimation+0x44
 	ldr r1, _0800807C @ =gMain
 	adds r1, #0xb8
 	ldrh r1, [r1]
@@ -390,7 +390,7 @@ _0800804C:
 	strb r5, [r4]
 	b _08008092
 	.align 2, 0
-_08008078: .4byte gUnknown_03000844
+_08008078: .4byte gAnimation+0x44
 _0800807C: .4byte gMain
 _08008080:
 	ldrb r0, [r4]
@@ -403,7 +403,7 @@ _08008080:
 	movs r0, #0
 	strb r0, [r4]
 _08008092:
-	ldr r2, _080080B4 @ =gUnknown_03002080
+	ldr r2, _080080B4 @ =gBG1MapBuffer
 	ldr r1, _080080B8 @ =gUnknown_08022C98
 	ldrb r3, [r4]
 	adds r0, r3, r1
@@ -420,7 +420,7 @@ _08008092:
 	strh r0, [r2]
 	b _080080F2
 	.align 2, 0
-_080080B4: .4byte gUnknown_03002080
+_080080B4: .4byte gBG1MapBuffer
 _080080B8: .4byte gUnknown_08022C98
 _080080BC: .4byte 0x000004DC
 _080080C0: .4byte 0x000004DE
@@ -430,7 +430,7 @@ _080080C4:
 	strb r5, [r0]
 	adds r0, #1
 	strb r5, [r0]
-	ldr r0, _080080FC @ =gUnknown_03002080
+	ldr r0, _080080FC @ =gBG1MapBuffer
 	ldr r5, _08008100 @ =0x000004DC
 	adds r3, r0, r5
 	ldrh r1, [r3]
@@ -456,7 +456,7 @@ _080080F4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080080FC: .4byte gUnknown_03002080
+_080080FC: .4byte gBG1MapBuffer
 _08008100: .4byte 0x000004DC
 _08008104: .4byte 0x000004DE
 
@@ -503,7 +503,7 @@ sub_800813C: @ 0x0800813C
 	adds r0, r2, #2
 	str r0, [r4, #4]
 	ldrh r0, [r2, #2]
-	bl sub_8013B14
+	bl FadeInBGM
 	ldr r0, [r4, #4]
 	adds r0, #2
 	str r0, [r4, #4]
@@ -1299,7 +1299,7 @@ sub_8008714: @ 0x08008714
 	ldrh r0, [r0]
 	cmp r0, #0x15
 	bne _08008736
-	ldr r0, _08008748 @ =gUnknown_03000844
+	ldr r0, _08008748 @ =gAnimation+0x44
 	ldr r1, _0800874C @ =gMain
 	adds r1, #0xb8
 	ldrh r1, [r1]
@@ -1315,7 +1315,7 @@ _0800873E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08008748: .4byte gUnknown_03000844
+_08008748: .4byte gAnimation+0x44
 _0800874C: .4byte gMain
 
 	thumb_func_start sub_8008750
@@ -1345,7 +1345,7 @@ sub_8008750: @ 0x08008750
 	adds r0, #1
 	strb r0, [r1]
 	movs r0, #0xe6
-	bl sub_8013998
+	bl PlayBGM
 	movs r0, #1
 	pop {r1}
 	bx r1
@@ -1702,7 +1702,7 @@ _08008A40:
 	ldr r0, _08008A5C @ =gMain
 	movs r1, #0
 	strb r1, [r0, #0x19]
-	ldr r0, _08008A60 @ =gUnknown_03002080
+	ldr r0, _08008A60 @ =gBG1MapBuffer
 	movs r2, #0
 	movs r1, #0xff
 	ldr r3, _08008A64 @ =0x000004FE
@@ -1716,14 +1716,14 @@ _08008A50:
 	b _08008B94
 	.align 2, 0
 _08008A5C: .4byte gMain
-_08008A60: .4byte gUnknown_03002080
+_08008A60: .4byte gBG1MapBuffer
 _08008A64: .4byte 0x000004FE
 _08008A68:
 	ldr r0, _08008A8C @ =gMain
 	ldrb r0, [r0, #8]
 	cmp r0, #3
 	bne _08008A82
-	ldr r0, _08008A90 @ =gUnknown_03000844
+	ldr r0, _08008A90 @ =gAnimation+0x44
 	bl sub_8014F94
 	ldr r0, _08008A94 @ =gInvestigation
 	movs r1, #0
@@ -1736,14 +1736,14 @@ _08008A82:
 	b _08008B94
 	.align 2, 0
 _08008A8C: .4byte gMain
-_08008A90: .4byte gUnknown_03000844
+_08008A90: .4byte gAnimation+0x44
 _08008A94: .4byte gInvestigation
 _08008A98:
 	ldr r5, _08008AF4 @ =gMain
 	ldrb r0, [r5, #8]
 	cmp r0, #3
 	bne _08008AB2
-	ldr r0, _08008AF8 @ =gUnknown_03000844
+	ldr r0, _08008AF8 @ =gAnimation+0x44
 	bl sub_8014F94
 	ldr r0, _08008AFC @ =gInvestigation
 	movs r1, #0
@@ -1783,7 +1783,7 @@ _08008AE2:
 	b _08008B94
 	.align 2, 0
 _08008AF4: .4byte gMain
-_08008AF8: .4byte gUnknown_03000844
+_08008AF8: .4byte gAnimation+0x44
 _08008AFC: .4byte gInvestigation
 _08008B00:
 	ldr r5, _08008B34 @ =gInvestigation
@@ -1986,7 +1986,7 @@ sub_8008C40: @ 0x08008C40
 _08008C7C: .4byte gMain
 _08008C80: .4byte gInvestigation
 _08008C84:
-	ldr r0, _08008CA0 @ =gUnknown_03000844
+	ldr r0, _08008CA0 @ =gAnimation+0x44
 	bl sub_8014F94
 	ldr r0, _08008CA4 @ =gInvestigation
 	movs r1, #0
@@ -1999,7 +1999,7 @@ _08008C96:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08008CA0: .4byte gUnknown_03000844
+_08008CA0: .4byte gAnimation+0x44
 _08008CA4: .4byte gInvestigation
 
 	thumb_func_start sub_8008CA8
@@ -2020,7 +2020,7 @@ sub_8008CA8: @ 0x08008CA8
 	adds r1, r5, #0
 	orrs r0, r1
 	strh r0, [r4]
-	ldr r1, _08008D00 @ =gUnknown_03000000
+	ldr r1, _08008D00 @ =gBG2MapBuffer
 	movs r0, #0
 	ldr r4, _08008D04 @ =0x0000029F
 	adds r5, r2, #0
@@ -2047,7 +2047,7 @@ _08008CD2:
 	.align 2, 0
 _08008CF8: .4byte gIORegisters
 _08008CFC: .4byte 0x0000FBFF
-_08008D00: .4byte gUnknown_03000000
+_08008D00: .4byte gBG2MapBuffer
 _08008D04: .4byte 0x0000029F
 _08008D08: .4byte 0x0000FFBF
 
@@ -2106,10 +2106,10 @@ sub_8008D5C: @ 0x08008D5C
 	ldrh r0, [r1, #2]
 	cmp r0, #0
 	beq _08008D74
-	bl sub_8013AE4
+	bl FadeOutBGM
 	b _08008D78
 _08008D74:
-	bl sub_8013A48
+	bl StopBGM
 _08008D78:
 	ldr r0, [r4, #4]
 	adds r0, #2
@@ -2131,7 +2131,7 @@ sub_8008D88: @ 0x08008D88
 	ldrh r0, [r0, #2]
 	cmp r0, #0
 	beq _08008DA0
-	bl sub_8013A7C
+	bl UnpauseBGM
 	b _08008DA4
 _08008DA0:
 	bl PauseBGM
@@ -2454,8 +2454,8 @@ sub_8008FE8: @ 0x08008FE8
 	strb r3, [r0, #0xe]
 	strb r3, [r0, #0xf]
 	movs r2, #0
-	ldr r4, _08009050 @ =gUnknown_03002080
-	ldr r6, _08009054 @ =gUnknown_03000844
+	ldr r4, _08009050 @ =gBG1MapBuffer
+	ldr r6, _08009054 @ =gAnimation+0x44
 	ldr r5, _08009058 @ =gMain
 	ldr r3, _0800905C @ =0x00007FFF
 	ldr r1, _08009060 @ =gTextBoxCharacters
@@ -2498,8 +2498,8 @@ _0800903A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08009050: .4byte gUnknown_03002080
-_08009054: .4byte gUnknown_03000844
+_08009050: .4byte gBG1MapBuffer
+_08009054: .4byte gAnimation+0x44
 _08009058: .4byte gMain
 _0800905C: .4byte 0x00007FFF
 _08009060: .4byte gTextBoxCharacters
@@ -2525,7 +2525,7 @@ sub_800906C: @ 0x0800906C
 	adds r0, #0x37
 	strb r2, [r0]
 	movs r2, #0
-	ldr r4, _080090D4 @ =gUnknown_03002080
+	ldr r4, _080090D4 @ =gBG1MapBuffer
 	ldr r3, _080090D8 @ =0x00007FFF
 	ldr r1, _080090DC @ =gTextBoxCharacters
 _08009094:
@@ -2563,7 +2563,7 @@ _080090C8:
 	bx r1
 	.align 2, 0
 _080090D0: .4byte 0x0000FFFC
-_080090D4: .4byte gUnknown_03002080
+_080090D4: .4byte gBG1MapBuffer
 _080090D8: .4byte 0x00007FFF
 _080090DC: .4byte gTextBoxCharacters
 _080090E0: .4byte 0x000004DC
@@ -2874,7 +2874,7 @@ sub_8009320: @ 0x08009320
 	ldrh r2, [r1, #2]
 	adds r1, r4, #2
 	str r1, [r0, #4]
-	ldr r3, _08009348 @ =gUnknown_03002920
+	ldr r3, _08009348 @ =gTalkData
 	lsls r1, r2, #2
 	adds r1, r1, r2
 	lsls r1, r1, #2
@@ -2889,7 +2889,7 @@ sub_8009320: @ 0x08009320
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08009348: .4byte gUnknown_03002920
+_08009348: .4byte gTalkData
 
 	thumb_func_start sub_800934C
 sub_800934C: @ 0x0800934C
@@ -2901,14 +2901,14 @@ sub_800934C: @ 0x0800934C
 	ldrh r0, [r0, #2]
 	cmp r0, #0
 	beq _0800936C
-	ldr r0, _08009368 @ =gUnknown_03000844
+	ldr r0, _08009368 @ =gAnimation+0x44
 	movs r1, #1
 	bl sub_8014138
 	b _08009374
 	.align 2, 0
-_08009368: .4byte gUnknown_03000844
+_08009368: .4byte gAnimation+0x44
 _0800936C:
-	ldr r0, _08009384 @ =gUnknown_03000844
+	ldr r0, _08009384 @ =gAnimation+0x44
 	movs r1, #0
 	bl sub_8014138
 _08009374:
@@ -2920,7 +2920,7 @@ _08009374:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08009384: .4byte gUnknown_03000844
+_08009384: .4byte gAnimation+0x44
 
 	thumb_func_start sub_8009388
 sub_8009388: @ 0x08009388
@@ -4051,7 +4051,7 @@ _08009C5A:
 	movs r6, #0x28
 	rsbs r6, r6, #0
 _08009C5E:
-	ldr r0, _08009D18 @ =gUnknown_03000844
+	ldr r0, _08009D18 @ =gAnimation+0x44
 	movs r2, #0x10
 	ldrsh r1, [r0, r2]
 	subs r1, r1, r6
@@ -4062,7 +4062,7 @@ _08009C6E:
 	ldr r0, _08009D1C @ =gIORegisters
 	mov ip, r0
 	ldr r2, _08009D20 @ =0x0000E080
-	ldr r1, _08009D24 @ =gUnknown_03000000
+	ldr r1, _08009D24 @ =gBG2MapBuffer
 	movs r0, #0x80
 	lsls r0, r0, #3
 _08009C7A:
@@ -4072,7 +4072,7 @@ _08009C7A:
 	cmp r0, #0
 	bne _08009C7A
 	movs r0, #0
-	ldr r7, _08009D24 @ =gUnknown_03000000
+	ldr r7, _08009D24 @ =gBG2MapBuffer
 _08009C88:
 	movs r2, #0
 	adds r4, r0, #1
@@ -4150,10 +4150,10 @@ _08009CFA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08009D18: .4byte gUnknown_03000844
+_08009D18: .4byte gAnimation+0x44
 _08009D1C: .4byte gIORegisters
 _08009D20: .4byte 0x0000E080
-_08009D24: .4byte gUnknown_03000000
+_08009D24: .4byte gBG2MapBuffer
 _08009D28: .4byte 0x040000D4
 _08009D2C: .4byte gUnknown_0203B500
 _08009D30: .4byte 0x80002580
@@ -4170,7 +4170,7 @@ sub_8009D3C: @ 0x08009D3C
 	adds r1, r2, #2
 	str r1, [r4, #4]
 	ldrh r1, [r2, #2]
-	bl sub_8013D04
+	bl SetBGMVolume
 	ldr r0, [r4, #4]
 	adds r0, #2
 	str r0, [r4, #4]

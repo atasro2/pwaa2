@@ -32,7 +32,14 @@ struct Main
     /* +0x017 */ u8 selectedButton; // unity: Cursol
     /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
-    u8 filler1A[0x2A - 0x1A];
+    u8 filler1A[0x20 - 0x1A];
+    /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
+    /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
+    /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now
+    /* +0x024 */ u8 filler24; //?
+    /* +0x025 */ u8 animationFlags; // unity: Obj_flag
+    /* +0x026 */ s16 bgmFadeAmount; // unity: bgm_fade_time?
+    /* +0x028 */ s16 bgmVolume; // unity: bgm_vol
     /* +0x02A */ u16 rngSeed; // unity: Random_seed
     /* +0x02C */ u8 gottenEvidenceType; // unity: get_note_file / only written to 
     /* +0x02D */ u8 gottenEvidenceId; // unity: get_note_id
@@ -82,7 +89,10 @@ struct Main
     /* +0x1A4 */ struct PsycheLock unk1A4[4];
     u8 filler244[0x254 - 0x244];
     /* +0x254 */ u32 soundFlags;
-    u8 filler258[0x2C0 - 0x258];
+    u8 filler258[0x2B8 - 0x258];
+    u16 unk2B8;
+    u16 unk2BA;
+    u8 filler2BC[0x2C0 - 0x2BC];
 }; /* size 0x2C0 */
 
 struct IORegisters

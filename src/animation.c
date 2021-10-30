@@ -1,0 +1,10 @@
+#include "global.h"
+#include "animation.h"
+#include "ewram.h"
+#include "sound.h"
+#include "utils.h"
+#include "script.h"
+#include "background.h"
+#include "graphics.h"
+#include "constants/animation.h"
+

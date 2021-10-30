@@ -26,7 +26,7 @@ SECTIONS {
         src/script_main.o(.text);
         asm/script_commands.o(.text);
         asm/romA7A8.o(.text);
-        asm/sound.o(.text);
+        src/sound.o(.text);
         asm/animation.o(.text);
         asm/rom15CE0.o(.text);
         /* library functions */

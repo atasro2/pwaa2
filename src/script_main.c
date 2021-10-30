@@ -412,7 +412,7 @@ static void DrawTextAndMapMarkers(struct ScriptContext * scriptCtx)
         }
     }
 }
-void RedrawTextboxCharacters()
+void RedrawTextboxCharacters(void)
 {
     u32 i;
     u8 * src;
