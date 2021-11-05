@@ -4,7 +4,7 @@
 #include "animation.h"
 #include "sound.h"
 #include "background.h"
-/*
+
 // Values of sin(x*(π/128)) as Q8.8 fixed-point numbers from x = 0 to x = 319
 const s16 gSineTable[256+64] =
 {
@@ -329,7 +329,7 @@ const s16 gSineTable[256+64] =
     Q_8_8(0.99609375),  // sin(318*(π/128))
     Q_8_8(0.99609375),  // sin(319*(π/128))
 };
-*/
+
 void MoveSpritesToOAM(void)
 {
     DmaCopy16(3, gOamObjects, OAM, sizeof(gOamObjects));
@@ -426,14 +426,13 @@ u8 Random(void)
     main->rngSeed = unk0.w;
     return unk0.w;
 }
-/*
+
 u32 * gFlagPtrs[] = {
     gMain.scriptFlags,
     &gMain.gameStateFlags,
     gMain.talkEndFlags
 };
-*/
-extern u32 * gFlagPtrs[];
+
 void ChangeFlag(u32 flagType, u32 id, bool32 set)
 {
     u32 * flagPtr = gFlagPtrs[flagType];

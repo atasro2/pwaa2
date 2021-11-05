@@ -1710,7 +1710,7 @@ _080172D8:
 	lsls r0, r0, #1
 	mov sl, r0
 	ldr r4, _08017358 @ =gSineTable
-	ldr r1, _0801735C @ =gUnknown_0801C1D8
+	ldr r1, _0801735C @ =gSineTable+0x80
 	movs r2, #0
 	ldrsh r0, [r1, r2]
 	mov r1, sl
@@ -1728,7 +1728,7 @@ _080172D8:
 	mov r1, sl
 	bl fix_mul
 	strh r0, [r5, #0x16]
-	ldr r2, _0801735C @ =gUnknown_0801C1D8
+	ldr r2, _0801735C @ =gSineTable+0x80
 	movs r1, #0
 	ldrsh r0, [r2, r1]
 	mov r1, sl
@@ -1761,7 +1761,7 @@ _0801732C:
 	.align 2, 0
 _08017354: .4byte gOamObjects
 _08017358: .4byte gSineTable
-_0801735C: .4byte gUnknown_0801C1D8
+_0801735C: .4byte gSineTable+0x80
 _08017360: .4byte 0x000001FF
 _08017364:
 	lsrs r1, r2, #0x10
@@ -1810,7 +1810,7 @@ _08017396:
 	asrs r0, r0, #0x10
 	bl fix_inverse
 	adds r5, r0, #0
-	ldr r1, _08017488 @ =gUnknown_0801C1D8
+	ldr r1, _08017488 @ =gSineTable+0x80
 	movs r2, #0
 	ldrsh r0, [r1, r2]
 	lsls r5, r5, #0x10
@@ -1846,7 +1846,7 @@ _08017396:
 	lsls r1, r1, #3
 	add r1, r8
 	strh r0, [r1, #6]
-	ldr r1, _08017488 @ =gUnknown_0801C1D8
+	ldr r1, _08017488 @ =gSineTable+0x80
 	movs r2, #0
 	ldrsh r0, [r1, r2]
 	movs r1, #0x80
@@ -1907,7 +1907,7 @@ _08017470:
 	bx r1
 	.align 2, 0
 _08017484: .4byte 0x000003FF
-_08017488: .4byte gUnknown_0801C1D8
+_08017488: .4byte gSineTable+0x80
 _0801748C: .4byte gOamObjects
 _08017490: .4byte gSineTable
 

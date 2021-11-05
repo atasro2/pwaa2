@@ -39,9 +39,7 @@ void LoadCurrentScriptIntoRam(void)
 void RunScriptContext(void)
 {
     if (gMain.advanceScriptContext && gMain.blendMode == 0)
-    {
         AdvanceScriptContext(&gScriptContext);
-    }
     DrawTextAndMapMarkers(&gScriptContext);
 }
 

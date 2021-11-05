@@ -872,7 +872,7 @@ sub_800AE84: @ 0x0800AE84
 	orrs r0, r2
 	strb r0, [r1]
 	ldr r1, _0800AEBC @ =0x040000D4
-	ldr r0, _0800AEC0 @ =gUnknown_08022F04
+	ldr r0, _0800AEC0 @ =gSaveVersion
 	str r0, [r1]
 	str r4, [r1, #4]
 	ldr r0, _0800AEC4 @ =0x80000019
@@ -890,7 +890,7 @@ sub_800AE84: @ 0x0800AE84
 	.align 2, 0
 _0800AEB8: .4byte gSaveDataBuffer
 _0800AEBC: .4byte 0x040000D4
-_0800AEC0: .4byte gUnknown_08022F04
+_0800AEC0: .4byte gSaveVersion
 _0800AEC4: .4byte 0x80000019
 _0800AEC8: .4byte 0x00002BBC
 
@@ -904,7 +904,7 @@ sub_800AECC: @ 0x0800AECC
 	adds r1, r4, #0
 	bl ReadSram
 	movs r1, #0
-	ldr r2, _0800AF18 @ =gUnknown_08022F04
+	ldr r2, _0800AF18 @ =gSaveVersion
 _0800AEE0:
 	adds r0, r1, r2
 	ldrb r0, [r0]
@@ -932,7 +932,7 @@ _0800AEE0:
 	.align 2, 0
 _0800AF10: .4byte gSaveDataBuffer
 _0800AF14: .4byte 0x00002BBC
-_0800AF18: .4byte gUnknown_08022F04
+_0800AF18: .4byte gSaveVersion
 _0800AF1C: .4byte gMain
 _0800AF20:
 	ldr r1, _0800AF2C @ =gMain
@@ -2413,7 +2413,7 @@ _0800BB8A:
 	ldr r1, _0800BBA8 @ =gScriptContext
 	movs r0, #0x80
 	strh r0, [r1, #0x1e]
-	ldr r0, _0800BBAC @ =gUnknown_0801C3D8
+	ldr r0, _0800BBAC @ =gCaseStartProcess
 	ldrb r3, [r3]
 	adds r0, r3, r0
 	ldrb r0, [r0]
@@ -2424,7 +2424,7 @@ _0800BBA0:
 	.align 2, 0
 _0800BBA4: .4byte gIORegisters
 _0800BBA8: .4byte gScriptContext
-_0800BBAC: .4byte gUnknown_0801C3D8
+_0800BBAC: .4byte gCaseStartProcess
 
 	thumb_func_start sub_800BBB0
 sub_800BBB0: @ 0x0800BBB0
@@ -3043,7 +3043,7 @@ _0800C074: .4byte gSaveDataBuffer
 _0800C078: .4byte 0x00002BBC
 _0800C07C:
 	ldr r2, _0800C0B4 @ =0x040000D4
-	ldr r0, _0800C0B8 @ =gUnknown_08022F04
+	ldr r0, _0800C0B8 @ =gSaveVersion
 	str r0, [r2]
 	ldr r0, _0800C0BC @ =gSaveDataBuffer
 	str r0, [r2, #4]
@@ -3070,7 +3070,7 @@ _0800C07C:
 	b _0800C3E6
 	.align 2, 0
 _0800C0B4: .4byte 0x040000D4
-_0800C0B8: .4byte gUnknown_08022F04
+_0800C0B8: .4byte gSaveVersion
 _0800C0BC: .4byte gSaveDataBuffer
 _0800C0C0: .4byte 0x80000019
 _0800C0C4: .4byte 0x00002BBC
@@ -4165,7 +4165,7 @@ _0800C90E:
 	adds r2, r6, #0
 	adds r2, #0xb3
 	ldr r3, _0800C958 @ =gMain
-	ldr r4, _0800C95C @ =gUnknown_0801C3D8
+	ldr r4, _0800C95C @ =gCaseStartProcess
 	cmp r1, #0
 	beq _0800C948
 	movs r7, #0
@@ -4190,7 +4190,7 @@ _0800C948:
 	b _0800C976
 	.align 2, 0
 _0800C958: .4byte gMain
-_0800C95C: .4byte gUnknown_0801C3D8
+_0800C95C: .4byte gCaseStartProcess
 _0800C960:
 	cmp r0, #2
 	beq _0800C96E
@@ -5262,7 +5262,7 @@ _0800D2A4:
 	strh r1, [r0]
 	subs r0, #2
 	strh r1, [r0]
-	ldr r0, _0800D2DC @ =gUnknown_0801C3D8
+	ldr r0, _0800D2DC @ =gCaseStartProcess
 	mov r1, r8
 	adds r1, #0xb3
 	ldrb r1, [r1]
@@ -5274,7 +5274,7 @@ _0800D2A4:
 	.align 2, 0
 _0800D2D4: .4byte gMain
 _0800D2D8: .4byte gSaveDataBuffer
-_0800D2DC: .4byte gUnknown_0801C3D8
+_0800D2DC: .4byte gCaseStartProcess
 _0800D2E0:
 	mov r0, r8
 	adds r0, #0x7e
@@ -12177,14 +12177,14 @@ _08010A4C:
 	adds r0, r0, r2
 	adds r6, r5, r0
 	bl sub_8016E7C
-	ldr r1, _08010A74 @ =gUnknown_08112378
+	ldr r1, _08010A74 @ =gComputedGotoTable10A3C
 	ldrb r4, [r5, #0xa]
 	lsls r0, r4, #2
 	adds r0, r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08010A74: .4byte gUnknown_08112378
+_08010A74: .4byte gComputedGotoTable10A3C
 _08010A78:
 	.byte 0x06, 0xF0, 0x32, 0xFF, 0x70, 0x7A, 0x00, 0x24
 	.byte 0x30, 0x72, 0x70, 0x7A, 0x05, 0xF0, 0x4E, 0xFB, 0x05, 0xF0, 0x62, 0xFB, 0x06, 0xF0, 0xB6, 0xF9

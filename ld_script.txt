@@ -45,9 +45,17 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.rodata);
-	    data/rodata.o(.rodata);
+	    rodata/bg.o(.rodata);
+	    src/utils.o(.rodata);
+	    rodata/case_data.o(.rodata);
+	    rodata/investigation_segments.o(.rodata);
+	    rodata/script_main.o(.rodata);
+	    rodata/script_commands.o(.rodata);
+	    rodata/romA7A8.o(.rodata);
+	    rodata/animation.o(.rodata);
+	    rodata/rom15CE0.o(.rodata);
         src/m4a_tables.o(.rodata);
-        data/sound.o(.rodata);
+        rodata/sound.o(.rodata);
         src/agb_sram.o(.rodata); 
     } =0
     /* capcom :^)) */
@@ -55,7 +63,22 @@ SECTIONS {
     .data :
     ALIGN(4)
     {
-        data/data.o(.data);
+        data/main.o(.data);
+        data/bg.o(.data);
+        src/utils.o(.data);
+        data/case_data.o(.data);
+        data/script_main.o(.data);
+        data/romA7A8.o(.data);
+        src/sound.o(.data);
+        data/animation.o(.data);
+        data/rom15CE0.o(.data);
+    } =0
+
+    . = 0x8130000;
+    gfx_data :
+    ALIGN(4)
+    {
+        data/graphics.o(gfx_data);
     } =0
 
     /* DWARF debug sections.

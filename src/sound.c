@@ -56,7 +56,11 @@ void sub_80138FC(u32 songNum, u32 vol)
 
 static bool32 sub_8013930(u32 songNum)
 {
-    extern s16 gUnknown_081123D4[];
+    static s16 gUnknown_081123D4[] = 
+    {106, 107, 133, 137,
+     140, 145, 146, 149,
+     151, 152, 156, 163,
+     164, 171, 174, -1};
     u32 i;
 
     for(i = 0; gUnknown_081123D4[i] != -1; i++)
