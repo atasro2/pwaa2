@@ -70,9 +70,14 @@ struct Main
     /* +0x084 */ u16 unk84; // unity AA4: SpEf_status?
     /* +0x086 */ u16 unk86; // unity AA4: SpEf_timer?
     /* +0x088 */ u8 unk88; // unity AA4: SpEf_time?
-    /* +0x088 */ u8 unk89; // unity AA4: SpEf_speed?
-    u8 filler8A[0x90 - 0x8A];
-    u8 unk90;
+    /* +0x089 */ u8 unk89; // unity AA4: SpEf_speed?
+    /* +0x08A */ u8 itemPlateEvidenceId;
+    /* +0x08B */ u8 itemPlateState;
+    /* +0x08C */ u8 itemPlateSide;
+    /* +0x08D */ u8 itemPlateRotation; // used in Take That animation to spin the evidence around
+    /* +0x08E */ s8 itemPlateSize;
+    /* +0x08F */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
+    /* +0x090 */ u8 itemPlateAction;
     u8 filler91[0xB3 - 0x91];
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;

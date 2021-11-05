@@ -476,7 +476,7 @@ void UpdateHardwareBlend(void)
             }
             break;
     }
-    if(gMain.unk90 == 1
+    if(gMain.itemPlateAction == 1
     && gMain.blendMode == 0
     && gMain.blendCounter != 0xFFFF)
     {
