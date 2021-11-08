@@ -2,78 +2,78 @@
 
     .global gUnknown_08111F14
 gUnknown_08111F14:
-    .4byte 0x801c41c
-    .4byte 0x801c424
-    .4byte 0x801c4d8
-    .4byte 0x801c4da
-    .4byte 0x801c4ec
-    .4byte 0x801c504
-    .4byte 0x801c51e
-    .4byte 0x801c51e
-    .4byte 0x801db00
-    .4byte 0x801db02
-    .4byte 0x801db16
-    .4byte 0x801db2d
-    .4byte 0x801db44
-    .4byte 0x801db60
-    .4byte 0x801fa34
-    .4byte 0x801fa36
-    .4byte 0x801fa45
-    .4byte 0x801fa60
-    .4byte 0x801fa7f
-    .4byte 0x801fa9e
-    .4byte 0x801fabf
-    .4byte 0x801fae6
+    .4byte gUnknown_0801C41C
+    .4byte gUnknown_0801C424
+    .4byte gUnknown_0801C4D8
+    .4byte gUnknown_0801C4DA
+    .4byte gUnknown_0801C4EC
+    .4byte gUnknown_0801C504
+    .4byte gUnknown_0801C51E
+    .4byte gUnknown_0801C51E
+    .4byte gUnknown_0801DB00
+    .4byte gUnknown_0801DB02
+    .4byte gUnknown_0801DB16
+    .4byte gUnknown_0801DB2D
+    .4byte gUnknown_0801DB44
+    .4byte gUnknown_0801DB60
+    .4byte gUnknown_0801FA34
+    .4byte gUnknown_0801FA36
+    .4byte gUnknown_0801FA45
+    .4byte gUnknown_0801FA60
+    .4byte gUnknown_0801FA7F
+    .4byte gUnknown_0801FA9E
+    .4byte gUnknown_0801FABF
+    .4byte gUnknown_0801FAE6
 
     .global gUnknown_08111F6C
 gUnknown_08111F6C:
-    .4byte 0x801c430
-    .4byte 0x801c480
-    .4byte 0x801c540
-    .4byte 0x801c540
-    .4byte 0x801c560
-    .4byte 0x801c570
-    .4byte 0x801c570
-    .4byte 0x801c5d8
-    .4byte 0x801db7c
-    .4byte 0x801db7c
-    .4byte 0x801dbc4
-    .4byte 0x801dbec
-    .4byte 0x801dbec
-    .4byte 0x801dc4c
-    .4byte 0x801fb10
-    .4byte 0x801fb60
-    .4byte 0x801fb10
-    .4byte 0x801fb60
-    .4byte 0x801fbf0
-    .4byte 0x801fc28
-    .4byte 0x801fbf0
-    .4byte 0x801fc28
+    .4byte gUnknown_0801C430
+    .4byte gUnknown_0801C480
+    .4byte gUnknown_0801C540
+    .4byte gUnknown_0801C540
+    .4byte gUnknown_0801C560
+    .4byte gUnknown_0801C570
+    .4byte gUnknown_0801C570
+    .4byte gUnknown_0801C5D8
+    .4byte gUnknown_0801DB7C
+    .4byte gUnknown_0801DB7C
+    .4byte gUnknown_0801DBC4
+    .4byte gUnknown_0801DBEC
+    .4byte gUnknown_0801DBEC
+    .4byte gUnknown_0801DC4C
+    .4byte gUnknown_0801FB10
+    .4byte gUnknown_0801FB60
+    .4byte gUnknown_0801FB10
+    .4byte gUnknown_0801FB60
+    .4byte gUnknown_0801FBF0
+    .4byte gUnknown_0801FC28
+    .4byte gUnknown_0801FBF0
+    .4byte gUnknown_0801FC28
 
     .global gUnknown_08111FC4
 gUnknown_08111FC4:
-    .4byte 0x801c610
-    .4byte 0x801c610
-    .4byte 0x801c610
-    .4byte 0x801c610
-    .4byte 0x801c610
-    .4byte 0x801cff0
-    .4byte 0x801c610
-    .4byte 0x801c610
-    .4byte 0x801dc84
-    .4byte 0x801dc84
-    .4byte 0x801dc84
-    .4byte 0x801eb80
-    .4byte 0x801dc84
-    .4byte 0x801dc84
-    .4byte 0x801fc98
-    .4byte 0x802039c
-    .4byte 0x801fc98
-    .4byte 0x801fc98
-    .4byte 0x80210f0
-    .4byte 0x8021c70
-    .4byte 0x801fc98
-    .4byte 0x801fc98
+    .4byte gUnknown_0801C610
+    .4byte gUnknown_0801C610
+    .4byte gUnknown_0801C610
+    .4byte gUnknown_0801C610
+    .4byte gUnknown_0801C610
+    .4byte gUnknown_0801CFF0
+    .4byte gUnknown_0801C610
+    .4byte gUnknown_0801C610
+    .4byte gUnknown_0801DC84
+    .4byte gUnknown_0801DC84
+    .4byte gUnknown_0801DC84
+    .4byte gUnknown_0801EB80
+    .4byte gUnknown_0801DC84
+    .4byte gUnknown_0801DC84
+    .4byte gUnknown_0801FC98
+    .4byte gUnknown_0802039C
+    .4byte gUnknown_0801FC98
+    .4byte gUnknown_0801FC98
+    .4byte gUnknown_080210F0
+    .4byte gUnknown_08021C70
+    .4byte gUnknown_0801FC98
+    .4byte gUnknown_0801FC98
 
     .global gUnknown_0811201C
 gUnknown_0811201C:
@@ -149,3 +149,4 @@ gUnknown_081120CC:
     .4byte nullsub_11
     .4byte InvestigationDummy
     .4byte InvestigationDummy
+

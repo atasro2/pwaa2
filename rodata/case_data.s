@@ -6,4 +6,4 @@ gCaseStartProcess:
 
     .global gUnknown_0801C3EE
 gUnknown_0801C3EE:
-    .incbin "baserom.gba", 0x0001C3EE, 0x636
+    .incbin "baserom.gba", 0x0001C3EE, 0x2E
