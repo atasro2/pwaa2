@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include "gba/gba.h"
+#include "structs.h"
 #include "main.h"
 #include "declarations.h"
 

@@ -1,6 +1,6 @@
 #ifndef GUARD_GRAPHICS_H
 #define GUARD_GRAPHICS_H
-
+/*
 #ifndef NONMATCHING
 
 #ifndef ROM_START
@@ -1249,5 +1249,7 @@ extern u8 gGfxSeqAnimation53[];
 extern u8 gGfxSeqAnimation54[];
 #endif
 
-
+*/
+extern u8 gTextPal[];
+#define gCharSet ((u8*)0x81AE3A8)
 #endif

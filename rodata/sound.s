@@ -3704,10 +3704,10 @@ gUnknown_0802E544:
 	.align 2
 	.global gMPlayTable
 gMPlayTable:	@ 0x0802E554
-	music_player gUnknown_03005F40, gUnknown_030057C0, 16, 0
-	music_player gUnknown_03005F80, gUnknown_03005CC0, 5, 0
-	music_player gUnknown_03005FC0, gUnknown_03005E50, 1, 0
-	music_player gMPlayMemAccArea, gUnknown_03005EA0, 2, 0
+	music_player gMPlayInfo_BGM, gMPlayTrack_BGM, 16, 0
+	music_player gMPlayInfo_SE1, gMPlayTrack_SE1, 5, 0
+	music_player gMPlayInfo_SE2, gMPlayTrack_SE2, 1, 0
+	music_player gMPlayInfo_SE3, gMPlayTrack_SE3, 2, 0
 
 	.align 2
 	.global gSongTable

@@ -102,12 +102,17 @@ extern const u8 scenario_3_5_script[];
 /* end script data */ 
 
 void ChangeScriptSection(u32);
-void LoadCurrentScriptIntoRam();
-void RunScriptContext();
+void LoadCurrentScriptIntoRam(void);
+void RunScriptContext(void);
 void InitScriptSection(struct ScriptContext *scriptCtx);
-void RedrawTextboxCharacters();
+void RedrawTextboxCharacters(void);
 
-void MakeMapMarkerSprites();
+void sub_8007CCC(struct Main *, s32);
+bool32 sub_8007CFC(struct Main *, s32);
+void sub_8007D30(struct Main *);
+void sub_8007D5C(struct Main *);
+
+void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);
 
 /* begin commands */

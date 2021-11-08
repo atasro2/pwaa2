@@ -11,6 +11,7 @@
 #include "investigation.h"
 #include "save.h"
 #include "court.h"
+#include "constants/animation.h"
 
 extern void (*gGameProcesses[])(struct Main *);
 extern void (*gIntrTable[0x10]);
@@ -475,7 +476,7 @@ void UpdateHardwareBlend(void)
             }
             break;
     }
-    if(gMain.unk90 == 1
+    if(gMain.itemPlateAction == 1
     && gMain.blendMode == 0
     && gMain.blendCounter != 0xFFFF)
     {
@@ -543,7 +544,7 @@ void sub_8000A80(void)
                 main->unk86 = 0;
                 main->unk89++;
                 sub_8003988(main->currentBG, main->unk89, 0);
-                if(main->unk84 == 3 && gAnimation[1].unk4 & 0x11000000)
+                if(main->unk84 == 3 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
                     sub_8003A7C(main->unk89, 0);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
@@ -563,7 +564,7 @@ void sub_8000A80(void)
                 main->unk86 = 0;
                 main->unk89--;
                 sub_8003988(main->currentBG, main->unk89, 0);
-                if(main->unk84 == 4 && gAnimation[1].unk4 & 0x11000000)
+                if(main->unk84 == 4 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
                     sub_8003A7C(main->unk89, 0);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
@@ -582,7 +583,7 @@ void sub_8000A80(void)
                 main->unk86 = 0;
                 main->unk89--;
                 sub_8003988(main->currentBG, main->unk89, 1);
-                if(gAnimation[1].unk4 & 0x11000000)
+                if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
                     sub_8003A7C(main->unk89, 1);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
@@ -601,7 +602,7 @@ void sub_8000A80(void)
                 main->unk86 = 0;
                 main->unk89++;
                 sub_8003988(main->currentBG, main->unk89, 1);
-                if(gAnimation[1].unk4 & 0x11000000)
+                if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
                     sub_8003A7C(main->unk89, 1);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
@@ -609,7 +610,7 @@ void sub_8000A80(void)
                     sub_8003B1C(main->currentBG, main->unk89, 1);
                 if(main->currentBG == 0x80)
                 {
-                    if(gAnimation[1].unk12 == 0x26)
+                    if(gAnimation[1].animationInfo.personId == 0x26)
                         sub_8003B1C(6, main->unk89, 1);
                 }
             }

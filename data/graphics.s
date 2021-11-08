@@ -1,128 +1,5 @@
-    .section .data
-
-    .global gGameProcesses
-gGameProcesses:
-    .incbin "baserom.gba", 0x00111E18, 0x3C
-
-    .global gUnknown_08111E54
-gUnknown_08111E54:
-    .incbin "baserom.gba", 0x00111E54, 0x40
-
-    .global gUnknown_08111E94
-gUnknown_08111E94:
-    .incbin "baserom.gba", 0x00111E94, 0x28
-
-    .global gUnknown_08111EBC
-gUnknown_08111EBC:
-    .incbin "baserom.gba", 0x00111EBC, 0x14
-
-    .global gUnknown_08111ED0
-gUnknown_08111ED0:
-    .incbin "baserom.gba", 0x00111ED0, 0x38
-
-    .global gUnknown_08111F08
-gUnknown_08111F08:
-    .incbin "baserom.gba", 0x00111F08, 0xC
-
-    .global gUnknown_08111F14
-gUnknown_08111F14:
-    .incbin "baserom.gba", 0x00111F14, 0x58
-
-    .global gUnknown_08111F6C
-gUnknown_08111F6C:
-    .incbin "baserom.gba", 0x00111F6C, 0x58
-
-    .global gUnknown_08111FC4
-gUnknown_08111FC4:
-    .incbin "baserom.gba", 0x00111FC4, 0x58
-
-    .global gUnknown_0811201C
-gUnknown_0811201C:
-    .incbin "baserom.gba", 0x0011201C, 0x58
-
-    .global gUnknown_08112074
-gUnknown_08112074:
-    .incbin "baserom.gba", 0x00112074, 0x58
-
-    .global gUnknown_081120CC
-gUnknown_081120CC:
-    .incbin "baserom.gba", 0x001120CC, 0x58
-
-    .global gUnknown_08112124
-gUnknown_08112124:
-    .incbin "baserom.gba", 0x00112124, 0x1D4
-
-    .global gUnknown_081122F8
-gUnknown_081122F8:
-    .incbin "baserom.gba", 0x001122F8, 0x20
-
-    .global gUnknown_08112318
-gUnknown_08112318:
-    .incbin "baserom.gba", 0x00112318, 0xC
-
-    .global gUnknown_08112324
-gUnknown_08112324:
-    .incbin "baserom.gba", 0x00112324, 0x10
-
-    .global gUnknown_08112334
-gUnknown_08112334:
-    .incbin "baserom.gba", 0x00112334, 0x18
-
-    .global gUnknown_0811234C
-gUnknown_0811234C:
-    .incbin "baserom.gba", 0x0011234C, 0x2C
-
-    .global gUnknown_08112378
-gUnknown_08112378:
-    .incbin "baserom.gba", 0x00112378, 0x30
-
-    .global gUnknown_081123A8
-gUnknown_081123A8:
-    .incbin "baserom.gba", 0x001123A8, 0x20
-
-    .global gUnknown_081123C8
-gUnknown_081123C8:
-    .incbin "baserom.gba", 0x001123C8, 0xC
-
-    .global gUnknown_081123D4
-gUnknown_081123D4:
-    .incbin "baserom.gba", 0x001123D4, 0x20
-
-    .global gUnknown_081123F4
-gUnknown_081123F4:
-    .incbin "baserom.gba", 0x001123F4, 0x20
-
-    .global gUnknown_08112414
-gUnknown_08112414:
-    .incbin "baserom.gba", 0x00112414, 0x18
-
-    .global gUnknown_0811242C
-gUnknown_0811242C:
-    .incbin "baserom.gba", 0x0011242C, 0x40
-
-    .global gUnknown_0811246C
-gUnknown_0811246C:
-    .incbin "baserom.gba", 0x0011246C, 0x64
-
-    .global gUnknown_081124D0
-gUnknown_081124D0:
-    .incbin "baserom.gba", 0x001124D0, 0x50
-
-    .global gUnknown_08112520
-gUnknown_08112520:
-    .incbin "baserom.gba", 0x00112520, 0x1E0
-
-    .global gUnknown_08112700
-gUnknown_08112700:
-    .incbin "baserom.gba", 0x00112700, 0x1E0
-
-    .global gUnknown_081128E0
-gUnknown_081128E0:
-    .incbin "baserom.gba", 0x001128E0, 0x160
-
-    .global gUnknown_08112A40
-gUnknown_08112A40:
-    .incbin "baserom.gba", 0x00112A40, 0x1D5C0
+	.section gfx_data, "aw", %progbits
+	.include "asm/macros.inc"
 
     .global gUnknown_08130000
 gUnknown_08130000:
@@ -1342,12 +1219,12 @@ gUnknown_081ADB68_gfx:
 
 @ BEGIN CHARSETS
 
-    .global gUnknown_081AE388
-gUnknown_081AE388:
+    .global gTextPal
+gTextPal:
     .incbin "graphics/charset.gbapal"
 
-    .global gUnknown_081AE3A8
-gUnknown_081AE3A8:
+    .global gCharSet
+gCharSet:
     .incbin "graphics/charset.4bpp"
 
 @ END CHARSETS
@@ -2208,7 +2085,6 @@ gUnknown_086EB860:
 gUnknown_0872D184:
     .incbin "baserom.gba", 0x0072D184, 0x3968
 
-    .global gUnknown_08730AEC
-gUnknown_08730AEC:
-    .incbin "baserom.gba", 0x00730AEC, 0xCF514
-
+    .global std_scripts
+std_scripts:
+    .incbin "baserom.gba", 0x00730AEC, 0xCBA5C

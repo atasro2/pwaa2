@@ -29,7 +29,17 @@ struct Main
     /* +0x013 */ s8 shakeAmountY; // unity: Quake_y
     /* +0x014 */ u16 shakeTimer; // unity: Quake_timer
     /* +0x016 */ u8 shakeIntensity; // unity: Quake_power
-    u8 filler17[0x2A - 0x17];
+    /* +0x017 */ u8 selectedButton; // unity: Cursol
+    /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
+    /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
+    u8 filler1A[0x20 - 0x1A];
+    /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
+    /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
+    /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now
+    /* +0x024 */ u8 filler24; //?
+    /* +0x025 */ u8 animationFlags; // unity: Obj_flag
+    /* +0x026 */ s16 bgmFadeAmount; // unity: bgm_fade_time?
+    /* +0x028 */ s16 bgmVolume; // unity: bgm_vol
     /* +0x02A */ u16 rngSeed; // unity: Random_seed
     /* +0x02C */ u8 gottenEvidenceType; // unity: get_note_file / only written to 
     /* +0x02D */ u8 gottenEvidenceId; // unity: get_note_id
@@ -60,15 +70,34 @@ struct Main
     /* +0x084 */ u16 unk84; // unity AA4: SpEf_status?
     /* +0x086 */ u16 unk86; // unity AA4: SpEf_timer?
     /* +0x088 */ u8 unk88; // unity AA4: SpEf_time?
-    /* +0x088 */ u8 unk89; // unity AA4: SpEf_speed?
-    u8 filler8A[0x90 - 0x8A];
-    u8 unk90;
+    /* +0x089 */ u8 unk89; // unity AA4: SpEf_speed?
+    /* +0x08A */ u8 itemPlateEvidenceId;
+    /* +0x08B */ u8 itemPlateState;
+    /* +0x08C */ u8 itemPlateSide;
+    /* +0x08D */ u8 itemPlateRotation; // used in Take That animation to spin the evidence around
+    /* +0x08E */ s8 itemPlateSize;
+    /* +0x08F */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
+    /* +0x090 */ u8 itemPlateAction;
     u8 filler91[0xB3 - 0x91];
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;
-    u8 fillerB5[0xDC - 0xB5];
-    /* +0x0DC */ u32 gameStateFlags;
-    u8 fillerE0[0x2C0 - 0xE0];
+    /* +0x0B5 */ s8 health; // unity: rest
+    /* +0x0B6 */ u16 talkingAnimationOffset; // unity: Def_talk_foa
+    /* +0x0B8 */ u16 idleAnimationOffset; // unity: Def_wait_foa
+    //2 byte filler
+    /* +0x0BC */ u32 scriptFlags[8]; // unity: sce_flag matches debug menu
+    /* +0x0DC */ u32 gameStateFlags; // unity: status_flag matches debug menu
+    /* +0x0E0 */ u32 talkEndFlags[8]; // unity: talk_end_flag // TODO: find right size
+    /* +0x100 */ u32 unk100[8]; // script related, apollo's FW_Mess_flag??
+    /* +0x120 */ u8 roomData[16][8]; // unity: Map_data //TODO: first size might be wrong
+    u8 filler1A0[0x1A4 - 0x1A0];
+    /* +0x1A4 */ struct PsycheLock unk1A4[4];
+    u8 filler244[0x254 - 0x244];
+    /* +0x254 */ u32 soundFlags;
+    u8 filler258[0x2B8 - 0x258];
+    u16 unk2B8;
+    u16 unk2BA;
+    u8 filler2BC[0x2C0 - 0x2BC];
 }; /* size 0x2C0 */
 
 struct IORegisters

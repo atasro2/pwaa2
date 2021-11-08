@@ -13,7 +13,7 @@ struct AnimationFrame
     /* +0x06 */ u8 filler6[2];
 };
 
-struct AnimationInfo // defunct struct?
+struct AnimationInfo
 {
     /* +0x00 */ u16 animId;
     /* +0x02 */ u8 personId;
@@ -38,11 +38,24 @@ struct SpriteTemplate {
 
 struct AnimationListEntry
 {
-    u8 filler0[4];
-    u32 unk4;
-    u8 filler8[0x12 - 0x8];
-    u8 unk12;
-    u8 filler13[0x40 - 0x13];
+    /* +0x00 */ s32 flags;
+    /* +0x04 */ struct AnimationListEntry * prev;
+    /* +0x08 */ struct AnimationListEntry * next;
+    /* +0x0C */ struct AnimationInfo animationInfo;
+    /* +0x28 */ s16 frameDurationCounter;
+    /* +0x2A */ u8 unk2A;
+    /* +0x2B */ u8 unk2B;
+    /* +0x2C */ u8 bgId;
+    /* +0x2D */ u8 roomId;
+    /* +0x2E */ s16 unk2E;
+    /* +0x30 */ struct SpriteTemplate * spriteData;
+    /* +0x34 */ struct AnimationFrame * frameData;
+    /* +0x38 */ u16 tileNum;
+    /* +0x3A */ u8 animtionOamStartIdx;
+    /* +0x3B */ u8 animtionOamEndIdx;
+    /* +0x3C */ s16 rotationAmount;
+    /* +0x3E */ u16 spritePriorityMatrixIndex; // ! this name sucks :(
+    /* +0x40 */ u8 filler40[4];
 };
 
 struct AnimationBackupStruct
