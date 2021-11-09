@@ -123,6 +123,31 @@ extern u8 gUnknown_0801F7A0[];
 extern u8 gUnknown_0801F8A4[];
 extern u8 gUnknown_0801F96C[];
 
+extern u8 gUnknown_0801FF70[];
+extern u8 gUnknown_0801FE30[];
+
+extern u8 gUnknown_0801FFF0[];
+extern u8 gUnknown_080200E0[];
+extern u8 gUnknown_08020018[];
+extern u8 gUnknown_080201A8[];
+extern u8 gUnknown_080202FC[];
+extern u8 gUnknown_0802025C[];
+
+extern u8 gUnknown_08020954[];
+extern u8 gUnknown_080206FC[];
+extern u8 gUnknown_080206F0[];
+
+extern u8 gUnknown_080209D4[];
+extern u8 gUnknown_08020A38[];
+extern u8 gUnknown_08020A60[];
+extern u8 gUnknown_08020C90[];
+extern u8 gUnknown_08020BDC[];
+extern u8 gUnknown_08020B28[];
+extern u8 gUnknown_08020D30[];
+extern u8 gUnknown_08020E20[];
+extern u8 gUnknown_08020FB0[];
+extern u8 gUnknown_0802108C[];
+
 
 void sub_800EAC8();
 void sub_801480C(u32);
