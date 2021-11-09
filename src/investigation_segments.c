@@ -269,10 +269,6 @@ void sub_8004C64(struct Main *main) {
     }
 }
 
-// END case 1
-
-// BEGIN case 2
-
 void sub_8004C90(struct Main *main) {
     DmaCopy16(3, gUnknown_0801D6DC, gMain.roomData, 0x28);
     DmaCopy16(3, gUnknown_0801D470, gTalkData, 0x26C);
@@ -472,9 +468,442 @@ void sub_8004CEC(struct Main *main) {
 void nullsub_9(struct Main *main) {
 }
 
+// END case 1
+
+// BEGIN case 2
+
+void sub_8005310(struct Main *main) {
+    DmaCopy16(3, gUnknown_0801E220, gMain.roomData, 0x50);
+    DmaCopy16(3, gUnknown_0801E018, gTalkData, 0x208);
+    DmaCopy16(3, gUnknown_0801E014, gUnknown_03003B70, 4);
+    main->currentRoomId = 0;
+    sub_8017910();
+}
+
+void sub_8005374(struct Main *main) {
+    DmaFill16(3, 0xFFFF, gExaminationData, 0x1E0);
+    switch(main->currentRoomId) {
+        case 0: {
+            DmaCopy16(3, gUnknown_0801E270, gExaminationData, 0x64);
+            if (GetFlag(0, 0xAB)) {
+                if (!GetFlag(0, 0x91)) {
+                    InvestigationSetPersonAnimation(4, 0xAF8, 0xAF8);
+                    InvestigationSetScriptSectionAndFlag(0x87, 0x91);
+                }
+                else {
+                    InvestigationSetPersonAnimation(4, 0x12D0, 0x12D0);
+                    PlayBGM(0xCC);
+                }
+            }
+            break;
+        }
+        case 1: {
+            if (GetFlag(0, 0xB5) && GetFlag(0, 0xB6)) {
+                if (!GetFlag(0, 0x94)) {
+                    InvestigationSetScriptSectionAndFlag(0xAD, 0x94);
+                    sub_800EAC8(1, 1);
+                }
+                else {
+                    InvestigationSetPersonAnimation(0x1D, 0x1FEC, 0x1FEC);
+                    PlayBGM(0xD0);
+                }
+                DmaCopy16(3, gUnknown_0801E2D4, gExaminationData, 0x28);
+                break;
+            }
+            if (GetFlag(0, 0xAC)) {
+                if (!GetFlag(0, 0x93)) {
+                    InvestigationSetScriptSectionAndFlag(0xAA, 0x93);
+                }
+                DmaCopy16(3, gUnknown_0801E2FC, gExaminationData, 0x28);
+                break;
+            }
+            LoadCurrentScriptIntoRam();
+            if (!GetFlag(0, 0x92)) {
+                InvestigationSetScriptSectionAndFlag(0x99, 0x92);
+            }
+            else {
+                InvestigationSetPersonAnimation(0x1D, 0, 0);
+                if (GetFlag(0, 0xAB)) {
+                    PlayBGM(0xD0);
+                }
+                else {
+                    PlayBGM(0xD7);
+                }
+            }
+            DmaCopy16(3, gUnknown_0801E2D4, gExaminationData, 0x28);
+            break;
+        }
+        case 8: {
+            DmaCopy16(3, gUnknown_0801E324, gExaminationData, 0xA0);
+            if (GetFlag(0, 0xB9)) {
+                ChangeFlag(0, 0xC6, 0);
+                if (!GetFlag(0, 0x97)) {
+                    InvestigationSetScriptSectionAndFlag(0xCD, 0x97);
+                }
+                else {
+                    PlayBGM(0x1F);
+                }
+            }
+            else if (GetFlag(0, 0xAE) && GetFlag(0, 0xAC)) {
+                ChangeFlag(0, 0xC6, 1);
+                if (!GetFlag(0, 0x96)) {
+                    InvestigationSetScriptSectionAndFlag(0xC7, 0x96);
+                    break;
+                }
+                InvestigationSetPersonAnimation(0x1E, 0, 0);
+                PlayBGM(0xD1);
+            }
+            else {
+                ChangeFlag(0, 0xC6, 0);
+                if (!GetFlag(0, 0x95)) {
+                    InvestigationSetScriptSectionAndFlag(0xC6, 0x95);
+                }
+                else {
+                    PlayBGM(0x1F);
+                }
+            }
+            break;
+        }
+        case 9: {
+            if (GetFlag(0, 0xBA)) {
+                ChangeFlag(0, 0xC8, 1);
+                if (!GetFlag(0, 0x9A)) {
+                    InvestigationSetScriptSectionAndFlag(0xEA, 0x9A);
+                }
+                else {
+                    InvestigationSetPersonAnimation(0x1C, 0x10F0, 0x10F0);
+                    PlayBGM(0xCD);
+                }
+                DmaCopy16(3, gUnknown_0801E464, gExaminationData, 0xC8);
+            }
+            else if (GetFlag(0, 0xB9)) {
+                ChangeFlag(0, 0xC8, 0);
+                if (!GetFlag(0, 0x99)) {
+                    InvestigationSetScriptSectionAndFlag(0xE9, 0x99);
+                }
+                DmaCopy16(3, gUnknown_0801E52C, gExaminationData, 0xC8);
+            }
+            else {
+                ChangeFlag(0, 0xC8, 1);
+                if (!GetFlag(0, 0x98)) {
+                    InvestigationSetScriptSectionAndFlag(0xDB, 0x98);
+                }
+                else {
+                    InvestigationSetPersonAnimation(0x1C, 0, 0);
+                    PlayBGM(0xCD);
+                }
+                DmaCopy16(3, gUnknown_0801E464, gExaminationData, 0xC8);
+            }
+            break;
+        }
+        case 10: {
+            if (GetFlag(0, 0xBA)) {
+                if (!GetFlag(0, 0x9C)) {
+                    InvestigationSetScriptSectionAndFlag(0xDA, 0x9C);
+                }
+                else {
+                    PlayBGM(0x1F);
+                }
+                DmaCopy16(3, gUnknown_0801E414, gExaminationData, 0x50);
+                break;
+            }
+            if (!GetFlag(0, 0x9B)) {
+                InvestigationSetScriptSectionAndFlag(0xCE, 0x9B);
+            }
+            else {
+                InvestigationSetPersonAnimation(0xA, 0x185C, 0x185C);
+                PlayBGM(0x1F);
+            }
+            DmaCopy16(3, gUnknown_0801E3C4, gExaminationData, 0x50);
+            break;
+        }
+        case 11: {
+            DmaCopy16(3, gUnknown_0801E7FC, gExaminationData, 0x12C);
+            if (GetFlag(0, 0xB9)) {
+                ChangeFlag(0, 0xC7, 1);
+                if (!GetFlag(0, 0x9E)) {
+                    InvestigationSetScriptSectionAndFlag(0xF9, 0x9E);
+                }
+                else if (!GetFlag(0, 0xBA)) {
+                    if (GetFlag(0, 0xC9)) {
+                        InvestigationSetPersonAnimation(0x1E, 0x1364, 0x1364);
+                        PlayBGM(0xDA);
+                    }
+                    else {
+                        InvestigationSetPersonAnimation(0x1E, 0, 0);
+                        PlayBGM(0xD1);
+                    }
+                }
+            }
+            else {
+                ChangeFlag(0, 0xC7, 0);
+                if (!GetFlag(0, 0x9D)) {
+                    InvestigationSetScriptSectionAndFlag(0xF7, 0x9D);
+                }
+                else {
+                    PlayBGM(0xD7);
+                }
+                DmaCopy16(3, gUnknown_0801E7FC, gExaminationData, 0x12C);
+            }
+            break;
+        }
+        case 12: {
+            if (GetFlag(0, 0xB6)) {
+                DmaCopy16(3, gUnknown_0801E6F8, gExaminationData, 0x104);
+            }
+            else {
+                DmaCopy16(3, gUnknown_0801E5F4, gExaminationData, 0x104);
+            }
+            if (GetFlag(0, 0xB9)) {
+                if (!GetFlag(0, 0xA0)) {
+                    InvestigationSetScriptSectionAndFlag(0xF5, 0xA0);
+                }
+            }
+            else if (!GetFlag(0, 0x9F)) {
+                InvestigationSetScriptSectionAndFlag(0xF1, 0x9F);
+            }
+            sub_801480C(0x19);
+            break;
+        }
+        case 13: {
+            if (GetFlag(0, 0xBB)) {
+                if (!GetFlag(0, 0xA4)) {
+                    InvestigationSetScriptSectionAndFlag(0x118, 0xA4);
+                }
+                DmaCopy16(3, gUnknown_0801E928, gExaminationData, 0xC8);
+            }
+            else if (GetFlag(0, 0xBA)) {
+                if (!GetFlag(0, 0xA3)) {
+                    InvestigationSetScriptSectionAndFlag(0x112, 0xA3);
+                }
+                else {
+                    InvestigationSetPersonAnimation(0x1F, 0x784, 0x784);
+                    PlayBGM(0xDA);
+                }
+                DmaCopy16(3, gUnknown_0801E9F0, gExaminationData, 0xC8);
+            }
+            else if (GetFlag(0, 0xAF) && GetFlag(0, 0xB0)) {
+                if (!GetFlag(0, 0xA2)) {
+                    InvestigationSetScriptSectionAndFlag(0x103, 0xA2);
+                }
+                else {
+                    InvestigationSetPersonAnimation(0x1F, 0x784, 0x784);
+                    PlayBGM(0xDA);
+                }
+                DmaCopy16(3, gUnknown_0801E9F0, gExaminationData, 0xC8);
+            }
+            else {
+                if (!GetFlag(0, 0xA1)) {
+                    InvestigationSetScriptSectionAndFlag(0x102, 0xA1);
+                }
+                DmaCopy16(3, gUnknown_0801E928, gExaminationData, 0xC8);
+            }
+            break;
+        }
+        case 14: {
+            if (!GetFlag(0, 0xA5)) {
+                InvestigationSetScriptSectionAndFlag(0x11A, 0xA5);
+            }
+            else {
+                PlayBGM(0xD7);
+            }
+            DmaCopy16(3, gUnknown_0801EAB8, gExaminationData, 0xC8);
+            break;
+        }
+    }
+}
+
+void sub_80059E0(struct Main *main) {
+    if(main->currentRoomId == 12) {
+        if(!GetFlag(0, 0xB7) && GetFlag(0, 0xB6)) {
+            DmaCopy16(3, gUnknown_0801E6F8, gExaminationData, 0x104);
+            ChangeFlag(0, 0xB7, 1);
+        }
+    }
+}
+
+void sub_8005A30(struct Main *main) {
+    DmaCopy16(3, gUnknown_0801F1EC, gMain.roomData, 0x50);
+    DmaCopy16(3, gUnknown_0801EFE4, gTalkData, 0x208);
+    DmaCopy16(3, gUnknown_0801EFDC, gUnknown_03003B70, 8);
+    main->currentRoomId = 0;
+}
+
+void sub_8005A8C(struct Main *main) {
+    DmaFill16(3, 0xFFFF, gExaminationData, 0x1E0);
+    switch(main->currentRoomId) {
+        case 0: {
+            DmaCopy16(3, gUnknown_0801F23C, gExaminationData, 0x64);
+            if (GetFlag(0, 0xD7)) {
+                InvestigationSetPersonAnimation(4, 0x25E4, 0x25E4);
+                PlayBGM(0xCC);
+            }
+            break;
+        }
+        case 1: {
+            if (GetFlag(0, 0xD4) && GetFlag(0, 0xD5) && GetFlag(0, 0xD6)) {
+                if (!GetFlag(0, 0xD9)) {
+                    InvestigationSetScriptSectionAndFlag(0xAE, 0xD9);
+                }
+                DmaCopy16(3, gUnknown_0801F2C8, gExaminationData, 0x28);
+                break;
+            }
+            if (!GetFlag(0, 0xD8)) {
+                InvestigationSetScriptSectionAndFlag(0x9B, 0xD8);
+            }
+            else {
+                InvestigationSetPersonAnimation(0x1D, 0x1FEC, 0x1FEC);
+                PlayBGM(0xD0);
+            }
+            DmaCopy16(3, gUnknown_0801F2A0, gExaminationData, 0x28);
+            break;
+        }
+        case 8: {
+            DmaCopy16(3, gUnknown_0801F2F0, gExaminationData, 0xA0);
+            if (!GetFlag(0, 0xDA)) {
+                InvestigationSetScriptSectionAndFlag(0xB1, 0xDA);
+                break;
+            }
+            InvestigationSetPersonAnimation(0x1E, 0x8A4, 0x8A4);
+            PlayBGM(0xDA);
+            break;
+        }
+        case 9: {
+            if (GetFlag(0, 0xD3)) {
+                DmaCopy16(3, gUnknown_0801F458, gExaminationData, 0xC8);
+                if (!GetFlag(0, 0xDC)) {
+                    InvestigationSetScriptSectionAndFlag(0xB7, 0xDC);
+                    break;
+                }
+                InvestigationSetPersonAnimation(0x1C, 0x10F0, 0x10F0);
+                PlayBGM(0xCD);
+            }
+            else {
+                if (!GetFlag(0, 0xDB)) {
+                    InvestigationSetScriptSectionAndFlag(0xB6, 0xDB);
+                }
+                DmaCopy16(3, gUnknown_0801F390, gExaminationData, 0xC8);
+            }
+            break;
+        }
+        case 10: {
+            DmaCopy16(3, gUnknown_0801F520, gExaminationData, 0x50);
+            if (GetFlag(0, 0xD1)) {
+                if (!GetFlag(0, 0xDE)) {
+                    InvestigationSetPersonAnimation(0xA, 0, 0);
+                    InvestigationSetScriptSectionAndFlag(0xF4, 0xDE);
+                    break;
+                }
+                if (!GetFlag(0, 0xD2)) {
+                    InvestigationSetPersonAnimation(0xF, 0x3628, 0x3628);
+                }
+                PlayBGM(0x1F);
+            }
+            else if (!GetFlag(0, 0xDD)) {
+                InvestigationSetScriptSectionAndFlag(0xF3, 0xDD);
+            }
+            else {
+                PlayBGM(0x1F);
+            }
+            break;
+        }
+        case 11: {
+            if (GetFlag(0, 0xD4) && GetFlag(0, 0xD5) && GetFlag(0, 0xD6)) {
+                sub_800EAC8(11, 1);
+                ChangeFlag(0, 0xF5, 1);
+                if (!GetFlag(0, 0xE2)) {
+                    InvestigationSetScriptSectionAndFlag(0xDD, 0xE2);
+                }
+                else {
+                    InvestigationSetPersonAnimation(0x1F, 0x784, 0x784);
+                    PlayBGM(0xDA);
+                }
+                DmaCopy16(3, gUnknown_0801F688, gExaminationData, 0x118);
+            }
+            else if (GetFlag(0, 0xD1)) {
+                ChangeFlag(0, 0xF5, 0);
+                if (!GetFlag(0, 0xE1)) {
+                    InvestigationSetScriptSectionAndFlag(0xDC, 0xE1);
+                }
+                DmaCopy16(3, gUnknown_0801F570, gExaminationData, 0x118);
+            }
+            else if (GetFlag(0, 0xD0)) {
+                ChangeFlag(0, 0xF5, 1);
+                if (!GetFlag(0, 0xE0)) {
+                    InvestigationSetScriptSectionAndFlag(0xCE, 0xE0);
+                }
+                else {
+                    InvestigationSetPersonAnimation(0x1F, 0x784, 0x784);
+                    PlayBGM(0xDA);
+                }
+                DmaCopy16(3, gUnknown_0801F688, gExaminationData, 0x118);
+            }
+            else {
+                ChangeFlag(0, 0xF5, 0);
+                if (!GetFlag(0, 0xDF)) {
+                    InvestigationSetScriptSectionAndFlag(0xCD, 0xDF);
+                }
+                else {
+                    PlayBGM(0xD7);
+                }
+                DmaCopy16(3, gUnknown_0801F570, gExaminationData, 0x118);
+            }
+            break;
+        }
+        case 12: {
+            DmaCopy16(3, gUnknown_0801F7A0, gExaminationData, 0x104);
+            if (!GetFlag(0, 0xE3)) {
+                InvestigationSetScriptSectionAndFlag(0xEF, 0xE3);
+            }
+            else {
+                PlayBGM(0xD7);
+            }
+            if(!GetFlag(0, 0xD1)) {
+                sub_801480C(0x19);
+            }
+            break;
+        }
+        case 13: {
+            DmaCopy16(3, gUnknown_0801F8A4, gExaminationData, 0xC8);
+            if (GetFlag(0, 0xD4) && GetFlag(0, 0xD5) && GetFlag(0, 0xD6)) {
+                if (!GetFlag(0, 0xE5)) {
+                    InvestigationSetScriptSectionAndFlag(0xFC, 0xE5);
+                }
+            }
+            else if (!GetFlag(0, 0xE4)) {
+                InvestigationSetScriptSectionAndFlag(0xFB, 0xE4);
+            }
+            else {
+                PlayBGM(0xD7);
+            }
+            break;
+        }
+        case 14: {
+            DmaCopy16(3, gUnknown_0801F96C, gExaminationData, 0xC8);
+            if (!GetFlag(0, 0xE6)) {
+                InvestigationSetPersonAnimation(0x20, 0, 0);
+                sub_801480C(0x3D);
+                InvestigationSetScriptSectionAndFlag(0x101, 0xE6);
+                break;
+            }
+            InvestigationSetPersonAnimation(0x20, 0, 0);
+            sub_801480C(0x3D);
+            if (GetFlag(0, 0xF9) && !GetFlag(0, 0xFA)) {
+                InvestigationSetScriptSectionAndFlag(0x102, 0xFA);
+            }
+            PlayBGM(0xCD);
+            break;
+        }
+    }
+}
+
+void nullsub_3(struct Main *main) {
+}
+
 // END case 2
 
 // BEGIN case 3
+
 
 // END case 3
 

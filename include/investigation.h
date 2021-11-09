@@ -87,7 +87,44 @@ extern u8 gUnknown_0801D9C0[];
 extern u8 gUnknown_0801D948[];
 extern u8 gUnknown_0801D8E4[];
 
+extern u8 gUnknown_0801E220[];
+extern u8 gUnknown_0801E018[];
 
+extern u8 gUnknown_0801E270[];
+extern u8 gUnknown_0801E2D4[];
+extern u8 gUnknown_0801E2FC[];
+extern u8 gUnknown_0801E324[];
+extern u8 gUnknown_0801E464[];
+extern u8 gUnknown_0801E52C[];
+extern u8 gUnknown_0801E414[];
+extern u8 gUnknown_0801E3C4[];
+extern u8 gUnknown_0801E7FC[];
+extern u8 gUnknown_0801E6F8[];
+extern u8 gUnknown_0801E5F4[];
+extern u8 gUnknown_0801E928[];
+extern u8 gUnknown_0801E9F0[];
+extern u8 gUnknown_0801EAB8[];
+extern u8 gUnknown_0801E014[];
+
+extern u8 gUnknown_0801F1EC[];
+extern u8 gUnknown_0801EFE4[];
+extern u8 gUnknown_0801EFDC[];
+
+extern u8 gUnknown_0801F23C[];
+extern u8 gUnknown_0801F2C8[];
+extern u8 gUnknown_0801F2A0[];
+extern u8 gUnknown_0801F2F0[];
+extern u8 gUnknown_0801F458[];
+extern u8 gUnknown_0801F390[];
+extern u8 gUnknown_0801F520[];
+extern u8 gUnknown_0801F688[];
+extern u8 gUnknown_0801F570[];
+extern u8 gUnknown_0801F7A0[];
+extern u8 gUnknown_0801F8A4[];
+extern u8 gUnknown_0801F96C[];
+
+
+void sub_800EAC8();
 void sub_801480C(u32);
 /* end data stuff from segments */
 
