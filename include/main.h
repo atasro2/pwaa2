@@ -78,7 +78,8 @@ struct Main
     /* +0x08E */ s8 itemPlateSize;
     /* +0x08F */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
     /* +0x090 */ u8 itemPlateAction;
-    u8 filler91[0xB3 - 0x91];
+    u8 filler91[0xB2 - 0x91];
+    /* +0x0B2 */ u8 currentRoomId;
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;
     /* +0x0B5 */ s8 health; // unity: rest

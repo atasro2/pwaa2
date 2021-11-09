@@ -22,6 +22,7 @@ SECTIONS {
         asm/bg.o(.text);
         src/utils.o(.text);
         src/case_data.o(.text);
+        src/investigation_segments.o(.text);
         asm/investigation_segments.o(.text);
         src/script_main.o(.text);
         asm/script_commands.o(.text);
@@ -48,6 +49,7 @@ SECTIONS {
 	    rodata/bg.o(.rodata);
 	    src/utils.o(.rodata);
 	    rodata/case_data.o(.rodata);
+	    src/investigation_segments.o(.rodata);
 	    rodata/investigation_segments.o(.rodata);
 	    rodata/script_main.o(.rodata);
 	    rodata/script_commands.o(.rodata);
