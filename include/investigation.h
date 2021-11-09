@@ -72,6 +72,21 @@ extern u8 gUnknown_0801CF8C[];
 extern u8 gUnknown_0801CF3C[];
 extern u8 gUnknown_0801CEEC[];
 
+extern u8 gUnknown_0801D6DC[];
+extern u8 gUnknown_0801D470[];
+extern u8 gUnknown_0801D464[];
+
+extern u8 gUnknown_0801D704[];
+extern u8 gUnknown_0801D768[];
+extern u8 gUnknown_0801DA88[];
+extern u8 gUnknown_0801D790[];
+extern u8 gUnknown_0801D81C[];
+extern u8 gUnknown_0801D86C[];
+extern u8 gUnknown_0801DA24[];
+extern u8 gUnknown_0801D9C0[];
+extern u8 gUnknown_0801D948[];
+extern u8 gUnknown_0801D8E4[];
+
 
 void sub_801480C(u32);
 /* end data stuff from segments */
