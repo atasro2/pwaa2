@@ -59,6 +59,7 @@ extern struct InvestigationStruct gInvestigation;
 extern u8 gUnknown_0801CA24[4];
 extern u8 gUnknown_0801CA28[0x1E0];
 extern u8 gUnknown_0801CC08[0x28];
+
 extern u8 gUnknown_0801CC30[0x78];
 extern u8 gUnknown_0801CCA8[0x28];
 extern u8 gUnknown_0801CCD0[0x8C];
@@ -69,9 +70,11 @@ extern u8 gUnknown_0801CE88[0x64];
 extern u8 gUnknown_0801CEEC[0x50];
 extern u8 gUnknown_0801CF3C[0x50];
 extern u8 gUnknown_0801CF8C[0x64];
+
 extern u8 gUnknown_0801D464[12];
 extern u8 gUnknown_0801D470[0x26C];
 extern u8 gUnknown_0801D6DC[0x28];
+
 extern u8 gUnknown_0801D704[0x64];
 extern u8 gUnknown_0801D768[0x28];
 extern u8 gUnknown_0801D790[0x8C];
@@ -82,9 +85,11 @@ extern u8 gUnknown_0801D948[0x78];
 extern u8 gUnknown_0801D9C0[0x64];
 extern u8 gUnknown_0801DA24[0x64];
 extern u8 gUnknown_0801DA88[0x78];
+
 extern u8 gUnknown_0801E014[4];
 extern u8 gUnknown_0801E018[0x208];
 extern u8 gUnknown_0801E220[0x50];
+
 extern u8 gUnknown_0801E270[0x64];
 extern u8 gUnknown_0801E2D4[0x28];
 extern u8 gUnknown_0801E2FC[0x28];
@@ -99,9 +104,11 @@ extern u8 gUnknown_0801E7FC[0x12C];
 extern u8 gUnknown_0801E928[0xC8];
 extern u8 gUnknown_0801E9F0[0xC8];
 extern u8 gUnknown_0801EAB8[0xC8];
+
 extern u8 gUnknown_0801EFDC[8];
 extern u8 gUnknown_0801EFE4[0x208];
 extern u8 gUnknown_0801F1EC[0x50];
+
 extern u8 gUnknown_0801F23C[0x64];
 extern u8 gUnknown_0801F2A0[0x28];
 extern u8 gUnknown_0801F2C8[0x28];
@@ -114,17 +121,21 @@ extern u8 gUnknown_0801F688[0x118];
 extern u8 gUnknown_0801F7A0[0x104];
 extern u8 gUnknown_0801F8A4[0xC8];
 extern u8 gUnknown_0801F96C[0xC8];
+
 extern u8 gUnknown_0801FE30[0x140];
 extern u8 gUnknown_0801FF70[0x7C];
+
 extern u8 gUnknown_0801FFF0[0x28];
 extern u8 gUnknown_08020018[0xC8];
 extern u8 gUnknown_080200E0[0xC8];
 extern u8 gUnknown_080201A8[0xB4];
 extern u8 gUnknown_0802025C[0xA0];
 extern u8 gUnknown_080202FC[0xA0];
+
 extern u8 gUnknown_080206F0[0xC];
 extern u8 gUnknown_080206FC[0x258];
 extern u8 gUnknown_08020954[0x7C];
+
 extern u8 gUnknown_080209D4[0x64];
 extern u8 gUnknown_08020A38[0x28];
 extern u8 gUnknown_08020A60[0xC8];
@@ -135,8 +146,10 @@ extern u8 gUnknown_08020D30[0xF0];
 extern u8 gUnknown_08020E20[0x190];
 extern u8 gUnknown_08020FB0[0x8C];
 extern u8 gUnknown_0802108C[0x64];
+
 extern u8 gUnknown_08021318[0x118];
 extern u8 gUnknown_08021430[0x82];
+
 extern u8 gUnknown_080214B4[0x64];
 extern u8 gUnknown_08021518[0x64];
 extern u8 gUnknown_0802157C[0x28];
@@ -150,9 +163,11 @@ extern u8 gUnknown_08021A7C[0x50];
 extern u8 gUnknown_08021ACC[0x8C];
 extern u8 gUnknown_08021B58[0xA0];
 extern u8 gUnknown_08021BF8[0x78];
+
 extern u8 gUnknown_0802224C[8];
 extern u8 gUnknown_08022254[0x1B8];
 extern u8 gUnknown_0802240C[0x82];
+
 extern u8 gUnknown_08022490[0x64];
 extern u8 gUnknown_080224F4[0x64];
 extern u8 gUnknown_08022558[0x28];
@@ -219,6 +234,10 @@ void InvestigationRoomUpdate_3_2(struct Main *main);
 void InvestigationSegmentSetup_3_4(struct Main *main);
 void InvestigationRoomSetup_3_4(struct Main *main);
 void InvestigationRoomUpdate_3_4(struct Main *main);
+
+void InvestigationSegmentSetup_3_6(struct Main *main);
+void InvestigationRoomSetup_3_6(struct Main *main);
+void InvestigationRoomUpdate_3_6(struct Main *main);
 
 void InvestigationDummy(struct Main *main);
 
