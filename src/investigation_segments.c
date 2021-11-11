@@ -24,7 +24,7 @@ void sub_800455C(struct Main *main) {
                 if(!GetFlag(0, 0x6C)) {
                     sub_801480C(9);
                 }
-                DmaCopy16(3, gUnknown_0801CC30, gExaminationData, 0x78);
+                LOADEXAMDATA(gUnknown_0801CC30);
             }
             if(GetFlag(0, 0x49)) {
                 ChangeFlag(0, 0x4A, 1);
@@ -54,7 +54,7 @@ void sub_800455C(struct Main *main) {
             else {
                 InvestigationSetScriptSectionAndFlag(0x89, 0xFF);
             }
-            DmaCopy16(3, gUnknown_0801CCA8, gExaminationData, 0x28);
+            LOADEXAMDATA(gUnknown_0801CCA8);
             break;
         }
         case 3: {
@@ -101,7 +101,7 @@ void sub_800455C(struct Main *main) {
             if(GetFlag(0, 0x49)) {
                 ChangeFlag(0, 0x4A, 1);
             }
-            DmaCopy16(3, gUnknown_0801CCD0, gExaminationData, 0x8C);
+            LOADEXAMDATA(gUnknown_0801CCD0);
             break;
         }
         case 4: {
@@ -139,12 +139,12 @@ void sub_800455C(struct Main *main) {
             else {
                 InvestigationSetScriptSectionAndFlag(0xB6, 0xFF);
             }
-            DmaCopy16(3, gUnknown_0801CD5C, gExaminationData, 0x50);
+            LOADEXAMDATA(gUnknown_0801CD5C);
             break;
         }
         case 5: {
             if(GetFlag(0, 0x48)) {
-                DmaCopy16(3, gUnknown_0801CE10, gExaminationData, 0x78);
+                LOADEXAMDATA(gUnknown_0801CE10);
                 if(GetFlag(0, 0x70) && !GetFlag(0, 0x4B)) {
                     InvestigationSetPersonAnimation(0x4015, 0, 0);
                     PlayBGM(0xCF);
@@ -170,7 +170,7 @@ void sub_800455C(struct Main *main) {
                 sub_801480C(0xD);
             }
             else {
-                DmaCopy16(3, gUnknown_0801CDAC, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_0801CDAC);
                 if(GetFlag(0, 0x57)) {
                     InvestigationSetPersonAnimation(0x4015, 0, 0);
                     PlayBGM(0xCF);
@@ -212,12 +212,12 @@ void sub_800455C(struct Main *main) {
             else if(!GetFlag(0, 0x5D)) {
                 InvestigationSetScriptSectionAndFlag(0x123, 0xFF);
             }
-            DmaCopy16(3, gUnknown_0801CE88, gExaminationData, 0x64);
+            LOADEXAMDATA(gUnknown_0801CE88);
             break;
         }
         case 7: {
             if(GetFlag(0, 0x4D)) {
-                DmaCopy16(3, gUnknown_0801CF8C, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_0801CF8C);
                 if(GetFlag(0, 0x7B) && !GetFlag(0, 0x4E)) {
                     InvestigationSetPersonAnimation(0x13, 0, 0);
                     PlayBGM(0xD7);
@@ -227,7 +227,7 @@ void sub_800455C(struct Main *main) {
                 }
             }
             else if(GetFlag(0, 0x48)) {
-                DmaCopy16(3, gUnknown_0801CF8C, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_0801CF8C);
                 if(GetFlag(0, 0x75)) {
                     InvestigationSetPersonAnimation(0x13, 0, 0);
                     PlayBGM(0xD7);
@@ -237,7 +237,7 @@ void sub_800455C(struct Main *main) {
                 }
             }
             else if(GetFlag(0, 0x42)) {
-                DmaCopy16(3, gUnknown_0801CF3C, gExaminationData, 0x50);
+                LOADEXAMDATA(gUnknown_0801CF3C);
                 if(GetFlag(0, 0x43)) {
                     InvestigationSetPersonAnimation(0x13, 0, 0);
                     PlayBGM(215);
@@ -247,7 +247,7 @@ void sub_800455C(struct Main *main) {
                 }
             }
             else {
-                DmaCopy16(3, gUnknown_0801CEEC, gExaminationData, 0x50);
+                LOADEXAMDATA(gUnknown_0801CEEC);
                 if(!GetFlag(0, 0x5C)) {
                     InvestigationSetScriptSectionAndFlag(0xFE, 0xFF);
                 }
@@ -280,14 +280,14 @@ void sub_8004CEC(struct Main *main) {
     DmaFill16(3, 0xFFFF, gExaminationData, 0x1E0);
     switch(main->currentRoomId) {
         case 0: {
-            DmaCopy16(3, gUnknown_0801D704, gExaminationData, 0x64);
+            LOADEXAMDATA(gUnknown_0801D704);
             if (!GetFlag(0, 0x90)) {
                 InvestigationSetScriptSectionAndFlag(0x81, 0x90);
             }
             break;
         }
         case 1: {
-            DmaCopy16(3, gUnknown_0801D768, gExaminationData, 0x28);
+            LOADEXAMDATA(gUnknown_0801D768);
             if (GetFlag(0, 0xAF)) {
                 LoadCurrentScriptIntoRam();
                 if (!GetFlag(0, 0x94)) {
@@ -320,7 +320,7 @@ void sub_8004CEC(struct Main *main) {
             break;
         }
         case 2: {
-            DmaCopy16(3, gUnknown_0801DA88, gExaminationData, 0x78);
+            LOADEXAMDATA(gUnknown_0801DA88);
             if (!GetFlag(0, 0x95)) {
                 InvestigationSetScriptSectionAndFlag(0x14F, 0x95);
             }
@@ -331,7 +331,7 @@ void sub_8004CEC(struct Main *main) {
             break;
         }
         case 3: {
-            DmaCopy16(3, gUnknown_0801D790, gExaminationData, 0x8C);
+            LOADEXAMDATA(gUnknown_0801D790);
             if (GetFlag(0, 0xAF)) {
                 if (!GetFlag(0, 0x9A)) {
                     InvestigationSetScriptSectionAndFlag(0xEE, 0x9A);
@@ -371,7 +371,7 @@ void sub_8004CEC(struct Main *main) {
             break;
         }
         case 4: {
-            DmaCopy16(3, gUnknown_0801D81C, gExaminationData, 0x50);
+            LOADEXAMDATA(gUnknown_0801D81C);
             if (GetFlag(0, 0xAA)) {
                 if (!GetFlag(0, 0x9D)) {
                     InvestigationSetScriptSectionAndFlag(0x11F, 0x9D);
@@ -392,7 +392,7 @@ void sub_8004CEC(struct Main *main) {
             break;
         }
         case 5: {
-            DmaCopy16(3, gUnknown_0801D86C, gExaminationData, 0x78);
+            LOADEXAMDATA(gUnknown_0801D86C);
             if (GetFlag(0, 0xA9) && GetFlag(0, 0xA5) && GetFlag(0, 0xB3)) {
                 if (!GetFlag(0, 0x98)) {
                     if (!GetFlag(0, 0x9F)) {
@@ -416,7 +416,7 @@ void sub_8004CEC(struct Main *main) {
         }
         case 6: {
             if (GetFlag(0, 0xAD) && GetFlag(0, 0xAE)) {
-                DmaCopy16(3, gUnknown_0801DA24, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_0801DA24);
                 if (!GetFlag(0, 0xA2)) {
                     InvestigationSetScriptSectionAndFlag(0x118, 0xA2);
                     break;
@@ -425,7 +425,7 @@ void sub_8004CEC(struct Main *main) {
                 PlayBGM(0xC);
             }
             else if (GetFlag(0, 0xA5)) {
-                DmaCopy16(3, gUnknown_0801DA24, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_0801DA24);
                 if(!GetFlag(0, 0xB3)) {
                     sub_801480C(0xA);
                 }
@@ -440,7 +440,7 @@ void sub_8004CEC(struct Main *main) {
                 if (!GetFlag(0, 0xA0)) {
                     InvestigationSetScriptSectionAndFlag(0xF2, 0xA0);
                 }
-                DmaCopy16(3, gUnknown_0801D9C0, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_0801D9C0);
             }
             break;
         }
@@ -449,7 +449,7 @@ void sub_8004CEC(struct Main *main) {
                 if(!GetFlag(0, 0xB5)) {
                     sub_801480C(0xE);
                 }
-                DmaCopy16(3, gUnknown_0801D948, gExaminationData, 0x78);
+                LOADEXAMDATA(gUnknown_0801D948);
                 if (!GetFlag(0, 0xA4)) {
                     InvestigationSetScriptSectionAndFlag(0x14B, 0xA4);
                 }
@@ -458,7 +458,7 @@ void sub_8004CEC(struct Main *main) {
                 if (!GetFlag(0, 0xA3)) {
                     InvestigationSetScriptSectionAndFlag(0x145, 0xA3);
                 }
-                DmaCopy16(3, gUnknown_0801D8E4, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_0801D8E4);
             }
             break;
         }
@@ -471,7 +471,6 @@ void nullsub_9(struct Main *main) {
 // END case 1
 
 // BEGIN case 2
-
 void sub_8005310(struct Main *main) {
     DmaCopy16(3, gUnknown_0801E220, gMain.roomData, 0x50);
     DmaCopy16(3, gUnknown_0801E018, gTalkData, 0x208);
@@ -484,7 +483,7 @@ void sub_8005374(struct Main *main) {
     DmaFill16(3, 0xFFFF, gExaminationData, 0x1E0);
     switch(main->currentRoomId) {
         case 0: {
-            DmaCopy16(3, gUnknown_0801E270, gExaminationData, 0x64);
+            LOADEXAMDATA(gUnknown_0801E270);
             if (GetFlag(0, 0xAB)) {
                 if (!GetFlag(0, 0x91)) {
                     InvestigationSetPersonAnimation(4, 0xAF8, 0xAF8);
@@ -507,14 +506,14 @@ void sub_8005374(struct Main *main) {
                     InvestigationSetPersonAnimation(0x1D, 0x1FEC, 0x1FEC);
                     PlayBGM(0xD0);
                 }
-                DmaCopy16(3, gUnknown_0801E2D4, gExaminationData, 0x28);
+                LOADEXAMDATA(gUnknown_0801E2D4);
                 break;
             }
             if (GetFlag(0, 0xAC)) {
                 if (!GetFlag(0, 0x93)) {
                     InvestigationSetScriptSectionAndFlag(0xAA, 0x93);
                 }
-                DmaCopy16(3, gUnknown_0801E2FC, gExaminationData, 0x28);
+                LOADEXAMDATA(gUnknown_0801E2FC);
                 break;
             }
             LoadCurrentScriptIntoRam();
@@ -530,11 +529,11 @@ void sub_8005374(struct Main *main) {
                     PlayBGM(0xD7);
                 }
             }
-            DmaCopy16(3, gUnknown_0801E2D4, gExaminationData, 0x28);
+            LOADEXAMDATA(gUnknown_0801E2D4);
             break;
         }
         case 8: {
-            DmaCopy16(3, gUnknown_0801E324, gExaminationData, 0xA0);
+            LOADEXAMDATA(gUnknown_0801E324);
             if (GetFlag(0, 0xB9)) {
                 ChangeFlag(0, 0xC6, 0);
                 if (!GetFlag(0, 0x97)) {
@@ -574,14 +573,14 @@ void sub_8005374(struct Main *main) {
                     InvestigationSetPersonAnimation(0x1C, 0x10F0, 0x10F0);
                     PlayBGM(0xCD);
                 }
-                DmaCopy16(3, gUnknown_0801E464, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801E464);
             }
             else if (GetFlag(0, 0xB9)) {
                 ChangeFlag(0, 0xC8, 0);
                 if (!GetFlag(0, 0x99)) {
                     InvestigationSetScriptSectionAndFlag(0xE9, 0x99);
                 }
-                DmaCopy16(3, gUnknown_0801E52C, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801E52C);
             }
             else {
                 ChangeFlag(0, 0xC8, 1);
@@ -592,7 +591,7 @@ void sub_8005374(struct Main *main) {
                     InvestigationSetPersonAnimation(0x1C, 0, 0);
                     PlayBGM(0xCD);
                 }
-                DmaCopy16(3, gUnknown_0801E464, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801E464);
             }
             break;
         }
@@ -604,7 +603,7 @@ void sub_8005374(struct Main *main) {
                 else {
                     PlayBGM(0x1F);
                 }
-                DmaCopy16(3, gUnknown_0801E414, gExaminationData, 0x50);
+                LOADEXAMDATA(gUnknown_0801E414);
                 break;
             }
             if (!GetFlag(0, 0x9B)) {
@@ -614,11 +613,11 @@ void sub_8005374(struct Main *main) {
                 InvestigationSetPersonAnimation(0xA, 0x185C, 0x185C);
                 PlayBGM(0x1F);
             }
-            DmaCopy16(3, gUnknown_0801E3C4, gExaminationData, 0x50);
+            LOADEXAMDATA(gUnknown_0801E3C4);
             break;
         }
         case 11: {
-            DmaCopy16(3, gUnknown_0801E7FC, gExaminationData, 0x12C);
+            LOADEXAMDATA(gUnknown_0801E7FC);
             if (GetFlag(0, 0xB9)) {
                 ChangeFlag(0, 0xC7, 1);
                 if (!GetFlag(0, 0x9E)) {
@@ -643,16 +642,16 @@ void sub_8005374(struct Main *main) {
                 else {
                     PlayBGM(0xD7);
                 }
-                DmaCopy16(3, gUnknown_0801E7FC, gExaminationData, 0x12C);
+                LOADEXAMDATA(gUnknown_0801E7FC);
             }
             break;
         }
         case 12: {
             if (GetFlag(0, 0xB6)) {
-                DmaCopy16(3, gUnknown_0801E6F8, gExaminationData, 0x104);
+                LOADEXAMDATA(gUnknown_0801E6F8);
             }
             else {
-                DmaCopy16(3, gUnknown_0801E5F4, gExaminationData, 0x104);
+                LOADEXAMDATA(gUnknown_0801E5F4);
             }
             if (GetFlag(0, 0xB9)) {
                 if (!GetFlag(0, 0xA0)) {
@@ -670,7 +669,7 @@ void sub_8005374(struct Main *main) {
                 if (!GetFlag(0, 0xA4)) {
                     InvestigationSetScriptSectionAndFlag(0x118, 0xA4);
                 }
-                DmaCopy16(3, gUnknown_0801E928, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801E928);
             }
             else if (GetFlag(0, 0xBA)) {
                 if (!GetFlag(0, 0xA3)) {
@@ -680,7 +679,7 @@ void sub_8005374(struct Main *main) {
                     InvestigationSetPersonAnimation(0x1F, 0x784, 0x784);
                     PlayBGM(0xDA);
                 }
-                DmaCopy16(3, gUnknown_0801E9F0, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801E9F0);
             }
             else if (GetFlag(0, 0xAF) && GetFlag(0, 0xB0)) {
                 if (!GetFlag(0, 0xA2)) {
@@ -690,13 +689,13 @@ void sub_8005374(struct Main *main) {
                     InvestigationSetPersonAnimation(0x1F, 0x784, 0x784);
                     PlayBGM(0xDA);
                 }
-                DmaCopy16(3, gUnknown_0801E9F0, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801E9F0);
             }
             else {
                 if (!GetFlag(0, 0xA1)) {
                     InvestigationSetScriptSectionAndFlag(0x102, 0xA1);
                 }
-                DmaCopy16(3, gUnknown_0801E928, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801E928);
             }
             break;
         }
@@ -707,7 +706,7 @@ void sub_8005374(struct Main *main) {
             else {
                 PlayBGM(0xD7);
             }
-            DmaCopy16(3, gUnknown_0801EAB8, gExaminationData, 0xC8);
+            LOADEXAMDATA(gUnknown_0801EAB8);
             break;
         }
     }
@@ -716,7 +715,7 @@ void sub_8005374(struct Main *main) {
 void sub_80059E0(struct Main *main) {
     if(main->currentRoomId == 12) {
         if(!GetFlag(0, 0xB7) && GetFlag(0, 0xB6)) {
-            DmaCopy16(3, gUnknown_0801E6F8, gExaminationData, 0x104);
+            LOADEXAMDATA(gUnknown_0801E6F8);
             ChangeFlag(0, 0xB7, 1);
         }
     }
@@ -733,7 +732,7 @@ void sub_8005A8C(struct Main *main) {
     DmaFill16(3, 0xFFFF, gExaminationData, 0x1E0);
     switch(main->currentRoomId) {
         case 0: {
-            DmaCopy16(3, gUnknown_0801F23C, gExaminationData, 0x64);
+            LOADEXAMDATA(gUnknown_0801F23C);
             if (GetFlag(0, 0xD7)) {
                 InvestigationSetPersonAnimation(4, 0x25E4, 0x25E4);
                 PlayBGM(0xCC);
@@ -745,7 +744,7 @@ void sub_8005A8C(struct Main *main) {
                 if (!GetFlag(0, 0xD9)) {
                     InvestigationSetScriptSectionAndFlag(0xAE, 0xD9);
                 }
-                DmaCopy16(3, gUnknown_0801F2C8, gExaminationData, 0x28);
+                LOADEXAMDATA(gUnknown_0801F2C8);
                 break;
             }
             if (!GetFlag(0, 0xD8)) {
@@ -755,11 +754,11 @@ void sub_8005A8C(struct Main *main) {
                 InvestigationSetPersonAnimation(0x1D, 0x1FEC, 0x1FEC);
                 PlayBGM(0xD0);
             }
-            DmaCopy16(3, gUnknown_0801F2A0, gExaminationData, 0x28);
+            LOADEXAMDATA(gUnknown_0801F2A0);
             break;
         }
         case 8: {
-            DmaCopy16(3, gUnknown_0801F2F0, gExaminationData, 0xA0);
+            LOADEXAMDATA(gUnknown_0801F2F0);
             if (!GetFlag(0, 0xDA)) {
                 InvestigationSetScriptSectionAndFlag(0xB1, 0xDA);
                 break;
@@ -770,7 +769,7 @@ void sub_8005A8C(struct Main *main) {
         }
         case 9: {
             if (GetFlag(0, 0xD3)) {
-                DmaCopy16(3, gUnknown_0801F458, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801F458);
                 if (!GetFlag(0, 0xDC)) {
                     InvestigationSetScriptSectionAndFlag(0xB7, 0xDC);
                     break;
@@ -782,12 +781,12 @@ void sub_8005A8C(struct Main *main) {
                 if (!GetFlag(0, 0xDB)) {
                     InvestigationSetScriptSectionAndFlag(0xB6, 0xDB);
                 }
-                DmaCopy16(3, gUnknown_0801F390, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_0801F390);
             }
             break;
         }
         case 10: {
-            DmaCopy16(3, gUnknown_0801F520, gExaminationData, 0x50);
+            LOADEXAMDATA(gUnknown_0801F520);
             if (GetFlag(0, 0xD1)) {
                 if (!GetFlag(0, 0xDE)) {
                     InvestigationSetPersonAnimation(0xA, 0, 0);
@@ -818,14 +817,14 @@ void sub_8005A8C(struct Main *main) {
                     InvestigationSetPersonAnimation(0x1F, 0x784, 0x784);
                     PlayBGM(0xDA);
                 }
-                DmaCopy16(3, gUnknown_0801F688, gExaminationData, 0x118);
+                LOADEXAMDATA(gUnknown_0801F688);
             }
             else if (GetFlag(0, 0xD1)) {
                 ChangeFlag(0, 0xF5, 0);
                 if (!GetFlag(0, 0xE1)) {
                     InvestigationSetScriptSectionAndFlag(0xDC, 0xE1);
                 }
-                DmaCopy16(3, gUnknown_0801F570, gExaminationData, 0x118);
+                LOADEXAMDATA(gUnknown_0801F570);
             }
             else if (GetFlag(0, 0xD0)) {
                 ChangeFlag(0, 0xF5, 1);
@@ -836,7 +835,7 @@ void sub_8005A8C(struct Main *main) {
                     InvestigationSetPersonAnimation(0x1F, 0x784, 0x784);
                     PlayBGM(0xDA);
                 }
-                DmaCopy16(3, gUnknown_0801F688, gExaminationData, 0x118);
+                LOADEXAMDATA(gUnknown_0801F688);
             }
             else {
                 ChangeFlag(0, 0xF5, 0);
@@ -846,12 +845,12 @@ void sub_8005A8C(struct Main *main) {
                 else {
                     PlayBGM(0xD7);
                 }
-                DmaCopy16(3, gUnknown_0801F570, gExaminationData, 0x118);
+                LOADEXAMDATA(gUnknown_0801F570);
             }
             break;
         }
         case 12: {
-            DmaCopy16(3, gUnknown_0801F7A0, gExaminationData, 0x104);
+            LOADEXAMDATA(gUnknown_0801F7A0);
             if (!GetFlag(0, 0xE3)) {
                 InvestigationSetScriptSectionAndFlag(0xEF, 0xE3);
             }
@@ -864,7 +863,7 @@ void sub_8005A8C(struct Main *main) {
             break;
         }
         case 13: {
-            DmaCopy16(3, gUnknown_0801F8A4, gExaminationData, 0xC8);
+            LOADEXAMDATA(gUnknown_0801F8A4);
             if (GetFlag(0, 0xD4) && GetFlag(0, 0xD5) && GetFlag(0, 0xD6)) {
                 if (!GetFlag(0, 0xE5)) {
                     InvestigationSetScriptSectionAndFlag(0xFC, 0xE5);
@@ -879,7 +878,7 @@ void sub_8005A8C(struct Main *main) {
             break;
         }
         case 14: {
-            DmaCopy16(3, gUnknown_0801F96C, gExaminationData, 0xC8);
+            LOADEXAMDATA(gUnknown_0801F96C);
             if (!GetFlag(0, 0xE6)) {
                 InvestigationSetPersonAnimation(0x20, 0, 0);
                 sub_801480C(0x3D);
@@ -903,7 +902,6 @@ void nullsub_3(struct Main *main) {
 // END case 2
 
 // BEGIN case 3
-
 void sub_8005FC0(struct Main *main) {
     DmaCopy16(3, gUnknown_0801FF70, gMain.roomData, 0x7C);
     DmaCopy16(3, gUnknown_0801FE30, gTalkData, 0x140);
@@ -929,14 +927,14 @@ void sub_800600C(struct Main *main) {
                 InvestigationSetPersonAnimation(0x23, 0, 0);
                 PlayBGM(0xEE);
             }
-            DmaCopy16(3, gUnknown_0801FFF0, gExaminationData, 0x28);
+            LOADEXAMDATA(gUnknown_0801FFF0);
             break;
         }
         case 19: {if (GetFlag(0, 0x91)) {
                 if (!GetFlag(0, 0x97)) {
                     InvestigationSetScriptSectionAndFlag(0x93, 0x97);
                 }
-                DmaCopy16(3, gUnknown_080200E0, gExaminationData, 0xC8);
+                LOADEXAMDATA(gUnknown_080200E0);
                 break;
             }
             if (GetFlag(0, 0x96)) {
@@ -949,11 +947,11 @@ void sub_800600C(struct Main *main) {
                     PlayBGM(0x15);
                 }
             }
-            DmaCopy16(3, gUnknown_08020018, gExaminationData, 0xC8);
+            LOADEXAMDATA(gUnknown_08020018);
             break;
         }
         case 18: {
-            DmaCopy16(3, gUnknown_080201A8, gExaminationData, 0xB4);
+            LOADEXAMDATA(gUnknown_080201A8);
             if (GetFlag(0, 0x91)) {
                 if (!GetFlag(0, 0x9B)) {
                     InvestigationSetScriptSectionAndFlag(0xA0, 0x9B);
@@ -975,7 +973,7 @@ void sub_800600C(struct Main *main) {
                     InvestigationSetPersonAnimation(0x28, 0, 0);
                     PlayBGM(0xD7);
                 }
-                DmaCopy16(3, gUnknown_080202FC, gExaminationData, 0xA0);
+                LOADEXAMDATA(gUnknown_080202FC);
                 break;
             }
             if (!GetFlag(0, 0x98)) {
@@ -986,10 +984,10 @@ void sub_800600C(struct Main *main) {
                 PlayBGM(0xDA);
             }
             if (!GetFlag(0, 0xA7)) {
-                DmaCopy16(3, gUnknown_0802025C, gExaminationData, 0xA0);
+                LOADEXAMDATA(gUnknown_0802025C);
             }
             else {
-                DmaCopy16(3, gUnknown_080202FC, gExaminationData, 0xA0);
+                LOADEXAMDATA(gUnknown_080202FC);
             }
             break;
         }
@@ -1023,7 +1021,7 @@ void sub_8006330(struct Main *main) {
                 InvestigationSetPersonAnimation(0x14, 0, 0);
                 PlayBGM(0xD7);
             }
-            DmaCopy16(3, gUnknown_080209D4, gExaminationData, 0x64);
+            LOADEXAMDATA(gUnknown_080209D4);
             break;
         }
         case 1: {
@@ -1034,11 +1032,11 @@ void sub_8006330(struct Main *main) {
                 InvestigationSetPersonAnimation(0x23, 0, 0);
                 PlayBGM(0xEE);
             }
-            DmaCopy16(3, gUnknown_08020A38, gExaminationData, 0x28);
+            LOADEXAMDATA(gUnknown_08020A38);
             break;
         }
         case 19: {
-            DmaCopy16(3, gUnknown_08020A60, gExaminationData, 0xC8);
+            LOADEXAMDATA(gUnknown_08020A60);
             if (GetFlag(0, 0xB0)) {
                 if (!GetFlag(0, 0xC1)) {
                     InvestigationSetScriptSectionAndFlag(0xB4, 0xC1);
@@ -1060,7 +1058,7 @@ void sub_8006330(struct Main *main) {
                 InvestigationSetPersonAnimation(0x27, 0, 0);
                 PlayBGM(0xDA);
             }
-            DmaCopy16(3, gUnknown_08020C90, gExaminationData, 0xA0);
+            LOADEXAMDATA(gUnknown_08020C90);
             break;
         }
         case 18: {
@@ -1070,7 +1068,7 @@ void sub_8006330(struct Main *main) {
                     InvestigationSetPersonAnimation(0x14, 0, 0);
                     InvestigationSetScriptSectionAndFlag(0xE1, 0xC4);
                 }
-                DmaCopy16(3, gUnknown_08020BDC, gExaminationData, 0xB4);
+                LOADEXAMDATA(gUnknown_08020BDC);
             }
             else {
                 if (!GetFlag(0, 0xC3)) {
@@ -1080,12 +1078,12 @@ void sub_8006330(struct Main *main) {
                     InvestigationSetPersonAnimation(0x18, 0, 0);
                     PlayBGM(0x16);
                 }
-                DmaCopy16(3, gUnknown_08020B28, gExaminationData, 0xB4);
+                LOADEXAMDATA(gUnknown_08020B28);
             }
             break;
         }
         case 16: {
-            DmaCopy16(3, gUnknown_08020D30, gExaminationData, 0xF0);
+            LOADEXAMDATA(gUnknown_08020D30);
             if (GetFlag(0, 0xBA) && GetFlag(0, 0xBB)) {
                 ChangeFlag(0, 0xDC, 1);
                 if (!GetFlag(0, 0xC7)) {
@@ -1114,7 +1112,7 @@ void sub_8006330(struct Main *main) {
             break;
         }
         case 17: {
-            DmaCopy16(3, gUnknown_08020E20, gExaminationData, 0x190);
+            LOADEXAMDATA(gUnknown_08020E20);
             if (GetFlag(0, 0xE1)) {
                 sub_801480C(0x1B);
             }
@@ -1128,7 +1126,7 @@ void sub_8006330(struct Main *main) {
             break;
         }
         case 15: {
-            DmaCopy16(3, gUnknown_08020FB0, gExaminationData, 0x8C);
+            LOADEXAMDATA(gUnknown_08020FB0);
             if (GetFlag(0, 0xBC)) {
                 ChangeFlag(0, 0xDF, 0);
                 ChangeFlag(0, 0xE0, 0);
@@ -1166,7 +1164,7 @@ void sub_8006330(struct Main *main) {
             break;
         }
         case 23: {
-            DmaCopy16(3, gUnknown_0802108C, gExaminationData, 0x64);
+            LOADEXAMDATA(gUnknown_0802108C);
             if (!GetFlag(0, 0xCC)) {
                 InvestigationSetScriptSectionAndFlag(0x153, 0xCC);
             }
@@ -1205,10 +1203,10 @@ void sub_80068D4(struct Main *main) {
                     PlayBGM(1);
                 }
                 if (!GetFlag(0, 0x95)) {
-                    DmaCopy16(3, gUnknown_080214B4, gExaminationData, 0x64);
+                    LOADEXAMDATA(gUnknown_080214B4);
                 }
                 else {
-                    DmaCopy16(3, gUnknown_08021518, gExaminationData, 0x64);
+                    LOADEXAMDATA(gUnknown_08021518);
                 }
             }
             else {
@@ -1216,7 +1214,7 @@ void sub_80068D4(struct Main *main) {
                     InvestigationSetPersonAnimation(0xA, 0xB48, 0xB48);
                     PlayBGM(1);
                 }
-                DmaCopy16(3, gUnknown_080214B4, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_080214B4);
             }
             break;
         }
@@ -1229,7 +1227,7 @@ void sub_80068D4(struct Main *main) {
             else if (!GetFlag(0, 0x9D)) {
                 InvestigationSetScriptSectionAndFlag(0x9F, 0x9D);
             }
-            DmaCopy16(3, gUnknown_0802157C, gExaminationData, 0x28);
+            LOADEXAMDATA(gUnknown_0802157C);
             break;
         }
         case 19: {
@@ -1239,21 +1237,21 @@ void sub_80068D4(struct Main *main) {
             else {
                 PlayBGM(0xD7);
             }
-            DmaCopy16(3, gUnknown_080215A4, gExaminationData, 0xC8);
+            LOADEXAMDATA(gUnknown_080215A4);
             break;
         }
         case 18: {
             if (!GetFlag(0, 0xA0)) {
                 InvestigationSetScriptSectionAndFlag(0xB3, 0xA0);
-                DmaCopy16(3, gUnknown_0802166C, gExaminationData, 0xB4);
+                LOADEXAMDATA(gUnknown_0802166C);
             }
             else if (!GetFlag(0, 0xBB)) {
                 InvestigationSetPersonAnimation(0x18, 0, 0);
                 PlayBGM(0x16);
-                DmaCopy16(3, gUnknown_0802166C, gExaminationData, 0xB4);
+                LOADEXAMDATA(gUnknown_0802166C);
             }
             else {
-                DmaCopy16(3, gUnknown_08021720, gExaminationData, 0xB4);
+                LOADEXAMDATA(gUnknown_08021720);
             }
             break;
         }
@@ -1265,7 +1263,7 @@ void sub_80068D4(struct Main *main) {
                 InvestigationSetPersonAnimation(0x27, 0, 0);
                 PlayBGM(0xDA);
             }
-            DmaCopy16(3, gUnknown_080217D4, gExaminationData, 0xA0);
+            LOADEXAMDATA(gUnknown_080217D4);
             break;
         }
         case 17: {
@@ -1293,14 +1291,14 @@ void sub_80068D4(struct Main *main) {
                 }
                 InvestigationSetPersonAnimation(0x4027, 0, 0);
             }
-            DmaCopy16(3, gUnknown_08021874, gExaminationData, 0x17C);
+            LOADEXAMDATA(gUnknown_08021874);
             break;
         }
         case 15: {
             if (!GetFlag(0, 0xA4)) {
                 InvestigationSetScriptSectionAndFlag(0xF4, 0xA4);
             }
-            DmaCopy16(3, gUnknown_080219F0, gExaminationData, 0x8C);
+            LOADEXAMDATA(gUnknown_080219F0);
             break;
         }
         case 22: {
@@ -1311,7 +1309,7 @@ void sub_80068D4(struct Main *main) {
                 InvestigationSetPersonAnimation(0x25, 0, 0);
                 PlayBGM(0xD3);
             }
-            DmaCopy16(3, gUnknown_08021ACC, gExaminationData, 0x8C);
+            LOADEXAMDATA(gUnknown_08021ACC);
             break;
         }
         case 21: {
@@ -1323,7 +1321,7 @@ void sub_80068D4(struct Main *main) {
                 sub_801480C(0x1E);
                 PlayBGM(0xD3);
             }
-            DmaCopy16(3, gUnknown_08021B58, gExaminationData, 0xA0);
+            LOADEXAMDATA(gUnknown_08021B58);
             break;
         }
         case 2: {
@@ -1342,14 +1340,14 @@ void sub_80068D4(struct Main *main) {
             else if (!GetFlag(0, 0xA9)) {
                 InvestigationSetScriptSectionAndFlag(0xFC, 0xA9);
             }
-            DmaCopy16(3, gUnknown_08021BF8, gExaminationData, 0x78);
+            LOADEXAMDATA(gUnknown_08021BF8);
             break;
         }
         case 25: {
             if (!GetFlag(0, 0xA6)) {
                 InvestigationSetScriptSectionAndFlag(0x10B, 0xA6);
             }
-            DmaCopy16(3, gUnknown_08021A7C, gExaminationData, 0x50);
+            LOADEXAMDATA(gUnknown_08021A7C);
             break;
         }
     }
@@ -1359,13 +1357,13 @@ void sub_8006E20(struct Main *main) {
     switch(main->currentRoomId) {
         case 0: {
             if(GetFlag(0, 0x95)) {
-                DmaCopy16(3, gUnknown_08021518, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_08021518);
             }
             break;
         }
         case 18: {
             if(GetFlag(0, 0xBB)) {
-                DmaCopy16(3, gUnknown_08021720, gExaminationData, 0xB4)
+                LOADEXAMDATA(gUnknown_08021720);
             }
             break;
         }
@@ -1397,7 +1395,7 @@ void sub_8006EE8(struct Main *main) {
                     InvestigationSetPersonAnimation(0xA, 0, 0);
                     PlayBGM(0xC);
                 }
-                DmaCopy16(3, gUnknown_080224F4, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_080224F4);
             }
             else {
                 if (!GetFlag(0, 0x9A)) {
@@ -1407,7 +1405,7 @@ void sub_8006EE8(struct Main *main) {
                     InvestigationSetPersonAnimation(0x14, 0, 0);
                     PlayBGM(0xD7);
                 }
-                DmaCopy16(3, gUnknown_08022490, gExaminationData, 0x64);
+                LOADEXAMDATA(gUnknown_08022490);
             }
             break;
         }
@@ -1425,7 +1423,7 @@ void sub_8006EE8(struct Main *main) {
                         PlayBGM(0xD6);
                     }
                 }
-                DmaCopy16(3, gUnknown_08022580, gExaminationData, 0x28);
+                LOADEXAMDATA(gUnknown_08022580);
             }
             else if (GetFlag(0, 0x90)) {
                 if (!GetFlag(0, 0x9D)) {
@@ -1437,13 +1435,13 @@ void sub_8006EE8(struct Main *main) {
                 else {
                     InvestigationSetScriptSectionAndFlag(0xA7, 0xFF);
                 }
-                DmaCopy16(3, gUnknown_08022580, gExaminationData, 0x28);
+                LOADEXAMDATA(gUnknown_08022580);
             }
             else {
                 if (!GetFlag(0, 0x9C)) {
                     InvestigationSetScriptSectionAndFlag(0xA3, 0x9C);
                 }
-                DmaCopy16(3, gUnknown_08022558, gExaminationData, 0x28);
+                LOADEXAMDATA(gUnknown_08022558);
             }
             break;
         }
@@ -1455,7 +1453,7 @@ void sub_8006EE8(struct Main *main) {
                 InvestigationSetPersonAnimation(0x27, 0, 0);
                 PlayBGM(0xDA);
             }
-            DmaCopy16(3, gUnknown_080225A8, gExaminationData, 0xC8);
+            LOADEXAMDATA(gUnknown_080225A8);
             break;
         }
         case 18: {
@@ -1463,14 +1461,14 @@ void sub_8006EE8(struct Main *main) {
             if (!GetFlag(0, 0xA1)) {
                 InvestigationSetScriptSectionAndFlag(0x110, 0xA1);
             }
-            DmaCopy16(3, gUnknown_08022670, gExaminationData, 0xB4);
+            LOADEXAMDATA(gUnknown_08022670);
             break;
         }
         case 20: {
             if (!GetFlag(0, 0xA0)) {
                 InvestigationSetScriptSectionAndFlag(0x100, 0xA0);
             }
-            DmaCopy16(3, gUnknown_08022724, gExaminationData, 0xA0);
+            LOADEXAMDATA(gUnknown_08022724);
             break;
         }
         case 17: {
@@ -1479,11 +1477,11 @@ void sub_8006EE8(struct Main *main) {
                 InvestigationSetPersonAnimation(0x14, 0, 0);
                 PlayBGM(0xC);
             }
-            DmaCopy16(3, gUnknown_080227C4, gExaminationData, 0x17C);
+            LOADEXAMDATA(gUnknown_080227C4);
             break;
         }
         case 15: {
-            DmaCopy16(3, gUnknown_08022940, gExaminationData, 0x8C);
+            LOADEXAMDATA(gUnknown_08022940);
             if (GetFlag(0, 0x96) && GetFlag(0, 0xBC)) {
                 if (!GetFlag(0, 0xA5)) {
                     InvestigationSetPersonAnimation(8, 0x5804, 0x5804);
@@ -1520,7 +1518,7 @@ void sub_8006EE8(struct Main *main) {
             if (!GetFlag(0, 0xA8)) {
                 sub_8004458(0x157, 0xA8);
             }
-            DmaCopy16(3, gUnknown_080229CC, gExaminationData, 0x64);
+            LOADEXAMDATA(gUnknown_080229CC);
             break;
         }
         case 22: {
@@ -1534,7 +1532,7 @@ void sub_8006EE8(struct Main *main) {
                 else if (!GetFlag(0, 0x99)) {
                     PlayBGM(0xEC);
                 }
-                DmaCopy16(3, gUnknown_08022ABC, gExaminationData, 0xA0);
+                LOADEXAMDATA(gUnknown_08022ABC);
             }
             else {
                 if (!GetFlag(0, 0xA6)) {
@@ -1543,7 +1541,7 @@ void sub_8006EE8(struct Main *main) {
                 else {
                     PlayBGM(0xEE);
                 }
-                DmaCopy16(3, gUnknown_08022A30, gExaminationData, 0x8C);
+                LOADEXAMDATA(gUnknown_08022A30);
             }
             break;
         }
@@ -1551,7 +1549,7 @@ void sub_8006EE8(struct Main *main) {
             if (!GetFlag(0, 0xA9)) {
                 InvestigationSetScriptSectionAndFlag(0x15C, 0xA9);
             }
-            DmaCopy16(3, gUnknown_08022B5C, gExaminationData, 0xA0);
+            LOADEXAMDATA(gUnknown_08022B5C);
             break;
         }
     }
