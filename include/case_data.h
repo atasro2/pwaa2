@@ -16,8 +16,9 @@ struct Struct811DC98
     /* +0x01 */ u8 evidenceId;
     /* +0x02 */ u8 unk2;
     /* +0x03 */ u8 unk3;
-    /* +0x04 */ u16 unk4;
+    /* +0x04 */ u8 unk4;
     /* +0x06 */ u16 unk6;
+    /* +0x08 */ u16 unk8;
 };
 
 extern const u8 gCaseStartProcess[];
