@@ -1,7 +1,7 @@
     .section .data
 
     .global gUnknown_08111F14
-gUnknown_08111F14:
+gUnknown_08111F14: @ const u8 * gCourtRecordInitialItemLists
     .4byte gUnknown_0801C41C
     .4byte gUnknown_0801C424
     .4byte gUnknown_0801C4D8
@@ -26,7 +26,7 @@ gUnknown_08111F14:
     .4byte gUnknown_0801FAE6
 
     .global gUnknown_08111F6C
-gUnknown_08111F6C:
+gUnknown_08111F6C: @ const struct Struct811DC54 *
     .4byte gUnknown_0801C430
     .4byte gUnknown_0801C480
     .4byte gUnknown_0801C540
@@ -51,7 +51,7 @@ gUnknown_08111F6C:
     .4byte gUnknown_0801FC28
 
     .global gUnknown_08111FC4
-gUnknown_08111FC4:
+gUnknown_08111FC4: @ const struct Struct811DC98 *
     .4byte gUnknown_0801C610
     .4byte gUnknown_0801C610
     .4byte gUnknown_0801C610
