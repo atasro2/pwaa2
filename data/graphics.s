@@ -1,13 +1,13 @@
 	.section gfx_data, "aw", %progbits
 	.include "asm/macros.inc"
 
-    .global gUnknown_08130000
+	.global gUnknown_08130000
 gUnknown_08130000:
-    .incbin "baserom.gba", 0x00130000, 0x200
+	.incbin "graphics/title_screen.gbapal"
 
-    .global gUnknown_08130200
+	.global gUnknown_08130200
 gUnknown_08130200:
-    .incbin "baserom.gba", 0x00130200, 0x3EE4
+	.incbin "graphics/title_screen.8bpp.lz"
 
     .global gUnknown_081340E4
 gUnknown_081340E4:
@@ -25,13 +25,13 @@ gUnknown_081370FC:
 gUnknown_081378FC:
     .incbin "graphics/evidence_profile_descriptions/evidence_profile_descriptions.gbapal"
 
-    .global gUnknown_0813791C
+	.global gUnknown_0813791C
 gUnknown_0813791C:
-    .incbin "baserom.gba", 0x0013791C, 0x1000
+	.incbin "graphics/ui/message_box/13791C.4bpp"
 
-    .global gUnknown_0813891C
+	.global gUnknown_0813891C
 gUnknown_0813891C:
-    .incbin "baserom.gba", 0x0013891C, 0x5000
+	.incbin "graphics/ui/message_box/nametags.4bpp"
 
     .global gUnknown_0813D91C
 gUnknown_0813D91C:
@@ -353,9 +353,788 @@ gUnknown_0814F0C4:
 gUnknown_081500C4:
     .incbin "graphics/save_yes_no.4bpp"
 
-    .global gUnknown_081508C4
+@ BEGIN EVIDENCE PROFILE DESCRIPTIONS
+
+	.global gUnknown_081508C4
 gUnknown_081508C4:
-    .incbin "baserom.gba", 0x001508C4, 0x27564
+	.incbin "graphics/evidence_profile_descriptions/1508C4.4bpp.lz"
+
+
+	.global gUnknown_08150CCC
+gUnknown_08150CCC:
+	.incbin "graphics/evidence_profile_descriptions/150CCC.4bpp.lz"
+
+
+	.global gUnknown_08151104
+gUnknown_08151104:
+	.incbin "graphics/evidence_profile_descriptions/151104.4bpp.lz"
+
+
+	.global gUnknown_08151568
+gUnknown_08151568:
+	.incbin "graphics/evidence_profile_descriptions/151568.4bpp.lz"
+
+
+	.global gUnknown_081519B8
+gUnknown_081519B8:
+	.incbin "graphics/evidence_profile_descriptions/1519B8.4bpp.lz"
+
+
+	.global gUnknown_08151D54
+gUnknown_08151D54:
+	.incbin "graphics/evidence_profile_descriptions/151D54.4bpp.lz"
+
+
+	.global gUnknown_08152124
+gUnknown_08152124:
+	.incbin "graphics/evidence_profile_descriptions/152124.4bpp.lz"
+
+
+	.global gUnknown_081524CC
+gUnknown_081524CC:
+	.incbin "graphics/evidence_profile_descriptions/1524CC.4bpp.lz"
+
+
+	.global gUnknown_08152970
+gUnknown_08152970:
+	.incbin "graphics/evidence_profile_descriptions/152970.4bpp.lz"
+
+
+	.global gUnknown_08152DBC
+gUnknown_08152DBC:
+	.incbin "graphics/evidence_profile_descriptions/152DBC.4bpp.lz"
+
+
+	.global gUnknown_081531C8
+gUnknown_081531C8:
+	.incbin "graphics/evidence_profile_descriptions/1531C8.4bpp.lz"
+
+
+	.global gUnknown_081535F8
+gUnknown_081535F8:
+	.incbin "graphics/evidence_profile_descriptions/1535F8.4bpp.lz"
+
+
+	.global gUnknown_081539C8
+gUnknown_081539C8:
+	.incbin "graphics/evidence_profile_descriptions/1539C8.4bpp.lz"
+
+
+	.global gUnknown_08153DE8
+gUnknown_08153DE8:
+	.incbin "graphics/evidence_profile_descriptions/153DE8.4bpp.lz"
+
+
+	.global gUnknown_0815421C
+gUnknown_0815421C:
+	.incbin "graphics/evidence_profile_descriptions/15421C.4bpp.lz"
+
+
+	.global gUnknown_0815464C
+gUnknown_0815464C:
+	.incbin "graphics/evidence_profile_descriptions/15464C.4bpp.lz"
+
+
+	.global gUnknown_08154AD0
+gUnknown_08154AD0:
+	.incbin "graphics/evidence_profile_descriptions/154AD0.4bpp.lz"
+
+
+	.global gUnknown_08154F20
+gUnknown_08154F20:
+	.incbin "graphics/evidence_profile_descriptions/154F20.4bpp.lz"
+
+
+	.global gUnknown_0815523C
+gUnknown_0815523C:
+	.incbin "graphics/evidence_profile_descriptions/15523C.4bpp.lz"
+
+
+	.global gUnknown_0815566C
+gUnknown_0815566C:
+	.incbin "graphics/evidence_profile_descriptions/15566C.4bpp.lz"
+
+
+	.global gUnknown_08155AE4
+gUnknown_08155AE4:
+	.incbin "graphics/evidence_profile_descriptions/155AE4.4bpp.lz"
+
+
+	.global gUnknown_08155FBC
+gUnknown_08155FBC:
+	.incbin "graphics/evidence_profile_descriptions/155FBC.4bpp.lz"
+
+
+	.global gUnknown_081563D0
+gUnknown_081563D0:
+	.incbin "graphics/evidence_profile_descriptions/1563D0.4bpp.lz"
+
+
+	.global gUnknown_0815680C
+gUnknown_0815680C:
+	.incbin "graphics/evidence_profile_descriptions/15680C.4bpp.lz"
+
+
+	.global gUnknown_08156C20
+gUnknown_08156C20:
+	.incbin "graphics/evidence_profile_descriptions/156C20.4bpp.lz"
+
+
+	.global gUnknown_081570B8
+gUnknown_081570B8:
+	.incbin "graphics/evidence_profile_descriptions/1570B8.4bpp.lz"
+
+
+	.global gUnknown_08157500
+gUnknown_08157500:
+	.incbin "graphics/evidence_profile_descriptions/157500.4bpp.lz"
+
+
+	.global gUnknown_08157904
+gUnknown_08157904:
+	.incbin "graphics/evidence_profile_descriptions/157904.4bpp.lz"
+
+
+	.global gUnknown_08157D08
+gUnknown_08157D08:
+	.incbin "graphics/evidence_profile_descriptions/157D08.4bpp.lz"
+
+
+	.global gUnknown_08158134
+gUnknown_08158134:
+	.incbin "graphics/evidence_profile_descriptions/158134.4bpp.lz"
+
+
+	.global gUnknown_081585C4
+gUnknown_081585C4:
+	.incbin "graphics/evidence_profile_descriptions/1585C4.4bpp.lz"
+
+
+	.global gUnknown_081589AC
+gUnknown_081589AC:
+	.incbin "graphics/evidence_profile_descriptions/1589AC.4bpp.lz"
+
+
+	.global gUnknown_08158E10
+gUnknown_08158E10:
+	.incbin "graphics/evidence_profile_descriptions/158E10.4bpp.lz"
+
+
+	.global gUnknown_08159200
+gUnknown_08159200:
+	.incbin "graphics/evidence_profile_descriptions/159200.4bpp.lz"
+
+
+	.global gUnknown_0815965C
+gUnknown_0815965C:
+	.incbin "graphics/evidence_profile_descriptions/15965C.4bpp.lz"
+
+
+	.global gUnknown_08159AA4
+gUnknown_08159AA4:
+	.incbin "graphics/evidence_profile_descriptions/159AA4.4bpp.lz"
+
+
+	.global gUnknown_08159EEC
+gUnknown_08159EEC:
+	.incbin "graphics/evidence_profile_descriptions/159EEC.4bpp.lz"
+
+
+	.global gUnknown_0815A350
+gUnknown_0815A350:
+	.incbin "graphics/evidence_profile_descriptions/15A350.4bpp.lz"
+
+
+	.global gUnknown_0815A7F4
+gUnknown_0815A7F4:
+	.incbin "graphics/evidence_profile_descriptions/15A7F4.4bpp.lz"
+
+
+	.global gUnknown_0815ACC8
+gUnknown_0815ACC8:
+	.incbin "graphics/evidence_profile_descriptions/15ACC8.4bpp.lz"
+
+
+	.global gUnknown_0815B100
+gUnknown_0815B100:
+	.incbin "graphics/evidence_profile_descriptions/15B100.4bpp.lz"
+
+
+	.global gUnknown_0815B5CC
+gUnknown_0815B5CC:
+	.incbin "graphics/evidence_profile_descriptions/15B5CC.4bpp.lz"
+
+
+	.global gUnknown_0815B9F0
+gUnknown_0815B9F0:
+	.incbin "graphics/evidence_profile_descriptions/15B9F0.4bpp.lz"
+
+
+	.global gUnknown_0815BDE0
+gUnknown_0815BDE0:
+	.incbin "graphics/evidence_profile_descriptions/15BDE0.4bpp.lz"
+
+
+	.global gUnknown_0815C1C0
+gUnknown_0815C1C0:
+	.incbin "graphics/evidence_profile_descriptions/15C1C0.4bpp.lz"
+
+
+	.global gUnknown_0815C590
+gUnknown_0815C590:
+	.incbin "graphics/evidence_profile_descriptions/15C590.4bpp.lz"
+
+
+	.global gUnknown_0815C9A0
+gUnknown_0815C9A0:
+	.incbin "graphics/evidence_profile_descriptions/15C9A0.4bpp.lz"
+
+
+	.global gUnknown_0815CE18
+gUnknown_0815CE18:
+	.incbin "graphics/evidence_profile_descriptions/15CE18.4bpp.lz"
+
+
+	.global gUnknown_0815D230
+gUnknown_0815D230:
+	.incbin "graphics/evidence_profile_descriptions/15D230.4bpp.lz"
+
+
+	.global gUnknown_0815D668
+gUnknown_0815D668:
+	.incbin "graphics/evidence_profile_descriptions/15D668.4bpp.lz"
+
+
+	.global gUnknown_0815DA90
+gUnknown_0815DA90:
+	.incbin "graphics/evidence_profile_descriptions/15DA90.4bpp.lz"
+
+
+	.global gUnknown_0815DEB4
+gUnknown_0815DEB4:
+	.incbin "graphics/evidence_profile_descriptions/15DEB4.4bpp.lz"
+
+
+	.global gUnknown_0815E2E4
+gUnknown_0815E2E4:
+	.incbin "graphics/evidence_profile_descriptions/15E2E4.4bpp.lz"
+
+
+	.global gUnknown_0815E73C
+gUnknown_0815E73C:
+	.incbin "graphics/evidence_profile_descriptions/15E73C.4bpp.lz"
+
+
+	.global gUnknown_0815EB38
+gUnknown_0815EB38:
+	.incbin "graphics/evidence_profile_descriptions/15EB38.4bpp.lz"
+
+
+	.global gUnknown_0815EFC0
+gUnknown_0815EFC0:
+	.incbin "graphics/evidence_profile_descriptions/15EFC0.4bpp.lz"
+
+
+	.global gUnknown_0815F3CC
+gUnknown_0815F3CC:
+	.incbin "graphics/evidence_profile_descriptions/15F3CC.4bpp.lz"
+
+
+	.global gUnknown_0815F7C8
+gUnknown_0815F7C8:
+	.incbin "graphics/evidence_profile_descriptions/15F7C8.4bpp.lz"
+
+
+	.global gUnknown_0815FBC4
+gUnknown_0815FBC4:
+	.incbin "graphics/evidence_profile_descriptions/15FBC4.4bpp.lz"
+
+
+	.global gUnknown_0816000C
+gUnknown_0816000C:
+	.incbin "graphics/evidence_profile_descriptions/16000C.4bpp.lz"
+
+
+	.global gUnknown_08160318
+gUnknown_08160318:
+	.incbin "graphics/evidence_profile_descriptions/160318.4bpp.lz"
+
+
+	.global gUnknown_08160758
+gUnknown_08160758:
+	.incbin "graphics/evidence_profile_descriptions/160758.4bpp.lz"
+
+
+	.global gUnknown_08160B6C
+gUnknown_08160B6C:
+	.incbin "graphics/evidence_profile_descriptions/160B6C.4bpp.lz"
+
+
+	.global gUnknown_08160F68
+gUnknown_08160F68:
+	.incbin "graphics/evidence_profile_descriptions/160F68.4bpp.lz"
+
+
+	.global gUnknown_08161378
+gUnknown_08161378:
+	.incbin "graphics/evidence_profile_descriptions/161378.4bpp.lz"
+
+
+	.global gUnknown_08161764
+gUnknown_08161764:
+	.incbin "graphics/evidence_profile_descriptions/161764.4bpp.lz"
+
+
+	.global gUnknown_08161B40
+gUnknown_08161B40:
+	.incbin "graphics/evidence_profile_descriptions/161B40.4bpp.lz"
+
+
+	.global gUnknown_08161EF8
+gUnknown_08161EF8:
+	.incbin "graphics/evidence_profile_descriptions/161EF8.4bpp.lz"
+
+
+	.global gUnknown_081622C4
+gUnknown_081622C4:
+	.incbin "graphics/evidence_profile_descriptions/1622C4.4bpp.lz"
+
+
+	.global gUnknown_0816264C
+gUnknown_0816264C:
+	.incbin "graphics/evidence_profile_descriptions/16264C.4bpp.lz"
+
+
+	.global gUnknown_08162A54
+gUnknown_08162A54:
+	.incbin "graphics/evidence_profile_descriptions/162A54.4bpp.lz"
+
+
+	.global gUnknown_08162E54
+gUnknown_08162E54:
+	.incbin "graphics/evidence_profile_descriptions/162E54.4bpp.lz"
+
+
+	.global gUnknown_08163274
+gUnknown_08163274:
+	.incbin "graphics/evidence_profile_descriptions/163274.4bpp.lz"
+
+
+	.global gUnknown_0816365C
+gUnknown_0816365C:
+	.incbin "graphics/evidence_profile_descriptions/16365C.4bpp.lz"
+
+
+	.global gUnknown_08163A80
+gUnknown_08163A80:
+	.incbin "graphics/evidence_profile_descriptions/163A80.4bpp.lz"
+
+
+	.global gUnknown_08163EB8
+gUnknown_08163EB8:
+	.incbin "graphics/evidence_profile_descriptions/163EB8.4bpp.lz"
+
+
+	.global gUnknown_081642BC
+gUnknown_081642BC:
+	.incbin "graphics/evidence_profile_descriptions/1642BC.4bpp.lz"
+
+
+	.global gUnknown_08164670
+gUnknown_08164670:
+	.incbin "graphics/evidence_profile_descriptions/164670.4bpp.lz"
+
+
+	.global gUnknown_08164A14
+gUnknown_08164A14:
+	.incbin "graphics/evidence_profile_descriptions/164A14.4bpp.lz"
+
+
+	.global gUnknown_08164DD4
+gUnknown_08164DD4:
+	.incbin "graphics/evidence_profile_descriptions/164DD4.4bpp.lz"
+
+
+	.global gUnknown_08165280
+gUnknown_08165280:
+	.incbin "graphics/evidence_profile_descriptions/165280.4bpp.lz"
+
+
+	.global gUnknown_08165670
+gUnknown_08165670:
+	.incbin "graphics/evidence_profile_descriptions/165670.4bpp.lz"
+
+
+	.global gUnknown_08165AA0
+gUnknown_08165AA0:
+	.incbin "graphics/evidence_profile_descriptions/165AA0.4bpp.lz"
+
+
+	.global gUnknown_08165EA4
+gUnknown_08165EA4:
+	.incbin "graphics/evidence_profile_descriptions/165EA4.4bpp.lz"
+
+
+	.global gUnknown_081662C0
+gUnknown_081662C0:
+	.incbin "graphics/evidence_profile_descriptions/1662C0.4bpp.lz"
+
+
+	.global gUnknown_0816670C
+gUnknown_0816670C:
+	.incbin "graphics/evidence_profile_descriptions/16670C.4bpp.lz"
+
+
+	.global gUnknown_08166B4C
+gUnknown_08166B4C:
+	.incbin "graphics/evidence_profile_descriptions/166B4C.4bpp.lz"
+
+
+	.global gUnknown_08166F74
+gUnknown_08166F74:
+	.incbin "graphics/evidence_profile_descriptions/166F74.4bpp.lz"
+
+
+	.global gUnknown_08167370
+gUnknown_08167370:
+	.incbin "graphics/evidence_profile_descriptions/167370.4bpp.lz"
+
+
+	.global gUnknown_0816777C
+gUnknown_0816777C:
+	.incbin "graphics/evidence_profile_descriptions/16777C.4bpp.lz"
+
+
+	.global gUnknown_08167B98
+gUnknown_08167B98:
+	.incbin "graphics/evidence_profile_descriptions/167B98.4bpp.lz"
+
+
+	.global gUnknown_08167F64
+gUnknown_08167F64:
+	.incbin "graphics/evidence_profile_descriptions/167F64.4bpp.lz"
+
+
+	.global gUnknown_08168378
+gUnknown_08168378:
+	.incbin "graphics/evidence_profile_descriptions/168378.4bpp.lz"
+
+
+	.global gUnknown_08168650
+gUnknown_08168650:
+	.incbin "graphics/evidence_profile_descriptions/168650.4bpp.lz"
+
+
+	.global gUnknown_08168994
+gUnknown_08168994:
+	.incbin "graphics/evidence_profile_descriptions/168994.4bpp.lz"
+
+
+	.global gUnknown_08168C6C
+gUnknown_08168C6C:
+	.incbin "graphics/evidence_profile_descriptions/168C6C.4bpp.lz"
+
+
+	.global gUnknown_08168F38
+gUnknown_08168F38:
+	.incbin "graphics/evidence_profile_descriptions/168F38.4bpp.lz"
+
+
+	.global gUnknown_08169228
+gUnknown_08169228:
+	.incbin "graphics/evidence_profile_descriptions/169228.4bpp.lz"
+
+
+	.global gUnknown_08169504
+gUnknown_08169504:
+	.incbin "graphics/evidence_profile_descriptions/169504.4bpp.lz"
+
+
+	.global gUnknown_081698E4
+gUnknown_081698E4:
+	.incbin "graphics/evidence_profile_descriptions/1698E4.4bpp.lz"
+
+
+	.global gUnknown_08169CC8
+gUnknown_08169CC8:
+	.incbin "graphics/evidence_profile_descriptions/169CC8.4bpp.lz"
+
+
+	.global gUnknown_0816A0C0
+gUnknown_0816A0C0:
+	.incbin "graphics/evidence_profile_descriptions/16A0C0.4bpp.lz"
+
+
+	.global gUnknown_0816A528
+gUnknown_0816A528:
+	.incbin "graphics/evidence_profile_descriptions/16A528.4bpp.lz"
+
+
+	.global gUnknown_0816A92C
+gUnknown_0816A92C:
+	.incbin "graphics/evidence_profile_descriptions/16A92C.4bpp.lz"
+
+
+	.global gUnknown_0816AD64
+gUnknown_0816AD64:
+	.incbin "graphics/evidence_profile_descriptions/16AD64.4bpp.lz"
+
+
+	.global gUnknown_0816B188
+gUnknown_0816B188:
+	.incbin "graphics/evidence_profile_descriptions/16B188.4bpp.lz"
+
+
+	.global gUnknown_0816B5E4
+gUnknown_0816B5E4:
+	.incbin "graphics/evidence_profile_descriptions/16B5E4.4bpp.lz"
+
+
+	.global gUnknown_0816BA60
+gUnknown_0816BA60:
+	.incbin "graphics/evidence_profile_descriptions/16BA60.4bpp.lz"
+
+
+	.global gUnknown_0816BEC8
+gUnknown_0816BEC8:
+	.incbin "graphics/evidence_profile_descriptions/16BEC8.4bpp.lz"
+
+
+	.global gUnknown_0816C304
+gUnknown_0816C304:
+	.incbin "graphics/evidence_profile_descriptions/16C304.4bpp.lz"
+
+
+	.global gUnknown_0816C748
+gUnknown_0816C748:
+	.incbin "graphics/evidence_profile_descriptions/16C748.4bpp.lz"
+
+
+	.global gUnknown_0816CB90
+gUnknown_0816CB90:
+	.incbin "graphics/evidence_profile_descriptions/16CB90.4bpp.lz"
+
+
+	.global gUnknown_0816CF80
+gUnknown_0816CF80:
+	.incbin "graphics/evidence_profile_descriptions/16CF80.4bpp.lz"
+
+
+	.global gUnknown_0816D35C
+gUnknown_0816D35C:
+	.incbin "graphics/evidence_profile_descriptions/16D35C.4bpp.lz"
+
+
+	.global gUnknown_0816D774
+gUnknown_0816D774:
+	.incbin "graphics/evidence_profile_descriptions/16D774.4bpp.lz"
+
+
+	.global gUnknown_0816DB84
+gUnknown_0816DB84:
+	.incbin "graphics/evidence_profile_descriptions/16DB84.4bpp.lz"
+
+
+	.global gUnknown_0816DFC4
+gUnknown_0816DFC4:
+	.incbin "graphics/evidence_profile_descriptions/16DFC4.4bpp.lz"
+
+
+	.global gUnknown_0816E3E8
+gUnknown_0816E3E8:
+	.incbin "graphics/evidence_profile_descriptions/16E3E8.4bpp.lz"
+
+
+	.global gUnknown_0816E810
+gUnknown_0816E810:
+	.incbin "graphics/evidence_profile_descriptions/16E810.4bpp.lz"
+
+
+	.global gUnknown_0816EC1C
+gUnknown_0816EC1C:
+	.incbin "graphics/evidence_profile_descriptions/16EC1C.4bpp.lz"
+
+
+	.global gUnknown_0816F0A4
+gUnknown_0816F0A4:
+	.incbin "graphics/evidence_profile_descriptions/16F0A4.4bpp.lz"
+
+
+	.global gUnknown_0816F4FC
+gUnknown_0816F4FC:
+	.incbin "graphics/evidence_profile_descriptions/16F4FC.4bpp.lz"
+
+
+	.global gUnknown_0816F998
+gUnknown_0816F998:
+	.incbin "graphics/evidence_profile_descriptions/16F998.4bpp.lz"
+
+
+	.global gUnknown_0816FE30
+gUnknown_0816FE30:
+	.incbin "graphics/evidence_profile_descriptions/16FE30.4bpp.lz"
+
+
+	.global gUnknown_08170210
+gUnknown_08170210:
+	.incbin "graphics/evidence_profile_descriptions/170210.4bpp.lz"
+
+
+	.global gUnknown_08170678
+gUnknown_08170678:
+	.incbin "graphics/evidence_profile_descriptions/170678.4bpp.lz"
+
+
+	.global gUnknown_08170B20
+gUnknown_08170B20:
+	.incbin "graphics/evidence_profile_descriptions/170B20.4bpp.lz"
+
+
+	.global gUnknown_08170F70
+gUnknown_08170F70:
+	.incbin "graphics/evidence_profile_descriptions/170F70.4bpp.lz"
+
+
+	.global gUnknown_081713B4
+gUnknown_081713B4:
+	.incbin "graphics/evidence_profile_descriptions/1713B4.4bpp.lz"
+
+
+	.global gUnknown_081717BC
+gUnknown_081717BC:
+	.incbin "graphics/evidence_profile_descriptions/1717BC.4bpp.lz"
+
+
+	.global gUnknown_08171BC4
+gUnknown_08171BC4:
+	.incbin "graphics/evidence_profile_descriptions/171BC4.4bpp.lz"
+
+
+	.global gUnknown_08172060
+gUnknown_08172060:
+	.incbin "graphics/evidence_profile_descriptions/172060.4bpp.lz"
+
+
+	.global gUnknown_08172478
+gUnknown_08172478:
+	.incbin "graphics/evidence_profile_descriptions/172478.4bpp.lz"
+
+
+	.global gUnknown_0817288C
+gUnknown_0817288C:
+	.incbin "graphics/evidence_profile_descriptions/17288C.4bpp.lz"
+
+
+	.global gUnknown_08172D00
+gUnknown_08172D00:
+	.incbin "graphics/evidence_profile_descriptions/172D00.4bpp.lz"
+
+
+	.global gUnknown_0817311C
+gUnknown_0817311C:
+	.incbin "graphics/evidence_profile_descriptions/17311C.4bpp.lz"
+
+
+	.global gUnknown_08173544
+gUnknown_08173544:
+	.incbin "graphics/evidence_profile_descriptions/173544.4bpp.lz"
+
+
+	.global gUnknown_0817399C
+gUnknown_0817399C:
+	.incbin "graphics/evidence_profile_descriptions/17399C.4bpp.lz"
+
+
+	.global gUnknown_08173DE8
+gUnknown_08173DE8:
+	.incbin "graphics/evidence_profile_descriptions/173DE8.4bpp.lz"
+
+
+	.global gUnknown_081740C8
+gUnknown_081740C8:
+	.incbin "graphics/evidence_profile_descriptions/1740C8.4bpp.lz"
+
+
+	.global gUnknown_081743A0
+gUnknown_081743A0:
+	.incbin "graphics/evidence_profile_descriptions/1743A0.4bpp.lz"
+
+
+	.global gUnknown_081747CC
+gUnknown_081747CC:
+	.incbin "graphics/evidence_profile_descriptions/1747CC.4bpp.lz"
+
+
+	.global gUnknown_08174AA8
+gUnknown_08174AA8:
+	.incbin "graphics/evidence_profile_descriptions/174AA8.4bpp.lz"
+
+
+	.global gUnknown_08174D74
+gUnknown_08174D74:
+	.incbin "graphics/evidence_profile_descriptions/174D74.4bpp.lz"
+
+
+	.global gUnknown_08175034
+gUnknown_08175034:
+	.incbin "graphics/evidence_profile_descriptions/175034.4bpp.lz"
+
+
+	.global gUnknown_08175484
+gUnknown_08175484:
+	.incbin "graphics/evidence_profile_descriptions/175484.4bpp.lz"
+
+
+	.global gUnknown_081758CC
+gUnknown_081758CC:
+	.incbin "graphics/evidence_profile_descriptions/1758CC.4bpp.lz"
+
+
+	.global gUnknown_08175CD4
+gUnknown_08175CD4:
+	.incbin "graphics/evidence_profile_descriptions/175CD4.4bpp.lz"
+
+
+	.global gUnknown_081760F0
+gUnknown_081760F0:
+	.incbin "graphics/evidence_profile_descriptions/1760F0.4bpp.lz"
+
+
+	.global gUnknown_0817651C
+gUnknown_0817651C:
+	.incbin "graphics/evidence_profile_descriptions/17651C.4bpp.lz"
+
+
+	.global gUnknown_08176920
+gUnknown_08176920:
+	.incbin "graphics/evidence_profile_descriptions/176920.4bpp.lz"
+
+
+	.global gUnknown_08176CF0
+gUnknown_08176CF0:
+	.incbin "graphics/evidence_profile_descriptions/176CF0.4bpp.lz"
+
+
+	.global gUnknown_0817701C
+gUnknown_0817701C:
+	.incbin "graphics/evidence_profile_descriptions/17701C.4bpp.lz"
+
+
+	.global gUnknown_081772D4
+gUnknown_081772D4:
+	.incbin "graphics/evidence_profile_descriptions/1772D4.4bpp.lz"
+
+
+	.global gUnknown_081775FC
+gUnknown_081775FC:
+	.incbin "graphics/evidence_profile_descriptions/1775FC.4bpp.lz"
+
+
+	.global gUnknown_081779E4
+gUnknown_081779E4:
+	.incbin "graphics/evidence_profile_descriptions/1779E4.4bpp.lz"
+
+@ END EVIDENCE PROFILE DESCRIPTIONS
 
 @ BEGIN EVIDENCE PROFILE PICTURES
 
