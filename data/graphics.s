@@ -2736,9 +2736,10 @@ gUnknown_08232968:
 gUnknown_082329A8:
     .incbin "graphics/striped_images/capcom_screen.4bpp.striped"
 
-    .global gUnknown_08233674
+	.global gUnknown_08233674
 gUnknown_08233674:
-    .incbin "baserom.gba", 0x00233674, 0x2340
+	.incbin "graphics/striped_images/233674.4bpp.striped"
+
 
     .global gUnknown_082359B4
 gUnknown_082359B4:
@@ -2748,9 +2749,39 @@ gUnknown_082359B4:
 gUnknown_0823663C:
     .incbin "graphics/striped_images/backgrounds/court/defendant_lobby.8bpp.striped"
     
-    .global gUnknown_0823B3E0
+	.global gUnknown_0823B3E0
 gUnknown_0823B3E0:
-    .incbin "baserom.gba", 0x0023B3E0, 0x1C778
+	.incbin "graphics/striped_images/23B3E0.4bpp.striped"
+
+
+	.global gUnknown_0823CF88
+gUnknown_0823CF88:
+	.incbin "graphics/striped_images/23CF88.4bpp.striped"
+
+
+	.global gUnknown_0823E98C
+gUnknown_0823E98C:
+	.incbin "graphics/striped_images/23E98C.4bpp.striped"
+
+
+	.global gUnknown_08240624
+gUnknown_08240624:
+	.incbin "graphics/striped_images/240624.8bpp.striped"
+
+
+	.global gUnknown_08246B24
+gUnknown_08246B24:
+	.incbin "graphics/striped_images/246B24.8bpp.striped"
+
+
+	.global gUnknown_0824C990
+gUnknown_0824C990:
+	.incbin "graphics/striped_images/24C990.8bpp.striped"
+
+
+	.global gUnknown_082540C0
+gUnknown_082540C0:
+	.incbin "graphics/striped_images/2540C0.4bpp.striped"
 
     .global gUnknown_08257B58
 gUnknown_08257B58:
@@ -2792,9 +2823,9 @@ gUnknown_08266194:
 gUnknown_08267F34:
     .incbin "graphics/striped_images/speedlines.4bpp.striped"
 
-    .global gUnknown_08268DE0
+	.global gUnknown_08268DE0
 gUnknown_08268DE0:
-    .incbin "baserom.gba", 0x00268DE0, 0x3748
+	.incbin "graphics/striped_images/268DE0.8bpp.striped"
 
     .global gUnknown_0826C528
 gUnknown_0826C528:
@@ -2810,15 +2841,515 @@ gUnknown_08277A98:
 
     .global gUnknown_08277AB8
 gUnknown_08277AB8:
-    .incbin "baserom.gba", 0x00277AB8, 0x1F6138
+    .incbin "baserom.gba", 0x00277AB8, 0x18D0
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+	.global gUnknown_08279388
+gUnknown_08279388:
+	.incbin "graphics/striped_images/279388.4bpp.striped"
+
+
+	.global gUnknown_0827C8EC
+gUnknown_0827C8EC:
+	.incbin "graphics/striped_images/27C8EC.4bpp.striped"
+
+
+	.global gUnknown_0827FBA8
+gUnknown_0827FBA8:
+	.incbin "graphics/striped_images/27FBA8.4bpp.striped"
+
+
+	.global gUnknown_082837C8
+gUnknown_082837C8:
+	.incbin "graphics/striped_images/2837C8.4bpp.striped"
+
+
+	.global gUnknown_08287938
+gUnknown_08287938:
+	.incbin "graphics/striped_images/287938.8bpp.striped"
+
+
+	.global gUnknown_08292318
+gUnknown_08292318:
+	.incbin "graphics/striped_images/292318.4bpp.striped"
+
+
+	.global gUnknown_08294658
+gUnknown_08294658:
+	.incbin "graphics/striped_images/294658.8bpp.striped"
+
+
+	.global gUnknown_08298BA4
+gUnknown_08298BA4:
+	.incbin "graphics/striped_images/298BA4.8bpp.striped"
+
+
+	.global gUnknown_0829F718
+gUnknown_0829F718:
+	.incbin "graphics/striped_images/29F718.8bpp.striped"
+
+
+	.global gUnknown_082A8370
+gUnknown_082A8370:
+	.incbin "graphics/striped_images/2A8370.8bpp.striped"
+
+
+	.global gUnknown_082B88D4
+gUnknown_082B88D4:
+	.incbin "graphics/striped_images/2B88D4.8bpp.striped"
+
+
+	.global gUnknown_082C04A0
+gUnknown_082C04A0:
+	.incbin "graphics/striped_images/2C04A0.8bpp.striped"
+
+
+	.global gUnknown_082C7CF0
+gUnknown_082C7CF0:
+	.incbin "graphics/striped_images/2C7CF0.8bpp.striped"
+
+
+	.global gUnknown_082CF29C
+gUnknown_082CF29C:
+	.incbin "graphics/striped_images/2CF29C.8bpp.striped"
+
+
+	.global gUnknown_082D5268
+gUnknown_082D5268:
+	.incbin "graphics/striped_images/2D5268.8bpp.striped"
+
+
+	.global gUnknown_082DA994
+gUnknown_082DA994:
+	.incbin "graphics/striped_images/2DA994.8bpp.striped"
+
+
+	.global gUnknown_082E5168
+gUnknown_082E5168:
+	.incbin "graphics/striped_images/2E5168.8bpp.striped"
+
+
+	.global gUnknown_082EA99C
+gUnknown_082EA99C:
+	.incbin "graphics/striped_images/2EA99C.4bpp.striped"
+
+
+	.global gUnknown_082EBA44
+gUnknown_082EBA44:
+	.incbin "graphics/striped_images/2EBA44.4bpp.striped"
+
+
+	.global gUnknown_082EC9B4
+gUnknown_082EC9B4:
+	.incbin "graphics/striped_images/2EC9B4.4bpp.striped"
+
+
+	.global gUnknown_082ED900
+gUnknown_082ED900:
+	.incbin "graphics/striped_images/2ED900.4bpp.striped"
+
+
+	.global gUnknown_082EE868
+gUnknown_082EE868:
+	.incbin "graphics/striped_images/2EE868.4bpp.striped"
+
+
+	.global gUnknown_082EF398
+gUnknown_082EF398:
+	.incbin "graphics/striped_images/2EF398.4bpp.striped"
+
+
+	.global gUnknown_082F0288
+gUnknown_082F0288:
+	.incbin "graphics/striped_images/2F0288.4bpp.striped"
+
+	.global gUnknown_082F13EC
+gUnknown_082F13EC:
+	.incbin "graphics/striped_images/2F13EC.4bpp.striped"
+
+
+	.global gUnknown_082F4518
+gUnknown_082F4518:
+	.incbin "graphics/striped_images/2F4518.4bpp.striped"
+
+
+	.global gUnknown_082F7A14
+gUnknown_082F7A14:
+	.incbin "graphics/striped_images/2F7A14.4bpp.striped"
+
+
+	.global gUnknown_082FB9E4
+gUnknown_082FB9E4:
+	.incbin "graphics/striped_images/2FB9E4.4bpp.striped"
+
+
+	.global gUnknown_082FD950
+gUnknown_082FD950:
+	.incbin "graphics/striped_images/2FD950.4bpp.striped"
+
+
+	.global gUnknown_08300B30
+gUnknown_08300B30:
+	.incbin "graphics/striped_images/300B30.4bpp.striped"
+
+
+	.global gUnknown_083040A8
+gUnknown_083040A8:
+	.incbin "graphics/striped_images/3040A8.8bpp.striped"
+
+
+	.global gUnknown_0830948C
+gUnknown_0830948C:
+	.incbin "graphics/striped_images/30948C.4bpp.striped"
+
+
+	.global gUnknown_0830C744
+gUnknown_0830C744:
+	.incbin "graphics/striped_images/30C744.8bpp.striped"
+
+
+	.global gUnknown_083130D4
+gUnknown_083130D4:
+	.incbin "graphics/striped_images/3130D4.4bpp.striped"
+
+
+	.global gUnknown_08316500
+gUnknown_08316500:
+	.incbin "graphics/striped_images/316500.4bpp.striped"
+
+
+	.global gUnknown_083198CC
+gUnknown_083198CC:
+	.incbin "graphics/striped_images/3198CC.4bpp.striped"
+
+
+	.global gUnknown_0831C908
+gUnknown_0831C908:
+	.incbin "graphics/striped_images/31C908.4bpp.striped"
+
+
+	.global gUnknown_08320384
+gUnknown_08320384:
+	.incbin "graphics/striped_images/320384.8bpp.striped"
+
+
+	.global gUnknown_0832587C
+gUnknown_0832587C:
+	.incbin "graphics/striped_images/32587C.8bpp.striped"
+
+
+	.global gUnknown_0832D4A0
+gUnknown_0832D4A0:
+	.incbin "graphics/striped_images/32D4A0.8bpp.striped"
+
+
+	.global gUnknown_08335060
+gUnknown_08335060:
+	.incbin "graphics/striped_images/335060.8bpp.striped"
+
+
+	.global gUnknown_0833C13C
+gUnknown_0833C13C:
+	.incbin "graphics/striped_images/33C13C.8bpp.striped"
+
+
+	.global gUnknown_08342954
+gUnknown_08342954:
+	.incbin "graphics/striped_images/342954.8bpp.striped"
+
+
+	.global gUnknown_083497D4
+gUnknown_083497D4:
+	.incbin "graphics/striped_images/3497D4.8bpp.striped"
+
+
+	.global gUnknown_0834FAAC
+gUnknown_0834FAAC:
+	.incbin "graphics/striped_images/34FAAC.8bpp.striped"
+
+
+	.global gUnknown_08356EB0
+gUnknown_08356EB0:
+	.incbin "graphics/striped_images/356EB0.8bpp.striped"
+
+
+	.global gUnknown_0835D154
+gUnknown_0835D154:
+	.incbin "graphics/striped_images/35D154.4bpp.striped"
+
+
+	.global gUnknown_08362700
+gUnknown_08362700:
+	.incbin "graphics/striped_images/362700.4bpp.striped"
+
+
+	.global gUnknown_08367768
+gUnknown_08367768:
+	.incbin "graphics/striped_images/367768.8bpp.striped"
+
+
+	.global gUnknown_08376EA8
+gUnknown_08376EA8:
+	.incbin "graphics/striped_images/376EA8.8bpp.striped"
+
+
+	.global gUnknown_0837C934
+gUnknown_0837C934:
+	.incbin "graphics/striped_images/37C934.4bpp.striped"
+
+
+	.global gUnknown_0837D6D8
+gUnknown_0837D6D8:
+	.incbin "graphics/striped_images/37D6D8.8bpp.striped"
+
+
+	.global gUnknown_0838309C
+gUnknown_0838309C:
+	.incbin "graphics/striped_images/38309C.8bpp.striped"
+
+
+	.global gUnknown_083899B0
+gUnknown_083899B0:
+	.incbin "graphics/striped_images/3899B0.4bpp.striped"
+
+
+	.global gUnknown_0838D548
+gUnknown_0838D548:
+	.incbin "graphics/striped_images/38D548.4bpp.striped"
+
+
+	.global gUnknown_0838EB18
+gUnknown_0838EB18:
+	.incbin "graphics/striped_images/38EB18.4bpp.striped"
+
+
+	.global gUnknown_08391440
+gUnknown_08391440:
+	.incbin "graphics/striped_images/391440.4bpp.striped"
+
+
+	.global gUnknown_08393C98
+gUnknown_08393C98:
+	.incbin "graphics/striped_images/393C98.4bpp.striped"
+
+
+	.global gUnknown_08395F30
+gUnknown_08395F30:
+	.incbin "graphics/striped_images/395F30.4bpp.striped"
+
+
+	.global gUnknown_08398878
+gUnknown_08398878:
+	.incbin "graphics/striped_images/398878.4bpp.striped"
+
+
+	.global gUnknown_0839DE10
+gUnknown_0839DE10:
+	.incbin "graphics/striped_images/39DE10.4bpp.striped"
+
+
+	.global gUnknown_083A1590
+gUnknown_083A1590:
+	.incbin "graphics/striped_images/3A1590.4bpp.striped"
+
+
+	.global gUnknown_083A42C4
+gUnknown_083A42C4:
+	.incbin "graphics/striped_images/3A42C4.8bpp.striped"
+
+
+	.global gUnknown_083A9384
+gUnknown_083A9384:
+	.incbin "graphics/striped_images/3A9384.4bpp.striped"
+
+
+	.global gUnknown_083AD43C
+gUnknown_083AD43C:
+	.incbin "graphics/striped_images/3AD43C.4bpp.striped"
+
+
+	.global gUnknown_083B1104
+gUnknown_083B1104:
+	.incbin "graphics/striped_images/3B1104.4bpp.striped"
+
+
+	.global gUnknown_083B3140
+gUnknown_083B3140:
+	.incbin "graphics/striped_images/3B3140.8bpp.striped"
+
+
+	.global gUnknown_083BBCB0
+gUnknown_083BBCB0:
+	.incbin "graphics/striped_images/3BBCB0.8bpp.striped"
+
+
+	.global gUnknown_083C49C0
+gUnknown_083C49C0:
+	.incbin "graphics/striped_images/3C49C0.8bpp.striped"
+
+
+	.global gUnknown_083CC6F8
+gUnknown_083CC6F8:
+	.incbin "graphics/striped_images/3CC6F8.8bpp.striped"
+
+
+	.global gUnknown_083D414C
+gUnknown_083D414C:
+	.incbin "graphics/striped_images/3D414C.8bpp.striped"
+
+
+	.global gUnknown_083E23A8
+gUnknown_083E23A8:
+	.incbin "graphics/striped_images/3E23A8.4bpp.striped"
+
+
+	.global gUnknown_083E3490
+gUnknown_083E3490:
+	.incbin "graphics/striped_images/3E3490.8bpp.striped"
+
+
+	.global gUnknown_083EBD14
+gUnknown_083EBD14:
+	.incbin "graphics/striped_images/3EBD14.8bpp.striped"
+
+
+	.global gUnknown_083F3DA8
+gUnknown_083F3DA8:
+	.incbin "graphics/striped_images/3F3DA8.8bpp.striped"
+
+
+	.global gUnknown_083FA848
+gUnknown_083FA848:
+	.incbin "graphics/striped_images/3FA848.8bpp.striped"
+
+
+	.global gUnknown_08401E1C
+gUnknown_08401E1C:
+	.incbin "graphics/striped_images/401E1C.8bpp.striped"
+
+
+	.global gUnknown_0840EE18
+gUnknown_0840EE18:
+	.incbin "graphics/striped_images/40EE18.4bpp.striped"
+
+
+	.global gUnknown_0841101C
+gUnknown_0841101C:
+	.incbin "graphics/striped_images/41101C.8bpp.striped"
+
+
+	.global gUnknown_08417880
+gUnknown_08417880:
+	.incbin "graphics/striped_images/417880.8bpp.striped"
+
+
+	.global gUnknown_0841DE18
+gUnknown_0841DE18:
+	.incbin "graphics/striped_images/41DE18.8bpp.striped"
+
+
+	.global gUnknown_08425334
+gUnknown_08425334:
+	.incbin "graphics/striped_images/425334.8bpp.striped"
+
+
+	.global gUnknown_0842C52C
+gUnknown_0842C52C:
+	.incbin "graphics/striped_images/42C52C.4bpp.striped"
+
+
+	.global gUnknown_0842F748
+gUnknown_0842F748:
+	.incbin "graphics/striped_images/42F748.4bpp.striped"
+
+
+	.global gUnknown_084308EC
+gUnknown_084308EC:
+	.incbin "graphics/striped_images/4308EC.4bpp.striped"
+
+
+	.global gUnknown_0843414C
+gUnknown_0843414C:
+	.incbin "graphics/striped_images/43414C.8bpp.striped"
+
+
+	.global gUnknown_0843B428
+gUnknown_0843B428:
+	.incbin "graphics/striped_images/43B428.4bpp.striped"
+
+
+	.global gUnknown_0843E438
+gUnknown_0843E438:
+	.incbin "graphics/striped_images/43E438.4bpp.striped"
+
+
+	.global gUnknown_08441C50
+gUnknown_08441C50:
+	.incbin "graphics/striped_images/441C50.4bpp.striped"
+
+
+	.global gUnknown_08444EF8
+gUnknown_08444EF8:
+	.incbin "graphics/striped_images/444EF8.4bpp.striped"
+
+
+	.global gUnknown_084478B0
+gUnknown_084478B0:
+	.incbin "graphics/striped_images/4478B0.4bpp.striped"
+
+
+	.global gUnknown_0844DE14
+gUnknown_0844DE14:
+	.incbin "graphics/striped_images/44DE14.4bpp.striped"
+
+
+	.global gUnknown_08451F68
+gUnknown_08451F68:
+	.incbin "graphics/striped_images/451F68.8bpp.striped"
+
+
+	.global gUnknown_08458A38
+gUnknown_08458A38:
+	.incbin "graphics/striped_images/458A38.4bpp.striped"
+
+
+	.global gUnknown_0845BDB0
+gUnknown_0845BDB0:
+	.incbin "graphics/striped_images/45BDB0.8bpp.striped"
+
+
+	.global gUnknown_08462D6C
+gUnknown_08462D6C:
+	.incbin "graphics/striped_images/462D6C.8bpp.striped"
+
+
+	.global gUnknown_0846531C
+gUnknown_0846531C:
+	.incbin "graphics/striped_images/46531C.4bpp.striped"
+
+
+	.global gUnknown_08468FD0
+gUnknown_08468FD0:
+	.incbin "graphics/striped_images/468FD0.4bpp.striped"
+
+
+	.global gUnknown_0846CAF0
+gUnknown_0846CAF0:
+	.incbin "graphics/striped_images/46CAF0.4bpp.striped"
 
     .global gUnknown_0846DBF0
 gUnknown_0846DBF0:
     .incbin "graphics/striped_images/backgrounds/steel_samurai.8bpp.striped"
 
-    .global gUnknown_0847384C
+	.global gUnknown_0847384C
 gUnknown_0847384C:
-    .incbin "baserom.gba", 0x0047384C, 0x43EC
+	.incbin "graphics/striped_images/47384C.4bpp.striped"
+
+
+	.global gUnknown_084746CC
+gUnknown_084746CC:
+	.incbin "graphics/striped_images/4746CC.4bpp.striped"
 
     .global gUnknown_08477C38
 gUnknown_08477C38:
