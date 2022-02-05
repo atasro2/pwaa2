@@ -3367,9 +3367,19 @@ gUnknown_084783F8:
 gUnknown_0847845C:
     .incbin "graphics/speedlines_first_and_last_columns.4bpp"
 
-    .global gUnknown_08478BDC
+	.global gUnknown_08478BDC
 gUnknown_08478BDC:
-    .incbin "baserom.gba", 0x00478BDC, 0x266700
+	.incbin "graphics/court_scrolls/court_scroll.gbapal"
+
+
+	.global gUnknown_08478BFC
+gUnknown_08478BFC:
+	.incbin "graphics/court_scrolls/court_scroll.4bpp"
+
+
+    .global gUnknown_08491BFC
+gUnknown_08491BFC:
+    .incbin "baserom.gba", 0x00491BFC, 0x24D6E0
 
     .global gUnknown_086DF2DC
 gUnknown_086DF2DC:
