@@ -3377,33 +3377,926 @@ gUnknown_08478BFC:
 	.incbin "graphics/court_scrolls/court_scroll.4bpp"
 
 
-    .global gUnknown_08491BFC
+	.global gUnknown_08491BFC
 gUnknown_08491BFC:
-    .incbin "baserom.gba", 0x00491BFC, 0x24D6E0
+	.incbin "graphics/animations/characters/animation01.pix"
 
-    .global gUnknown_086DF2DC
+
+	.global gUnknown_084AB9C0
+gUnknown_084AB9C0:
+	.incbin "graphics/animations/characters/animation01.seq"
+
+
+	.global gUnknown_084AF048
+gUnknown_084AF048:
+	.incbin "graphics/animations/characters/animation02.pix"
+
+
+	.global gUnknown_084C9ABC
+gUnknown_084C9ABC:
+	.incbin "graphics/animations/characters/animation02.seq"
+
+
+	.global gUnknown_084CE560
+gUnknown_084CE560:
+	.incbin "graphics/animations/characters/animation03.pix"
+
+
+	.global gUnknown_084D8C1C
+gUnknown_084D8C1C:
+	.incbin "graphics/animations/characters/animation03.seq"
+
+
+	.global gUnknown_084DB2C8
+gUnknown_084DB2C8:
+	.incbin "graphics/animations/characters/animation04.pix"
+
+
+	.global gUnknown_084DDA24
+gUnknown_084DDA24:
+	.incbin "graphics/animations/characters/animation04.seq"
+
+
+	.global gUnknown_084DDC94
+gUnknown_084DDC94:
+	.incbin "graphics/animations/characters/animation05.pix"
+
+
+	.global gUnknown_084E2514
+gUnknown_084E2514:
+	.incbin "graphics/animations/characters/animation05.seq"
+
+
+	.global gUnknown_084E32A8
+gUnknown_084E32A8:
+	.incbin "graphics/animations/characters/animation06.pix"
+
+
+	.global gUnknown_085039C0
+gUnknown_085039C0:
+	.incbin "graphics/animations/characters/animation06.seq"
+
+
+	.global gUnknown_08509834
+gUnknown_08509834:
+	.incbin "graphics/animations/characters/animation07.pix"
+
+
+	.global gUnknown_0851EE0C
+gUnknown_0851EE0C:
+	.incbin "graphics/animations/characters/animation07.seq"
+
+
+	.global gUnknown_08522654
+gUnknown_08522654:
+	.incbin "graphics/animations/characters/animation08.pix"
+
+
+	.global gUnknown_08547F34
+gUnknown_08547F34:
+	.incbin "graphics/animations/characters/animation08.seq"
+
+
+	.global gUnknown_0854BB84
+gUnknown_0854BB84:
+	.incbin "graphics/animations/characters/animation09.pix"
+
+
+	.global gUnknown_08558750
+gUnknown_08558750:
+	.incbin "graphics/animations/characters/animation09.seq"
+
+
+	.global gUnknown_0855A0A8
+gUnknown_0855A0A8:
+	.incbin "graphics/animations/characters/animation10.pix"
+
+
+	.global gUnknown_08560B7C
+gUnknown_08560B7C:
+	.incbin "graphics/animations/characters/animation10.seq"
+
+
+	.global gUnknown_085615D4
+gUnknown_085615D4:
+	.incbin "graphics/animations/characters/animation11.pix"
+
+
+	.global gUnknown_08565B00
+gUnknown_08565B00:
+	.incbin "graphics/animations/characters/animation11.seq"
+
+
+	.global gUnknown_08565EAC
+gUnknown_08565EAC:
+	.incbin "graphics/animations/characters/animation12.pix"
+
+
+	.global gUnknown_08589338
+gUnknown_08589338:
+	.incbin "graphics/animations/characters/animation12.seq"
+
+
+	.global gUnknown_0858D9C8
+gUnknown_0858D9C8:
+	.incbin "graphics/animations/characters/animation13.pix"
+
+
+	.global gUnknown_085A8FB8
+gUnknown_085A8FB8:
+	.incbin "graphics/animations/characters/animation13.seq"
+
+
+	.global gUnknown_085AB9D4
+gUnknown_085AB9D4:
+	.incbin "graphics/animations/characters/animation14.pix"
+
+
+	.global gUnknown_085B9DFC
+gUnknown_085B9DFC:
+	.incbin "graphics/animations/characters/animation14.seq"
+
+
+	.global gUnknown_085BCBD0
+gUnknown_085BCBD0:
+	.incbin "graphics/animations/characters/animation15.pix"
+
+
+	.global gUnknown_085C90E4
+gUnknown_085C90E4:
+	.incbin "graphics/animations/characters/animation15.seq"
+
+
+	.global gUnknown_085CA858
+gUnknown_085CA858:
+	.incbin "graphics/animations/characters/animation16.pix"
+
+
+	.global gUnknown_085D8B08
+gUnknown_085D8B08:
+	.incbin "graphics/animations/characters/animation16.seq"
+
+
+	.global gUnknown_085DA150
+gUnknown_085DA150:
+	.incbin "graphics/animations/characters/animation17.pix"
+
+
+	.global gUnknown_085E6A7C
+gUnknown_085E6A7C:
+	.incbin "graphics/animations/characters/animation17.seq"
+
+
+	.global gUnknown_085E7AC8
+gUnknown_085E7AC8:
+	.incbin "graphics/animations/characters/animation18.pix"
+
+
+	.global gUnknown_085F0DFC
+gUnknown_085F0DFC:
+	.incbin "graphics/animations/characters/animation18.seq"
+
+
+	.global gUnknown_085F26B4
+gUnknown_085F26B4:
+	.incbin "graphics/animations/characters/animation19.pix"
+
+
+	.global gUnknown_086030D4
+gUnknown_086030D4:
+	.incbin "graphics/animations/characters/animation19.seq"
+
+
+	.global gUnknown_0860756C
+gUnknown_0860756C:
+	.incbin "graphics/animations/characters/animation20.pix"
+
+
+	.global gUnknown_08617DCC
+gUnknown_08617DCC:
+	.incbin "graphics/animations/characters/animation20.seq"
+
+
+	.global gUnknown_0861B3B8
+gUnknown_0861B3B8:
+	.incbin "graphics/animations/characters/animation21.pix"
+
+
+	.global gUnknown_08627F28
+gUnknown_08627F28:
+	.incbin "graphics/animations/characters/animation21.seq"
+
+
+	.global gUnknown_0862E164
+gUnknown_0862E164:
+	.incbin "graphics/animations/characters/animation22.pix"
+
+
+	.global gUnknown_08643078
+gUnknown_08643078:
+	.incbin "graphics/animations/characters/animation22.seq"
+
+
+	.global gUnknown_0864685C
+gUnknown_0864685C:
+	.incbin "graphics/animations/characters/animation23.pix"
+
+
+	.global gUnknown_0865343C
+gUnknown_0865343C:
+	.incbin "graphics/animations/characters/animation23.seq"
+
+
+	.global gUnknown_0865649C
+gUnknown_0865649C:
+	.incbin "graphics/animations/characters/animation24.pix"
+
+
+	.global gUnknown_086786DC
+gUnknown_086786DC:
+	.incbin "graphics/animations/characters/animation24.seq"
+
+
+	.global gUnknown_086800E8
+gUnknown_086800E8:
+	.incbin "graphics/animations/characters/animation25.pix"
+
+
+	.global gUnknown_086949D0
+gUnknown_086949D0:
+	.incbin "graphics/animations/characters/animation25.seq"
+
+
+	.global gUnknown_086993BC
+gUnknown_086993BC:
+	.incbin "graphics/animations/characters/animation26.pix"
+
+
+	.global gUnknown_0869DE1C
+gUnknown_0869DE1C:
+	.incbin "graphics/animations/characters/animation26.seq"
+
+
+	.global gUnknown_0869E36C
+gUnknown_0869E36C:
+	.incbin "graphics/animations/characters/animation27.pix"
+
+
+	.global gUnknown_086AC8D8
+gUnknown_086AC8D8:
+	.incbin "graphics/animations/characters/animation27.seq"
+
+
+	.global gUnknown_086AEF54
+gUnknown_086AEF54:
+	.incbin "graphics/animations/characters/animation28.pix"
+
+
+	.global gUnknown_086BEC0C
+gUnknown_086BEC0C:
+	.incbin "graphics/animations/characters/animation28.seq"
+
+
+	.global gUnknown_086C0428
+gUnknown_086C0428:
+	.incbin "graphics/animations/characters/animation29.pix"
+
+
+	.global gUnknown_086CCE38
+gUnknown_086CCE38:
+	.incbin "graphics/animations/characters/animation29.seq"
+
+
+	.global gUnknown_086CEB28
+gUnknown_086CEB28:
+	.incbin "graphics/animations/characters/animation30.pix"
+
+
+	.global gUnknown_086D0A74
+gUnknown_086D0A74:
+	.incbin "graphics/animations/characters/animation30.seq"
+
+
+	.global gUnknown_086D0CA4
+gUnknown_086D0CA4:
+	.incbin "graphics/animations/characters/animation31.pix"
+
+
+	.global gUnknown_086D3000
+gUnknown_086D3000:
+	.incbin "graphics/animations/characters/animation31.seq"
+
+
+	.global gUnknown_086D32A4
+gUnknown_086D32A4:
+	.incbin "graphics/animations/characters/animation32.pix"
+
+
+	.global gUnknown_086D82BC
+gUnknown_086D82BC:
+	.incbin "graphics/animations/characters/animation32.seq"
+
+
+	.global gUnknown_086D9D44
+gUnknown_086D9D44:
+	.incbin "graphics/animations/characters/animation33.pix"
+
+
+	.global gUnknown_086DC8C4
+gUnknown_086DC8C4:
+	.incbin "graphics/animations/characters/animation33.seq"
+
+
+	.global gUnknown_086DCAF4
+gUnknown_086DCAF4:
+	.incbin "graphics/animations/characters/animation34.pix"
+
+
+	.global gUnknown_086DDE7C
+gUnknown_086DDE7C:
+	.incbin "graphics/animations/characters/animation34.seq"
+
+
+	.global gUnknown_086DDEE0
+gUnknown_086DDEE0:
+	.incbin "graphics/animations/characters/animation35.pix"
+
+
+	.global gUnknown_086DF280
+gUnknown_086DF280:
+	.incbin "graphics/animations/characters/animation35.seq"
+
+
+	.global gUnknown_086DF2DC
 gUnknown_086DF2DC:
-    .incbin "baserom.gba", 0x006DF2DC, 0x4
+	.incbin "graphics/animations/tileset01.pix"
 
-    .global gUnknown_086DF2E0
-gUnknown_086DF2E0:
-    .incbin "baserom.gba", 0x006DF2E0, 0xA578
 
-    .global gUnknown_086E9858
+	.global gUnknown_086E9858
 gUnknown_086E9858:
-    .incbin "baserom.gba", 0x006E9858, 0x304
+	.incbin "graphics/animations/animation01.seq"
 
-    .global gUnknown_086E9B5C
+
+	.global gUnknown_086E987C
+gUnknown_086E987C:
+	.incbin "graphics/animations/animation02.seq"
+
+
+	.global gUnknown_086E989C
+gUnknown_086E989C:
+	.incbin "graphics/animations/animation03.seq"
+
+
+	.global gUnknown_086E98C0
+gUnknown_086E98C0:
+	.incbin "graphics/animations/animation04.seq"
+
+
+	.global gUnknown_086E98E0
+gUnknown_086E98E0:
+	.incbin "graphics/animations/animation05.seq"
+
+
+	.global gUnknown_086E9904
+gUnknown_086E9904:
+	.incbin "graphics/animations/animation06.seq"
+
+
+	.global gUnknown_086E99A4
+gUnknown_086E99A4:
+	.incbin "graphics/animations/animation07.seq"
+
+
+	.global gUnknown_086E9A5C
+gUnknown_086E9A5C:
+	.incbin "graphics/animations/animation08.seq"
+
+
+	.global gUnknown_086E9AE4
+gUnknown_086E9AE4:
+	.incbin "graphics/animations/animation09.seq"
+
+
+	.global gUnknown_086E9B5C
 gUnknown_086E9B5C:
-    .incbin "baserom.gba", 0x006E9B5C, 0x1D04
+	.incbin "graphics/animations/animation10.seq"
 
-    .global gUnknown_086EB860
+
+	.global gUnknown_086E9C84
+gUnknown_086E9C84:
+	.incbin "graphics/animations/animation11.seq"
+
+
+	.global gUnknown_086E9D8C
+gUnknown_086E9D8C:
+	.incbin "graphics/animations/animation12.seq"
+
+
+	.global gUnknown_086E9F3C
+gUnknown_086E9F3C:
+	.incbin "graphics/animations/animation13.seq"
+
+
+	.global gUnknown_086EA01C
+gUnknown_086EA01C:
+	.incbin "graphics/animations/animation14.seq"
+
+
+	.global gUnknown_086EA0F8
+gUnknown_086EA0F8:
+	.incbin "graphics/animations/animation15.seq"
+
+
+	.global gUnknown_086EA3C0
+gUnknown_086EA3C0:
+	.incbin "graphics/animations/animation16.seq"
+
+
+	.global gUnknown_086EA6F8
+gUnknown_086EA6F8:
+	.incbin "graphics/animations/animation17.seq"
+
+
+	.global gUnknown_086EA868
+gUnknown_086EA868:
+	.incbin "graphics/animations/animation18.seq"
+
+
+	.global gUnknown_086EAA58
+gUnknown_086EAA58:
+	.incbin "graphics/animations/animation19.seq"
+
+
+	.global gUnknown_086EADD0
+gUnknown_086EADD0:
+	.incbin "graphics/animations/animation20.seq"
+
+
+	.global gUnknown_086EB16C
+gUnknown_086EB16C:
+	.incbin "graphics/animations/animation21.seq"
+
+
+	.global gUnknown_086EB520
+gUnknown_086EB520:
+	.incbin "graphics/animations/animation22.seq"
+
+
+	.global gUnknown_086EB540
+gUnknown_086EB540:
+	.incbin "graphics/animations/animation23.seq"
+
+
+	.global gUnknown_086EB560
+gUnknown_086EB560:
+	.incbin "graphics/animations/animation24.seq"
+
+
+	.global gUnknown_086EB580
+gUnknown_086EB580:
+	.incbin "graphics/animations/animation25.seq"
+
+
+	.global gUnknown_086EB5A4
+gUnknown_086EB5A4:
+	.incbin "graphics/animations/animation26.seq"
+
+
+	.global gUnknown_086EB5C8
+gUnknown_086EB5C8:
+	.incbin "graphics/animations/animation27.seq"
+
+
+	.global gUnknown_086EB5E8
+gUnknown_086EB5E8:
+	.incbin "graphics/animations/animation28.seq"
+
+
+	.global gUnknown_086EB608
+gUnknown_086EB608:
+	.incbin "graphics/animations/animation29.seq"
+
+
+	.global gUnknown_086EB640
+gUnknown_086EB640:
+	.incbin "graphics/animations/animation30.seq"
+
+
+	.global gUnknown_086EB66C
+gUnknown_086EB66C:
+	.incbin "graphics/animations/animation31.seq"
+
+
+	.global gUnknown_086EB6C4
+gUnknown_086EB6C4:
+	.incbin "graphics/animations/animation32.seq"
+
+
+	.global gUnknown_086EB72C
+gUnknown_086EB72C:
+	.incbin "graphics/animations/animation33.seq"
+
+
+	.global gUnknown_086EB7BC
+gUnknown_086EB7BC:
+	.incbin "graphics/animations/animation34.seq"
+
+
+	.global gUnknown_086EB860
 gUnknown_086EB860:
-    .incbin "baserom.gba", 0x006EB860, 0x41924
+	.incbin "graphics/animations/tileset02.pix"
 
-    .global gUnknown_0872D184
+
+	.global gUnknown_0872D184
 gUnknown_0872D184:
-    .incbin "baserom.gba", 0x0072D184, 0x3968
+	.incbin "graphics/animations/animation35.seq"
+
+
+	.global gUnknown_0872D27C
+gUnknown_0872D27C:
+	.incbin "graphics/animations/animation36.seq"
+
+
+	.global gUnknown_0872D3A4
+gUnknown_0872D3A4:
+	.incbin "graphics/animations/animation37.seq"
+
+
+	.global gUnknown_0872D3C4
+gUnknown_0872D3C4:
+	.incbin "graphics/animations/animation38.seq"
+
+
+	.global gUnknown_0872D3E4
+gUnknown_0872D3E4:
+	.incbin "graphics/animations/animation39.seq"
+
+
+	.global gUnknown_0872D404
+gUnknown_0872D404:
+	.incbin "graphics/animations/animation40.seq"
+
+
+	.global gUnknown_0872D424
+gUnknown_0872D424:
+	.incbin "graphics/animations/animation41.seq"
+
+
+	.global gUnknown_0872D45C
+gUnknown_0872D45C:
+	.incbin "graphics/animations/animation42.seq"
+
+
+	.global gUnknown_0872D494
+gUnknown_0872D494:
+	.incbin "graphics/animations/animation43.seq"
+
+
+	.global gUnknown_0872D4CC
+gUnknown_0872D4CC:
+	.incbin "graphics/animations/animation44.seq"
+
+
+	.global gUnknown_0872D4EC
+gUnknown_0872D4EC:
+	.incbin "graphics/animations/animation45.seq"
+
+
+	.global gUnknown_0872D55C
+gUnknown_0872D55C:
+	.incbin "graphics/animations/animation46.seq"
+
+
+	.global gUnknown_0872D74C
+gUnknown_0872D74C:
+	.incbin "graphics/animations/animation47.seq"
+
+
+	.global gUnknown_0872D7DC
+gUnknown_0872D7DC:
+	.incbin "graphics/animations/animation48.seq"
+
+
+	.global gUnknown_0872D914
+gUnknown_0872D914:
+	.incbin "graphics/animations/animation49.seq"
+
+
+	.global gUnknown_0872D934
+gUnknown_0872D934:
+	.incbin "graphics/animations/animation50.seq"
+
+
+	.global gUnknown_0872D954
+gUnknown_0872D954:
+	.incbin "graphics/animations/animation51.seq"
+
+
+	.global gUnknown_0872DAB4
+gUnknown_0872DAB4:
+	.incbin "graphics/animations/animation52.seq"
+
+
+	.global gUnknown_0872DCC8
+gUnknown_0872DCC8:
+	.incbin "graphics/animations/animation53.seq"
+
+
+	.global gUnknown_0872DE7C
+gUnknown_0872DE7C:
+	.incbin "graphics/animations/animation54.seq"
+
+
+	.global gUnknown_0872DEE8
+gUnknown_0872DEE8:
+	.incbin "graphics/animations/animation55.seq"
+
+
+	.global gUnknown_0872E228
+gUnknown_0872E228:
+	.incbin "graphics/animations/animation56.seq"
+
+
+	.global gUnknown_0872E2A4
+gUnknown_0872E2A4:
+	.incbin "graphics/animations/animation57.seq"
+
+
+	.global gUnknown_0872E420
+gUnknown_0872E420:
+	.incbin "graphics/animations/animation58.seq"
+
+
+	.global gUnknown_0872E5B0
+gUnknown_0872E5B0:
+	.incbin "graphics/animations/animation59.seq"
+
+
+	.global gUnknown_0872E658
+gUnknown_0872E658:
+	.incbin "graphics/animations/animation60.seq"
+
+
+	.global gUnknown_0872E82C
+gUnknown_0872E82C:
+	.incbin "graphics/animations/animation61.seq"
+
+
+	.global gUnknown_0872E850
+gUnknown_0872E850:
+	.incbin "graphics/animations/animation62.seq"
+
+
+	.global gUnknown_0872EAD8
+gUnknown_0872EAD8:
+	.incbin "graphics/animations/animation63.seq"
+
+
+	.global gUnknown_0872EB48
+gUnknown_0872EB48:
+	.incbin "graphics/animations/animation64.seq"
+
+
+	.global gUnknown_0872EB8C
+gUnknown_0872EB8C:
+	.incbin "graphics/animations/animation65.seq"
+
+
+	.global gUnknown_0872EBF8
+gUnknown_0872EBF8:
+	.incbin "graphics/animations/animation66.seq"
+
+
+	.global gUnknown_0872ED10
+gUnknown_0872ED10:
+	.incbin "graphics/animations/animation67.seq"
+
+
+	.global gUnknown_0872EE64
+gUnknown_0872EE64:
+	.incbin "graphics/animations/animation68.seq"
+
+
+	.global gUnknown_0872F164
+gUnknown_0872F164:
+	.incbin "graphics/animations/animation69.seq"
+
+
+	.global gUnknown_0872F72C
+gUnknown_0872F72C:
+	.incbin "graphics/animations/animation70.seq"
+
+
+	.global gUnknown_0872F86C
+gUnknown_0872F86C:
+	.incbin "graphics/animations/animation71.seq"
+
+
+	.global gUnknown_0872F9F0
+gUnknown_0872F9F0:
+	.incbin "graphics/animations/animation72.seq"
+
+
+	.global gUnknown_0872FB94
+gUnknown_0872FB94:
+	.incbin "graphics/animations/animation73.seq"
+
+
+	.global gUnknown_0872FE68
+gUnknown_0872FE68:
+	.incbin "graphics/animations/animation74.seq"
+
+
+	.global gUnknown_0872FF78
+gUnknown_0872FF78:
+	.incbin "graphics/animations/animation75.seq"
+
+
+	.global gUnknown_08730088
+gUnknown_08730088:
+	.incbin "graphics/animations/animation76.seq"
+
+
+	.global gUnknown_08730198
+gUnknown_08730198:
+	.incbin "graphics/animations/animation77.seq"
+
+
+	.global gUnknown_087302A8
+gUnknown_087302A8:
+	.incbin "graphics/animations/animation78.seq"
+
+
+	.global gUnknown_087302C8
+gUnknown_087302C8:
+	.incbin "graphics/animations/animation79.seq"
+
+
+	.global gUnknown_087302E8
+gUnknown_087302E8:
+	.incbin "graphics/animations/animation80.seq"
+
+
+	.global gUnknown_08730308
+gUnknown_08730308:
+	.incbin "graphics/animations/animation81.seq"
+
+
+	.global gUnknown_08730328
+gUnknown_08730328:
+	.incbin "graphics/animations/animation82.seq"
+
+
+	.global gUnknown_08730348
+gUnknown_08730348:
+	.incbin "graphics/animations/animation83.seq"
+
+
+	.global gUnknown_08730368
+gUnknown_08730368:
+	.incbin "graphics/animations/animation84.seq"
+
+
+	.global gUnknown_087305C4
+gUnknown_087305C4:
+	.incbin "graphics/animations/animation85.seq"
+
+
+	.global gUnknown_08730600
+gUnknown_08730600:
+	.incbin "graphics/animations/animation86.seq"
+
+
+	.global gUnknown_08730620
+gUnknown_08730620:
+	.incbin "graphics/animations/animation87.seq"
+
+
+	.global gUnknown_08730650
+gUnknown_08730650:
+	.incbin "graphics/animations/animation88.seq"
+
+
+	.global gUnknown_08730680
+gUnknown_08730680:
+	.incbin "graphics/animations/animation89.seq"
+
+
+	.global gUnknown_087306A4
+gUnknown_087306A4:
+	.incbin "graphics/animations/animation90.seq"
+
+
+	.global gUnknown_087306C8
+gUnknown_087306C8:
+	.incbin "graphics/animations/animation91.seq"
+
+
+	.global gUnknown_08730700
+gUnknown_08730700:
+	.incbin "graphics/animations/animation92.seq"
+
+
+	.global gUnknown_0873076C
+gUnknown_0873076C:
+	.incbin "graphics/animations/animation93.seq"
+
+
+	.global gUnknown_087307D8
+gUnknown_087307D8:
+	.incbin "graphics/animations/animation94.seq"
+
+
+	.global gUnknown_08730800
+gUnknown_08730800:
+	.incbin "graphics/animations/animation95.seq"
+
+
+	.global gUnknown_08730824
+gUnknown_08730824:
+	.incbin "graphics/animations/animation96.seq"
+
+
+	.global gUnknown_0873084C
+gUnknown_0873084C:
+	.incbin "graphics/animations/animation97.seq"
+
+
+	.global gUnknown_08730870
+gUnknown_08730870:
+	.incbin "graphics/animations/animation98.seq"
+
+
+	.global gUnknown_087308A0
+gUnknown_087308A0:
+	.incbin "graphics/animations/animation99.seq"
+
+
+	.global gUnknown_087308C4
+gUnknown_087308C4:
+	.incbin "graphics/animations/animation100.seq"
+
+
+	.global gUnknown_087308EC
+gUnknown_087308EC:
+	.incbin "graphics/animations/animation101.seq"
+
+
+	.global gUnknown_08730910
+gUnknown_08730910:
+	.incbin "graphics/animations/animation102.seq"
+
+
+	.global gUnknown_0873093C
+gUnknown_0873093C:
+	.incbin "graphics/animations/animation103.seq"
+
+
+	.global gUnknown_08730980
+gUnknown_08730980:
+	.incbin "graphics/animations/animation104.seq"
+
+
+	.global gUnknown_087309A4
+gUnknown_087309A4:
+	.incbin "graphics/animations/animation105.seq"
+
+
+	.global gUnknown_087309D4
+gUnknown_087309D4:
+	.incbin "graphics/animations/animation106.seq"
+
+
+	.global gUnknown_08730A00
+gUnknown_08730A00:
+	.incbin "graphics/animations/animation107.seq"
+
+
+	.global gUnknown_08730A30
+gUnknown_08730A30:
+	.incbin "graphics/animations/animation108.seq"
+
+
+	.global gUnknown_08730A54
+gUnknown_08730A54:
+	.incbin "graphics/animations/animation109.seq"
+
+
+	.global gUnknown_08730A7C
+gUnknown_08730A7C:
+	.incbin "graphics/animations/animation110.seq"
+
+
+	.global gUnknown_08730AA0
+gUnknown_08730AA0:
+	.incbin "graphics/animations/animation111.seq"
+
+
+	.global gUnknown_08730AC8
+gUnknown_08730AC8:
+	.incbin "graphics/animations/tileset03.pix"
+
+
 
     .global std_scripts
 std_scripts:
