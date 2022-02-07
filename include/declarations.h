@@ -10,9 +10,11 @@ extern void sub_8003B8C(u16,u16);
 // script_main
 extern void sub_8007D30(struct Main * main);
 // new file
+extern bool32 sub_801715C(void);
 extern void sub_80178E0(void);
 extern void sub_8017910(void);
 extern void sub_801798C(void);
+extern bool32 sub_8017C78(void);
 extern void sub_80183D8(void);
 
 #endif//GUARD_DECLARATIONS_H

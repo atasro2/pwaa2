@@ -588,7 +588,7 @@ sub_8016150: @ 0x08016150
 	beq _0801616A
 	movs r0, #0x3d
 	bl sub_8013EB0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r4, #1
 _0801616A:
 	movs r0, #0x3e
@@ -597,7 +597,7 @@ _0801616A:
 	beq _08016180
 	movs r0, #0x3e
 	bl sub_8013EB0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r4, #1
 _08016180:
 	movs r0, #0x3f
@@ -606,7 +606,7 @@ _08016180:
 	beq _08016196
 	movs r0, #0x3f
 	bl sub_8013EB0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r4, #1
 _08016196:
 	cmp r4, #0
@@ -1009,7 +1009,7 @@ sub_8016D40: @ 0x08016D40
 	adds r6, r5, r0
 _08016D5E:
 	ldm r6!, {r0}
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r4, #1
 	movs r1, #0
 	ldrsh r0, [r5, r1]
@@ -3125,7 +3125,7 @@ sub_8017FD4: @ 0x08017FD4
 sub_8018010: @ 0x08018010
 	push {lr}
 	ldr r0, [r0, #0x1c]
-	bl sub_8014F94
+	bl DestroyAnimation
 	pop {r0}
 	bx r0
 
@@ -3437,13 +3437,13 @@ sub_8018280: @ 0x08018280
 	bl sub_8013EB0
 	cmp r0, #0
 	beq _0801829C
-	bl sub_8014F94
+	bl DestroyAnimation
 _0801829C:
 	movs r0, #0x45
 	bl sub_8013EB0
 	cmp r0, #0
 	beq _080182EE
-	bl sub_8014F94
+	bl DestroyAnimation
 	b _080182EE
 	.align 2, 0
 _080182AC: .4byte gMain+0x2B4
@@ -3462,7 +3462,7 @@ _080182C2:
 	bl sub_8013EB0
 	cmp r0, #0
 	beq _080182CE
-	bl sub_8014F94
+	bl DestroyAnimation
 _080182CE:
 	adds r0, r4, #0
 	bl sub_8013EB0
@@ -4030,13 +4030,13 @@ sub_8018720: @ 0x08018720
 	bl sub_8013EB0
 	cmp r0, #0
 	beq _08018732
-	bl sub_8014F94
+	bl DestroyAnimation
 _08018732:
 	movs r0, #0x45
 	bl sub_8013EB0
 	cmp r0, #0
 	beq _08018740
-	bl sub_8014F94
+	bl DestroyAnimation
 _08018740:
 	movs r0, #0
 	strb r0, [r4]

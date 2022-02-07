@@ -29,7 +29,11 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x02 */ u16 unk2; // unity AA4: finger_pos_y
     /* +0x04 */ u8 filler04[0x2];
     /* +0x06 */ u8 unk6;
-    /* +0x06 */ u8 filler07[0x9];
+    /* +0x06 */ u8 filler07[0x5];
+    /* +0x0C */ u8 unkC;
+    /* +0x0D */ u8 unkD;
+    /* +0x0E */ u8 unkE;
+    /* +0x0F */ u8 unkF;
     /* +0x10 */ u8 unk10;
     /* +0x11 */ u8 filler11[0x8];
     ///* +0x04 */ u8 unk4; // unity AA4: sel_place

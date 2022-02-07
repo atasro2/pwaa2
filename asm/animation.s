@@ -168,7 +168,7 @@ sub_8013EE8: @ 0x08013EE8
 	adds r5, r6, #0
 _08013F14:
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	mov r1, sp
 	movs r0, #0
 	strh r0, [r1]
@@ -554,8 +554,8 @@ _080141D2:
 _080141DE:
 	bx lr
 
-	thumb_func_start sub_80141E0
-sub_80141E0: @ 0x080141E0
+	thumb_func_start SetAnimationFrameOffset
+SetAnimationFrameOffset: @ 0x080141E0
 	push {r4, lr}
 	adds r3, r0, #0
 	cmp r3, #0
@@ -1284,7 +1284,7 @@ sub_8014704: @ 0x08014704
 	cmp r0, #0
 	beq _08014734
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 _08014734:
 	movs r0, #0
 	b _080147F8
@@ -1949,7 +1949,7 @@ _08014C2A:
 _08014C3C: .4byte 0x7FFFFFFF
 _08014C40:
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r3, #0
 	b _08014C5E
 _08014C4A:
@@ -2303,11 +2303,11 @@ _08014EF0: .4byte 0x0000071F
 _08014EF4: .4byte 0xFDFFFFFF
 _08014EF8:
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	cmp r6, #0
 	beq _08014F54
 	adds r0, r6, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	b _08014F54
 _08014F0A:
 	ldrb r0, [r2]
@@ -2385,8 +2385,8 @@ _08014F88:
 	.align 2, 0
 _08014F90: .4byte gAnimation
 
-	thumb_func_start sub_8014F94
-sub_8014F94: @ 0x08014F94
+	thumb_func_start DestroyAnimation
+DestroyAnimation: @ 0x08014F94
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	ldr r6, _08014FBC @ =gMain
@@ -2402,7 +2402,7 @@ sub_8014F94: @ 0x08014F94
 	bl sub_8013EB0
 	cmp r0, #0
 	beq _08014FC8
-	bl sub_8014F94
+	bl DestroyAnimation
 	b _08014FD6
 	.align 2, 0
 _08014FBC: .4byte gMain
@@ -2413,7 +2413,7 @@ _08014FC8:
 	bl sub_8013EB0
 	cmp r0, #0
 	beq _08014FD6
-	bl sub_8014F94
+	bl DestroyAnimation
 _08014FD6:
 	ldr r0, [r4]
 	movs r1, #0x80
@@ -3329,7 +3329,7 @@ _080156A8:
 	beq _0801574A
 _080156BE:
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	b _08015858
 _080156C6:
 	adds r0, r1, #0
@@ -3345,7 +3345,7 @@ _080156C6:
 	cmp r1, r0
 	beq _0801574A
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	b _0801574A
 _080156E6:
 	adds r0, r1, #0
@@ -4049,8 +4049,8 @@ _08015C38: .4byte gCourtScroll
 _08015C3C: .4byte gUnknown_08112414
 _08015C40: .4byte gAnimation+0x44
 
-	thumb_func_start sub_8015C44
-sub_8015C44: @ 0x08015C44
+	thumb_func_start SetCourtScrollPersonAnim
+SetCourtScrollPersonAnim: @ 0x08015C44
 	push {r4, r5, lr}
 	adds r4, r2, #0
 	adds r5, r3, #0

@@ -34,9 +34,9 @@ struct CourtScroll
 
 extern struct CourtScroll gCourtScroll;
 
-void InitBGs();
-void InitBG3();
-void UpdateBackground();
+void InitBGs(void);
+void InitBG3(void);
+void UpdateBackground(void);
 void DecompressCurrentBGStripe(u32);
 void DecompressBackgroundIntoBuffer(u32);
 void CopyBGDataToVram(u32);
@@ -44,11 +44,12 @@ u32 GetBGControlBits(u32);
 u8 * GetBGPalettePtr(u32);
 void CopyBGDataToVramAndScrollBG(u32);
 void SetTextboxSize(u32);
-void UpdateTextbox();
+void UpdateTextbox(void);
 void SlideTextbox(u32);
 void SlideInBG2Window(u32, u32);
 void UpdateBG2Window(struct CourtRecord *);
+extern void sub_80037C8(void);
 void SetTextboxNametag(u32, u32);
-void UpdateBGTilemaps();
+void UpdateBGTilemaps(void);
 
 #endif//GUARD_BACKGROUND_H

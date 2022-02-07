@@ -24,6 +24,7 @@ SECTIONS {
         src/case_data.o(.text);
         asm/investigation_segments.o(.text);
         src/script_main.o(.text);
+        src/script_commands.o(.text);
         asm/script_commands.o(.text);
         asm/romA7A8.o(.text);
         src/sound.o(.text);
