@@ -2195,14 +2195,14 @@ _08002012:
 	adds r2, r0, #0
 	cmp r2, #0
 	beq _08002022
-	bl sub_8014F94
+	bl DestroyAnimation
 _08002022:
 	movs r0, #0x90
 	bl sub_8013EB0
 	adds r2, r0, #0
 	cmp r2, #0
 	beq _08002032
-	bl sub_8014F94
+	bl DestroyAnimation
 _08002032:
 	movs r4, #0
 _08002034:
@@ -2212,7 +2212,7 @@ _08002034:
 	adds r2, r0, #0
 	cmp r2, #0
 	beq _08002046
-	bl sub_8014F94
+	bl DestroyAnimation
 _08002046:
 	adds r4, #1
 	cmp r4, #4
@@ -4971,8 +4971,8 @@ sub_80035B0: @ 0x080035B0
 	.align 2, 0
 _080035BC: .4byte gUnknown_0801ADC8
 
-	thumb_func_start sub_80035C0
-sub_80035C0: @ 0x080035C0
+	thumb_func_start SetTextboxSize
+SetTextboxSize: @ 0x080035C0
 	push {r4, r5, r6, r7, lr}
 	ldr r2, _080035D4 @ =gScriptContext
 	cmp r0, #1
@@ -5010,7 +5010,7 @@ _080035E8:
 	ands r1, r2
 	lsls r1, r1, #0x18
 	lsrs r1, r1, #0x18
-	bl sub_8004000
+	bl SetTextboxNametag
 	b _0800368E
 	.align 2, 0
 _08003610: .4byte gBG1MapBuffer
@@ -5029,7 +5029,7 @@ _0800361C:
 	strb r0, [r1]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8004000
+	bl SetTextboxNametag
 	b _0800368E
 _0800363A:
 	ldr r1, _08003694 @ =gBG1MapBuffer
@@ -5267,7 +5267,7 @@ SlideTextbox: @ 0x080037FC
 	bl sub_80037C8
 	movs r0, #0
 	movs r1, #0
-	bl sub_8004000
+	bl SetTextboxNametag
 	cmp r4, #1
 	bne _08003864
 	ldr r0, _0800384C @ =gScriptContext
@@ -6302,8 +6302,8 @@ _08003FF4: .4byte gMain
 _08003FF8: .4byte gUnknown_08111EBC
 _08003FFC: .4byte gIORegisters
 
-	thumb_func_start sub_8004000
-sub_8004000: @ 0x08004000
+	thumb_func_start SetTextboxNametag
+SetTextboxNametag: @ 0x08004000
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0

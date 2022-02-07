@@ -2673,7 +2673,7 @@ _0800BD6C:
 	mov r7, sl
 	strb r0, [r7, #0x1a]
 	movs r0, #2
-	bl sub_80035C0
+	bl SetTextboxSize
 	movs r0, #0x98
 	lsls r0, r0, #1
 	adds r4, r4, r0
@@ -5089,7 +5089,7 @@ _0800D116:
 	ands r1, r2
 	lsls r1, r1, #0x18
 	lsrs r1, r1, #0x18
-	bl sub_8004000
+	bl SetTextboxNametag
 	movs r3, #0xfa
 	lsls r3, r3, #4
 	adds r0, r4, r3
@@ -6044,9 +6044,9 @@ _0800D910:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #0x22
 	bl sub_801480C
 	b _0800D998
@@ -6065,7 +6065,7 @@ _0800D970:
 	cmp r0, #0
 	blt _0800DA00
 	adds r0, r1, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #0x24
 	movs r1, #0x78
 	movs r2, #0x3c
@@ -6120,9 +6120,9 @@ _0800D9E4:
 	cmp r1, r0
 	ble _0800DA00
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #1
 	strb r0, [r6, #9]
 _0800DA00:
@@ -6405,9 +6405,9 @@ _0800DC0C:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #0x23
 	bl sub_801480C
 	ldrb r0, [r6, #0xa]
@@ -6430,7 +6430,7 @@ _0800DC74:
 	cmp r0, #0
 	blt _0800DCEE
 	adds r0, r1, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #0x26
 	movs r1, #0x78
 	movs r2, #0x3c
@@ -6470,9 +6470,9 @@ _0800DCA2:
 	cmp r1, r0
 	bge _0800DCEE
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #1
 	strb r0, [r6, #9]
 	movs r0, #0
@@ -6736,7 +6736,7 @@ _0800DEC6:
 	strb r4, [r5, #0x19]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8004000
+	bl SetTextboxNametag
 	movs r0, #4
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]
@@ -6884,7 +6884,7 @@ _0800E028:
 	movs r1, #1
 	movs r2, #3
 	movs r3, #0
-	bl sub_8015C44
+	bl SetCourtScrollPersonAnim
 	ldr r0, _0800E05C @ =gUnknown_08478BDC
 	movs r1, #0x1e
 	movs r2, #0x1f
@@ -7010,7 +7010,7 @@ _0800E12A:
 	movs r0, #0
 	movs r1, #1
 	movs r2, #3
-	bl sub_8015C44
+	bl SetCourtScrollPersonAnim
 	ldr r0, _0800E158 @ =gUnknown_08478BDC
 	movs r1, #0x1e
 	movs r2, #0x1f
@@ -9164,7 +9164,7 @@ _0800F2A6:
 	strb r0, [r5, #0xe]
 	bl sub_8013E40
 	ldr r0, _0800F32C @ =gAnimation+0x44
-	bl sub_8014F94
+	bl DestroyAnimation
 	ldr r0, _0800F330 @ =gInvestigation
 	strb r4, [r0, #6]
 	movs r1, #0xf
@@ -13797,7 +13797,7 @@ _08011B40:
 	str r0, [r7, #8]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8004000
+	bl SetTextboxNametag
 	mov r3, sl
 	ldr r0, [r3]
 	ldr r1, _08011B64 @ =0xFFFFFCFF
@@ -16405,8 +16405,8 @@ _080130BC: .4byte 0x00004090
 _080130C0: .4byte 0x000080D8
 _080130C4: .4byte 0x000041D8
 
-	thumb_func_start sub_80130C8
-sub_80130C8: @ 0x080130C8
+	thumb_func_start FindEvidenceInCourtRecord
+FindEvidenceInCourtRecord: @ 0x080130C8
 	push {r4, lr}
 	adds r4, r1, #0
 	cmp r0, #0
@@ -16448,8 +16448,8 @@ _08013104:
 	.align 2, 0
 _0801310C: .4byte gCourtRecord+0x18
 
-	thumb_func_start sub_8013110
-sub_8013110: @ 0x08013110
+	thumb_func_start FindFirstEmptySlotInCourtRecord
+FindFirstEmptySlotInCourtRecord: @ 0x08013110
 	ldr r2, _08013124 @ =gCourtRecord+0x18
 	cmp r0, #0
 	beq _08013118
@@ -16475,8 +16475,8 @@ _08013134:
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_8013138
-sub_8013138: @ 0x08013138
+	thumb_func_start SortCourtRecordAndSyncListCount
+SortCourtRecordAndSyncListCount: @ 0x08013138
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	mov ip, r0

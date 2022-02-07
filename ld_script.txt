@@ -31,6 +31,7 @@ SECTIONS {
         src/investigation_segment_3_4.o(.text);
         src/investigation_segment_3_6.o(.text);
         src/script_main.o(.text);
+        src/script_commands.o(.text);
         asm/script_commands.o(.text);
         asm/romA7A8.o(.text);
         src/sound.o(.text);
