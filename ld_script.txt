@@ -29,6 +29,7 @@ SECTIONS {
         asm/romA7A8.o(.text);
         src/sound.o(.text);
         asm/animation.o(.text);
+        src/rom15CE0.o(.text);
         asm/rom15CE0.o(.text);
         /* library functions */
         src/m4a_1.o(.text);
