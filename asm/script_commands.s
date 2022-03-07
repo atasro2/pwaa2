@@ -941,11 +941,11 @@ Command2F: @ 0x080090E8
 	cmp r0, #0
 	beq _08009104
 	adds r0, r2, #0
-	bl sub_801480C
+	bl PlayAnimation
 	b _0800910E
 _08009104:
 	adds r0, r2, #0
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	bl DestroyAnimation
 _0800910E:
 	ldr r0, [r4, #4]

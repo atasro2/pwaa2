@@ -82,7 +82,7 @@ struct Main
     s16 unk98;
     u8 filler9A[0xB0 - 0x9A];
     /* +0x0B0 */ u16 unkB0;
-    /* +0x0B2 */ u8 fillerB2;
+    /* +0x0B2 */ u8 currentRoomId;
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;
     /* +0x0B5 */ s8 health; // unity: rest
@@ -94,7 +94,7 @@ struct Main
     /* +0x0E0 */ u32 talkEndFlags[8]; // unity: talk_end_flag // TODO: find right size
     /* +0x100 */ u32 unk100[8]; // script related, apollo's FW_Mess_flag??
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
-    /* +0x1A4 */ struct PsycheLock unk1A4[4];
+    /* +0x1A4 */ struct PsycheLockData unk1A4[4];
     u8 filler244[0x254 - 0x244];
     /* +0x254 */ u32 soundFlags;
     u8 filler258[0x2B8 - 0x258];

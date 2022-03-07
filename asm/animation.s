@@ -110,8 +110,8 @@ _08013EA4: .4byte gAnimation+0x44
 _08013EA8: .4byte 0x0000083C
 _08013EAC: .4byte gOamObjects
 
-	thumb_func_start sub_8013EB0
-sub_8013EB0: @ 0x08013EB0
+	thumb_func_start FindAnimationFromAnimId
+FindAnimationFromAnimId: @ 0x08013EB0
 	push {r4, r5, lr}
 	adds r3, r0, #0
 	ldr r1, _08013ED4 @ =gAnimation+0x83C
@@ -148,7 +148,7 @@ sub_8013EE8: @ 0x08013EE8
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r7, r0, #0
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	cmp r4, #0
 	beq _08013F80
@@ -257,8 +257,8 @@ _08013FC0:
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_8013FC4
-sub_8013FC4: @ 0x08013FC4
+	thumb_func_start SetAnimationRotScaleParams
+SetAnimationRotScaleParams: @ 0x08013FC4
 	push {r4, r5, lr}
 	adds r2, r0, #0
 	adds r3, r1, #0
@@ -326,8 +326,8 @@ _08014038:
 _08014040: .4byte gSineTable
 _08014044: .4byte gOamObjects
 
-	thumb_func_start sub_8014048
-sub_8014048: @ 0x08014048
+	thumb_func_start SetAnimationRotation
+SetAnimationRotation: @ 0x08014048
 	push {lr}
 	adds r3, r0, #0
 	cmp r3, #0
@@ -335,14 +335,14 @@ sub_8014048: @ 0x08014048
 	adds r0, #0x40
 	strh r2, [r0]
 	adds r0, r3, #0
-	bl sub_8013FC4
+	bl SetAnimationRotScaleParams
 _0801405A:
 	pop {r0}
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_8014060
-sub_8014060: @ 0x08014060
+	thumb_func_start DisableAnimationRotation
+DisableAnimationRotation: @ 0x08014060
 	adds r2, r0, #0
 	cmp r2, #0
 	beq _0801406E
@@ -355,8 +355,8 @@ _0801406E:
 	.align 2, 0
 _08014070: .4byte 0xFFEFFFFF
 
-	thumb_func_start sub_8014074
-sub_8014074: @ 0x08014074
+	thumb_func_start SetAnimationScale
+SetAnimationScale: @ 0x08014074
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -1397,8 +1397,8 @@ _080147F8:
 _08014804: .4byte 0x040000D4
 _08014808: .4byte 0x81000022
 
-	thumb_func_start sub_801480C
-sub_801480C: @ 0x0801480C
+	thumb_func_start PlayAnimation
+PlayAnimation: @ 0x0801480C
 	push {r4, r5, lr}
 	adds r3, r0, #0
 	ldr r2, _08014844 @ =gMain
@@ -1423,7 +1423,7 @@ sub_801480C: @ 0x0801480C
 _08014836:
 	adds r0, r3, #0
 	adds r2, r4, #0
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 	pop {r4, r5}
 	pop {r1}
 	bx r1
@@ -1431,8 +1431,8 @@ _08014836:
 _08014844: .4byte gMain
 _08014848: .4byte gUnknown_08023648
 
-	thumb_func_start sub_801484C
-sub_801484C: @ 0x0801484C
+	thumb_func_start PlayAnimationAtCustomOrigin
+PlayAnimationAtCustomOrigin: @ 0x0801484C
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -1679,7 +1679,7 @@ _08014A1E:
 	ldrsh r1, [r4, r2]
 	movs r3, #6
 	ldrsh r2, [r4, r3]
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 	adds r6, r0, #0
 	ldr r0, [r4, #0x14]
 	movs r1, #0x82
@@ -2079,7 +2079,7 @@ sub_8014D10: @ 0x08014D10
 	lsrs r0, r4, #8
 	movs r1, #0xff
 	ands r4, r1
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r3, r0, #0
 	b _08014D46
 	.align 2, 0
@@ -2234,12 +2234,12 @@ _08014E60:
 	cmp r0, #0x20
 	bne _08014E7A
 	movs r0, #0x3d
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r6, r0, #0
 	cmp r6, #0
 	bne _08014E7A
 	movs r0, #0x3e
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r6, r0, #0
 _08014E7A:
 	adds r3, r5, #0
@@ -2399,7 +2399,7 @@ DestroyAnimation: @ 0x08014F94
 	cmp r0, r1
 	bne _08014FD6
 	movs r0, #0x3d
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	cmp r0, #0
 	beq _08014FC8
 	bl DestroyAnimation
@@ -2410,7 +2410,7 @@ _08014FC0: .4byte 0x00FFFFFF
 _08014FC4: .4byte 0x002000FF
 _08014FC8:
 	movs r0, #0x3e
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	cmp r0, #0
 	beq _08014FD6
 	bl DestroyAnimation
@@ -3306,7 +3306,7 @@ _08015678:
 	cmp r0, #0
 	bne _080156A0
 	ldrh r0, [r4, #0xc]
-	bl sub_801480C
+	bl PlayAnimation
 	adds r0, r4, #0
 	movs r1, #1
 	bl sub_8014138
@@ -3467,7 +3467,7 @@ _0801579A:
 	movs r6, #0x3d
 _080157CC:
 	adds r0, r6, #0
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r2, r0, #0
 	cmp r2, #0
 	beq _08015804

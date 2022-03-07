@@ -2350,7 +2350,7 @@ _0800BB10:
 	movs r0, #8
 	strh r0, [r1, #0x14]
 	movs r0, #0x6b
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _0800BB2C
@@ -6002,9 +6002,9 @@ _0800D8DC: @ jump table
 	.4byte _0800D9A0 @ case 4
 _0800D8F0:
 	movs r0, #0x24
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x25
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	ldr r0, _0800D90C @ =gTestimony
@@ -6015,10 +6015,10 @@ _0800D8F0:
 _0800D90C: .4byte gTestimony
 _0800D910:
 	movs r0, #0x24
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x25
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x10]
 	adds r0, #0xa
@@ -6048,7 +6048,7 @@ _0800D910:
 	adds r0, r5, #0
 	bl DestroyAnimation
 	movs r0, #0x22
-	bl sub_801480C
+	bl PlayAnimation
 	b _0800D998
 _0800D964:
 	adds r0, r6, #0
@@ -6059,7 +6059,7 @@ _0800D964:
 	b _0800D998
 _0800D970:
 	movs r0, #0x22
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	ldr r0, [r1]
 	cmp r0, #0
@@ -6069,11 +6069,11 @@ _0800D970:
 	movs r0, #0x24
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x25
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 _0800D998:
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
@@ -6081,10 +6081,10 @@ _0800D998:
 	b _0800DA00
 _0800D9A0:
 	movs r0, #0x24
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x25
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldr r2, _0800DA08 @ =gTestimony
 	ldrh r3, [r4, #0x10]
@@ -6366,9 +6366,9 @@ _0800DBE0: @ jump table
 	.4byte _0800DCA2 @ case 4
 _0800DBF4:
 	movs r0, #0x26
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x27
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	ldrb r0, [r6, #0xa]
@@ -6376,10 +6376,10 @@ _0800DBF4:
 	b _0800DCEC
 _0800DC0C:
 	movs r0, #0x26
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x27
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x10]
 	adds r0, #0xa
@@ -6409,7 +6409,7 @@ _0800DC0C:
 	adds r0, r5, #0
 	bl DestroyAnimation
 	movs r0, #0x23
-	bl sub_801480C
+	bl PlayAnimation
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800DCEC
@@ -6424,7 +6424,7 @@ _0800DC64:
 	b _0800DCEC
 _0800DC74:
 	movs r0, #0x23
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	ldr r0, [r1]
 	cmp r0, #0
@@ -6434,20 +6434,20 @@ _0800DC74:
 	movs r0, #0x26
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x27
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800DCEC
 _0800DCA2:
 	movs r0, #0x26
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x27
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x12]
 	subs r0, #7
@@ -6711,7 +6711,7 @@ _0800DEC6:
 	cmp r0, #0
 	beq _0800DF84
 	movs r0, #1
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x47
 	bl PlaySE
 	movs r0, #3
@@ -14148,13 +14148,13 @@ _08011A28:
 	cmp r3, #0
 	beq _08011A3C
 	movs r0, #4
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x37
 	bl PlaySE
 	b _08011A48
 _08011A3C:
 	movs r0, #2
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x51
 	bl PlaySE
 _08011A48:
@@ -15471,7 +15471,7 @@ _08012524:
 	movs r0, #8
 	strh r0, [r1, #0x14]
 	movs r0, #0x6b
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _08012546
@@ -15709,7 +15709,7 @@ _080126F0:
 	b _080129F0
 _0801270E:
 	movs r0, #4
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x37
 	bl PlaySE
 	ldr r1, _0801279C @ =gTestimony

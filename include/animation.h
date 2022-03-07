@@ -121,6 +121,8 @@ struct AnimationListEntry * FindAnimationFromAnimId(u32 animId);
 void SetAnimationOriginCoords(struct AnimationListEntry *animation, u32 xOrigin, u32 yOrigin);
 void SetAnimationRotation(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 rotation);
 void DisableAnimationRotation(struct AnimationListEntry *animation);
+void SetAnimationScale(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 scale);
+void sub_8014124(struct AnimationListEntry *animation);
 void ChangeAnimationActivity(struct AnimationListEntry *animation, bool32 arg1);
 void SetAnimationXFlip(struct AnimationListEntry *animation, bool32 flipX);
 void SetAnimationPriority(struct AnimationListEntry* arg0, u32 arg1);
