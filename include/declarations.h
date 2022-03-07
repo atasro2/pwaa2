@@ -1,6 +1,8 @@
 #ifndef GUARD_DECLARATIONS_H //TODO: get rid of this file when it's possible to move everything to its own header
 #define GUARD_DECLARATIONS_H
 
+extern struct PscyheLock gPsycheLock;
+
 extern u8 * gUnknown_081124D0[];
 extern u8 gUnknown_0814777C[];
 
@@ -12,7 +14,12 @@ extern void sub_8003B8C(u16,u16);
 
 // script_main
 extern void sub_8007D30(struct Main * main);
+
+// investigation stuff 
+extern void sub_8010FA4(void);
+
 // new file
+extern void sub_8016C7C(u32);
 extern bool32 sub_801715C(void);
 extern void sub_80178E0(void);
 extern void sub_8017910(void);

@@ -107,7 +107,7 @@ _080045E0:
 	cmp r0, #0
 	bne _080045F2
 	movs r0, #9
-	bl sub_801480C
+	bl PlayAnimation
 _080045F2:
 	ldr r1, _0800461C @ =0x040000D4
 	ldr r0, _08004620 @ =gUnknown_0801CC30
@@ -515,7 +515,7 @@ _08004964:
 	bl InvestigationSetScriptSectionAndFlag
 _08004978:
 	movs r0, #0xc
-	bl sub_801480C
+	bl PlayAnimation
 	b _08004C4C
 _08004980:
 	movs r0, #0
@@ -551,7 +551,7 @@ _080049C0:
 	bl InvestigationSetScriptSectionAndFlag
 _080049C8:
 	movs r0, #0xd
-	bl sub_801480C
+	bl PlayAnimation
 	b _08004C4C
 _080049D0:
 	ldr r1, _08004A00 @ =0x040000D4
@@ -1409,7 +1409,7 @@ _08005144:
 	bl PlayBGM
 _08005156:
 	movs r0, #0xc
-	bl sub_801480C
+	bl PlayAnimation
 	b _080052F0
 	.align 2, 0
 _08005160: .4byte 0x00004015
@@ -1477,7 +1477,7 @@ _080051C6:
 	cmp r0, #0
 	bne _080051F4
 	movs r0, #0xa
-	bl sub_801480C
+	bl PlayAnimation
 _080051F4:
 	movs r0, #0
 	movs r1, #0xa1
@@ -1544,7 +1544,7 @@ _08005250:
 	cmp r0, #0
 	bne _08005292
 	movs r0, #0xe
-	bl sub_801480C
+	bl PlayAnimation
 _08005292:
 	ldr r1, _080052B8 @ =0x040000D4
 	ldr r0, _080052BC @ =gUnknown_0801D948
@@ -2215,7 +2215,7 @@ _0800588C:
 	bl InvestigationSetScriptSectionAndFlag
 _080058A0:
 	movs r0, #0x19
-	bl sub_801480C
+	bl PlayAnimation
 	b _080059CA
 _080058A8:
 	movs r0, #0
@@ -2894,7 +2894,7 @@ _08005EAE:
 	cmp r0, #0
 	bne _08005FB4
 	movs r0, #0x19
-	bl sub_801480C
+	bl PlayAnimation
 	b _08005FB4
 _08005EC2:
 	ldr r1, _08005F0C @ =0x040000D4
@@ -2964,7 +2964,7 @@ _08005F36:
 	movs r2, #0
 	bl InvestigationSetPersonAnimation
 	movs r0, #0x3d
-	bl sub_801480C
+	bl PlayAnimation
 	ldr r0, _08005F78 @ =0x00000101
 	movs r1, #0xe6
 	bl InvestigationSetScriptSectionAndFlag
@@ -2980,7 +2980,7 @@ _08005F7C:
 	movs r2, #0
 	bl InvestigationSetPersonAnimation
 	movs r0, #0x3d
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0
 	movs r1, #0xf9
 	bl GetFlag
@@ -3780,7 +3780,7 @@ _080066A8:
 	cmp r0, #0
 	beq _080066C8
 	movs r0, #0x1b
-	bl sub_801480C
+	bl PlayAnimation
 _080066C8:
 	movs r0, #0
 	movs r1, #0xc8
@@ -4475,9 +4475,9 @@ _08006D0C:
 	b _08006D36
 _08006D24:
 	movs r0, #0x1c
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x1e
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0xd3
 	bl PlayBGM
 _08006D36:
@@ -5186,7 +5186,7 @@ _08007388:
 	cmp r0, #0
 	bne _0800739A
 	movs r0, #0x1d
-	bl sub_801480C
+	bl PlayAnimation
 _0800739A:
 	movs r0, #0
 	movs r1, #0xa8
@@ -5222,7 +5222,7 @@ _080073D0:
 	cmp r0, #0
 	bne _080073EE
 	movs r0, #0x1f
-	bl sub_801480C
+	bl PlayAnimation
 _080073EE:
 	movs r0, #0
 	movs r1, #0xa7

@@ -34,5 +34,5 @@
 . = 0x00005FC0; gMPlayInfo_SE2 = .;
 . = 0x00006000; gMPlayMemAccArea = .; /* what the fuck */
 . = 0x00006000; gMPlayInfo_SE3 = .;
-. = 0x00006050; gUnknown_03006050 = .;
+. = 0x00006050; gPsycheLock = .;
 . = 0x00006390; gUnknown_03006390 = .;
