@@ -372,17 +372,9 @@ _08016498: // psylock_move_lock_appear
         case 0:
             for(i = 0; i < gPsycheLock.unk0; i++)
             {
-                s32 xOrigin;
-                s32 yOrigin;
-                s32 temp;
-
-                temp = (gPsycheLock.unk0-1) * 5;
-                xOrigin = (i + temp) * 2 + 0;
-                yOrigin = (i + temp) * 2 + 1;
-                temp = !!temp;
-#ifndef NONMATCHING
-                asm("":"=r"(xOrigin));
-#endif
+                s32 temp = gPsycheLock.unk0 - 1;
+                s32 xOrigin = temp * 10 + i * 2;
+                s32 yOrigin = temp * 10 + i * 2 + 1;
                 xOrigin = gUnknown_0811246C[xOrigin] + 32;
                 yOrigin = gUnknown_0811246C[yOrigin] + 16;
                 gPsycheLock.lockAnims[i] = PlayAnimationAtCustomOrigin(40 + i, xOrigin, yOrigin);
@@ -463,17 +455,12 @@ _0801667C: // psylock_move_lock_unlock
             s32 xOrigin;
             s32 yOrigin;
             s32 temp;
-            s32 temp2;
             gPsycheLock.unk2--;
             PlaySE(0x74);
             DestroyAnimation(gPsycheLock.lockAnims[gPsycheLock.unk2]);
-            temp = (gPsycheLock.unk0-1) * 5;
-            xOrigin = (gPsycheLock.unk2 + temp) * 2 + 0;
-            yOrigin = (gPsycheLock.unk2 + temp) * 2 + 1;
-            temp = !!temp;
-#ifndef NONMATCHING
-            asm("":"=r"(xOrigin));
-#endif
+            temp = gPsycheLock.unk0 - 1;
+            xOrigin = temp * 10 + gPsycheLock.unk2 * 2;
+            yOrigin = temp * 10 + gPsycheLock.unk2 * 2 + 1;
             xOrigin = gUnknown_0811246C[xOrigin] + 32;
             yOrigin = gUnknown_0811246C[yOrigin] + 16;
             gPsycheLock.lockAnims[gPsycheLock.unk2] = PlayAnimationAtCustomOrigin(50 + gPsycheLock.unk2, xOrigin, yOrigin);
@@ -711,4 +698,25 @@ _08016C6A: // psylock_move_null
     return;
 
     //_08016C6A function return
+}
+
+void sub_8016C7C(u32 arg0)
+{
+    int i;
+
+    sub_8016124(arg0);
+    sub_8015EB4();
+    sub_8015CF0(&gPsycheLock.unk10[0], gPsycheLock.unk0 - 1, 3);
+    sub_8015CF0(&gPsycheLock.unk10[1], gPsycheLock.unk0 + 5 - 1, 0);
+    sub_8015CE0(&gPsycheLock.unk10[0], gPsycheLock.unk0 - 1, 3, gPsycheLock.unk10[0].unk8->unk6-1);
+    sub_8015CE0(&gPsycheLock.unk10[1], gPsycheLock.unk0 + 5 - 1, 0, gPsycheLock.unk10[1].unk8->unk6-1);
+    for(i = 0; i < gPsycheLock.unk0; i++)
+    {
+        s32 temp = (gPsycheLock.unk0-1);
+        s32 xOrigin = temp * 10 + i * 2;
+        s32 yOrigin = temp * 10 + i * 2 + 1;
+        xOrigin = gUnknown_0811246C[xOrigin] + 32;
+        yOrigin = gUnknown_0811246C[yOrigin] + 16;
+        gPsycheLock.lockAnims[i] = PlayAnimationAtCustomOrigin(45 + i, xOrigin, yOrigin);
+    }
 }
