@@ -1984,7 +1984,7 @@ const struct ExaminationData gUnknown_0802108C[5] = {
 };
 
 void InvestigationSegmentSetup_3_2(struct Main *main) {
-    DmaCopy16(3, gUnknown_08020954, gMain.roomData, 0x7C);
+    DmaCopy16(3, gUnknown_08020954, gMain.roomData, sizeof(gUnknown_08020954)); // note: size copied is 0x7C, actual size 0x7D
     DmaCopy16(3, gUnknown_080206FC, gTalkData, sizeof(gUnknown_080206FC));
     DmaCopy16(3, gUnknown_080206F0, gUnknown_03003B70, sizeof(gUnknown_080206F0));
     main->currentRoomId = 0;
