@@ -70,7 +70,6 @@ SECTIONS {
 	    rodata/romA7A8.o(.rodata);
 	    rodata/animation.o(.rodata);
         src/rom15CE0.o(.rodata);
-	    rodata/rom15CE0.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/sound.o(.rodata);
         src/agb_sram.o(.rodata);
