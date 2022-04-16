@@ -3,12 +3,26 @@
 
 struct PsycheLockData
 {
-    u8 filler00[0x28];    
+    u32 unk0; // unity: status
+    u16 unk4; // unity: room
+    u16 unk6; // unity: pl_id 
+    u8 unk8; // unity: level
+    u8 unk9; // unity: size
+    u16 unkA; // unity: start_message
+    u16 unkC; // unity: cancel_message
+    u16 unkE; // unity: correct_message
+    u16 unk10; // unity: wrong_message
+    u16 unk12; // unity: die_message
+    u16 unk14; // unity: cancel_bgm
+    u16 unk16; // unity: unlock_bgm
+    u32 unk18; // unity: item_size
+    u8 unk1C[4]; // unity: item_no
+    u16 unk20[4]; //  unity: item_correct_message
 };
 
 struct PscyheLock_10_8 {
     u8 fill0[0x4];
-    u16 unk4;
+    u16 unk4;   
     u16 unk6;
 };
 

@@ -4,6 +4,8 @@
 extern struct PscyheLock gPsycheLock;
 
 extern u8 * gUnknown_081124D0[];
+extern u16 gUnknown_08112520[0x1E0];
+extern u16 gUnknown_08112700[0x1E0];
 extern u8 gUnknown_0814777C[];
 
 // ??
@@ -21,8 +23,10 @@ extern void sub_8010FA4(void);
 // new file
 extern void sub_8016C7C(u32);
 extern bool32 sub_801715C(void);
+extern int sub_80175C0(void);
 extern void sub_80178E0(void);
 extern void sub_8017910(void);
+extern void sub_8017928(u32);
 extern void sub_801798C(void);
 extern bool32 sub_8017C78(void);
 extern void sub_80183D8(void);

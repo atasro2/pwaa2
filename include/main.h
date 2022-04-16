@@ -78,10 +78,20 @@ struct Main
     /* +0x08E */ s8 itemPlateSize;
     /* +0x08F */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
     /* +0x090 */ u8 itemPlateAction;
-    u8 filler91[0x98 - 0x91];
-    s16 unk98;
-    u8 filler9A[0xB0 - 0x9A];
-    /* +0x0B0 */ u16 unkB0;
+    u8 filler91[0x96 - 0x91];
+    /* +0x096 */ u8 unk96; // unity: gauge_rno_0
+    /* +0x097 */ u8 unk97; // unity: gauge_rno_1
+    /* +0x098 */ s16 unk98; // unity: gauge_hp
+    /* +0x09A */ s16 unk9A; // unity: gauge_hp_disp
+    /* +0x09C */ s16 unk9C; // unity: gauge_dmg_cnt
+    /* +0x09E */ s16 unk9E; // unity: gauge_pos_x
+    /* +0x0A0 */ s16 unkA0; // unity: gauge_pos_y
+    /* +0x0A2 */ s16 unkA2; // unity: gauge_cnt_0
+    /* +0x0A4 */ s16 unkA4; // unity: gauge_cnt_1
+    /* +0x0A6 */ s16 unkA6; // unity: gauge_disp_flag
+    /* +0x0A8 */ s32 unkA8; // unity: gauge_hp_fixed
+    /* +0x0AC */ s32 unkAC; // unity: gauge_hp_fixed_diff
+    /* +0x0B0 */ s16 unkB0; // unity: gauge_hp_scenario_end
     /* +0x0B2 */ u8 currentRoomId;
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;
@@ -95,9 +105,25 @@ struct Main
     /* +0x100 */ u32 unk100[8]; // script related, apollo's FW_Mess_flag??
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
     /* +0x1A4 */ struct PsycheLockData unk1A4[4];
-    u8 filler244[0x254 - 0x244];
+    u8 filler244[0x246 - 0x244];
+    u16 unk246;
+    u8 unk248;
+    u8 unk249;
+    u8 unk24A;
+    u8 filler24B[0x254 - 0x24B];
     /* +0x254 */ u32 soundFlags;
-    u8 filler258[0x2B8 - 0x258];
+    u8 filler258[0x288 - 0x258];
+    struct Main_288 {
+        u8 unk0;
+        u8 unk1;
+        u8 unk2;
+        u8 unk3;
+        s32 unk4;
+        s32 unk8;
+        s32 unkC;
+        s32 unk10;
+    } unk288[2];
+    u8 filler2B0[0x2B8 - 0x2B0];
     u16 unk2B8;
     u16 unk2BA;
     u8 filler2BC[0x2C0 - 0x2BC];
