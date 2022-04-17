@@ -77,6 +77,7 @@ struct MapMarker
 extern struct ScriptContext gScriptContext;
 extern struct TextBoxCharacter gTextBoxCharacters[0x3F];
 extern struct MapMarker gMapMarker[8];
+extern u8 gUnknown_03003B70[];
 
 /* begin script data */
 

@@ -1,7 +1,7 @@
     .section .data
 
     .global gUnknown_08111F14
-gUnknown_08111F14:
+gUnknown_08111F14: @ const u8 * gCourtRecordInitialItemLists
     .4byte gUnknown_0801C41C
     .4byte gUnknown_0801C424
     .4byte gUnknown_0801C4D8
@@ -26,7 +26,7 @@ gUnknown_08111F14:
     .4byte gUnknown_0801FAE6
 
     .global gUnknown_08111F6C
-gUnknown_08111F6C:
+gUnknown_08111F6C: @ const struct Struct811DC54 *
     .4byte gUnknown_0801C430
     .4byte gUnknown_0801C480
     .4byte gUnknown_0801C540
@@ -51,7 +51,7 @@ gUnknown_08111F6C:
     .4byte gUnknown_0801FC28
 
     .global gUnknown_08111FC4
-gUnknown_08111FC4:
+gUnknown_08111FC4: @ const struct Struct811DC98 *
     .4byte gUnknown_0801C610
     .4byte gUnknown_0801C610
     .4byte gUnknown_0801C610
@@ -79,24 +79,24 @@ gUnknown_08111FC4:
 gUnknown_0811201C:
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_80044F8
+    .4byte InvestigationSegmentSetup_1_0
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8004C90
+    .4byte InvestigationSegmentSetup_1_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8005310
+    .4byte InvestigationSegmentSetup_2_0
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8005A30
+    .4byte InvestigationSegmentSetup_2_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8005FC0
-    .4byte sub_80062D4
+    .4byte InvestigationSegmentSetup_3_0
+    .4byte InvestigationSegmentSetup_3_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8006890
-    .4byte sub_8006E8C
+    .4byte InvestigationSegmentSetup_3_4
+    .4byte InvestigationSegmentSetup_3_6
     .4byte InvestigationDummy
     .4byte InvestigationDummy
 
@@ -104,24 +104,24 @@ gUnknown_0811201C:
 gUnknown_08112074:
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_800455C
+    .4byte InvestigationRoomSetup_1_0
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8004CEC
+    .4byte InvestigationRoomSetup_1_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8005374
+    .4byte InvestigationRoomSetup_2_0
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8005A8C
+    .4byte InvestigationRoomSetup_2_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_800600C
-    .4byte sub_8006330
+    .4byte InvestigationRoomSetup_3_0
+    .4byte InvestigationRoomSetup_3_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_80068D4
-    .4byte sub_8006EE8
+    .4byte InvestigationRoomSetup_3_4
+    .4byte InvestigationRoomSetup_3_6
     .4byte InvestigationDummy
     .4byte InvestigationDummy
 
@@ -129,24 +129,24 @@ gUnknown_08112074:
 gUnknown_081120CC:
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8004C64
+    .4byte InvestigationRoomUpdate_1_0
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte nullsub_9
+    .4byte InvestigationRoomUpdate_1_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_80059E0
+    .4byte InvestigationRoomUpdate_2_0
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte nullsub_3
+    .4byte InvestigationRoomUpdate_2_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte nullsub_10
-    .4byte sub_8006868
+    .4byte InvestigationRoomUpdate_3_0
+    .4byte InvestigationRoomUpdate_3_2
     .4byte InvestigationDummy
     .4byte InvestigationDummy
-    .4byte sub_8006E20
-    .4byte nullsub_11
+    .4byte InvestigationRoomUpdate_3_4
+    .4byte InvestigationRoomUpdate_3_6
     .4byte InvestigationDummy
     .4byte InvestigationDummy
 

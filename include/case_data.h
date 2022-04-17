@@ -16,8 +16,9 @@ struct Struct811DC98
     /* +0x01 */ u8 evidenceId;
     /* +0x02 */ u8 unk2;
     /* +0x03 */ u8 unk3;
-    /* +0x04 */ u16 unk4;
+    /* +0x04 */ u8 unk4;
     /* +0x06 */ u16 unk6;
+    /* +0x08 */ u16 unk8;
 };
 
 extern const u8 gCaseStartProcess[];
@@ -32,6 +33,8 @@ extern void (*gInvestigationRoomUpdateFunctions[])(struct Main *);
 
 void InvestigationSetPersonAnimation(u32 arg0, u32 arg1, u32 arg2);
 void InvestigationSetScriptSectionAndFlag(u32 section, u32 flagId);
+// InvestigationSetScriptSectionAndFlag_no_window
+void sub_8004458(u32 section, u32 flagId);
 
 #define LOADEXAMDATA(x) DmaCopy16(3, (x), gExaminationData, sizeof(x))
 
