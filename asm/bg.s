@@ -4949,8 +4949,8 @@ _0800358E:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_80035A0
-sub_80035A0: @ 0x080035A0
+	thumb_func_start GetBGControlBits
+GetBGControlBits: @ 0x080035A0
 	ldr r1, _080035AC @ =gUnknown_0801ADC8
 	lsls r0, r0, #3
 	adds r1, #4
@@ -5500,7 +5500,7 @@ _080039B0:
 _080039CC: .4byte 0xFFFFFE00
 _080039D0:
 	adds r0, r5, #0
-	bl sub_80035A0
+	bl GetBGControlBits
 	adds r4, r0, #0
 	adds r0, r5, #0
 	bl sub_80035B0

@@ -247,8 +247,8 @@ _08013FA6:
 _08013FB0: .4byte gAnimation+0x83C
 _08013FB4: .4byte 0xFFFFF808
 
-	thumb_func_start sub_8013FB8
-sub_8013FB8: @ 0x08013FB8
+	thumb_func_start SetAnimationOriginCoords
+SetAnimationOriginCoords: @ 0x08013FB8
 	cmp r0, #0
 	beq _08013FC0
 	strh r1, [r0, #0x10]

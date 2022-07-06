@@ -50,4 +50,16 @@
 
 #define KEY_NEW() ({ (*(u16 *)REG_ADDR_KEYINPUT) ^ KEYS_MASK; })
 
+// Converts a number to Q8.8 fixed-point format
+#define Q_8_8(n) ((s16)((n) * 256))
+
+// Converts a number to Q16.16 fixed-point format
+#define Q_16_16(n)  ((s32)((n) * 65536))
+
+// Converts a Q8.8 fixed-point format number to a regular integer
+#define Q_8_8_TO_INT(n) ((int)((n) / 256))
+
+// Converts a Q16.16 fixed-point format number to a regular integer
+#define Q_16_16_TO_INT(n)  ((int)((n) >> 16))
+
 #endif//GUARD_GLOBAL_H

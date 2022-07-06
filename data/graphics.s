@@ -37,8 +37,8 @@ gUnknown_0813891C:
 gUnknown_0813D91C:
     .incbin "baserom.gba", 0x0013D91C, 0x60
 
-    .global gUnknown_0813D97C
-gUnknown_0813D97C:
+    .global gGfx4bppTestimonyArrows
+gGfx4bppTestimonyArrows:
     .incbin "baserom.gba", 0x0013D97C, 0x180
 
     .global gUnknown_0813DAFC

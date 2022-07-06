@@ -4870,7 +4870,7 @@ _0800CF08:
 	mov r1, sb
 	str r1, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _0800CFF8 @ =gUnknown_0813D97C
+	ldr r0, _0800CFF8 @ =gGfx4bppTestimonyArrows
 	str r0, [r6]
 	ldr r0, _0800CFFC @ =0x06013400
 	str r0, [r6, #4]
@@ -4970,7 +4970,7 @@ _0800CFE8: .4byte 0x06013000
 _0800CFEC: .4byte 0x80000200
 _0800CFF0: .4byte gUnknown_0814DC40
 _0800CFF4: .4byte 0x050002A0
-_0800CFF8: .4byte gUnknown_0813D97C
+_0800CFF8: .4byte gGfx4bppTestimonyArrows
 _0800CFFC: .4byte 0x06013400
 _0800D000: .4byte 0x80000040
 _0800D004: .4byte gUnknown_0813DAFC
@@ -6515,7 +6515,7 @@ sub_800DD0C: @ 0x0800DD0C
 	ldr r2, _0800DD8C @ =0x80000010
 	str r2, [r1, #8]
 	ldr r2, [r1, #8]
-	ldr r2, _0800DD90 @ =gUnknown_0813D97C
+	ldr r2, _0800DD90 @ =gGfx4bppTestimonyArrows
 	str r2, [r1]
 	movs r2, #0xd0
 	lsls r2, r2, #1
@@ -6557,7 +6557,7 @@ _0800DD80: .4byte 0x80000200
 _0800DD84: .4byte gUnknown_0814DC40
 _0800DD88: .4byte 0x050002A0
 _0800DD8C: .4byte 0x80000010
-_0800DD90: .4byte gUnknown_0813D97C
+_0800DD90: .4byte gGfx4bppTestimonyArrows
 _0800DD94: .4byte 0x80000040
 _0800DD98: .4byte gUnknown_0813DAFC
 _0800DD9C: .4byte gScriptContext
@@ -8855,7 +8855,7 @@ _0800F088: .4byte 0x05000300
 _0800F08C: .4byte 0x80000010
 _0800F090:
 	ldrh r0, [r5, #0x2e]
-	bl sub_80035A0
+	bl GetBGControlBits
 	movs r1, #3
 	ands r1, r0
 	cmp r1, #0
@@ -9005,7 +9005,7 @@ sub_800F19C: @ 0x0800F19C
 	cmp r0, #0
 	bne _0800F1E8
 	ldrh r0, [r4, #0x2e]
-	bl sub_80035A0
+	bl GetBGControlBits
 	movs r1, #1
 	ands r1, r0
 	cmp r1, #0
@@ -13322,7 +13322,7 @@ sub_8011388: @ 0x08011388
 	cmp r0, #1
 	bne _080113FC
 	ldrh r0, [r5, #0x2e]
-	bl sub_80035A0
+	bl GetBGControlBits
 	movs r1, #3
 	ands r1, r0
 	cmp r1, #0
@@ -16329,7 +16329,7 @@ sub_8012BEC: @ 0x08012BEC
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	lsls r0, r0, #5
-	ldr r3, _08012C4C @ =gUnknown_0813D97C
+	ldr r3, _08012C4C @ =gGfx4bppTestimonyArrows
 	adds r0, r0, r3
 	str r0, [r1]
 	ldr r0, _08012C50 @ =0x06013400
@@ -16355,7 +16355,7 @@ _08012C3E:
 	.align 2, 0
 _08012C44: .4byte 0x040000D4
 _08012C48: .4byte gUnknown_08023418
-_08012C4C: .4byte gUnknown_0813D97C
+_08012C4C: .4byte gGfx4bppTestimonyArrows
 _08012C50: .4byte 0x06013400
 _08012C54: .4byte 0x80000040
 _08012C58: .4byte gUnknown_0802341C
@@ -16368,7 +16368,7 @@ sub_8012C60: @ 0x08012C60
 	movs r1, #0xc
 	bl sub_8003C14
 	ldr r0, _08012CD8 @ =0x040000D4
-	ldr r1, _08012CDC @ =gUnknown_0813D97C
+	ldr r1, _08012CDC @ =gGfx4bppTestimonyArrows
 	str r1, [r0]
 	ldr r1, _08012CE0 @ =0x06013400
 	str r1, [r0, #4]
@@ -16423,7 +16423,7 @@ sub_8012C60: @ 0x08012C60
 	bx r0
 	.align 2, 0
 _08012CD8: .4byte 0x040000D4
-_08012CDC: .4byte gUnknown_0813D97C
+_08012CDC: .4byte gGfx4bppTestimonyArrows
 _08012CE0: .4byte 0x06013400
 _08012CE4: .4byte 0x80000040
 _08012CE8: .4byte gUnknown_0813DAFC

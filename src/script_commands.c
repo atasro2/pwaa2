@@ -10,8 +10,10 @@
 #include "investigation.h"
 #include "court_record.h"
 #include "graphics.h"
+#include "court.h"
 #include "constants/bg.h"
 #include "constants/script.h"
+#include "constants/songs.h"
 /**
 const u8 gTextboxDownArrowTileIndexes[] = {
     0x20, 0x22, 0x24, 0x26, 0x24, 0x22,
@@ -540,8 +542,8 @@ bool32 Command16(struct ScriptContext * scriptCtx)
     main->showTextboxCharacters = FALSE;
     main->unkB0 = main->unk98;
     SET_PROCESS(3, 2, 0, 0);
-    gInvestigation.unkC = 0;
-    gInvestigation.unkD = 0;
+    gInvestigation.selectedAction = 0;
+    gInvestigation.lastAction = 0;
     main->scenarioIdx++;
     PlayBGM(230);
     return 1;
@@ -682,4 +684,314 @@ u32 Command1B(struct ScriptContext * scriptCtx) // ! probably fakematch
     {
         goto changeBG;
     }
+}
+
+u32 Command1C(struct ScriptContext * scriptCtx)
+{
+    int i;
+    scriptCtx->scriptPtr++;
+    switch(*scriptCtx->scriptPtr)
+    {
+        case 0: // enable textbox
+            gMain.showTextboxCharacters = TRUE;
+            gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
+            gIORegisters.lcd_bg1vofs = 0;
+            sub_80037C8();
+            SetTextboxNametag(gMain.unk2BC, gMain.unk2BD);
+            break;
+        case 1: // disable textbox
+            gMain.showTextboxCharacters = FALSE;
+            for(i = 0; i < 256; i++)
+                gBG1MapBuffer[0x180 + i] = 0;
+            break;
+        case 2:
+            if(gMain.process[GAME_PROCESS] == 3)
+            {
+                DestroyAnimation(&gAnimation[1]);
+                gInvestigation.personActive = 0;
+                sub_800EB24(&gInvestigation, 15);
+            }
+            SlideTextbox(1);
+            break;
+        case 3:
+            if(gMain.process[GAME_PROCESS] == 3)
+            {
+                DestroyAnimation(&gAnimation[1]);
+                gInvestigation.personActive = 0;
+                sub_800EB24(&gInvestigation, 15);
+            }
+            SlideTextbox(0);
+            if(gMain.process[GAME_PROCESS] == 4)
+            {
+                gInvestigation.selectedActionYOffset = 0;
+                if(gMain.process[GAME_PROCESS_STATE] == 6)
+                {
+                    sub_800EB24(&gInvestigation, 1);
+                }
+                if(gMain.process[GAME_PROCESS_STATE] == 8)
+                {
+                    sub_800EB24(&gInvestigation, 4);
+                    gInvestigation.actionState = 4;
+                }
+                if(gMain.process[GAME_PROCESS_STATE] == 9)
+                {
+                    sub_800EB24(&gInvestigation, 8);
+                }
+            }
+            break;
+        case 6:
+            gInvestigation.selectedActionYOffset = 0;
+            if(gMain.process[GAME_PROCESS_STATE] == 6)
+                sub_800EB24(&gInvestigation, 1);
+            if(gMain.process[GAME_PROCESS_STATE] == 8)
+            {
+                sub_800EB24(&gInvestigation, 4);
+                gInvestigation.actionState = 4;
+                gMain.advanceScriptContext = FALSE;
+                gMain.showTextboxCharacters = FALSE;
+                scriptCtx->textboxState = 4;
+                break;
+            }
+            if(gMain.process[GAME_PROCESS_STATE] == 9)
+                sub_800EB24(&gInvestigation, 8);
+            gMain.advanceScriptContext = FALSE;
+            gMain.showTextboxCharacters = FALSE;
+            scriptCtx->textboxState = 4;
+            gInvestigation.actionState = 1;
+            break;
+        case 4:
+            gIORegisters.lcd_bg1vofs = 0;
+            gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
+            scriptCtx->textboxState = 0;
+            break;
+        case 5:
+            gIORegisters.lcd_bg1vofs = -81;
+            gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
+            scriptCtx->textboxState = 1;
+            break;
+        default:
+            break;
+    }
+    scriptCtx->scriptPtr++;
+    gInvestigation.unk7 = 0;
+    return 0;
+}
+
+u32 Command1D(struct ScriptContext * scriptCtx)
+{
+    u32 bits;
+    u32 var1;
+    scriptCtx->scriptPtr++;
+    bits = GetBGControlBits(gMain.currentBG);
+    if(bits & 0xF)
+        gMain.isBGScrolling = 1;
+    else
+        gMain.isBGScrolling = 0;
+    var1 = *scriptCtx->scriptPtr;
+    switch(var1 >> 8)
+    {
+        case BG_SHIFT_LEFT:
+            gMain.horizontolBGScrollSpeed = -(u8)var1;
+            break;
+        case BG_SHIFT_RIGHT:
+            gMain.horizontolBGScrollSpeed = (u8)var1;
+            break;
+        case BG_SHIFT_UP:
+            gMain.verticalBGScrollSpeed = -(u8)var1;
+            break;
+        case BG_SHIFT_DOWN:
+            gMain.verticalBGScrollSpeed = (u8)var1;
+            break;
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+u32 Command1E(struct ScriptContext * scriptCtx)
+{
+    u32 var0;
+    u32 var1;
+    u32 var2;
+    scriptCtx->scriptPtr++;
+    var0 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    var1 = *scriptCtx->scriptPtr;
+    gMain.talkingAnimationOffset = var1;
+    scriptCtx->scriptPtr++;
+    var2 = *scriptCtx->scriptPtr;
+    gMain.idleAnimationOffset = var2;
+    scriptCtx->scriptPtr++;
+    if(var0 != 0)
+    {
+        PlayPersonAnimation(var0, 0, var1, 0);
+        gInvestigation.personActive = 1;
+        sub_800EB24(&gInvestigation, 15);
+    }
+    else
+    {
+        DestroyAnimation(&gAnimation[1]);
+        gInvestigation.personActive = 0;
+        sub_800EB24(&gInvestigation, 15);
+    }
+    return 0;
+}
+
+u32 Command1F(struct ScriptContext * scriptCtx)
+{
+    u32 i;
+    u16 * tilemapBuffer;
+    scriptCtx->scriptPtr++;
+    gIORegisters.lcd_dispcnt &= ~DISPCNT_BG2_ON;
+    gIORegisters.lcd_dispcnt |= DISPCNT_BG3_ON;
+    tilemapBuffer = gBG2MapBuffer;
+    for(i = 0; i < 0x2A0; i++, tilemapBuffer++)
+       *tilemapBuffer = 0;
+    gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP; // TODO: add TXT/AFF macro once known which one is used
+    gIORegisters.lcd_bg2hofs = 8;
+    scriptCtx->flags &= ~0x40;
+    return 0;
+}
+
+u32 Command20(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    scriptCtx->nextSection = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command21(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    PlaySE(SE007_MENU_OPEN_SUBMENU);
+    scriptCtx->flags |= 0x10;
+    gMain.gameStateFlags |= 0x300;
+    BACKUP_PROCESS();
+    SET_PROCESS(7, 0, 0, 1);
+    return 0;
+}
+
+bool32 Command22(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    // skips a token
+    scriptCtx->scriptPtr++;
+    if (*scriptCtx->scriptPtr)
+        FadeOutBGM(*scriptCtx->scriptPtr);
+    else
+        StopBGM();
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command23(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    // skips a token
+    scriptCtx->scriptPtr++;
+    if (*scriptCtx->scriptPtr)
+        UnpauseBGM();
+    else
+        PauseBGM();
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command24(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    gMain.advanceScriptContext = FALSE;
+    gMain.showTextboxCharacters = FALSE;
+    SET_PROCESS(2, 0, 0, 0);
+    return 1;
+}
+
+bool32 Command25(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    scriptCtx->previousSection = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command26(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if (*scriptCtx->scriptPtr != 0) {
+        gMain.gameStateFlags |= 0x10;
+        scriptCtx->textSkip = 0;
+    }
+    else
+        gMain.gameStateFlags &= ~0x10;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command27(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    gMain.shakeTimer = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    gMain.gameStateFlags |= 1;
+    gMain.shakeIntensity = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command28(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if (*scriptCtx->scriptPtr)
+    {
+        BACKUP_PROCESS();
+        SET_PROCESS(5, 0, 0, 0); // start testimony
+    }
+    else
+    {
+        gMain.process[GAME_PROCESS_STATE]++;
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command29(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if (*scriptCtx->scriptPtr == 3)
+    {
+        gTestimony.pressPromptY = 0xE0;
+        gTestimony.presentPromptY = 0xE0;
+        gTestimony.displayState = 2;
+        gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
+    }
+    else if (*scriptCtx->scriptPtr == 2)
+    {
+        gTestimony.pressPromptY = 0xE0;
+        gTestimony.presentPromptY = 0xE0;
+        gTestimony.displayState = 0;
+        gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
+    }
+    else if (*scriptCtx->scriptPtr == 4)
+    {
+        DmaCopy16(3, gUnknown_08141CFC, OBJ_VRAM0 + 0x3000, 0x400);
+        DmaCopy16(3, gUnknown_0814DC40, OBJ_PLTT+0xA0, 0x20);
+        DmaCopy16(3, gGfx4bppTestimonyArrows, 0x1A0, 0x80);
+        DmaCopy16(3, gGfx4bppTestimonyArrows + 12 * TILE_SIZE_4BPP, 0x220, 0x80);
+        gTestimony.pressPromptY = 0xE0;
+        gTestimony.presentPromptY = 0xE0;
+        gTestimony.displayState = 0;
+        gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
+        SET_PROCESS(6, 1, 0, 0);
+    }
+    else if (*scriptCtx->scriptPtr != 0)
+    {
+        BACKUP_PROCESS();
+        SET_PROCESS(6, 0, 0, 0); // return to testimony
+    }
+    else
+    {
+        SET_PROCESS(3, 1, 0, 0); // goes back into trial process
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
 }
