@@ -115,18 +115,21 @@ struct Main
     u8 filler258[0x288 - 0x258];
     struct Main_288 {
         u8 unk0;
-        u8 unk1;
-        u8 unk2;
-        u8 unk3;
+        s8 unk1;
+        s8 unk2;
+        s8 unk3;
         s32 unk4;
         s32 unk8;
         s32 unkC;
         s32 unk10;
     } unk288[2];
-    u8 filler2B0[0x2B8 - 0x2B0];
+    u8 unk2B0; // unity: spotlight_command_status
+    u8 filler2B1[0x2B8 - 0x2B1];
     u16 unk2B8;
     u16 unk2BA;
-    u8 filler2BC[0x2C0 - 0x2BC];
+    u8 unk2BC;
+    u8 unk2BD;
+    u8 filler2BE[0x2C0 - 0x2BE];
 }; /* size 0x2C0 */
 
 struct IORegisters

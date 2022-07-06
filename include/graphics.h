@@ -7,6 +7,8 @@
 
 #define GFX_BASE_ADDR (ROM_START + 0x130000)
 
+#define gGfx4bppTestimonyArrows ((u8*)(GFX_BASE_ADDR + 0xD97C))
+#define gUnknown_08141CFC ((u8*)(GFX_BASE_ADDR + 0x11CFC))
 #define gUnknown_08141EFC ((u8*)(GFX_BASE_ADDR + 0x11EFC))
 #define gUnknown_08146FFC ((u8*)(GFX_BASE_ADDR + 0x16FFC))
 #define gUnknown_081473FC ((u8*)(GFX_BASE_ADDR + 0x173FC))

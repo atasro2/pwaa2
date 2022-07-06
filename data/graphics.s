@@ -37,8 +37,8 @@ gUnknown_0813891C:
 gUnknown_0813D91C:
     .incbin "graphics/detention_center_bottom_tiles.4bpp"
 
-    .global gUnknown_0813D97C
-gUnknown_0813D97C:
+    .global gGfx4bppTestimonyArrows
+gGfx4bppTestimonyArrows:
     .incbin "graphics/ui/left_right_arrows.4bpp"
 
     .global gUnknown_0813DC7C

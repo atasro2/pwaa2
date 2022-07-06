@@ -2,6 +2,7 @@
 #define GUARD_DECLARATIONS_H
 
 extern struct PscyheLock gPsycheLock;
+extern struct Struct3006390 gUnknown_03006390[8];
 
 extern u8 * gUnknown_081124D0[];
 extern u16 gUnknown_08112520[0x1E0];

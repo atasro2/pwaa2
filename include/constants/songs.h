@@ -1,0 +1,21 @@
+#ifndef GUARD_CONST_SONGS_H
+#define GUARD_CONST_SONGS_H
+
+enum Songs {
+    /* BEGIN BGM */
+    //TODO: fill in
+    /* END BGM */
+    /* BEGIN SE */
+    SE000_MENU_CHANGE = 42,
+    SE001_MENU_CONFIRM,
+    SE002_MENU_CANCEL,
+    SE003_TEXT_BLIP_MALE,
+    SE004_TEXT_BLIP_FEMALE,
+    SE005_TEXT_ADVANCE,
+    SE006_TEXT_BLIP_TYPEWRITER_HIGH,
+    SE007_MENU_OPEN_SUBMENU,
+    //TODO: fill in
+    /* END SE */
+};
+
+#endif//GUARD_CONST_SONGS_H
