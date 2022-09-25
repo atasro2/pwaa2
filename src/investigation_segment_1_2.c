@@ -4,6 +4,7 @@
 #include "script.h"
 #include "sound.h"
 #include "case_data.h"
+#include "animation.h"
 
 const struct Struct811DC98 gUnknown_0801CFF0[95] = {
     {
@@ -1879,7 +1880,7 @@ void InvestigationRoomSetup_1_2(struct Main *main) {
                 if(!GetFlag(0, 0x98)) {
                     if(!GetFlag(0, 0x9F)) {
                         InvestigationSetScriptSectionAndFlag(0x143, 0x9F);
-                        sub_801480C(0xC);
+                        PlayAnimation(0xC);
                         break;
                     }
                     InvestigationSetPersonAnimation(0x4015, 0x5A0, 0x5A0);
@@ -1893,7 +1894,7 @@ void InvestigationRoomSetup_1_2(struct Main *main) {
                 InvestigationSetPersonAnimation(0x4015, 0x5A0, 0x5A0);
                 PlayBGM(0xCF);
             }
-            sub_801480C(0xC);
+            PlayAnimation(0xC);
             break;
         }
         case 6: {
@@ -1909,7 +1910,7 @@ void InvestigationRoomSetup_1_2(struct Main *main) {
             else if(GetFlag(0, 0xA5)) {
                 LOADEXAMDATA(gUnknown_0801DA24);
                 if(!GetFlag(0, 0xB3)) {
-                    sub_801480C(0xA);
+                    PlayAnimation(0xA);
                 }
                 if(!GetFlag(0, 0xA1)) {
                     InvestigationSetScriptSectionAndFlag(0xF7, 0xA1);
@@ -1929,7 +1930,7 @@ void InvestigationRoomSetup_1_2(struct Main *main) {
         case 7: {
             if(GetFlag(0, 0xA9) && GetFlag(0, 0xA5) && GetFlag(0, 0xB3) && GetFlag(0, 0x97)) {
                 if(!GetFlag(0, 0xB5)) {
-                    sub_801480C(0xE);
+                    PlayAnimation(0xE);
                 }
                 LOADEXAMDATA(gUnknown_0801D948);
                 if(!GetFlag(0, 0xA4)) {

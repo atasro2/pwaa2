@@ -4,6 +4,7 @@
 #include "script.h"
 #include "sound.h"
 #include "case_data.h"
+#include "animation.h"
 
 const u8 gUnknown_0801DB00[2] = {
     0xFE, 0xFF,
@@ -2727,7 +2728,7 @@ void InvestigationRoomSetup_2_0(struct Main *main) {
             else if(!GetFlag(0, 0x9F)) {
                 InvestigationSetScriptSectionAndFlag(0xF1, 0x9F);
             }
-            sub_801480C(0x19);
+            PlayAnimation(0x19);
             break;
         }
         case 13: {

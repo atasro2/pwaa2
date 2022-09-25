@@ -4,6 +4,7 @@
 #include "script.h"
 #include "sound.h"
 #include "case_data.h"
+#include "animation.h"
 
 const u8 gUnknown_0801C41C[8] = {
     0x00, 0x03, 0xFE, 0x05, 0x06, 0x07, 0x09, 0xFF,
@@ -1973,7 +1974,7 @@ void InvestigationRoomSetup_1_0(struct Main *main) {
                     InvestigationSetScriptSectionAndFlag(0x82, 0xFF);
                 }
                 if(!GetFlag(0, 0x6C)) {
-                    sub_801480C(9);
+                    PlayAnimation(9);
                 }
                 LOADEXAMDATA(gUnknown_0801CC30);
             }
@@ -2103,7 +2104,7 @@ void InvestigationRoomSetup_1_0(struct Main *main) {
                 else if(!GetFlag(0, 0x4B)) {
                     InvestigationSetScriptSectionAndFlag(0xEC, 0xFF);
                 }
-                sub_801480C(0xC);
+                PlayAnimation(0xC);
             }
             else if(GetFlag(0, 0x41)) {
                 if(GetFlag(0, 0x60)) {
@@ -2118,7 +2119,7 @@ void InvestigationRoomSetup_1_0(struct Main *main) {
                 else {
                     InvestigationSetScriptSectionAndFlag(0xE6, 0xFF);
                 }
-                sub_801480C(0xD);
+                PlayAnimation(0xD);
             }
             else {
                 LOADEXAMDATA(gUnknown_0801CDAC);

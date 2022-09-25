@@ -4877,7 +4877,7 @@ _0800CF08:
 	ldr r1, _0800D000 @ =0x80000040
 	str r1, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _0800D004 @ =gUnknown_0813D97C+0x180
+	ldr r0, _0800D004 @ =gGfx4bppTestimonyArrows+0x180
 	str r0, [r6]
 	ldr r0, _0800D008 @ =0x06013480
 	str r0, [r6, #4]
@@ -4973,7 +4973,7 @@ _0800CFF4: .4byte 0x050002A0
 _0800CFF8: .4byte gGfx4bppTestimonyArrows
 _0800CFFC: .4byte 0x06013400
 _0800D000: .4byte 0x80000040
-_0800D004: .4byte gUnknown_0813D97C+0x180
+_0800D004: .4byte gGfx4bppTestimonyArrows+0x180
 _0800D008: .4byte 0x06013480
 _0800D00C: .4byte 0x040000D4
 _0800D010: .4byte gUnknown_02000D3C
@@ -6523,7 +6523,7 @@ sub_800DD0C: @ 0x0800DD0C
 	ldr r3, _0800DD94 @ =0x80000040
 	str r3, [r1, #8]
 	ldr r2, [r1, #8]
-	ldr r2, _0800DD98 @ =gUnknown_0813D97C+0x180
+	ldr r2, _0800DD98 @ =gGfx4bppTestimonyArrows+0x180
 	str r2, [r1]
 	movs r2, #0x88
 	lsls r2, r2, #2
@@ -6559,7 +6559,7 @@ _0800DD88: .4byte 0x050002A0
 _0800DD8C: .4byte 0x80000010
 _0800DD90: .4byte gGfx4bppTestimonyArrows
 _0800DD94: .4byte 0x80000040
-_0800DD98: .4byte gUnknown_0813D97C+0x180
+_0800DD98: .4byte gGfx4bppTestimonyArrows+0x180
 _0800DD9C: .4byte gScriptContext
 _0800DDA0: .4byte gCourtRecord
 _0800DDA4: .4byte gTestimony
@@ -8166,7 +8166,7 @@ _0800EAB0:
 	.align 2, 0
 _0800EAC4: .4byte gOamObjects+0x180
 
-	thumb_func_start sub_800EAC8
+	thumb_func_start sub_800EAC8 @ room_seq_chg
 sub_800EAC8: @ 0x0800EAC8
 	ldr r2, _0800EAD8 @ =gMain
 	movs r3, #0x97
@@ -16375,7 +16375,7 @@ sub_8012C60: @ 0x08012C60
 	ldr r2, _08012CE4 @ =0x80000040
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08012CE8 @ =gUnknown_0813D97C+0x180
+	ldr r1, _08012CE8 @ =gGfx4bppTestimonyArrows+0x180
 	str r1, [r0]
 	ldr r1, _08012CEC @ =0x06013480
 	str r1, [r0, #4]
@@ -16426,7 +16426,7 @@ _08012CD8: .4byte 0x040000D4
 _08012CDC: .4byte gGfx4bppTestimonyArrows
 _08012CE0: .4byte 0x06013400
 _08012CE4: .4byte 0x80000040
-_08012CE8: .4byte gUnknown_0813D97C+0x180
+_08012CE8: .4byte gGfx4bppTestimonyArrows+0x180
 _08012CEC: .4byte 0x06013480
 _08012CF0: .4byte gUnknown_081410FC
 _08012CF4: .4byte 0x06013800

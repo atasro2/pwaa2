@@ -70,8 +70,7 @@ extern struct ExaminationData gExaminationData[16];
 extern struct InvestigationStruct gInvestigation;
 
 /* new stuff needed for segments */
-void sub_800EAC8();
-void sub_801480C(u32);
+void sub_800EAC8(u32, u32); // room_seq_chg
 /* end data stuff from segments */
 
 void sub_800EB24(struct InvestigationStruct *, u32);
