@@ -2339,7 +2339,7 @@ _08008EE4:
 	ldr r2, _08008F68 @ =0x80000040
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08008F6C @ =gUnknown_0813DAFC
+	ldr r1, _08008F6C @ =gUnknown_0813D97C+0x180
 	str r1, [r0]
 	movs r1, #0x88
 	lsls r1, r1, #2
@@ -2374,7 +2374,7 @@ _08008F5C: .4byte 0x050002A0
 _08008F60: .4byte 0x80000010
 _08008F64: .4byte gUnknown_0813D97C
 _08008F68: .4byte 0x80000040
-_08008F6C: .4byte gUnknown_0813DAFC
+_08008F6C: .4byte gUnknown_0813D97C+0x180
 _08008F70: .4byte gTestimony
 _08008F74: .4byte gIORegisters
 _08008F78: .4byte gMain+0x8

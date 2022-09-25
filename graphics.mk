@@ -983,3 +983,67 @@ graphics/speedlines_first_and_last_columns.4bpp: graphics/speedlines_first_and_l
 	$(GBAGFX) $< $@ -mwidth 1 -mheight 20
 graphics/charset.4bpp: graphics/charset.png
 	$(GBAGFX) $< $@ -mwidth 2 -mheight 2
+
+graphics/ui/investigation/stop_button.4bpp: graphics/ui/investigation/stop_button.png
+	$(GBAGFX) $< $@ -mwidth 4 -mheight 2
+
+graphics/episode_select_options.4bpp: graphics/episode_select_options.png
+	$(GBAGFX) $< $@ -mwidth 8 -mheight 4
+
+graphics/map_markers/double_door_diagram.4bpp: graphics/map_markers/double_door_diagram.png
+	$(GBAGFX) $< $@ -mwidth 4 -mheight 8
+
+graphics/episode_select_options.4bpp.lz: graphics/episode_select_options.4bpp
+	$(GBAGFX) $< $@ -search 1
+
+graphics/nickel_samurai_case3_op_zoomin.8bpp.lz: graphics/nickel_samurai_case3_op_zoomin.8bpp
+	$(GBAGFX) $< $@ -search 1
+
+graphics/nickel_samurai_case3_op_zoomin.bin.lz: graphics/nickel_samurai_case3_op_zoomin.bin
+	$(GBAGFX) $< $@ -search 1
+
+graphics/nickel_samurai_case3_op_zoomin.gbapal.lz: graphics/nickel_samurai_case3_op_zoomin.gbapal
+	$(GBAGFX) $< $@ -search 1
+
+graphics/psyche_lock_chain_tileset.4bpp.lz: graphics/psyche_lock_chain_tileset.4bpp
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_01.bin.lz: graphics/psyche_lock_chain_animation_01.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_02.bin.lz: graphics/psyche_lock_chain_animation_02.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_03.bin.lz: graphics/psyche_lock_chain_animation_03.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_04.bin.lz: graphics/psyche_lock_chain_animation_04.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_05.bin.lz: graphics/psyche_lock_chain_animation_05.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_06.bin.lz: graphics/psyche_lock_chain_animation_06.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_07.bin.lz: graphics/psyche_lock_chain_animation_07.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_08.bin.lz: graphics/psyche_lock_chain_animation_08.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_09.bin.lz: graphics/psyche_lock_chain_animation_09.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_10.bin.lz: graphics/psyche_lock_chain_animation_10.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_11.bin.lz: graphics/psyche_lock_chain_animation_11.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_12.bin.lz: graphics/psyche_lock_chain_animation_12.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_13.bin.lz: graphics/psyche_lock_chain_animation_13.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_14.bin.lz: graphics/psyche_lock_chain_animation_14.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_15.bin.lz: graphics/psyche_lock_chain_animation_15.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_16.bin.lz: graphics/psyche_lock_chain_animation_16.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_17.bin.lz: graphics/psyche_lock_chain_animation_17.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_18.bin.lz: graphics/psyche_lock_chain_animation_18.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_19.bin.lz: graphics/psyche_lock_chain_animation_19.bin
+	$(GBAGFX) $< $@ -search 8
+graphics/psyche_lock_chain_animation_20.bin.lz: graphics/psyche_lock_chain_animation_20.bin
+	$(GBAGFX) $< $@ -search 8
