@@ -5728,7 +5728,7 @@ sub_8003B8C: @ 0x08003B8C
 	lsrs r5, r1, #0x10
 	ldr r0, _08003BC8 @ =gUnknown_086E9B5C
 	ldr r0, [r0, #4]
-	ldr r1, _08003BCC @ =gUnknown_086DF2E0
+	ldr r1, _08003BCC @ =gUnknown_086DF2DC+4
 	adds r0, r0, r1
 	ldr r1, _08003BD0 @ =0x040000D4
 	str r0, [r1]
@@ -5752,7 +5752,7 @@ _08003BB0:
 	b _08003BDE
 	.align 2, 0
 _08003BC8: .4byte gUnknown_086E9B5C
-_08003BCC: .4byte gUnknown_086DF2E0
+_08003BCC: .4byte gUnknown_086DF2DC+4
 _08003BD0: .4byte 0x040000D4
 _08003BD4: .4byte 0x80000010
 _08003BD8:

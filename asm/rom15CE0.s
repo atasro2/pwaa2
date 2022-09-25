@@ -1538,7 +1538,7 @@ _08017176:
 	thumb_func_start sub_8017178
 sub_8017178: @ 0x08017178
 	ldr r0, _080171CC @ =0x040000D4
-	ldr r1, _080171D0 @ =gUnknown_081475FC
+	ldr r1, _080171D0 @ =gUnknown_0814757C+0x80
 	str r1, [r0]
 	ldr r1, _080171D4 @ =0x06013780
 	str r1, [r0, #4]
@@ -1581,7 +1581,7 @@ sub_8017178: @ 0x08017178
 	bx lr
 	.align 2, 0
 _080171CC: .4byte 0x040000D4
-_080171D0: .4byte gUnknown_081475FC
+_080171D0: .4byte gUnknown_0814757C+0x80
 _080171D4: .4byte 0x06013780
 _080171D8: .4byte 0x800000C0
 _080171DC: .4byte gUnknown_0814E340
