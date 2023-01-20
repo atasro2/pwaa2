@@ -47,14 +47,14 @@ struct Main
     /* +0x030 */ u16 unk30; // unity AA4: Bg256_load_no?
     /* +0x032 */ s16 previousBG; // unity AA4: Bg256_no_old? probably wrong
     /* +0x034 */ s8 currentBgStripe; // maybe Bg256_rno_0?
-    /* +0x035 */ u8 unk2D; // unused field maybe Bg256_SP_Flag?
+    /* +0x035 */ u8 unk35; // unused field maybe Bg256_SP_Flag?
     /* +0x036 */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
     /* +0x037 */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
     /* +0x038 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x
     /* +0x03A */ s16 Bg256_scroll_y; // unity AA4: Bg256_scroll_y
     /* +0x03C */ s16 Bg256_pos_x; // unity AA4: Bg256_pos_x
     /* +0x03E */ s16 Bg256_pos_y; // unity AA4: Bg256_pos_y
-    /* +0x040 */ u16 unk38; // unity AA4: Bg256_add? unused but is background related 100%
+    /* +0x040 */ u16 unk40; // unity AA4: Bg256_add? unused but is background related 100%
     /* +0x042 */ s16 Bg256_dir; // unity AA4: Bg256_dir
     /* +0x044 */ s8 horizontolBGScrollSpeed; // unity AA4: Bg256_scroll_speed_x
     /* +0x045 */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
@@ -107,14 +107,18 @@ struct Main
     /* +0x100 */ u32 unk100[8]; // script related, apollo's FW_Mess_flag??
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
     /* +0x1A4 */ struct PsycheLockData unk1A4[4];
-    u8 filler244[0x246 - 0x244];
+    s8 unk244;
+    u8 unk245;
     u16 unk246;
     u8 unk248;
     u8 unk249;
     u8 unk24A;
-    u8 filler24B[0x254 - 0x24B];
+    u8 unk24B;
+    u8 filler24C[0x254 - 0x24C];
     /* +0x254 */ u32 soundFlags;
-    u8 filler258[0x288 - 0x258];
+    u8 filler258[0x276 - 0x258];
+    u16 unk276[8]; // ! fix size later
+    u16 unk286;
     struct Main_288 {
         u8 unk0;
         s8 unk1;

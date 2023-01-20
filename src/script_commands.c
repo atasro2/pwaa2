@@ -1015,7 +1015,7 @@ bool32 Command2A(struct ScriptContext *scriptCtx)
     return 0;
 }
 
-bool32 Command2B(struct ScriptContext *scriptCtx) // nullsubbed take damage command 
+bool32 Command2B(struct ScriptContext *scriptCtx) // nooped take damage command 
 {
     scriptCtx->scriptPtr++;
     return 0;
@@ -1811,6 +1811,192 @@ bool32 Command4C(struct ScriptContext *scriptCtx)
     {
         return 1;
     }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command4D(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    gMain.previousBG = gMain.currentBG;
+    gMain.currentBG = *scriptCtx->scriptPtr;
+    gMain.currentBgStripe = 1;
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr == 0)
+        gMain.unk35 = 1;
+    else
+        gMain.unk35 = 0;
+    scriptCtx->scriptPtr++;
+    return 1;
+}
+
+bool32 Command4E(struct ScriptContext *scriptCtx)
+{
+    u32 temp;
+    if(gMain.blendMode == 0 && scriptCtx->textSkip > 1) {
+        scriptCtx->scriptPtr++;
+        scriptCtx->waitTimer = *scriptCtx->scriptPtr;
+        scriptCtx->scriptPtr++;
+        return 0;
+    }
+    if(scriptCtx->waitTimer != 0) {
+        if(scriptCtx->unk30 != gAnimation[1].animationInfo.personId) {
+            SetAnimationFrameOffset(&gAnimation[1], gMain.idleAnimationOffset);
+            scriptCtx->unk30 = gAnimation[1].animationInfo.personId;
+        }
+        scriptCtx->waitTimer--;
+        if(scriptCtx->waitTimer == 0) {
+            scriptCtx->scriptPtr += 2;
+            scriptCtx->unk30 = 0;
+            return 0;
+        }
+        
+    } else {
+        scriptCtx->scriptPtr++;
+        scriptCtx->waitTimer = *scriptCtx->scriptPtr;
+        scriptCtx->scriptPtr--;
+        scriptCtx->unk30 = 0;
+    }
+
+    return 1;
+}
+
+bool32 Command4F(struct ScriptContext *scriptCtx)
+{
+    struct PsycheLockData * psycheLockData;
+    scriptCtx->scriptPtr++;
+    gMain.unk244 = *scriptCtx->scriptPtr;
+    psycheLockData = &gMain.unk1A4[gMain.unk244];
+    gMain.unk1A4[*scriptCtx->scriptPtr].unk0 |= 1;
+
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr != 0xFFFF)
+        psycheLockData->unk8 = psycheLockData->unk9 = *scriptCtx->scriptPtr;
+
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr != 0xFFFF)
+        psycheLockData->unk6 = *scriptCtx->scriptPtr;
+
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr != 0xFFFF)
+        psycheLockData->unk4 = *scriptCtx->scriptPtr;
+
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr != 0xFFFF)
+        psycheLockData->unkA = *scriptCtx->scriptPtr;
+
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr != 0xFFFF)
+        psycheLockData->unkC = *scriptCtx->scriptPtr;
+
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr != 0xFFFF)
+        psycheLockData->unk12 = *scriptCtx->scriptPtr;
+    
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command50(struct ScriptContext *scriptCtx)
+{
+    struct PsycheLockData * psycheLockData;
+    scriptCtx->scriptPtr++;
+    psycheLockData = &gMain.unk1A4[*scriptCtx->scriptPtr];
+    DmaFill16(3, 0, psycheLockData, sizeof(*psycheLockData));
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command51(struct ScriptContext *scriptCtx)
+{
+    u32 var0, var1;
+    scriptCtx->scriptPtr++;
+    var0 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    var1 = *scriptCtx->scriptPtr;
+    sub_800EAC8(var0, var1);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command52(struct ScriptContext *scriptCtx)
+{
+    u32 temp;
+    scriptCtx->scriptPtr++;
+    temp = *scriptCtx->scriptPtr;
+    gMain.unk24A |= temp;
+    sub_8016E10(1);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command53(struct ScriptContext *scriptCtx)
+{
+    gMain.unk24A = 0;
+    sub_8016E10(2);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command54(struct ScriptContext *scriptCtx)
+{
+    u16 array[2];
+    s32 i;
+    for(i = 0; i < 2; i++) {
+        scriptCtx->scriptPtr++;
+        array[i] = *scriptCtx->scriptPtr;
+    }
+    switch(array[0]) {
+        case 0:
+            sub_8017928(array[1]);
+            break;
+        case 1:
+            gMain.unkA6 = array[1];
+            break;
+        case 2:
+            gMain.unk9C = array[1];
+            break;
+    }
+    scriptCtx->scriptPtr++;
+    return 1;
+}
+
+bool32 Command55(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command56(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command57(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    gMain.unk244 = *scriptCtx->scriptPtr;
+    BACKUP_PROCESS();
+    SET_PROCESS(INVESTIGATION_PROCESS, 10, 9, 0);
+    gMain.unk24B = 1;
+    scriptCtx->scriptPtr++;
+    return 1;
+}
+
+bool32 Command58(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    sub_8016D40();
+    gMain.unk24B = 0;
+    return 0;
+}
+
+bool32 Command59(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    gMain.unk276[gMain.unk286] = gUnknown_03003B70[*scriptCtx->scriptPtr];
+    gMain.unk286++;
     scriptCtx->scriptPtr++;
     return 0;
 }

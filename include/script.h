@@ -40,8 +40,7 @@ struct ScriptContext
     /* +0x2C */ u16 holdItSection;
     /* +0x2E */ u8 holdItFlag;
     /* +0x2F */ u8 unk2F;
-    /* +0x30 */ u8 unk30;
-    /* +0x31 */ u8 unk31;
+    /* +0x30 */ u16 unk30;
     /* +0x32 */ u8 unk32; // unity: rt_wait_timer   
     /* +0x33 */ u8 unk33; // unity: desk_attack
     /* +0x34 */ u8 textboxNameId; // unity: speaker_id
@@ -84,7 +83,7 @@ struct MapMarker
 extern struct ScriptContext gScriptContext;
 extern struct TextBoxCharacter gTextBoxCharacters[0x3F];
 extern struct MapMarker gMapMarker[8];
-extern u8 gUnknown_03003B70[];
+extern u16 gUnknown_03003B70[];
 
 /* begin script data */
 

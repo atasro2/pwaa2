@@ -23,6 +23,8 @@ extern void sub_8010FA4(void);
 
 // new file
 extern void sub_8016C7C(u32);
+extern void sub_8016D40(void);
+extern void sub_8016E10(u32);
 extern bool32 sub_801715C(void);
 extern int sub_80175C0(void);
 extern void sub_80178E0(void);
