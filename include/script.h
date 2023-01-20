@@ -71,7 +71,7 @@ struct MapMarker
     /* +0x02 */ u8 blinkTimer;
     /* +0x03 */ u8 speed;
     /* +0x04 */ u8 direction;
-    /* +0x05 */ u8 unk5; // status
+    /* +0x05 */ u8 flags;
     /* +0x06 */ u8 distanceToMove;
     /* +0x07 */ u8 distanceMoved;
     /* +0x08 */ u16 attr0;

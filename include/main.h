@@ -78,7 +78,9 @@ struct Main
     /* +0x08E */ s8 itemPlateSize;
     /* +0x08F */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
     /* +0x090 */ u8 itemPlateAction;
-    u8 filler91[0x96 - 0x91];
+    u8 filler91[0x92 - 0x91];
+    /* +0x092 */ u16 affineScale; // used for the scale of oam sprites in court record, deliver judgement, episode unlocked
+    u8 filler94[0x96 - 0x94];
     /* +0x096 */ u8 unk96; // unity: gauge_rno_0
     /* +0x097 */ u8 unk97; // unity: gauge_rno_1
     /* +0x098 */ s16 unk98; // unity: gauge_hp

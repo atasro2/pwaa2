@@ -11,9 +11,11 @@
 #include "court_record.h"
 #include "graphics.h"
 #include "court.h"
+#include "save.h"
 #include "constants/bg.h"
 #include "constants/script.h"
 #include "constants/songs.h"
+#include "constants/process.h"
 /**
 const u8 gTextboxDownArrowTileIndexes[] = {
     0x20, 0x22, 0x24, 0x26, 0x24, 0x22,
@@ -709,7 +711,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             {
                 DestroyAnimation(&gAnimation[1]);
                 gInvestigation.personActive = 0;
-                sub_800EB24(&gInvestigation, 15);
+                SetInactiveActionButtons(&gInvestigation, 15);
             }
             SlideTextbox(1);
             break;
@@ -718,7 +720,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             {
                 DestroyAnimation(&gAnimation[1]);
                 gInvestigation.personActive = 0;
-                sub_800EB24(&gInvestigation, 15);
+                SetInactiveActionButtons(&gInvestigation, 15);
             }
             SlideTextbox(0);
             if(gMain.process[GAME_PROCESS] == 4)
@@ -726,26 +728,26 @@ u32 Command1C(struct ScriptContext * scriptCtx)
                 gInvestigation.selectedActionYOffset = 0;
                 if(gMain.process[GAME_PROCESS_STATE] == 6)
                 {
-                    sub_800EB24(&gInvestigation, 1);
+                    SetInactiveActionButtons(&gInvestigation, 1);
                 }
                 if(gMain.process[GAME_PROCESS_STATE] == 8)
                 {
-                    sub_800EB24(&gInvestigation, 4);
+                    SetInactiveActionButtons(&gInvestigation, 4);
                     gInvestigation.actionState = 4;
                 }
                 if(gMain.process[GAME_PROCESS_STATE] == 9)
                 {
-                    sub_800EB24(&gInvestigation, 8);
+                    SetInactiveActionButtons(&gInvestigation, 8);
                 }
             }
             break;
         case 6:
             gInvestigation.selectedActionYOffset = 0;
             if(gMain.process[GAME_PROCESS_STATE] == 6)
-                sub_800EB24(&gInvestigation, 1);
+                SetInactiveActionButtons(&gInvestigation, 1);
             if(gMain.process[GAME_PROCESS_STATE] == 8)
             {
-                sub_800EB24(&gInvestigation, 4);
+                SetInactiveActionButtons(&gInvestigation, 4);
                 gInvestigation.actionState = 4;
                 gMain.advanceScriptContext = FALSE;
                 gMain.showTextboxCharacters = FALSE;
@@ -753,7 +755,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
                 break;
             }
             if(gMain.process[GAME_PROCESS_STATE] == 9)
-                sub_800EB24(&gInvestigation, 8);
+                SetInactiveActionButtons(&gInvestigation, 8);
             gMain.advanceScriptContext = FALSE;
             gMain.showTextboxCharacters = FALSE;
             scriptCtx->textboxState = 4;
@@ -825,13 +827,13 @@ u32 Command1E(struct ScriptContext * scriptCtx)
     {
         PlayPersonAnimation(var0, 0, var1, 0);
         gInvestigation.personActive = 1;
-        sub_800EB24(&gInvestigation, 15);
+        SetInactiveActionButtons(&gInvestigation, 15);
     }
     else
     {
         DestroyAnimation(&gAnimation[1]);
         gInvestigation.personActive = 0;
-        sub_800EB24(&gInvestigation, 15);
+        SetInactiveActionButtons(&gInvestigation, 15);
     }
     return 0;
 }
@@ -991,6 +993,823 @@ bool32 Command29(struct ScriptContext *scriptCtx)
     else
     {
         SET_PROCESS(3, 1, 0, 0); // goes back into trial process
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command2A(struct ScriptContext *scriptCtx)
+{
+    u32 nextSection;
+    scriptCtx->scriptPtr++;
+    if (GetFlag(0, *scriptCtx->scriptPtr))
+    {
+        nextSection = *(scriptCtx->scriptPtr + 1);
+    }
+    else
+    {
+        nextSection = *(scriptCtx->scriptPtr + 2);
+    }
+    scriptCtx->nextSection = nextSection;
+    scriptCtx->scriptPtr += 3;
+    return 0;
+}
+
+bool32 Command2B(struct ScriptContext *scriptCtx) // nullsubbed take damage command 
+{
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command2C(struct ScriptContext *scriptCtx)
+{
+    u32 i;
+    scriptCtx->scriptPtr++;
+    scriptCtx->nextSection = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    scriptCtx->textX = 0;
+    scriptCtx->textY = 0;
+    for (i = 0; i < ARRAY_COUNT(gTextBoxCharacters); i++)
+    {
+        gTextBoxCharacters[i].state &= ~0x8000;
+    }
+    if(gBG1MapBuffer[622] != 9 && gBG1MapBuffer[622] != 0)
+        gBG1MapBuffer[622] = 9; // clear downward arrow in text box
+    if(gBG1MapBuffer[623] != 9 && gBG1MapBuffer[623] != 0)
+        gBG1MapBuffer[623] = 9; // clear downward arrow in text box
+    SetAnimationFrameOffset(&gAnimation[1], gMain.idleAnimationOffset);
+    return 0;
+}
+
+bool32 Command2E(struct ScriptContext *scriptCtx)
+{
+    u32 i;
+    scriptCtx->flags &= ~(0x2 | 0x1);
+    scriptCtx->scriptPtr++;
+    scriptCtx->textX = 0;
+    scriptCtx->textY = 0;
+    scriptCtx->textboxDownArrowIndex = 0;
+    scriptCtx->textboxDownArrowDelayCounter = 0;
+    for (i = 0; i < ARRAY_COUNT(gTextBoxCharacters); i++)
+    {
+        gTextBoxCharacters[i].state &= ~0x8000;
+    }
+    if(gBG1MapBuffer[622] != 9 && gBG1MapBuffer[622] != 0)
+        gBG1MapBuffer[622] = 9; // clear downward arrow in text box
+    if(gBG1MapBuffer[623] != 9 && gBG1MapBuffer[623] != 0)
+        gBG1MapBuffer[623] = 9; // clear downward arrow in text box
+    return 1;
+}
+
+bool32 Command2F(struct ScriptContext *scriptCtx)
+{
+    u32 temp;
+    scriptCtx->scriptPtr++;
+    temp = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    if (*scriptCtx->scriptPtr)
+        PlayAnimation(temp);
+    else
+        DestroyAnimation(FindAnimationFromAnimId(temp));
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command30(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    scriptCtx->currentSoundCue = *scriptCtx->scriptPtr;
+    if (scriptCtx->currentSoundCue == 2)
+    {
+        scriptCtx->soundCueSkip = 0;
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command31(struct ScriptContext *scriptCtx)
+{
+    u32 flags, blendDelay;
+    scriptCtx->scriptPtr++;
+    flags = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    blendDelay = *scriptCtx->scriptPtr;
+    StartAnimationBlend(flags, blendDelay);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command32(struct ScriptContext *scriptCtx)
+{
+    u32 location, bgId;
+    scriptCtx->scriptPtr++;
+    location = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    bgId = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    gMain.roomData[location][0] = bgId;
+    return 0;
+}
+
+bool32 Command33(struct ScriptContext *scriptCtx)
+{
+    u32 startingLocation;
+
+    scriptCtx->scriptPtr++;
+    startingLocation = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    gMain.roomData[startingLocation][1] = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    gMain.roomData[startingLocation][2] = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    gMain.roomData[startingLocation][3] = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    gMain.roomData[startingLocation][4] = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command34(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    gMain.currentRoomId = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    StartHardwareBlend(2, 0, 2, 0x1F);
+    SET_PROCESS(INVESTIGATION_PROCESS, INVESTIGATION_ROOM_INIT, 0, 0);
+    return 0;
+}
+
+bool32 Command35(struct ScriptContext *scriptCtx)
+{
+    u32 offset;
+    u32 flag;
+    u32 temp;
+    u16 *jmpArgs;
+
+    scriptCtx->scriptPtr++;
+    flag = *scriptCtx->scriptPtr >> 8;
+
+    if (*scriptCtx->scriptPtr & 1)
+    {
+        if (!GetFlag(0, flag))
+        {
+            scriptCtx->scriptPtr += 2;
+            return 0;
+        }
+    }
+    else
+    {
+        if (GetFlag(0, flag))
+        {
+            scriptCtx->scriptPtr += 2;
+            return 0;
+        }
+    }
+    if (*scriptCtx->scriptPtr & 0x80)
+    {
+        u32 *heapPtr;
+        scriptCtx->scriptPtr++;
+        temp = *scriptCtx->scriptPtr;
+        scriptCtx->scriptPtr++;
+        heapPtr = eScriptHeap;
+        heapPtr += temp + 1;
+        jmpArgs = (u16 *)heapPtr;
+        offset = jmpArgs[0] / 2;
+        temp = jmpArgs[1];
+        sub_8007CCC(&gMain, scriptCtx->currentSection);
+        gScriptContext.textSkip = 0; // ! INCONFUCKINGSISTENT USE OF POINTERS AND GLOBALS
+        scriptCtx->currentSection = temp + 0x80;
+        heapPtr = eScriptHeap;
+        heapPtr += temp + 1;
+        scriptCtx->scriptSectionPtr = eScriptHeap + *heapPtr;
+        scriptCtx->scriptPtr = scriptCtx->scriptSectionPtr + offset;
+    }
+    else
+    {
+        scriptCtx->scriptPtr++;
+        temp = *scriptCtx->scriptPtr / 2;
+        scriptCtx->scriptPtr = scriptCtx->scriptSectionPtr + temp;
+    }
+    return 0;
+}
+
+bool32 Command36(struct ScriptContext *scriptCtx)
+{
+    u32 idx;
+    u32 offset;
+    u32 *heapPtr;
+    u16 *ptr;
+    scriptCtx->scriptPtr++;
+    idx = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    heapPtr = eScriptHeap;
+    ptr = (u16 *)(heapPtr + idx + 1);
+    offset = ptr[0] / 2;
+    idx = ptr[1];
+    sub_8007CCC(&gMain, scriptCtx->currentSection);
+    gScriptContext.textSkip = 0; // ! INCONFUCKINGSISTENT USE OF POINTERS AND GLOBALS
+    scriptCtx->currentSection = idx + 0x80;
+    scriptCtx->scriptSectionPtr = eScriptHeap + ((u32 *)eScriptHeap)[idx + 1];
+    scriptCtx->scriptPtr = scriptCtx->scriptSectionPtr + offset;
+    return 0;
+}
+
+bool32 Command37(struct ScriptContext *scriptCtx)
+{
+    u32 temp;
+    scriptCtx->scriptPtr++;
+    temp = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    gTalkData[temp].enableFlag = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command38(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if (*scriptCtx->scriptPtr)
+    {
+        ChangeAnimationActivity(&gAnimation[1], 1);
+    }
+    else
+    {
+        ChangeAnimationActivity(&gAnimation[1], 0);
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+struct MapMarkerSprite
+{
+    /* +0x00 */ u8 *tiles;
+    /* +0x04 */ u16 size;
+    /* +0x06 */ u16 attr0;
+    /* +0x08 */ u16 attr1;
+    /* +0x0A */ u16 attr2;
+};
+
+extern const struct MapMarkerSprite sMapMarkerSprites[];
+
+bool32 Command39(struct ScriptContext *scriptCtx)
+{
+    u32 id;
+    u32 oamIdx;
+    struct MapMarker *mapMarker;
+    struct OamAttrs *oamObject;
+    scriptCtx->scriptPtr++;
+    id = *scriptCtx->scriptPtr >> 8;
+    if (*scriptCtx->scriptPtr & 1)
+    {
+        oamIdx = GetMapMarkerIndexFromId(id);
+        if (oamIdx == 0xFF)
+        {
+            u32 size;
+            oamIdx = GetMapMarkerIndexFromId(0xFF);
+            mapMarker = &gMapMarker[oamIdx];
+            oamIdx += 0x39;
+            mapMarker->id = id;
+            mapMarker->vramPtr = scriptCtx->mapMarkerVramPtr;
+            DmaCopy16(3, sMapMarkerSprites[id].tiles, mapMarker->vramPtr, size = sMapMarkerSprites[id].size); // weird shit going on here
+            DmaCopy16(3, gUnknown_08231BE8, OBJ_PLTT + 0xC0, 0x20);
+            mapMarker->oamIdx = oamIdx;
+            oamObject = &gOamObjects[oamIdx];
+
+            oamObject->attr0 = sMapMarkerSprites[id].attr0;
+            mapMarker->attr0 = oamObject->attr0;
+
+            oamObject->attr1 = sMapMarkerSprites[id].attr1;
+            mapMarker->attr1 = oamObject->attr1;
+
+            oamIdx = ((uintptr_t)mapMarker->vramPtr - ((uintptr_t)OBJ_VRAM0 + 0x1800));
+            oamIdx /= 32;
+            oamObject->attr2 = SPRITE_ATTR2(oamIdx + 0xC0, 2, 6);
+            mapMarker->attr2 = oamObject->attr2;
+
+            scriptCtx->mapMarkerVramPtr += size;
+        }
+        else
+        {
+            mapMarker = &gMapMarker[oamIdx];
+            oamObject = &gOamObjects[mapMarker->oamIdx];
+            oamObject->attr0 = mapMarker->attr0;
+            oamObject->attr1 = mapMarker->attr1;
+            oamObject->attr2 = mapMarker->attr2;
+            mapMarker->flags &= ~0x4;
+        }
+    }
+    else
+    {
+        // TODO: BUGFIX
+        // ! Capcom forgot to check for 0xFF here.
+        oamIdx = GetMapMarkerIndexFromId(id);
+        gMapMarker[oamIdx].flags |= 4;
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command3A(struct ScriptContext *scriptCtx)
+{
+    u32 oamIdx;
+    scriptCtx->scriptPtr++;
+    oamIdx = GetMapMarkerIndexFromId(*scriptCtx->scriptPtr >> 8);
+    if (oamIdx != 0xFF)
+    {
+        scriptCtx->scriptPtr++;
+        gMapMarker[oamIdx].attr0 &= ~0xFF;
+        gMapMarker[oamIdx].attr0 |= (u8)*scriptCtx->scriptPtr;
+        gMapMarker[oamIdx].attr1 &= ~0x1FF;
+        gMapMarker[oamIdx].attr1 |= (u8)(*scriptCtx->scriptPtr >> 8);
+        scriptCtx->scriptPtr++;
+    }
+    else
+    {
+        scriptCtx->scriptPtr++;
+        scriptCtx->scriptPtr++;
+    }
+    return 0;
+}
+
+bool32 Command3B(struct ScriptContext *scriptCtx)
+{
+    u32 oamIdx;
+    scriptCtx->scriptPtr++;
+    oamIdx = GetMapMarkerIndexFromId(*scriptCtx->scriptPtr >> 8);
+    if (oamIdx != 0xFF)
+    {
+        gMapMarker[oamIdx].direction = (u8)*scriptCtx->scriptPtr & 3;
+        scriptCtx->scriptPtr++;
+        gMapMarker[oamIdx].speed = (u8)(*scriptCtx->scriptPtr >> 8);
+        gMapMarker[oamIdx].distanceToMove = (u8)*scriptCtx->scriptPtr;
+        scriptCtx->scriptPtr++;
+        gMapMarker[oamIdx].flags |= 2;
+        gMapMarker[oamIdx].distanceMoved = 0;
+    }
+    else
+    {
+        scriptCtx->scriptPtr++;
+        scriptCtx->scriptPtr++;
+    }
+    return 0;
+}
+
+bool32 Command3C(struct ScriptContext *scriptCtx)
+{
+    u32 oamIdx;
+    scriptCtx->scriptPtr++;
+    oamIdx = GetMapMarkerIndexFromId(*scriptCtx->scriptPtr >> 8);
+    if (oamIdx != 0xFF)
+    {
+        gMapMarker[oamIdx].isBlinking = *scriptCtx->scriptPtr;
+        if (!(*scriptCtx->scriptPtr & 1))
+        {
+            gOamObjects[oamIdx + 0x39].attr1 = gMapMarker[oamIdx].attr1;
+        }
+    }
+    gMapMarker[oamIdx].blinkTimer = 0;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command3D(struct ScriptContext *scriptCtx)
+{
+    u32 oamIdx;
+    scriptCtx->scriptPtr++;
+    oamIdx = GetMapMarkerIndexFromId(*scriptCtx->scriptPtr >> 8);
+    if (oamIdx != 0xFF)
+    {
+        if (gMapMarker[oamIdx].flags & 2)
+        {
+            scriptCtx->scriptPtr--;
+            return 1;
+        }
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command3E(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x1F80, 0x80);
+    DmaCopy16(3, &gUnknown_0814DC60[0], OBJ_PLTT + 0x100, 0x20);
+    gInvestigation.pointerX = 0xF0;
+    gInvestigation.pointerY = 0x30;
+    gInvestigation.pointerColorCounter = 0;
+    gInvestigation.pointerColor = 8;
+    gInvestigation.spotselectStartCounter = 0xF;
+    gInvestigation.spotselectId = *scriptCtx->scriptPtr;
+    scriptCtx->flags |= (SCRIPT_SPOTSELECT_MOVE_TO_START | SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+struct SpotSelectData
+{
+    /* +0x00 */ struct Point4 firstArea;
+    /* +0x10 */ struct Point4 secondArea;
+    /* +0x20 */ u16 firstAreaSection;
+    /* +0x22 */ u16 secondAreaSection;
+    /* +0x24 */ u16 defaultSection;
+    /* +0x26 */ u16 unk26; // Unused, called a dummy in unity
+    /* +0x28 */ u8 left;
+    /* +0x29 */ u8 top;
+    /* +0x2A */ u8 right;
+    /* +0x2B */ u8 bottom;
+};
+
+extern const struct SpotSelectData gSpotSelectData[];
+
+bool32 Command3F(struct ScriptContext *scriptCtx)
+{
+    struct InvestigationStruct *investigation = &gInvestigation;
+    const struct SpotSelectData *spotselect;
+    struct Rect rect;
+
+    if (scriptCtx->flags & SCRIPT_SPOTSELECT_MOVE_TO_START)
+    {
+        investigation->pointerX += investigation->spotselectStartCounter;
+        investigation->pointerX &= 0xFF;
+        investigation->spotselectStartCounter--;
+        if (investigation->spotselectStartCounter == 0)
+        {
+            scriptCtx->flags &= ~SCRIPT_SPOTSELECT_MOVE_TO_START;
+            scriptCtx->flags |= (SCRIPT_SPOTSELECT_INPUT | SCRIPT_LOOP);
+        }
+        if (scriptCtx->flags & SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND)
+        {
+            PlaySE(SE007_MENU_OPEN_SUBMENU);
+            scriptCtx->flags &= ~SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND;
+        }
+    }
+    else if (scriptCtx->flags & SCRIPT_SPOTSELECT_INPUT)
+    {
+        spotselect = &gSpotSelectData[investigation->spotselectId];
+        if (gJoypad.heldKeys & DPAD_LEFT)
+        {
+            investigation->pointerX -= 3;
+            if (investigation->pointerX < spotselect->left)
+                investigation->pointerX = spotselect->left;
+            if (investigation->pointerX > DISPLAY_WIDTH - 16)
+                investigation->pointerX = 0;
+        }
+        if (gJoypad.heldKeys & DPAD_RIGHT)
+        {
+            investigation->pointerX += 3;
+            if (investigation->pointerX > spotselect->right)
+                investigation->pointerX = spotselect->right;
+            if (investigation->pointerX > DISPLAY_WIDTH - 16)
+                investigation->pointerX = DISPLAY_WIDTH - 16;
+        }
+        if (gJoypad.heldKeys & DPAD_UP)
+        {
+            investigation->pointerY -= 3;
+            if (investigation->pointerY < spotselect->top)
+                investigation->pointerY = spotselect->top;
+            if (investigation->pointerY > DISPLAY_HEIGHT - 16)
+                investigation->pointerY = 0;
+        }
+        if (gJoypad.heldKeys & DPAD_DOWN)
+        {
+            investigation->pointerY += 3;
+            if (investigation->pointerY > spotselect->bottom)
+                investigation->pointerY = spotselect->bottom;
+            if (investigation->pointerY > DISPLAY_HEIGHT - 16)
+                investigation->pointerY = DISPLAY_HEIGHT - 16;
+        }
+        if (gJoypad.pressedKeys & A_BUTTON)
+        {
+            scriptCtx->flags &= ~(SCRIPT_SPOTSELECT_INPUT | SCRIPT_LOOP);
+            rect.x = gMain.Bg256_pos_x + investigation->pointerX + 12;
+            rect.y = gMain.Bg256_pos_y + investigation->pointerY;
+            rect.w = 4;
+            rect.h = 4;
+            if (CheckRectCollisionWithArea(&rect, &spotselect->firstArea))
+                ChangeScriptSection(spotselect->firstAreaSection);
+            else if (CheckRectCollisionWithArea(&rect, &spotselect->secondArea))
+                ChangeScriptSection(spotselect->secondAreaSection);
+            else
+                ChangeScriptSection(spotselect->defaultSection);
+            scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
+            DmaCopy16(3, &gUnknown_0814DC60[0], OBJ_PLTT + 0x100, 0x20);
+            PlaySE(SE001_MENU_CONFIRM);
+            scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
+            gOamObjects[88].attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+            gOamObjects[88].attr1 = SPRITE_ATTR1_NONAFFINE(investigation->pointerX, FALSE, FALSE, 1);
+            gOamObjects[88].attr2 = SPRITE_ATTR2(0xFC, 1, 8);
+            return 0;
+        }
+        investigation->pointerColorCounter++;
+        if (investigation->pointerColorCounter > 1)
+        {
+            investigation->pointerColorCounter = 0;
+            investigation->pointerColor++;
+            investigation->pointerColor &= 0xF;
+            DmaCopy16(3, &gUnknown_0814DC60[investigation->pointerColor * 0x20], OBJ_PLTT + 0x100, 0x20);
+        }
+    }
+    scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
+    gOamObjects[88].attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    gOamObjects[88].attr1 = SPRITE_ATTR1_NONAFFINE(investigation->pointerX, FALSE, FALSE, 1);
+    gOamObjects[88].attr2 = SPRITE_ATTR2(0xFC, 1, 8);
+    return 1;
+}
+
+void MakeMapMarkerSprites()
+{
+    u32 i = 0;
+    u32 id;
+    struct MapMarker *mapMarker;
+    struct OamAttrs *oam;
+    for (i = 0; i < 8; i++)
+    {
+        if (gMapMarker[i].id == 0xFF)
+            continue;
+
+        id = gMapMarker[i].id;
+        DmaCopy16(3, sMapMarkerSprites[id].tiles, (gMapMarker + i)->vramPtr, sMapMarkerSprites[id].size);
+        mapMarker = &gMapMarker[i];
+        if (!(mapMarker->flags & 4))
+        {
+            oam = &gOamObjects[mapMarker->oamIdx];
+            oam->attr0 = mapMarker->attr0;
+            oam->attr1 = mapMarker->attr1;
+            oam->attr2 = mapMarker->attr2;
+        }
+
+        if (mapMarker->id)
+            ; // needed for matching wtf
+    }
+}
+
+u32 GetMapMarkerIndexFromId(u32 id) // GetExplCharWorkIndexById
+{
+    u32 i = 0;
+    do
+    {
+        if (gMapMarker[i].id == id)
+            return i;
+        i++;
+    } while (i < ARRAY_COUNT(gMapMarker));
+    return 0xFF;
+}
+
+bool32 Command40(struct ScriptContext * scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    scriptCtx->flags &= ~SCRIPT_SPOTSELECT_SELECTION_MADE;
+    gOamObjects[88].attr0 = SPRITE_ATTR0_CLEAR;
+    return 0;
+}
+
+bool32 Command41(struct ScriptContext * scriptCtx)
+{
+    u32 i;
+    struct OamAttrs *oam;
+    scriptCtx->scriptPtr++;
+    // this has to be outside of the loop, else the load order breaks...
+    oam = &gOamObjects[52];
+    for(i = 0; i < 4; i++)
+    {
+        oam->attr0 = SPRITE_ATTR0((-32 & 255), ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+	// 64x32 sprite size
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(60*i, 0, 0, 3);
+        oam->attr2 = SPRITE_ATTR2(0x100+0x20*i, 0, 5);
+        oam++;
+    }
+    SetInactiveActionButtons(&gInvestigation, 0xF);
+    gInvestigation.inactiveActionButtonY = 0xE0;
+    gInvestigation.selectedActionYOffset = 0;
+    gInvestigation.lastActionYOffset = 8;
+    gInvestigation.selectedAction = 0;
+    gInvestigation.lastAction = 0;
+    
+    SET_PROCESS(INVESTIGATION_PROCESS,INVESTIGATION_MAIN,0,0);
+    return 0;
+}
+
+bool32 Command42(struct ScriptContext * scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr)
+    {
+        gMain.soundFlags &= ~SOUND_FLAG_DISABLE_CUE;
+    }
+    else
+    {
+        gMain.soundFlags |= SOUND_FLAG_DISABLE_CUE;
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command43(struct ScriptContext * scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr)
+        sub_8017928(1);
+    else
+        sub_8017928(2);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command44(struct ScriptContext * scriptCtx)
+{
+    u32 i;
+    struct OamAttrs *oam;
+    oam = &gOamObjects[49];
+    scriptCtx->scriptPtr++;
+    gMain.affineScale = 0x280;
+    BACKUP_PROCESS();
+    if(*scriptCtx->scriptPtr) 
+    {
+        DmaCopy16(3, gUnknown_081438DC, OBJ_VRAM0+0x3400, 0x1000);
+        DmaCopy16(3, gUnknown_0814DEC0, OBJ_PLTT+0xA0, 0x20);
+        SET_PROCESS(VERDICT_PROCESS,0,0,0);
+    }
+    else 
+    {
+        DmaCopy16(3, gUnknown_081430DC, OBJ_VRAM0+0x3400, 0x800);
+        DmaCopy16(3, gUnknown_081440DC, OBJ_VRAM0+0x3C00, 0x800);
+        DmaCopy16(3, gUnknown_0814DEE0, OBJ_PLTT+0xA0, 0x20);
+        SET_PROCESS(VERDICT_PROCESS,0,0,1);
+    }
+    scriptCtx->scriptPtr++;
+    oam->attr0 = SPRITE_ATTR0((~16 & 255), ST_OAM_AFFINE_DOUBLE, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_AFFINE((~16 & 511), 0, 3);
+    oam->attr2 = SPRITE_ATTR2(0x1A0, 0, 5);
+    oam++;
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    return 0;
+}
+
+bool32 Command46(struct ScriptContext * scriptCtx)
+{
+    s32 i, j;
+    u8 *r6;
+    u16 *r3;
+    u32 flag;
+    s32 id;
+    s32 xOffset;
+    scriptCtx->scriptPtr++;
+    flag = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    id = flag & 0xF;
+    switch(id)
+    {
+        default:
+        case 0:
+            gMain.horizontolBGScrollSpeed = 14;
+            r6 = gUnknown_08263FD4;
+            r3 = (u16 *)gUnknown_08263FF4;
+            break;
+        case 1:
+            gMain.horizontolBGScrollSpeed = -14;
+            r6 = gUnknown_08265CC4;
+            r3 = (u16 *)gUnknown_08265CE4;
+            break;
+        case 2:
+            gMain.horizontolBGScrollSpeed = -14;
+            r6 = gUnknown_08277A98;
+            r3 = (u16 *)gUnknown_08277AB8;
+            break;
+    }
+    xOffset = 0;
+    if(flag & 0x10) {
+        gMain.horizontolBGScrollSpeed = 0;
+        switch(id)
+        {
+            case 0:
+                xOffset = 0x30;
+                break;
+            case 1:
+                xOffset = -0x28;
+                break;
+            case 2:
+                xOffset = -0x28;
+                break;
+        }
+        SetAnimationOriginCoords(&gAnimation[1], gAnimation[1].animationInfo.xOrigin - xOffset, gAnimation[1].animationInfo.yOrigin);
+    }
+    for(i = 0; i < 0x400; i++) {
+        gBG2MapBuffer[i] = 0xE080;
+    }
+    for(i = 0; i < 20; i++) 
+    {
+        for(j = 0; j < 30; j++, r3++) 
+        {
+            u32 x = j - xOffset / 8;
+            if(x <= 30)
+                gBG2MapBuffer[i * 32 + 1 + x] = *r3 + 0x80;
+        }
+    }
+    r6 += 32 + 20*30*2;
+    DmaCopy16(3, r6, eUnknown_0203B500, 30*20*TILE_SIZE_4BPP);
+    gIORegisters.lcd_dispcnt |= DISPCNT_BG2_ON;
+    gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
+    if(flag & 0x20)
+        gIORegisters.lcd_dispcnt &= ~DISPCNT_BG3_ON;
+    scriptCtx->flags |= 0x40;
+    return 0;
+}
+
+bool32 Command47(struct ScriptContext *scriptCtx)
+{
+    u16 volume, fadeTime;
+    scriptCtx->scriptPtr++;
+    volume = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    fadeTime = *scriptCtx->scriptPtr;
+    SetBGMVolume(volume, fadeTime);
+
+    scriptCtx->scriptPtr++;
+
+    return 0;
+}
+
+bool32 Command48(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr == 0xFFFF) 
+    {
+        gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
+        scriptCtx->textXOffset = 9;
+        scriptCtx->textYOffset = DISPLAY_HEIGHT-44;
+        scriptCtx->scriptPtr+=2;
+    }
+    else 
+    {
+        gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
+        scriptCtx->textXOffset = *scriptCtx->scriptPtr;
+        scriptCtx->scriptPtr++;
+        scriptCtx->textYOffset = *scriptCtx->scriptPtr;
+        scriptCtx->scriptPtr++;
+    }
+
+    return 0;
+}
+
+bool32 Command49(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    gMain.advanceScriptContext = FALSE;
+    gMain.showTextboxCharacters = FALSE;
+    LoadSaveData();
+    gSaveDataBuffer.main.caseEnabledFlags |= 0x80;
+    SaveGameData();
+    SET_PROCESS(TITLE_SCREEN_PROCESS, 0, 0, 0);
+    return 0;
+}
+
+bool32 Command4A(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr) 
+    {
+        if(gMain.process[GAME_PROCESS_STATE] == VERDICT_NOTGUILTY_EXIT) 
+        {
+            scriptCtx->scriptPtr++;
+            return 0;
+        }
+    }
+    else 
+    {
+        if(gMain.process[GAME_PROCESS_STATE] == VERDICT_DRAW_CONFETTI) 
+        {
+            scriptCtx->scriptPtr++;
+            return 0;
+        }
+    }
+    scriptCtx->scriptPtr--;
+    return 1;
+}
+
+bool32 Command4B(struct ScriptContext *scriptCtx)
+{
+    u32 res;
+    u32 r2;
+    scriptCtx->scriptPtr++;
+    res = GetMapMarkerIndexFromId(*scriptCtx->scriptPtr >> 8);
+    if(res != 0xFF) 
+    {
+        r2 = (*scriptCtx->scriptPtr & 3) << 12;
+        // this clears existing hflip/vflip and sets r2 as new flips
+        // the current macros dont allow easily setting this
+        gMapMarker[res].attr1 = (gMapMarker[res].attr1 & 0xCFFF) + r2;
+    }
+    gMapMarker[res].blinkTimer = 0;
+    scriptCtx->scriptPtr++;
+
+    return 0;
+}
+
+bool32 Command4C(struct ScriptContext *scriptCtx)
+{
+    if(gMain.isBGScrolling) 
+    {
+        return 1;
     }
     scriptCtx->scriptPtr++;
     return 0;

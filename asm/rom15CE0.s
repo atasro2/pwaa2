@@ -426,7 +426,7 @@ _08018494:
 	bgt _080184A6
 	mov r0, sp
 	adds r1, r4, #0
-	bl sub_8014508
+	bl CheckRectCollisionWithArea
 	cmp r0, #0
 	beq _08018490
 	adds r7, r5, #0

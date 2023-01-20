@@ -456,8 +456,8 @@ _08014132:
 	.align 2, 0
 _08014134: .4byte 0xFFEFFFFF
 
-	thumb_func_start sub_8014138
-sub_8014138: @ 0x08014138
+	thumb_func_start ChangeAnimationActivity
+ChangeAnimationActivity: @ 0x08014138
 	push {r4, lr}
 	adds r3, r0, #0
 	cmp r3, #0
@@ -987,8 +987,8 @@ _080144F6:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_8014508
-sub_8014508: @ 0x08014508
+	thumb_func_start CheckRectCollisionWithArea
+CheckRectCollisionWithArea: @ 0x08014508
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -2060,8 +2060,8 @@ _08014D04: .4byte gAnimation
 _08014D08: .4byte gOamObjects
 _08014D0C: .4byte 0x000001FF
 
-	thumb_func_start sub_8014D10
-sub_8014D10: @ 0x08014D10
+	thumb_func_start StartAnimationBlend
+StartAnimationBlend: @ 0x08014D10
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -2290,12 +2290,12 @@ _08014E7A:
 	beq _08014EF8
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_8014138
+	bl ChangeAnimationActivity
 	cmp r6, #0
 	beq _08014F54
 	adds r0, r6, #0
 	movs r1, #0
-	bl sub_8014138
+	bl ChangeAnimationActivity
 	b _08014F54
 	.align 2, 0
 _08014EEC: .4byte 0x00001942
@@ -3284,7 +3284,7 @@ _08015634:
 	bne _080156BE
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_8014138
+	bl ChangeAnimationActivity
 	b _08015858
 	.align 2, 0
 _08015668: .4byte gMain
@@ -3309,7 +3309,7 @@ _08015678:
 	bl PlayAnimation
 	adds r0, r4, #0
 	movs r1, #1
-	bl sub_8014138
+	bl ChangeAnimationActivity
 _080156A0:
 	ldrh r2, [r7, #0x30]
 	cmp r2, #0x7f
@@ -3381,7 +3381,7 @@ _080156E6:
 _08015722:
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_8014138
+	bl ChangeAnimationActivity
 	b _0801574A
 	.align 2, 0
 _0801572C: .4byte gAnimation
@@ -3392,12 +3392,12 @@ _08015730:
 	beq _0801574A
 	adds r0, r4, #0
 	movs r1, #1
-	bl sub_8014138
+	bl ChangeAnimationActivity
 	b _0801574A
 _08015742:
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_8014138
+	bl ChangeAnimationActivity
 _0801574A:
 	ldrh r0, [r4, #0xc]
 	cmp r0, #0x7d

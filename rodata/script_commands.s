@@ -12,10 +12,10 @@ gCourtScrollGfxPointers:
 gTextboxDownArrowTileIndexes:
     .incbin "baserom.gba", 0x00022C98, 0x8
 
-    .global gUnknown_08022CA0
-gUnknown_08022CA0:
+    .global sMapMarkerSprites
+sMapMarkerSprites:
     .incbin "baserom.gba", 0x00022CA0, 0x6C
 
-    .global gUnknown_08022D0C
-gUnknown_08022D0C:
+    .global gSpotSelectData
+gSpotSelectData:
     .incbin "baserom.gba", 0x00022D0C, 0x160

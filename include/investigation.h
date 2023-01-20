@@ -25,19 +25,24 @@ struct ExaminationData
 
 struct InvestigationStruct // unity: tantei_work_
 {
-    /* +0x00 */ u16 unk0; // unity AA4: finger_pos_x
-    /* +0x02 */ u16 unk2; // unity AA4: finger_pos_y
+    /* +0x00 */ u16 pointerX; // unity AA4: finger_pos_x
+    /* +0x02 */ u16 pointerY; // unity AA4: finger_pos_y
     /* +0x04 */ u8 filler04[0x2];
     /* +0x06 */ u8 personActive;
     /* +0x07 */ u8 unk7;
-    /* +0x08 */ u8 filler08[0x3];
+    /* +0x08 */ u8 filler08[0x1];
+    /* +0x08 */ u8 spotselectStartCounter; // unity AA4: finger_speed_x
+    /* +0x0A */ u8 spotselectId; // unity: siteki_no // 指摘 pointed out
     /* +0x0B */ u8 unkB;
-    /* +0x0C */ u8 selectedAction;
-    /* +0x0D */ u8 lastAction;
-    /* +0x0E */ u8 actionState;
-    /* +0x0F */ u8 unkF;
-    /* +0x10 */ u8 selectedActionYOffset;
-    /* +0x11 */ u8 filler11[0x8];
+    /* +0x0C */ u8 selectedAction; // unity: menu // selected investigation button, why menu?
+    /* +0x0D */ u8 lastAction; // unity AA4: menu_old
+    /* +0x0E */ u8 actionState; // unity AA4: menu_rno
+    /* +0x0F */ u8 inactiveActionButtonY; // unity AA4: menu_pos_y
+    /* +0x10 */ u8 selectedActionYOffset; // unity AA4: menu_add
+    /* +0x11 */ u8 lastActionYOffset; // unity AA4: menu_add_old
+    /* +0x11 */ u8 filler11[0x6];
+    /* +0x18 */ u8 pointerColor; // unity AA4: yubi_col_no
+    /* +0x19 */ u8 pointerColorCounter; // unity AA4: yubi_col_timer
 };
 
 #if 0
@@ -73,7 +78,7 @@ extern struct InvestigationStruct gInvestigation;
 void sub_800EAC8(u32, u32); // room_seq_chg
 /* end data stuff from segments */
 
-void sub_800EB24(struct InvestigationStruct *, u32);
+void SetInactiveActionButtons(struct InvestigationStruct *, u32);
 extern u32 sub_800D5B0(struct InvestigationStruct *);
 void sub_800D674(void);
 void sub_800D6C8(void);
