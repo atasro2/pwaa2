@@ -32,7 +32,8 @@ struct Main
     /* +0x017 */ u8 selectedButton; // unity: Cursol
     /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
-    u8 filler1A[0x20 - 0x1A];
+    u8 filler1A[0x1E - 0x1A];
+    /* +0x020 */ u16 unk1E;
     /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
     /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
     /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now
@@ -114,7 +115,8 @@ struct Main
     u8 unk249;
     u8 unk24A;
     u8 unk24B;
-    u8 filler24C[0x254 - 0x24C];
+    u8 unk24C;
+    u8 filler24C[0x254 - 0x24D];
     /* +0x254 */ u32 soundFlags;
     u8 filler258[0x276 - 0x258];
     u16 unk276[8]; // ! fix size later
@@ -135,7 +137,8 @@ struct Main
     u16 unk2BA;
     u8 unk2BC;
     u8 unk2BD;
-    u8 filler2BE[0x2C0 - 0x2BE];
+    u8 unk2BE;
+    u8 unk2BF;
 }; /* size 0x2C0 */
 
 struct IORegisters
@@ -212,5 +215,6 @@ u32 ReadKeysAndTestResetCombo(void);
 void StartHardwareBlend(u32 mode, u32 delay, u32 deltaY, u32 target);
 void InitCourtScroll(u8 *, u32, u32, u32);
 void ResetGameState(void);
-
+void sub_8000E78(u32, u32, u32);
+void sub_8000EB4(u32, u32, u32);
 #endif//GUARD_MAIN_H

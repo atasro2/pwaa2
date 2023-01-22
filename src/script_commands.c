@@ -2000,3 +2000,332 @@ bool32 Command59(struct ScriptContext *scriptCtx)
     scriptCtx->scriptPtr++;
     return 0;
 }
+
+bool32 Command5A(struct ScriptContext *scriptCtx)
+{
+
+    u16 i, j, k;
+    scriptCtx->scriptPtr++;
+    for(i = 0; i < gMain.unk286; i++) {
+        if(gMain.unk276[i] == gUnknown_03003B70[*scriptCtx->scriptPtr])
+            gMain.unk276[i] = 0;
+    }
+    for(i = 0; i < gMain.unk286; i++) {
+        if(gMain.unk276[i] == 0) {
+            for(j = i+1, k = i; j < gMain.unk286; j++, k++) {
+                gMain.unk276[k] = gMain.unk276[j];
+            }
+        }
+    }
+    gMain.unk286--;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command5B(struct ScriptContext *scriptCtx)
+{
+    u16 var0, var1;
+    scriptCtx->scriptPtr++;
+    var0 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    var1 = *scriptCtx->scriptPtr;
+    sub_8011088(var0, var1);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command5C(struct ScriptContext *scriptCtx)
+{
+    u16 var0, var1, var2;
+    scriptCtx->scriptPtr++;
+    var0 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    var1 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    var2 = *scriptCtx->scriptPtr;
+    sub_8000E78(var0, var1, var2);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command5D(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command5E(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command5F(struct ScriptContext *scriptCtx)
+{
+    u16 var0, var1, var2;
+    scriptCtx->scriptPtr++;
+    var0 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    var1 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    var2 = *scriptCtx->scriptPtr;
+    sub_8000EB4(var0, var1, var2);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command60(struct ScriptContext *scriptCtx)
+{
+    u32 id;
+    struct PsycheLockData * data;
+    
+    scriptCtx->scriptPtr++;
+    data = &gMain.unk1A4[*scriptCtx->scriptPtr];
+    scriptCtx->scriptPtr++;
+    data->unk1C[0] = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    data->unk20[0] = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    data->unk10 = *scriptCtx->scriptPtr;
+
+    data->unk18 = 1;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command61(struct ScriptContext *scriptCtx)
+{
+    u32 id;
+    struct PsycheLockData * data;
+    scriptCtx->scriptPtr++;
+    data = &gMain.unk1A4[*scriptCtx->scriptPtr];
+    scriptCtx->scriptPtr++;
+    data->unk1C[data->unk18] = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    data->unk20[data->unk18] = *scriptCtx->scriptPtr;
+    data->unk18++;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command62(struct ScriptContext *scriptCtx)
+{
+    sub_80161F4();
+    sub_801622C();
+    gMain.currentBG = 0;
+    gMain.unk24B = 2;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command63(struct ScriptContext *scriptCtx)
+{
+    sub_8016204();
+    sub_801622C();
+    gMain.unk24B = 0;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command64(struct ScriptContext *scriptCtx)
+{
+    struct PsycheLockData * data;
+    scriptCtx->scriptPtr++;
+    // ! There was dead code here causing gMain to get loaded as gMain+0x1A4 for the SET_PROCESS
+    data = gMain.unk1A4;
+    if(data->unk0) ;
+    SET_PROCESS(INVESTIGATION_PROCESS, 10, 4, 0);
+    scriptCtx->scriptPtr++;
+    return 1;
+}
+
+bool32 Command65(struct ScriptContext *scriptCtx)
+{
+    s32 var0, var1, var2;
+    scriptCtx->scriptPtr++;
+    var0 = *scriptCtx->scriptPtr;
+    var2 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    var1 = *scriptCtx->scriptPtr;
+    gMain.unk2BE = (var0 << 4) | (var1 & 0xF);
+    switch(var0) {
+        case 0:
+            if(var1 == 1) {
+                sub_800E7B0();
+                sub_800E7EC(0x18, 0x80, 1);
+            } else {
+                sub_800E7EC(0x18, 0x80, 0);
+            }
+            break;
+        case 1:
+            if(var1 == 1) {
+                sub_800E8C4();
+                sub_800E900(0, 0x80, 1);
+            } else {
+                sub_800E900(0, 0, 0);
+            }
+            break;
+        case 2:
+            if(var2 != 2) break;
+            if(var1 == 1) {
+                sub_800E8C4();
+                sub_800E9D4(0x20, 0x80, 1);
+            } else {
+                sub_800E900(0, 0, 0);
+            }
+            break;
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command66(struct ScriptContext *scriptCtx)
+{
+    struct PsycheLockData * data;
+    scriptCtx->scriptPtr++;
+    gMain.unk244 = *scriptCtx->scriptPtr;
+    data = &gMain.unk1A4[gMain.unk244];
+    scriptCtx->scriptPtr++;
+    data->unk14 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    data->unk16 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command67(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    LoadCurrentScriptIntoRam();
+    return 0;
+}
+
+bool32 Command68(struct ScriptContext *scriptCtx)
+{
+    gAnimation[1].flags |= 0x400;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command69(struct ScriptContext *scriptCtx)
+{
+    if(gInvestigation.pointerX == 0) {
+        sub_801816C();
+        return 1;
+    } else if((s16)gInvestigation.pointerX >= 0) { // TODO: look further into the type for this
+        sub_8018138();
+        if(gInvestigation.pointerX > 32)
+            return 1;
+        gInvestigation.pointerX = SHRT_MIN;
+        return 1;
+    }
+    sub_801823C();
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command6A(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr == 1)
+        sub_80180B4();
+    else if(*scriptCtx->scriptPtr == 0)
+        sub_80180F8();
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command6B(struct ScriptContext *scriptCtx)
+{
+    sub_8017F2C();
+    scriptCtx->scriptPtr+=2;
+    return 0;
+}
+
+bool32 Command6C(struct ScriptContext *scriptCtx)
+{
+    gCourtRecord.windowScrollSpeed = 0;
+    gCourtRecord.windowX = 0x110;
+    gCourtRecord.windowMode = 0;
+    gCourtRecord.flags &= ~4;
+    gCourtRecord.flags |= 0x20;
+    BACKUP_PROCESS();
+    SET_PROCESS(COURT_RECORD_PROCESS, RECORD_TAKE_THAT_SPECIAL, 0, 0);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command6D(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    switch(*scriptCtx->scriptPtr) {
+        case 0:
+            sub_8018690();
+            break;
+        case 1:
+            sub_8018720();
+            break;
+        case 2:
+            sub_80186EC();
+    }
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command6E(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    if(*scriptCtx->scriptPtr == 1)
+        gScriptContext.flags |= 0x800; // ! INCONSISTENT USES OF GLOBALS VS POINTEEERS
+    else
+        gScriptContext.flags &= ~0x800;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command6F(struct ScriptContext *scriptCtx)
+{
+    scriptCtx->scriptPtr++;
+    gMain.unk1E = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command70(struct ScriptContext *scriptCtx)
+{
+    u32 songId, vol;
+    scriptCtx->scriptPtr++;
+    songId = scriptCtx->scriptPtr[0];
+    vol = scriptCtx->scriptPtr[1];
+    scriptCtx->scriptPtr++;
+    scriptCtx->scriptPtr++;
+    sub_80138FC(songId, vol);
+    scriptCtx->scriptPtr++;
+    return 0;
+}
+
+bool32 Command71(struct ScriptContext *scriptCtx)
+{
+    struct PsycheLockData * data;
+    u32 var0;
+    scriptCtx->scriptPtr++;
+    scriptCtx->scriptPtr++;
+    var0 = *scriptCtx->scriptPtr;
+    scriptCtx->scriptPtr++;
+    // ! force gMain.unk1A4 via dead code
+    data = gMain.unk1A4;
+    if(data->unk0) ;
+    switch(var0) {
+        case 0:
+            SET_PROCESS(INVESTIGATION_PROCESS, 10, 4, 0);
+            gMain.unk24C = 1;
+            break;
+        case 1:
+            SlideTextbox(0);
+            SET_PROCESS(INVESTIGATION_PROCESS, 10, 7, 0);
+            gMain.unk24C = 0;
+    }
+    scriptCtx->scriptPtr++;
+    return 1;
+}
