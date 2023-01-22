@@ -4,6 +4,7 @@
 #include "script.h"
 #include "sound.h"
 #include "case_data.h"
+#include "animation.h"
 
 const struct Struct811DC98 gUnknown_0802039C[71] = {
     {
@@ -2100,7 +2101,7 @@ void InvestigationRoomSetup_3_2(struct Main *main) {
         case 17: {
             LOADEXAMDATA(gUnknown_08020E20);
             if(GetFlag(0, 0xE1)) {
-                sub_801480C(0x1B);
+                PlayAnimation(0x1B);
             }
             if(!GetFlag(0, 0xC8)) {
                 InvestigationSetScriptSectionAndFlag(0x107, 0xC8);

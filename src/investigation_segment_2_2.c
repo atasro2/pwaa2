@@ -4,6 +4,7 @@
 #include "script.h"
 #include "sound.h"
 #include "case_data.h"
+#include "animation.h"
 
 const struct Struct811DC98 gUnknown_0801EB80[93] = {
     {
@@ -2400,7 +2401,7 @@ void InvestigationRoomSetup_2_2(struct Main *main) {
                 PlayBGM(0xD7);
             }
             if(!GetFlag(0, 0xD1)) {
-                sub_801480C(0x19);
+                PlayAnimation(0x19);
             }
             break;
         }
@@ -2423,12 +2424,12 @@ void InvestigationRoomSetup_2_2(struct Main *main) {
             LOADEXAMDATA(gUnknown_0801F96C);
             if(!GetFlag(0, 0xE6)) {
                 InvestigationSetPersonAnimation(0x20, 0, 0);
-                sub_801480C(0x3D);
+                PlayAnimation(0x3D);
                 InvestigationSetScriptSectionAndFlag(0x101, 0xE6);
                 break;
             }
             InvestigationSetPersonAnimation(0x20, 0, 0);
-            sub_801480C(0x3D);
+            PlayAnimation(0x3D);
             if(GetFlag(0, 0xF9) && !GetFlag(0, 0xFA)) {
                 InvestigationSetScriptSectionAndFlag(0x102, 0xFA);
             }

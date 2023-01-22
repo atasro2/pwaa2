@@ -32,7 +32,8 @@ struct Main
     /* +0x017 */ u8 selectedButton; // unity: Cursol
     /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
-    u8 filler1A[0x20 - 0x1A];
+    u8 filler1A[0x1E - 0x1A];
+    /* +0x020 */ u16 unk1E;
     /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
     /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
     /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now
@@ -47,14 +48,14 @@ struct Main
     /* +0x030 */ u16 unk30; // unity AA4: Bg256_load_no?
     /* +0x032 */ s16 previousBG; // unity AA4: Bg256_no_old? probably wrong
     /* +0x034 */ s8 currentBgStripe; // maybe Bg256_rno_0?
-    /* +0x035 */ u8 unk2D; // unused field maybe Bg256_SP_Flag?
+    /* +0x035 */ u8 unk35; // unused field maybe Bg256_SP_Flag?
     /* +0x036 */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
     /* +0x037 */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
     /* +0x038 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x
     /* +0x03A */ s16 Bg256_scroll_y; // unity AA4: Bg256_scroll_y
     /* +0x03C */ s16 Bg256_pos_x; // unity AA4: Bg256_pos_x
     /* +0x03E */ s16 Bg256_pos_y; // unity AA4: Bg256_pos_y
-    /* +0x040 */ u16 unk38; // unity AA4: Bg256_add? unused but is background related 100%
+    /* +0x040 */ u16 unk40; // unity AA4: Bg256_add? unused but is background related 100%
     /* +0x042 */ s16 Bg256_dir; // unity AA4: Bg256_dir
     /* +0x044 */ s8 horizontolBGScrollSpeed; // unity AA4: Bg256_scroll_speed_x
     /* +0x045 */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
@@ -78,7 +79,22 @@ struct Main
     /* +0x08E */ s8 itemPlateSize;
     /* +0x08F */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
     /* +0x090 */ u8 itemPlateAction;
-    u8 filler91[0xB2 - 0x91];
+    u8 filler91[0x92 - 0x91];
+    /* +0x092 */ u16 affineScale; // used for the scale of oam sprites in court record, deliver judgement, episode unlocked
+    u8 filler94[0x96 - 0x94];
+    /* +0x096 */ u8 unk96; // unity: gauge_rno_0
+    /* +0x097 */ u8 unk97; // unity: gauge_rno_1
+    /* +0x098 */ s16 unk98; // unity: gauge_hp
+    /* +0x09A */ s16 unk9A; // unity: gauge_hp_disp
+    /* +0x09C */ s16 unk9C; // unity: gauge_dmg_cnt
+    /* +0x09E */ s16 unk9E; // unity: gauge_pos_x
+    /* +0x0A0 */ s16 unkA0; // unity: gauge_pos_y
+    /* +0x0A2 */ s16 unkA2; // unity: gauge_cnt_0
+    /* +0x0A4 */ s16 unkA4; // unity: gauge_cnt_1
+    /* +0x0A6 */ s16 unkA6; // unity: gauge_disp_flag
+    /* +0x0A8 */ s32 unkA8; // unity: gauge_hp_fixed
+    /* +0x0AC */ s32 unkAC; // unity: gauge_hp_fixed_diff
+    /* +0x0B0 */ s16 unkB0; // unity: gauge_hp_scenario_end
     /* +0x0B2 */ u8 currentRoomId;
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;
@@ -91,13 +107,38 @@ struct Main
     /* +0x0E0 */ u32 talkEndFlags[8]; // unity: talk_end_flag // TODO: find right size
     /* +0x100 */ u32 unk100[8]; // script related, apollo's FW_Mess_flag??
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
-    /* +0x1A4 */ struct PsycheLock unk1A4[4];
-    u8 filler244[0x254 - 0x244];
+    /* +0x1A4 */ struct PsycheLockData unk1A4[4];
+    s8 unk244;
+    u8 unk245;
+    u16 unk246;
+    u8 unk248;
+    u8 unk249;
+    u8 unk24A;
+    u8 unk24B;
+    u8 unk24C;
+    u8 filler24C[0x254 - 0x24D];
     /* +0x254 */ u32 soundFlags;
-    u8 filler258[0x2B8 - 0x258];
+    u8 filler258[0x276 - 0x258];
+    u16 unk276[8]; // ! fix size later
+    u16 unk286;
+    struct Main_288 {
+        u8 unk0;
+        s8 unk1;
+        s8 unk2;
+        s8 unk3;
+        s32 unk4;
+        s32 unk8;
+        s32 unkC;
+        s32 unk10;
+    } unk288[2];
+    u8 unk2B0; // unity: spotlight_command_status
+    u8 filler2B1[0x2B8 - 0x2B1];
     u16 unk2B8;
     u16 unk2BA;
-    u8 filler2BC[0x2C0 - 0x2BC];
+    u8 unk2BC;
+    u8 unk2BD;
+    u8 unk2BE;
+    u8 unk2BF;
 }; /* size 0x2C0 */
 
 struct IORegisters
@@ -174,5 +215,6 @@ u32 ReadKeysAndTestResetCombo(void);
 void StartHardwareBlend(u32 mode, u32 delay, u32 deltaY, u32 target);
 void InitCourtScroll(u8 *, u32, u32, u32);
 void ResetGameState(void);
-
+void sub_8000E78(u32, u32, u32);
+void sub_8000EB4(u32, u32, u32);
 #endif//GUARD_MAIN_H

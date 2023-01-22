@@ -5,5 +5,5 @@
 #define eScriptHeap ((void*) (EWRAM_START + 0x11FC0))
 #define eBGDecompBuffer ((void*) (EWRAM_START + 0x2CFC0))
 #define eUnknown_02031FC0 ((void*) (EWRAM_START + 0x31FC0))
-
+#define eUnknown_0203B500 ((void*) (EWRAM_START + 0x3B500))
 #endif//GUARD_EWRAM_H

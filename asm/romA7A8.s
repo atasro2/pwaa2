@@ -126,7 +126,7 @@ _0800A88C:
 	b _0800AC2E
 _0800A88E:
 	bl ResetGameState
-	bl sub_800AECC
+	bl LoadSaveData
 	ldr r0, _0800A89C @ =0x00000101
 	str r0, [r6, #8]
 	b _0800AC2E
@@ -861,8 +861,8 @@ _0800AE6A:
 _0800AE7C: .4byte 0x040000D4
 _0800AE80: .4byte 0x81000200
 
-	thumb_func_start sub_800AE84
-sub_800AE84: @ 0x0800AE84
+	thumb_func_start SaveGameData
+SaveGameData: @ 0x0800AE84
 	push {r4, lr}
 	ldr r4, _0800AEB8 @ =gSaveDataBuffer
 	adds r1, r4, #0
@@ -878,7 +878,7 @@ sub_800AE84: @ 0x0800AE84
 	ldr r0, _0800AEC4 @ =0x80000019
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	bl sub_800AF3C
+	bl CalculateSaveChecksum
 	movs r1, #0xe0
 	lsls r1, r1, #0x14
 	ldr r2, _0800AEC8 @ =0x00002BBC
@@ -894,8 +894,8 @@ _0800AEC0: .4byte gSaveVersion
 _0800AEC4: .4byte 0x80000019
 _0800AEC8: .4byte 0x00002BBC
 
-	thumb_func_start sub_800AECC
-sub_800AECC: @ 0x0800AECC
+	thumb_func_start LoadSaveData
+LoadSaveData: @ 0x0800AECC
 	push {r4, lr}
 	movs r0, #0xe0
 	lsls r0, r0, #0x14
@@ -922,7 +922,7 @@ _0800AEE0:
 	adds r0, r4, #0
 	adds r0, #0xb4
 	strb r1, [r0]
-	bl sub_800AF78
+	bl CheckSaveChecksum
 	cmp r0, #0
 	beq _0800AF30
 	movs r0, #0x10
@@ -951,8 +951,8 @@ _0800AF34:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_800AF3C
-sub_800AF3C: @ 0x0800AF3C
+	thumb_func_start CalculateSaveChecksum
+CalculateSaveChecksum: @ 0x0800AF3C
 	push {r4, lr}
 	ldr r1, _0800AF6C @ =gSaveDataBuffer
 	movs r0, #0
@@ -984,8 +984,8 @@ _0800AF6C: .4byte gSaveDataBuffer
 _0800AF70: .4byte 0x00002BBC
 _0800AF74: .4byte 0x00000927
 
-	thumb_func_start sub_800AF78
-sub_800AF78: @ 0x0800AF78
+	thumb_func_start CheckSaveChecksum
+CheckSaveChecksum: @ 0x0800AF78
 	push {r4, lr}
 	movs r1, #0
 	ldr r0, _0800AFA4 @ =gUnknown_02000034
@@ -1851,7 +1851,7 @@ _0800B6CC:
 	orrs r1, r2
 	strb r1, [r0]
 _0800B6D8:
-	bl sub_800AE84
+	bl SaveGameData
 	cmp r0, #0
 	beq _0800B708
 	ldr r4, _0800B700 @ =gScriptContext
@@ -2350,7 +2350,7 @@ _0800BB10:
 	movs r0, #8
 	strh r0, [r1, #0x14]
 	movs r0, #0x6b
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _0800BB2C
@@ -2673,7 +2673,7 @@ _0800BD6C:
 	mov r7, sl
 	strb r0, [r7, #0x1a]
 	movs r0, #2
-	bl sub_80035C0
+	bl SetTextboxSize
 	movs r0, #0x98
 	lsls r0, r0, #1
 	adds r4, r4, r0
@@ -3035,7 +3035,7 @@ _0800C034:
 	ldrb r0, [r4]
 	orrs r1, r0
 	strb r1, [r4]
-	bl sub_800AE84
+	bl SaveGameData
 	b _0800C3E6
 	.align 2, 0
 _0800C070: .4byte gMain
@@ -4266,7 +4266,7 @@ _0800C9CC: @ jump table
 	.4byte _0800D2E0 @ case 6
 	.4byte _0800D2F4 @ case 7
 _0800C9EC:
-	bl sub_800AECC
+	bl LoadSaveData
 	mov r0, r8
 	bl sub_800BCE4
 	bl _0800D42C
@@ -4870,14 +4870,14 @@ _0800CF08:
 	mov r1, sb
 	str r1, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _0800CFF8 @ =gUnknown_0813D97C
+	ldr r0, _0800CFF8 @ =gGfx4bppTestimonyArrows
 	str r0, [r6]
 	ldr r0, _0800CFFC @ =0x06013400
 	str r0, [r6, #4]
 	ldr r1, _0800D000 @ =0x80000040
 	str r1, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r0, _0800D004 @ =gUnknown_0813D97C+0x180
+	ldr r0, _0800D004 @ =gGfx4bppTestimonyArrows+0x180
 	str r0, [r6]
 	ldr r0, _0800D008 @ =0x06013480
 	str r0, [r6, #4]
@@ -4970,10 +4970,10 @@ _0800CFE8: .4byte 0x06013000
 _0800CFEC: .4byte 0x80000200
 _0800CFF0: .4byte gUnknown_0814DC40
 _0800CFF4: .4byte 0x050002A0
-_0800CFF8: .4byte gUnknown_0813D97C
+_0800CFF8: .4byte gGfx4bppTestimonyArrows
 _0800CFFC: .4byte 0x06013400
 _0800D000: .4byte 0x80000040
-_0800D004: .4byte gUnknown_0813D97C+0x180
+_0800D004: .4byte gGfx4bppTestimonyArrows+0x180
 _0800D008: .4byte 0x06013480
 _0800D00C: .4byte 0x040000D4
 _0800D010: .4byte gUnknown_02000D3C
@@ -5078,7 +5078,7 @@ _0800D116:
 	ldr r0, _0800D20C @ =0x80000050
 	str r0, [r5, #8]
 	ldr r0, [r5, #8]
-	bl sub_8009934
+	bl MakeMapMarkerSprites
 	ldr r6, _0800D210 @ =gScriptContext
 	adds r0, r6, #0
 	adds r0, #0x34
@@ -5089,7 +5089,7 @@ _0800D116:
 	ands r1, r2
 	lsls r1, r1, #0x18
 	lsrs r1, r1, #0x18
-	bl sub_8004000
+	bl SetTextboxNametag
 	movs r3, #0xfa
 	lsls r3, r3, #4
 	adds r0, r4, r3
@@ -6002,9 +6002,9 @@ _0800D8DC: @ jump table
 	.4byte _0800D9A0 @ case 4
 _0800D8F0:
 	movs r0, #0x24
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x25
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	ldr r0, _0800D90C @ =gTestimony
@@ -6015,10 +6015,10 @@ _0800D8F0:
 _0800D90C: .4byte gTestimony
 _0800D910:
 	movs r0, #0x24
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x25
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x10]
 	adds r0, #0xa
@@ -6044,11 +6044,11 @@ _0800D910:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #0x22
-	bl sub_801480C
+	bl PlayAnimation
 	b _0800D998
 _0800D964:
 	adds r0, r6, #0
@@ -6059,21 +6059,21 @@ _0800D964:
 	b _0800D998
 _0800D970:
 	movs r0, #0x22
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	ldr r0, [r1]
 	cmp r0, #0
 	blt _0800DA00
 	adds r0, r1, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #0x24
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x25
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 _0800D998:
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
@@ -6081,10 +6081,10 @@ _0800D998:
 	b _0800DA00
 _0800D9A0:
 	movs r0, #0x24
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x25
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldr r2, _0800DA08 @ =gTestimony
 	ldrh r3, [r4, #0x10]
@@ -6120,9 +6120,9 @@ _0800D9E4:
 	cmp r1, r0
 	ble _0800DA00
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #1
 	strb r0, [r6, #9]
 _0800DA00:
@@ -6366,9 +6366,9 @@ _0800DBE0: @ jump table
 	.4byte _0800DCA2 @ case 4
 _0800DBF4:
 	movs r0, #0x26
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x27
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x53
 	bl PlaySE
 	ldrb r0, [r6, #0xa]
@@ -6376,10 +6376,10 @@ _0800DBF4:
 	b _0800DCEC
 _0800DC0C:
 	movs r0, #0x26
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x27
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x10]
 	adds r0, #0xa
@@ -6405,11 +6405,11 @@ _0800DC0C:
 	movs r3, #0x1f
 	bl StartHardwareBlend
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #0x23
-	bl sub_801480C
+	bl PlayAnimation
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800DCEC
@@ -6424,30 +6424,30 @@ _0800DC64:
 	b _0800DCEC
 _0800DC74:
 	movs r0, #0x23
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	ldr r0, [r1]
 	cmp r0, #0
 	blt _0800DCEE
 	adds r0, r1, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #0x26
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 	movs r0, #0x27
 	movs r1, #0x78
 	movs r2, #0x3c
-	bl sub_801484C
+	bl PlayAnimationAtCustomOrigin
 	ldrb r0, [r6, #0xa]
 	adds r0, #1
 	b _0800DCEC
 _0800DCA2:
 	movs r0, #0x26
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r4, r0, #0
 	movs r0, #0x27
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r5, r0, #0
 	ldrh r0, [r4, #0x12]
 	subs r0, #7
@@ -6470,9 +6470,9 @@ _0800DCA2:
 	cmp r1, r0
 	bge _0800DCEE
 	adds r0, r4, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	adds r0, r5, #0
-	bl sub_8014F94
+	bl DestroyAnimation
 	movs r0, #1
 	strb r0, [r6, #9]
 	movs r0, #0
@@ -6515,7 +6515,7 @@ sub_800DD0C: @ 0x0800DD0C
 	ldr r2, _0800DD8C @ =0x80000010
 	str r2, [r1, #8]
 	ldr r2, [r1, #8]
-	ldr r2, _0800DD90 @ =gUnknown_0813D97C
+	ldr r2, _0800DD90 @ =gGfx4bppTestimonyArrows
 	str r2, [r1]
 	movs r2, #0xd0
 	lsls r2, r2, #1
@@ -6523,7 +6523,7 @@ sub_800DD0C: @ 0x0800DD0C
 	ldr r3, _0800DD94 @ =0x80000040
 	str r3, [r1, #8]
 	ldr r2, [r1, #8]
-	ldr r2, _0800DD98 @ =gUnknown_0813D97C+0x180
+	ldr r2, _0800DD98 @ =gGfx4bppTestimonyArrows+0x180
 	str r2, [r1]
 	movs r2, #0x88
 	lsls r2, r2, #2
@@ -6557,9 +6557,9 @@ _0800DD80: .4byte 0x80000200
 _0800DD84: .4byte gUnknown_0814DC40
 _0800DD88: .4byte 0x050002A0
 _0800DD8C: .4byte 0x80000010
-_0800DD90: .4byte gUnknown_0813D97C
+_0800DD90: .4byte gGfx4bppTestimonyArrows
 _0800DD94: .4byte 0x80000040
-_0800DD98: .4byte gUnknown_0813D97C+0x180
+_0800DD98: .4byte gGfx4bppTestimonyArrows+0x180
 _0800DD9C: .4byte gScriptContext
 _0800DDA0: .4byte gCourtRecord
 _0800DDA4: .4byte gTestimony
@@ -6711,7 +6711,7 @@ _0800DEC6:
 	cmp r0, #0
 	beq _0800DF84
 	movs r0, #1
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x47
 	bl PlaySE
 	movs r0, #3
@@ -6736,7 +6736,7 @@ _0800DEC6:
 	strb r4, [r5, #0x19]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8004000
+	bl SetTextboxNametag
 	movs r0, #4
 	strb r0, [r5, #9]
 	strb r4, [r5, #0xa]
@@ -6884,7 +6884,7 @@ _0800E028:
 	movs r1, #1
 	movs r2, #3
 	movs r3, #0
-	bl sub_8015C44
+	bl SetCourtScrollPersonAnim
 	ldr r0, _0800E05C @ =gUnknown_08478BDC
 	movs r1, #0x1e
 	movs r2, #0x1f
@@ -7010,7 +7010,7 @@ _0800E12A:
 	movs r0, #0
 	movs r1, #1
 	movs r2, #3
-	bl sub_8015C44
+	bl SetCourtScrollPersonAnim
 	ldr r0, _0800E158 @ =gUnknown_08478BDC
 	movs r1, #0x1e
 	movs r2, #0x1f
@@ -8166,7 +8166,7 @@ _0800EAB0:
 	.align 2, 0
 _0800EAC4: .4byte gOamObjects+0x180
 
-	thumb_func_start sub_800EAC8
+	thumb_func_start sub_800EAC8 @ room_seq_chg
 sub_800EAC8: @ 0x0800EAC8
 	ldr r2, _0800EAD8 @ =gMain
 	movs r3, #0x97
@@ -8219,8 +8219,8 @@ _0800EB1C:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_800EB24
-sub_800EB24: @ 0x0800EB24
+	thumb_func_start SetInactiveActionButtons
+SetInactiveActionButtons: @ 0x0800EB24
 	adds r2, r0, #0
 	strb r1, [r2, #8]
 	ldrb r0, [r2, #6]
@@ -8402,7 +8402,7 @@ _0800EC76:
 	bls _0800EC76
 	mov r0, r8
 	movs r1, #0xf
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r1, #0
 	mov sb, r1
 	movs r0, #0xe0
@@ -8806,7 +8806,7 @@ _0800F00A:
 	strh r0, [r4, #2]
 	adds r0, r4, #0
 	movs r1, #0xf
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	adds r0, r7, #0
 	ldrb r2, [r4, #0xc]
 	lsls r0, r2
@@ -8830,7 +8830,7 @@ _0800F00A:
 	bne _0800F074
 	movs r0, #0xc
 	movs r1, #1
-	bl sub_8014D10
+	bl StartAnimationBlend
 	strb r6, [r4, #0x19]
 	strb r6, [r4, #0x18]
 	ldr r1, _0800F080 @ =0x040000D4
@@ -8855,7 +8855,7 @@ _0800F088: .4byte 0x05000300
 _0800F08C: .4byte 0x80000010
 _0800F090:
 	ldrh r0, [r5, #0x2e]
-	bl sub_80035A0
+	bl GetBGControlBits
 	movs r1, #3
 	ands r1, r0
 	cmp r1, #0
@@ -8908,7 +8908,7 @@ _0800F0E6:
 	strb r1, [r4, #0xe]
 	adds r0, r4, #0
 	movs r1, #0xf
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 _0800F0FA:
 	ldrb r0, [r4, #0x10]
 	cmp r0, #7
@@ -9005,7 +9005,7 @@ sub_800F19C: @ 0x0800F19C
 	cmp r0, #0
 	bne _0800F1E8
 	ldrh r0, [r4, #0x2e]
-	bl sub_80035A0
+	bl GetBGControlBits
 	movs r1, #1
 	ands r1, r0
 	cmp r1, #0
@@ -9152,7 +9152,7 @@ _0800F2A6:
 	movs r4, #0
 	adds r0, r5, #0
 	movs r1, #0xf
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r0, #0xe0
 	strb r0, [r5, #0xf]
 	strb r4, [r5, #0x10]
@@ -9164,11 +9164,11 @@ _0800F2A6:
 	strb r0, [r5, #0xe]
 	bl sub_8013E40
 	ldr r0, _0800F32C @ =gAnimation+0x44
-	bl sub_8014F94
+	bl DestroyAnimation
 	ldr r0, _0800F330 @ =gInvestigation
 	strb r4, [r0, #6]
 	movs r1, #0xf
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	ldr r1, _0800F334 @ =gUnknown_08112074
 	mov r2, r8
 	ldrb r2, [r2]
@@ -9487,7 +9487,7 @@ _0800F56C:
 	strb r7, [r6, #0xa]
 	adds r0, r5, #0
 	movs r1, #0xe
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	strb r7, [r5, #0xe]
 	movs r0, #0xe0
 	strb r0, [r5, #0xf]
@@ -9747,10 +9747,10 @@ _0800F762:
 	strh r0, [r3]
 	ldr r0, _0800F7A4 @ =gAnimation+0x44
 	movs r1, #1
-	bl sub_8014138
+	bl ChangeAnimationActivity
 	movs r0, #1
 	movs r1, #1
-	bl sub_8014D10
+	bl StartAnimationBlend
 	movs r0, #0x82
 	lsls r0, r0, #1
 	str r0, [r6, #8]
@@ -10346,7 +10346,7 @@ _0800FBFA:
 	strh r0, [r4, #2]
 	ldr r0, [sp]
 	movs r1, #0xd
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r0, #2
 	ldr r6, [sp]
 	strb r0, [r6, #0xe]
@@ -11182,7 +11182,7 @@ _080102AE:
 	ldr r0, [sp]
 	movs r1, #4
 	str r3, [sp, #0x14]
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r1, #0
 	movs r0, #0xf0
 	ldr r4, [sp]
@@ -11362,7 +11362,7 @@ _080103FE:
 	strh r0, [r6, #2]
 	ldr r0, [sp]
 	movs r1, #0xb
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r0, #2
 	ldr r7, [sp]
 	strb r0, [r7, #0xe]
@@ -11761,7 +11761,7 @@ _08010726:
 _08010748:
 	ldr r0, _08010768 @ =gInvestigation
 	movs r1, #4
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r0, #0
 	movs r1, #1
 	ldr r2, _08010768 @ =gInvestigation
@@ -12091,7 +12091,7 @@ _080109AC:
 	bls _080109AC
 	adds r0, r4, #0
 	movs r1, #0xf
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r0, #0xe0
 	strb r0, [r4, #0xf]
 	movs r0, #0x40
@@ -12109,7 +12109,7 @@ _080109E8: .4byte 0x000040E0
 _080109EC:
 	adds r0, r4, #0
 	movs r1, #7
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r1, #0
 	movs r0, #2
 	strb r0, [r4, #0xe]
@@ -12186,69 +12186,469 @@ _08010A4C:
 	.align 2, 0
 _08010A74: .4byte gComputedGotoTable10A3C
 _08010A78:
-	.byte 0x06, 0xF0, 0x32, 0xFF, 0x70, 0x7A, 0x00, 0x24
-	.byte 0x30, 0x72, 0x70, 0x7A, 0x05, 0xF0, 0x4E, 0xFB, 0x05, 0xF0, 0x62, 0xFB, 0x06, 0xF0, 0xB6, 0xF9
-	.byte 0x0A, 0x48, 0x0B, 0x49, 0x40, 0x18, 0x04, 0x70, 0x01, 0x20, 0xFA, 0x7A, 0x10, 0x43, 0xF8, 0x72
-	.byte 0xA8, 0x7A, 0x01, 0x30, 0xA8, 0x72, 0x05, 0xF0, 0xC1, 0xFB, 0x05, 0xF0, 0xB3, 0xFB, 0x00, 0x28
-	.byte 0x00, 0xD1, 0x6E, 0xE2, 0xA8, 0x7A, 0x01, 0x30, 0xA8, 0x72, 0x6A, 0xE2, 0xB0, 0x37, 0x00, 0x03
-	.byte 0x4A, 0x02, 0x00, 0x00, 0x70, 0x89, 0xF6, 0xF7, 0x37, 0xFD, 0x28, 0x49, 0x01, 0x20, 0x08, 0x76
-	.byte 0x03, 0x20, 0xA8, 0x72, 0x25, 0x4C, 0x26, 0x48, 0x21, 0x18, 0x01, 0x20, 0x09, 0x78, 0x08, 0x40
-	.byte 0x00, 0x28, 0x23, 0xD0, 0x23, 0x49, 0x80, 0x20, 0x40, 0x00, 0x49, 0x88, 0x81, 0x42, 0x1D, 0xD1
-	.byte 0x92, 0x21, 0x89, 0x00, 0x60, 0x18, 0x00, 0x78, 0x00, 0x28, 0x17, 0xD1, 0x28, 0x1C, 0xDC, 0x30
-	.byte 0x00, 0x68, 0x10, 0x21, 0x08, 0x40, 0x00, 0x28, 0x10, 0xD1, 0x1B, 0x49, 0x0D, 0x20, 0x09, 0x88
-	.byte 0x08, 0x40, 0x00, 0x28, 0x0A, 0xD0, 0x06, 0xF0, 0xA5, 0xFE, 0x06, 0xF0, 0xC7, 0xFA, 0x31, 0x20
-	.byte 0x02, 0xF0, 0x88, 0xFE, 0xA0, 0x68, 0xE8, 0x60, 0x14, 0x48, 0xA8, 0x60, 0x0F, 0x4C, 0x10, 0x4A
-	.byte 0xA1, 0x18, 0x02, 0x20, 0x09, 0x78, 0x08, 0x40, 0x00, 0x28, 0x21, 0xD0, 0x06, 0xF0, 0x0E, 0xFB
-	.byte 0x00, 0x28, 0x1D, 0xD1, 0x92, 0x21, 0x89, 0x00, 0x60, 0x18, 0x04, 0x78, 0x00, 0x2C, 0x17, 0xD1
-	.byte 0x08, 0x49, 0x80, 0x20, 0x80, 0x00, 0x49, 0x88, 0x81, 0x42, 0x11, 0xD1, 0x2C, 0x20, 0x02, 0xF0
-	.byte 0x69, 0xFE, 0x08, 0x20, 0xA8, 0x72, 0xEC, 0x72, 0x18, 0xE1, 0x00, 0x00, 0xB0, 0x37, 0x00, 0x03
-	.byte 0x4A, 0x02, 0x00, 0x00, 0xA0, 0x37, 0x00, 0x03, 0x40, 0x3C, 0x00, 0x03, 0x07, 0x00, 0x00, 0x03
-	.byte 0x1F, 0x4C, 0x20, 0x4A, 0xA0, 0x18, 0x00, 0x78, 0x00, 0x28, 0x23, 0xD1, 0x06, 0xF0, 0xE6, 0xFA
-	.byte 0x00, 0x28, 0x1F, 0xD1, 0x1C, 0x49, 0x80, 0x20, 0x40, 0x00, 0x49, 0x88, 0x81, 0x42, 0x19, 0xD1
-	.byte 0x06, 0xF0, 0x0E, 0xFD, 0x00, 0x28, 0x15, 0xD1, 0x28, 0x1C, 0xDC, 0x30, 0x00, 0x68, 0x10, 0x21
-	.byte 0x08, 0x40, 0x00, 0x28, 0x0E, 0xD1, 0x15, 0x49, 0x05, 0x20, 0x09, 0x88, 0x08, 0x40, 0x00, 0x28
-	.byte 0x08, 0xD0, 0x06, 0xF0, 0x4F, 0xFE, 0x31, 0x20, 0x02, 0xF0, 0x34, 0xFE, 0xA0, 0x68, 0xE8, 0x60
-	.byte 0x0F, 0x48, 0xA8, 0x60, 0x28, 0x1C, 0x98, 0x30, 0x00, 0x24, 0x00, 0x5F, 0x00, 0x28, 0x00, 0xDD
-	.byte 0xD7, 0xE1, 0x28, 0x1C, 0x9A, 0x30, 0x00, 0x21, 0x40, 0x5E, 0x00, 0x28, 0x00, 0xDD, 0xD0, 0xE1
-	.byte 0x07, 0xF0, 0x42, 0xF8, 0x00, 0x28, 0x00, 0xD0, 0xCB, 0xE1, 0x0B, 0x20, 0xA8, 0x72, 0xC8, 0xE1
-	.byte 0xB0, 0x37, 0x00, 0x03, 0x4A, 0x02, 0x00, 0x00, 0xA0, 0x37, 0x00, 0x03, 0x40, 0x3C, 0x00, 0x03
-	.byte 0x07, 0x00, 0x00, 0x04, 0xEA, 0x7A, 0x01, 0x2A, 0x00, 0xD1, 0x8D, 0xE1, 0x01, 0x2A, 0x02, 0xDC
-	.byte 0x00, 0x2A, 0x03, 0xD0, 0xB5, 0xE1, 0x02, 0x2A, 0x14, 0xD0, 0xB2, 0xE1, 0x06, 0x48, 0x02, 0x76
-	.byte 0x42, 0x76, 0x06, 0x49, 0x0B, 0x1C, 0x4A, 0x33, 0x05, 0x48, 0x1C, 0x88, 0x20, 0x40, 0x18, 0x80
-	.byte 0xCA, 0x81, 0x05, 0xF0, 0xB7, 0xFA, 0x74, 0xE1, 0xB0, 0x37, 0x00, 0x03, 0x70, 0x3A, 0x00, 0x03
-	.byte 0xFF, 0xFD, 0x00, 0x00, 0x30, 0x7A, 0x01, 0x38, 0x30, 0x72, 0x00, 0x06, 0x00, 0x28, 0x0D, 0xD1
-	.byte 0x05, 0x48, 0x93, 0x21, 0x89, 0x00, 0x40, 0x18, 0x01, 0x78, 0x00, 0x29, 0x06, 0xD1, 0x07, 0x20
-	.byte 0xA8, 0x72, 0xE9, 0x72, 0x8D, 0xE1, 0x00, 0x00, 0xB0, 0x37, 0x00, 0x03, 0x08, 0x48, 0x01, 0x21
-	.byte 0x01, 0x76, 0x93, 0x22, 0x92, 0x00, 0x80, 0x18, 0x00, 0x78, 0x00, 0x28, 0x02, 0xD1, 0x01, 0x20
-	.byte 0xF2, 0xF7, 0xB4, 0xFD, 0x03, 0x20, 0xA8, 0x72, 0x00, 0x20, 0xE8, 0x72, 0x79, 0xE1, 0x00, 0x00
-	.byte 0xB0, 0x37, 0x00, 0x03, 0x30, 0x8A, 0xF6, 0xF7, 0x47, 0xFC, 0x01, 0x20, 0xF2, 0xF7, 0xA6, 0xFD
-	.byte 0x03, 0x20, 0xA8, 0x72, 0x6D, 0xE1, 0x06, 0x48, 0xA0, 0x30, 0x64, 0x21, 0x01, 0x80, 0xE8, 0x7A
-	.byte 0x04, 0x28, 0x00, 0xD9, 0x65, 0xE1, 0x80, 0x00, 0x02, 0x49, 0x40, 0x18, 0x00, 0x68, 0x87, 0x46
-	.byte 0xB0, 0x37, 0x00, 0x03, 0xD8, 0x0C, 0x01, 0x08, 0xEC, 0x0C, 0x01, 0x08, 0x02, 0x0D, 0x01, 0x08
-	.byte 0x44, 0x0D, 0x01, 0x08, 0x58, 0x0D, 0x01, 0x08, 0x78, 0x0D, 0x01, 0x08, 0x13, 0x48, 0x00, 0x21
-	.byte 0x01, 0x76, 0x1E, 0x20, 0x02, 0xF0, 0xF6, 0xFE, 0x05, 0xF0, 0x64, 0xFA, 0xE8, 0x7A, 0x01, 0x30
-	.byte 0xE8, 0x72, 0x05, 0xF0, 0x93, 0xFA, 0x05, 0xF0, 0x85, 0xFA, 0x00, 0x28, 0x00, 0xD1, 0x40, 0xE1
-	.byte 0x05, 0xF0, 0x68, 0xFA, 0x09, 0x4C, 0x20, 0x1C, 0x98, 0x30, 0x00, 0x21, 0x40, 0x5E, 0x4F, 0x28
-	.byte 0x00, 0xDD, 0x0F, 0xE1, 0x01, 0x20, 0x06, 0xF0, 0xFF, 0xFD, 0x21, 0x1C, 0x9C, 0x31, 0x04, 0x48
-	.byte 0x08, 0x80, 0x03, 0x20, 0x06, 0xF0, 0xF8, 0xFD, 0x04, 0xE1, 0x00, 0x00, 0xB0, 0x37, 0x00, 0x03
-	.byte 0xD8, 0xFF, 0x00, 0x00, 0x05, 0xF0, 0x72, 0xFA, 0x05, 0xF0, 0x64, 0xFA, 0x00, 0x28, 0x00, 0xD1
-	.byte 0x1F, 0xE1, 0x05, 0xF0, 0x3F, 0xFA, 0xF5, 0xE0, 0x05, 0xF0, 0x68, 0xFA, 0x05, 0xF0, 0x5A, 0xFA
-	.byte 0x00, 0x28, 0x00, 0xD1, 0x15, 0xE1, 0x06, 0xF0, 0x87, 0xFF, 0x00, 0x28, 0x00, 0xD0, 0x10, 0xE1
-	.byte 0x02, 0x20, 0x06, 0xF0, 0xD9, 0xFD, 0xE5, 0xE0, 0x00, 0x24, 0x03, 0x20, 0x38, 0x73, 0x78, 0x73
-	.byte 0x05, 0x49, 0x01, 0x20, 0x08, 0x76, 0x00, 0xF0, 0x0D, 0xF9, 0x00, 0xF0, 0x05, 0xFA, 0x34, 0x60
-	.byte 0x82, 0x20, 0x40, 0x00, 0xA8, 0x60, 0xFC, 0xE0, 0xB0, 0x37, 0x00, 0x03, 0xE8, 0x7A, 0x05, 0x28
-	.byte 0x00, 0xD9, 0xF6, 0xE0, 0x80, 0x00, 0x02, 0x49, 0x40, 0x18, 0x00, 0x68, 0x87, 0x46, 0x00, 0x00
-	.byte 0xB4, 0x0D, 0x01, 0x08, 0xCC, 0x0D, 0x01, 0x08, 0xF0, 0x0D, 0x01, 0x08, 0x14, 0x0E, 0x01, 0x08
-	.byte 0x2E, 0x0F, 0x01, 0x08, 0x38, 0x0F, 0x01, 0x08, 0x22, 0x0E, 0x01, 0x08, 0xB0, 0x89, 0xF6, 0xF7
-	.byte 0xB3, 0xFB, 0x06, 0x48, 0x38, 0x30, 0x00, 0x78, 0x01, 0x28, 0x02, 0xD0, 0x04, 0x28, 0x00, 0xD0
-	.byte 0xB0, 0xE0, 0x01, 0x20, 0xF2, 0xF7, 0x0A, 0xFD, 0xAC, 0xE0, 0x00, 0x00, 0x40, 0x3C, 0x00, 0x03
-	.byte 0x07, 0x49, 0x08, 0x20, 0x09, 0x88, 0x08, 0x40, 0x00, 0x28, 0x00, 0xD1, 0xC9, 0xE0, 0xE8, 0x7A
-	.byte 0x01, 0x30, 0xE8, 0x72, 0x1E, 0x20, 0x02, 0xF0, 0x6D, 0xFE, 0x02, 0x20, 0x04, 0x21, 0x7E, 0xE0
-	.byte 0x40, 0x3C, 0x00, 0x03, 0x28, 0x1C, 0x7E, 0x30, 0x00, 0x88, 0x00, 0x28, 0x00, 0xD0, 0xB8, 0xE0
-	.byte 0x90, 0xE0, 0x00, 0xF0, 0xBF, 0xF8, 0x00, 0xF0, 0xB7, 0xF9, 0x08, 0x49, 0xFE, 0x20, 0xCA, 0x7A
-	.byte 0x10, 0x40, 0xC8, 0x72, 0x82, 0x20, 0x40, 0x00, 0xA8, 0x60, 0x05, 0x48, 0xB4, 0x8A, 0x84, 0x42
-	.byte 0x02, 0xD0, 0xB0, 0x8A, 0x02, 0xF0, 0xA8, 0xFD, 0x01, 0x20, 0x5F, 0xE0, 0x20, 0x3C, 0x00, 0x03
-	.byte 0xFF, 0xFF, 0x00, 0x00
+	bl sub_80178E0
+	ldrb r0, [r6, #9]
+	movs r4, #0
+	strb r0, [r6, #8]
+	ldrb r0, [r6, #9]
+	bl sub_8016124
+	bl sub_8016150
+	bl sub_8016DFC
+	ldr r0, _08010ABC @ =gMain
+	ldr r1, _08010AC0 @ =0x0000024A
+	adds r0, r0, r1
+	strb r4, [r0]
+	movs r0, #1
+	ldrb r2, [r7, #0xb]
+	orrs r0, r2
+	strb r0, [r7, #0xb]
+	ldrb r0, [r5, #0xa]
+	adds r0, #1
+	strb r0, [r5, #0xa]
+_08010AA6:
+	bl sub_801622C
+	bl sub_8016214
+	cmp r0, #0
+	bne _08010AB4
+	b _08010F92
+_08010AB4:
+	ldrb r0, [r5, #0xa]
+	adds r0, #1
+	strb r0, [r5, #0xa]
+	b _08010F92
+	.align 2, 0
+_08010ABC: .4byte gMain
+_08010AC0: .4byte 0x0000024A
+_08010AC4:
+	ldrh r0, [r6, #0xa]
+	bl ChangeScriptSection
+	ldr r1, _08010B6C @ =gMain
+	movs r0, #1
+	strb r0, [r1, #0x18]
+	movs r0, #3
+	strb r0, [r5, #0xa]
+_08010AD4:
+	ldr r4, _08010B6C @ =gMain
+	ldr r0, _08010B70 @ =0x0000024A
+	adds r1, r4, r0
+	movs r0, #1
+	ldrb r1, [r1]
+	ands r0, r1
+	cmp r0, #0
+	beq _08010B2C
+	ldr r1, _08010B74 @ =gJoypad
+	movs r0, #0x80
+	lsls r0, r0, #1
+	ldrh r1, [r1, #2]
+	cmp r1, r0
+	bne _08010B2C
+	movs r1, #0x92
+	lsls r1, r1, #2
+	adds r0, r4, r1
+	ldrb r0, [r0]
+	cmp r0, #0
+	bne _08010B2C
+	adds r0, r5, #0
+	adds r0, #0xdc
+	ldr r0, [r0]
+	movs r1, #0x10
+	ands r0, r1
+	cmp r0, #0
+	bne _08010B2C
+	ldr r1, _08010B78 @ =gScriptContext
+	movs r0, #0xd
+	ldrh r1, [r1]
+	ands r0, r1
+	cmp r0, #0
+	beq _08010B2C
+	bl sub_8017864
+	bl sub_80170AC
+	movs r0, #0x31
+	bl PlaySE
+	ldr r0, [r4, #8]
+	str r0, [r5, #0xc]
+	ldr r0, _08010B7C @ =0x03000007
+	str r0, [r5, #8]
+_08010B2C:
+	ldr r4, _08010B6C @ =gMain
+	ldr r2, _08010B70 @ =0x0000024A
+	adds r1, r4, r2
+	movs r0, #2
+	ldrb r1, [r1]
+	ands r0, r1
+	cmp r0, #0
+	beq _08010B80
+	bl sub_801715C
+	cmp r0, #0
+	bne _08010B80
+	movs r1, #0x92
+	lsls r1, r1, #2
+	adds r0, r4, r1
+	ldrb r4, [r0]
+	cmp r4, #0
+	bne _08010B80
+	ldr r1, _08010B74 @ =gJoypad
+	movs r0, #0x80
+	lsls r0, r0, #2
+	ldrh r1, [r1, #2]
+	cmp r1, r0
+	bne _08010B80
+	movs r0, #0x2c
+	bl PlaySE
+	movs r0, #8
+	strb r0, [r5, #0xa]
+	strb r4, [r5, #0xb]
+	b _08010D9C
+	.align 2, 0
+_08010B6C: .4byte gMain
+_08010B70: .4byte 0x0000024A
+_08010B74: .4byte gJoypad
+_08010B78: .4byte gScriptContext
+_08010B7C: .4byte 0x03000007
+_08010B80:
+	ldr r4, _08010C00 @ =gMain
+	ldr r2, _08010C04 @ =0x0000024A
+	adds r0, r4, r2
+	ldrb r0, [r0]
+	cmp r0, #0
+	bne _08010BD4
+	bl sub_801715C
+	cmp r0, #0
+	bne _08010BD4
+	ldr r1, _08010C08 @ =gJoypad
+	movs r0, #0x80
+	lsls r0, r0, #1
+	ldrh r1, [r1, #2]
+	cmp r1, r0
+	bne _08010BD4
+	bl sub_80175C0
+	cmp r0, #0
+	bne _08010BD4
+	adds r0, r5, #0
+	adds r0, #0xdc
+	ldr r0, [r0]
+	movs r1, #0x10
+	ands r0, r1
+	cmp r0, #0
+	bne _08010BD4
+	ldr r1, _08010C0C @ =gScriptContext
+	movs r0, #5
+	ldrh r1, [r1]
+	ands r0, r1
+	cmp r0, #0
+	beq _08010BD4
+	bl sub_8017864
+	movs r0, #0x31
+	bl PlaySE
+	ldr r0, [r4, #8]
+	str r0, [r5, #0xc]
+	ldr r0, _08010C10 @ =0x04000007
+	str r0, [r5, #8]
+_08010BD4:
+	adds r0, r5, #0
+	adds r0, #0x98
+	movs r4, #0
+	ldrsh r0, [r0, r4]
+	cmp r0, #0
+	ble _08010BE2
+	b _08010F92
+_08010BE2:
+	adds r0, r5, #0
+	adds r0, #0x9a
+	movs r1, #0
+	ldrsh r0, [r0, r1]
+	cmp r0, #0
+	ble _08010BF0
+	b _08010F92
+_08010BF0:
+	bl sub_8017C78
+	cmp r0, #0
+	beq _08010BFA
+	b _08010F92
+_08010BFA:
+	movs r0, #0xb
+	strb r0, [r5, #0xa]
+	b _08010F92
+	.align 2, 0
+_08010C00: .4byte gMain
+_08010C04: .4byte 0x0000024A
+_08010C08: .4byte gJoypad
+_08010C0C: .4byte gScriptContext
+_08010C10: .4byte 0x04000007
+_08010C14:
+	ldrb r2, [r5, #0xb]
+	cmp r2, #1
+	bne _08010C1C
+	b _08010F38
+_08010C1C:
+	cmp r2, #1
+	bgt _08010C26
+	cmp r2, #0
+	beq _08010C2C
+	b _08010F92
+_08010C26:
+	cmp r2, #2
+	beq _08010C54
+	b _08010F92
+_08010C2C:
+	ldr r0, _08010C48 @ =gMain
+	strb r2, [r0, #0x18]
+	strb r2, [r0, #0x19]
+	ldr r1, _08010C4C @ =gIORegisters
+	adds r3, r1, #0
+	adds r3, #0x4a
+	ldr r0, _08010C50 @ =0x0000FDFF
+	ldrh r4, [r3]
+	ands r0, r4
+	strh r0, [r3]
+	strh r2, [r1, #0xe]
+	bl sub_80161B4
+	b _08010F32
+	.align 2, 0
+_08010C48: .4byte gMain
+_08010C4C: .4byte gIORegisters
+_08010C50: .4byte 0x0000FDFF
+_08010C54:
+	ldrb r0, [r6, #8]
+	subs r0, #1
+	strb r0, [r6, #8]
+	lsls r0, r0, #0x18
+	cmp r0, #0
+	bne _08010C7C
+	ldr r0, _08010C78 @ =gMain
+	movs r1, #0x93
+	lsls r1, r1, #2
+	adds r0, r0, r1
+	ldrb r1, [r0]
+	cmp r1, #0
+	bne _08010C7C
+	movs r0, #7
+	strb r0, [r5, #0xa]
+	strb r1, [r5, #0xb]
+	b _08010F92
+	.align 2, 0
+_08010C78: .4byte gMain
+_08010C7C:
+	ldr r0, _08010CA0 @ =gMain
+	movs r1, #1
+	strb r1, [r0, #0x18]
+	movs r2, #0x93
+	lsls r2, r2, #2
+	adds r0, r0, r2
+	ldrb r0, [r0]
+	cmp r0, #0
+	bne _08010C94
+	movs r0, #1
+	bl SlideTextbox
+_08010C94:
+	movs r0, #3
+	strb r0, [r5, #0xa]
+	movs r0, #0
+	strb r0, [r5, #0xb]
+	b _08010F92
+	.align 2, 0
+_08010CA0: .4byte gMain
+_08010CA4:
+	ldrh r0, [r6, #0x10]
+	bl ChangeScriptSection
+	movs r0, #1
+	bl SlideTextbox
+_08010CB0:
+	movs r0, #3
+	strb r0, [r5, #0xa]
+	b _08010F92
+_08010CB6:
+	ldr r0, _08010CD0 @ =gMain
+	adds r0, #0xa0
+	movs r1, #0x64
+	strh r1, [r0]
+	ldrb r0, [r5, #0xb]
+	cmp r0, #4
+	bls _08010CC6
+	b _08010F92
+_08010CC6:
+	lsls r0, r0, #2
+	ldr r1, _08010CD4 @ =_08010CD8
+	adds r0, r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.align 2, 0
+_08010CD0: .4byte gMain
+_08010CD4: .4byte _08010CD8
+_08010CD8: @ jump table
+	.4byte _08010CEC @ case 0
+	.4byte _08010D02 @ case 1
+	.4byte _08010D44 @ case 2
+	.4byte _08010D58 @ case 3
+	.4byte _08010D78 @ case 4
+_08010CEC:
+	ldr r0, _08010D3C @ =gMain
+	movs r1, #0
+	strb r1, [r0, #0x18]
+	movs r0, #0x1e
+	bl FadeOutBGM
+	bl sub_80161C4
+	ldrb r0, [r5, #0xb]
+	adds r0, #1
+	strb r0, [r5, #0xb]
+_08010D02:
+	bl sub_801622C
+	bl sub_8016214
+	cmp r0, #0
+	bne _08010D10
+	b _08010F92
+_08010D10:
+	bl sub_80161E4
+	ldr r4, _08010D3C @ =gMain
+	adds r0, r4, #0
+	adds r0, #0x98
+	movs r1, #0
+	ldrsh r0, [r0, r1]
+	cmp r0, #0x4f
+	ble _08010D24
+	b _08010F44
+_08010D24:
+	movs r0, #1
+	bl sub_8017928
+	adds r1, r4, #0
+	adds r1, #0x9c
+	ldr r0, _08010D40 @ =0x0000FFD8
+	strh r0, [r1]
+	movs r0, #3
+	bl sub_8017928
+	b _08010F44
+	.align 2, 0
+_08010D3C: .4byte gMain
+_08010D40: .4byte 0x0000FFD8
+_08010D44:
+	bl sub_801622C
+	bl sub_8016214
+	cmp r0, #0
+	bne _08010D52
+	b _08010F92
+_08010D52:
+	bl sub_80161D4
+	b _08010F44
+_08010D58:
+	bl sub_801622C
+	bl sub_8016214
+	cmp r0, #0
+	bne _08010D66
+	b _08010F92
+_08010D66:
+	bl sub_8017C78
+	cmp r0, #0
+	beq _08010D70
+	b _08010F92
+_08010D70:
+	movs r0, #2
+	bl sub_8017928
+	b _08010F44
+_08010D78:
+	movs r4, #0
+	movs r0, #3
+	strb r0, [r7, #0xc]
+	strb r0, [r7, #0xd]
+	ldr r1, _08010D98 @ =gMain
+	movs r0, #1
+	strb r0, [r1, #0x18]
+	bl sub_8010FA4
+	bl sub_8011198
+	str r4, [r6]
+	movs r0, #0x82
+	lsls r0, r0, #1
+	str r0, [r5, #8]
+	b _08010F92
+	.align 2, 0
+_08010D98: .4byte gMain
+_08010D9C:
+	ldrb r0, [r5, #0xb]
+	cmp r0, #5
+	bls _08010DA4
+	b _08010F92
+_08010DA4:
+	lsls r0, r0, #2
+	ldr r1, _08010DB0 @ =_08010DB4
+	adds r0, r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.align 2, 0
+_08010DB0: .4byte _08010DB4
+_08010DB4: @ jump table
+	.4byte _08010DCC @ case 0
+	.4byte _08010DF0 @ case 1
+	.4byte _08010E14 @ case 2
+	.4byte _08010F2E @ case 3
+	.4byte _08010F38 @ case 4
+	.4byte _08010E22 @ case 5
+_08010DCC:
+	ldrh r0, [r6, #0xc]
+	bl ChangeScriptSection
+	ldr r0, _08010DEC @ =gScriptContext
+	adds r0, #0x38
+	ldrb r0, [r0]
+	cmp r0, #1
+	beq _08010DE2
+	cmp r0, #4
+	beq _08010DE2
+	b _08010F44
+_08010DE2:
+	movs r0, #1
+	bl SlideTextbox
+	b _08010F44
+	.align 2, 0
+_08010DEC: .4byte gScriptContext
+_08010DF0:
+	ldr r1, _08010E10 @ =gScriptContext
+	movs r0, #8
+	ldrh r1, [r1]
+	ands r0, r1
+	cmp r0, #0
+	bne _08010DFE
+	b _08010F92
+_08010DFE:
+	ldrb r0, [r5, #0xb]
+	adds r0, #1
+	strb r0, [r5, #0xb]
+	movs r0, #0x1e
+	bl FadeOutBGM
+	movs r0, #2
+	movs r1, #4
+	b _08010F0E
+	.align 2, 0
+_08010E10: .4byte gScriptContext
+_08010E14:
+	adds r0, r5, #0
+	adds r0, #0x7e
+	ldrh r0, [r0]
+	cmp r0, #0
+	beq _08010E20
+	b _08010F92
+_08010E20:
+	b _08010F44
+_08010E22:
+	bl sub_8010FA4
+	bl sub_8011198
+	ldr r1, _08010E4C @ =gInvestigation
+	movs r0, #0xfe
+	ldrb r2, [r1, #0xb]
+	ands r0, r2
+	strb r0, [r1, #0xb]
+	movs r0, #0x82
+	lsls r0, r0, #1
+	str r0, [r5, #8]
+	ldr r0, _08010E50 @ =0x0000FFFF
+	ldrh r4, [r6, #0x14]
+	cmp r4, r0
+	beq _08010E48
+	ldrh r0, [r6, #0x14]
+	bl PlayBGM
+_08010E48:
+	movs r0, #1
+	b _08010F0C
+	.align 2, 0
+_08010E4C: .4byte gInvestigation
+_08010E50: .4byte 0x0000FFFF
 _08010E54:
 	ldrb r1, [r5, #0xb]
 	cmp r1, #1
@@ -12289,20 +12689,75 @@ _08010E98:
 	bl SlideTextbox
 	ldr r0, [r4, #0xc]
 	str r0, [r4, #8]
+_08010EA6:
 	b _08010F92
 	.align 2, 0
 _08010EA8: .4byte gMain
 _08010EAC:
-	.byte 0xE8, 0x7A, 0x05, 0x28
-	.byte 0x6F, 0xD8, 0x80, 0x00, 0x01, 0x49, 0x40, 0x18, 0x00, 0x68, 0x87, 0x46, 0xC0, 0x0E, 0x01, 0x08
-	.byte 0xD8, 0x0E, 0x01, 0x08, 0xF8, 0x0E, 0x01, 0x08, 0x1C, 0x0F, 0x01, 0x08, 0x2E, 0x0F, 0x01, 0x08
-	.byte 0x38, 0x0F, 0x01, 0x08, 0x4C, 0x0F, 0x01, 0x08, 0x70, 0x8A, 0xF6, 0xF7, 0x2D, 0xFB, 0x05, 0x48
-	.byte 0x38, 0x30, 0x00, 0x78, 0x01, 0x28, 0x01, 0xD0, 0x04, 0x28, 0x2B, 0xD1, 0x01, 0x20, 0xF2, 0xF7
-	.byte 0x85, 0xFC, 0x27, 0xE0, 0x40, 0x3C, 0x00, 0x03, 0x07, 0x49, 0x08, 0x20, 0x09, 0x88, 0x08, 0x40
-	.byte 0x00, 0x28, 0x46, 0xD0, 0xE8, 0x7A, 0x01, 0x30, 0xE8, 0x72, 0x02, 0x20, 0x01, 0x21, 0x01, 0x22
-	.byte 0x1F, 0x23, 0xEF, 0xF7, 0xA3, 0xFC, 0x3C, 0xE0, 0x40, 0x3C, 0x00, 0x03, 0x28, 0x1C, 0x7E, 0x30
-	.byte 0x00, 0x88, 0x00, 0x28, 0x35, 0xD1, 0x1E, 0x20, 0x02, 0xF0, 0xDC, 0xFD, 0x0A, 0xE0, 0x05, 0xF0
-	.byte 0x59, 0xF9
+	ldrb r0, [r5, #0xb]
+	cmp r0, #5
+	bhi _08010F92
+	lsls r0, r0, #2
+	ldr r1, _08010EBC @ =_08010EC0
+	adds r0, r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.align 2, 0
+_08010EBC: .4byte _08010EC0
+_08010EC0: @ jump table
+	.4byte _08010ED8 @ case 0
+	.4byte _08010EF8 @ case 1
+	.4byte _08010F1C @ case 2
+	.4byte _08010F2E @ case 3
+	.4byte _08010F38 @ case 4
+	.4byte _08010F4C @ case 5
+_08010ED8:
+	ldrh r0, [r6, #0x12]
+	bl ChangeScriptSection
+	ldr r0, _08010EF4 @ =gScriptContext
+	adds r0, #0x38
+	ldrb r0, [r0]
+	cmp r0, #1
+	beq _08010EEC
+	cmp r0, #4
+	bne _08010F44
+_08010EEC:
+	movs r0, #1
+	bl SlideTextbox
+	b _08010F44
+	.align 2, 0
+_08010EF4: .4byte gScriptContext
+_08010EF8:
+	ldr r1, _08010F18 @ =gScriptContext
+	movs r0, #8
+	ldrh r1, [r1]
+	ands r0, r1
+	cmp r0, #0
+	beq _08010F92
+	ldrb r0, [r5, #0xb]
+	adds r0, #1
+	strb r0, [r5, #0xb]
+	movs r0, #2
+_08010F0C:
+	movs r1, #1
+_08010F0E:
+	movs r2, #1
+	movs r3, #0x1f
+	bl StartHardwareBlend
+	b _08010F92
+	.align 2, 0
+_08010F18: .4byte gScriptContext
+_08010F1C:
+	adds r0, r5, #0
+	adds r0, #0x7e
+	ldrh r0, [r0]
+	cmp r0, #0
+	bne _08010F92
+	movs r0, #0x1e
+	bl FadeOutBGM
+	b _08010F44
+_08010F2E:
+	bl sub_80161E4
 _08010F32:
 	ldrb r0, [r5, #0xb]
 	adds r0, #1
@@ -12312,24 +12767,51 @@ _08010F38:
 	bl sub_8016214
 	cmp r0, #0
 	beq _08010F92
+_08010F44:
 	ldrb r0, [r5, #0xb]
 	adds r0, #1
 	strb r0, [r5, #0xb]
 	b _08010F92
 _08010F4C:
-	.byte 0x12, 0x48, 0x02, 0x1C
-	.byte 0x9A, 0x32, 0x01, 0x21, 0x11, 0x80, 0x98, 0x30, 0x01, 0x80, 0x00, 0xF0, 0x23, 0xF8, 0x00, 0xF0
-	.byte 0x1B, 0xF9, 0x0E, 0x49, 0xFE, 0x20, 0xCC, 0x7A, 0x20, 0x40, 0xC8, 0x72, 0x00, 0x20, 0xF2, 0xF7
-	.byte 0x45, 0xFC, 0x82, 0x20, 0x40, 0x00, 0xA8, 0x60, 0x09, 0x48, 0xB1, 0x8A, 0x81, 0x42, 0x02, 0xD0
-	.byte 0xB0, 0x8A, 0x02, 0xF0, 0x09, 0xFD, 0x01, 0x20, 0x01, 0x21, 0x01, 0x22, 0x1F, 0x23, 0xEF, 0xF7
-	.byte 0x65, 0xFC
+	ldr r0, _08010F98 @ =gMain
+	adds r2, r0, #0
+	adds r2, #0x9a
+	movs r1, #1
+	strh r1, [r2]
+	adds r0, #0x98
+	strh r1, [r0]
+	bl sub_8010FA4
+	bl sub_8011198
+	ldr r1, _08010F9C @ =gInvestigation
+	movs r0, #0xfe
+	ldrb r4, [r1, #0xb]
+	ands r0, r4
+	strb r0, [r1, #0xb]
+	movs r0, #0
+	bl SlideTextbox
+	movs r0, #0x82
+	lsls r0, r0, #1
+	str r0, [r5, #8]
+	ldr r0, _08010FA0 @ =0x0000FFFF
+	ldrh r1, [r6, #0x14]
+	cmp r1, r0
+	beq _08010F86
+	ldrh r0, [r6, #0x14]
+	bl PlayBGM
+_08010F86:
+	movs r0, #1
+	movs r1, #1
+	movs r2, #1
+	movs r3, #0x1f
+	bl StartHardwareBlend
 _08010F92:
 	pop {r4, r5, r6, r7}
 	pop {r0}
 	bx r0
-_08010F98:
-	.byte 0xB0, 0x37, 0x00, 0x03, 0x20, 0x3C, 0x00, 0x03
-	.byte 0xFF, 0xFF, 0x00, 0x00
+	.align 2, 0
+_08010F98: .4byte gMain
+_08010F9C: .4byte gInvestigation
+_08010FA0: .4byte 0x0000FFFF
 
 	thumb_func_start sub_8010FA4
 sub_8010FA4: @ 0x08010FA4
@@ -12483,7 +12965,7 @@ _080110DA:
 	ldr r4, _0801117C @ =gOamObjects+0x1A0
 	adds r0, r5, #0
 	movs r1, #4
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	movs r1, #0
 	movs r0, #0xd0
 	strb r0, [r5, #0xf]
@@ -12840,7 +13322,7 @@ sub_8011388: @ 0x08011388
 	cmp r0, #1
 	bne _080113FC
 	ldrh r0, [r5, #0x2e]
-	bl sub_80035A0
+	bl GetBGControlBits
 	movs r1, #3
 	ands r1, r0
 	cmp r1, #0
@@ -13032,7 +13514,7 @@ _0801151C:
 	beq _0801152C
 	adds r1, r4, #4
 	mov r0, sp
-	bl sub_8014508
+	bl CheckRectCollisionWithArea
 	cmp r0, #0
 	bne _08011568
 _0801152C:
@@ -13666,13 +14148,13 @@ _08011A28:
 	cmp r3, #0
 	beq _08011A3C
 	movs r0, #4
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x37
 	bl PlaySE
 	b _08011A48
 _08011A3C:
 	movs r0, #2
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x51
 	bl PlaySE
 _08011A48:
@@ -13797,7 +14279,7 @@ _08011B40:
 	str r0, [r7, #8]
 	movs r0, #0
 	movs r1, #0
-	bl sub_8004000
+	bl SetTextboxNametag
 	mov r3, sl
 	ldr r0, [r3]
 	ldr r1, _08011B64 @ =0xFFFFFCFF
@@ -14948,7 +15430,7 @@ _08012470:
 	ldr r0, _08012518 @ =0x80000050
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	bl sub_8009934
+	bl MakeMapMarkerSprites
 	ldrb r0, [r5, #0xc]
 	cmp r0, #5
 	bne _080124DA
@@ -14989,7 +15471,7 @@ _08012524:
 	movs r0, #8
 	strh r0, [r1, #0x14]
 	movs r0, #0x6b
-	bl sub_8013EB0
+	bl FindAnimationFromAnimId
 	adds r1, r0, #0
 	cmp r1, #0
 	beq _08012546
@@ -15227,7 +15709,7 @@ _080126F0:
 	b _080129F0
 _0801270E:
 	movs r0, #4
-	bl sub_801480C
+	bl PlayAnimation
 	movs r0, #0x37
 	bl PlaySE
 	ldr r1, _0801279C @ =gTestimony
@@ -15788,7 +16270,7 @@ sub_8012B74: @ 0x08012B74
 	bne _08012BB4
 	ldr r0, _08012BB0 @ =gInvestigation
 	movs r1, #1
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	b _08012BD4
 	.align 2, 0
 _08012BAC: .4byte gMain+0x8
@@ -15799,7 +16281,7 @@ _08012BB4:
 	bne _08012BC8
 	ldr r0, _08012BC4 @ =gInvestigation
 	movs r1, #4
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 	b _08012BD4
 	.align 2, 0
 _08012BC4: .4byte gInvestigation
@@ -15808,7 +16290,7 @@ _08012BC8:
 	bne _08012BD4
 	ldr r0, _08012BE4 @ =gInvestigation
 	movs r1, #8
-	bl sub_800EB24
+	bl SetInactiveActionButtons
 _08012BD4:
 	ldr r0, _08012BE8 @ =gScriptContext
 	movs r1, #2
@@ -15847,7 +16329,7 @@ sub_8012BEC: @ 0x08012BEC
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	lsls r0, r0, #5
-	ldr r3, _08012C4C @ =gUnknown_0813D97C
+	ldr r3, _08012C4C @ =gGfx4bppTestimonyArrows
 	adds r0, r0, r3
 	str r0, [r1]
 	ldr r0, _08012C50 @ =0x06013400
@@ -15873,7 +16355,7 @@ _08012C3E:
 	.align 2, 0
 _08012C44: .4byte 0x040000D4
 _08012C48: .4byte gUnknown_08023418
-_08012C4C: .4byte gUnknown_0813D97C
+_08012C4C: .4byte gGfx4bppTestimonyArrows
 _08012C50: .4byte 0x06013400
 _08012C54: .4byte 0x80000040
 _08012C58: .4byte gUnknown_0802341C
@@ -15886,14 +16368,14 @@ sub_8012C60: @ 0x08012C60
 	movs r1, #0xc
 	bl sub_8003C14
 	ldr r0, _08012CD8 @ =0x040000D4
-	ldr r1, _08012CDC @ =gUnknown_0813D97C
+	ldr r1, _08012CDC @ =gGfx4bppTestimonyArrows
 	str r1, [r0]
 	ldr r1, _08012CE0 @ =0x06013400
 	str r1, [r0, #4]
 	ldr r2, _08012CE4 @ =0x80000040
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08012CE8 @ =gUnknown_0813D97C+0x180
+	ldr r1, _08012CE8 @ =gGfx4bppTestimonyArrows+0x180
 	str r1, [r0]
 	ldr r1, _08012CEC @ =0x06013480
 	str r1, [r0, #4]
@@ -15941,10 +16423,10 @@ sub_8012C60: @ 0x08012C60
 	bx r0
 	.align 2, 0
 _08012CD8: .4byte 0x040000D4
-_08012CDC: .4byte gUnknown_0813D97C
+_08012CDC: .4byte gGfx4bppTestimonyArrows
 _08012CE0: .4byte 0x06013400
 _08012CE4: .4byte 0x80000040
-_08012CE8: .4byte gUnknown_0813D97C+0x180
+_08012CE8: .4byte gGfx4bppTestimonyArrows+0x180
 _08012CEC: .4byte 0x06013480
 _08012CF0: .4byte gUnknown_081410FC
 _08012CF4: .4byte 0x06013800
@@ -16405,8 +16887,8 @@ _080130BC: .4byte 0x00004090
 _080130C0: .4byte 0x000080D8
 _080130C4: .4byte 0x000041D8
 
-	thumb_func_start sub_80130C8
-sub_80130C8: @ 0x080130C8
+	thumb_func_start FindEvidenceInCourtRecord
+FindEvidenceInCourtRecord: @ 0x080130C8
 	push {r4, lr}
 	adds r4, r1, #0
 	cmp r0, #0
@@ -16448,8 +16930,8 @@ _08013104:
 	.align 2, 0
 _0801310C: .4byte gCourtRecord+0x18
 
-	thumb_func_start sub_8013110
-sub_8013110: @ 0x08013110
+	thumb_func_start FindFirstEmptySlotInCourtRecord
+FindFirstEmptySlotInCourtRecord: @ 0x08013110
 	ldr r2, _08013124 @ =gCourtRecord+0x18
 	cmp r0, #0
 	beq _08013118
@@ -16475,8 +16957,8 @@ _08013134:
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_8013138
-sub_8013138: @ 0x08013138
+	thumb_func_start SortCourtRecordAndSyncListCount
+SortCourtRecordAndSyncListCount: @ 0x08013138
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	mov ip, r0

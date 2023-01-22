@@ -1,6 +1,13 @@
 #ifndef GUARD_SCRIPT_H
 #define GUARD_SCRIPT_H
 
+#define SCRIPT_FULLSCREEN 0x4
+#define SCRIPT_LOOP 0x8
+#define SCRIPT_SPOTSELECT_MOVE_TO_START 0x80
+#define SCRIPT_SPOTSELECT_INPUT 0x100
+#define SCRIPT_SPOTSELECT_PLAY_SPAWN_SOUND 0x200
+#define SCRIPT_SPOTSELECT_SELECTION_MADE 0x400
+
 struct ScriptContext
 {
     /* +0x00 */ u16 flags; // message status, flags
@@ -33,8 +40,7 @@ struct ScriptContext
     /* +0x2C */ u16 holdItSection;
     /* +0x2E */ u8 holdItFlag;
     /* +0x2F */ u8 unk2F;
-    /* +0x30 */ u8 unk30;
-    /* +0x31 */ u8 unk31;
+    /* +0x30 */ u16 unk30;
     /* +0x32 */ u8 unk32; // unity: rt_wait_timer   
     /* +0x33 */ u8 unk33; // unity: desk_attack
     /* +0x34 */ u8 textboxNameId; // unity: speaker_id
@@ -64,7 +70,7 @@ struct MapMarker
     /* +0x02 */ u8 blinkTimer;
     /* +0x03 */ u8 speed;
     /* +0x04 */ u8 direction;
-    /* +0x05 */ u8 unk5; // status
+    /* +0x05 */ u8 flags;
     /* +0x06 */ u8 distanceToMove;
     /* +0x07 */ u8 distanceMoved;
     /* +0x08 */ u16 attr0;
@@ -77,7 +83,7 @@ struct MapMarker
 extern struct ScriptContext gScriptContext;
 extern struct TextBoxCharacter gTextBoxCharacters[0x3F];
 extern struct MapMarker gMapMarker[8];
-extern u8 gUnknown_03003B70[];
+extern u16 gUnknown_03003B70[];
 
 /* begin script data */
 

@@ -31,10 +31,11 @@ SECTIONS {
         src/investigation_segment_3_4.o(.text);
         src/investigation_segment_3_6.o(.text);
         src/script_main.o(.text);
-        asm/script_commands.o(.text);
+        src/script_commands.o(.text);
         asm/romA7A8.o(.text);
         src/sound.o(.text);
         asm/animation.o(.text);
+        src/rom15CE0.o(.text);
         asm/rom15CE0.o(.text);
         /* library functions */
         src/m4a_1.o(.text);
@@ -52,9 +53,9 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.rodata);
-        rodata/bg.o(.rodata);
-        src/utils.o(.rodata);
-        rodata/case_data.o(.rodata);
+	    rodata/bg.o(.rodata);
+	    src/utils.o(.rodata);
+	    rodata/case_data.o(.rodata);
         src/investigation_segment_1_0.o(.rodata);
         src/investigation_segment_1_2.o(.rodata);
         src/investigation_segment_2_0.o(.rodata);
@@ -63,11 +64,11 @@ SECTIONS {
         src/investigation_segment_3_2.o(.rodata);
         src/investigation_segment_3_4.o(.rodata);
         src/investigation_segment_3_6.o(.rodata);
-        rodata/script_main.o(.rodata);
-        rodata/script_commands.o(.rodata);
-        rodata/romA7A8.o(.rodata);
-        rodata/animation.o(.rodata);
-        rodata/rom15CE0.o(.rodata);
+	    rodata/script_main.o(.rodata);
+	    rodata/script_commands.o(.rodata);
+	    rodata/romA7A8.o(.rodata);
+	    rodata/animation.o(.rodata);
+        src/rom15CE0.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/sound.o(.rodata);
         src/agb_sram.o(.rodata);
