@@ -23,7 +23,7 @@
 . = 0x00011DC0; gUnknown_02011DC0 = .;
 . = 0x00011FC0; gScriptHeap = .;
 . = 0x00011FC4; gUnknown_02011FC4 = .;
-. = 0x0002CFC0; gUnknown_0202CFC0 = .;
+. = 0x0002CFC0; gBGDecompBuffer = .;
 . = 0x00036500; gUnknown_02036500 = .;
 . = 0x0003A500; gUnknown_0203A500 = .;
 . = 0x0003B000; gUnknown_0203B000 = .;

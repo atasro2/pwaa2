@@ -179,7 +179,7 @@ _08001038:
 	movs r0, #0
 	ldrsb r0, [r2, r0]
 	lsls r0, r0, #6
-	ldr r5, _080010F0 @ =gUnknown_0202CFC0
+	ldr r5, _080010F0 @ =gBGDecompBuffer
 	adds r6, r0, r5
 	movs r4, #1
 	str r2, [sp, #0x18]
@@ -254,7 +254,7 @@ _080010D8:
 	b _0800110A
 	.align 2, 0
 _080010EC: .4byte 0x7FFFFFFF
-_080010F0: .4byte gUnknown_0202CFC0
+_080010F0: .4byte gBGDecompBuffer
 _080010F4: .4byte 0x040000D4
 _080010F8: .4byte gBG3MapBuffer
 _080010FC: .4byte 0x80000001
@@ -365,7 +365,7 @@ _080011BC:
 	movs r0, #0
 	ldrsb r0, [r1, r0]
 	lsls r0, r0, #6
-	ldr r2, _080012A0 @ =gUnknown_0202CFC0
+	ldr r2, _080012A0 @ =gBGDecompBuffer
 	adds r5, r0, r2
 	movs r7, #1
 	ldr r6, [sp, #0xc]
@@ -480,7 +480,7 @@ _08001286:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080012A0: .4byte gUnknown_0202CFC0
+_080012A0: .4byte gBGDecompBuffer
 _080012A4: .4byte gBG3MapBuffer
 _080012A8: .4byte 0x040000D4
 _080012AC: .4byte gTilemapBuffer
@@ -554,7 +554,7 @@ _08001330:
 	movs r0, #0
 	ldrsb r0, [r3, r0]
 	lsls r0, r0, #6
-	ldr r4, _0800143C @ =gUnknown_0202CFC0
+	ldr r4, _0800143C @ =gBGDecompBuffer
 	adds r6, r0, r4
 	movs r3, #1
 	ldr r7, [sp, #4]
@@ -689,7 +689,7 @@ _08001422:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800143C: .4byte gUnknown_0202CFC0
+_0800143C: .4byte gBGDecompBuffer
 _08001440: .4byte 0x040000D4
 _08001444: .4byte gBG3MapBuffer+0x3E
 _08001448: .4byte 0x80000001
@@ -758,7 +758,7 @@ _080014C2:
 	movs r0, #0
 	ldrsb r0, [r1, r0]
 	lsls r0, r0, #6
-	ldr r2, _080015A4 @ =gUnknown_0202CFC0
+	ldr r2, _080015A4 @ =gBGDecompBuffer
 	adds r6, r0, r2
 	movs r0, #1
 	mov ip, r0
@@ -871,7 +871,7 @@ _08001588:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080015A4: .4byte gUnknown_0202CFC0
+_080015A4: .4byte gBGDecompBuffer
 _080015A8: .4byte 0x040000D4
 _080015AC: .4byte gBG3MapBuffer+0x2
 _080015B0: .4byte gTilemapBuffer
@@ -937,7 +937,7 @@ _0800160C:
 	movs r0, #0
 	ldrsb r0, [r6, r0]
 	muls r0, r4, r0
-	ldr r6, _0800167C @ =gUnknown_0202CFC0
+	ldr r6, _0800167C @ =gBGDecompBuffer
 	adds r0, r0, r6
 	subs r0, r0, r4
 	str r0, [r1]
@@ -971,7 +971,7 @@ _0800166C: .4byte gBG3MapBuffer
 _08001670: .4byte 0x040000D4
 _08001674: .4byte 0x80000020
 _08001678: .4byte 0x06004000
-_0800167C: .4byte gUnknown_0202CFC0
+_0800167C: .4byte gBGDecompBuffer
 _08001680:
 	mov r1, ip
 	adds r1, #0x37
@@ -1092,7 +1092,7 @@ _0800172C:
 	ldrsb r0, [r3, r0]
 	adds r1, r0, #0
 	muls r1, r6, r1
-	ldr r7, _080017E8 @ =gUnknown_0202CFC0
+	ldr r7, _080017E8 @ =gBGDecompBuffer
 	adds r1, r1, r7
 	mov r7, ip
 	movs r0, #0
@@ -1161,7 +1161,7 @@ _080017C4:
 _080017DC: .4byte 0x040000D4
 _080017E0: .4byte 0x800002A0
 _080017E4: .4byte 0x80000020
-_080017E8: .4byte gUnknown_0202CFC0
+_080017E8: .4byte gBGDecompBuffer
 _080017EC: .4byte 0x06004000
 
 	thumb_func_start sub_80017F0
@@ -1220,7 +1220,7 @@ _0800183C:
 	movs r0, #0
 	ldrsb r0, [r6, r0]
 	muls r0, r5, r0
-	ldr r6, _080018DC @ =gUnknown_0202CFC0
+	ldr r6, _080018DC @ =gBGDecompBuffer
 	adds r0, r0, r6
 	adds r0, r0, r5
 	movs r1, #0
@@ -1286,7 +1286,7 @@ _080018CC: .4byte gBG3MapBuffer+0x540
 _080018D0: .4byte 0xFFFFFAC0
 _080018D4: .4byte 0x040000D4
 _080018D8: .4byte 0x80000020
-_080018DC: .4byte gUnknown_0202CFC0
+_080018DC: .4byte gBGDecompBuffer
 _080018E0: .4byte 0x06004000
 
 	thumb_func_start sub_80018E4
@@ -1365,7 +1365,7 @@ _08001938:
 	ldrsb r0, [r3, r0]
 	adds r1, r0, #0
 	muls r1, r6, r1
-	ldr r7, _08001A08 @ =gUnknown_0202CFC0
+	ldr r7, _08001A08 @ =gBGDecompBuffer
 	adds r1, r1, r7
 	mov r7, ip
 	movs r0, #0
@@ -1438,7 +1438,7 @@ _080019F8: .4byte 0x80000020
 _080019FC: .4byte 0x800002E0
 _08001A00: .4byte gBG3MapBuffer
 _08001A04: .4byte 0x800002C0
-_08001A08: .4byte gUnknown_0202CFC0
+_08001A08: .4byte gBGDecompBuffer
 _08001A0C: .4byte 0x06004000
 
 	thumb_func_start UpdateBackground
@@ -3202,10 +3202,10 @@ _080027E6:
 	.align 2, 0
 _080027F4: .4byte gUnknown_02036500
 _080027F8:
-	ldr r0, _080027FC @ =gUnknown_0202CFC0
+	ldr r0, _080027FC @ =gBGDecompBuffer
 	b _08002804
 	.align 2, 0
-_080027FC: .4byte gUnknown_0202CFC0
+_080027FC: .4byte gBGDecompBuffer
 _08002800:
 	ldr r0, [r6, #0x48]
 	adds r0, r0, r3
@@ -3308,7 +3308,7 @@ _080028A4:
 _080028B8: .4byte gMain
 _080028BC: .4byte gUnknown_02036500
 _080028C0:
-	ldr r0, _08002910 @ =gUnknown_0202CFC0
+	ldr r0, _08002910 @ =gBGDecompBuffer
 _080028C2:
 	str r0, [r2, #0x48]
 	bl m4aSoundVSyncOff
@@ -3348,7 +3348,7 @@ _08002904:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08002910: .4byte gUnknown_0202CFC0
+_08002910: .4byte gBGDecompBuffer
 _08002914: .4byte gMain
 _08002918: .4byte gUnknown_0801ADC8
 
@@ -4047,7 +4047,7 @@ _08002EA0:
 	ldr r0, [r0]
 	movs r1, #0xf
 	ands r0, r1
-	ldr r7, _08002F30 @ =gUnknown_0202CFC0
+	ldr r7, _08002F30 @ =gBGDecompBuffer
 	cmp r0, #0
 	bne _08002ED4
 	ldr r7, _08002F34 @ =gUnknown_02036500
@@ -4097,7 +4097,7 @@ _08002EF6:
 	.align 2, 0
 _08002F28: .4byte 0x040000D4
 _08002F2C: .4byte 0x80000100
-_08002F30: .4byte gUnknown_0202CFC0
+_08002F30: .4byte gBGDecompBuffer
 _08002F34: .4byte gUnknown_02036500
 _08002F38: .4byte gUnknown_0801BBD8
 _08002F3C: .4byte gBG3MapBuffer
@@ -4171,7 +4171,7 @@ _08002F9C:
 	lsls r0, r0, #7
 	mov r1, sb
 	asrs r0, r1
-	ldr r6, _0800303C @ =gUnknown_0202CFC0
+	ldr r6, _0800303C @ =gBGDecompBuffer
 	adds r7, r0, r6
 	movs r0, #0xf0
 	lsls r0, r0, #3
@@ -4228,7 +4228,7 @@ _0800301A:
 	.align 2, 0
 _08003034: .4byte 0x040000D4
 _08003038: .4byte 0x06004000
-_0800303C: .4byte gUnknown_0202CFC0
+_0800303C: .4byte gBGDecompBuffer
 _08003040: .4byte gBG3MapBuffer
 _08003044:
 	ldr r2, _08003084 @ =0x040000D4

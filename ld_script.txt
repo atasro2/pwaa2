@@ -32,7 +32,12 @@ SECTIONS {
         src/investigation_segment_3_6.o(.text);
         src/script_main.o(.text);
         src/script_commands.o(.text);
-        asm/romA7A8.o(.text);
+        asm/title_processes.o(.text);
+        asm/gameover_process.o(.text);
+        asm/save_processes.o(.text);
+        asm/court.o(.text);
+        asm/investigation.o(.text);
+        asm/court_record.o(.text);
         src/sound.o(.text);
         asm/animation.o(.text);
         src/rom15CE0.o(.text);

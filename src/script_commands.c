@@ -2313,7 +2313,7 @@ bool32 Command71(struct ScriptContext *scriptCtx)
     scriptCtx->scriptPtr++;
     var0 = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
-    // ! force gMain.unk1A4 via dead code
+    // ! force gMain.unk1A4 load via dead code
     data = gMain.unk1A4;
     if(data->unk0) ;
     switch(var0) {

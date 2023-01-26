@@ -2,14 +2,14 @@
 
     .global gUnknown_081122F8
 gUnknown_081122F8:
-    .4byte sub_800B2CC
-    .4byte sub_800B3C8
-    .4byte sub_800B5A0
-    .4byte sub_800B668
-    .4byte sub_800B824
-    .4byte sub_800BB54
-    .4byte sub_800BBB0
-    .4byte sub_800BC58
+    .4byte SaveGameInit1
+    .4byte SaveGameInit2
+    .4byte SaveGameInitButtons
+    .4byte SaveGameWaitForInput
+    .4byte SaveGameExitSaveScreen
+    .4byte SaveGame5
+    .4byte SaveGame6
+    .4byte SaveGame7
 
     .global gUnknown_08112318
 gUnknown_08112318:
