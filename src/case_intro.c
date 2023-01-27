@@ -8,13 +8,11 @@
 #include "graphics.h"
 #include "court.h"
 #include "case_data.h"
+#include "ewram.h"
 #include "constants/animation.h"
 #include "constants/script.h"
 
 extern u8 * gUnknown_081124D0[];
-
-
-// case 4 opening spotlight code
 
 bool32 sub_8017C94(void)
 {
@@ -221,4 +219,48 @@ void sub_8018118(void)
     int i;
     for(i = 0; i < 16; i++)
        sub_801801C(&gUnknown_03006390[i]); 
+}
+
+void sub_8018138(void)
+{
+    gInvestigation.pointerX -= 0xE;
+    gIORegisters.lcd_bg2x = (0x40 - gInvestigation.pointerX / 2) << 8;
+    gIORegisters.lcd_bg2y = (0x20 - gInvestigation.pointerX / 4) << 8;
+    gIORegisters.lcd_bg2pa = gInvestigation.pointerX;
+    gIORegisters.lcd_bg2pd = gInvestigation.pointerX;
+}
+
+void sub_801816C(void)
+{
+    gInvestigation.pointerX = 0xE0;
+    gIORegisters.lcd_dispcnt &= ~7;
+    gIORegisters.lcd_dispcnt |= DISPCNT_MODE_1;
+    gIORegisters.lcd_dispcnt &= ~DISPCNT_BG3_ON;
+    gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_256COLOR | BGCNT_SCREENBASE(30);
+    gIORegisters.lcd_bg2x = -0x40 << 8;
+    gIORegisters.lcd_bg2y = -0x20 << 8;
+    gIORegisters.lcd_bg2pa = 0;
+    gIORegisters.lcd_bg2pb = 0;
+    gIORegisters.lcd_bg2pc = 0;
+    gIORegisters.lcd_bg2pd = 0;
+    LZ77UnCompWram(gUnknown_08477C38, eUnknown_02036500);
+    DmaCopy16(3, eUnknown_02036500, BG_CHAR_ADDR(1), 0x1300);
+    LZ77UnCompWram(gUnknown_08478370, eUnknown_02036500);
+    DmaCopy16(3, eUnknown_02036500, gBG2MapBuffer, sizeof(gBG2MapBuffer));
+    LZ77UnCompWram(gUnknown_084783F8, eUnknown_02036500);
+    DmaCopy16(3, eUnknown_02036500, BG_PLTT, BG_PLTT_SIZE);
+    *(u16*)BG_PLTT = 0xFFFF; // white backdrop
+    sub_8018138();
+}
+
+void sub_801823C(void)
+{
+    gIORegisters.lcd_dispcnt &= ~7;
+    gIORegisters.lcd_dispcnt |= DISPCNT_BG3_ON;
+    gIORegisters.lcd_bg2hofs = 0;
+    gIORegisters.lcd_bg2vofs = 0;
+    CopyBGDataToVram(0x80);
+    gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP;
+    *(u16*)BG_PLTT = 0; // black backdrop
+    InitBGs();
 }

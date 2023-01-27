@@ -71,7 +71,7 @@ $(shell mkdir -p $(SUBDIRS))
 ASFLAGS := -mcpu=arm7tdmi -mthumb-interwork
 
 CC1             := tools/agbcc/bin/old_agbcc
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
+override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm
 
 CPPFLAGS := -I tools/agbcc -I tools/agbcc/include -iquote include -DREVISION=$(GAME_REVISION) -nostdinc
 

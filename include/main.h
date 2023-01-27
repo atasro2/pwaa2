@@ -132,7 +132,9 @@ struct Main
         s32 unk10;
     } unk288[2];
     u8 unk2B0; // unity: spotlight_command_status
-    u8 filler2B1[0x2B8 - 0x2B1];
+    u8 filler2B1[0x2B4 - 0x2B1];
+    u8 unk2B4;
+    u8 filler2B5[0x2B8 - 0x2B5];
     u16 unk2B8;
     u16 unk2BA;
     u8 unk2BC;

@@ -36,6 +36,10 @@
 #define gUnknown_08277A98 ((u8*)(GFX_BASE_ADDR + 0x147A98))
 #define gUnknown_08277AB8 ((u8*)(GFX_BASE_ADDR + 0x147AB8))
 
+#define gUnknown_08477C38 ((u8*)(GFX_BASE_ADDR + 0x347C38))
+#define gUnknown_08478370 ((u8*)(GFX_BASE_ADDR + 0x348370))
+#define gUnknown_084783F8 ((u8*)(GFX_BASE_ADDR + 0x3483F8))
+
 //extern u8 gTextPal[];
 #define gTextPal ((u8*)(GFX_BASE_ADDR + 0x7E388))
 #define gCharSet ((u8*)(GFX_BASE_ADDR + 0x7E3A8))
