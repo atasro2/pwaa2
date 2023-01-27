@@ -40,8 +40,11 @@ SECTIONS {
         asm/court_record.o(.text);
         src/sound.o(.text);
         asm/animation.o(.text);
-        src/rom15CE0.o(.text);
-        asm/rom15CE0.o(.text);
+        src/psyche_lock.o(.text);
+        src/hp_bar.o(.text);
+        src/case_intro.o(.text);
+        asm/case_intro.o(.text);
+        asm/signal_detector.o(.text);
         /* library functions */
         src/m4a_1.o(.text);
         src/m4a.o(.text);
@@ -73,7 +76,8 @@ SECTIONS {
 	    rodata/script_commands.o(.rodata);
 	    rodata/romA7A8.o(.rodata);
 	    rodata/animation.o(.rodata);
-        src/rom15CE0.o(.rodata);
+        src/psyche_lock.o(.rodata);
+        src/hp_bar.o(.rodata);
         src/m4a_tables.o(.rodata);
         rodata/sound.o(.rodata);
         src/agb_sram.o(.rodata);

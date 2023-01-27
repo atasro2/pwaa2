@@ -33,7 +33,7 @@ struct Main
     /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
     u8 filler1A[0x1E - 0x1A];
-    /* +0x020 */ u16 unk1E;
+    /* +0x020 */ u16 unk1E; // unity: Bk_end_mess
     /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
     /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
     /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now
@@ -115,8 +115,8 @@ struct Main
     u8 unk249;
     u8 unk24A;
     u8 unk24B;
-    u8 unk24C;
-    u8 filler24C[0x254 - 0x24D];
+    u8 unk24C; // unity: psy_unlock_not_unlock_message
+    u8 filler24D[0x254 - 0x24D];
     /* +0x254 */ u32 soundFlags;
     u8 filler258[0x276 - 0x258];
     u16 unk276[8]; // ! fix size later
