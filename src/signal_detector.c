@@ -206,16 +206,16 @@ void sub_80186EC(void) {
 
 void sub_8018720(void) {
     struct AnimationListEntry * animation;
-    if(gMain.unk2B4 ^ gMain.unk2B4) return;
+    u8 * unk2B4 = &gMain.unk2B4;
     animation = FindAnimationFromAnimId(0x44);
     if(animation)
         DestroyAnimation(animation);
     animation = FindAnimationFromAnimId(0x45);
     if(animation)
         DestroyAnimation(animation);
-    gMain.unk2B4 = 0;
+    *unk2B4 = 0;
 }
 
 void nullsub_12(void) {
-
+    
 }
