@@ -11,9 +11,41 @@
 #include "constants/animation.h"
 #include "constants/script.h"
 
-extern u16 gUnknown_0811242C[2][16];
-extern s16 gUnknown_0811246C[5*5*2];
+u16 gUnknown_0811242C[][16] = {
+    {0x0000, 0x0842, 0x1084, 0x14a5, 0x18c6, 0x1ce8, 0x252a, 0x294b, 0x318d, 0x39ce, 0x4210, 0x4632, 0x4a53, 0x5295, 0x5ad6, 0x6318},
+    {0x0000, 0x0842, 0x1084, 0x18c6, 0x2529, 0x2d6b, 0x39ce, 0x4210, 0x4a52, 0x4e73, 0x56b5, 0x5ad6, 0x6318, 0x6739, 0x6f7b, 0x739c}
+};
 
+s16 gUnknown_0811246C[] = { // pairs of psychelock X/Y coordinates
+	0x0058, 0x0058, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, // 1 lock
+    0x0018, 0x0050, 0x0098, 0x0050, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, // 2 locks
+    0x0058, 0x0058, 0x0010, 0x0040, 0x00a0, 0x0040, 0x0000, 0x0000, 0x0000, 0x0000, // 3 locks
+    0x0028, 0x0028, 0x0088, 0x0028, 0x0008, 0x0058, 0x00a8, 0x0058, 0x0000, 0x0000, // 4 locks
+    0x0058, 0x0058, 0x0028, 0x0018, 0x0088, 0x0018, 0x0008, 0x0050, 0x00a8, 0x0050, // 5 locks 
+};
+
+u8 * gUnknown_081124D0[] = {
+    gUnknown_081489E8,
+    gUnknown_08148C20,
+    gUnknown_08149010,
+    gUnknown_08149444,
+    gUnknown_08149AB0,
+    gUnknown_0814A224,
+    gUnknown_0814A3A8,
+    gUnknown_0814A610,
+    gUnknown_0814AA70,
+    gUnknown_0814AED0,
+    gUnknown_0814B6E4,
+    gUnknown_0814B944,
+    gUnknown_0814BCE4,
+    gUnknown_0814C094,
+    gUnknown_0814C58C,
+    gUnknown_0814CAA0,
+    gUnknown_0814CC38,
+    gUnknown_0814CEE4,
+    gUnknown_0814D218,
+    gUnknown_0814D5A4
+};
 void sub_8015F54(struct PscyheLock_10 * arg0);
 
 void sub_8015CE0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2, s32 arg3)

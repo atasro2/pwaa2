@@ -94,7 +94,9 @@ SECTIONS {
         data/romA7A8.o(.data);
         src/sound.o(.data);
         data/animation.o(.data);
-        data/rom15CE0.o(.data);
+        src/psyche_lock.o(.data);
+        src/hp_bar.o(.data);
+        src/signal_detector.o(.data);
     } =0
 
     . = 0x8130000;
