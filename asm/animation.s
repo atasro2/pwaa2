@@ -3516,7 +3516,7 @@ _0801582C:
 	ldrh r0, [r4, #0xc]
 	cmp r0, #8
 	bhi _08015844
-	ldr r0, _08015890 @ =gUnknown_081123F4
+	ldr r0, _08015890 @ =gSpecialAnimationEffectFunctions
 	ldrh r1, [r4, #0xc]
 	subs r1, #1
 	lsls r1, r1, #2
@@ -3562,7 +3562,7 @@ _08015878:
 	bx r0
 	.align 2, 0
 _0801588C: .4byte 0xFDFFFFFF
-_08015890: .4byte gUnknown_081123F4
+_08015890: .4byte gSpecialAnimationEffectFunctions
 
 	thumb_func_start sub_8015894
 sub_8015894: @ 0x08015894
@@ -4035,7 +4035,7 @@ _08015C1C: .4byte 0xFFFFFEB6
 sub_8015C20: @ 0x08015C20
 	push {lr}
 	ldr r1, _08015C38 @ =gCourtScroll
-	ldr r0, _08015C3C @ =gUnknown_08112414
+	ldr r0, _08015C3C @ =gCourtScrollPersonAnimationUpdateFuncs
 	ldrb r3, [r1, #6]
 	lsls r2, r3, #2
 	adds r2, r2, r0
@@ -4046,7 +4046,7 @@ sub_8015C20: @ 0x08015C20
 	bx r0
 	.align 2, 0
 _08015C38: .4byte gCourtScroll
-_08015C3C: .4byte gUnknown_08112414
+_08015C3C: .4byte gCourtScrollPersonAnimationUpdateFuncs
 _08015C40: .4byte gAnimation+0x44
 
 	thumb_func_start SetCourtScrollPersonAnim

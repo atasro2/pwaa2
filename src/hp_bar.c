@@ -519,7 +519,7 @@ _080179C0:
     {
         if(gMain.process[GAME_PROCESS] == 3 || gMain.process[GAME_PROCESS] == 5 || gMain.process[GAME_PROCESS] == 6 || gMain.process[GAME_PROCESS] == 5)
         {
-            ChangeScriptSection(gUnknown_0801C3EE[gMain.scenarioIdx]);
+            ChangeScriptSection(gCaseGameoverSections[gMain.scenarioIdx]);
             sub_8017928(4);
         }
     }

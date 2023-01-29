@@ -16,14 +16,30 @@
 #include "constants/script.h"
 #include "constants/songs.h"
 #include "constants/process.h"
-/**
+#include "graphics.h"
+
+const u8 gSoundCueTable[] = {
+    0, 0, 1, 0, 1, 1, 1, 0,
+    0, 0, 0, 0, 0, 0, 0, 1,
+    0, 1, 1, 1, 1, 1, 0, 0,
+    1, 1, 1, 1, 1, 0, 0, 0,
+    0, 1, 1, 0, 1, 0, 0, 1,
+    0, 1, 0, 0, 1, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0,
+};
+
+/* thrice just the palette?
+   probably left over from when the scroll
+   was more than a single graphic */
+u8 * const gCourtScrollGfxPointers[] = {
+    gUnknown_08478BDC,
+    gUnknown_08478BDC,
+    gUnknown_08478BDC,
+};
+
 const u8 gTextboxDownArrowTileIndexes[] = {
     0x20, 0x22, 0x24, 0x26, 0x24, 0x22,
 };
-*/
-extern u8 gTextboxDownArrowTileIndexes[];
-extern u8 gSoundCueTable[];
-extern u8 * gCourtScrollGfxPointers[];
 
 bool32 CommandDummy(struct ScriptContext * scriptCtx)
 {
@@ -1249,7 +1265,71 @@ struct MapMarkerSprite
     /* +0x0A */ u16 attr2;
 };
 
-extern const struct MapMarkerSprite sMapMarkerSprites[];
+const struct MapMarkerSprite sMapMarkerSprites[] = {
+    {
+        .tiles = gUnknown_08231C08,
+        .size = 0x80,
+        .attr0 = 0x0000,
+        .attr1 = 0x4000,
+        .attr2 = 0x0000,
+    },
+    {
+        .tiles = gUnknown_08231C88,
+        .size = 0x80,
+        .attr0 = 0x0000,
+        .attr1 = 0x4000,
+        .attr2 = 0x0000,
+    },
+    {
+        .tiles = gUnknown_08231D08,
+        .size = 0x80,
+        .attr0 = 0x0000,
+        .attr1 = 0x4000,
+        .attr2 = 0x0000,
+    },
+    {
+        .tiles = gUnknown_08231D88,
+        .size = 0x400,
+        .attr0 = 0x8000,
+        .attr1 = 0xc000,
+        .attr2 = 0x0000,
+    },
+    {
+        .tiles = gUnknown_08232188,
+        .size = 0x100,
+        .attr0 = 0x8000,
+        .attr1 = 0x8000,
+        .attr2 = 0x0000,
+    },
+    {
+        .tiles = gUnknown_08232288,
+        .size = 0x100,
+        .attr0 = 0x8000,
+        .attr1 = 0x8000,
+        .attr2 = 0x0000,
+    },
+    {
+        .tiles = gUnknown_08232388,
+        .size = 0x100,
+        .attr0 = 0x8000,
+        .attr1 = 0x8000,
+        .attr2 = 0x0000,
+    },
+    {
+        .tiles = gUnknown_08231D08,
+        .size = 0x80,
+        .attr0 = 0x0000,
+        .attr1 = 0x4000,
+        .attr2 = 0x0000,
+    },
+    {
+        .tiles = gUnknown_08232488,
+        .size = 0x20,
+        .attr0 = 0x0000,
+        .attr1 = 0x0000,
+        .attr2 = 0x0000,
+    },
+};
 
 bool32 Command39(struct ScriptContext *scriptCtx)
 {
@@ -1419,7 +1499,408 @@ struct SpotSelectData
     /* +0x2B */ u8 bottom;
 };
 
-extern const struct SpotSelectData gSpotSelectData[];
+const struct SpotSelectData gSpotSelectData[] = {
+    {
+        .firstArea = {
+            .points = {
+                {
+                    .x = 0xA8,
+                    .y = 0x47,
+                },
+                {
+                    .x = 0xB1,
+                    .y = 0x46,
+                },
+                {
+                    .x = 0xB2,
+                    .y = 0x50,
+                },
+                {
+                    .x = 0xAA,
+                    .y = 0x4D,
+                },
+            },
+        },
+        .secondArea = {
+            .points = {
+                {
+                    .x = 0x44,
+                    .y = 0x33,
+                },
+                {
+                    .x = 0x5E,
+                    .y = 0x39,
+                },
+                {
+                    .x = 0x7C,
+                    .y = 0x55,
+                },
+                {
+                    .x = 0x50,
+                    .y = 0x54,
+                },
+            },
+        },
+        .firstAreaSection = 0xB0,
+        .secondAreaSection = 0xAE,
+        .defaultSection = 0xAF,
+        .unk26 = 0,
+        .left = 2,
+        .top = 2,
+        .right = 222,
+        .bottom = 102,
+    },
+    {
+        .firstArea = {
+            .points = {
+                {
+                    .x = 0x9E,
+                    .y = 0x47,
+                },
+                {
+                    .x = 0xC1,
+                    .y = 0x53,
+                },
+                {
+                    .x = 0xBB,
+                    .y = 0x5D,
+                },
+                {
+                    .x = 0x97,
+                    .y = 0x51,
+                },
+            },
+        },
+        .secondArea = {
+            .points = {
+                {
+                    .x = 0xC7,
+                    .y = 0x12,
+                },
+                {
+                    .x = 0xDA,
+                    .y = 0x12,
+                },
+                {
+                    .x = 0xDA,
+                    .y = 0x5C,
+                },
+                {
+                    .x = 0xC7,
+                    .y = 0x5C,
+                },
+            },
+        },
+        .firstAreaSection = 0xC8,
+        .secondAreaSection = 0xC6,
+        .defaultSection = 0xC7,
+        .unk26 = 0,
+        .left = 2,
+        .top = 2,
+        .right = 222,
+        .bottom = 102,
+    },
+    {
+        .firstArea = {
+            .points = {
+                {
+                    .x = 0x97,
+                    .y = 0x49,
+                },
+                {
+                    .x = 0xBB,
+                    .y = 0x2D,
+                },
+                {
+                    .x = 0xC8,
+                    .y = 0x4E,
+                },
+                {
+                    .x = 0xAB,
+                    .y = 0x5B,
+                },
+            },
+        },
+        .secondArea = {
+            .points = {
+                {
+                    .x = 0x3E,
+                    .y = 0x8,
+                },
+                {
+                    .x = 0x5F,
+                    .y = 0x9,
+                },
+                {
+                    .x = 0x5B,
+                    .y = 0x21,
+                },
+                {
+                    .x = 0x42,
+                    .y = 0x1E,
+                },
+            },
+        },
+        .firstAreaSection = 0xD4,
+        .secondAreaSection = 0xD1,
+        .defaultSection = 0xD3,
+        .unk26 = 0,
+        .left = 2,
+        .top = 2,
+        .right = 222,
+        .bottom = 102,
+    },
+    {
+        .firstArea = {
+            .points = {
+                {
+                    .x = 0x2C,
+                    .y = 0x8,
+                },
+                {
+                    .x = 0x4E,
+                    .y = 0x8,
+                },
+                {
+                    .x = 0x4E,
+                    .y = 0x44,
+                },
+                {
+                    .x = 0x2C,
+                    .y = 0x44,
+                },
+            },
+        },
+        .secondArea = {
+            .points = {
+                {
+                    .x = 0x0,
+                    .y = 0x0,
+                },
+                {
+                    .x = 0x1,
+                    .y = 0x0,
+                },
+                {
+                    .x = 0x1,
+                    .y = 0x1,
+                },
+                {
+                    .x = 0x0,
+                    .y = 0x1,
+                },
+            },
+        },
+        .firstAreaSection = 0xFE,
+        .secondAreaSection = 0xFD,
+        .defaultSection = 0xFD,
+        .unk26 = 0,
+        .left = 2,
+        .top = 2,
+        .right = 222,
+        .bottom = 102,
+    },
+    {
+        .firstArea = {
+            .points = {
+                {
+                    .x = 0xC7,
+                    .y = 0x12,
+                },
+                {
+                    .x = 0xDA,
+                    .y = 0x12,
+                },
+                {
+                    .x = 0xDA,
+                    .y = 0x5C,
+                },
+                {
+                    .x = 0xC7,
+                    .y = 0x5C,
+                },
+            },
+        },
+        .secondArea = {
+            .points = {
+                {
+                    .x = 0x0,
+                    .y = 0x0,
+                },
+                {
+                    .x = 0x1,
+                    .y = 0x0,
+                },
+                {
+                    .x = 0x1,
+                    .y = 0x1,
+                },
+                {
+                    .x = 0x0,
+                    .y = 0x1,
+                },
+            },
+        },
+        .firstAreaSection = 0x101,
+        .secondAreaSection = 0x100,
+        .defaultSection = 0x100,
+        .unk26 = 0,
+        .left = 2,
+        .top = 2,
+        .right = 222,
+        .bottom = 102,
+    },
+    {
+        .firstArea = {
+            .points = {
+                {
+                    .x = 0xA1,
+                    .y = 0x12,
+                },
+                {
+                    .x = 0xB6,
+                    .y = 0x12,
+                },
+                {
+                    .x = 0xB6,
+                    .y = 0x49,
+                },
+                {
+                    .x = 0xA1,
+                    .y = 0x49,
+                },
+            },
+        },
+        .secondArea = {
+            .points = {
+                {
+                    .x = 0x6E,
+                    .y = 0x49,
+                },
+                {
+                    .x = 0xB6,
+                    .y = 0x49,
+                },
+                {
+                    .x = 0xB6,
+                    .y = 0x5E,
+                },
+                {
+                    .x = 0x6E,
+                    .y = 0x5E,
+                },
+            },
+        },
+        .firstAreaSection = 0x125,
+        .secondAreaSection = 0x125,
+        .defaultSection = 0x124,
+        .unk26 = 0,
+        .left = 2,
+        .top = 16,
+        .right = 222,
+        .bottom = 102,
+    },
+    {
+        .firstArea = {
+            .points = {
+                {
+                    .x = 0xC1,
+                    .y = 0x27,
+                },
+                {
+                    .x = 0xE9,
+                    .y = 0x27,
+                },
+                {
+                    .x = 0xE9,
+                    .y = 0x45,
+                },
+                {
+                    .x = 0xC1,
+                    .y = 0x45,
+                },
+            },
+        },
+        .secondArea = {
+            .points = {
+                {
+                    .x = 0x97,
+                    .y = 0x27,
+                },
+                {
+                    .x = 0xC0,
+                    .y = 0x27,
+                },
+                {
+                    .x = 0xC0,
+                    .y = 0x45,
+                },
+                {
+                    .x = 0x97,
+                    .y = 0x45,
+                },
+            },
+        },
+        .firstAreaSection = 0xA2,
+        .secondAreaSection = 0x9F,
+        .defaultSection = 0xA0,
+        .unk26 = 0,
+        .left = 2,
+        .top = 2,
+        .right = 222,
+        .bottom = 102,
+    },
+    {
+        .firstArea = {
+            .points = {
+                {
+                    .x = 0x41,
+                    .y = 0x4E,
+                },
+                {
+                    .x = 0x7D,
+                    .y = 0x6D,
+                },
+                {
+                    .x = 0x73,
+                    .y = 0x7E,
+                },
+                {
+                    .x = 0x39,
+                    .y = 0x62,
+                },
+            },
+        },
+        .secondArea = {
+            .points = {
+                {
+                    .x = 0x78,
+                    .y = 0x8,
+                },
+                {
+                    .x = 0x92,
+                    .y = 0x8,
+                },
+                {
+                    .x = 0x75,
+                    .y = 0x67,
+                },
+                {
+                    .x = 0x46,
+                    .y = 0x50,
+                },
+            },
+        },
+        .firstAreaSection = 0xF7,
+        .secondAreaSection = 0xF4,
+        .defaultSection = 0xF6,
+        .unk26 = 0,
+        .left = 2,
+        .top = 2,
+        .right = 222,
+        .bottom = 102,
+    },
+};
 
 bool32 Command3F(struct ScriptContext *scriptCtx)
 {
@@ -1573,7 +2054,7 @@ bool32 Command41(struct ScriptContext * scriptCtx)
     for(i = 0; i < 4; i++)
     {
         oam->attr0 = SPRITE_ATTR0((-32 & 255), ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-	// 64x32 sprite size
+    // 64x32 sprite size
         oam->attr1 = SPRITE_ATTR1_NONAFFINE(60*i, 0, 0, 3);
         oam->attr2 = SPRITE_ATTR2(0x100+0x20*i, 0, 5);
         oam++;

@@ -75,7 +75,7 @@ InvestigationProcess: @ 0x0800EB38
 	ldrb r0, [r5, #9]
 	cmp r0, #5
 	beq _0800EB56
-	ldr r0, _0800EB78 @ =gUnknown_081120CC
+	ldr r0, _0800EB78 @ =gInvestigationRoomUpdateFunctions
 	adds r1, r5, #0
 	adds r1, #0xb3
 	ldrb r1, [r1]
@@ -100,7 +100,7 @@ _0800EB56:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800EB78: .4byte gUnknown_081120CC
+_0800EB78: .4byte gInvestigationRoomUpdateFunctions
 _0800EB7C: .4byte gUnknown_0811234C
 _0800EB80: .4byte gInvestigation
 
@@ -250,7 +250,7 @@ _0800EC76:
 	mov r1, sb
 	strb r1, [r2, #0xc]
 	strb r1, [r2, #0xd]
-	ldr r1, _0800EE18 @ =gUnknown_0811201C
+	ldr r1, _0800EE18 @ =gInvestigationSegmentSetupFunctions
 	adds r5, r6, #0
 	adds r5, #0xb3
 	ldrb r2, [r5]
@@ -313,7 +313,7 @@ _0800EC76:
 	bl ChangeScriptSection
 	movs r0, #1
 	bl SlideTextbox
-	ldr r1, _0800EE34 @ =gUnknown_08112074
+	ldr r1, _0800EE34 @ =gInvestigationRoomSetupFunctions
 	ldrb r2, [r5]
 	lsls r0, r2, #2
 	adds r0, r0, r1
@@ -390,14 +390,14 @@ _0800EE08: .4byte gUnknown_081DE3A8
 _0800EE0C: .4byte 0x05000320
 _0800EE10: .4byte gOamObjects+0x1A0
 _0800EE14: .4byte 0x000040E0
-_0800EE18: .4byte gUnknown_0811201C
+_0800EE18: .4byte gInvestigationSegmentSetupFunctions
 _0800EE1C: .4byte 0x0000FFAF
 _0800EE20: .4byte 0x0000FDFF
 _0800EE24: .4byte gCourtRecord
 _0800EE28: .4byte 0x85000008
 _0800EE2C: .4byte gScriptContext
 _0800EE30: .4byte 0x0000FFFF
-_0800EE34: .4byte gUnknown_08112074
+_0800EE34: .4byte gInvestigationRoomSetupFunctions
 
 	thumb_func_start sub_800EE38
 sub_800EE38: @ 0x0800EE38
@@ -1004,7 +1004,7 @@ _0800F2A6:
 	strb r4, [r0, #6]
 	movs r1, #0xf
 	bl SetInactiveActionButtons
-	ldr r1, _0800F334 @ =gUnknown_08112074
+	ldr r1, _0800F334 @ =gInvestigationRoomSetupFunctions
 	mov r2, r8
 	ldrb r2, [r2]
 	lsls r0, r2, #2
@@ -1034,7 +1034,7 @@ _0800F324: .4byte gOamObjects+0x130
 _0800F328: .4byte 0x000040E0
 _0800F32C: .4byte gAnimation+0x44
 _0800F330: .4byte gInvestigation
-_0800F334: .4byte gUnknown_08112074
+_0800F334: .4byte gInvestigationRoomSetupFunctions
 
 	thumb_func_start sub_800F338
 sub_800F338: @ 0x0800F338

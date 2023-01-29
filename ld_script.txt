@@ -60,9 +60,9 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.rodata);
-	    rodata/bg.o(.rodata);
+	    src/bg.o(.rodata);
 	    src/utils.o(.rodata);
-	    rodata/case_data.o(.rodata);
+	    src/case_data.o(.rodata);
         src/investigation_segment_1_0.o(.rodata);
         src/investigation_segment_1_2.o(.rodata);
         src/investigation_segment_2_0.o(.rodata);
@@ -71,8 +71,8 @@ SECTIONS {
         src/investigation_segment_3_2.o(.rodata);
         src/investigation_segment_3_4.o(.rodata);
         src/investigation_segment_3_6.o(.rodata);
-	    rodata/script_main.o(.rodata);
-	    rodata/script_commands.o(.rodata);
+	    src/script_main.o(.rodata);
+	    src/script_commands.o(.rodata);
 	    rodata/romA7A8.o(.rodata);
 	    rodata/animation.o(.rodata);
         src/psyche_lock.o(.rodata);
@@ -86,14 +86,15 @@ SECTIONS {
     .data :
     ALIGN(4)
     {
-        data/main.o(.data);
+        src/main.o(.data);
         data/bg.o(.data);
+        src/bg.o(.data);
         src/utils.o(.data);
-        data/case_data.o(.data);
-        data/script_main.o(.data);
+        src/case_data.o(.data);
+        src/script_main.o(.data);
         data/romA7A8.o(.data);
         src/sound.o(.data);
-        data/animation.o(.data);
+        src/animation.o(.data);
         src/psyche_lock.o(.data);
         src/hp_bar.o(.data);
         src/signal_detector.o(.data);
@@ -104,6 +105,12 @@ SECTIONS {
     ALIGN(4)
     {
         data/graphics.o(gfx_data);
+    } =0
+
+    script_data :
+    ALIGN(4)
+    {
+        src/scripts.o(script_data);
     } =0
 
     /* DWARF debug sections.

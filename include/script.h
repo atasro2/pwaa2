@@ -88,11 +88,14 @@ extern u16 gUnknown_03003B70[];
 /* begin script data */
 
 extern const u32 std_scripts[];
-extern const u8 scenario_0_script[];
+extern const u8 scenario_0_0_script[];
+extern const u8 scenario_0_1_script[];
 extern const u8 scenario_1_0_script[];
 extern const u8 scenario_1_1_script[];
 extern const u8 scenario_1_2_script[];
 extern const u8 scenario_1_3_script[];
+extern const u8 scenario_1_4_script[];
+extern const u8 scenario_1_5_script[];
 extern const u8 scenario_2_0_script[];
 extern const u8 scenario_2_1_script[];
 extern const u8 scenario_2_2_script[];
@@ -105,6 +108,9 @@ extern const u8 scenario_3_2_script[];
 extern const u8 scenario_3_3_script[];
 extern const u8 scenario_3_4_script[];
 extern const u8 scenario_3_5_script[];
+extern const u8 scenario_3_6_script[];
+extern const u8 scenario_3_7_script[];
+
 
 /* end script data */ 
 
@@ -219,6 +225,24 @@ bool32 Command5C(struct ScriptContext *);
 bool32 Command5D(struct ScriptContext *);
 bool32 Command5E(struct ScriptContext *);
 bool32 Command5F(struct ScriptContext *);
+bool32 Command60(struct ScriptContext *);
+bool32 Command61(struct ScriptContext *);
+bool32 Command62(struct ScriptContext *);
+bool32 Command63(struct ScriptContext *);
+bool32 Command64(struct ScriptContext *);
+bool32 Command65(struct ScriptContext *);
+bool32 Command66(struct ScriptContext *);
+bool32 Command67(struct ScriptContext *);
+bool32 Command68(struct ScriptContext *);
+bool32 Command69(struct ScriptContext *);
+bool32 Command6A(struct ScriptContext *);
+bool32 Command6B(struct ScriptContext *);
+bool32 Command6C(struct ScriptContext *);
+bool32 Command6D(struct ScriptContext *);
+bool32 Command6E(struct ScriptContext *);
+bool32 Command6F(struct ScriptContext *);
+bool32 Command70(struct ScriptContext *);
+bool32 Command71(struct ScriptContext *);
 /* end commands */
 
 #endif//GUARD_SCRIPT_H

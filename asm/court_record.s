@@ -9,7 +9,7 @@ InitializeCourtRecordForScenario: @ 0x08011688
 	adds r5, r0, #0
 	mov ip, r1
 	movs r3, #0
-	ldr r0, _0801172C @ =gUnknown_08111F14
+	ldr r0, _0801172C @ =gCourtRecordInitialItemLists
 	mov r8, r0
 	mov r2, ip
 	adds r2, #0x38
@@ -92,7 +92,7 @@ _08011722:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801172C: .4byte gUnknown_08111F14
+_0801172C: .4byte gCourtRecordInitialItemLists
 
 	thumb_func_start CourtRecordProcess
 CourtRecordProcess: @ 0x08011730
