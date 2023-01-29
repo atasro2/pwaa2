@@ -563,7 +563,7 @@ SetAnimationFrameOffset: @ 0x080141E0
 	ldrh r0, [r3, #0xc]
 	cmp r0, #0xff
 	bne _08014214
-	ldr r4, _08014210 @ =gUnknown_08023420
+	ldr r4, _08014210 @ =gPersonAnimData
 	ldrb r2, [r3, #0xe]
 	lsls r0, r2, #1
 	adds r0, r0, r2
@@ -580,7 +580,7 @@ SetAnimationFrameOffset: @ 0x080141E0
 	ldr r0, [r0]
 	b _0801423C
 	.align 2, 0
-_08014210: .4byte gUnknown_08023420
+_08014210: .4byte gPersonAnimData
 _08014214:
 	cmp r0, #8
 	bls _08014234
@@ -704,7 +704,7 @@ _080142DE:
 	ldrh r3, [r3, #2]
 	lsrs r0, r3, #0xc
 	lsls r0, r0, #2
-	ldr r4, _080143D4 @ =gUnknown_08024228
+	ldr r4, _080143D4 @ =gSpriteSizeTable
 	adds r0, r0, r4
 	ldr r0, [r0]
 	str r0, [sp]
@@ -811,7 +811,7 @@ _080143C4: .4byte gUnknown_0200AFC8
 _080143C8: .4byte gUnknown_0200AFD0
 _080143CC: .4byte gUnknown_0200AFC0
 _080143D0: .4byte 0x0000FFFF
-_080143D4: .4byte gUnknown_08024228
+_080143D4: .4byte gSpriteSizeTable
 _080143D8:
 	asrs r0, r2, #3
 	muls r0, r6, r0
@@ -1298,7 +1298,7 @@ _08014740:
 	adds r4, r1, #0
 	ldr r0, _08014794 @ =0x06015800
 	str r0, [sp, #0x10]
-	ldr r2, _08014798 @ =gUnknown_08023420
+	ldr r2, _08014798 @ =gPersonAnimData
 	lsls r0, r4, #1
 	adds r0, r0, r4
 	lsls r0, r0, #2
@@ -1338,7 +1338,7 @@ _08014784:
 	b _080147AA
 	.align 2, 0
 _08014794: .4byte 0x06015800
-_08014798: .4byte gUnknown_08023420
+_08014798: .4byte gPersonAnimData
 _0801479C:
 	mov r0, sp
 	lsls r1, r4, #1
@@ -1405,7 +1405,7 @@ PlayAnimation: @ 0x0801480C
 	lsls r0, r3, #2
 	adds r0, r0, r3
 	lsls r0, r0, #2
-	ldr r1, _08014848 @ =gUnknown_08023648
+	ldr r1, _08014848 @ =gAnimationData
 	adds r0, r0, r1
 	movs r4, #0xc
 	ldrsh r1, [r0, r4]
@@ -1429,7 +1429,7 @@ _08014836:
 	bx r1
 	.align 2, 0
 _08014844: .4byte gMain
-_08014848: .4byte gUnknown_08023648
+_08014848: .4byte gAnimationData
 
 	thumb_func_start PlayAnimationAtCustomOrigin
 PlayAnimationAtCustomOrigin: @ 0x0801484C
@@ -1443,7 +1443,7 @@ PlayAnimationAtCustomOrigin: @ 0x0801484C
 	lsls r3, r5, #2
 	adds r3, r3, r5
 	lsls r3, r3, #2
-	ldr r0, _0801491C @ =gUnknown_08023648
+	ldr r0, _0801491C @ =gAnimationData
 	adds r3, r3, r0
 	mov r0, sp
 	strh r5, [r0]
@@ -1539,7 +1539,7 @@ _080148EA:
 	bx r1
 	.align 2, 0
 _08014918: .4byte gMain
-_0801491C: .4byte gUnknown_08023648
+_0801491C: .4byte gAnimationData
 _08014920: .4byte 0x05000200
 _08014924: .4byte gObjPaletteBuffer
 _08014928: .4byte 0x040000D4
@@ -1565,7 +1565,7 @@ sub_801492C: @ 0x0801492C
 	strb r3, [r0, #2]
 	ldr r0, _08014A68 @ =0x06015800
 	str r0, [sp, #0x10]
-	ldr r2, _08014A6C @ =gUnknown_08023420
+	ldr r2, _08014A6C @ =gPersonAnimData
 	ldrb r1, [r4, #2]
 	lsls r0, r1, #1
 	adds r0, r0, r1
@@ -1706,7 +1706,7 @@ _08014A54:
 	.align 2, 0
 _08014A64: .4byte gAnimation+0x44
 _08014A68: .4byte 0x06015800
-_08014A6C: .4byte gUnknown_08023420
+_08014A6C: .4byte gPersonAnimData
 _08014A70: .4byte 0x040000D4
 _08014A74: .4byte 0x8000000E
 
@@ -2598,7 +2598,7 @@ _080150F8:
 	blo _08015134
 	b _080152E2
 _08015134:
-	ldr r7, _0801520C @ =gUnknown_08024228
+	ldr r7, _0801520C @ =gSpriteSizeTable
 	str r7, [sp, #0x1c]
 	movs r0, #0x24
 	add r0, ip
@@ -2707,7 +2707,7 @@ _080151FC: .4byte gBG0MapBuffer
 _08015200: .4byte gAnimation
 _08015204: .4byte 0x00000FFF
 _08015208: .4byte gUnknown_0200AFC0
-_0801520C: .4byte gUnknown_08024228
+_0801520C: .4byte gSpriteSizeTable
 _08015210: .4byte 0x000001FF
 _08015214:
 	movs r0, #0
@@ -3569,7 +3569,7 @@ sub_8015894: @ 0x08015894
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r4, r1, #0
-	ldr r6, _0801590C @ =gUnknown_08024264
+	ldr r6, _0801590C @ =gCourtScroll01AnimOffsets
 	movs r2, #0xc
 	ldrsh r1, [r4, r2]
 	adds r1, r1, r6
@@ -3627,7 +3627,7 @@ _080158F6:
 	bl sub_800E900
 	b _08015920
 	.align 2, 0
-_0801590C: .4byte gUnknown_08024264
+_0801590C: .4byte gCourtScroll01AnimOffsets
 _08015910: .4byte 0xFFFFFE20
 _08015914:
 	adds r0, r5, #0
@@ -3646,7 +3646,7 @@ sub_8015928: @ 0x08015928
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r4, r1, #0
-	ldr r6, _080159A4 @ =gUnknown_08024264
+	ldr r6, _080159A4 @ =gCourtScroll01AnimOffsets
 	movs r1, #0xc
 	ldrsh r2, [r4, r1]
 	movs r1, #0x1e
@@ -3705,7 +3705,7 @@ _0801598E:
 	bl sub_800E900
 	b _080159B6
 	.align 2, 0
-_080159A4: .4byte gUnknown_08024264
+_080159A4: .4byte gCourtScroll01AnimOffsets
 _080159A8:
 	movs r2, #0x88
 	lsls r2, r2, #2
@@ -3725,7 +3725,7 @@ sub_80159C0: @ 0x080159C0
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r1, #0
-	ldr r3, _08015A38 @ =gUnknown_08024283
+	ldr r3, _08015A38 @ =gCourtScroll02AnimOffsets
 	movs r2, #0xc
 	ldrsh r1, [r4, r2]
 	adds r1, r1, r3
@@ -3781,7 +3781,7 @@ _08015A20:
 	bl sub_800E7EC
 	b _08015A4C
 	.align 2, 0
-_08015A38: .4byte gUnknown_08024283
+_08015A38: .4byte gCourtScroll02AnimOffsets
 _08015A3C: .4byte 0xFFFFFEE3
 _08015A40:
 	adds r0, r5, #0
@@ -3800,7 +3800,7 @@ sub_8015A54: @ 0x08015A54
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r1, #0
-	ldr r2, _08015AD0 @ =gUnknown_080242A2
+	ldr r2, _08015AD0 @ =gCourtScroll03AnimOffsets
 	movs r3, #0xc
 	ldrsh r1, [r4, r3]
 	adds r1, r1, r2
@@ -3817,7 +3817,7 @@ sub_8015A54: @ 0x08015A54
 	subs r1, r0, r1
 	cmp r5, r1
 	bge _08015A90
-	ldr r0, _08015AD4 @ =gUnknown_08024283
+	ldr r0, _08015AD4 @ =gCourtScroll02AnimOffsets
 	adds r2, r0, #0
 	adds r2, #0x20
 _08015A82:
@@ -3858,8 +3858,8 @@ _08015AB8:
 	bl sub_800E7EC
 	b _08015AE6
 	.align 2, 0
-_08015AD0: .4byte gUnknown_080242A2
-_08015AD4: .4byte gUnknown_08024283
+_08015AD0: .4byte gCourtScroll03AnimOffsets
+_08015AD4: .4byte gCourtScroll02AnimOffsets
 _08015AD8:
 	movs r0, #0xb5
 	lsls r0, r0, #1
@@ -3879,7 +3879,7 @@ sub_8015AF0: @ 0x08015AF0
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r4, r1, #0
-	ldr r6, _08015B6C @ =gUnknown_08024283
+	ldr r6, _08015B6C @ =gCourtScroll02AnimOffsets
 	movs r2, #0xc
 	ldrsh r1, [r4, r2]
 	adds r1, r1, r6
@@ -3938,7 +3938,7 @@ _08015B52:
 	bl sub_800E7EC
 	b _08015B7A
 	.align 2, 0
-_08015B6C: .4byte gUnknown_08024283
+_08015B6C: .4byte gCourtScroll02AnimOffsets
 _08015B70:
 	rsbs r0, r5, #0
 	movs r1, #0x80
@@ -3956,7 +3956,7 @@ sub_8015B84: @ 0x08015B84
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r1, #0
-	ldr r2, _08015C00 @ =gUnknown_080242A2
+	ldr r2, _08015C00 @ =gCourtScroll03AnimOffsets
 	movs r3, #0xc
 	ldrsh r1, [r4, r3]
 	adds r1, r1, r2
@@ -3987,7 +3987,7 @@ _08015BBC:
 	subs r1, r0, r1
 	cmp r5, r1
 	bge _08015BDE
-	ldr r0, _08015C04 @ =gUnknown_08024283
+	ldr r0, _08015C04 @ =gCourtScroll02AnimOffsets
 	adds r2, r0, #0
 	adds r2, #0x20
 _08015BD0:
@@ -4015,8 +4015,8 @@ _08015BE8:
 	bl sub_800E7EC
 	b _08015C14
 	.align 2, 0
-_08015C00: .4byte gUnknown_080242A2
-_08015C04: .4byte gUnknown_08024283
+_08015C00: .4byte gCourtScroll03AnimOffsets
+_08015C04: .4byte gCourtScroll02AnimOffsets
 _08015C08:
 	ldr r3, _08015C1C @ =0xFFFFFEB6
 	adds r0, r5, r3

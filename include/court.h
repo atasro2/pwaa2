@@ -21,4 +21,26 @@ void TestimonyProcess(struct Main *);
 void QuestioningProcess(struct Main *);
 extern void VerdictProcess(struct Main *);
 
+/* begin process functions */
+
+//~ gCourtProcessStates:
+void CourtInit(struct Main *);
+void CourtMain(struct Main *);
+void CourtExit(struct Main *);
+
+//~ gTestimonyProcessStates:
+void TestimonyInit(struct Main *);
+void TestimonyMain(struct Main *);
+void TestimonyExit(struct Main *);
+void TestimonyAnim(struct Main *);
+
+//~ gQuestioningProcessStates:
+void QuestioningInit(struct Main *);
+void QuestioningMain(struct Main *);
+void QuestioningExit(struct Main *);
+void QuestioningAnim(struct Main *);
+void QuestioningHoldIt(struct Main *);
+void QuestioningObjection(struct Main *);
+/* end process functions */
+
 #endif//GUARD_COURT_H

@@ -73,8 +73,10 @@ SECTIONS {
         src/investigation_segment_3_6.o(.rodata);
 	    src/script_main.o(.rodata);
 	    src/script_commands.o(.rodata);
-	    rodata/romA7A8.o(.rodata);
-	    rodata/animation.o(.rodata);
+	    src/gameover_process.o(.rodata);
+	    src/save_processes.o(.rodata);
+	    src/court_record.o(.rodata);
+	    src/animation.o(.rodata);
         src/psyche_lock.o(.rodata);
         src/hp_bar.o(.rodata);
         src/m4a_tables.o(.rodata);
@@ -87,12 +89,15 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.data);
-        data/bg.o(.data);
         src/bg.o(.data);
         src/utils.o(.data);
         src/case_data.o(.data);
         src/script_main.o(.data);
+        src/save_processes.o(.data);
+        src/court.o(.data);
+        src/investigation.o(.data);
         data/romA7A8.o(.data);
+        src/court_record.o(.data);
         src/sound.o(.data);
         src/animation.o(.data);
         src/psyche_lock.o(.data);

@@ -114,7 +114,7 @@ _0800D53E:
 	thumb_func_start CourtProcess
 CourtProcess: @ 0x0800D544
 	push {lr}
-	ldr r2, _0800D558 @ =gUnknown_08112318
+	ldr r2, _0800D558 @ =gCourtProcessStates
 	ldrb r3, [r0, #9]
 	lsls r1, r3, #2
 	adds r1, r1, r2
@@ -123,10 +123,10 @@ CourtProcess: @ 0x0800D544
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800D558: .4byte gUnknown_08112318
+_0800D558: .4byte gCourtProcessStates
 
-	thumb_func_start sub_800D55C
-sub_800D55C: @ 0x0800D55C
+	thumb_func_start CourtInit
+CourtInit: @ 0x0800D55C
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
@@ -321,8 +321,8 @@ _0800D724: .4byte gScriptContext
 _0800D728: .4byte 0x0000FFFF
 _0800D72C: .4byte gMain+0x8
 
-	thumb_func_start sub_800D730
-sub_800D730: @ 0x0800D730
+	thumb_func_start CourtMain
+CourtMain: @ 0x0800D730
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	adds r0, #0x7e
@@ -443,8 +443,8 @@ _0800D82A:
 _0800D830: .4byte gScriptContext
 _0800D834: .4byte gMain+0x8
 
-	thumb_func_start sub_800D838
-sub_800D838: @ 0x0800D838
+	thumb_func_start CourtExit
+CourtExit: @ 0x0800D838
 	push {r4, lr}
 	adds r4, r0, #0
 	bl sub_8007D30
@@ -511,8 +511,8 @@ _0800D8B6:
 	.align 2, 0
 _0800D8BC: .4byte gBG2MapBuffer+0xB
 
-	thumb_func_start sub_800D8C0
-sub_800D8C0: @ 0x0800D8C0
+	thumb_func_start TestimonyAnim
+TestimonyAnim: @ 0x0800D8C0
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	ldrb r0, [r6, #0xa]
@@ -668,7 +668,7 @@ _0800DA08: .4byte gTestimony
 	thumb_func_start TestimonyProcess
 TestimonyProcess: @ 0x0800DA0C
 	push {lr}
-	ldr r2, _0800DA20 @ =gUnknown_08112324
+	ldr r2, _0800DA20 @ =gTestimonyProcessStates
 	ldrb r3, [r0, #9]
 	lsls r1, r3, #2
 	adds r1, r1, r2
@@ -677,10 +677,10 @@ TestimonyProcess: @ 0x0800DA0C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800DA20: .4byte gUnknown_08112324
+_0800DA20: .4byte gTestimonyProcessStates
 
-	thumb_func_start sub_800DA24
-sub_800DA24: @ 0x0800DA24
+	thumb_func_start TestimonyInit
+TestimonyInit: @ 0x0800DA24
 	ldr r2, _0800DA50 @ =0x040000D4
 	ldr r1, _0800DA54 @ =gUnknown_081414FC
 	str r1, [r2]
@@ -712,8 +712,8 @@ _0800DA64: .4byte 0x050002A0
 _0800DA68: .4byte 0x80000010
 _0800DA6C: .4byte gTestimony
 
-	thumb_func_start sub_800DA70
-sub_800DA70: @ 0x0800DA70
+	thumb_func_start TestimonyMain
+TestimonyMain: @ 0x0800DA70
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	adds r0, #0x7e
@@ -863,8 +863,8 @@ _0800DBAA:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_800DBB0
-sub_800DBB0: @ 0x0800DBB0
+	thumb_func_start TestimonyExit
+TestimonyExit: @ 0x0800DBB0
 	ldr r2, _0800DBC0 @ =gOamObjects+0x1C8
 	movs r1, #0x80
 	lsls r1, r1, #2
@@ -875,8 +875,8 @@ sub_800DBB0: @ 0x0800DBB0
 	.align 2, 0
 _0800DBC0: .4byte gOamObjects+0x1C8
 
-	thumb_func_start sub_800DBC4
-sub_800DBC4: @ 0x0800DBC4
+	thumb_func_start QuestioningAnim
+QuestioningAnim: @ 0x0800DBC4
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	ldrb r0, [r6, #0xa]
@@ -1019,7 +1019,7 @@ _0800DCEE:
 	thumb_func_start QuestioningProcess
 QuestioningProcess: @ 0x0800DCF4
 	push {lr}
-	ldr r2, _0800DD08 @ =gUnknown_08112334
+	ldr r2, _0800DD08 @ =gQuestioningProcessStates
 	ldrb r3, [r0, #9]
 	lsls r1, r3, #2
 	adds r1, r1, r2
@@ -1028,10 +1028,10 @@ QuestioningProcess: @ 0x0800DCF4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800DD08: .4byte gUnknown_08112334
+_0800DD08: .4byte gQuestioningProcessStates
 
-	thumb_func_start sub_800DD0C
-sub_800DD0C: @ 0x0800DD0C
+	thumb_func_start QuestioningInit
+QuestioningInit: @ 0x0800DD0C
 	push {lr}
 	ldr r1, _0800DD74 @ =0x040000D4
 	ldr r2, _0800DD78 @ =gUnknown_08141CFC
@@ -1097,8 +1097,8 @@ _0800DD9C: .4byte gScriptContext
 _0800DDA0: .4byte gCourtRecord
 _0800DDA4: .4byte gTestimony
 
-	thumb_func_start sub_800DDA8
-sub_800DDA8: @ 0x0800DDA8
+	thumb_func_start QuestioningMain
+QuestioningMain: @ 0x0800DDA8
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r0, #0x7e
@@ -1393,13 +1393,13 @@ _0800E00C:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start nullsub_4
-nullsub_4: @ 0x0800E014
+	thumb_func_start QuestioningExit
+QuestioningExit: @ 0x0800E014
 	bx lr
 	.align 2, 0
 
-	thumb_func_start sub_800E018
-sub_800E018: @ 0x0800E018
+	thumb_func_start QuestioningHoldIt
+QuestioningHoldIt: @ 0x0800E018
 	push {r4, lr}
 	adds r4, r0, #0
 	ldrb r1, [r4, #0xa]
@@ -1496,8 +1496,8 @@ _0800E0DC: .4byte gScriptContext
 _0800E0E0: .4byte gTestimony
 _0800E0E4: .4byte gOamObjects
 
-	thumb_func_start sub_800E0E8
-sub_800E0E8: @ 0x0800E0E8
+	thumb_func_start QuestioningObjection
+QuestioningObjection: @ 0x0800E0E8
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldrb r0, [r4, #0xa]

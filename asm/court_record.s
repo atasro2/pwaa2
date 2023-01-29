@@ -105,7 +105,7 @@ CourtRecordProcess: @ 0x08011730
 	ldr r2, _08011760 @ =0x000004DE
 	adds r1, r1, r2
 	strh r3, [r1]
-	ldr r1, _08011764 @ =gUnknown_081123A8
+	ldr r1, _08011764 @ =gCourtRecordProcessStates
 	ldrb r3, [r0, #9]
 	lsls r2, r3, #2
 	adds r2, r2, r1
@@ -118,13 +118,13 @@ CourtRecordProcess: @ 0x08011730
 _08011758: .4byte gBG1MapBuffer
 _0801175C: .4byte 0x000004DC
 _08011760: .4byte 0x000004DE
-_08011764: .4byte gUnknown_081123A8
+_08011764: .4byte gCourtRecordProcessStates
 _08011768: .4byte gCourtRecord
 
 	thumb_func_start EvidenceAddedProcess
 EvidenceAddedProcess: @ 0x0801176C
 	push {lr}
-	ldr r1, _08011784 @ =gUnknown_081123C8
+	ldr r1, _08011784 @ =gEvidenceAddedProcessStates
 	ldrb r3, [r0, #9]
 	lsls r2, r3, #2
 	adds r2, r2, r1
@@ -134,11 +134,11 @@ EvidenceAddedProcess: @ 0x0801176C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08011784: .4byte gUnknown_081123C8
+_08011784: .4byte gEvidenceAddedProcessStates
 _08011788: .4byte gCourtRecord
 
-	thumb_func_start sub_801178C
-sub_801178C: @ 0x0801178C
+	thumb_func_start CourtRecordInit
+CourtRecordInit: @ 0x0801178C
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	adds r6, r1, #0
@@ -259,8 +259,8 @@ _0801187C: .4byte gOamObjects+0x1C8
 _08011880: .4byte gOamObjects+0x1B8
 _08011884: .4byte 0x00006560
 
-	thumb_func_start sub_8011888
-sub_8011888: @ 0x08011888
+	thumb_func_start CourtRecordMain
+CourtRecordMain: @ 0x08011888
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -279,7 +279,7 @@ sub_8011888: @ 0x08011888
 	ldr r0, [r6, #0x14]
 	ldrb r2, [r6, #0xd]
 	adds r0, r2, r0
-	ldr r1, _080118E4 @ =gUnknown_08022F38
+	ldr r1, _080118E4 @ =gEvidenceProfileData
 	ldrb r0, [r0]
 	lsls r0, r0, #3
 	adds r0, r0, r1
@@ -302,7 +302,7 @@ sub_8011888: @ 0x08011888
 	.align 2, 0
 _080118DC: .4byte gAnimation+0x44
 _080118E0: .4byte gJoypad
-_080118E4: .4byte gUnknown_08022F38
+_080118E4: .4byte gEvidenceProfileData
 _080118E8:
 	ldrh r1, [r3]
 	movs r0, #0x10
@@ -918,8 +918,8 @@ _08011E04:
 	.align 2, 0
 _08011E14: .4byte gCourtRecord
 
-	thumb_func_start sub_8011E18
-sub_8011E18: @ 0x08011E18
+	thumb_func_start CourtRecordExit
+CourtRecordExit: @ 0x08011E18
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -1014,8 +1014,8 @@ _08011ED0: .4byte 0x000004DE
 _08011ED4: .4byte gMain+0x8
 _08011ED8: .4byte 0x000002B2
 
-	thumb_func_start sub_8011EDC
-sub_8011EDC: @ 0x08011EDC
+	thumb_func_start CourtRecordChangeState
+CourtRecordChangeState: @ 0x08011EDC
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -1067,8 +1067,8 @@ _08011F32:
 _08011F38: .4byte gOamObjects+0x1B8
 _08011F3C: .4byte 0x000001FF
 
-	thumb_func_start sub_8011F40
-sub_8011F40: @ 0x08011F40
+	thumb_func_start CourtRecordChangeRecord
+CourtRecordChangeRecord: @ 0x08011F40
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -1153,8 +1153,8 @@ _08011FEC: .4byte gUnknown_081424FC
 _08011FF0: .4byte 0x06013500
 _08011FF4: .4byte 0x80000100
 
-	thumb_func_start sub_8011FF8
-sub_8011FF8: @ 0x08011FF8
+	thumb_func_start CourtRecordDetailSubMenu
+CourtRecordDetailSubMenu: @ 0x08011FF8
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -1248,7 +1248,7 @@ _080120A6:
 	ldr r0, _080120E8 @ =0x80000160
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r1, _080120EC @ =gUnknown_08022F38
+	ldr r1, _080120EC @ =gEvidenceProfileData
 	lsls r0, r2, #3
 	adds r0, r0, r1
 	ldrh r0, [r0, #6]
@@ -1265,7 +1265,7 @@ _080120DC: .4byte 0x040000D4
 _080120E0: .4byte gMain
 _080120E4: .4byte gUnknown_02000034
 _080120E8: .4byte 0x80000160
-_080120EC: .4byte gUnknown_08022F38
+_080120EC: .4byte gEvidenceProfileData
 _080120F0: .4byte _080120F4
 _080120F4: @ jump table
 	.4byte _080121A0 @ case 0
@@ -1567,7 +1567,7 @@ _0801236E:
 	ldr r0, [r6, #0x14]
 	ldrb r2, [r6, #0xd]
 	adds r0, r2, r0
-	ldr r1, _080123AC @ =gUnknown_08022F38
+	ldr r1, _080123AC @ =gEvidenceProfileData
 	ldrb r0, [r0]
 	lsls r0, r0, #3
 	adds r0, r0, r1
@@ -1595,7 +1595,7 @@ _0801239A:
 	movs r0, #6
 	b _08012690
 	.align 2, 0
-_080123AC: .4byte gUnknown_08022F38
+_080123AC: .4byte gEvidenceProfileData
 _080123B0:
 	adds r0, r5, #0
 	adds r0, #0x7e
@@ -1903,7 +1903,7 @@ _08012630:
 	ldr r0, [r6, #0x14]
 	ldrb r1, [r6, #0xd]
 	adds r0, r1, r0
-	ldr r1, _08012660 @ =gUnknown_08022F38
+	ldr r1, _08012660 @ =gEvidenceProfileData
 	ldrb r0, [r0]
 	lsls r0, r0, #3
 	adds r0, r0, r1
@@ -1919,7 +1919,7 @@ _08012630:
 	beq _0801266A
 	b _08012676
 	.align 2, 0
-_08012660: .4byte gUnknown_08022F38
+_08012660: .4byte gEvidenceProfileData
 _08012664:
 	cmp r0, #2
 	beq _08012672
@@ -1956,8 +1956,8 @@ _08012692:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_80126A0
-sub_80126A0: @ 0x080126A0
+	thumb_func_start CourtRecordLoadGfxChangeState
+CourtRecordLoadGfxChangeState: @ 0x080126A0
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r0, [r1, #0x14]
@@ -1972,8 +1972,8 @@ sub_80126A0: @ 0x080126A0
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_80126BC
-sub_80126BC: @ 0x080126BC
+	thumb_func_start CourtRecordTakeThatSpecial
+CourtRecordTakeThatSpecial: @ 0x080126BC
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -2035,7 +2035,7 @@ _0801270E:
 	beq _08012734
 	movs r2, #6
 _08012734:
-	ldr r1, _080127A0 @ =gUnknown_08022F38
+	ldr r1, _080127A0 @ =gEvidenceProfileData
 	lsls r0, r2, #3
 	adds r0, r0, r1
 	ldrh r3, [r0, #4]
@@ -2089,7 +2089,7 @@ _08012734:
 	b _080129F0
 	.align 2, 0
 _0801279C: .4byte gTestimony
-_080127A0: .4byte gUnknown_08022F38
+_080127A0: .4byte gEvidenceProfileData
 _080127A4: .4byte gUnknown_08177E28_pal
 _080127A8: .4byte 0x040000D4
 _080127AC: .4byte 0x05000220
@@ -2457,8 +2457,8 @@ _08012A9C: .4byte gOamObjects
 _08012AA0: .4byte 0x0000C058
 _08012AA4: .4byte gCourtRecord
 
-	thumb_func_start sub_8012AA8
-sub_8012AA8: @ 0x08012AA8
+	thumb_func_start EvidenceAddedInit
+EvidenceAddedInit: @ 0x08012AA8
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	ldr r2, _08012B00 @ =gBG2MapBuffer
@@ -2504,8 +2504,8 @@ _08012B00: .4byte gBG2MapBuffer
 _08012B04: .4byte 0x000003FF
 _08012B08: .4byte gIORegisters
 
-	thumb_func_start sub_8012B0C
-sub_8012B0C: @ 0x08012B0C
+	thumb_func_start EvidenceAddedMain
+EvidenceAddedMain: @ 0x08012B0C
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -2554,8 +2554,8 @@ _08012B64:
 _08012B6C: .4byte gScriptContext
 _08012B70: .4byte gJoypad
 
-	thumb_func_start sub_8012B74
-sub_8012B74: @ 0x08012B74
+	thumb_func_start EvidenceAddedExit
+EvidenceAddedExit: @ 0x08012B74
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
@@ -2633,7 +2633,7 @@ sub_8012BEC: @ 0x08012BEC
 	ands r0, r1
 	strb r0, [r4, #8]
 	ldr r1, _08012C44 @ =0x040000D4
-	ldr r0, _08012C48 @ =gUnknown_08023418
+	ldr r0, _08012C48 @ =sCourtRecordLeftArrowTileIndexes
 	ldrb r2, [r4, #8]
 	adds r0, r2, r0
 	ldrb r0, [r0]
@@ -2646,7 +2646,7 @@ sub_8012BEC: @ 0x08012BEC
 	ldr r2, _08012C54 @ =0x80000040
 	str r2, [r1, #8]
 	ldr r0, [r1, #8]
-	ldr r0, _08012C58 @ =gUnknown_0802341C
+	ldr r0, _08012C58 @ =sCourtRecordRightArrowTileIndexes
 	ldrb r4, [r4, #8]
 	adds r0, r4, r0
 	ldrb r0, [r0]
@@ -2663,11 +2663,11 @@ _08012C3E:
 	bx r0
 	.align 2, 0
 _08012C44: .4byte 0x040000D4
-_08012C48: .4byte gUnknown_08023418
+_08012C48: .4byte sCourtRecordLeftArrowTileIndexes
 _08012C4C: .4byte gGfx4bppTestimonyArrows
 _08012C50: .4byte 0x06013400
 _08012C54: .4byte 0x80000040
-_08012C58: .4byte gUnknown_0802341C
+_08012C58: .4byte sCourtRecordRightArrowTileIndexes
 _08012C5C: .4byte 0x06013480
 
 	thumb_func_start sub_8012C60
@@ -2849,7 +2849,7 @@ _08012DD6:
 	thumb_func_start sub_8012DDC
 sub_8012DDC: @ 0x08012DDC
 	push {r4, r5, lr}
-	ldr r1, _08012E2C @ =gUnknown_08022F38
+	ldr r1, _08012E2C @ =gEvidenceProfileData
 	lsls r0, r0, #3
 	adds r0, r0, r1
 	ldrh r1, [r0, #4]
@@ -2888,7 +2888,7 @@ sub_8012DDC: @ 0x08012DDC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08012E2C: .4byte gUnknown_08022F38
+_08012E2C: .4byte gEvidenceProfileData
 _08012E30: .4byte gUnknown_08177E28_pal
 _08012E34: .4byte 0x040000D4
 _08012E38: .4byte 0x05000220
@@ -3778,7 +3778,7 @@ _08013502:
 
 	thumb_func_start sub_8013508
 sub_8013508: @ 0x08013508
-	ldr r1, _08013540 @ =gUnknown_08022F38
+	ldr r1, _08013540 @ =gEvidenceProfileData
 	adds r0, #0x8a
 	ldrb r0, [r0]
 	lsls r0, r0, #3
@@ -3806,7 +3806,7 @@ sub_8013508: @ 0x08013508
 	ldr r0, [r0, #8]
 	bx lr
 	.align 2, 0
-_08013540: .4byte gUnknown_08022F38
+_08013540: .4byte gEvidenceProfileData
 _08013544: .4byte gUnknown_08177E28_pal
 _08013548: .4byte 0x040000D4
 _0801354C: .4byte 0x05000220

@@ -516,7 +516,7 @@ _0800B2A8: .4byte 0x00002BBC
 	thumb_func_start SaveGameProcess
 SaveGameProcess: @ 0x0800B2AC
 	push {lr}
-	ldr r2, _0800B2C4 @ =gUnknown_081122F8
+	ldr r2, _0800B2C4 @ =gSaveGameProcessStates
 	ldr r0, _0800B2C8 @ =gMain
 	ldrb r3, [r0, #9]
 	lsls r1, r3, #2
@@ -526,7 +526,7 @@ SaveGameProcess: @ 0x0800B2AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B2C4: .4byte gUnknown_081122F8
+_0800B2C4: .4byte gSaveGameProcessStates
 _0800B2C8: .4byte gMain
 
 	thumb_func_start SaveGameInit1

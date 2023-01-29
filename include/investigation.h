@@ -250,6 +250,18 @@ extern const struct ExaminationData gUnknown_08022ABC[8];
 extern const struct ExaminationData gUnknown_08022B5C[8];
 /* end autodumped */
 
+void InvestigationInit(struct Main *, struct InvestigationStruct *);
+void InvestigationMain(struct Main *, struct InvestigationStruct *);
+void InvestigationExit(struct Main *, struct InvestigationStruct *);
+void InvestigationBgScrollWait(struct Main *, struct InvestigationStruct *);
+void InvestigationTextboxSlideWait(struct Main *, struct InvestigationStruct *);
+void InvestigationRoomInit(struct Main *, struct InvestigationStruct *);
+void InvestigationInspect(struct Main *, struct InvestigationStruct *);
+void InvestigationMove(struct Main *, struct InvestigationStruct *);
+void InvestigationTalk(struct Main *, struct InvestigationStruct *);
+void InvestigationPresent(struct Main *, struct InvestigationStruct *);
+void sub_8010A3C(struct Main *, struct InvestigationStruct *);
+
 /* Segment 1 */
 void InvestigationSegmentSetup_1_0(struct Main *main);
 void InvestigationRoomSetup_1_0(struct Main *main);
