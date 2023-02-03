@@ -533,7 +533,7 @@ _08017A10:
             gMain.unk9E -= 4;
             if(gMain.process[GAME_PROCESS] == 4
             && gMain.process[GAME_PROCESS_STATE] == 10 
-            && gMain.process[GAME_PROCESSUNK2] == 7)
+            && gMain.process[GAME_PROCESS_VAR1] == 7)
             {
                 if(gMain.unk9E <= 84)
                 {

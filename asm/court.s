@@ -1,8 +1,8 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_800D450
-sub_800D450: @ 0x0800D450
+	thumb_func_start SetCurrentEpisodeBit
+SetCurrentEpisodeBit: @ 0x0800D450
 	push {r4, lr}
 	ldr r2, _0800D46C @ =gMain
 	movs r3, #1
@@ -267,7 +267,7 @@ CourtInit: @ 0x0800D55C
 	strh r0, [r1, #0x1e]
 	movs r0, #0x80
 	bl ChangeScriptSection
-	bl sub_800D450
+	bl SetCurrentEpisodeBit
 	movs r0, #0x30
 	movs r1, #0xf
 	bl SetTimedKeysAndDelay

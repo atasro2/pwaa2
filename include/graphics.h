@@ -11,9 +11,11 @@
 #define gUnknown_08141CFC ((u8*)(GFX_BASE_ADDR + 0x11CFC))
 #define gUnknown_08141EFC ((u8*)(GFX_BASE_ADDR + 0x11EFC))
 #define gUnknown_081426FC ((u8*)(GFX_BASE_ADDR + 0x126FC))
+#define gUnknown_08142DFC ((u8*)(GFX_BASE_ADDR + 0x12DFC))
 #define gUnknown_081430DC ((u8*)(GFX_BASE_ADDR + 0x130DC))
 #define gUnknown_081438DC ((u8*)(GFX_BASE_ADDR + 0x138DC))
 #define gUnknown_081440DC ((u8*)(GFX_BASE_ADDR + 0x140DC))
+#define gUnknown_081448DC ((u8*)(GFX_BASE_ADDR + 0x148DC))
 #define gUnknown_08146FFC ((u8*)(GFX_BASE_ADDR + 0x16FFC))
 #define gUnknown_081473FC ((u8*)(GFX_BASE_ADDR + 0x173FC))
 #define gUnknown_0814747C ((u8*)(GFX_BASE_ADDR + 0x1747C))
@@ -44,8 +46,10 @@
 
 #define gUnknown_0814DC40 ((u8*)(GFX_BASE_ADDR + 0x1DC40))
 #define gUnknown_0814DC60 ((u8*)(GFX_BASE_ADDR + 0x1DC60))
+#define gUnknown_0814DEA0 ((u8*)(GFX_BASE_ADDR + 0x1DEA0))
 #define gUnknown_0814DEC0 ((u8*)(GFX_BASE_ADDR + 0x1DEC0))
 #define gUnknown_0814DEE0 ((u8*)(GFX_BASE_ADDR + 0x1DEE0))
+#define gUnknown_0814DF00 ((u8*)(GFX_BASE_ADDR + 0x1DF00))
 #define gUnknown_0814E340 ((u8*)(GFX_BASE_ADDR + 0x1E340))
 #define gUnknown_0814E360 ((u8*)(GFX_BASE_ADDR + 0x1E360))
 

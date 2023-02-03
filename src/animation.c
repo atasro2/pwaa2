@@ -2012,3 +2012,100 @@ void (*gCourtScrollPersonAnimationUpdateFuncs[6])(struct AnimationListEntry *, s
     sub_80159C0,
     sub_8015A54,
 };
+
+static void InitCurrentAnimationToNull()
+{
+    gAnimation[0].flags = ANIM_ENABLE_XFLIP;
+    gAnimation[0].next = NULL;
+    gAnimation[0].prev = NULL;
+}
+
+
+void ResetAnimationSystem()
+{
+    struct AnimationListEntry *animation = gAnimation;
+    DmaFill16(3, 0, gAnimation, sizeof(gAnimation));
+    gMain.animationFlags |= 3;
+    animation = &gAnimation[1];
+    animation->animationInfo.animId = 0xFF;
+    animation->animationInfo.personId = 0;
+    InitCurrentAnimationToNull();
+}
+
+void ClearAllAnimationSprites()
+{
+    struct AnimationListEntry *animation;
+    for (animation = &gAnimation[1]; animation < &gAnimation[0x20]; animation++)
+    {
+        if (animation->flags & ANIM_ALLOCATED)
+        {
+            if (&gOamObjects[animation->animtionOamStartIdx] < &gOamObjects[animation->animtionOamEndIdx])
+            {
+                struct OamAttrs *oam;
+                for (oam = &gOamObjects[animation->animtionOamStartIdx]; oam < &gOamObjects[animation->animtionOamEndIdx]; oam++)
+                    oam->attr0 = SPRITE_ATTR0_CLEAR;
+            }
+        }
+    }
+}
+
+struct AnimationListEntry * FindAnimationFromAnimId(u32 animId)
+{
+    struct AnimationListEntry *animation = &gAnimation[0x1F];
+    s32 i;
+    for(i = 0x1F; i != -1; i--) // ! HM
+    {
+        if (animation->animationInfo.animId == animId && animation->flags & ANIM_ALLOCATED)
+            return animation;
+        animation--;
+    }
+    return NULL;
+}
+
+/* static */ struct AnimationListEntry *AllocateAnimationWithId(u32 animId)
+{
+    u32 flags = 0;
+    s32 i;
+    struct AnimationListEntry *animation = FindAnimationFromAnimId(animId);
+    if (animation != NULL)
+    {
+        flags = (animation->flags & 0x02000000) ? 0x02000000 : flags;
+        flags = (animation->flags & ANIM_INACTIVE) ? ANIM_INACTIVE : flags;
+        DestroyAnimation(animation);
+        DmaFill16(3, 0, animation, 0x44)
+        animation->flags = (ANIM_PLAYING | ANIM_QUEUED_TILE_UPLOAD | ANIM_ACTIVE | ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD) | flags;
+        animation->frameDurationCounter = 0xffff;
+        if (flags & ANIM_INACTIVE)
+            animation->flags &= ~ANIM_ACTIVE;
+        animation->animationInfo.animId = animId;
+        return animation;
+    }
+    else
+    {
+        animation = &gAnimation[0x1F];
+        for (i = 0x1f; i != -1; i--)
+        {
+            if (!(animation->flags & ANIM_ALLOCATED))
+            {
+                if (animation != &gAnimation[1])
+                {
+                    DmaFill16(3, 0, animation, 0x44)
+                    animation->flags = (ANIM_PLAYING | ANIM_QUEUED_TILE_UPLOAD | ANIM_ACTIVE | ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD);
+                    animation->animationInfo.animId = animId;
+                    return animation;
+                }
+            }
+            animation--;
+        }
+        return NULL;
+    }
+}
+
+void SetAnimationOriginCoords(struct AnimationListEntry *animation, u32 xOrigin, u32 yOrigin) // unused
+{
+    if (animation != NULL)
+    {
+        animation->animationInfo.xOrigin = xOrigin;
+        animation->animationInfo.yOrigin = yOrigin;
+    }
+}

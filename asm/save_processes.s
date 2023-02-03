@@ -263,7 +263,7 @@ _0800B06C:
 	bls _0800B06C
 	movs r0, #6
 	movs r1, #8
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldr r1, _0800B0E8 @ =gIORegisters
 	adds r2, r1, #0
 	adds r2, #0x4a
@@ -770,7 +770,7 @@ _0800B4BE:
 	bls _0800B4BE
 	movs r0, #6
 	movs r1, #8
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldr r1, _0800B598 @ =gIORegisters
 	movs r5, #0x4a
 	movs r3, #0
@@ -3484,7 +3484,7 @@ _0800CA7C:
 	bls _0800CA7C
 	movs r0, #5
 	movs r1, #8
-	bl sub_8003C14
+	bl SlideInBG2Window
 	movs r0, #0x31
 	bl PlaySE
 	ldr r1, _0800CAF4 @ =gIORegisters

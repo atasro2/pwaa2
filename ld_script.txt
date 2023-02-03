@@ -19,6 +19,7 @@ SECTIONS {
     {
         src/crt0.o(.text);
         src/main.o(.text);
+        src/bg.o(.text);
         asm/bg.o(.text);
         src/utils.o(.text);
         src/case_data.o(.text);
@@ -33,12 +34,16 @@ SECTIONS {
         src/script_main.o(.text);
         src/script_commands.o(.text);
         asm/title_processes.o(.text);
-        asm/gameover_process.o(.text);
+        src/gameover_process.o(.text);
         asm/save_processes.o(.text);
+        src/court.o(.text);
         asm/court.o(.text);
+        src/investigation.o(.text);
         asm/investigation.o(.text);
+        src/court_record.o(.text);
         asm/court_record.o(.text);
         src/sound.o(.text);
+        src/animation.o(.text);
         asm/animation.o(.text);
         src/psyche_lock.o(.text);
         src/hp_bar.o(.text);

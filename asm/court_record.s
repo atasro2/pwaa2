@@ -1,142 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start InitializeCourtRecordForScenario
-InitializeCourtRecordForScenario: @ 0x08011688
-	push {r4, r5, r6, r7, lr}
-	mov r7, r8
-	push {r7}
-	adds r5, r0, #0
-	mov ip, r1
-	movs r3, #0
-	ldr r0, _0801172C @ =gCourtRecordInitialItemLists
-	mov r8, r0
-	mov r2, ip
-	adds r2, #0x38
-	movs r4, #0xff
-	adds r7, r2, #0
-_080116A0:
-	adds r1, r2, r3
-	ldrb r0, [r1]
-	orrs r0, r4
-	strb r0, [r1]
-	adds r3, #1
-	cmp r3, #0x1f
-	bls _080116A0
-	movs r0, #0
-	mov r1, ip
-	strb r0, [r1, #0x11]
-	movs r3, #0
-	mov r6, ip
-	adds r6, #0x18
-	adds r5, #0xb3
-	adds r2, r6, #0
-	movs r4, #0xff
-_080116C0:
-	adds r1, r2, r3
-	ldrb r0, [r1]
-	orrs r0, r4
-	strb r0, [r1]
-	adds r3, #1
-	cmp r3, #0x1f
-	bls _080116C0
-	movs r0, #0
-	mov r1, ip
-	strb r0, [r1, #0x10]
-	ldrb r5, [r5]
-	lsls r0, r5, #2
-	add r0, r8
-	ldr r2, [r0]
-	movs r3, #0
-	ldrb r1, [r2]
-	cmp r1, #0xfe
-	beq _080116FC
-	adds r4, r7, #0
-_080116E6:
-	adds r0, r4, r3
-	strb r1, [r0]
-	mov r1, ip
-	ldrb r0, [r1, #0x11]
-	adds r0, #1
-	strb r0, [r1, #0x11]
-	adds r2, #1
-	adds r3, #1
-	ldrb r1, [r2]
-	cmp r1, #0xfe
-	bne _080116E6
-_080116FC:
-	adds r2, #1
-	movs r3, #0
-	ldrb r1, [r2]
-	adds r0, r1, #0
-	cmp r0, #0xff
-	beq _08011722
-	adds r4, r6, #0
-_0801170A:
-	adds r0, r4, r3
-	strb r1, [r0]
-	mov r1, ip
-	ldrb r0, [r1, #0x10]
-	adds r0, #1
-	strb r0, [r1, #0x10]
-	adds r2, #1
-	adds r3, #1
-	ldrb r1, [r2]
-	adds r0, r1, #0
-	cmp r0, #0xff
-	bne _0801170A
-_08011722:
-	pop {r3}
-	mov r8, r3
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0801172C: .4byte gCourtRecordInitialItemLists
-
-	thumb_func_start CourtRecordProcess
-CourtRecordProcess: @ 0x08011730
-	push {lr}
-	ldr r1, _08011758 @ =gBG1MapBuffer
-	ldr r3, _0801175C @ =0x000004DC
-	adds r2, r1, r3
-	movs r3, #9
-	strh r3, [r2]
-	ldr r2, _08011760 @ =0x000004DE
-	adds r1, r1, r2
-	strh r3, [r1]
-	ldr r1, _08011764 @ =gCourtRecordProcessStates
-	ldrb r3, [r0, #9]
-	lsls r2, r3, #2
-	adds r2, r2, r1
-	ldr r1, _08011768 @ =gCourtRecord
-	ldr r2, [r2]
-	bl _call_via_r2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011758: .4byte gBG1MapBuffer
-_0801175C: .4byte 0x000004DC
-_08011760: .4byte 0x000004DE
-_08011764: .4byte gCourtRecordProcessStates
-_08011768: .4byte gCourtRecord
-
-	thumb_func_start EvidenceAddedProcess
-EvidenceAddedProcess: @ 0x0801176C
-	push {lr}
-	ldr r1, _08011784 @ =gEvidenceAddedProcessStates
-	ldrb r3, [r0, #9]
-	lsls r2, r3, #2
-	adds r2, r2, r1
-	ldr r1, _08011788 @ =gCourtRecord
-	ldr r2, [r2]
-	bl _call_via_r2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08011784: .4byte gEvidenceAddedProcessStates
-_08011788: .4byte gCourtRecord
-
 	thumb_func_start CourtRecordInit
 CourtRecordInit: @ 0x0801178C
 	push {r4, r5, r6, r7, lr}
@@ -228,18 +92,18 @@ _0801180A:
 	ldrb r0, [r6, #0x10]
 	strb r0, [r6, #0xe]
 	str r3, [r6, #0x14]
-	bl sub_8012C60
+	bl LoadEvidenceWindowGraphics
 	ldr r0, [r6, #0x14]
 	ldrb r5, [r6, #0xd]
 	adds r0, r5, r0
 	ldrb r0, [r0]
-	bl sub_8012DDC
+	bl LoadEvidenceGraphics
 	ldrb r0, [r7, #0xb]
 	cmp r0, #1
 	bne _08011854
 	movs r0, #2
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 _08011854:
 	movs r0, #1
 	strb r0, [r6, #0xf]
@@ -314,7 +178,7 @@ _080118E8:
 	bls _08011914
 	movs r0, #1
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldrb r0, [r6, #0xd]
 	adds r0, #1
 	strb r0, [r6, #0xd]
@@ -335,7 +199,7 @@ _08011914:
 	bls _080119B8
 	movs r0, #2
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldrb r0, [r6, #0xd]
 	subs r0, #1
 	strb r0, [r6, #0xd]
@@ -417,7 +281,7 @@ _080119C2:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	movs r0, #4
 	strb r0, [r6, #0xf]
 	b _08011B8C
@@ -446,7 +310,7 @@ _080119EC:
 	beq _08011A28
 	movs r0, #4
 	movs r1, #0x12
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldr r0, _08011A24 @ =0x00000707
 	b _08011B40
 	.align 2, 0
@@ -615,7 +479,7 @@ _08011B68:
 	bl PlaySE
 	movs r0, #4
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	movs r0, #2
 _08011B8C:
 	strb r0, [r7, #9]
@@ -682,7 +546,7 @@ _08011BFA:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	movs r0, #4
 	strb r0, [r6, #0xf]
 	b _08011DF4
@@ -741,7 +605,7 @@ _08011C24:
 	strb r0, [r6, #0xc]
 	movs r0, #4
 	movs r1, #0x12
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldr r0, _08011CAC @ =0x00000707
 	str r0, [r7, #8]
 	b _08011E04
@@ -796,7 +660,7 @@ _08011CDC:
 	movs r0, #4
 	strb r0, [r1, #0xe]
 	movs r1, #0x12
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldr r0, _08011D64 @ =0x00000707
 	str r0, [r7, #8]
 	movs r0, #0x10
@@ -857,7 +721,7 @@ _08011D8C:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldrb r0, [r7, #0xb]
 	cmp r0, #2
 	bne _08011DB0
@@ -884,7 +748,7 @@ _08011DBC:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	movs r0, #4
 	strb r0, [r6, #0xf]
 	b _08011DF4
@@ -897,7 +761,7 @@ _08011DDC:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	movs r0, #2
 _08011DF4:
 	strb r0, [r7, #9]
@@ -1086,7 +950,7 @@ CourtRecordChangeRecord: @ 0x08011F40
 	strb r0, [r4, #0xc]
 	movs r0, #2
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	movs r1, #1
 	strb r1, [r4, #0xf]
 	movs r0, #3
@@ -1142,7 +1006,7 @@ _08011FD2:
 	ldrb r4, [r4, #0xd]
 	adds r0, r4, r0
 	ldrb r0, [r0]
-	bl sub_8012DDC
+	bl LoadEvidenceGraphics
 _08011FE0:
 	pop {r4, r5}
 	pop {r0}
@@ -1964,7 +1828,7 @@ CourtRecordLoadGfxChangeState: @ 0x080126A0
 	ldrb r1, [r1, #0xd]
 	adds r0, r1, r0
 	ldrb r0, [r0]
-	bl sub_8012DDC
+	bl LoadEvidenceGraphics
 	movs r0, #3
 	strb r0, [r4, #9]
 	pop {r4}
@@ -2480,11 +2344,11 @@ _08012AB6:
 	ldrh r2, [r1]
 	orrs r0, r2
 	strh r0, [r1]
-	bl sub_8012C60
+	bl LoadEvidenceWindowGraphics
 	adds r0, r5, #0
 	adds r0, #0x2d
 	ldrb r0, [r0]
-	bl sub_8012DDC
+	bl LoadEvidenceGraphics
 	ldrh r1, [r5, #0x28]
 	lsls r0, r1, #0x10
 	asrs r0, r0, #0x11
@@ -2543,7 +2407,7 @@ _08012B46:
 	bl PlaySE
 	movs r0, #3
 	movs r1, #0xe
-	bl sub_8003C14
+	bl SlideInBG2Window
 	movs r0, #2
 	strb r0, [r5, #9]
 _08012B64:
@@ -2670,12 +2534,12 @@ _08012C54: .4byte 0x80000040
 _08012C58: .4byte sCourtRecordRightArrowTileIndexes
 _08012C5C: .4byte 0x06013480
 
-	thumb_func_start sub_8012C60
-sub_8012C60: @ 0x08012C60
+	thumb_func_start LoadEvidenceWindowGraphics
+LoadEvidenceWindowGraphics: @ 0x08012C60
 	push {lr}
 	movs r0, #1
 	movs r1, #0xc
-	bl sub_8003C14
+	bl SlideInBG2Window
 	ldr r0, _08012CD8 @ =0x040000D4
 	ldr r1, _08012CDC @ =gGfx4bppTestimonyArrows
 	str r1, [r0]
@@ -2846,8 +2710,8 @@ _08012DD6:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_8012DDC
-sub_8012DDC: @ 0x08012DDC
+	thumb_func_start LoadEvidenceGraphics
+LoadEvidenceGraphics: @ 0x08012DDC
 	push {r4, r5, lr}
 	ldr r1, _08012E2C @ =gEvidenceProfileData
 	lsls r0, r0, #3

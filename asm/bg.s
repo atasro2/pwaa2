@@ -1,65 +1,8 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start InitBGs
-InitBGs: @ 0x08000EF8
-	push {r4, r5, r6, lr}
-	sub sp, #4
-	mov r1, sp
-	movs r0, #0
-	strh r0, [r1]
-	ldr r1, _08000F54 @ =0x040000D4
-	mov r0, sp
-	str r0, [r1]
-	ldr r0, _08000F58 @ =gBG0MapBuffer
-	str r0, [r1, #4]
-	ldr r0, _08000F5C @ =0x81000400
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	ldr r2, _08000F60 @ =gBG1MapBuffer
-	movs r1, #0
-	ldr r4, _08000F64 @ =0x000003FF
-	ldr r6, _08000F68 @ =gBG2MapBuffer
-	ldr r5, _08000F6C @ =gIORegisters
-	ldr r3, _08000F70 @ =gUnknown_0801B1D8
-_08000F1E:
-	adds r0, r1, r3
-	ldrb r0, [r0]
-	strh r0, [r2]
-	adds r1, #1
-	adds r2, #2
-	cmp r1, r4
-	bls _08000F1E
-	mov r1, sp
-	movs r0, #0
-	strh r0, [r1]
-	ldr r0, _08000F54 @ =0x040000D4
-	str r1, [r0]
-	str r6, [r0, #4]
-	ldr r1, _08000F5C @ =0x81000400
-	str r1, [r0, #8]
-	ldr r0, [r0, #8]
-	movs r0, #0
-	strh r0, [r5, #0x12]
-	movs r0, #8
-	strh r0, [r5, #0x10]
-	bl sub_8000F74
-	add sp, #4
-	pop {r4, r5, r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08000F54: .4byte 0x040000D4
-_08000F58: .4byte gBG0MapBuffer
-_08000F5C: .4byte 0x81000400
-_08000F60: .4byte gBG1MapBuffer
-_08000F64: .4byte 0x000003FF
-_08000F68: .4byte gBG2MapBuffer
-_08000F6C: .4byte gIORegisters
-_08000F70: .4byte gUnknown_0801B1D8
-
-	thumb_func_start sub_8000F74
-sub_8000F74: @ 0x08000F74
+	thumb_func_start InitBG3
+InitBG3: @ 0x08000F74
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	ldr r7, _08000FE0 @ =gMain
@@ -4992,7 +4935,7 @@ _080035D8:
 	adds r7, #0x38
 	adds r5, r2, #0
 	adds r5, #0x34
-	ldr r2, _08003618 @ =gUnknown_0801B1D8
+	ldr r2, _08003618 @ =gTextboxTiles
 _080035E8:
 	adds r0, r3, r2
 	ldrb r0, [r0]
@@ -5015,7 +4958,7 @@ _080035E8:
 	.align 2, 0
 _08003610: .4byte gBG1MapBuffer
 _08003614: .4byte 0x000002BF
-_08003618: .4byte gUnknown_0801B1D8
+_08003618: .4byte gTextboxTiles
 _0800361C:
 	adds r1, r2, #0
 	adds r1, #0x3a
@@ -5042,7 +4985,7 @@ _0800363A:
 	adds r5, r1, r0
 	adds r0, #0x80
 	adds r6, r1, r0
-	ldr r2, _0800369C @ =gUnknown_0801B1D8
+	ldr r2, _0800369C @ =gTextboxTiles
 _08003650:
 	adds r0, r3, r2
 	ldrb r0, [r0]
@@ -5066,7 +5009,7 @@ _08003668:
 	movs r3, #0xe0
 	lsls r3, r3, #1
 	ldr r4, _080036A4 @ =0x000001DF
-	ldr r2, _0800369C @ =gUnknown_0801B1D8
+	ldr r2, _0800369C @ =gTextboxTiles
 _0800367C:
 	adds r0, r3, r2
 	ldrb r0, [r0]
@@ -5084,7 +5027,7 @@ _0800368E:
 	.align 2, 0
 _08003694: .4byte gBG1MapBuffer
 _08003698: .4byte 0x000001BF
-_0800369C: .4byte gUnknown_0801B1D8
+_0800369C: .4byte gTextboxTiles
 _080036A0: .4byte 0x0000021F
 _080036A4: .4byte 0x000001DF
 
@@ -5236,7 +5179,7 @@ sub_80037C8: @ 0x080037C8
 	lsls r1, r1, #1
 	ldr r4, _080037F0 @ =0x000003BF
 	ldr r0, _080037F4 @ =gBG1MapBuffer
-	ldr r3, _080037F8 @ =gUnknown_0801B1D8
+	ldr r3, _080037F8 @ =gTextboxTiles
 	movs r5, #0xe0
 	lsls r5, r5, #2
 	adds r2, r0, r5
@@ -5254,7 +5197,7 @@ _080037DA:
 	.align 2, 0
 _080037F0: .4byte 0x000003BF
 _080037F4: .4byte gBG1MapBuffer
-_080037F8: .4byte gUnknown_0801B1D8
+_080037F8: .4byte gTextboxTiles
 
 	thumb_func_start SlideTextbox
 SlideTextbox: @ 0x080037FC
@@ -5784,8 +5727,8 @@ _08003C08: .4byte 0x040000D4
 _08003C0C: .4byte 0x05000340
 _08003C10: .4byte 0x80000010
 
-	thumb_func_start sub_8003C14
-sub_8003C14: @ 0x08003C14
+	thumb_func_start SlideInBG2Window
+SlideInBG2Window: @ 0x08003C14
 	push {r4, lr}
 	adds r3, r0, #0
 	adds r4, r1, #0
@@ -6324,7 +6267,7 @@ SetTextboxNametag: @ 0x08004000
 	lsls r4, r4, #1
 	subs r3, #0xde
 	ldr r0, _0800404C @ =gBG1MapBuffer
-	ldr r2, _08004050 @ =gUnknown_0801B1D8
+	ldr r2, _08004050 @ =gTextboxTiles
 	movs r5, #0xc0
 	lsls r5, r5, #2
 	adds r1, r0, r5
@@ -6342,7 +6285,7 @@ _08004040: .4byte gMain
 _08004044: .4byte 0x000002BD
 _08004048: .4byte gUnknown_08111ED0
 _0800404C: .4byte gBG1MapBuffer
-_08004050: .4byte gUnknown_0801B1D8
+_08004050: .4byte gTextboxTiles
 _08004054:
 	adds r0, r5, #0
 	movs r1, #5

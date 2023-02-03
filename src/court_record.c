@@ -1,6 +1,10 @@
 #include "global.h"
+#include "background.h"
 #include "court_record.h"
+#include "case_data.h"
 #include "graphics.h"
+#include "main.h"
+#include "constants/process.h"
 
 struct EvidenceProfileData
 {
@@ -811,3 +815,42 @@ void (*gEvidenceAddedProcessStates[3])(struct Main *, struct CourtRecord *) = {
 	EvidenceAddedMain,
 	EvidenceAddedExit
 };
+
+void InitializeCourtRecordForScenario(struct Main * main, struct CourtRecord * courtRecord) // Status_init
+{
+    const u8 * recordIds;
+    u32 i;
+
+    for(i = 0; i < 32; i++)
+        courtRecord->profileList[i] |= 0xFF;
+    courtRecord->profileCount = 0;
+    for(i = 0; i < 32; i++)
+        courtRecord->evidenceList[i] |= 0xFF;
+    courtRecord->evidenceCount = 0;
+    recordIds = gCourtRecordInitialItemLists[main->scenarioIdx];
+    for(i = 0; *recordIds != 0xFE; i++)
+    {
+        courtRecord->profileList[i] = *recordIds;
+        courtRecord->profileCount++;
+        recordIds++;
+    }
+    recordIds++;
+    for(i = 0; *recordIds != 0xFF; i++)
+    {
+        courtRecord->evidenceList[i] = *recordIds;
+        courtRecord->evidenceCount++;
+        recordIds++;
+    }
+}
+
+void CourtRecordProcess(struct Main * main) // Status
+{
+    gBG1MapBuffer[622] = 9;
+    gBG1MapBuffer[623] = 9;
+    gCourtRecordProcessStates[main->process[GAME_PROCESS_STATE]](main, &gCourtRecord);
+}
+
+void EvidenceAddedProcess(struct Main * main) // Note_add_disp
+{
+    gEvidenceAddedProcessStates[main->process[GAME_PROCESS_STATE]](main, &gCourtRecord);
+}

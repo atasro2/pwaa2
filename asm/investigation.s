@@ -323,7 +323,7 @@ _0800EC76:
 	adds r0, r6, #0
 	movs r1, #0
 	bl sub_8011388
-	bl sub_800D450
+	bl SetCurrentEpisodeBit
 	movs r0, #0x30
 	movs r1, #0xf
 	bl SetTimedKeysAndDelay
@@ -997,7 +997,7 @@ _0800F2A6:
 	strb r4, [r5, #0xd]
 	movs r0, #1
 	strb r0, [r5, #0xe]
-	bl sub_8013E40
+	bl ClearAllAnimationSprites
 	ldr r0, _0800F32C @ =gAnimation+0x44
 	bl DestroyAnimation
 	ldr r0, _0800F330 @ =gInvestigation
