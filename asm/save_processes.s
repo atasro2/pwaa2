@@ -196,7 +196,7 @@ _0800AFDE:
 	str r5, [r4, #8]
 	ldr r0, [r4, #8]
 	movs r0, #0
-	bl sub_80035B0
+	bl GetBGPalettePtr
 	str r0, [r4]
 	movs r2, #0xa0
 	lsls r2, r2, #0x13
@@ -248,7 +248,7 @@ _0800AFDE:
 	ldr r0, _0800B0F0 @ =0x00003FC7
 	strh r0, [r1, #6]
 	movs r0, #0xa
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #0xa
 	bl CopyBGDataToVram
 	movs r0, #0
@@ -739,7 +739,7 @@ _0800B3D6:
 	str r1, [r0, #8]
 	ldr r0, [r0, #8]
 	movs r0, #0xa
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #0xa
 	bl CopyBGDataToVram
 	adds r1, r4, #0
@@ -1262,9 +1262,9 @@ _0800B8F2:
 	cmp r1, #0xb
 	bls _0800B8F2
 	ldrh r0, [r6, #0x2e]
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r6, #0x2e]
-	bl sub_800342C
+	bl CopyBGDataToVramAndScrollBG
 	ldr r4, _0800BA10 @ =0x040000D4
 	ldr r5, _0800BA14 @ =gUnknown_0200203C
 	str r5, [r4]
@@ -1785,7 +1785,7 @@ sub_800BD08: @ 0x0800BD08
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
 	movs r0, #0xa
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #0xa
 	bl CopyBGDataToVram
 	ldr r1, _0800BDFC @ =gMain
@@ -3453,7 +3453,7 @@ _0800CA08:
 	str r0, [r1, #8]
 	ldr r0, [r1, #8]
 	movs r0, #0xa
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #0xa
 	bl CopyBGDataToVram
 	mov r1, r8
@@ -3816,7 +3816,7 @@ _0800CD0C:
 	str r3, [r6, #8]
 	ldr r0, [r6, #8]
 	movs r0, #0
-	bl sub_80035B0
+	bl GetBGPalettePtr
 	adds r7, r0, #0
 	str r7, [r6]
 	movs r1, #0xa0
@@ -4250,10 +4250,10 @@ _0800D116:
 	ldr r0, [r5, #8]
 	mov r1, r8
 	ldrh r0, [r1, #0x2e]
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	mov r2, r8
 	ldrh r0, [r2, #0x2e]
-	bl sub_800342C
+	bl CopyBGDataToVramAndScrollBG
 	movs r0, #4
 	ldrh r3, [r6]
 	ands r0, r3

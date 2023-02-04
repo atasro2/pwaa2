@@ -31,7 +31,7 @@ _0800A7CA:
 	ldr r0, _0800A818 @ =0x00003FC7
 	strh r0, [r5, #6]
 	movs r0, #0
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #0
 	bl CopyBGDataToVram
 	adds r1, r5, #0

@@ -270,7 +270,7 @@ _0800EC76:
 	adds r0, r0, r1
 	ldrb r4, [r0]
 	adds r0, r4, #0
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	adds r0, r4, #0
 	bl CopyBGDataToVram
 	movs r0, #0x80
@@ -934,7 +934,7 @@ InvestigationRoomInit: @ 0x0800F220
 	bne _0800F268
 	bl ResetSoundControl
 	ldrb r0, [r4]
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	strb r7, [r6, #0xa]
 	b _0800F318
 	.align 2, 0

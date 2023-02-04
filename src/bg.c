@@ -1,5 +1,6 @@
 #include "global.h"
 #include "background.h"
+#include "ewram.h"
 /* was bg3 in pwaa1 */
 #include "data/background.h"
 
@@ -227,6 +228,32 @@ void InitBGs()
     gIORegisters.lcd_bg2vofs = 0;
     gIORegisters.lcd_bg2hofs = 8;
     InitBG3();
+}
+
+// BG256_init
+void InitBG3()
+{
+    struct Main *main = &gMain;
+    u32 i = 0;
+    u32 j = 0;
+    struct IORegisters *ioRegsp = &gIORegisters;
+
+    for (i = 0; i < 30; i++)
+    {
+        gBG3MapBuffer[GET_MAP_TILE_INDEX(0, i, 0, 1)] = 600 + i; // TODO: ??? this line doesn't ever appear in the game
+    }
+    for (i = 0; i < 21; i++)
+    {
+        for (j = 0; j < 30; j++)
+        {
+            gBG3MapBuffer[GET_MAP_TILE_INDEX(i, j, 1, 1)] = j + i * 30;
+        }
+    }
+    ioRegsp->lcd_bg3vofs = 8;
+    ioRegsp->lcd_bg3hofs = 8;
+    main->Bg256_scroll_x = 0;
+    main->Bg256_scroll_y = 0;
+    DmaFill16(3, 0, VRAM + 0xDD80, 0x40); // empty 8bpp tile
 }
 
 // St_bg2_main00

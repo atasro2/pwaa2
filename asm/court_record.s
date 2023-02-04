@@ -1220,7 +1220,7 @@ _0801219E:
 	strh r0, [r5, #0x2e]
 _080121A0:
 	ldrh r0, [r5, #0x2e]
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	ldr r1, _0801220C @ =0x040000D4
 	ldr r0, _08012210 @ =gOamObjects
 	str r0, [r1]
@@ -1565,9 +1565,9 @@ _08012470:
 	cmp r1, #0xb
 	bls _08012470
 	ldrh r0, [r5, #0x2e]
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r5, #0x2e]
-	bl sub_800342C
+	bl CopyBGDataToVramAndScrollBG
 	ldr r3, _080124F8 @ =gSaveDataBuffer
 	adds r0, r3, #0
 	adds r0, #0x4d
@@ -1636,7 +1636,7 @@ _0801251C: .4byte gTestimony
 _08012520: .4byte gCourtRecord
 _08012524:
 	ldrh r0, [r5, #0x2e]
-	bl sub_800342C
+	bl CopyBGDataToVramAndScrollBG
 	ldrh r2, [r5, #0x2e]
 	cmp r2, #0x23
 	bne _08012546
@@ -1800,7 +1800,7 @@ _08012674:
 	strh r0, [r5, #0x2e]
 _08012676:
 	ldrh r0, [r5, #0x2e]
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	ldrh r0, [r5, #0x2e]
 	bl CopyBGDataToVram
 	movs r0, #1

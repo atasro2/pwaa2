@@ -66,12 +66,11 @@ struct AnimationListEntry
     /* +0x30 */ struct SpriteTemplate * spriteData;
     /* +0x34 */ struct AnimationFrame * frameData;
     /* +0x38 */ u16 tileNum;
-    /* +0x3A */ s16 rotationAmount;
-    /* +0x3C */ u16 spritePriorityMatrixIndex; // ! this name sucks :(
-    // these two used to be at 3A/B
+    /* +0x3A */ u8 filler3A[4];
     /* +0x3E */ u8 animtionOamStartIdx;
     /* +0x3F */ u8 animtionOamEndIdx;
-    /* +0x40 */ u8 filler40[4];
+    /* +0x40 */ s16 rotationAmount;
+    /* +0x42 */ u16 spritePriorityMatrixIndex; // ! this name sucks :(
 };
 
 struct AnimationBackupStruct

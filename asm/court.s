@@ -201,7 +201,7 @@ CourtInit: @ 0x0800D55C
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
 	movs r0, #1
-	bl sub_8002820
+	bl DecompressBackgroundIntoBuffer
 	movs r0, #1
 	bl CopyBGDataToVram
 	movs r0, #0x80

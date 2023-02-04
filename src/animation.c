@@ -2109,3 +2109,40 @@ void SetAnimationOriginCoords(struct AnimationListEntry *animation, u32 xOrigin,
         animation->animationInfo.yOrigin = yOrigin;
     }
 }
+
+void SetAnimationRotScaleParams(struct AnimationListEntry *animation, u32 rotscaleIdx)
+{
+    s32 sin, cos;
+    u32 oamIdx;
+    oamIdx = rotscaleIdx << 2;
+    if (animation != NULL)
+    {
+        if (rotscaleIdx > 0x1f)
+            rotscaleIdx = 0x1f;
+        animation->flags = (animation->flags & ~ANIM_ENABLE_XFLIP) | ANIM_ENABLE_ROTATION;
+        animation->rotationAmount &= 0xff;
+        animation->spritePriorityMatrixIndex &= 0xff00;
+        animation->spritePriorityMatrixIndex |= rotscaleIdx;
+        cos = _Cos(animation->rotationAmount);
+        sin = -_Sin(animation->rotationAmount);
+        gOamObjects[oamIdx++].attr3 = cos;
+        gOamObjects[oamIdx++].attr3 = -sin;
+        gOamObjects[oamIdx++].attr3 = sin;
+        gOamObjects[oamIdx++].attr3 = cos;
+    }
+}
+
+void SetAnimationRotation(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 rotation)
+{
+    if (animation != NULL)
+    {
+        animation->rotationAmount = rotation;
+        SetAnimationRotScaleParams(animation, rotscaleIdx);
+    }
+}
+
+void DisableAnimationRotation(struct AnimationListEntry *animation)
+{
+    if (animation != NULL)
+        animation->flags &= ~ANIM_ENABLE_ROTATION;
+}

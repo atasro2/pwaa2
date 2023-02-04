@@ -1,75 +1,8 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start InitBG3
-InitBG3: @ 0x08000F74
-	push {r4, r5, r6, r7, lr}
-	sub sp, #4
-	ldr r7, _08000FE0 @ =gMain
-	movs r1, #0
-	ldr r6, _08000FE4 @ =gIORegisters
-	ldr r0, _08000FE8 @ =gBG3MapBuffer
-	movs r2, #0x96
-	lsls r2, r2, #2
-	adds r3, r2, #0
-	adds r2, r0, #2
-_08000F88:
-	adds r0, r1, r3
-	strh r0, [r2]
-	adds r2, #2
-	adds r1, #1
-	cmp r1, #0x1d
-	bls _08000F88
-	movs r1, #0
-	ldr r5, _08000FE8 @ =gBG3MapBuffer
-_08000F98:
-	movs r2, #0
-	adds r4, r1, #1
-	lsls r0, r1, #4
-	subs r0, r0, r1
-	lsls r3, r0, #1
-	lsls r0, r1, #6
-	adds r0, #0x42
-	adds r1, r0, r5
-_08000FA8:
-	adds r0, r2, r3
-	strh r0, [r1]
-	adds r1, #2
-	adds r2, #1
-	cmp r2, #0x1d
-	bls _08000FA8
-	adds r1, r4, #0
-	cmp r1, #0x14
-	bls _08000F98
-	movs r1, #0
-	movs r0, #8
-	strh r0, [r6, #0x16]
-	strh r0, [r6, #0x14]
-	strh r1, [r7, #0x38]
-	strh r1, [r7, #0x3a]
-	mov r0, sp
-	strh r1, [r0]
-	ldr r1, _08000FEC @ =0x040000D4
-	str r0, [r1]
-	ldr r0, _08000FF0 @ =0x0600DD80
-	str r0, [r1, #4]
-	ldr r0, _08000FF4 @ =0x81000020
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	add sp, #4
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08000FE0: .4byte gMain
-_08000FE4: .4byte gIORegisters
-_08000FE8: .4byte gBG3MapBuffer
-_08000FEC: .4byte 0x040000D4
-_08000FF0: .4byte 0x0600DD80
-_08000FF4: .4byte 0x81000020
-
-	thumb_func_start sub_8000FF8
-sub_8000FF8: @ 0x08000FF8
+	thumb_func_start bg256_right_scroll_end
+bg256_right_scroll_end: @ 0x08000FF8
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -248,8 +181,8 @@ _08001140:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_8001158
-sub_8001158: @ 0x08001158
+	thumb_func_start bg256_right_scroll
+bg256_right_scroll: @ 0x08001158
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -399,7 +332,7 @@ _08001262:
 	bne _080011B2
 	mov r0, sb
 	ldr r1, [sp, #0x10]
-	bl sub_8000FF8
+	bl bg256_right_scroll_end
 _08001278:
 	mov r6, sb
 	movs r0, #0x38
@@ -432,8 +365,8 @@ _080012B4: .4byte 0x80000001
 _080012B8: .4byte gBG3MapBuffer+0x2
 _080012BC: .4byte 0x06004000
 
-	thumb_func_start sub_80012C0
-sub_80012C0: @ 0x080012C0
+	thumb_func_start bg256_left_scroll_end
+bg256_left_scroll_end: @ 0x080012C0
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -642,8 +575,8 @@ _08001454: .4byte 0x81000020
 _08001458: .4byte gBG3MapBuffer
 _0800145C: .4byte 0x00002276
 
-	thumb_func_start sub_8001460
-sub_8001460: @ 0x08001460
+	thumb_func_start bg256_left_scroll
+bg256_left_scroll: @ 0x08001460
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -790,7 +723,7 @@ _08001564:
 	bne _080014B8
 	mov r0, sb
 	ldr r1, [sp, #0x10]
-	bl sub_80012C0
+	bl bg256_left_scroll_end
 _0800157A:
 	mov r2, sb
 	movs r0, #0x38
@@ -824,8 +757,8 @@ _080015BC: .4byte gBG3MapBuffer+0x3E
 _080015C0: .4byte 0x80000001
 _080015C4: .4byte 0x06004000
 
-	thumb_func_start sub_80015C8
-sub_80015C8: @ 0x080015C8
+	thumb_func_start bg256_down_scroll_end
+bg256_down_scroll_end: @ 0x080015C8
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -957,8 +890,8 @@ _080016B8:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_80016CC
-sub_80016CC: @ 0x080016CC
+	thumb_func_start bg256_down_scroll
+bg256_down_scroll: @ 0x080016CC
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -1079,7 +1012,7 @@ _080017A2:
 	bne _08001720
 	adds r0, r4, #0
 	ldr r1, [sp]
-	bl sub_80015C8
+	bl bg256_down_scroll_end
 _080017B8:
 	movs r7, #0x3a
 	ldrsh r1, [r4, r7]
@@ -1107,8 +1040,8 @@ _080017E4: .4byte 0x80000020
 _080017E8: .4byte gBGDecompBuffer
 _080017EC: .4byte 0x06004000
 
-	thumb_func_start sub_80017F0
-sub_80017F0: @ 0x080017F0
+	thumb_func_start bg256_up_scroll_end
+bg256_up_scroll_end: @ 0x080017F0
 	push {r4, r5, r6, r7, lr}
 	mov ip, r0
 	adds r4, r1, #0
@@ -1232,8 +1165,8 @@ _080018D8: .4byte 0x80000020
 _080018DC: .4byte gBGDecompBuffer
 _080018E0: .4byte 0x06004000
 
-	thumb_func_start sub_80018E4
-sub_80018E4: @ 0x080018E4
+	thumb_func_start bg256_up_scroll
+bg256_up_scroll: @ 0x080018E4
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -1354,7 +1287,7 @@ _080019BA:
 	bne _0800192C
 	adds r0, r4, #0
 	ldr r1, [sp]
-	bl sub_80017F0
+	bl bg256_up_scroll_end
 _080019D0:
 	movs r2, #0x3a
 	ldrsh r1, [r4, r2]
@@ -2596,7 +2529,7 @@ _080023AE:
 	bgt _080023E8
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_8001158
+	bl bg256_right_scroll
 	b _0800240A
 	.align 2, 0
 _080023CC: .4byte gMain
@@ -2623,7 +2556,7 @@ _080023E8:
 _08002402:
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_8000FF8
+	bl bg256_right_scroll_end
 _0800240A:
 	mov r7, r8
 	movs r0, #0
@@ -2676,7 +2609,7 @@ _08002456:
 	ble _0800246E
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_8001460
+	bl bg256_left_scroll
 _0800246E:
 	movs r7, #0x3c
 	ldrsh r1, [r6, r7]
@@ -2697,7 +2630,7 @@ _0800246E:
 _0800248E:
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_80012C0
+	bl bg256_left_scroll_end
 _08002496:
 	mov r1, r8
 	movs r0, #0
@@ -2863,7 +2796,7 @@ _080025B4:
 	bgt _080025E0
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_80016CC
+	bl bg256_down_scroll
 	b _08002602
 	.align 2, 0
 _080025D4: .4byte gUnknown_02002BC1
@@ -2886,7 +2819,7 @@ _080025E0:
 _080025FA:
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_80015C8
+	bl bg256_down_scroll_end
 _08002602:
 	mov r0, sb
 	movs r1, #0
@@ -2980,7 +2913,7 @@ _080026A6:
 	ble _080026D0
 	adds r0, r6, #0
 	adds r1, r4, #0
-	bl sub_80018E4
+	bl bg256_up_scroll
 	b _080026F8
 	.align 2, 0
 _080026C0: .4byte 0x040000D4
@@ -3007,7 +2940,7 @@ _080026D0:
 _080026F0:
 	lsls r1, r4, #1
 	adds r0, r6, #0
-	bl sub_80017F0
+	bl bg256_up_scroll_end
 _080026F8:
 	mov r7, sb
 	movs r1, #0
@@ -3168,8 +3101,8 @@ _08002818:
 	bx r0
 	.align 2, 0
 
-	thumb_func_start sub_8002820
-sub_8002820: @ 0x08002820
+	thumb_func_start DecompressBackgroundIntoBuffer
+DecompressBackgroundIntoBuffer: @ 0x08002820
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -4698,8 +4631,8 @@ _0800341C:
 	pop {r0}
 	bx r0
 
-	thumb_func_start sub_800342C
-sub_800342C: @ 0x0800342C
+	thumb_func_start CopyBGDataToVramAndScrollBG
+CopyBGDataToVramAndScrollBG: @ 0x0800342C
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -4790,7 +4723,7 @@ _080034DC:
 	orrs r2, r0
 	adds r0, r7, #0
 	adds r1, r2, #0
-	bl sub_8001158
+	bl bg256_right_scroll
 	b _0800358E
 _080034E8:
 	cmp r0, #0
@@ -4820,7 +4753,7 @@ _08003514:
 	orrs r2, r0
 	adds r0, r7, #0
 	adds r1, r2, #0
-	bl sub_8001460
+	bl bg256_left_scroll
 	b _0800358E
 _08003520:
 	lsls r0, r4, #0x10
@@ -4851,7 +4784,7 @@ _0800354E:
 	orrs r2, r0
 	adds r0, r7, #0
 	adds r1, r2, #0
-	bl sub_80016CC
+	bl bg256_down_scroll
 	b _0800358E
 _0800355A:
 	cmp r0, #0
@@ -4880,7 +4813,7 @@ _08003584:
 	orrs r2, r0
 	adds r0, r7, #0
 	adds r1, r2, #0
-	bl sub_80018E4
+	bl bg256_up_scroll
 _0800358E:
 	add sp, #0x10
 	pop {r3, r4, r5}
@@ -4903,8 +4836,8 @@ GetBGControlBits: @ 0x080035A0
 	.align 2, 0
 _080035AC: .4byte gBackgroundTable
 
-	thumb_func_start sub_80035B0
-sub_80035B0: @ 0x080035B0
+	thumb_func_start GetBGPalettePtr
+GetBGPalettePtr: @ 0x080035B0
 	ldr r1, _080035BC @ =gBackgroundTable
 	lsls r0, r0, #3
 	adds r0, r0, r1
@@ -5446,7 +5379,7 @@ _080039D0:
 	bl GetBGControlBits
 	adds r4, r0, #0
 	adds r0, r5, #0
-	bl sub_80035B0
+	bl GetBGPalettePtr
 	adds r1, r0, #0
 	cmp r4, #0
 	bge _08003A24
