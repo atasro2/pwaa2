@@ -21,6 +21,8 @@ SECTIONS {
         src/main.o(.text);
         src/bg.o(.text);
         asm/bg.o(.text);
+        src/bg2.o(.text);
+        asm/bg2.o(.text);
         src/utils.o(.text);
         src/case_data.o(.text);
         src/investigation_segment_1_0.o(.text);
@@ -45,6 +47,11 @@ SECTIONS {
         src/sound.o(.text);
         src/animation.o(.text);
         asm/animation.o(.text);
+        src/animation2.o(.text);
+        asm/animation2.o(.text);
+        src/animation3.o(.text);
+        asm/animation3.o(.text);
+        src/animation4.o(.text);
         src/psyche_lock.o(.text);
         src/hp_bar.o(.text);
         src/case_intro.o(.text);

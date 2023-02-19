@@ -58,15 +58,15 @@ struct AnimationListEntry
     /* +0x08 */ struct AnimationListEntry * next;
     /* +0x0C */ struct AnimationInfo animationInfo;
     /* +0x28 */ s16 frameDurationCounter;
-    /* +0x2A */ u8 unk2A;
-    /* +0x2B */ u8 unk2B;
+    /* +0x2A */ u8 animVar0;
+    /* +0x2B */ u8 animVar1;
     /* +0x2C */ u8 bgId;
     /* +0x2D */ u8 roomId;
-    /* +0x2E */ s16 unk2E;
-    /* +0x30 */ struct SpriteTemplate * spriteData;
-    /* +0x34 */ struct AnimationFrame * frameData;
-    /* +0x38 */ u16 tileNum;
-    /* +0x3A */ u8 filler3A[4];
+    /* +0x2E */ s16 specialEffectVar;
+    /* +0x30 */ u8 filler3A[4];
+    /* +0x34 */ struct SpriteTemplate * spriteData;
+    /* +0x38 */ struct AnimationFrame * frameData;
+    /* +0x3C */ u16 tileNum;
     /* +0x3E */ u8 animtionOamStartIdx;
     /* +0x3F */ u8 animtionOamEndIdx;
     /* +0x40 */ s16 rotationAmount;
@@ -120,14 +120,14 @@ struct SpriteSizeData {
 
 extern struct AnimationListEntry gAnimation[32];
 
-void sub_8015C6C(struct AnimationListEntry *);
+void SpeechBubbleAnimationEffect(struct AnimationListEntry *);
 
-void sub_8015AF0(struct AnimationListEntry *, struct CourtScroll *);
-void sub_8015B84(struct AnimationListEntry *, struct CourtScroll *);
-void sub_8015894(struct AnimationListEntry *, struct CourtScroll *);
-void sub_8015928(struct AnimationListEntry *, struct CourtScroll *);
-void sub_80159C0(struct AnimationListEntry *, struct CourtScroll *);
-void sub_8015A54(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode0AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode1AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode2AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode3AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode4AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode5AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
 
 void ResetAnimationSystem();
 void ClearAllAnimationSprites();
@@ -157,5 +157,7 @@ void DestroyAnimation(struct AnimationListEntry * animation);
 void MoveAnimationTilesToRam(bool32 arg0);
 void UpdateAnimations(u32 arg0);
 void SetCourtScrollPersonAnim(u32 arg0, u32 arg1, u32 arg2, u32 arg3);
+
+void sub_80146F0(u32 state, u32 animOffset);
 
 #endif//GUARD_ANIMATION_H

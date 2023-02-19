@@ -41,8 +41,8 @@ struct ScriptContext
     /* +0x2E */ u8 holdItFlag;
     /* +0x2F */ u8 unk2F;
     /* +0x30 */ u16 unk30;
-    /* +0x32 */ u8 unk32; // unity: rt_wait_timer   
-    /* +0x33 */ u8 unk33; // unity: desk_attack
+    /* +0x32 */ u8 personAnimPauseCounter; // unity: rt_wait_timer
+    /* +0x33 */ bool8 slamDesk; // unity: desk_attack
     /* +0x34 */ u8 textboxNameId; // unity: speaker_id
     /* +0x35 */ u8 fullscreenInputDelayCounter;
     /* +0x36 */ u8 textboxDownArrowIndex; // unity AA4: enter_type

@@ -38,7 +38,7 @@ struct Main
     /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
     /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
     /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now
-    /* +0x024 */ u8 filler24; //?
+    /* +0x024 */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
     /* +0x025 */ u8 animationFlags; // unity: Obj_flag
     /* +0x026 */ s16 bgmFadeAmount; // unity: bgm_fade_time?
     /* +0x028 */ s16 bgmVolume; // unity: bgm_vol

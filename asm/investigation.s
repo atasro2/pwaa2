@@ -5321,7 +5321,7 @@ _080114D0:
 	b _0801156E
 _080114EE:
 	mov r0, sp
-	bl sub_8014280
+	bl CheckRectCollisionWithAnim
 	adds r2, r0, #0
 	ldr r4, _080114FC @ =gExaminationData
 	b _0801150C

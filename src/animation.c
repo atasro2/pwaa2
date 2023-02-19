@@ -1994,23 +1994,23 @@ const s8 gCourtScroll03AnimOffsets[31] = {
 };
 
 void (*gSpecialAnimationEffectFunctions[8])(struct AnimationListEntry *) = {
-    sub_8015C6C,
-    sub_8015C6C,
-    sub_8015C6C,
-    sub_8015C6C,
-    sub_8015C6C,
-    sub_8015C6C,
-    sub_8015C6C,
-    sub_8015C6C,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
+    SpeechBubbleAnimationEffect,
 };
 
 void (*gCourtScrollPersonAnimationUpdateFuncs[6])(struct AnimationListEntry *, struct CourtScroll *) = {
-    sub_8015AF0,
-    sub_8015B84,
-    sub_8015894,
-    sub_8015928,
-    sub_80159C0,
-    sub_8015A54,
+    ScrollMode0AnimationUpdate,
+    ScrollMode1AnimationUpdate,
+    ScrollMode2AnimationUpdate,
+    ScrollMode3AnimationUpdate,
+    ScrollMode4AnimationUpdate,
+    ScrollMode5AnimationUpdate,
 };
 
 static void InitCurrentAnimationToNull()

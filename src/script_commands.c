@@ -78,9 +78,9 @@ bool32 Command02(struct ScriptContext * scriptCtx)
 
     if(scriptCtx->flags & 0x20)
     {
-        if(scriptCtx->unk32 != 0)
+        if(scriptCtx->personAnimPauseCounter != 0)
         {
-            scriptCtx->unk32--;
+            scriptCtx->personAnimPauseCounter--;
             return 1;
         }
         else
@@ -153,7 +153,7 @@ bool32 Command02(struct ScriptContext * scriptCtx)
             }
             return 0;
         }
-        scriptCtx->unk32 = 10;
+        scriptCtx->personAnimPauseCounter = 10;
         scriptCtx->flags |= 0x20;
         if(scriptCtx->currentToken == 0xA) // if script cmd is 0xA ?
         {
@@ -264,9 +264,9 @@ bool32 Command08(struct ScriptContext * scriptCtx)
         return 1;
     if(scriptCtx->flags & 0x20)
     {
-        if(scriptCtx->unk32 > 0)
+        if(scriptCtx->personAnimPauseCounter > 0)
         {
-            scriptCtx->unk32--;
+            scriptCtx->personAnimPauseCounter--;
             return TRUE;
         }
         scriptCtx->flags &= ~0x20;
@@ -303,7 +303,7 @@ bool32 Command08(struct ScriptContext * scriptCtx)
     else if(gJoypad.pressedKeys & A_BUTTON)
     {
         PlaySE(0x2B);
-        scriptCtx->unk32 = 10;
+        scriptCtx->personAnimPauseCounter = 10;
         scriptCtx->flags |= 0x20;
         if(scriptCtx->fullscreenCursorPos == 0)
             scriptCtx->nextSection = *(scriptCtx->scriptPtr+1);
@@ -336,9 +336,9 @@ bool32 Command09(struct ScriptContext * scriptCtx)
         return 1;
     if(scriptCtx->flags & 0x20)
     {
-        if(scriptCtx->unk32 > 0)
+        if(scriptCtx->personAnimPauseCounter > 0)
         {
-            scriptCtx->unk32--;
+            scriptCtx->personAnimPauseCounter--;
             return TRUE;
         }
         scriptCtx->flags &= ~0x20;
@@ -377,7 +377,7 @@ bool32 Command09(struct ScriptContext * scriptCtx)
     else if(gJoypad.pressedKeys & A_BUTTON)
     {
         PlaySE(0x2B);
-        scriptCtx->unk32 = 10;
+        scriptCtx->personAnimPauseCounter = 10;
         scriptCtx->flags |= 0x20;
         if(scriptCtx->fullscreenCursorPos == 0)
             scriptCtx->nextSection = *(scriptCtx->scriptPtr+1);

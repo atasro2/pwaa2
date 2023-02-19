@@ -596,7 +596,7 @@ _0800B33A:
 	bls _0800B33A
 	movs r4, #0
 	adds r0, r2, #0
-	bl sub_8014A78
+	bl SaveAnimationDataToBuffer
 	strb r4, [r6, #0x18]
 	ldr r4, _0800B3C0 @ =gMain
 	ldr r3, _0800B3C4 @ =0x000002BA
@@ -1347,7 +1347,7 @@ _0800B8F2:
 	movs r3, #0x80
 	lsls r3, r3, #4
 	adds r0, r5, r3
-	bl sub_801492C
+	bl RestoreAnimationsFromBuffer
 	ldr r2, _0800BA74 @ =gMain
 	adds r1, r2, #0
 	adds r1, #0x25
@@ -3866,7 +3866,7 @@ _0800CD0C:
 	ldr r0, _0800CE78 @ =0x00002808
 	adds r4, r4, r0
 	adds r0, r4, #0
-	bl sub_801492C
+	bl RestoreAnimationsFromBuffer
 	mov r1, r8
 	ldrb r1, [r1, #8]
 	cmp r1, #4
