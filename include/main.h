@@ -33,7 +33,8 @@ struct Main
     /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
     /* +0x01A */ u8 tilemapUpdateBits;
-    u8 filler1B[0x1E - 0x1B];
+    /* +0x01B */ u8 saveContinueFlags;
+    u8 filler1C[0x1E - 0x1C];
     /* +0x020 */ u16 unk1E; // unity: Bk_end_mess
     /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
     /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?

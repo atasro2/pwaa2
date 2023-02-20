@@ -731,6 +731,17 @@
 #define gGfxSeqAnimation111 ((u8*)(ROM_START + 0x730AA0))
 #define gGfxPixAnimationTileset03 ((u8*)(ROM_START + 0x730AC8))
 
+#define gGfx4bppNametags ((u8*)(ROM_START + 0x13891C))
+
+
+
+#define gUnknown_081370FC ((u8*)(0x08000000 + 0x1370FC))
+#define gUnknown_0813791C ((u8*)(0x08000000 + 0x13791C))
+#define gUnknown_081500C4 ((u8*)(0x08000000 + 0x1500C4))
+#define gUnknown_081DE3A8 ((u8*)(0x08000000 + 0x1DE3A8))
+#define gUnknown_081378FC ((u8*)(0x08000000 + 0x1378FC))
+
+
 
 //extern u8 gTextPal[];
 #define gTextPal ((u8*)(GFX_BASE_ADDR + 0x7E388))

@@ -2965,3 +2965,138 @@ _08002714:
 	pop {r4, r5, r6, r7}
 	pop {r0}
 	bx r0
+
+	thumb_func_start DecompressCurrentBGStripe
+DecompressCurrentBGStripe: @ 0x08002724
+	push {r4, r5, r6, r7, lr}
+	adds r2, r0, #0
+	ldr r0, _08002744 @ =0xFFFF7FFF
+	ands r2, r0
+	cmp r2, #0x80
+	bne _0800274C
+	ldr r2, _08002748 @ =gMain
+	adds r1, r2, #0
+	adds r1, #0x34
+	movs r0, #0xb
+	strb r0, [r1]
+	movs r1, #0x32
+	ldrsh r0, [r2, r1]
+	bl UpdateAnimations
+	b _08002818
+	.align 2, 0
+_08002744: .4byte 0xFFFF7FFF
+_08002748: .4byte gMain
+_0800274C:
+	ldr r0, _080027D8 @ =gBackgroundTable
+	lsls r2, r2, #3
+	adds r0, r2, r0
+	ldr r5, [r0]
+	ldr r0, _080027DC @ =gMain
+	adds r1, r0, #0
+	adds r1, #0x34
+	adds r6, r0, #0
+	adds r7, r2, #0
+	ldrb r1, [r1]
+	cmp r1, #1
+	bne _08002780
+	adds r4, r5, #0
+	movs r3, #1
+	adds r1, r6, #0
+	adds r1, #0x50
+_0800276C:
+	ldm r4!, {r0}
+	stm r1!, {r0}
+	adds r3, #1
+	cmp r3, #0xa
+	bls _0800276C
+	ldr r0, _080027DC @ =gMain
+	movs r1, #0x32
+	ldrsh r0, [r0, r1]
+	bl UpdateAnimations
+_08002780:
+	ldr r2, _080027DC @ =gMain
+	adds r0, r2, #0
+	adds r0, #0x34
+	ldrb r0, [r0]
+	lsls r0, r0, #0x18
+	asrs r0, r0, #0x18
+	lsls r0, r0, #2
+	adds r1, r2, #0
+	adds r1, #0x4c
+	adds r0, r0, r1
+	ldr r0, [r0]
+	adds r5, r5, r0
+	ldr r0, _080027D8 @ =gBackgroundTable
+	adds r0, #4
+	adds r0, r7, r0
+	ldr r4, [r0]
+	movs r0, #1
+	ands r0, r4
+	adds r6, r2, #0
+	cmp r0, #0
+	bne _080027B6
+	movs r0, #4
+	ands r0, r4
+	movs r3, #0xf0
+	lsls r3, r3, #4
+	cmp r0, #0
+	beq _080027BA
+_080027B6:
+	movs r3, #0xf0
+	lsls r3, r3, #5
+_080027BA:
+	movs r1, #0x80
+	lsls r1, r1, #0x18
+	ands r1, r4
+	cmp r1, #0
+	beq _080027C6
+	lsrs r3, r3, #1
+_080027C6:
+	adds r0, r6, #0
+	adds r0, #0x34
+	ldrb r0, [r0]
+	cmp r0, #1
+	bne _08002800
+	cmp r1, #0
+	beq _080027E0
+	adds r5, #0x20
+	b _080027E6
+	.align 2, 0
+_080027D8: .4byte gBackgroundTable
+_080027DC: .4byte gMain
+_080027E0:
+	movs r0, #0x80
+	lsls r0, r0, #2
+	adds r5, r5, r0
+_080027E6:
+	movs r0, #0xf
+	ands r4, r0
+	cmp r4, #0
+	bne _080027F8
+	ldr r0, _080027F4 @ =gUnknown_02036500
+	b _08002804
+	.align 2, 0
+_080027F4: .4byte gUnknown_02036500
+_080027F8:
+	ldr r0, _080027FC @ =gBGDecompBuffer
+	b _08002804
+	.align 2, 0
+_080027FC: .4byte gBGDecompBuffer
+_08002800:
+	ldr r0, [r6, #0x48]
+	adds r0, r0, r3
+_08002804:
+	str r0, [r6, #0x48]
+	ldr r1, [r6, #0x48]
+	adds r0, r5, #0
+	bl LZ77UnCompWram
+	adds r1, r6, #0
+	adds r1, #0x34
+	ldrb r0, [r1]
+	adds r0, #1
+	strb r0, [r1]
+_08002818:
+	pop {r4, r5, r6, r7}
+	pop {r0}
+	bx r0
+	.align 2, 0

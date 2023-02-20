@@ -23,6 +23,9 @@ SECTIONS {
         asm/bg.o(.text);
         src/bg2.o(.text);
         asm/bg2.o(.text);
+        src/bg3.o(.text);
+        asm/bg3.o(.text);
+        src/bg4.o(.text);
         src/utils.o(.text);
         src/case_data.o(.text);
         src/investigation_segment_1_0.o(.text);
@@ -37,6 +40,7 @@ SECTIONS {
         src/script_commands.o(.text);
         asm/title_processes.o(.text);
         src/gameover_process.o(.text);
+        src/save_processes.o(.text);
         asm/save_processes.o(.text);
         src/court.o(.text);
         asm/court.o(.text);

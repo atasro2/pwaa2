@@ -768,7 +768,7 @@ _08011DF4:
 _08011DF6:
 	ldr r4, _08011E14 @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012D20
 _08011E04:
@@ -823,7 +823,7 @@ _08011E4A:
 	strh r0, [r3]
 _08011E5E:
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012D20
 	movs r0, #1
@@ -908,7 +908,7 @@ _08011F08:
 	strh r2, [r3, #2]
 _08011F0E:
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012D20
 	movs r0, #1
@@ -937,7 +937,7 @@ CourtRecordChangeRecord: @ 0x08011F40
 	adds r5, r0, #0
 	adds r4, r1, #0
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012D20
 	movs r0, #1
@@ -1616,7 +1616,7 @@ _080124DA:
 	strb r0, [r7]
 	ldr r4, _08012520 @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012D20
 	ldrb r0, [r5, #0xa]
@@ -1752,7 +1752,7 @@ _08012608:
 _0801261C:
 	ldr r4, _0801262C @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012D20
 	b _08012692
@@ -2305,7 +2305,7 @@ _08012A02:
 _08012A7C:
 	ldr r4, _08012AA4 @ =gCourtRecord
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012D20
 _08012A8A:
@@ -2374,7 +2374,7 @@ EvidenceAddedMain: @ 0x08012B0C
 	adds r5, r0, #0
 	adds r4, r1, #0
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012E54
 	movs r0, #1
@@ -2424,7 +2424,7 @@ EvidenceAddedExit: @ 0x08012B74
 	adds r5, r0, #0
 	adds r4, r1, #0
 	adds r0, r4, #0
-	bl sub_8003FC4
+	bl UpdateBG2Window
 	adds r0, r4, #0
 	bl sub_8012E54
 	movs r0, #1
