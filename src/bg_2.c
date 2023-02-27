@@ -3,6 +3,7 @@
 #include "ewram.h"
 #include "animation.h"
 #include "m4a.h"
+#include "graphics.h"
 
 void DecompressBackgroundIntoBuffer(u32 bgId)
 {
@@ -56,4 +57,27 @@ void DecompressBackgroundIntoBuffer(u32 bgId)
 // leftover from GS1
 void LoadCase3IntroBackgrounds()
 {
+}
+
+void EnableDetentionCenterMask(bool16 enable)
+{
+    u16 i, j;
+    u16 r4;
+    u16 * map = &gBG0MapBuffer[0x202];
+    map += 0x20;
+    for(r4 = 0, i = 0; i < 3; r4++, i++) {
+        for(j = 0; j < 26; j++) {
+            if(enable)
+                *map++ = 0x2000 | (0x80 + r4);
+            else
+                *map++ = 0;
+        }
+        map += 6;
+    }
+    if(enable) {
+        DmaCopy16(3, gUnknown_0813D91C, VRAM+0x1000, 0x60);
+        gIORegisters.lcd_bg0cnt &= ~0x3;
+        gIORegisters.lcd_bg0cnt |= BGCNT_PRIORITY(2);
+        gIORegisters.lcd_dispcnt |= DISPCNT_BG0_ON;
+    }
 }

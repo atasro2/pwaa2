@@ -7,6 +7,13 @@
 
 #define GFX_BASE_ADDR (ROM_START + 0x130000)
 
+#define gUnknown_081370FC ((u8*)(GFX_BASE_ADDR + 0x70FC))
+#define gUnknown_081378FC ((u8*)(GFX_BASE_ADDR + 0x78FC))
+#define gUnknown_0813791C ((u8*)(GFX_BASE_ADDR + 0x791C))
+#define gGfx4bppNametags ((u8*)(GFX_BASE_ADDR + 0x891C))
+
+#define gUnknown_0813D91C ((u8*)(GFX_BASE_ADDR + 0xD91C))
+
 #define gGfx4bppTestimonyArrows ((u8*)(GFX_BASE_ADDR + 0xD97C))
 #define gUnknown_08141CFC ((u8*)(GFX_BASE_ADDR + 0x11CFC))
 #define gUnknown_08141EFC ((u8*)(GFX_BASE_ADDR + 0x11EFC))
@@ -50,8 +57,11 @@
 #define gUnknown_0814DEC0 ((u8*)(GFX_BASE_ADDR + 0x1DEC0))
 #define gUnknown_0814DEE0 ((u8*)(GFX_BASE_ADDR + 0x1DEE0))
 #define gUnknown_0814DF00 ((u8*)(GFX_BASE_ADDR + 0x1DF00))
+#define gUnknown_0814E0E0 ((u8*)(GFX_BASE_ADDR + 0x1E0E0))
+#define gUnknown_0814E100 ((u8*)(GFX_BASE_ADDR + 0x1E100))
 #define gUnknown_0814E340 ((u8*)(GFX_BASE_ADDR + 0x1E340))
 #define gUnknown_0814E360 ((u8*)(GFX_BASE_ADDR + 0x1E360))
+#define gUnknown_081500C4 ((u8*)(GFX_BASE_ADDR + 0x200C4))
 
 #define gUnknown_081508C4 ((u8*)(GFX_BASE_ADDR + 0x208C4))
 #define gUnknown_08150CCC ((u8*)(GFX_BASE_ADDR + 0x20CCC))
@@ -731,19 +741,10 @@
 #define gGfxSeqAnimation111 ((u8*)(ROM_START + 0x730AA0))
 #define gGfxPixAnimationTileset03 ((u8*)(ROM_START + 0x730AC8))
 
-#define gGfx4bppNametags ((u8*)(ROM_START + 0x13891C))
-
-
-
-#define gUnknown_081370FC ((u8*)(0x08000000 + 0x1370FC))
-#define gUnknown_0813791C ((u8*)(0x08000000 + 0x13791C))
-#define gUnknown_081500C4 ((u8*)(0x08000000 + 0x1500C4))
-#define gUnknown_081DE3A8 ((u8*)(0x08000000 + 0x1DE3A8))
-#define gUnknown_081378FC ((u8*)(0x08000000 + 0x1378FC))
-
-
-
 //extern u8 gTextPal[];
 #define gTextPal ((u8*)(GFX_BASE_ADDR + 0x7E388))
 #define gCharSet ((u8*)(GFX_BASE_ADDR + 0x7E3A8))
+
+#define gUnknown_081DE3A8 ((u8*)(GFX_BASE_ADDR + 0xAE3A8))
+
 #endif

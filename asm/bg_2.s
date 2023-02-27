@@ -1,84 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_8002920
-sub_8002920: @ 0x08002920
-	push {r4, r5, r6, r7, lr}
-	lsls r0, r0, #0x10
-	lsrs r3, r0, #0x10
-	ldr r2, _08002948 @ =gBG0MapBuffer+0x404
-	adds r2, #0x40
-	movs r4, #0
-	movs r1, #0
-	movs r0, #0x80
-	lsls r0, r0, #6
-	adds r7, r0, #0
-_08002934:
-	movs r0, #0
-	adds r5, r4, #1
-	adds r6, r1, #1
-	adds r1, r4, #0
-	adds r1, #0x80
-	orrs r1, r7
-_08002940:
-	cmp r3, #0
-	beq _0800294C
-	strh r1, [r2]
-	b _0800294E
-	.align 2, 0
-_08002948: .4byte gBG0MapBuffer+0x404
-_0800294C:
-	strh r3, [r2]
-_0800294E:
-	adds r2, #2
-	adds r0, #1
-	lsls r0, r0, #0x10
-	lsrs r0, r0, #0x10
-	cmp r0, #0x19
-	bls _08002940
-	adds r2, #0xc
-	lsls r0, r5, #0x10
-	lsrs r4, r0, #0x10
-	lsls r0, r6, #0x10
-	lsrs r1, r0, #0x10
-	cmp r1, #2
-	bls _08002934
-	cmp r3, #0
-	beq _08002998
-	ldr r1, _080029A0 @ =0x040000D4
-	ldr r0, _080029A4 @ =gUnknown_0813D91C
-	str r0, [r1]
-	ldr r0, _080029A8 @ =0x06001000
-	str r0, [r1, #4]
-	ldr r0, _080029AC @ =0x80000030
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	ldr r2, _080029B0 @ =gIORegisters
-	ldr r0, _080029B4 @ =0x0000FFFC
-	ldrh r1, [r2]
-	ands r0, r1
-	movs r1, #2
-	orrs r0, r1
-	strh r0, [r2]
-	adds r2, #0x4a
-	movs r1, #0x80
-	lsls r1, r1, #1
-	adds r0, r1, #0
-	ldrh r1, [r2]
-	orrs r0, r1
-	strh r0, [r2]
-_08002998:
-	pop {r4, r5, r6, r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080029A0: .4byte 0x040000D4
-_080029A4: .4byte gUnknown_0813D91C
-_080029A8: .4byte 0x06001000
-_080029AC: .4byte 0x80000030
-_080029B0: .4byte gIORegisters
-_080029B4: .4byte 0x0000FFFC
-
 	thumb_func_start CopyBGDataToVram
 CopyBGDataToVram: @ 0x080029B8
 	push {r4, r5, r6, r7, lr}
@@ -112,21 +34,21 @@ _080029E2:
 	cmp r0, #1
 	bne _08002A00
 	movs r0, #0
-	bl sub_8002920
+	bl EnableDetentionCenterMask
 	b _08002A14
 	.align 2, 0
 _080029F8: .4byte gMain
 _080029FC: .4byte gIORegisters
 _08002A00:
 	movs r0, #1
-	bl sub_8002920
+	bl EnableDetentionCenterMask
 	b _08002A14
 _08002A08:
 	mov r1, r8
 	adds r1, #0x35
 	movs r0, #0
 	strb r0, [r1]
-	bl sub_8002920
+	bl EnableDetentionCenterMask
 _08002A14:
 	ldr r0, _08002A30 @ =gMain
 	ldrb r0, [r0, #8]
