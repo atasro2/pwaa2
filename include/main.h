@@ -118,7 +118,11 @@ struct Main
     u8 unk24A;
     u8 unk24B;
     u8 unk24C; // unity: psy_unlock_not_unlock_message
-    u8 filler24D[0x254 - 0x24D];
+    u8 unk24D;
+    u8 unk24E;
+    u8 unk24F;
+    u8 unk250;
+    u8 filler251[0x254 - 0x251];
     /* +0x254 */ u32 soundFlags;
     u8 filler258[0x276 - 0x258];
     u16 unk276[8]; // ! fix size later

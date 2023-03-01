@@ -20,7 +20,6 @@ SECTIONS {
         src/crt0.o(.text);
         src/main.o(.text);
         src/bg.o(.text);
-        asm/bg.o(.text);
         src/bg_2.o(.text);
         asm/bg_2.o(.text);
         src/bg_3.o(.text);
