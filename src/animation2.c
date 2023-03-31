@@ -7,9 +7,12 @@
 #include "background.h"
 #include "graphics.h"
 #include "constants/animation.h"
+#include "constants/process.h"
 
 extern const struct PersonAnimationData gPersonAnimData[];
 extern const struct SpriteSizeData gSpriteSizeTable[];
+
+struct AnimationListEntry * CreateAnimationFromAnimationInfo(struct AnimationInfo *animationFieldC, u32 arg1, u32 flags);
 
 void ChangeAnimationActivity(struct AnimationListEntry *animation, bool32 activate)
 {
@@ -356,8 +359,53 @@ struct AnimationListEntry *PlayPersonAnimation(u32 arg0, u32 arg1, u32 talkingAn
     return PlayPersonAnimationAtCustomOrigin(arg0, talkingAnimOff, xOrigin, DISPLAY_HEIGHT/2, arg1);
 }
 
-void sub_80146F0(u32 state, u32 animOffset)
+void sub_80146F0(u32 animId, u32 animOffset)
 {
     gMain.idleAnimationOffset = animOffset;
     gMain.talkingAnimationOffset = animOffset;
+}
+
+struct AnimationListEntry *PlayPersonAnimationAtCustomOrigin(u32 arg0, u32 talkingAnimOff, u32 xOrigin, u32 yOrigin, u32 flags)
+{
+    struct Main *main = &gMain;
+    struct AnimationListEntry *animation = &gAnimation[1];
+    struct AnimationInfo animationInfo;
+    u32 personId = arg0 & 0xFF;
+    if (personId == 0)
+    {
+        if (animation->flags & ANIM_ALLOCATED)
+            DestroyAnimation(animation);
+        return NULL;
+    }
+    animationInfo.animId = 0xFF;
+    *(u16 *)(&animationInfo.personId) = arg0; // this assignment matches but sucks. doing it like this allows unk2 to not be an array which makes everything else more sane
+    arg0 = personId; // ?! just use personId for the rest of the function like the previous dev and a good human :sob:
+    animationInfo.vramPtr = OBJ_VRAM0 + 0x5800;
+    animationInfo.animGfxDataStartPtr = gPersonAnimData[personId].gfxData;
+    animationInfo.animFrameDataStartPtr = gPersonAnimData[personId].frameData + talkingAnimOff;
+    animationInfo.paletteSlot = 14;
+    if(animation->animationInfo.animId == 0xFF) {
+        if(arg0 == 0x10)
+            animationInfo.paletteSlot = 13;
+        if(arg0 == 0x27)
+            animationInfo.paletteSlot = 13;
+    }
+    if (main->process[GAME_PROCESS] == COURT_PROCESS) // why does it force a specific amount of sprites
+        animationInfo.spriteCount = 0x27;
+    else
+        animationInfo.spriteCount = gPersonAnimData[arg0].spriteCount;
+    animationInfo.priority = 0x31;
+    animationInfo.xOrigin = xOrigin;
+    animationInfo.yOrigin = yOrigin;
+    if (!(animation->flags & ANIM_ALLOCATED))
+    {
+        DmaFill16(3, 0, animation, sizeof(gAnimation[1]));
+        animation->flags |= ANIM_ALLOCATED;
+        animation->animationInfo.animId = 0xFF;
+        PutAnimationInAnimList(animation);
+    }
+    animation->bgId |= 0;
+    CreateAnimationFromAnimationInfo(&animationInfo, 0xFF, flags);
+    animation->bgId = main->currentBG;
+    return animation;
 }

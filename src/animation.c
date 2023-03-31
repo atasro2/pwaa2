@@ -2146,3 +2146,30 @@ void DisableAnimationRotation(struct AnimationListEntry *animation)
     if (animation != NULL)
         animation->flags &= ~ANIM_ENABLE_ROTATION;
 }
+
+void SetAnimationScale(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 scale)
+{
+	s16 temp;
+    u32 oamIdx;
+    oamIdx = rotscaleIdx << 2;
+    if (animation != NULL)
+    {
+        if (rotscaleIdx > 0x1f)
+            rotscaleIdx = 0x1f;
+        animation->flags = (animation->flags & ~ANIM_ENABLE_XFLIP) | ANIM_ENABLE_ROTATION;
+        animation->rotationAmount &= 0xff;
+        animation->spritePriorityMatrixIndex &= 0xff00;
+        animation->spritePriorityMatrixIndex |= rotscaleIdx;
+        temp = fix_inverse(scale); 
+        gOamObjects[oamIdx++].attr3 = fix_mul(_Cos(0), temp);
+        gOamObjects[oamIdx++].attr3 = fix_mul(_Sin(0), temp);
+        gOamObjects[oamIdx++].attr3 = fix_mul(-_Sin(0), temp);
+        gOamObjects[oamIdx++].attr3 = fix_mul(_Cos(0), temp);
+    }
+}
+
+void DisableAnimationScale(struct AnimationListEntry *animation)
+{
+    if (animation != NULL)
+        animation->flags &= ~ANIM_ENABLE_ROTATION;
+}

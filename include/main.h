@@ -50,7 +50,7 @@ struct Main
     /* +0x030 */ u16 unk30; // unity AA4: Bg256_load_no?
     /* +0x032 */ s16 previousBG; // unity AA4: Bg256_no_old? probably wrong
     /* +0x034 */ s8 currentBgStripe; // maybe Bg256_rno_0?
-    /* +0x035 */ u8 unk35; // unused field maybe Bg256_SP_Flag?
+    /* +0x035 */ u8 unk35;
     /* +0x036 */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
     /* +0x037 */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
     /* +0x038 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x

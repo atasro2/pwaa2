@@ -553,7 +553,7 @@
 #define gUnknown_08477C38 ((u8*)(GFX_BASE_ADDR + 0x347C38))
 #define gUnknown_08478370 ((u8*)(GFX_BASE_ADDR + 0x348370))
 #define gUnknown_084783F8 ((u8*)(GFX_BASE_ADDR + 0x3483F8))
-
+#define gUnknown_0847845C ((u8*)(GFX_BASE_ADDR + 0x34845C))
 #define gUnknown_08478BDC ((u8*)(GFX_BASE_ADDR + 0x348BDC))
 
 

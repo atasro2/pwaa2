@@ -14,5 +14,6 @@ extern u8 eUnknown_02002BC1;
 #define eBGDecompBuffer ((void*) (EWRAM_START + 0x2CFC0))
 #define eUnknown_02031FC0 ((void*) (EWRAM_START + 0x31FC0))
 #define eUnknown_02036500 ((void*) (EWRAM_START + 0x36500))
+#define eUnknown_0203B000 ((void*) (EWRAM_START + 0x3B000))
 #define eUnknown_0203B500 ((void*) (EWRAM_START + 0x3B500))
 #endif//GUARD_EWRAM_H

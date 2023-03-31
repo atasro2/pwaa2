@@ -446,7 +446,7 @@ _08016498: // psylock_move_lock_appear
                     } 
                     else 
                     {
-                        sub_8014124(gPsycheLock.lockAnims[i]);
+                        DisableAnimationScale(gPsycheLock.lockAnims[i]);
                         gPsycheLock.lockAnims[i]->flags &= ~0x100;
                     }
                 }
@@ -454,7 +454,7 @@ _08016498: // psylock_move_lock_appear
             if(gPsycheLock.unkA > gPsycheLock.unk0 * 8)
             {
                 for(i = 0; i < gPsycheLock.unk0; i++)
-                    sub_8014124(gPsycheLock.lockAnims[i]);
+                    DisableAnimationScale(gPsycheLock.lockAnims[i]);
                 gPsycheLock.unkA = 0;
                 gPsycheLock.unk6++;
             }

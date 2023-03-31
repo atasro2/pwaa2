@@ -136,7 +136,7 @@ void SetAnimationOriginCoords(struct AnimationListEntry *animation, u32 xOrigin,
 void SetAnimationRotation(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 rotation);
 void DisableAnimationRotation(struct AnimationListEntry *animation);
 void SetAnimationScale(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 scale);
-void sub_8014124(struct AnimationListEntry *animation);
+void DisableAnimationScale(struct AnimationListEntry *animation);
 void ChangeAnimationActivity(struct AnimationListEntry *animation, bool32 arg1);
 void SetAnimationXFlip(struct AnimationListEntry *animation, bool32 flipX);
 void SetAnimationPriority(struct AnimationListEntry* arg0, u32 arg1);
@@ -158,6 +158,6 @@ void MoveAnimationTilesToRam(bool32 arg0);
 void UpdateAnimations(u32 arg0);
 void SetCourtScrollPersonAnim(u32 arg0, u32 arg1, u32 arg2, u32 arg3);
 
-void sub_80146F0(u32 state, u32 animOffset);
+void sub_80146F0(u32 animId, u32 animOffset);
 
 #endif//GUARD_ANIMATION_H

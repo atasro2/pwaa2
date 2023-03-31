@@ -47,9 +47,7 @@ SECTIONS {
         asm/court_record.o(.text);
         src/sound.o(.text);
         src/animation.o(.text);
-        asm/animation.o(.text);
         src/animation2.o(.text);
-        asm/animation2.o(.text);
         src/animation3.o(.text);
         asm/animation3.o(.text);
         src/animation4.o(.text);
