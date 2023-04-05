@@ -13,7 +13,6 @@ extern const struct PersonAnimationData gPersonAnimData[];
 extern const struct SpriteSizeData gSpriteSizeTable[];
 extern const struct AnimationData gAnimationData[];
 
-
 extern u16 gObjPaletteBuffer[16][16];
 
 struct AnimationListEntry * CreateAnimationFromAnimationInfo(struct AnimationInfo *animationFieldC, u32 arg1, u32 flags);
@@ -525,6 +524,123 @@ void UpdateAllAnimationSprites()
             oam1->attr0 = SPRITE_ATTR0_CLEAR;
             src = animation->animationInfo.animGfxDataStartPtr+4;
             DmaCopy16(3, src, OBJ_PLTT + (animation->animationInfo.paletteSlot & 0xF) * 0x20, 0x20);
+        }
+    }
+}
+
+void MoveAnimationTilesToRam(bool32 arg0)
+{
+    struct AnimationListEntry *animation; // r5
+
+    for (animation = gAnimation[0].next; animation != NULL; animation = animation->next)
+    {
+        void * tileData;
+        struct SpriteTemplate * spriteTemplate; // ip
+        struct SpriteSizeData * spriteSizeData; // r7
+        void * tileDest; // r6
+        void * nextTileDest; // r8
+        u32 * temp;
+        u32 spriteCount; // sl
+        u32 palCount; //sp08
+        u32 i;
+
+        if(!(animation->flags & ANIM_QUEUED_TILE_UPLOAD))
+            continue;
+        if(!(animation->flags & ANIM_ACTIVE))
+            continue;
+        tileDest = arg0 ? eUnknown_0200AFC0 + 0x200 : animation->animationInfo.vramPtr;
+        spriteTemplate = animation->spriteData;
+        spriteCount = *(u16*)animation->spriteData;
+        spriteSizeData = eUnknown_0200AFC0;
+        spriteSizeData += animation->animtionOamEndIdx;
+        animation->flags &= ~ANIM_QUEUED_TILE_UPLOAD;
+        palCount = *(u32*)animation->animationInfo.animGfxDataStartPtr;
+        if(palCount & 0x80000000)
+        {
+            for(i = 0; i < spriteCount; i++)
+            {
+                void * tileStart;
+                //void * tileData;
+                u32 * offsets;
+                u32 tileNum;
+                u32 size;
+                spriteTemplate++;
+                spriteSizeData--;
+                size = spriteSizeData->tileSize;
+                nextTileDest = tileDest + size;
+                tileNum = (spriteTemplate->data & 0x1FF);
+                tileStart = animation->animationInfo.tileDataPtr;
+                offsets = (u32*)tileStart;
+                tileStart += offsets[tileNum];
+                tileData = tileStart;
+                while(nextTileDest > tileDest)
+                {
+                    if(*(u16*)tileData & 0x8000)
+                    {
+                        u32 repeatCount = *(u16*)tileData & 0x7FFF;
+                        DmaFill16(3, *((u16*)tileData+1), tileDest, repeatCount*=2);
+                        tileDest += repeatCount;
+                        tileData += 4;
+                    }
+                    else
+                    {
+                        u32 size = *(u16*)tileData * 2;
+                        tileData+=2;
+                        DmaCopy16(3, tileData, tileDest, size);
+                        tileDest += size;
+                        tileData += size;
+                    }
+                }
+            }
+        }
+        else
+        {
+            u32 tileNumMask;
+            if(animation->frameData->flags & 1)
+                tileNumMask = 0x1FF;
+            else if(animation->frameData->flags & 8)
+                tileNumMask = 0x3FF;
+            else
+                tileNumMask = 0x7FF;
+            for(i = 0; i < spriteCount; i++)
+            {
+                u16 * sizePtr;
+                u32 tileNum;
+                spriteTemplate++;
+                spriteSizeData--;
+                sizePtr = &spriteSizeData->tileSize; // !! SCRUB C probably fakematch
+                tileData = animation->animationInfo.tileDataPtr + (spriteTemplate->data & tileNumMask) * TILE_SIZE_4BPP;
+                DmaCopy16(3, tileData, tileDest, *sizePtr);
+                tileDest += *sizePtr;
+            }
+        }
+        if(animation->flags & ANIM_QUEUED_PAL_UPLOAD)
+        {
+            u8 * ptr;
+            uintptr_t dest;
+            u32 palOffset = animation->animationInfo.paletteSlot & 0xF;
+
+            palOffset *= 32;
+            dest = OBJ_PLTT + palOffset;
+            palCount *= 32;
+            tileData = animation->animationInfo.animGfxDataStartPtr+4;
+            if(animation->flags & 0x200)
+                tileData = animation->unk30;
+            
+            if(animation->flags & 0x400) {
+                u16 buf[0x30];
+                DmaCopy16(3, tileData, buf, palCount);
+                for(i = 0; i < 0x30; i++) {
+                    if(gMain.unk84 == 0xFFFE)
+                        buf[i] = sub_800389C(buf[i], 0x20, 1);
+                    else
+                        buf[i] = sub_800389C(buf[i], 0x20, 0);
+                }
+                DmaCopy16(3, buf, dest, palCount);
+            } else {
+                DmaCopy16(3, tileData, dest, palCount);
+            }
+            animation->flags &= ~ANIM_QUEUED_PAL_UPLOAD;
         }
     }
 }
