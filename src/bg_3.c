@@ -229,31 +229,31 @@ void SlideTextbox(u32 slideUp)
     }
 }
 
-u16 sub_800389C(u16 arg0, u16 arg1, u16 arg2)
+u16 sub_800389C(u16 color, u16 y, u16 mode)
 {
-    u16 r = (arg0 & 0x1F);
-    u16 g = (arg0 & 0x3E0) >> 5;
-    u16 b = (arg0 & 0x7C00) >> 10;
+    u16 r = (color & 0x1F);
+    u16 g = (color & 0x3E0) >> 5;
+    u16 b = (color & 0x7C00) >> 10;
     u16 average = (r + g + b) / 3;
 
-    if(arg1 > 32)
-        arg1 = 32;
+    if(y > 32)
+        y = 32;
     
-    switch(arg2) {
+    switch(mode) {
         case 2:
-            r = (r * (32 - arg1)) / 32;
-            g = (g * (32 - arg1)) / 32;
-            b = (b * (32 - arg1)) / 32;
+            r = (r * (32 - y)) / 32;
+            g = (g * (32 - y)) / 32;
+            b = (b * (32 - y)) / 32;
             break;
         case 1:
-            r = (r * (32 - arg1) + arg1 * 31) / 32;
-            g = (g * (32 - arg1)) / 32;
-            b = (b * (32 - arg1)) / 32;
+            r = (r * (32 - y) + y * 31) / 32;
+            g = (g * (32 - y)) / 32;
+            b = (b * (32 - y)) / 32;
             break;
         default:
-            r = (r * (32 - arg1) + arg1 * average) / 32;
-            g = (g * (32 - arg1) + arg1 * average) / 32;
-            b = (b * (32 - arg1) + arg1 * average) / 32;
+            r = (r * (32 - y) + y * average) / 32;
+            g = (g * (32 - y) + y * average) / 32;
+            b = (b * (32 - y) + y * average) / 32;
     }
     r &= 0x1F;
     g &= 0x1F;

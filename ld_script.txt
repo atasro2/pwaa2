@@ -47,10 +47,6 @@ SECTIONS {
         asm/court_record.o(.text);
         src/sound.o(.text);
         src/animation.o(.text);
-        src/animation2.o(.text);
-        src/animation3.o(.text);
-        asm/animation3.o(.text);
-        src/animation4.o(.text);
         src/psyche_lock.o(.text);
         src/hp_bar.o(.text);
         src/case_intro.o(.text);
