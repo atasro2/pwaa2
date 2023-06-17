@@ -10,12 +10,12 @@
 . = 0x0000103C; gUnknown_0200103C = .;
 . = 0x0000183C; gUnknown_0200183C = .;
 . = 0x0000203C; gUnknown_0200203C = .;
-. = 0x00002BBC; gUnknown_02002BBC = .;
-. = 0x00002BBD; gUnknown_02002BBD = .;
-. = 0x00002BBE; gUnknown_02002BBE = .;
-. = 0x00002BBF; gUnknown_02002BBF = .;
-. = 0x00002BC0; gUnknown_02002BC0 = .;
-. = 0x00002BC1; gUnknown_02002BC1 = .;
+. = 0x00002BBC; eUnknown_02002BBC = .;
+. = 0x00002BBD; eUnknown_02002BBD = .;
+. = 0x00002BBE; eUnknown_02002BBE = .;
+. = 0x00002BBF; eUnknown_02002BBF = .;
+. = 0x00002BC0; eUnknown_02002BC0 = .;
+. = 0x00002BC1; eUnknown_02002BC1 = .;
 . = 0x0000AFC0; gUnknown_0200AFC0 = .;
 . = 0x0000AFC8; gUnknown_0200AFC8 = .;
 . = 0x0000AFD0; gUnknown_0200AFD0 = .;
@@ -23,7 +23,7 @@
 . = 0x00011DC0; gUnknown_02011DC0 = .;
 . = 0x00011FC0; gScriptHeap = .;
 . = 0x00011FC4; gUnknown_02011FC4 = .;
-. = 0x0002CFC0; gUnknown_0202CFC0 = .;
+. = 0x0002CFC0; gBGDecompBuffer = .;
 . = 0x00036500; gUnknown_02036500 = .;
 . = 0x0003A500; gUnknown_0203A500 = .;
 . = 0x0003B000; gUnknown_0203B000 = .;

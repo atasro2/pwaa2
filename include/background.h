@@ -41,8 +41,8 @@ extern u16 gBG2MapBuffer[0x400];
 extern u16 gBG3MapBuffer[0x400];
 extern u16 gTilemapBuffer[0x400];
 
-extern const u8 gUnknown_08013B70[0x400];
-extern const u16 gUnknown_08014570[0x2C0];
+extern const u8 gTextboxTiles[0x400];
+extern const u16 gUnknown_0801BBD8[0x2C0];
 
 struct CourtScroll
 {
@@ -75,5 +75,6 @@ void UpdateBG2Window(struct CourtRecord *);
 extern void sub_80037C8(void);
 void SetTextboxNametag(u32, u32);
 void UpdateBGTilemaps(void);
+u16 sub_800389C(u16 color, u16 y, u16 mode);
 
 #endif//GUARD_BACKGROUND_H

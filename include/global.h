@@ -62,4 +62,6 @@
 // Converts a Q16.16 fixed-point format number to a regular integer
 #define Q_16_16_TO_INT(n)  ((int)((n) >> 16))
 
+#define abs(x) (((x) < 0) ? -(x) : (x))
+
 #endif//GUARD_GLOBAL_H

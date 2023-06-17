@@ -13,7 +13,35 @@
 #include "court.h"
 #include "constants/animation.h"
 
-extern void (*gGameProcesses[])(struct Main *);
+
+void CapcomLogoProcess(struct Main *);
+void TitleScreenProcess(struct Main *);
+
+void GameOverScreenProcess(struct Main *);
+
+void SaveGameProcess(struct Main *);
+void EpisodeClearedProcess(struct Main *);
+void SelectEpisodeProcess(struct Main *);
+void ContinueSaveProcess(struct Main *);
+void ClearSaveProcess(struct Main *);
+
+void (*gGameProcesses[])(struct Main *) = {
+    CapcomLogoProcess,
+    TitleScreenProcess,
+    GameOverScreenProcess,
+    CourtProcess,
+    InvestigationProcess,
+    TestimonyProcess,
+    QuestioningProcess,
+    CourtRecordProcess,
+    EvidenceAddedProcess,
+    VerdictProcess,
+    SaveGameProcess,
+    EpisodeClearedProcess,
+    SelectEpisodeProcess,
+    ContinueSaveProcess,
+    ClearSaveProcess,
+};
 extern void (*gIntrTable[0x10]);
 
 static void DoGameProcess(void);

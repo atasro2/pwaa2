@@ -58,19 +58,19 @@ struct AnimationListEntry
     /* +0x08 */ struct AnimationListEntry * next;
     /* +0x0C */ struct AnimationInfo animationInfo;
     /* +0x28 */ s16 frameDurationCounter;
-    /* +0x2A */ u8 unk2A;
-    /* +0x2B */ u8 unk2B;
+    /* +0x2A */ u8 animVar0;
+    /* +0x2B */ u8 animVar1;
     /* +0x2C */ u8 bgId;
     /* +0x2D */ u8 roomId;
-    /* +0x2E */ s16 unk2E;
-    /* +0x30 */ struct SpriteTemplate * spriteData;
-    /* +0x34 */ struct AnimationFrame * frameData;
-    /* +0x38 */ u16 tileNum;
-    /* +0x3A */ u8 animtionOamStartIdx;
-    /* +0x3B */ u8 animtionOamEndIdx;
-    /* +0x3C */ s16 rotationAmount;
-    /* +0x3E */ u16 spritePriorityMatrixIndex; // ! this name sucks :(
-    /* +0x40 */ u8 filler40[4];
+    /* +0x2E */ s16 specialEffectVar;
+    /* +0x30 */ u8 * unk30;
+    /* +0x34 */ struct SpriteTemplate * spriteData;
+    /* +0x38 */ struct AnimationFrame * frameData;
+    /* +0x3C */ u16 tileNum;
+    /* +0x3E */ u8 animtionOamStartIdx;
+    /* +0x3F */ u8 animtionOamEndIdx;
+    /* +0x40 */ s16 rotationAmount;
+    /* +0x42 */ u16 spritePriorityMatrixIndex; // ! this name sucks :(
 };
 
 struct AnimationBackupStruct
@@ -120,15 +120,14 @@ struct SpriteSizeData {
 
 extern struct AnimationListEntry gAnimation[32];
 
-void sub_8011130(struct AnimationListEntry *);
-void sub_80111A0(struct AnimationListEntry *);
+void SpeechBubbleAnimationEffect(struct AnimationListEntry *);
 
-void sub_8011068(struct AnimationListEntry *, struct CourtScroll *);
-void sub_80110A8(struct AnimationListEntry *, struct CourtScroll *);
-void sub_8010F68(struct AnimationListEntry *, struct CourtScroll *);
-void sub_8010FA8(struct AnimationListEntry *, struct CourtScroll *);
-void sub_8010FEC(struct AnimationListEntry *, struct CourtScroll *);
-void sub_801102C(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode0AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode1AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode2AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode3AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode4AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
+void ScrollMode5AnimationUpdate(struct AnimationListEntry *, struct CourtScroll *);
 
 void ResetAnimationSystem();
 void ClearAllAnimationSprites();
@@ -137,7 +136,7 @@ void SetAnimationOriginCoords(struct AnimationListEntry *animation, u32 xOrigin,
 void SetAnimationRotation(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 rotation);
 void DisableAnimationRotation(struct AnimationListEntry *animation);
 void SetAnimationScale(struct AnimationListEntry *animation, u32 rotscaleIdx, u32 scale);
-void sub_8014124(struct AnimationListEntry *animation);
+void DisableAnimationScale(struct AnimationListEntry *animation);
 void ChangeAnimationActivity(struct AnimationListEntry *animation, bool32 arg1);
 void SetAnimationXFlip(struct AnimationListEntry *animation, bool32 flipX);
 void SetAnimationPriority(struct AnimationListEntry* arg0, u32 arg1);
@@ -158,5 +157,7 @@ void DestroyAnimation(struct AnimationListEntry * animation);
 void MoveAnimationTilesToRam(bool32 arg0);
 void UpdateAnimations(u32 arg0);
 void SetCourtScrollPersonAnim(u32 arg0, u32 arg1, u32 arg2, u32 arg3);
+
+void sub_80146F0(u32 animId, u32 animOffset);
 
 #endif//GUARD_ANIMATION_H

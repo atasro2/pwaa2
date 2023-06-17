@@ -23,11 +23,11 @@ struct Struct811DC98
 
 extern const u8 gCaseStartProcess[];
 extern const u16 gCaseGameoverSections[];
-extern const u16 gUnknown_0801C3EE[];
+extern const u16 gCaseGameoverSections[];
 
-extern const u8 * gCourtRecordInitialItemLists[17];
-extern const struct Struct811DC54 * gUnknown_0811DC54[17];
-extern const struct Struct811DC98 * gUnknown_0811DC98[17];
+extern const u8 * gCourtRecordInitialItemLists[22];
+extern const struct Struct811DC54 * gUnknown_0811DC54[22];
+extern const struct Struct811DC98 * gUnknown_0811DC98[22];
 extern void (*gInvestigationSegmentSetupFunctions[])(struct Main *);
 extern void (*gInvestigationRoomSetupFunctions[])(struct Main *);
 extern void (*gInvestigationRoomUpdateFunctions[])(struct Main *);

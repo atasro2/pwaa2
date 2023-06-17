@@ -4455,9 +4455,3 @@ gUnknown_08730AA0:
     .global gUnknown_08730AC8
 gUnknown_08730AC8:
     .incbin "graphics/animations/tileset03.pix"
-
-
-
-    .global std_scripts
-std_scripts:
-    .incbin "baserom.gba", 0x00730AEC, 0xCBA5C

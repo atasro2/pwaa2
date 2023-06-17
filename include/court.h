@@ -16,9 +16,31 @@ extern struct TestimonyStruct gTestimony;
 void sub_800B51C(struct Main *, struct TestimonyStruct *, u32);
 void sub_800B638(struct Main *, struct TestimonyStruct *);
 
-void GameProcess03(struct Main *);
-void GameProcess05(struct Main *);
-void GameProcess06(struct Main *);
-extern void GameProcess09(struct Main *);
+void CourtProcess(struct Main *);
+void TestimonyProcess(struct Main *);
+void QuestioningProcess(struct Main *);
+extern void VerdictProcess(struct Main *);
+
+/* begin process functions */
+
+//~ gCourtProcessStates:
+void CourtInit(struct Main *);
+void CourtMain(struct Main *);
+void CourtExit(struct Main *);
+
+//~ gTestimonyProcessStates:
+void TestimonyInit(struct Main *);
+void TestimonyMain(struct Main *);
+void TestimonyExit(struct Main *);
+void TestimonyAnim(struct Main *);
+
+//~ gQuestioningProcessStates:
+void QuestioningInit(struct Main *);
+void QuestioningMain(struct Main *);
+void QuestioningExit(struct Main *);
+void QuestioningAnim(struct Main *);
+void QuestioningHoldIt(struct Main *);
+void QuestioningObjection(struct Main *);
+/* end process functions */
 
 #endif//GUARD_COURT_H

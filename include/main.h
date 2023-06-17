@@ -32,12 +32,14 @@ struct Main
     /* +0x017 */ u8 selectedButton; // unity: Cursol
     /* +0x018 */ bool8 advanceScriptContext; // unity: Mess_move_flag
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
-    u8 filler1A[0x1E - 0x1A];
-    /* +0x020 */ u16 unk1E;
+    /* +0x01A */ u8 tilemapUpdateBits;
+    /* +0x01B */ u8 saveContinueFlags;
+    u8 filler1C[0x1E - 0x1C];
+    /* +0x020 */ u16 unk1E; // unity: Bk_end_mess
     /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
     /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
     /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now
-    /* +0x024 */ u8 filler24; //?
+    /* +0x024 */ u8 allocatedObjPltts; // unity: Obj_plt_use_flag
     /* +0x025 */ u8 animationFlags; // unity: Obj_flag
     /* +0x026 */ s16 bgmFadeAmount; // unity: bgm_fade_time?
     /* +0x028 */ s16 bgmVolume; // unity: bgm_vol
@@ -48,7 +50,7 @@ struct Main
     /* +0x030 */ u16 unk30; // unity AA4: Bg256_load_no?
     /* +0x032 */ s16 previousBG; // unity AA4: Bg256_no_old? probably wrong
     /* +0x034 */ s8 currentBgStripe; // maybe Bg256_rno_0?
-    /* +0x035 */ u8 unk35; // unused field maybe Bg256_SP_Flag?
+    /* +0x035 */ u8 unk35;
     /* +0x036 */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
     /* +0x037 */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
     /* +0x038 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x
@@ -115,8 +117,12 @@ struct Main
     u8 unk249;
     u8 unk24A;
     u8 unk24B;
-    u8 unk24C;
-    u8 filler24C[0x254 - 0x24D];
+    u8 unk24C; // unity: psy_unlock_not_unlock_message
+    u8 unk24D;
+    u8 unk24E;
+    u8 unk24F;
+    u8 unk250;
+    u8 filler251[0x254 - 0x251];
     /* +0x254 */ u32 soundFlags;
     u8 filler258[0x276 - 0x258];
     u16 unk276[8]; // ! fix size later
@@ -132,7 +138,9 @@ struct Main
         s32 unk10;
     } unk288[2];
     u8 unk2B0; // unity: spotlight_command_status
-    u8 filler2B1[0x2B8 - 0x2B1];
+    u8 filler2B1[0x2B4 - 0x2B1];
+    u8 unk2B4;
+    u8 filler2B5[0x2B8 - 0x2B5];
     u16 unk2B8;
     u16 unk2BA;
     u8 unk2BC;
@@ -197,8 +205,8 @@ extern struct OamAttrs gOamObjects[128];
 
 #define GAME_PROCESS 0
 #define GAME_PROCESS_STATE 1
-#define GAME_PROCESSUNK2 2
-#define GAME_PROCESSUNK3 3
+#define GAME_PROCESS_VAR1 2
+#define GAME_PROCESS_VAR2 3
 
 #define SET_PROCESS_PTR(no_0, no_1, no_2, no_3, main) (*(u32*)main->process = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
 #define SET_PROCESS(no_0, no_1, no_2, no_3) (*(u32*)gMain.process = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
