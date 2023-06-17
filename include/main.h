@@ -124,7 +124,8 @@ struct Main
     u8 unk250;
     u8 filler251[0x254 - 0x251];
     /* +0x254 */ u32 soundFlags;
-    u8 filler258[0x276 - 0x258];
+    u8 filler258[0x25C - 0x258];
+    u8 unk25C[0x276 - 0x25C]; // ! fix size later
     u16 unk276[8]; // ! fix size later
     u16 unk286;
     struct Main_288 {

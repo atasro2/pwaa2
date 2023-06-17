@@ -28,9 +28,9 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x00 */ u16 pointerX; // unity AA4: finger_pos_x
     /* +0x02 */ u16 pointerY; // unity AA4: finger_pos_y
     /* +0x04 */ u8 filler04[0x2];
-    /* +0x06 */ u8 personActive;
-    /* +0x07 */ u8 unk7;
-    /* +0x08 */ u8 filler08[0x1];
+    /* +0x06 */ bool8 personActive;
+    /* +0x07 */ bool8 inspectionPaused; // unity AA4: ckeck_no_flag
+    /* +0x08 */ u8 inactiveActions; // unity AA4: menu_mv_be_flag
     /* +0x09 */ u8 spotselectStartCounter; // unity AA4: finger_speed_x
     /* +0x0A */ u8 spotselectId; // unity: siteki_no // 指摘 pointed out
     /* +0x0B */ u8 unkB;
@@ -76,6 +76,7 @@ extern struct InvestigationStruct gInvestigation;
 
 /* new stuff needed for segments */
 void sub_800EAC8(u32, u32); // room_seq_chg
+bool8 sub_800EADC(u16 arg0);
 /* end data stuff from segments */
 
 void SetInactiveActionButtons(struct InvestigationStruct *, u32);
