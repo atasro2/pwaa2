@@ -35,10 +35,10 @@ SECTIONS {
         src/investigation_segment_3_6.o(.text);
         src/script_main.o(.text);
         src/script_commands.o(.text);
-        asm/title_processes.o(.text);
+        src/title_processes.o(.text);
         src/gameover_process.o(.text);
         src/save_processes.o(.text);
-        asm/save_processes.o(.text);
+        asm/episode_load_processes.o(.text);
         src/court.o(.text);
         asm/court.o(.text);
         src/investigation.o(.text);

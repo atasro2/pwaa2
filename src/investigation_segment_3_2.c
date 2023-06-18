@@ -1802,7 +1802,7 @@ const struct ExaminationData gUnknown_08020E20[20] = {
     },
 };
 
-const struct ExaminationData gUnknown_08020FB0[11] = {
+const struct ExaminationData gUnknown_08020FB0[7] = {
     {
         .examinationSection = 0x128,
         .unk2 = 0x0,
@@ -1880,6 +1880,9 @@ const struct ExaminationData gUnknown_08020FB0[11] = {
             [3] = { .x = 115, .y = 37 },
         }}
     },
+};
+
+const struct ExaminationData gUnknown_0802103C[4] = { // ! this is unused. it's the same as gUnknown_0802108C except the first element
     {
         .examinationSection = 0x154,
         .unk2 = 0x0,
@@ -2113,7 +2116,7 @@ void InvestigationRoomSetup_3_2(struct Main *main) {
             break;
         }
         case 15: {
-            DmaCopy16(3, gUnknown_08020FB0, gExaminationData, sizeof(gUnknown_08020FB0)-(4*sizeof(struct ExaminationData)));
+            LOADEXAMDATA(gUnknown_08020FB0);
             if(GetFlag(0, 0xBC)) {
                 ChangeFlag(0, 0xDF, 0);
                 ChangeFlag(0, 0xE0, 0);

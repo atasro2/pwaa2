@@ -1,12 +1,12 @@
     .section gfx_data, "aw", %progbits
     .include "asm/macros.inc"
 
-    .global gUnknown_08130000
-gUnknown_08130000:
+    .global gGfxPalTitleScreen
+gGfxPalTitleScreen:
     .incbin "graphics/title_screen.gbapal"
 
-    .global gUnknown_08130200
-gUnknown_08130200:
+    .global gGfx8lzTitleScreen
+gGfx8lzTitleScreen:
     .incbin "graphics/title_screen.8bpp.lz"
 
     .global gUnknown_081340E4
@@ -17,8 +17,8 @@ gUnknown_081340E4:
 gUnknown_081342E4:
     .incbin "graphics/title_screen_demo.8bpp.lz"
 
-    .global gUnknown_081370FC
-gUnknown_081370FC:
+    .global gUnusedAsciiCharSet
+gUnusedAsciiCharSet:
     .incbin "graphics/unused_ascii_charset.4bpp"
 
     .global gUnknown_081378FC
@@ -396,25 +396,10 @@ gUnknown_0814DF00:
     .global gUnknown_0814DF20
 gUnknown_0814DF20:
     .incbin "graphics/ui/new_game_continue_0.gbapal"
-
-    .global gUnknown_0814DF40
-gUnknown_0814DF40:
     .incbin "graphics/ui/new_game_continue_1.gbapal"
-
-    .global gUnknown_0814DF60
-gUnknown_0814DF60:
     .incbin "graphics/ui/new_game_continue_2.gbapal"
-
-    .global gUnknown_0814DF80
-gUnknown_0814DF80:
     .incbin "graphics/ui/new_game_continue_3.gbapal"
-
-    .global gUnknown_0814DFA0
-gUnknown_0814DFA0:
     .incbin "graphics/ui/new_game_continue_4.gbapal"
-
-    .global gUnknown_0814DFC0
-gUnknown_0814DFC0:
     .incbin "graphics/ui/new_game_continue_5.gbapal"
 
     .global gUnknown_0814DFE0
@@ -2158,8 +2143,8 @@ gCharSet:
 
 @ BEGIN TALK LOCATION CHOICES
 
-    .global gUnknown_081DE3A8
-gUnknown_081DE3A8:
+    .global gGfxPalChoiceSelected
+gGfxPalChoiceSelected:
     .incbin "graphics/talk_location_choices/choice_selected.gbapal"
 
     .global gUnknown_081DE3C8

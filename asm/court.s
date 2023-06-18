@@ -172,7 +172,7 @@ CourtInit: @ 0x0800D55C
 	strh r0, [r1, #4]
 	ldr r0, _0800D6D8 @ =0x00003FC7
 	strh r0, [r1, #6]
-	ldr r0, _0800D6DC @ =gUnknown_081370FC
+	ldr r0, _0800D6DC @ =gUnusedAsciiCharSet
 	str r0, [r4]
 	ldr r0, _0800D6E0 @ =0x06003800
 	str r0, [r4, #4]
@@ -299,7 +299,7 @@ _0800D6CC: .4byte gInvestigation
 _0800D6D0: .4byte 0x8100000E
 _0800D6D4: .4byte 0x00003D01
 _0800D6D8: .4byte 0x00003FC7
-_0800D6DC: .4byte gUnknown_081370FC
+_0800D6DC: .4byte gUnusedAsciiCharSet
 _0800D6E0: .4byte 0x06003800
 _0800D6E4: .4byte 0x80000400
 _0800D6E8: .4byte gUnknown_0813791C

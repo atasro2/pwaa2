@@ -40,7 +40,9 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x0F */ u8 inactiveActionButtonY; // unity AA4: menu_pos_y
     /* +0x10 */ u8 selectedActionYOffset; // unity AA4: menu_add
     /* +0x11 */ u8 lastActionYOffset; // unity AA4: menu_add_old
-    /* +0x11 */ u8 filler11[0x6];
+    /* +0x12 */ u8 filler12[0x4];
+    /* +0x16 */ u8 pointerFrame;
+    /* +0x17 */ u8 pointerFrameCounter;
     /* +0x18 */ u8 pointerColor; // unity AA4: yubi_col_no
     /* +0x19 */ u8 pointerColorCounter; // unity AA4: yubi_col_timer
 };
@@ -71,7 +73,7 @@ struct InvestigationStruct // unity: tantei_work_
 #endif
 
 extern struct TalkData gTalkData[32];
-extern struct ExaminationData gExaminationData[16];
+extern struct ExaminationData gExaminationData[24];
 extern struct InvestigationStruct gInvestigation;
 
 /* new stuff needed for segments */
@@ -213,7 +215,7 @@ extern const struct ExaminationData gUnknown_08020BDC[9];
 extern const struct ExaminationData gUnknown_08020C90[8];
 extern const struct ExaminationData gUnknown_08020D30[12];
 extern const struct ExaminationData gUnknown_08020E20[20];
-extern const struct ExaminationData gUnknown_08020FB0[11];
+extern const struct ExaminationData gUnknown_08020FB0[7];
 extern const struct ExaminationData gUnknown_0802108C[5];
 extern const struct Struct811DC98 gUnknown_080210F0[46];
 extern const struct TalkData gUnknown_08021318[14];
