@@ -36,6 +36,7 @@ enum InvestigationProcessStates {
     INVESTIGATION_MOVE,
     INVESTIGATION_TALK,
     INVESTIGATION_PRESENT,
+    INVESTIGATION_10,
 };
 
 enum TestimonyProcessStates {

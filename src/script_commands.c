@@ -12,6 +12,7 @@
 #include "graphics.h"
 #include "court.h"
 #include "save.h"
+#include "psyche_lock.h"
 #include "constants/bg.h"
 #include "constants/script.h"
 #include "constants/songs.h"

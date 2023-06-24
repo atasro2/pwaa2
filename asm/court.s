@@ -1117,7 +1117,7 @@ _0800DDB6:
 	ldr r1, _0800DDD4 @ =gTestimony
 	adds r0, r5, #0
 	movs r2, #1
-	bl sub_800E6D0
+	bl UpdateQuestioningMenuSprites
 	b _0800E00C
 	.align 2, 0
 _0800DDD0: .4byte gScriptContext
@@ -1325,7 +1325,7 @@ _0800DF84:
 	ldr r1, _0800DFB4 @ =gTestimony
 	adds r0, r5, #0
 	movs r2, #1
-	bl sub_800E6D0
+	bl UpdateQuestioningMenuSprites
 	ldr r0, _0800DFB8 @ =gCourtRecord
 	bl sub_8012BEC
 	ldr r1, _0800DFBC @ =gOamObjects
@@ -1482,7 +1482,7 @@ _0800E0C0:
 	ldr r1, _0800E0E0 @ =gTestimony
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_800E6D0
+	bl UpdateQuestioningMenuSprites
 	ldr r1, _0800E0E4 @ =gOamObjects
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -1620,7 +1620,7 @@ _0800E1D8:
 	ldr r1, _0800E1E8 @ =gTestimony
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_800E6D0
+	bl UpdateQuestioningMenuSprites
 	pop {r4, r5}
 	pop {r0}
 	bx r0
@@ -2201,8 +2201,8 @@ _0800E6BE:
 	.align 2, 0
 _0800E6CC: .4byte gMain+0x8
 
-	thumb_func_start sub_800E6D0
-sub_800E6D0: @ 0x0800E6D0
+	thumb_func_start UpdateQuestioningMenuSprites
+UpdateQuestioningMenuSprites: @ 0x0800E6D0
 	push {r4, lr}
 	adds r3, r1, #0
 	ldr r0, _0800E6E8 @ =gScriptContext

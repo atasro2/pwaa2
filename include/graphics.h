@@ -19,6 +19,8 @@
 #define gGfx4bppTestimonyArrows ((u8*)(GFX_BASE_ADDR + 0xD97C))
 #define gUnknown_08141CFC ((u8*)(GFX_BASE_ADDR + 0x11CFC))
 #define gUnknown_08141EFC ((u8*)(GFX_BASE_ADDR + 0x11EFC))
+#define gUnknown_081422FC ((u8*)(GFX_BASE_ADDR + 0x122FC))
+#define gUnknown_081424FC ((u8*)(GFX_BASE_ADDR + 0x124FC))
 #define gUnknown_081426FC ((u8*)(GFX_BASE_ADDR + 0x126FC))
 #define gUnknown_08142DFC ((u8*)(GFX_BASE_ADDR + 0x12DFC))
 #define gUnknown_081430DC ((u8*)(GFX_BASE_ADDR + 0x130DC))
@@ -224,6 +226,8 @@
 #define gUnknown_081772D4 ((u8*)(GFX_BASE_ADDR + 0x472D4))
 #define gUnknown_081775FC ((u8*)(GFX_BASE_ADDR + 0x475FC))
 #define gUnknown_081779E4 ((u8*)(GFX_BASE_ADDR + 0x479E4))
+
+#define gUnknown_08177E28 ((u8*)(GFX_BASE_ADDR + 0x47E28))
 
 #define gUnknown_08231BE8 ((u8*)(GFX_BASE_ADDR + 0x101BE8))
 

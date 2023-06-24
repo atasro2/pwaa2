@@ -1,0 +1,16 @@
+#ifndef GUARD_PSYCHE_LOCK_H
+#define GUARD_PSYCHE_LOCK_H
+
+void sub_80161F4(void);
+void sub_8016204(void);
+void sub_801622C(void);
+void sub_8016C7C(u32);
+void sub_8016D40(void);
+s32 sub_8016D8C(u16 arg0, u16 arg1);
+s32 sub_8016DCC(struct PsycheLockData * data, u16 arg1);
+void sub_8016E10(u32);
+void sub_80170AC(void);
+void sub_8017134(void);
+bool32 sub_801715C(void);
+
+#endif//GUARD_PSYCHE_LOCK_H

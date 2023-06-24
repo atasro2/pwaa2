@@ -30,7 +30,7 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x04 */ u8 filler04[0x2];
     /* +0x06 */ u8 personActive;
     /* +0x07 */ u8 unk7;
-    /* +0x08 */ u8 filler08[0x1];
+    /* +0x08 */ u8 inactiveActions;
     /* +0x09 */ u8 spotselectStartCounter; // unity AA4: finger_speed_x
     /* +0x0A */ u8 spotselectId; // unity: siteki_no // 指摘 pointed out
     /* +0x0B */ u8 unkB;

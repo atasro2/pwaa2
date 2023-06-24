@@ -27,14 +27,8 @@ extern void sub_8010FA4(void);
 extern void sub_8011088(u16, u16);
 
 // new file
-void sub_80161F4(void);
-void sub_8016204(void);
-void sub_801622C(void);
-void sub_8016C7C(u32);
-void sub_8016D40(void);
-void sub_8016E10(u32);
-bool32 sub_801715C(void);
 int sub_80175C0(void);
+void sub_8017864(void);
 void sub_80178E0(void);
 void sub_8017910(void);
 void sub_8017928(u32);
