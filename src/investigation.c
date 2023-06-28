@@ -288,3 +288,307 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
     if(investigation->lastActionYOffset > 0)
         investigation->lastActionYOffset--;
 }
+
+// ! still the same as CourtExit, thanks capcom
+void InvestigationExit(struct Main * main, struct InvestigationStruct * investigation) // tantei_exit
+{
+    sub_8007D30(main);
+    DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
+    SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 1, main);
+    if(main->scenarioIdx == 2)
+    {
+        if(!(main->caseEnabledFlags & 2))
+            SET_PROCESS_PTR(EPISODE_CLEAR_PROCESS, 0, 0, 1, main);
+    }
+    else if(main->scenarioIdx == 8)
+    {
+        if(!(main->caseEnabledFlags & 4))
+            SET_PROCESS_PTR(EPISODE_CLEAR_PROCESS, 0, 0, 2, main);
+    }
+    else if(main->scenarioIdx == 14)
+    {
+        if(!(main->caseEnabledFlags & 8))
+            SET_PROCESS_PTR(EPISODE_CLEAR_PROCESS, 0, 0, 3, main);
+    }
+}
+
+void InvestigationBgScrollWait(struct Main * main, struct InvestigationStruct * investigation) // tantei_bg_scroll_wait
+{
+    bool32 finishedScrolling;
+    UpdateScrollPromptSprite(main, 0);
+    if(main->process[GAME_PROCESS_VAR1] == 0)
+    {
+        if(GetBGControlBits(main->currentBG) & BG_MODE_SIZE_480x160)
+        {
+            if(main->Bg256_pos_x == 0 || main->Bg256_pos_x == 240)
+                finishedScrolling = TRUE;
+            else
+                finishedScrolling = FALSE;
+        }
+        else 
+        {
+            if(main->Bg256_pos_x == 0 || main->Bg256_pos_x == 120)
+                finishedScrolling = TRUE;
+            else
+                finishedScrolling = FALSE;
+        }
+        if(finishedScrolling)
+        {
+            investigation->selectedActionYOffset = 0;
+            investigation->lastActionYOffset = 0;
+            investigation->actionState = 1;
+            main->process[GAME_PROCESS_VAR1]++;
+        }
+    }
+    else
+    {
+        if(investigation->actionState == 0)
+            SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+    }
+}
+
+void InvestigationTextboxSlideWait(struct Main * main, struct InvestigationStruct * investigation) // tantei_mw_scroll_wait
+{
+    UpdateScrollPromptSprite(main, 0);
+    if(gScriptContext.textboxState == 0)
+        SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+}
+
+void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * investigation) // tantei_room_init
+{
+    u32 i, j;
+    u8 * roomData;
+    struct OamAttrs * oam;
+
+    if(gScriptContext.textboxState != 1)
+        return;
+    if(main->blendMode)
+        return;
+    roomData = main->roomData[main->currentRoomId];
+    if(main->process[GAME_PROCESS_VAR1] == 0)
+    {
+        ResetSoundControl();
+        DecompressBackgroundIntoBuffer(roomData[0]);
+        main->process[GAME_PROCESS_VAR1] = 1;
+        return;
+    }
+    CopyBGDataToVram(roomData[0]);
+    oam = &gOamObjects[38];
+    for(i = 0; i < 4; i++)
+    {
+        for(j = 0; j < 2; oam++, j++)
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+    }
+    oam = &gOamObjects[52];
+    for(i = 0; i < 4; i++)
+    {
+        oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(i*60, FALSE, FALSE, 3);
+        oam->attr2 = SPRITE_ATTR2(0x100+i*0x20, 0, 5);
+        oam++;
+    }
+    SetInactiveActionButtons(investigation, 0xF);
+    investigation->inactiveActionButtonY = 0xE0;
+    investigation->selectedActionYOffset = 0;
+    investigation->lastActionYOffset = 8;
+    investigation->selectedAction = 0;
+    investigation->lastAction = 0;
+    investigation->actionState = 1;
+    ClearAllAnimationSprites();
+    //TODO: MACROS BITCH!!! these exact 3 lines exist elsewhere in the code so this is 100% a macro in the original code considering it doesn't use the investigation struct ptr 
+    DestroyAnimation(&gAnimation[1]);
+    gInvestigation.personActive = 0;
+    SetInactiveActionButtons(&gInvestigation, 0xF);
+    
+    gInvestigationRoomSetupFunctions[main->scenarioIdx](main);
+    UpdateScrollPromptSprite(main, 0);
+    StartHardwareBlend(1, 1, 1, 0x1F);
+    SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+}
+
+void InvestigationInspect(struct Main * main, struct InvestigationStruct * investigation) // tantei_inspect // ! goto
+{
+    u32 temp;
+    struct OamAttrs * oam = &gOamObjects[58];
+    if(gAnimation[1].flags & ANIM_BLEND_ACTIVE)
+        return;
+    if(main->blendMode)
+        return;
+    
+    if(gJoypad.pressedKeys & START_BUTTON
+    && !(main->gameStateFlags & 0x10)
+    && gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)  && gMain.unk30 != 0x7F)
+        goto s;
+    else if(gJoypad.pressedKeys & R_BUTTON
+    && !(main->gameStateFlags & 0x10)
+    && gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
+        goto r;
+    else if(investigation->inspectionPaused)
+        return;
+    else if(gScriptContext.textboxState != 1)
+        return;
+    else if(!(main->advanceScriptContext == FALSE && main->showTextboxCharacters == FALSE))
+        return;
+    else
+    {
+        switch(main->process[GAME_PROCESS_VAR1])
+        {
+            default:
+                break;
+            case 0:
+                if(investigation->selectedActionYOffset <= 0xF)
+                    investigation->selectedActionYOffset++;
+                investigation->lastActionYOffset = 0;
+                if (investigation->selectedActionYOffset > 0xF)
+                    main->process[GAME_PROCESS_VAR1]++;
+                break;
+            case 1:
+                temp = 3;
+                if(gJoypad.pressedKeys & START_BUTTON
+                && !(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+                {
+                    s:
+                    PauseBGM();
+                    DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam[25], sizeof(gOamObjects));
+                    DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
+                    if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
+                        gSaveDataBuffer.main.showTextboxCharacters = 1;
+                    }
+                    PlaySE(49);
+                    main->gameStateFlags &= ~1;
+                    BACKUP_PROCESS_PTR(main);
+                    SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 0, main);
+                    return;
+                }
+                else if(gJoypad.pressedKeys & R_BUTTON
+                && !(main->gameStateFlags & 0x10))
+                {
+                    r:
+                    PlaySE(49);
+                    BACKUP_PROCESS_PTR(main);
+                    SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
+                    oam->attr0 = SPRITE_ATTR0_CLEAR;
+                    return;
+                }
+                if(gJoypad.pressedKeys & A_BUTTON)
+                {
+                    PlaySE(43);
+                    oam->attr0 = SPRITE_ATTR0_CLEAR;
+                    temp = GetExaminedAreaSection(investigation);
+                    ChangeScriptSection(temp);
+                    SlideTextbox(1);
+                    investigation->inspectionPaused = TRUE;
+                    investigation->pointerFrame = 0;
+                    investigation->pointerFrameCounter = 0;
+                    investigation->inactiveActions = 1;
+                    investigation->actionState = 3;
+                    investigation->inactiveActionButtonY = 0xF0;
+                    investigation->selectedActionYOffset = 0;
+                    investigation->lastActionYOffset = 0;
+                    gIORegisters.lcd_bldcnt = 0x1942;
+                    gIORegisters.lcd_bldalpha = 0x71F;
+                    return;
+                }
+                if(gJoypad.pressedKeys & B_BUTTON)
+                {
+                    PlaySE(44);
+                    main->process[GAME_PROCESS_VAR1] = 2;
+                    SetInactiveActionButtons(investigation, 0xE);
+                    investigation->actionState = 2;
+                    investigation->inactiveActionButtonY = 0xE0;
+                    investigation->selectedActionYOffset = 0x10;
+                    investigation->lastActionYOffset = 0;
+                    return;
+                }
+                
+                if(gJoypad.heldKeys & DPAD_LEFT)
+                {
+                    investigation->pointerX -= temp;
+                    if(investigation->pointerY < 16 && investigation->pointerX < 60)
+                        investigation->pointerX = 60;
+                    if(investigation->pointerX > 224)
+                        investigation->pointerX = 0;
+                }
+                if(gJoypad.heldKeys & DPAD_RIGHT)
+                {
+                    investigation->pointerX += temp;
+                    if(investigation->pointerY < 16 && investigation->pointerX < 60)
+                        investigation->pointerX = 60;
+                    if(investigation->pointerX > 224)
+                        investigation->pointerX = 224;
+                }
+                if(gJoypad.heldKeys & DPAD_UP)
+                {
+                    investigation->pointerY -= temp;
+                    if(investigation->pointerX < 60 && investigation->pointerY < 16)
+                        investigation->pointerY = 16;
+                    if(investigation->pointerY > 144)
+                        investigation->pointerY = 0;
+                }
+                if(gJoypad.heldKeys & DPAD_DOWN)
+                {
+                    investigation->pointerY += temp;
+                    if(investigation->pointerX < 60 && investigation->pointerY < 16)
+                        investigation->pointerY = 16;
+                    if(investigation->pointerY > 144)
+                        investigation->pointerY = 144;
+                }
+                temp = GetExaminedAreaSection(investigation);
+                if(temp == 0x1d ||
+                    (
+                        (gMain.scenarioIdx == 2 && temp == 0xE8) ||
+                        (gMain.scenarioIdx == 14 && temp == 0xC7) ||
+                        (gMain.scenarioIdx == 15 && temp == 0x14F) ||
+                        (gMain.scenarioIdx == 18 && temp == 0xA5) ||
+                        (gMain.scenarioIdx == 18 && gMain.currentRoomId == 25 && temp == 0x10C) ||
+                        (gMain.scenarioIdx == 18 && gMain.currentRoomId == 21 && temp == 0x10C) ||
+                        (gMain.scenarioIdx == 15 && gMain.currentRoomId == 23 && temp == 0x15A)
+                    )
+                ) // ! come one just a little more hardcoding please :(
+                {
+                    
+                    investigation->pointerFrame = 0;
+                    investigation->pointerFrameCounter = 0;
+                }
+                else
+                {
+                    investigation->pointerFrameCounter++;
+                    if(investigation->pointerFrameCounter > 8)
+                    {
+                        investigation->pointerFrameCounter = 0;
+                        investigation->pointerFrame += 4;
+                        investigation->pointerFrame &= 0xF;
+                    }
+                }
+                oam->attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+                if(investigation->pointerX < 120)
+                    oam->attr1 = SPRITE_ATTR1_NONAFFINE(investigation->pointerX, TRUE, FALSE, 1);
+                else
+                    oam->attr1 = SPRITE_ATTR1_NONAFFINE(investigation->pointerX, FALSE, FALSE, 1);
+                oam->attr2 = SPRITE_ATTR2(0x190+investigation->pointerFrame, 0, 8);
+                investigation->pointerColorCounter++;
+                if(investigation->pointerColorCounter > 1)
+                {
+                    investigation->pointerColorCounter = 0;
+                    investigation->pointerColor += 1;
+                    investigation->pointerColor &= 0xF;
+                    DmaCopy16(3, (void *)(0x0814DC60)+investigation->pointerColor*32, OBJ_PLTT+0x100, 0x20);
+                }
+                break;
+            case 2:
+                if(investigation->selectedActionYOffset > 8)
+                    investigation->selectedActionYOffset--;
+                if(investigation->actionState == 0)
+                {
+                    oam->attr0 = SPRITE_ATTR0_CLEAR;
+                    ChangeAnimationActivity(&gAnimation[1], TRUE);
+                    StartAnimationBlend(1, 1);
+                    SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+                    investigation->inactiveActions += 1 << investigation->selectedAction;
+                    investigation->selectedActionYOffset = 8;
+                    investigation->lastActionYOffset = 0;
+                }
+                break;
+        }
+    }
+}
