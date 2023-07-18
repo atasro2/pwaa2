@@ -1424,3 +1424,68 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
         }
     }
 }
+
+void InvestigationPresent(struct Main * main, struct InvestigationStruct * investigation) // tantei_show
+{
+    struct OamAttrs * oam;
+    u32 i;
+
+    switch(main->process[GAME_PROCESS_VAR1])
+    {
+        case 0:
+            if(investigation->selectedActionYOffset < 16)
+                investigation->selectedActionYOffset++;
+            investigation->lastActionYOffset = 0;
+            if (investigation->selectedActionYOffset >= 16)
+                main->process[GAME_PROCESS_VAR1]++;
+            break;
+        case 1:
+            if(investigation->inactiveActionButtonY == 0xE0)
+            {
+                main->process[GAME_PROCESS_VAR1]++;
+                BACKUP_PROCESS_PTR(main);
+                SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 2, main);
+            }
+            break;
+        case 2:
+            if(investigation->inactiveActionButtonY == 0xE0
+            && gScriptContext.textboxState == 0)
+            {
+                oam = &gOamObjects[52];
+                for(i = 0; i < 4; i++)
+                {
+                    oam->attr0 = 0x40E0;
+                    oam->attr1 = i * 60 + 0xC000;
+                    oam->attr2 = i * 0x20 + 0x5100;
+                    oam++;
+                }
+                SetInactiveActionButtons(investigation, 0xF);
+                investigation->inactiveActionButtonY = 0xE0; // inactiveActionButtonY is already 0xE0 wtf
+                investigation->selectedActionYOffset = 0x40;
+                investigation->lastActionYOffset = 8;
+                investigation->selectedAction = 3;
+                investigation->lastAction = 3;
+                SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+            }
+            break;
+        case 3:
+            SetInactiveActionButtons(investigation, 7);
+            investigation->actionState = 2;
+            investigation->inactiveActionButtonY = 0xE0;
+            investigation->selectedActionYOffset = 0x10;
+            investigation->lastActionYOffset = 0;
+            main->process[GAME_PROCESS_VAR1]++;
+            break;
+        case 4:
+            if(investigation->selectedActionYOffset > 8)
+                investigation->selectedActionYOffset--;
+            if(investigation->actionState == 0)
+            {
+                investigation->selectedActionYOffset = 8;
+                investigation->lastActionYOffset = 0;
+                investigation->inactiveActions += 1 << investigation->selectedAction;
+                SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+            }
+            break;
+    }
+}
