@@ -21,8 +21,8 @@ gUnknown_081342E4:
 gUnusedAsciiCharSet:
     .incbin "graphics/unused_ascii_charset.4bpp"
 
-    .global gUnknown_081378FC
-gUnknown_081378FC:
+    .global gGfxPalEvidenceProfileDesc
+gGfxPalEvidenceProfileDesc:
     .incbin "graphics/evidence_profile_descriptions/evidence_profile_descriptions.gbapal"
 
     .global gUnknown_0813791C
@@ -53,8 +53,8 @@ gUnknown_0813E0FC:
 gUnknown_081400FC:
     .incbin "graphics/ui/investigation/action_buttons.4bpp"
 
-    .global gUnknown_081410FC
-gUnknown_081410FC:
+    .global gGfx4bppControllerButtons
+gGfx4bppControllerButtons:
     .incbin "graphics/ui/court_record/controller_buttons.4bpp"
 
     .global gUnknown_081412FC
@@ -69,12 +69,12 @@ gUnknown_081414FC:
 gUnknown_08141CFC:
     .incbin "graphics/ui/trial/press_present_buttons.4bpp"
 
-    .global gUnknown_081420FC
-gUnknown_081420FC:
+    .global gGfx4bppPresentBackTextTiles
+gGfx4bppPresentBackTextTiles:
     .incbin "graphics/ui/court_record/present_back_text.4bpp"
 
-    .global gUnknown_081422FC
-gUnknown_081422FC:
+    .global gGfx4bppProfileTextTiles
+gGfx4bppProfileTextTiles:
     .incbin "graphics/ui/court_record/profiles_text.4bpp"
 
     .global gUnknown_081424FC
@@ -273,8 +273,8 @@ gUnknown_0814D5A4:
 gUnknown_0814DA60:
     .incbin "graphics/unk_14DA60.gbapal"
 
-    .global gUnknown_0814DA80
-gUnknown_0814DA80:
+    .global gGfxPalCrossExamUI
+gGfxPalCrossExamUI:
     .incbin "graphics/unk_14DA80.gbapal"
 
     .global gUnknown_0814DAA0
@@ -289,8 +289,8 @@ gUnknown_0814DBA0:
 gUnknown_0814DBC0:
     .incbin "graphics/ui/investigation/action_buttons_1.gbapal"
 
-    .global gUnknown_0814DBE0
-gUnknown_0814DBE0:
+    .global gGfxPalCourtRecordActionText
+gGfxPalCourtRecordActionText:
     .incbin "graphics/ui/court_record/controls_blurb.gbapal"
 
     .global gUnknown_0814DC00
@@ -1270,7 +1270,8 @@ gUnknown_081779E4:
 @ END EVIDENCE PROFILE DESCRIPTIONS
 
 @ BEGIN EVIDENCE PROFILE PICTURES
-
+    .global gUnknown_08177E28
+gUnknown_08177E28:
     .global gUnknown_08177E28_pal
 gUnknown_08177E28_pal:
     .incbin "graphics/evidence_profile_pictures/00177E28.gbapal"

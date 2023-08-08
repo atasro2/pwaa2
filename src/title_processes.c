@@ -9,6 +9,7 @@
 #include "graphics.h"
 #include "constants/songs.h"
 #include "constants/process.h"
+#include "constants/oam_allocations.h"
 
 void CapcomLogoProcess(struct Main *main)
 {
@@ -72,7 +73,7 @@ void TitleScreenProcess(struct Main *main)
         DmaCopy16(3, eBGDecompBuffer, BG_CHAR_ADDR(1), 30*20*TILE_SIZE_8BPP);
         DmaCopy16(3, gUnknown_0814DF20, OBJ_PLTT + 0x40, 0xC0);
         DmaCopy16(3, gUnknown_081458DC, OBJ_VRAM0 + 0x400, 0x400);
-        oam = &gOamObjects[52];
+        oam = &gOamObjects[OAM_IDX_TITLE_SCREEN_OPTIONS];
         oam->attr0 = SPRITE_ATTR0(112, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
         oam->attr1 = SPRITE_ATTR1_NONAFFINE(88, FALSE, FALSE, 2);
         oam->attr2 = SPRITE_ATTR2(0x20, 1, 2);
@@ -133,7 +134,7 @@ void TitleScreenProcess(struct Main *main)
             gInvestigation.pointerFrame = 2;
         if(main->selectedButton == 0)
         {
-            oam = &gOamObjects[52];
+            oam = &gOamObjects[OAM_IDX_TITLE_SCREEN_OPTIONS];
             oam->attr2 = SPRITE_ATTR2(0x20, 1, gInvestigation.pointerFrame);
             oam++;
             oam->attr2 = SPRITE_ATTR2(0x28, 1, gInvestigation.pointerFrame);
@@ -147,7 +148,7 @@ void TitleScreenProcess(struct Main *main)
         }
         else
         {
-            oam = &gOamObjects[52];
+            oam = &gOamObjects[OAM_IDX_TITLE_SCREEN_OPTIONS];
             oam->attr2 = SPRITE_ATTR2(0x20, 1, 5);
             oam++;
             oam->attr2 = SPRITE_ATTR2(0x28, 1, 5);
@@ -180,7 +181,7 @@ void TitleScreenProcess(struct Main *main)
             main->process[GAME_PROCESS_VAR1]++;
             if(main->process[GAME_PROCESS_VAR1] > 4)
             {
-                oam = &gOamObjects[52];
+                oam = &gOamObjects[OAM_IDX_TITLE_SCREEN_OPTIONS];
                 oam->attr0 = SPRITE_ATTR0_CLEAR;
                 oam->attr2 = SPRITE_ATTR2(0x20, 0, 2);
                 oam++;
@@ -194,7 +195,7 @@ void TitleScreenProcess(struct Main *main)
             }
             else
             {
-                oam = &gOamObjects[52];
+                oam = &gOamObjects[OAM_IDX_TITLE_SCREEN_OPTIONS];
                 oam->attr0 = SPRITE_ATTR0(112, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
                 oam->attr2 = SPRITE_ATTR2(0x20, 0, 2);
                 oam++;
@@ -217,7 +218,7 @@ void TitleScreenProcess(struct Main *main)
         }
         else
         {
-            oam = &gOamObjects[52];
+            oam = &gOamObjects[OAM_IDX_TITLE_SCREEN_OPTIONS];
             if((oam->attr0 & 0xFF) <= DISPLAY_WIDTH - 16)
             {
                 oam->attr0 += gScriptContext.fullscreenTextYOffset;

@@ -194,7 +194,7 @@ CourtInit: @ 0x0800D55C
 	ldr r1, _0800D6F8 @ =0x80000010
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800D6FC @ =gUnknown_081378FC
+	ldr r0, _0800D6FC @ =gGfxPalEvidenceProfileDesc
 	str r0, [r4]
 	ldr r0, _0800D700 @ =0x05000240
 	str r0, [r4, #4]
@@ -307,7 +307,7 @@ _0800D6EC: .4byte 0x80000800
 _0800D6F0: .4byte gUnknown_0814DC60
 _0800D6F4: .4byte 0x05000300
 _0800D6F8: .4byte 0x80000010
-_0800D6FC: .4byte gUnknown_081378FC
+_0800D6FC: .4byte gGfxPalEvidenceProfileDesc
 _0800D700: .4byte 0x05000240
 _0800D704: .4byte 0x0000FFAF
 _0800D708: .4byte 0x0000FDFF
@@ -1327,7 +1327,7 @@ _0800DF84:
 	movs r2, #1
 	bl UpdateQuestioningMenuSprites
 	ldr r0, _0800DFB8 @ =gCourtRecord
-	bl sub_8012BEC
+	bl UpdateCourtRecordArrows
 	ldr r1, _0800DFBC @ =gOamObjects
 	ldr r2, _0800DFC0 @ =gScriptContext
 	movs r0, #8

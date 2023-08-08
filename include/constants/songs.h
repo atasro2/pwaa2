@@ -2,6 +2,7 @@
 #define GUARD_CONST_SONGS_H
 
 /* BEGIN BGM */
+#define BGM015_JINGLE_EVIDENCE 15
 //TODO: fill in
 /* END BGM */
 /* BEGIN SE */

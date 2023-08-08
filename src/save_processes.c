@@ -5,6 +5,7 @@
 #include "sound.h"
 #include "constants/process.h"
 #include "constants/songs.h"
+#include "constants/oam_allocations.h"
 
 const char gSaveVersion[0x34] = "2002 CAPCOM GBA GYAKUTEN-SAIBAN2 07/15 Ver 1.000-";
 
@@ -103,7 +104,7 @@ void ClearSaveProcess(struct Main *main)
         DmaCopy16(3, gUnknown_081500C4, OBJ_VRAM0 + 0x3C00, 0x800);
         DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
         DmaCopy16(3, gTextPal, OBJ_PLTT, 0x20);
-        DmaCopy16(3, gUnknown_081378FC, PLTT, 0x20);
+        DmaCopy16(3, gGfxPalEvidenceProfileDesc, PLTT, 0x20);
         gIORegisters.lcd_bg0cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(28) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
         gIORegisters.lcd_bg1cnt = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
         gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
@@ -136,7 +137,7 @@ void ClearSaveProcess(struct Main *main)
                 ChangeScriptSection(4);
                 gScriptContext.textXOffset = 9;
                 gScriptContext.textYOffset = 52;
-                oam = &gOamObjects[40];
+                oam = &gOamObjects[OAM_IDX_SAVE_PROMPT];
                 oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_BLEND, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
                 oam->attr1 = SPRITE_ATTR1_NONAFFINE(48, FALSE, FALSE, 3);
                 oam->attr2 = SPRITE_ATTR2(0x1E0, 0, 10);
@@ -169,7 +170,7 @@ void ClearSaveProcess(struct Main *main)
                 main->process[GAME_PROCESS_STATE]++;
             }
         }
-        oam = &gOamObjects[40];
+        oam = &gOamObjects[OAM_IDX_SAVE_PROMPT];
         if(main->selectedButton == 0)
         {
             oam->attr2 = SPRITE_ATTR2(0x1E0, 0, 9);
@@ -300,7 +301,7 @@ void SaveGameInitButtons(struct Main *main)
             ChangeScriptSection(1);
         gScriptContext.textXOffset = 9;
         gScriptContext.textYOffset = 52;
-        oam = &gOamObjects[40];
+        oam = &gOamObjects[OAM_IDX_SAVE_PROMPT];
         oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_BLEND, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
         oam->attr1 = SPRITE_ATTR1_NONAFFINE(48, FALSE, FALSE, 3);
         oam->attr2 = SPRITE_ATTR2(0x1E0, 0, 10);
@@ -373,7 +374,7 @@ void SaveGameWaitForInput(struct Main *main)
             return;
         }
     }
-    oam = &gOamObjects[40];
+    oam = &gOamObjects[OAM_IDX_SAVE_PROMPT];
     if(main->selectedButton == 0)
     {
         oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_BLEND, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -561,7 +562,7 @@ void SaveGame6(struct Main * main)
     }
     else
     {
-        struct OamAttrs * oam = &gOamObjects[40];
+        struct OamAttrs * oam = &gOamObjects[OAM_IDX_SAVE_PROMPT];
         oam->attr0 = SPRITE_ATTR0_CLEAR;
         oam++;
         oam->attr0 = SPRITE_ATTR0_CLEAR;
@@ -580,7 +581,7 @@ void SaveGame7(struct Main * main)
         else
             main->process[GAME_PROCESS_STATE] = 4;
         main->process[GAME_PROCESS_VAR1] = 0;
-        oam = &gOamObjects[40];
+        oam = &gOamObjects[OAM_IDX_SAVE_PROMPT];
         oam->attr0 = SPRITE_ATTR0_CLEAR;
         oam++;
         oam->attr0 = SPRITE_ATTR0_CLEAR;

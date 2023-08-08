@@ -2080,7 +2080,7 @@ _0800CD0C:
 	ldr r2, _0800CE40 @ =0x80000800
 	str r2, [r6, #8]
 	ldr r0, [r6, #8]
-	ldr r5, _0800CE44 @ =gUnknown_081378FC
+	ldr r5, _0800CE44 @ =gGfxPalEvidenceProfileDesc
 	str r5, [r6]
 	ldr r0, _0800CE48 @ =0x05000240
 	str r0, [r6, #4]
@@ -2202,7 +2202,7 @@ _0800CE34: .4byte 0x06003800
 _0800CE38: .4byte 0x80000400
 _0800CE3C: .4byte gUnknown_0813791C
 _0800CE40: .4byte 0x80000800
-_0800CE44: .4byte gUnknown_081378FC
+_0800CE44: .4byte gGfxPalEvidenceProfileDesc
 _0800CE48: .4byte 0x05000240
 _0800CE4C: .4byte 0x80000010
 _0800CE50: .4byte 0x80000100
@@ -2576,7 +2576,7 @@ _0800D1A4:
 	cmp r6, #3
 	bls _0800D1D6
 	mov r0, r8
-	bl sub_8013508
+	bl LoadItemPlateGfx
 _0800D1D6:
 	ldr r0, [sp]
 	ldrb r1, [r0]

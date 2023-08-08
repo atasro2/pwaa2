@@ -1,24 +1,24 @@
 #ifndef GUARD_CASE_DATA_H
 #define GUARD_CASE_DATA_H
 
-struct Struct811DC54
+struct CourtPresentData
 {
-    /* +0x00 */ u16 scriptSection;
-    /* +0x02 */ u16 evidenceId;
-    /* +0x04 */ u16 unk4;
-    /* +0x06 */ u8 flagId;
-    /* +0x07 */ u8 unk7;
+    /* +0x00 */ u16 presentingSection; // unity: keyhole
+    /* +0x02 */ u16 evidenceId; // unity: key
+    /* +0x04 */ u16 presentedSection; // unity: jump
+    /* +0x06 */ u8 flagId; // unity: sce_flag
+    /* +0x07 */ u8 action; // unity: win_flag
 };
 
-struct Struct811DC98
+struct InvestigationPresentData
 {
-    /* +0x00 */ u8 roomId;
-    /* +0x01 */ u8 evidenceId;
-    /* +0x02 */ u8 unk2;
-    /* +0x03 */ u8 unk3;
-    /* +0x04 */ u8 unk4;
-    /* +0x06 */ u16 unk6;
-    /* +0x08 */ u16 unk8;
+    /* +0x00 */ u8 roomId; // unity: room
+    /* +0x01 */ u8 roomseq; // unity: item
+    /* +0x02 */ u8 evidenceId; // unity: 
+    /* +0x03 */ u8 personId; // unity: pl_id
+    /* +0x04 */ u8 isProfile; // unity: end
+    /* +0x06 */ u16 interestedSection; // unity: mess_true
+    /* +0x08 */ u16 uninterestedSection; // unity: mess_false
 };
 
 extern const u8 gCaseStartProcess[];
@@ -26,8 +26,8 @@ extern const u16 gCaseGameoverSections[];
 extern const u16 gCaseGameoverSections[];
 
 extern const u8 * gCourtRecordInitialItemLists[22];
-extern const struct Struct811DC54 * gUnknown_0811DC54[22];
-extern const struct Struct811DC98 * gUnknown_0811DC98[22];
+extern const struct CourtPresentData * gCourtPresentData[22];
+extern const struct InvestigationPresentData * gInvestigationPresentData[22];
 extern void (*gInvestigationSegmentSetupFunctions[])(struct Main *);
 extern void (*gInvestigationRoomSetupFunctions[])(struct Main *);
 extern void (*gInvestigationRoomUpdateFunctions[])(struct Main *);

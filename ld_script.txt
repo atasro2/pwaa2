@@ -44,7 +44,6 @@ SECTIONS {
         src/investigation.o(.text);
         asm/investigation.o(.text);
         src/court_record.o(.text);
-        asm/court_record.o(.text);
         src/sound.o(.text);
         src/animation.o(.text);
         src/psyche_lock.o(.text);

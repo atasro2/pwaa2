@@ -125,9 +125,9 @@ struct Main
     u8 filler251[0x254 - 0x251];
     /* +0x254 */ u32 soundFlags;
     /* +0x258 */ u32 unk258;
-    u8 filler258[0x276 - 0x25C];
-    u16 unk276[8]; // ! fix size later
-    u16 unk286;
+    u8 unk25C[25]; // unity: roomseq
+    u16 unk276[8]; // unity: lockdat
+    u16 unk286; // unity: lock_max
     struct Main_288 {
         u8 unk0;
         s8 unk1;

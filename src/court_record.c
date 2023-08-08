@@ -11,6 +11,7 @@
 #include "animation.h"
 #include "psyche_lock.h"
 #include "save.h"
+#include "ewram.h"
 #include "constants/process.h"
 #include "constants/songs.h"
 #include "constants/animation.h"
@@ -1124,7 +1125,7 @@ void CourtRecordMain(struct Main * main, struct CourtRecord * courtRecord) // st
             }
             PlaySE(SE001_MENU_CONFIRM);
             if(main->process[GAME_PROCESS_VAR2] == 2) {
-                section = GetEvidenceCommentSection(main, courtRecord->displayItemList[courtRecord->selectedItem], courtRecord->flags & 1);
+                section = GetEvidenceCommentSection(main, courtRecord->displayItemList[courtRecord->selectedItem], courtRecord->flags & COURT_RECORD_VIEW_PROFILES);
                 ChangeScriptSection(section);
                 SlideTextbox(1);
             }
@@ -1260,7 +1261,7 @@ void CourtRecordChangeRecord(struct Main * main, struct CourtRecord * courtRecor
         if(courtRecord->flags & COURT_RECORD_VIEW_PROFILES)
         {
             courtRecord->flags &= ~COURT_RECORD_VIEW_PROFILES;
-            DmaCopy16(3, gUnknown_081422FC, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
+            DmaCopy16(3, gGfx4bppProfileTextTiles, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
             courtRecord->displayItemCount = courtRecord->evidenceCount;
             courtRecord->displayItemList = courtRecord->evidenceList;
         }
@@ -1740,4 +1741,657 @@ void CourtRecordTakeThatSpecial(struct Main * main, struct CourtRecord * courtRe
     }
     UpdateBG2Window(&gCourtRecord);
     UpdateRecordSprites(&gCourtRecord);
+}
+
+void EvidenceAddedInit(struct Main * main, struct CourtRecord * courtRecord) // note_add_init
+{
+    u32 i;
+    u16 * map = gBG2MapBuffer;
+    for(i = 0; i < 0x400; i++, map++)
+        *map = 0;
+    gIORegisters.lcd_dispcnt |= DISPCNT_BG2_ON;
+    LoadEvidenceWindowGraphics();
+    LoadEvidenceGraphics(main->gottenEvidenceId);
+    SetBGMVolume(main->bgmVolume >> 1, 4);
+    PlaySE(BGM015_JINGLE_EVIDENCE);
+    main->process[GAME_PROCESS_STATE]++;
+    main->process[GAME_PROCESS_VAR1] = 0;
+}
+
+void EvidenceAddedMain(struct Main * main, struct CourtRecord * courtRecord) // note_add_main
+{
+    UpdateBG2Window(courtRecord);
+    UpdateEvidenceSprites(courtRecord);
+    if(courtRecord->windowScrollSpeed == 0 && gScriptContext.flags & 1)
+    {
+        if(main->process[GAME_PROCESS_VAR1] == 0)
+        {
+            SetBGMVolume(0x100, 0x1E);
+            main->process[GAME_PROCESS_VAR1] = 1;
+        }
+        if(gJoypad.pressedKeys & (A_BUTTON|B_BUTTON))
+        {
+            PlaySE(SE001_MENU_CONFIRM);
+            SlideInBG2Window(3, 0xE);
+            main->process[GAME_PROCESS_STATE] = EVIDENCE_ADD_EXIT;
+        }
+    }
+}
+
+void EvidenceAddedExit(struct Main * main, struct CourtRecord * courtRecord) // note_add_exit
+{
+    UpdateBG2Window(courtRecord);
+    UpdateEvidenceSprites(courtRecord);
+    if(courtRecord->windowScrollSpeed == 0)
+    {
+        RESTORE_PROCESS_PTR(main);
+        if(gMain.process[GAME_PROCESS] == INVESTIGATION_PROCESS)
+        {
+            if(gMain.process[GAME_PROCESS_STATE] == INVESTIGATION_INSPECT)
+                SetInactiveActionButtons(&gInvestigation, 1);
+            else if(main->process[GAME_PROCESS_STATE] == INVESTIGATION_TALK) //! why?? why???? why are you using that pointer when the other ones are noooot
+                SetInactiveActionButtons(&gInvestigation, 4);
+            else if(gMain.process[GAME_PROCESS_STATE] == INVESTIGATION_PRESENT)
+                SetInactiveActionButtons(&gInvestigation, 8);
+        }
+        gScriptContext.flags |= 2;
+    }
+}
+
+void UpdateCourtRecordArrows(struct CourtRecord * courtRecord)
+{
+    courtRecord->recordArrowCounter++;
+    if(courtRecord->recordArrowCounter > 4)
+    {
+        courtRecord->recordArrowCounter = 0;
+        courtRecord->recordArrowFrame++;
+        courtRecord->recordArrowFrame &= 3;
+        DmaCopy16(3, gGfx4bppTestimonyArrows + sCourtRecordLeftArrowTileIndexes[courtRecord->recordArrowFrame] * 32, OBJ_VRAM0+0x3400, TILE_SIZE_4BPP*4);
+        DmaCopy16(3, gGfx4bppTestimonyArrows + sCourtRecordRightArrowTileIndexes[courtRecord->recordArrowFrame] * 32, OBJ_VRAM0+0x3480, TILE_SIZE_4BPP*4);
+    }
+}
+
+void LoadEvidenceWindowGraphics(void)
+{
+    SlideInBG2Window(1, 0xC);
+    DmaCopy16(3, gGfx4bppTestimonyArrows, OBJ_VRAM0+0x3400, TILE_SIZE_4BPP*4);
+    DmaCopy16(3, gGfx4bppTestimonyArrows + TILE_SIZE_4BPP*4 * 3, OBJ_VRAM0+0x3480, TILE_SIZE_4BPP*4);
+    DmaCopy16(3, gGfx4bppControllerButtons, OBJ_VRAM0+0x3800, TILE_SIZE_4BPP*16);
+    DmaCopy16(3, gGfx4bppPresentBackTextTiles, OBJ_VRAM0+0x3A00, TILE_SIZE_4BPP*16);
+    DmaCopy16(3, gGfx4bppProfileTextTiles, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
+    DmaCopy16(3, gGfxPalCrossExamUI, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, gGfxPalCourtRecordActionText, OBJ_PLTT+0x80, 0x20);
+    DmaCopy16(3, gGfxPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
+}
+
+void UpdateRecordSprites(struct CourtRecord * courtRecord)
+{
+    struct OamAttrs * oam;
+    UpdateEvidenceSprites(courtRecord);
+    if(courtRecord->flags & 4)
+    {
+        UpdateCourtRecordArrows(courtRecord);
+        oam = gOamObjects + OAM_IDX_LR_ARROW;
+        if(courtRecord->displayItemCount > 1)
+            oam->attr0 = SPRITE_ATTR0(48, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        else
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(0, FALSE, FALSE, 1);
+        oam->attr2 = SPRITE_ATTR2(0x1A0, 0, 2);
+        oam++;
+        if(courtRecord->displayItemCount > 1)
+            oam->attr0 = SPRITE_ATTR0(48, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        else
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-16, FALSE, FALSE, 1);
+        oam->attr2 = SPRITE_ATTR2(0x1A4, 0, 2);
+        if(gMain.process[GAME_PROCESS_VAR2] == 0
+        || gMain.process[GAME_PROCESS_VAR2] == 4
+        || gMain.process[GAME_PROCESS_VAR2] == 5)
+            UpdateRecordInfoActionSprites(1);
+        else
+            UpdateRecordPresentActionSprites(1);
+        return;
+    }
+    else
+    {
+        oam = gOamObjects + OAM_IDX_LR_ARROW;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        if(gMain.process[GAME_PROCESS_VAR2] == 0
+        || gMain.process[GAME_PROCESS_VAR2] == 4
+        || gMain.process[GAME_PROCESS_VAR2] == 5)
+            UpdateRecordInfoActionSprites(0);
+        else
+            UpdateRecordPresentActionSprites(0);
+    }
+}
+
+void LoadEvidenceGraphics(u32 evidenceId)
+{
+    u32 offset;
+    u8 * src;
+
+    offset = gEvidenceProfileData[evidenceId].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
+    src = gUnknown_08177E28 + offset;
+    DmaCopy16(3, src, OBJ_PLTT+0x20, 0x20);
+    src = gUnknown_08177E28 + offset + 0x20;
+    DmaCopy16(3, src, OBJ_VRAM0+0x5000, TILE_SIZE_4BPP * 64);
+    src = gEvidenceProfileData[evidenceId].descriptionTiles;
+    LZ77UnCompWram(src, eUnknown_0200AFC0);
+    DmaCopy16(3, eUnknown_0200AFC0, (void *)OBJ_VRAM0+0x3C00, TILE_SIZE_4BPP * 160);
+}
+
+void UpdateEvidenceSprites(struct CourtRecord * courtRecord)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_EVIDENCE_DISPLAY];
+    u32 i;
+
+    oam->attr0 = SPRITE_ATTR0(24, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(0, FALSE, FALSE, 3);
+    oam->attr1 += courtRecord->windowX;
+    oam->attr2 = SPRITE_ATTR2(0x280, 0, 1);
+    oam++;
+    for(i = 0; i < 5; i++)
+    {
+        oam->attr0 = SPRITE_ATTR0(24, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(72 + i*32, FALSE, FALSE, 2);
+        oam->attr1 += courtRecord->windowX;
+        oam->attr2 = SPRITE_ATTR2(0x1E0 + i*0x10, 0, 2);
+        oam++;
+    }
+    for(i = 0; i < 5; i++)
+    {
+        oam->attr0 = SPRITE_ATTR0(56, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(72 + i*32, FALSE, FALSE, 2);
+        oam->attr1 += courtRecord->windowX;
+        oam->attr2 = SPRITE_ATTR2(0x230 + i*0x10, 0, 2);
+        oam++;
+    }
+}
+
+void ClearEvidenceSprites(struct CourtRecord * courtRecord)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_EVIDENCE_DISPLAY];
+    u32 i;
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    oam++;
+    for(i = 0; i < 10; i++)
+    {
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+    }
+}
+
+void UpdateRecordInfoActionSprites(bool32 showSprites)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_EVIDENCE_RECORD_ACTIONS];
+    if(showSprites)
+    {
+        oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(160, FALSE, FALSE, 1);
+        oam->attr2 = SPRITE_ATTR2(0x1C8, 0, 4);
+        oam++;
+        oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(176, FALSE, FALSE, 2);
+        oam->attr2 = SPRITE_ATTR2(0x1A8, 0, 4);
+        oam++;
+        oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(208, FALSE, FALSE, 2);
+        oam->attr2 = SPRITE_ATTR2(0x1B0, 0, 4);
+    }
+    else
+    {
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+    }
+}
+
+void UpdateRecordPresentActionSprites(bool32 showSprites)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_EVIDENCE_RECORD_ACTIONS];
+    if(showSprites)
+    {
+        if(gMain.gameStateFlags & 0x100)
+        {
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(60, FALSE, FALSE, 1);
+            oam->attr2 = SPRITE_ATTR2(0x1C8, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(76, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x1A8, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(108, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x1B0, 0, 4);
+            oam++;
+            oam = &gOamObjects[OAM_IDX_EVIDENCE_PRESENT_ACTIONS];
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(200, FALSE, FALSE, 1);
+            oam->attr2 = SPRITE_ATTR2(0x1C0, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(216, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x1D0, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+        }
+        else
+        {
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(60, FALSE, FALSE, 1);
+            oam->attr2 = SPRITE_ATTR2(0x1C8, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(76, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x1A8, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(108, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x1B0, 0, 4);
+            oam++;
+            oam = &gOamObjects[OAM_IDX_EVIDENCE_PRESENT_ACTIONS];
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(140, FALSE, FALSE, 1);
+            oam->attr2 = SPRITE_ATTR2(0x1C0, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(156, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x1D0, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(200, FALSE, FALSE, 1);
+            oam->attr2 = SPRITE_ATTR2(0x1C4, 0, 4);
+            oam++;
+            oam->attr0 = SPRITE_ATTR0(96, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(216, FALSE, FALSE, 2);
+            oam->attr2 = SPRITE_ATTR2(0x1D8, 0, 4);
+            oam++;
+        }
+    }
+    else
+    {
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam = &gOamObjects[OAM_IDX_EVIDENCE_PRESENT_ACTIONS];
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+    }
+}
+
+void UpdateEvidenceDetailActionSprites(bool32 showSprites)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_EVIDENCE_RECORD_ACTIONS];
+    
+    oam->attr0 = SPRITE_ATTR0(144, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(184, FALSE, FALSE, 1);
+    oam->attr2 = SPRITE_ATTR2(0x1C4, 0, 4);
+    oam++;
+    oam->attr0 = SPRITE_ATTR0(144, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(200, FALSE, FALSE, 1);
+    oam->attr2 = SPRITE_ATTR2(0x1CC, 0, 4);
+    oam++;
+    oam->attr0 = SPRITE_ATTR0(144, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(216, FALSE, FALSE, 2);
+    oam->attr2 = SPRITE_ATTR2(0x1D8, 0, 4);
+}
+
+s32 FindEvidenceInCourtRecord(u32 isProfile, u32 evidenceId)
+{
+    u8 * list;
+    u32 evidenceCount;
+    u32 i;
+
+    if(isProfile)
+    {
+        list = gCourtRecord.profileList;
+        evidenceCount = gCourtRecord.profileCount;
+    }
+    else
+    {
+        list = gCourtRecord.evidenceList;
+        evidenceCount = gCourtRecord.evidenceCount;
+    }
+    for(i = 0; i < evidenceCount; i++, list++)
+    {
+        if(*list == evidenceId)
+            return i;
+    }
+    return -1;
+}
+
+s32 FindFirstEmptySlotInCourtRecord(u32 isProfile)
+{
+    u32 i;
+    u8 * list = gCourtRecord.evidenceList;
+    if(isProfile)
+        list = gCourtRecord.profileList;
+    for(i = 0; i < 0x20; i++, list++)
+    {
+        if(*list == 0xFF)
+            return i;
+    }
+    return -1;
+}
+
+void SortCourtRecordAndSyncListCount(struct CourtRecord * courtRecord)
+{
+    u8 * ewram = eUnknown_0200AFC0;
+    u32 i;
+
+    DmaCopy16(3, courtRecord->profileList, ewram, 0x20);
+    DmaFill16(3, 0xFFFF, courtRecord->profileList, 0x20);
+    courtRecord->profileCount = 0;
+    for(i = 0; i < 0x20; i++)
+    {
+        if(ewram[i] != 0xFF)
+        {
+            courtRecord->profileList[courtRecord->profileCount] = ewram[i];
+            courtRecord->profileCount++;
+        }
+    }
+    DmaCopy16(3, courtRecord->evidenceList, ewram, 0x20);
+    DmaFill16(3, 0xFFFF, courtRecord->evidenceList, 0x20);
+    courtRecord->evidenceCount = 0;
+    for(i = 0; i < 0x20; i++)
+    {
+        if(ewram[i] != 0xFF)
+        {
+            courtRecord->evidenceList[courtRecord->evidenceCount] = ewram[i];
+            courtRecord->evidenceCount++;
+        }
+    }
+}
+
+u32 GetQuestioningPresentedSection(u32 section, u32 evidenceId)
+{
+    const struct CourtPresentData * presentData;
+    presentData = gCourtPresentData[gMain.scenarioIdx];
+    for(; presentData->presentingSection != 0xFFFF; presentData++)
+    {
+        if(presentData->flagId != 0xFF)
+        {
+            if(!GetFlag(0, presentData->flagId))
+                continue;
+        }
+        if(presentData->presentingSection == section && presentData->evidenceId == evidenceId)
+        {
+            if(presentData->action != 0)
+                gScriptContext.slamDesk = FALSE;
+            else
+                gScriptContext.slamDesk = TRUE;
+            return presentData->presentedSection;
+        }
+    }
+    gScriptContext.slamDesk = FALSE;
+    return 0;
+}
+
+u32 GetEvidenceCommentSection(struct Main * main, u32 evidenceId, bool8 isProfile) // unity tantei_show_check
+{
+    const struct InvestigationPresentData * presetData;
+    u32 retVal;
+
+    presetData = gInvestigationPresentData[main->scenarioIdx];
+    retVal = presetData->uninterestedSection;
+    
+    for(; presetData->isProfile != 0xFF && presetData->roomId != main->currentRoomId; presetData++)
+        ; // this loop has to be a for loop otherwise bad regalloc! :))))
+    
+    for(; presetData->roomId == main->currentRoomId; presetData++)
+    {
+        if(gAnimation[1].animationInfo.personId == presetData->personId
+        && isProfile == presetData->isProfile
+        && (main->unk25C[main->currentRoomId] == presetData->roomseq || presetData->roomseq == 0xFF))
+        {
+            if(evidenceId == presetData->evidenceId
+            || presetData->evidenceId == 0xFF)
+                return presetData->interestedSection;
+            retVal = presetData->uninterestedSection;
+        }
+    }
+
+    return retVal;
+}
+
+void UpdateItemPlate(struct Main * main)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_ITEMPLATE_ITEM];
+    switch(main->itemPlateState)
+    {
+        case 0:
+        default:
+            break;
+        case 1:
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            DmaCopy16(3, &gOamObjects[OAM_IDX_ITEMPLATE_ITEM], OAM+OAM_IDX_ITEMPLATE_ITEM*8, 0x8);
+            if(main->itemPlateSide == 0)
+                main->itemPlateAction = 4;
+            else
+                main->itemPlateAction = 6;
+            main->itemPlateState++;
+        case 2: // fallthrough
+            DrawItemPlate(main);
+            if(main->itemPlateAction == 2)
+            {
+                gBG1MapBuffer[GET_MAP_TILE_INDEX(1, 1, 0, 0)] = 0;
+                gBG1MapBuffer[GET_MAP_TILE_INDEX(1, 2, 0, 0)] = 0;
+                gBG1MapBuffer[GET_MAP_TILE_INDEX(2, 1, 0, 0)] = 0;
+                gBG1MapBuffer[GET_MAP_TILE_INDEX(2, 2, 0, 0)] = 0;
+                gBG1MapBuffer[GET_MAP_TILE_INDEX(1, 28, 0, 0)] = 0;
+                gBG1MapBuffer[GET_MAP_TILE_INDEX(1, 27, 0, 0)] = 0;
+                gBG1MapBuffer[GET_MAP_TILE_INDEX(2, 28, 0, 0)] = 0;
+                gBG1MapBuffer[GET_MAP_TILE_INDEX(2, 27, 0, 0)] = 0;
+                main->itemPlateState = 0;
+            }
+            break;
+        case 3:
+            LoadItemPlateGfx(main);
+            if(main->itemPlateSide == 0)
+            {
+                oam->attr1 = SPRITE_ATTR1_NONAFFINE(16, FALSE, FALSE, 3);
+                main->itemPlateAction = 3;
+            }
+            else
+            {
+                oam->attr1 = SPRITE_ATTR1_NONAFFINE(160, FALSE, FALSE, 3);
+                main->itemPlateAction = 5;
+            }
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam->attr2 = SPRITE_ATTR2(0x80, 0, 1);
+            main->itemPlateState++;
+        case 4: // fallthrough
+            if(main->process[GAME_PROCESS] == SAVE_GAME_PROCESS)
+            {
+                main->itemPlateState = 6;
+                return;
+            }    
+            DrawItemPlate(main);
+            if(main->itemPlateAction == 1)
+                oam->attr0 = SPRITE_ATTR0(16, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+            
+            if(main->process[GAME_PROCESS] >= COURT_RECORD_PROCESS)
+            {
+                int i;
+                u16 * map;
+                oam->attr0 = SPRITE_ATTR0_CLEAR;
+                DmaCopy16(3, &gOamObjects[OAM_IDX_ITEMPLATE_ITEM], OAM+OAM_IDX_ITEMPLATE_ITEM*8, 0x8);
+                map = gBG1MapBuffer;
+                for(i = 0; i < 352; i++, map++)
+                    *map = 0;
+                main->itemPlateState++;
+            }
+            break;
+        case 5:
+            if(main->process[GAME_PROCESS] < COURT_RECORD_PROCESS)
+            {
+                LoadItemPlateGfx(main);
+                oam->attr0 = SPRITE_ATTR0(16, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+                if(main->itemPlateSide == 0)
+                    oam->attr1 = SPRITE_ATTR1_NONAFFINE(16, FALSE, FALSE, 3);
+                else
+                    oam->attr1 = SPRITE_ATTR1_NONAFFINE(160, FALSE, FALSE, 3);
+                oam->attr2 = SPRITE_ATTR2(0x80, 0, 1);
+                gIORegisters.lcd_dispcnt |= DISPCNT_BG0_ON;
+                DrawItemPlate(main);
+                main->itemPlateState = 4;
+            }
+            break;
+        case 6:
+            if(main->process[GAME_PROCESS] != SAVE_GAME_PROCESS)
+                main->itemPlateState = 5;
+            break;
+    }
+}
+
+void LoadItemPlateGfx(struct Main * main)
+{
+    u32 offset;
+    u8 * src;
+
+    offset = gEvidenceProfileData[main->itemPlateEvidenceId].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
+    src = gUnknown_08177E28 + offset;
+    DmaCopy16(3, src, OBJ_PLTT+0x20, 0x20);
+    src = gUnknown_08177E28 + offset + 0x20;
+    DmaCopy16(3, src, OBJ_VRAM0+0x1000, TILE_SIZE_4BPP * 64);
+}
+
+void sub_801355C(struct Main * main) {
+    u16 * map = gBG1MapBuffer+32+1;
+    u32 i;
+    map++;
+    for(i = 0; i < main->itemPlateSize+1; i++)
+    {
+        u32 j;
+        for(j = 0; j < main->itemPlateSize; j++)
+            *map++ = 0x38;
+        map += (0x20 - main->itemPlateSize);
+    }
+    map = gBG1MapBuffer+32+1;
+    *map++ = 0x30;
+    for(i = 0; i < main->itemPlateSize; i++)
+        *map++ = 0x31;
+    *map++ = 0x32;
+    map = gBG1MapBuffer+32+1; 
+    map += main->itemPlateSize*32 + 32;
+    *map++ = 0x35;
+    for(i = 0; i < main->itemPlateSize; i++)
+        *map++ = 0x36;
+    *map++ = 0x37;
+    map = gBG1MapBuffer+32+1;
+    map += 32;
+    for(i = 0; i < main->itemPlateSize; i++)
+    {
+        *map = 0x33;
+        map[main->itemPlateSize+1] = 0x34;
+        map += 32;
+    }
+}
+
+void sub_801364C(struct Main * main) {
+    u16 * map = gBG1MapBuffer+32+28;
+    u32 i;
+    map--;
+    for(i = 0; i < main->itemPlateSize+1; i++)
+    {
+        u32 j;
+        for(j = 0; j < main->itemPlateSize; j++)
+            *map-- = 0x38;
+        map += (0x20 + main->itemPlateSize);
+    }
+    map = gBG1MapBuffer+32+28;
+    *map-- = 0x32;
+    for(i = 0; i < main->itemPlateSize; i++)
+        *map-- = 0x31;
+    *map-- = 0x30;
+    map = gBG1MapBuffer+32+28;
+    map += main->itemPlateSize*32 + 32;
+    *map-- = 0x37;
+    for(i = 0; i < main->itemPlateSize; i++)
+        *map-- = 0x36;
+    *map-- = 0x35;
+    map = gBG1MapBuffer+32+28;
+    map += 32;
+    for(i = 0; i < main->itemPlateSize; i++)
+    {
+        *map = 0x34;
+        map[-main->itemPlateSize-1] = 0x33;
+        map += 32;
+    }
+}
+
+void DrawItemPlate(struct Main * main) // how did i match this
+{
+    u16 * map;
+    u32 i;
+
+    if(main->itemPlateAction > 2)
+    {
+        map = gBG1MapBuffer+32; // start at y 1
+        for(i = 0; i < 0x140; i++, map++)
+            *map = 0;
+    }
+    switch(main->itemPlateAction)
+    {
+        case 0:
+            break;
+        case 1:
+            if(main->itemPlateSide != 0)
+                sub_801364C(main);
+            else
+                sub_801355C(main);
+            break;
+        case 2:
+        default:
+            break;
+        case 3:
+        case 4:
+            sub_801355C(main);
+            break;
+        case 5:
+        case 6:
+            sub_801364C(main);
+            break;
+    }
+    main->itemPlateCounter++;
+    if(main->itemPlateCounter > 0)
+    {
+        main->itemPlateCounter = 0;
+        if(main->itemPlateAction == 4 || main->itemPlateAction == 6)
+        {
+            if(main->itemPlateSize > 0)
+            {
+                main->itemPlateSize--;
+                return;
+            }
+            main->itemPlateAction = 2;
+        }
+        else
+        {
+            if(main->itemPlateSize < 8)
+            {
+                main->itemPlateSize++;
+                return;
+            }
+            main->itemPlateAction = 1;
+        }
+    }
 }
