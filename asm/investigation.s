@@ -151,7 +151,7 @@ InvestigationInit: @ 0x0800EB84
 	strh r0, [r7, #4]
 	ldr r0, _0800EDB4 @ =0x00003FC7
 	strh r0, [r7, #6]
-	ldr r0, _0800EDB8 @ =gUnknown_081370FC
+	ldr r0, _0800EDB8 @ =gUnusedAsciiCharSet
 	str r0, [r4]
 	ldr r0, _0800EDBC @ =0x06003800
 	str r0, [r4, #4]
@@ -205,7 +205,7 @@ InvestigationInit: @ 0x0800EB84
 	str r0, [r4, #4]
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800EE08 @ =gUnknown_081DE3A8
+	ldr r0, _0800EE08 @ =gGfxPalChoiceSelected
 	str r0, [r4]
 	ldr r0, _0800EE0C @ =0x05000320
 	str r0, [r4, #4]
@@ -366,7 +366,7 @@ _0800EDA8: .4byte gInvestigation
 _0800EDAC: .4byte 0x8100000E
 _0800EDB0: .4byte 0x00003D01
 _0800EDB4: .4byte 0x00003FC7
-_0800EDB8: .4byte gUnknown_081370FC
+_0800EDB8: .4byte gUnusedAsciiCharSet
 _0800EDBC: .4byte 0x06003800
 _0800EDC0: .4byte 0x80000400
 _0800EDC4: .4byte gUnknown_0813791C
@@ -386,7 +386,7 @@ _0800EDF8: .4byte gUnknown_081426FC
 _0800EDFC: .4byte 0x06013200
 _0800EE00: .4byte gUnknown_0814DC60
 _0800EE04: .4byte 0x05000300
-_0800EE08: .4byte gUnknown_081DE3A8
+_0800EE08: .4byte gGfxPalChoiceSelected
 _0800EE0C: .4byte 0x05000320
 _0800EE10: .4byte gOamObjects+0x1A0
 _0800EE14: .4byte 0x000040E0
@@ -4692,7 +4692,7 @@ sub_8010FA4: @ 0x08010FA4
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08011074 @ =gUnknown_081DE3A8
+	ldr r1, _08011074 @ =gGfxPalChoiceSelected
 	str r1, [r0]
 	ldr r1, _08011078 @ =0x05000320
 	str r1, [r0, #4]
@@ -4738,7 +4738,7 @@ _08011064: .4byte gUnknown_081426FC
 _08011068: .4byte 0x06013200
 _0801106C: .4byte gUnknown_0814DC60
 _08011070: .4byte 0x05000300
-_08011074: .4byte gUnknown_081DE3A8
+_08011074: .4byte gGfxPalChoiceSelected
 _08011078: .4byte 0x05000320
 _0801107C: .4byte gOamObjects+0x1A0
 _08011080: .4byte 0x000040E0
@@ -5396,8 +5396,8 @@ _0801156E:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_8011578
-sub_8011578: @ 0x08011578
+	thumb_func_start LoadLocationChoiceGraphics
+LoadLocationChoiceGraphics: @ 0x08011578
 	push {r4, r5, r6, r7, lr}
 	ldr r1, _080115BC @ =gMain
 	adds r2, r1, #0
@@ -5442,8 +5442,8 @@ _080115C8: .4byte 0x040000D4
 _080115CC: .4byte 0x80000400
 _080115D0: .4byte 0x06013400
 
-	thumb_func_start sub_80115D4
-sub_80115D4: @ 0x080115D4
+	thumb_func_start LoadTalkChoiceGraphics
+LoadTalkChoiceGraphics: @ 0x080115D4
 	push {r4, r5, r6, r7, lr}
 	ldr r2, _08011654 @ =gTalkData
 	ldrb r1, [r2]

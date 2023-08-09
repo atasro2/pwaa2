@@ -7,22 +7,28 @@
 
 #define GFX_BASE_ADDR (ROM_START + 0x130000)
 
-#define gUnknown_081370FC ((u8*)(GFX_BASE_ADDR + 0x70FC))
-#define gUnknown_081378FC ((u8*)(GFX_BASE_ADDR + 0x78FC))
+#define gGfxPalTitleScreen ((u8*)(GFX_BASE_ADDR + 0x0))
+#define gGfx8lzTitleScreen ((u8*)(GFX_BASE_ADDR + 0x200))
+#define gUnusedAsciiCharSet ((u8*)(GFX_BASE_ADDR + 0x70FC))
+#define gGfxPalEvidenceProfileDesc ((u8*)(GFX_BASE_ADDR + 0x78FC))
 #define gUnknown_0813791C ((u8*)(GFX_BASE_ADDR + 0x791C))
 #define gGfx4bppNametags ((u8*)(GFX_BASE_ADDR + 0x891C))
 
 #define gUnknown_0813D91C ((u8*)(GFX_BASE_ADDR + 0xD91C))
-
 #define gGfx4bppTestimonyArrows ((u8*)(GFX_BASE_ADDR + 0xD97C))
+#define gGfx4bppControllerButtons ((u8*)(GFX_BASE_ADDR + 0x110FC))
 #define gUnknown_08141CFC ((u8*)(GFX_BASE_ADDR + 0x11CFC))
 #define gUnknown_08141EFC ((u8*)(GFX_BASE_ADDR + 0x11EFC))
+#define gGfx4bppPresentBackTextTiles ((u8*)(GFX_BASE_ADDR + 0x120FC))
+#define gGfx4bppProfileTextTiles ((u8*)(GFX_BASE_ADDR + 0x122FC))
+#define gUnknown_081424FC ((u8*)(GFX_BASE_ADDR + 0x124FC))
 #define gUnknown_081426FC ((u8*)(GFX_BASE_ADDR + 0x126FC))
 #define gUnknown_08142DFC ((u8*)(GFX_BASE_ADDR + 0x12DFC))
 #define gUnknown_081430DC ((u8*)(GFX_BASE_ADDR + 0x130DC))
 #define gUnknown_081438DC ((u8*)(GFX_BASE_ADDR + 0x138DC))
 #define gUnknown_081440DC ((u8*)(GFX_BASE_ADDR + 0x140DC))
 #define gUnknown_081448DC ((u8*)(GFX_BASE_ADDR + 0x148DC))
+#define gUnknown_081458DC ((u8*)(GFX_BASE_ADDR + 0x158DC))
 #define gUnknown_08146FFC ((u8*)(GFX_BASE_ADDR + 0x16FFC))
 #define gUnknown_081473FC ((u8*)(GFX_BASE_ADDR + 0x173FC))
 #define gUnknown_0814747C ((u8*)(GFX_BASE_ADDR + 0x1747C))
@@ -50,13 +56,15 @@
 #define gUnknown_0814CEE4 ((u8*)(GFX_BASE_ADDR + 0x1CEE4))
 #define gUnknown_0814D218 ((u8*)(GFX_BASE_ADDR + 0x1D218))
 #define gUnknown_0814D5A4 ((u8*)(GFX_BASE_ADDR + 0x1D5A4))
-
+#define gGfxPalCrossExamUI ((u8*)(GFX_BASE_ADDR + 0x1DA80))
+#define gGfxPalCourtRecordActionText ((u8*)(GFX_BASE_ADDR + 0x1DBE0))
 #define gUnknown_0814DC40 ((u8*)(GFX_BASE_ADDR + 0x1DC40))
 #define gUnknown_0814DC60 ((u8*)(GFX_BASE_ADDR + 0x1DC60))
 #define gUnknown_0814DEA0 ((u8*)(GFX_BASE_ADDR + 0x1DEA0))
 #define gUnknown_0814DEC0 ((u8*)(GFX_BASE_ADDR + 0x1DEC0))
 #define gUnknown_0814DEE0 ((u8*)(GFX_BASE_ADDR + 0x1DEE0))
 #define gUnknown_0814DF00 ((u8*)(GFX_BASE_ADDR + 0x1DF00))
+#define gUnknown_0814DF20 ((u8*)(GFX_BASE_ADDR + 0x1DF20))
 #define gUnknown_0814E0E0 ((u8*)(GFX_BASE_ADDR + 0x1E0E0))
 #define gUnknown_0814E100 ((u8*)(GFX_BASE_ADDR + 0x1E100))
 #define gUnknown_0814E120 ((u8*)(GFX_BASE_ADDR + 0x1E120))
@@ -220,6 +228,8 @@
 #define gUnknown_081772D4 ((u8*)(GFX_BASE_ADDR + 0x472D4))
 #define gUnknown_081775FC ((u8*)(GFX_BASE_ADDR + 0x475FC))
 #define gUnknown_081779E4 ((u8*)(GFX_BASE_ADDR + 0x479E4))
+
+#define gUnknown_08177E28 ((u8*)(GFX_BASE_ADDR + 0x47E28))
 
 #define gUnknown_08231BE8 ((u8*)(GFX_BASE_ADDR + 0x101BE8))
 
@@ -746,6 +756,6 @@
 #define gTextPal ((u8*)(GFX_BASE_ADDR + 0x7E388))
 #define gCharSet ((u8*)(GFX_BASE_ADDR + 0x7E3A8))
 
-#define gUnknown_081DE3A8 ((u8*)(GFX_BASE_ADDR + 0xAE3A8))
+#define gGfxPalChoiceSelected ((u8*)(GFX_BASE_ADDR + 0xAE3A8))
 
 #endif

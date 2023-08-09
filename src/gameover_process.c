@@ -3,6 +3,7 @@
 #include "background.h"
 #include "sound.h"
 #include "constants/process.h"
+#include "constants/oam_allocations.h"
 
 const u8 gUnknown_08022E6C[152] = {
     0x01, 0x02, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
@@ -29,7 +30,7 @@ const u8 gUnknown_08022E6C[152] = {
 void GameOverScreenProcess(struct Main *main)
 {
     struct IORegisters *ioRegsp = &gIORegisters; // r4
-    struct OamAttrs * oam = &gOamObjects[57]; // r3 
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_GAME_OVER]; // r3 
     u32 i, j;
     u32 temp;
     switch (main->process[GAME_PROCESS_STATE])

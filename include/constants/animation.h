@@ -3,6 +3,10 @@
 
 enum {
     ANIM_NONE,
+    ANIM_HOLDIT_LEFT,
+    ANIM_OBJECTION_LEFT,
+    ANIM_OBJECTION_RIGHT,
+    ANIM_TAKETHAT_LEFT,
     // TODO: fill in
 };
 

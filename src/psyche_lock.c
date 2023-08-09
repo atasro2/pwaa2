@@ -1,4 +1,5 @@
 #include "global.h"
+#include "psyche_lock.h"
 #include "animation.h"
 #include "background.h"
 #include "investigation.h"

@@ -172,7 +172,7 @@ CourtInit: @ 0x0800D55C
 	strh r0, [r1, #4]
 	ldr r0, _0800D6D8 @ =0x00003FC7
 	strh r0, [r1, #6]
-	ldr r0, _0800D6DC @ =gUnknown_081370FC
+	ldr r0, _0800D6DC @ =gUnusedAsciiCharSet
 	str r0, [r4]
 	ldr r0, _0800D6E0 @ =0x06003800
 	str r0, [r4, #4]
@@ -194,7 +194,7 @@ CourtInit: @ 0x0800D55C
 	ldr r1, _0800D6F8 @ =0x80000010
 	str r1, [r4, #8]
 	ldr r0, [r4, #8]
-	ldr r0, _0800D6FC @ =gUnknown_081378FC
+	ldr r0, _0800D6FC @ =gGfxPalEvidenceProfileDesc
 	str r0, [r4]
 	ldr r0, _0800D700 @ =0x05000240
 	str r0, [r4, #4]
@@ -299,7 +299,7 @@ _0800D6CC: .4byte gInvestigation
 _0800D6D0: .4byte 0x8100000E
 _0800D6D4: .4byte 0x00003D01
 _0800D6D8: .4byte 0x00003FC7
-_0800D6DC: .4byte gUnknown_081370FC
+_0800D6DC: .4byte gUnusedAsciiCharSet
 _0800D6E0: .4byte 0x06003800
 _0800D6E4: .4byte 0x80000400
 _0800D6E8: .4byte gUnknown_0813791C
@@ -307,7 +307,7 @@ _0800D6EC: .4byte 0x80000800
 _0800D6F0: .4byte gUnknown_0814DC60
 _0800D6F4: .4byte 0x05000300
 _0800D6F8: .4byte 0x80000010
-_0800D6FC: .4byte gUnknown_081378FC
+_0800D6FC: .4byte gGfxPalEvidenceProfileDesc
 _0800D700: .4byte 0x05000240
 _0800D704: .4byte 0x0000FFAF
 _0800D708: .4byte 0x0000FDFF
@@ -1117,7 +1117,7 @@ _0800DDB6:
 	ldr r1, _0800DDD4 @ =gTestimony
 	adds r0, r5, #0
 	movs r2, #1
-	bl sub_800E6D0
+	bl UpdateQuestioningMenuSprites
 	b _0800E00C
 	.align 2, 0
 _0800DDD0: .4byte gScriptContext
@@ -1325,9 +1325,9 @@ _0800DF84:
 	ldr r1, _0800DFB4 @ =gTestimony
 	adds r0, r5, #0
 	movs r2, #1
-	bl sub_800E6D0
+	bl UpdateQuestioningMenuSprites
 	ldr r0, _0800DFB8 @ =gCourtRecord
-	bl sub_8012BEC
+	bl UpdateCourtRecordArrows
 	ldr r1, _0800DFBC @ =gOamObjects
 	ldr r2, _0800DFC0 @ =gScriptContext
 	movs r0, #8
@@ -1482,7 +1482,7 @@ _0800E0C0:
 	ldr r1, _0800E0E0 @ =gTestimony
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_800E6D0
+	bl UpdateQuestioningMenuSprites
 	ldr r1, _0800E0E4 @ =gOamObjects
 	movs r0, #0x80
 	lsls r0, r0, #2
@@ -1620,7 +1620,7 @@ _0800E1D8:
 	ldr r1, _0800E1E8 @ =gTestimony
 	adds r0, r4, #0
 	movs r2, #0
-	bl sub_800E6D0
+	bl UpdateQuestioningMenuSprites
 	pop {r4, r5}
 	pop {r0}
 	bx r0
@@ -2201,8 +2201,8 @@ _0800E6BE:
 	.align 2, 0
 _0800E6CC: .4byte gMain+0x8
 
-	thumb_func_start sub_800E6D0
-sub_800E6D0: @ 0x0800E6D0
+	thumb_func_start UpdateQuestioningMenuSprites
+UpdateQuestioningMenuSprites: @ 0x0800E6D0
 	push {r4, lr}
 	adds r3, r1, #0
 	ldr r0, _0800E6E8 @ =gScriptContext
