@@ -13,8 +13,8 @@ struct CourtPresentData
 struct InvestigationPresentData
 {
     /* +0x00 */ u8 roomId; // unity: room
-    /* +0x01 */ u8 roomseq; // unity: item
-    /* +0x02 */ u8 evidenceId; // unity: 
+    /* +0x01 */ u8 roomseq; // unity: roomseq
+    /* +0x02 */ u8 evidenceId; // unity: item
     /* +0x03 */ u8 personId; // unity: pl_id
     /* +0x04 */ u8 isProfile; // unity: end
     /* +0x06 */ u16 interestedSection; // unity: mess_true
