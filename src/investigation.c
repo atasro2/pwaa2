@@ -8,7 +8,9 @@
 #include "animation.h"
 #include "sound.h"
 #include "graphics.h"
+#include "constants/songs.h"
 #include "constants/process.h"
+#include "constants/oam_allocations.h"
 
 void (*gInvestigationProcessStates[])(struct Main *, struct InvestigationStruct *) = {
 	InvestigationInit, // RNO1_TANTEI_INIT
@@ -83,7 +85,7 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     DmaCopy16(3, (void *)0x081426FC, OBJ_VRAM0 + 0x3200, 0x200);
     DmaCopy16(3, (void *)0x0814DC60, OBJ_PLTT+0x100, 0x20);
     DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
-    oam = &gOamObjects[52];
+    oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
     for(i = 0; i < 4; i++)
     {
         oam->attr0 = SPRITE_ATTR0(-32 & 0xFF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -196,7 +198,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
             if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
                 gSaveDataBuffer.main.showTextboxCharacters = 1;
             }
-            PlaySE(0x31);
+            PlaySE(SE007_MENU_OPEN_SUBMENU);
             main->gameStateFlags &= ~1;
             BACKUP_PROCESS_PTR(main);
             SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 0, main);
@@ -209,7 +211,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
         if(!(main->gameStateFlags & 0x10))
         {
             r:
-            PlaySE(0x31);
+            PlaySE(SE007_MENU_OPEN_SUBMENU);
             BACKUP_PROCESS_PTR(main);
             SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
             UpdateScrollPromptSprite(main, 0);
@@ -230,13 +232,13 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
             investigation->selectedAction &= 1;
         else
             investigation->selectedAction &= 3;
-        PlaySE(0x2A);
+        PlaySE(SE000_MENU_CHANGE);
         investigation->selectedActionYOffset = 0;
         investigation->lastActionYOffset = 8;
     }
     else if(gJoypad.pressedKeys & A_BUTTON)
     {
-        PlaySE(0x2B);
+        PlaySE(SE001_MENU_CONFIRM);
         investigation->pointerX = 120;
         investigation->pointerY = 50;
         SetInactiveActionButtons(investigation, 0xF);
@@ -269,7 +271,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
             main->Bg256_pos_x == 120 ||
             main->Bg256_pos_x == 240)
             {
-                PlaySE(0x2B);
+                PlaySE(SE001_MENU_CONFIRM);
                 main->isBGScrolling = TRUE;
                 if(main->Bg256_pos_x == 0)
                     main->horizontolBGScrollSpeed = 6;
@@ -373,13 +375,13 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
         return;
     }
     CopyBGDataToVram(roomData[0]);
-    oam = &gOamObjects[38];
+    oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
     for(i = 0; i < 4; i++)
     {
         for(j = 0; j < 2; oam++, j++)
             oam->attr0 = SPRITE_ATTR0_CLEAR;
     }
-    oam = &gOamObjects[52];
+    oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
     for(i = 0; i < 4; i++)
     {
         oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -409,7 +411,7 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
 void InvestigationInspect(struct Main * main, struct InvestigationStruct * investigation) // tantei_inspect // ! goto
 {
     u32 temp;
-    struct OamAttrs * oam = &gOamObjects[58];
+    struct OamAttrs * oam = &gOamObjects[58]; // this was OAM_IDX_POINTER == 88 in pwaa1
     if(gAnimation[1].flags & ANIM_BLEND_ACTIVE)
         return;
     if(main->blendMode)
@@ -613,7 +615,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 main->process[GAME_PROCESS_VAR1]++;
             break;
         case 1:
-            oam = &gOamObjects[38];
+            oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
             moveLocations = main->roomData[main->currentRoomId];
             moveLocations += 4;
             moveLocations -= 3;
@@ -671,7 +673,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
         case 2:
             if(main->process[GAME_PROCESS_VAR2] <= 12)
             {
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 for(i = 0; i < 4; i++)
                 {
                     for(j = 0; j < 2; j++)
@@ -682,7 +684,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 }
                 main->process[GAME_PROCESS_VAR2]++;
             }
-            oam = &gOamObjects[53];
+            oam = &gOamObjects[OAM_IDX_BUTTON_PROMPTS];
             temp = (u16)(oam->attr1 & ~0x1ff);
             oam->attr1 -= 6;
             oam->attr1 &= 0x1FF;
@@ -726,7 +728,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                     PauseBGM();
                     DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
                     DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
-                    PlaySE(0x31);
+                    PlaySE(SE007_MENU_OPEN_SUBMENU);
                     main->gameStateFlags &= ~1;
                     BACKUP_PROCESS_PTR(main);
                     SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 0, main);
@@ -737,11 +739,11 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
             {
                 if(!(main->gameStateFlags & 0x10))
                 {
-                    PlaySE(0x31);
+                    PlaySE(SE007_MENU_OPEN_SUBMENU);
                     main->process[GAME_PROCESS_VAR1] = 6; //! tries opening court record from switch case 6 but fails spectacularly
                     BACKUP_PROCESS_PTR(main);
                     SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
-                    oam = &gOamObjects[38];
+                    oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                     for(i = 0; i < 8; oam++, i++)
                         oam->attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH+60, FALSE, FALSE, 0);
                 }
@@ -764,7 +766,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 }
                 while(++i < 4);
                 if(temp != investigation->selectedOption)
-                    PlaySE(0x2A);
+                    PlaySE(SE000_MENU_CHANGE);
                 break;
             }
             else if(gJoypad.pressedKeys & DPAD_DOWN)
@@ -784,13 +786,13 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 }
                 while(++i < 4) ;
                 if(temp != investigation->selectedOption)
-                    PlaySE(0x2A);
+                    PlaySE(SE000_MENU_CHANGE);
                 break;
             }
             else if(gJoypad.pressedKeys & A_BUTTON)
             {
                 u32 roomId;
-                PlaySE(0x2B);
+                PlaySE(SE001_MENU_CONFIRM);
                 roomId = main->currentRoomId;
                 j = investigation->selectedOption+1;
                 main->currentRoomId = main->roomData[roomId][j];
@@ -801,7 +803,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
             }
             else if(gJoypad.pressedKeys & B_BUTTON)
             {
-                PlaySE(0x2C);
+                PlaySE(SE002_MENU_CANCEL);
                 main->process[GAME_PROCESS_VAR1]++;
                 main->process[GAME_PROCESS_VAR2] = 0;
                 break;
@@ -810,7 +812,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
         case 4:
             if(main->process[GAME_PROCESS_VAR2] <= 12)
             {
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 for(i = 0; i < 4; i++)
                 {
                     for(j = 0; j < 2; j++)
@@ -821,7 +823,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 }
                 main->process[GAME_PROCESS_VAR2]++;
             }
-            oam = &gOamObjects[53];
+            oam = &gOamObjects[OAM_IDX_BUTTON_PROMPTS];
             temp = (u16)(oam->attr1 & ~0x1ff);
             oam->attr1 += 6;
             oam->attr1 &= 0x1FF;
@@ -840,7 +842,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
         case 5:
             if(main->process[GAME_PROCESS_VAR2] <= 12)
             {
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 for(i = 0; i < 4; i++)
                 {
                     for(j = 0; j < 2; j++)
@@ -862,7 +864,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
             }
             break;
         case 6:
-            oam = &gOamObjects[38];
+            oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
             moveLocations = main->roomData[main->currentRoomId];
             moveLocations+= 1;
             for(i = 0; i < 4; i++)
@@ -897,7 +899,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
             main->process[GAME_PROCESS_VAR1] = 3;
             break;
     }
-    oam = &gOamObjects[38];
+    oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
     for(i = 0; i < 4; i++)
     {
         if(i == investigation->selectedOption)
@@ -949,7 +951,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 && talkData->enableFlag == TRUE)
                     break;
             }
-            oam = &gOamObjects[38];
+            oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
             icons = talkData->iconId;
             for(i = 0; i < 4; i++)
             {
@@ -998,7 +1000,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
         {
             if(main->process[GAME_PROCESS_VAR2] <= 12)
             {
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 for(i = 0; i < 4; i++)
                 {
                     for(j = 0; j < 2; j++)
@@ -1009,7 +1011,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 }
                 main->process[GAME_PROCESS_VAR2]++;
             }
-            oam = &gOamObjects[54];
+            oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_TALK];
             temp = (u16)(oam->attr1 & ~0x1ff);
             oam->attr1 -= 9;
             oam->attr1 &= 0x1FF;
@@ -1047,7 +1049,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                         if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
                             gSaveDataBuffer.main.showTextboxCharacters = 1;
                         }
-                        PlaySE(0x31);
+                        PlaySE(SE007_MENU_OPEN_SUBMENU);
                         main->gameStateFlags &= ~1;
                         BACKUP_PROCESS_PTR(main);
                         SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 0, main);
@@ -1057,11 +1059,11 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     if(!(main->gameStateFlags & 0x10))
                     {
-                        PlaySE(0x31);
+                        PlaySE(SE007_MENU_OPEN_SUBMENU);
                         main->process[GAME_PROCESS_VAR1] = 8;
                         BACKUP_PROCESS_PTR(main);
                         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
-                        oam = &gOamObjects[38];
+                        oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                         for(i = 0; i < 8; oam++, i++)
                             oam->attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH+60, FALSE, FALSE, 0);
                         vram = FALSE;
@@ -1084,7 +1086,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     }
                     while(++i < 4);
                     if(temp != investigation->selectedOption)
-                        PlaySE(0x2A);
+                        PlaySE(SE000_MENU_CHANGE);
                 }
                 else if(gJoypad.pressedKeys & DPAD_DOWN)
                 {
@@ -1103,11 +1105,11 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     }
                     while(++i < 4);
                     if(temp != investigation->selectedOption)
-                        PlaySE(0x2A);
+                        PlaySE(SE000_MENU_CHANGE);
                 }
                 else if(gJoypad.pressedKeys & A_BUTTON)
                 {
-                    PlaySE(0x2B);
+                    PlaySE(SE001_MENU_CONFIRM);
                     temp = talkData->talkSection[investigation->selectedOption];
                     ChangeScriptSection(temp);
                     SlideTextbox(1);
@@ -1127,13 +1129,13 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 }
                 else if(gJoypad.pressedKeys & B_BUTTON)
                 {
-                    PlaySE(0x2C);
+                    PlaySE(SE002_MENU_CANCEL);
                     main->process[GAME_PROCESS_VAR1]++;
                     main->process[GAME_PROCESS_VAR2] = 0;
                     vram = FALSE;
                 }
             }
-            oam = &gOamObjects[34];
+            oam = &gOamObjects[OAM_IDX_TALK_TICK];
             if(vram)
             {
                 for(i = 0; i < 4; i++)
@@ -1176,7 +1178,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
         {
             if(main->process[GAME_PROCESS_VAR2] <= 12)
             {
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 for(i = 0; i < 4; i++)
                 {
                     for(j = 0; j < 2; j++)
@@ -1187,7 +1189,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 }
                 main->process[GAME_PROCESS_VAR2]++;
             }
-            oam = &gOamObjects[54];
+            oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_TALK];
             temp = (u16)(oam->attr1 & ~0x1ff);
             oam->attr1 += 9;
             oam->attr1 &= 0x1FF;
@@ -1207,7 +1209,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
         case 5:
             if(main->process[GAME_PROCESS_VAR2] <= 12)
             {
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 for(i = 0; i < 4; i++)
                 {
                     for(j = 0; j < 2; j++)
@@ -1246,7 +1248,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                         if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
                             gSaveDataBuffer.main.showTextboxCharacters = 1;
                         }
-                        PlaySE(0x31);
+                        PlaySE(SE007_MENU_OPEN_SUBMENU);
                         main->gameStateFlags &= ~1;
                         BACKUP_PROCESS_PTR(main);
                         SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 0, main);
@@ -1260,7 +1262,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     if(gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
                     {
-                        PlaySE(0x31);
+                        PlaySE(SE007_MENU_OPEN_SUBMENU);
                         BACKUP_PROCESS_PTR(main);
                         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
                         return;
@@ -1269,7 +1271,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             }
             if(main->process[GAME_PROCESS_VAR2] <= 12)
             {
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 for(i = 0; i < 4; i++)
                 {
                     for(j = 0; j < 2; j++)
@@ -1284,7 +1286,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             {
                 u8 r4;
             
-                oam = &gOamObjects[54];
+                oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_TALK];
                 oam->attr1 &= ~0x1FF;
                 for(talkData = gTalkData; talkData->roomId != 0xFF; talkData++)
                 {
@@ -1293,7 +1295,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     && talkData->enableFlag == TRUE)
                         break;
                 }
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 icons = talkData->iconId;
                 for(i = 0; i < 4; i++)
                 {
@@ -1340,7 +1342,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
         case 7:
             if(main->process[GAME_PROCESS_VAR2] <= 12)
             {
-                oam = &gOamObjects[38];
+                oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
                 for(i = 0; i < 4; i++)
                 {
                     for(j = 0; j < 2; j++)
@@ -1366,7 +1368,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 && talkData->enableFlag == TRUE)
                     break;
             }
-            oam = &gOamObjects[38];
+            oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
             icons = talkData->iconId;
             for(i = 0; i < 4; i++)
             {
@@ -1401,7 +1403,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             break;
         }
     }
-    oam = &gOamObjects[38];
+    oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
     for(i = 0; i < 4; i++)
     {
         if(i == investigation->selectedOption)
@@ -1451,7 +1453,7 @@ void InvestigationPresent(struct Main * main, struct InvestigationStruct * inves
             if(investigation->inactiveActionButtonY == 0xE0
             && gScriptContext.textboxState == 0)
             {
-                oam = &gOamObjects[52];
+                oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
                 for(i = 0; i < 4; i++)
                 {
                     oam->attr0 = 0x40E0;
