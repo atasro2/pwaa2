@@ -705,7 +705,7 @@ sub_8010FA4: @ 0x08010FA4
 	str r1, [r0, #4]
 	str r2, [r0, #8]
 	ldr r1, [r0, #8]
-	ldr r1, _08011074 @ =gUnknown_081DE3A8
+	ldr r1, _08011074 @ =gGfxPalChoiceSelected
 	str r1, [r0]
 	ldr r1, _08011078 @ =0x05000320
 	str r1, [r0, #4]
@@ -751,7 +751,7 @@ _08011064: .4byte gUnknown_081426FC
 _08011068: .4byte 0x06013200
 _0801106C: .4byte gUnknown_0814DC60
 _08011070: .4byte 0x05000300
-_08011074: .4byte gUnknown_081DE3A8
+_08011074: .4byte gGfxPalChoiceSelected
 _08011078: .4byte 0x05000320
 _0801107C: .4byte gOamObjects+0x1A0
 _08011080: .4byte 0x000040E0
@@ -1409,8 +1409,8 @@ _0801156E:
 	bx r1
 	.align 2, 0
 
-	thumb_func_start sub_8011578
-sub_8011578: @ 0x08011578
+	thumb_func_start LoadLocationChoiceGraphics
+LoadLocationChoiceGraphics: @ 0x08011578
 	push {r4, r5, r6, r7, lr}
 	ldr r1, _080115BC @ =gMain
 	adds r2, r1, #0
@@ -1455,8 +1455,8 @@ _080115C8: .4byte 0x040000D4
 _080115CC: .4byte 0x80000400
 _080115D0: .4byte 0x06013400
 
-	thumb_func_start sub_80115D4
-sub_80115D4: @ 0x080115D4
+	thumb_func_start LoadTalkChoiceGraphics
+LoadTalkChoiceGraphics: @ 0x080115D4
 	push {r4, r5, r6, r7, lr}
 	ldr r2, _08011654 @ =gTalkData
 	ldrb r1, [r2]

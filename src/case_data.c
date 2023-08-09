@@ -6,6 +6,7 @@
 #include "script.h"
 #include "utils.h"
 #include "sound.h"
+#include "constants/oam_allocations.h"
 
 const u8 gCaseStartProcess[] = {
     3, 3, 4, 3,
@@ -50,7 +51,7 @@ const u8 * gCourtRecordInitialItemLists[22] = { /* gCourtRecordInitialItemLists 
     gUnknown_0801FAE6,
 };
 
-const struct Struct811DC54 * gUnknown_08111F6C[22] = {
+const struct CourtPresentData * gCourtPresentData[22] = {
     gUnknown_0801C430,
     gUnknown_0801C480,
     gUnknown_0801C540,
@@ -75,7 +76,7 @@ const struct Struct811DC54 * gUnknown_08111F6C[22] = {
     gUnknown_0801FC28,
 };
 
-const struct Struct811DC98 * gUnknown_08111FC4[22] = {
+const struct InvestigationPresentData * gInvestigationPresentData[22] = {
     gUnknown_0801C610,
     gUnknown_0801C610,
     gUnknown_0801C610,
@@ -203,7 +204,7 @@ void sub_8004458(u32 section, u32 flagId) // Set_event
 
 void sub_8004478(u32 section, u32 flagId) // unused? Set_event2?
 {
-    struct OamAttrs *sprite = &gOamObjects[52];
+    struct OamAttrs *sprite = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
     u32 i = 0;
 
     for (i = 0; i < 4; sprite++, i++)

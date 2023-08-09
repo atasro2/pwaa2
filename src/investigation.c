@@ -74,7 +74,7 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     ioRegs->lcd_bg1cnt = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
-    DmaCopy16(3, (void *)0x081370FC, VRAM + 0x3800, 0x800);
+    DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
     DmaCopy16(3, (void *)0x0813791C, VRAM, 0x1000);
     DmaCopy16(3, (void *)0x081400FC, OBJ_VRAM0 + 0x2000, 0x1000);
     DmaCopy16(3, (void *)0x0814DBA0, OBJ_PLTT+0xA0, 0x40);
@@ -82,7 +82,7 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     DmaCopy16(3, (void *)0x0814DC00, OBJ_PLTT+0xE0, 0x20);
     DmaCopy16(3, (void *)0x081426FC, OBJ_VRAM0 + 0x3200, 0x200);
     DmaCopy16(3, (void *)0x0814DC60, OBJ_PLTT+0x100, 0x20);
-    DmaCopy16(3, (void *)0x081DE3A8, OBJ_PLTT+0x120, 0x40);
+    DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
     oam = &gOamObjects[52];
     for(i = 0; i < 4; i++)
     {
@@ -191,7 +191,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
         {
             s:
             PauseBGM();
-            DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam[25], sizeof(gOamObjects));
+            DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
             DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
             if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
                 gSaveDataBuffer.main.showTextboxCharacters = 1;
@@ -449,7 +449,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
                 {
                     s:
                     PauseBGM();
-                    DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam[25], sizeof(gOamObjects));
+                    DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
                     DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
                     if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
                         gSaveDataBuffer.main.showTextboxCharacters = 1;
@@ -724,7 +724,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 if(!(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
                 {
                     PauseBGM();
-                    DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam[25], sizeof(gOamObjects));
+                    DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
                     DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
                     PlaySE(0x31);
                     main->gameStateFlags &= ~1;
@@ -1042,7 +1042,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     if(!(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
                     {
                         PauseBGM();
-                        DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam[25], sizeof(gOamObjects));
+                        DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
                         DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
                         if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
                             gSaveDataBuffer.main.showTextboxCharacters = 1;
@@ -1241,7 +1241,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     if((gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)) && gMain.unk30 != 0x7F)
                     {
                         PauseBGM();
-                        DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam[25], sizeof(gOamObjects));
+                        DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
                         DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
                         if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
                             gSaveDataBuffer.main.showTextboxCharacters = 1;

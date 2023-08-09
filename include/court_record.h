@@ -59,7 +59,7 @@ s32 FindEvidenceInCourtRecord(u32, u32);
 s32 FindFirstEmptySlotInCourtRecord(u32);
 void SortCourtRecordAndSyncListCount(struct CourtRecord *);
 u32 GetQuestioningPresentedSection(u32, u32);
-u32 GetEvidenceCommentSection(struct Main *, u32);
+u32 GetEvidenceCommentSection(struct Main *, u32, bool8);
 void UpdateItemPlate(struct Main *);
 void LoadItemPlateGfx(struct Main *);
 void DrawItemPlate(struct Main *);

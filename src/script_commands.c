@@ -12,10 +12,12 @@
 #include "graphics.h"
 #include "court.h"
 #include "save.h"
+#include "psyche_lock.h"
 #include "constants/bg.h"
 #include "constants/script.h"
 #include "constants/songs.h"
 #include "constants/process.h"
+#include "constants/oam_allocations.h"
 #include "graphics.h"
 
 const u8 gSoundCueTable[] = {
@@ -1976,9 +1978,9 @@ bool32 Command3F(struct ScriptContext *scriptCtx)
             DmaCopy16(3, &gUnknown_0814DC60[0], OBJ_PLTT + 0x100, 0x20);
             PlaySE(SE001_MENU_CONFIRM);
             scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
-            gOamObjects[88].attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-            gOamObjects[88].attr1 = SPRITE_ATTR1_NONAFFINE(investigation->pointerX, FALSE, FALSE, 1);
-            gOamObjects[88].attr2 = SPRITE_ATTR2(0xFC, 1, 8);
+            gOamObjects[OAM_IDX_POINTER].attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+            gOamObjects[OAM_IDX_POINTER].attr1 = SPRITE_ATTR1_NONAFFINE(investigation->pointerX, FALSE, FALSE, 1);
+            gOamObjects[OAM_IDX_POINTER].attr2 = SPRITE_ATTR2(0xFC, 1, 8);
             return 0;
         }
         investigation->pointerColorCounter++;
@@ -1991,9 +1993,9 @@ bool32 Command3F(struct ScriptContext *scriptCtx)
         }
     }
     scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
-    gOamObjects[88].attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-    gOamObjects[88].attr1 = SPRITE_ATTR1_NONAFFINE(investigation->pointerX, FALSE, FALSE, 1);
-    gOamObjects[88].attr2 = SPRITE_ATTR2(0xFC, 1, 8);
+    gOamObjects[OAM_IDX_POINTER].attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    gOamObjects[OAM_IDX_POINTER].attr1 = SPRITE_ATTR1_NONAFFINE(investigation->pointerX, FALSE, FALSE, 1);
+    gOamObjects[OAM_IDX_POINTER].attr2 = SPRITE_ATTR2(0xFC, 1, 8);
     return 1;
 }
 
@@ -2040,7 +2042,7 @@ bool32 Command40(struct ScriptContext * scriptCtx)
 {
     scriptCtx->scriptPtr++;
     scriptCtx->flags &= ~SCRIPT_SPOTSELECT_SELECTION_MADE;
-    gOamObjects[88].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_POINTER].attr0 = SPRITE_ATTR0_CLEAR;
     return 0;
 }
 

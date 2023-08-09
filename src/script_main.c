@@ -6,6 +6,7 @@
 #include "graphics.h"
 #include "save.h"
 #include "constants/script.h"
+#include "constants/oam_allocations.h"
 
 static void AdvanceScriptContext(struct ScriptContext *);
 static void DrawTextAndMapMarkers(struct ScriptContext *);
@@ -421,7 +422,7 @@ static void DrawTextAndMapMarkers(struct ScriptContext * scriptCtx)
     u32 size;
     if(!(scriptCtx->flags & SCRIPT_FULLSCREEN))
     {
-        oam = &gOamObjects[57];
+        oam = &gOamObjects[OAM_IDX_MAP_MARKER];
         for(i = 0; i < ARRAY_COUNT(gMapMarker); i++) 
         {
             if(gMapMarker[i].id != 0xFF)
@@ -497,7 +498,7 @@ static void DrawTextAndMapMarkers(struct ScriptContext * scriptCtx)
     if(gMain.showTextboxCharacters)
     {
         size = scriptCtx->flags & 0x800 ? 48 : 32;
-        oam = &gOamObjects[0x2];
+        oam = &gOamObjects[OAM_IDX_TEXT];
         for(i = 0; i < size; i++)
         {
             
@@ -513,7 +514,7 @@ static void DrawTextAndMapMarkers(struct ScriptContext * scriptCtx)
         }   
         if(scriptCtx->flags & SCRIPT_FULLSCREEN)
         {
-            oam = &gOamObjects[58];
+            oam = &gOamObjects[OAM_IDX_TEXT_FULLSCREEN];
             for(i = 32; i < ARRAY_COUNT(gTextBoxCharacters); i++)
             {
                 if(gTextBoxCharacters[i].state & 0x8000)
@@ -531,7 +532,7 @@ static void DrawTextAndMapMarkers(struct ScriptContext * scriptCtx)
     else
     {
         size = scriptCtx->flags & 0x800 ? 48 : 32;
-        oam = &gOamObjects[0x2];
+        oam = &gOamObjects[OAM_IDX_TEXT];
         for(i = 0; i < size; i++)
         {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
@@ -539,7 +540,7 @@ static void DrawTextAndMapMarkers(struct ScriptContext * scriptCtx)
         }
         if(scriptCtx->flags & SCRIPT_FULLSCREEN)
         {
-            oam = &gOamObjects[58];
+            oam = &gOamObjects[OAM_IDX_TEXT_FULLSCREEN];
             for(i = 32; i < ARRAY_COUNT(gTextBoxCharacters); i++)
             {
                 oam->attr0 = SPRITE_ATTR0_CLEAR;
