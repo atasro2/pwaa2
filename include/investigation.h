@@ -243,6 +243,9 @@ void InvestigationTalk(struct Main *, struct InvestigationStruct *);
 void InvestigationPresent(struct Main *, struct InvestigationStruct *);
 void sub_8010A3C(struct Main *, struct InvestigationStruct *);
 
+void LoadLocationChoiceGraphics(void);
+void LoadTalkChoiceGraphics(void);
+
 /* Segment 1 */
 void InvestigationSegmentSetup_1_0(struct Main *main);
 void InvestigationRoomSetup_1_0(struct Main *main);
