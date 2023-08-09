@@ -43,6 +43,7 @@ SECTIONS {
         asm/court.o(.text);
         src/investigation.o(.text);
         asm/investigation.o(.text);
+        src/investigation2.o(.text);
         src/court_record.o(.text);
         src/sound.o(.text);
         src/animation.o(.text);
@@ -104,6 +105,7 @@ SECTIONS {
         src/save_processes.o(.data);
         src/court.o(.data);
         src/investigation.o(.data);
+        src/investigation2.o(.data);
         data/romA7A8.o(.data);
         src/court_record.o(.data);
         src/sound.o(.data);

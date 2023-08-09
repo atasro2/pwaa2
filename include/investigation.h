@@ -18,8 +18,8 @@ struct TalkData
 struct ExaminationData
 {
     /* +0x00 */ u16 examinationSection;
-    /* +0x02 */ u8 unk2;
-    /* +0x03 */ u8 unk3;
+    /* +0x02 */ u8 type;
+    /* +0x03 */ u8 animId;
     /* +0x04 */ struct Point4 area;
 };  
 
