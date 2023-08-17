@@ -42,8 +42,6 @@ SECTIONS {
         src/court.o(.text);
         asm/court.o(.text);
         src/investigation.o(.text);
-        asm/investigation.o(.text);
-        src/investigation2.o(.text);
         src/court_record.o(.text);
         src/sound.o(.text);
         src/animation.o(.text);

@@ -1768,3 +1768,306 @@ _08010EAC:
             break;
     }
 }
+
+void sub_8010FA4(void) {
+    struct OamAttrs * oam;
+    int i;
+
+    DmaCopy16(3, gUnknown_081400FC, OBJ_VRAM0 + 0x2000, 0x1000);
+    DmaCopy16(3, gUnknown_0814DBA0, OBJ_PLTT + 0xA0, 0x40);
+    DmaCopy16(3, gUnknown_081412FC, OBJ_VRAM0 + 0x3000, 0x200);
+    DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT + 0xE0, 0x20);
+    DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x3200, 0x200);
+    DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT + 0x100, 0x20);
+    DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+    oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
+    for(i = 0; i < 4; i++) {
+        oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(i * 60, FALSE, FALSE, 3);
+        oam->attr2 = SPRITE_ATTR2(0x100 + i * 0x20, 0, 5);
+        oam++;
+    }
+}
+
+void sub_8011088(u16 arg0, u16 arg1) {
+    struct OamAttrs * oam;
+    u32 i;
+    sub_8010FA4();
+    if(arg0 == 0) {
+        gInvestigation.unkB &= ~1;
+        gInvestigation.selectedAction = 3;
+        gInvestigation.lastAction = 3;
+    } else if(arg0 == 1) {
+        gInvestigation.unkB &= ~1;
+        oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
+        for(i = 0; i < 4; i++) {
+            oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(i * 60, FALSE, FALSE, 3);
+            oam->attr2 = SPRITE_ATTR2(0x100 + i * 0x20, 0, 5);
+            oam++;
+        }
+        SetInactiveActionButtons(&gInvestigation, 4);
+        gInvestigation.inactiveActionButtonY = 208;
+        gInvestigation.selectedActionYOffset = 0;
+        gInvestigation.lastActionYOffset = 0;
+        gInvestigation.selectedAction = 2;
+        gInvestigation.lastAction = 2;
+        gInvestigation.unkB &= ~1;
+        gInvestigation.actionState = 5;
+        oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_TALK];
+        oam->attr0 &= 0xFF00;
+        oam->attr0 |= 240;
+        oam->attr1 &= 0xFF00;
+        oam->attr2 = SPRITE_ATTR2(0x140, 1, 6);
+        gMain.process[GAME_PROCESS_STATE] = INVESTIGATION_TALK; // this has to only be in investigation otherwise ????
+        gMain.process[GAME_PROCESS_VAR1] = 1;
+        gInvestigation.previousSelectedOption = arg1;
+        gIORegisters.lcd_bg1vofs = -77;
+        if(gMain.unk1A4[gMain.unk244].unk16 != 0xFFFF)
+            PlayBGM(gMain.unk1A4[gMain.unk244].unk16);
+    }
+}
+
+void sub_8011198(void) {
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
+    u32 attr1;
+    oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    attr1 = oam->attr1 & 0xFE00;
+    oam->attr1 = attr1;
+    oam++;
+    oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    attr1 = oam->attr1 & 0xFE00;
+    oam->attr1 = attr1 | 60;
+    oam++;
+    oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    attr1 = oam->attr1 & 0xFE00;
+    oam->attr1 = attr1 | 120;
+    oam++;
+    oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    attr1 = oam->attr1 & 0xFE00;
+    oam->attr1 = attr1 | 180;
+    oam++;
+}
+
+
+void UpdateInvestigationActionSprites(struct InvestigationStruct * investigation)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
+    u32 i;
+    u32 y;
+
+    if(!(investigation->unkB & 1)) {
+        switch(investigation->actionState)
+        {
+            case 0:
+                for(i = 0; i < OAM_COUNT_INVESTIGATION_ACTIONS; i++)
+                {
+                    if(investigation->selectedAction == i)
+                    {
+                        oam->attr0 = 0x4000;
+                        y = investigation->selectedActionYOffset + 240;
+                        y &= 0xFF;
+                        oam->attr0 += y; 
+                        oam->attr2 = i * 0x20 + 0x6500;
+                    }
+                    else if(investigation->lastAction == i)
+                    {
+                        oam->attr0 &= ~0xFF;
+                        oam->attr0 |= investigation->inactiveActionButtonY;
+                        oam->attr0 += investigation->lastActionYOffset;
+                        oam->attr2 = i * 0x20 + 0x5500;
+                    }
+                    else if((investigation->inactiveActions >> i) & 1)
+                    {
+                        oam->attr0 &= ~0xFF;
+                        oam->attr0 |= investigation->inactiveActionButtonY;
+                        oam->attr2 = i * 0x20 + 0x5500;
+                    }
+                    else
+                    {
+                        oam->attr2 = i * 0x20 + 0x5500;
+                    }
+                    oam++;
+                }
+                return;
+            case 1:
+                i = investigation->selectedAction; // ! variable re(ab)use
+                oam += i;
+                oam->attr2 = 0x6500 + i * 0x20;
+                investigation->inactiveActionButtonY = 0xE0;
+                investigation->actionState++;
+                break;
+            case 2:
+                investigation->inactiveActionButtonY += 2;
+                if(investigation->inactiveActionButtonY >= 0xF0)
+                {
+                    investigation->inactiveActionButtonY = 0xF0;
+                    investigation->actionState = 0;
+                }
+                break;
+            case 3:
+                investigation->inactiveActionButtonY -= 2;
+                if(investigation->inactiveActionButtonY <= 0xE0)
+                {
+                    investigation->inactiveActionButtonY = 0xE0;
+                    investigation->actionState = 4;
+                }
+                break;
+            case 4:
+                break;
+            case 5:
+                investigation->inactiveActionButtonY++;
+                if(investigation->inactiveActionButtonY >= 0xE0)
+                {
+                    investigation->inactiveActionButtonY = 0xF0;
+                    investigation->actionState = 4;
+                    return;
+                }
+                break;
+        }
+        i = gMain.roomData[gMain.currentRoomId][0]; //! re(ab)use
+        if(i != gMain.currentBG)
+            investigation->selectedActionYOffset = 0x40;
+        for(i = 0; i < OAM_COUNT_INVESTIGATION_ACTIONS; i++)
+        {
+            if(investigation->inactiveActions >> i & 1)
+            {
+                oam->attr0 &= 0xFF00;
+                oam->attr0 |= investigation->inactiveActionButtonY;
+            }
+            else if(investigation->selectedAction == i)
+            {
+                oam->attr0 &= 0xFF00;
+                y = 0x100 - investigation->selectedActionYOffset;
+                y &= 0xFF;
+                oam->attr0 += y;
+            }
+            oam++;
+        }
+    }
+}
+
+void UpdateScrollPromptSprite(struct Main * main, u32 show)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_BUTTON_PROMPTS+3];
+    u32 r6 = 0; // ! UNUSED, This is present in the assembly for this function somehow
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    if(show && gScriptContext.textboxState == 1 
+    && GetBGControlBits(main->currentBG) & (BG_MODE_SIZE_480x160 | BG_MODE_SIZE_360x160))
+    {
+        if(gMain.Bg256_pos_x == 0) // ! inconsistent use of global vs pointer
+        {
+            oam->attr0 = 0x4020;
+            oam->attr1 = 0x80D0;
+            oam->attr2 = 0x7188;
+        }
+        else if(main->Bg256_pos_x == 240 || main->Bg256_pos_x == 120)
+        {
+            oam->attr0 = 0x4020;
+            oam->attr1 = 0x8000;
+            oam->attr2 = 0x7180;
+        }
+    }
+}
+
+u32 GetExaminedAreaSection(struct InvestigationStruct * investigation) // finger_pos_check
+{
+    struct Rect rect;
+    u32 animId;
+    struct ExaminationData * examData;
+    if(investigation->pointerX < 120)
+        rect.x = gMain.Bg256_pos_x + investigation->pointerX;
+    else
+        rect.x = gMain.Bg256_pos_x + investigation->pointerX + 12;
+    rect.y = gMain.Bg256_pos_y + investigation->pointerY;
+    rect.w = 4;
+    rect.h = 16;
+    if(gMain.scenarioIdx == 2) {
+        if(gMain.currentRoomId == 5 && GetFlag(0, 0x41) != FALSE && GetFlag(0, 0x48) == FALSE)
+            return 0xE8;
+    }
+    else if (gMain.scenarioIdx == 14) {
+        if(gMain.currentRoomId == 0)
+            return 0xC7;
+    }
+    else if (gMain.scenarioIdx == 15) {
+        if(gMain.currentRoomId == 0 && GetFlag(0, 0xBC) != FALSE)
+            return 0x14F;
+    }
+    else if (gMain.scenarioIdx == 18) {
+        if(gMain.currentRoomId == 20 && GetFlag(0, 0x92) == FALSE)
+            return 0xA5;
+    }
+    animId = CheckRectCollisionWithAnim(&rect);
+    for(examData = gExaminationData; examData->type != 0xFF; examData++) // Check for collision with animation
+    {
+        if(examData->type == 0xFE && animId == examData->animId)
+            return examData->examinationSection;
+    }
+    for(examData = gExaminationData; examData->type != 0xFF; examData++) // Check for collision with area
+    {
+        if(examData->type == 0xFE)
+            continue;
+        if(CheckRectCollisionWithArea(&rect, &examData->area))
+            return examData->examinationSection;
+    }
+    if(gMain.scenarioIdx == 15 && gMain.currentRoomId == 23) {
+        return 0x15A;
+    }
+    else if((gMain.scenarioIdx == 18 && gMain.currentRoomId == 25) || (gMain.scenarioIdx == 18 && gMain.currentRoomId == 21)) {
+        return 0x10C;
+    }
+    return 0x1D;
+}
+
+void LoadLocationChoiceGraphics(void)
+{
+    u32 i;
+    u8 *roomptr = gMain.roomData[gMain.currentRoomId];
+    roomptr += 1;
+    for(i = 0; i < 4; i++)
+    {
+        u8 *src;
+        void *destination = (void *)VRAM+0x13400;
+        destination += i*0x800;
+        if(*roomptr != 0xFF)
+	    {
+            src = (void *)0x081DE3E8+*roomptr*0x800;
+            DmaCopy16(3, src, destination, 0x800);
+        }
+        roomptr++;
+    }
+}
+
+void LoadTalkChoiceGraphics(void)
+{
+    u32 i;
+    struct TalkData *talkdata;
+    u8 *icons;
+    for(talkdata = gTalkData; talkdata->roomId != 0xFF; talkdata++)
+    {
+        if(gMain.currentRoomId == talkdata->roomId)
+	    {
+            if(gAnimation[1].animationInfo.personId == talkdata->personId)
+	        {
+                if(talkdata->enableFlag == 1)
+		            break;
+            }
+        }
+    }
+    icons = talkdata->iconId;
+    for(i = 0; i < 4; i++)
+    {
+        void *src;
+        void *destination = (void *)VRAM+0x13400;
+        destination += i*0x800;
+        if(*icons != 0xFF)
+	    {
+            src = (void *)0x081EB3E8 + *icons*0x800;
+            DmaCopy16(3, src, destination, 0x800);
+        }
+        icons++;
+    }
+    DmaCopy16(3, (void *)0x08142BFC, (void *)VRAM+0x15400, 0x200);
+    DmaCopy16(3, (void *)0x0814DE80, (void *)PLTT+0x360, 0x20);
+}
