@@ -25,6 +25,7 @@ extern void sub_800E900(u32, u32, u8);
 extern void sub_800E9D4(u32, u32, u8);
 extern void sub_8010FA4(void);
 extern void sub_8011088(u16, u16);
+extern void sub_8011198(void);
 
 // new file
 int sub_80175C0(void);

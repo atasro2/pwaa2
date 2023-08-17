@@ -105,8 +105,6 @@ SECTIONS {
         src/save_processes.o(.data);
         src/court.o(.data);
         src/investigation.o(.data);
-        src/investigation2.o(.data);
-        data/romA7A8.o(.data);
         src/court_record.o(.data);
         src/sound.o(.data);
         src/animation.o(.data);

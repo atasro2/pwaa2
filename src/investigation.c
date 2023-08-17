@@ -7,6 +7,8 @@
 #include "background.h"
 #include "animation.h"
 #include "sound.h"
+#include "script.h"
+#include "psyche_lock.h"
 #include "graphics.h"
 #include "constants/songs.h"
 #include "constants/process.h"
@@ -23,7 +25,7 @@ void (*gInvestigationProcessStates[])(struct Main *, struct InvestigationStruct 
 	InvestigationMove, // RNO1_TANTEI_MOVE
 	InvestigationTalk, // RNO1_TANTEI_TALK
 	InvestigationPresent,  // RNO1_TANTEI_SHOW
-    sub_8010A3C // new in GS2, probably for signal detector?
+    InvestigationPsycheLock // RNO1_TANTEI_PSYCOLOCK // taken from AA4 unity mobile port
 };
 
 void UpdateScrollPromptSprite(struct Main *, u32);
@@ -1488,6 +1490,281 @@ void InvestigationPresent(struct Main * main, struct InvestigationStruct * inves
                 investigation->inactiveActions += 1 << investigation->selectedAction;
                 SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
             }
+            break;
+    }
+}
+
+void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * investigation)  // ! inconsistent use of pointer vs global
+{
+    struct PsycheLockData * psycheLockData = NULL;
+    static void * states[] = {
+        &&_08010A78,
+        &&_08010AA6,
+        &&_08010AC4,
+        &&_08010AD4,
+        &&_08010C14,
+        &&_08010CA4,
+        &&_08010CB0,
+        &&_08010CB6,
+        &&_08010D9C,
+        &&_08010E54,
+        &&_08010EA6,
+        &&_08010EAC
+    };
+
+    if(main->process[GAME_PROCESS_VAR1] == 9)
+        goto _08010E54;
+
+    psycheLockData = &main->unk1A4[main->unk244];
+    sub_8016E7C();
+    goto *states[main->process[GAME_PROCESS_VAR1]];
+
+_08010A78:
+    sub_80178E0();
+    psycheLockData->unk8 = psycheLockData->unk9;
+    sub_8016124(psycheLockData->unk9);
+    sub_8016150();
+    sub_8016DFC();
+    gMain.unk24A = 0;
+    investigation->unkB |= 1;
+    main->process[GAME_PROCESS_VAR1]++;
+_08010AA6:
+    sub_801622C();
+    if(sub_8016214())
+        main->process[GAME_PROCESS_VAR1]++;
+    return;
+_08010AC4:
+    ChangeScriptSection(psycheLockData->unkA);
+    gMain.advanceScriptContext = TRUE;
+    main->process[GAME_PROCESS_VAR1] = 3;
+_08010AD4:
+    if(gMain.unk24A & 1
+    && gJoypad.pressedKeys == R_BUTTON
+    && gMain.unk248 == 0
+    && (main->gameStateFlags & 0x10) == 0
+    && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN | SCRIPT_LOOP))
+    {
+        sub_8017864();
+        sub_80170AC();
+        PlaySE(SE007_MENU_OPEN_SUBMENU);
+        BACKUP_PROCESS_PTR(main);
+        SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 3, main);
+    }
+    if(gMain.unk24A & 2
+    && sub_801715C() == FALSE
+    && gMain.unk248 == 0
+    && gJoypad.pressedKeys == L_BUTTON)
+    {
+        PlaySE(SE002_MENU_CANCEL);
+        main->process[GAME_PROCESS_VAR1] = 8;
+        main->process[GAME_PROCESS_VAR2] = 0;
+        goto _08010D9C; // goto state 8 immediately
+    }
+    if(gMain.unk24A == 0
+    && sub_801715C() == FALSE
+    && gJoypad.pressedKeys == R_BUTTON
+    && sub_80175C0() == 0
+    && (main->gameStateFlags & 0x10) == 0
+    && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN))
+    {
+        sub_8017864();
+        PlaySE(SE007_MENU_OPEN_SUBMENU);
+        BACKUP_PROCESS_PTR(main);
+        SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 4, main);
+    }
+    if(main->unk98 <= 0
+    && main->unk9A <= 0
+    && sub_8017C78() == FALSE)
+        main->process[GAME_PROCESS_VAR1] = 11;
+    return;
+_08010C14:
+    switch(main->process[GAME_PROCESS_VAR2]) {
+        case 0:
+            gMain.advanceScriptContext = FALSE;
+            gMain.showTextboxCharacters = FALSE;
+            gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
+            gIORegisters.lcd_bg1vofs = 0;
+            sub_80161B4();
+            main->process[GAME_PROCESS_VAR2]++;
+        case 1:
+            sub_801622C();
+            if(sub_8016214()) {
+                main->process[GAME_PROCESS_VAR2]++;
+                break;
+            }
+            break;
+        case 2:
+            psycheLockData->unk8--;
+            if(psycheLockData->unk8 == 0 && gMain.unk24C == 0) {
+                main->process[GAME_PROCESS_VAR1] = 7;
+                main->process[GAME_PROCESS_VAR2] = 0;
+                break;
+            }
+            gMain.advanceScriptContext = TRUE;
+            if(gMain.unk24C == 0)
+                SlideTextbox(1);
+            main->process[GAME_PROCESS_VAR1] = 3;
+            main->process[GAME_PROCESS_VAR2] = 0;
+            break;
+    }
+    return;
+_08010CA4:
+    ChangeScriptSection(psycheLockData->unk10);
+    SlideTextbox(1);
+_08010CB0:
+    main->process[GAME_PROCESS_VAR1] = 3;
+    return;
+_08010CB6:
+    gMain.unkA0 = 100;
+    switch(main->process[GAME_PROCESS_VAR2]) {
+        case 0:
+            gMain.advanceScriptContext = FALSE;
+            FadeOutBGM(30);
+            sub_80161C4();
+            main->process[GAME_PROCESS_VAR2]++;
+        case 1:
+            sub_801622C();
+            if(!sub_8016214())
+                break;
+            sub_80161E4();
+            if(gMain.unk98 < 80) {
+                sub_8017928(1);
+                gMain.unk9C = -40;
+                sub_8017928(3);
+            }
+            main->process[GAME_PROCESS_VAR2]++;
+            break;
+        case 2:
+            sub_801622C();
+            if(!sub_8016214())
+                break;
+            sub_80161D4();
+            main->process[GAME_PROCESS_VAR2]++;
+            break;
+        case 3:
+            sub_801622C();
+            if(!sub_8016214())
+                break;
+            if(sub_8017C78())
+                break;
+            sub_8017928(2);
+            main->process[GAME_PROCESS_VAR2]++;
+            break;
+        case 4:
+            investigation->selectedAction = 3;
+            investigation->lastAction = 3;
+            gMain.advanceScriptContext = 1;
+            sub_8010FA4();
+            sub_8011198();
+            psycheLockData->unk0 = 0;
+            SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+    }
+    return;
+_08010D9C:
+    switch(main->process[GAME_PROCESS_VAR2]) {
+        case 0:
+            ChangeScriptSection(psycheLockData->unkC);
+            if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
+                SlideTextbox(1);
+            main->process[GAME_PROCESS_VAR2]++;
+            break;
+        case 1:
+            if(gScriptContext.flags & 8) {
+                main->process[GAME_PROCESS_VAR2]++;
+                FadeOutBGM(30);
+                StartHardwareBlend(2, 4, 1, 0x1F);
+            }
+            break;
+        case 2:
+            if(main->blendMode == 0)
+                main->process[GAME_PROCESS_VAR2]++;
+            break;
+        case 3:
+            sub_80161E4();
+            main->process[GAME_PROCESS_VAR2]++;
+        case 4:
+            sub_801622C();
+            if(sub_8016214()) {
+                main->process[GAME_PROCESS_VAR2]++;
+                break;
+            }
+            break;
+        case 5:
+            sub_8010FA4();
+            sub_8011198();
+            gInvestigation.unkB &= ~1;
+            SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+            if(psycheLockData->unk14 != 0xFFFF)
+                PlayBGM(psycheLockData->unk14);
+            StartHardwareBlend(1, 1, 1, 0x1F);
+            break;
+    }
+    return;
+_08010E54:
+    switch(main->process[GAME_PROCESS_VAR2]) {
+        case 0:
+            gMain.advanceScriptContext = FALSE;
+            investigation->unkB |= 1;
+            SlideTextbox(0);
+            sub_8016124(main->unk244);
+            sub_8016150();
+            main->process[GAME_PROCESS_VAR2]++;
+        case 1:
+            sub_801622C();
+            if(sub_8016214()) {
+                main->process[GAME_PROCESS_VAR2]++;
+                break;
+            }
+            break;
+        case 2:
+            gMain.advanceScriptContext = TRUE;
+            SlideTextbox(1);
+            RESTORE_PROCESS();
+    }
+    return;
+_08010EA6: // what the fuck
+    return;
+_08010EAC:
+    switch(main->process[GAME_PROCESS_VAR2]) {
+        case 0:
+            ChangeScriptSection(psycheLockData->unk12);
+            if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
+                SlideTextbox(1);
+            main->process[GAME_PROCESS_VAR2]++;
+            break;
+        case 1:
+            if(gScriptContext.flags & 8) {
+                main->process[GAME_PROCESS_VAR2]++;
+                StartHardwareBlend(2, 1, 1, 0x1F);
+            }
+            break;
+        case 2:
+            if(main->blendMode == 0) {
+                FadeOutBGM(30);
+                main->process[GAME_PROCESS_VAR2]++;
+            }
+            break;
+        case 3:
+            sub_80161E4();
+            main->process[GAME_PROCESS_VAR2]++;
+        case 4:
+            sub_801622C();
+            if(sub_8016214()) {
+                main->process[GAME_PROCESS_VAR2]++;
+                break;
+            }
+            break;
+        case 5:
+            gMain.unk9A = 1;
+            gMain.unk98 = 1;
+            sub_8010FA4();
+            sub_8011198();
+            gInvestigation.unkB &= ~1;
+            SlideTextbox(0);
+            SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
+            if(psycheLockData->unk14 != 0xFFFF)
+                PlayBGM(psycheLockData->unk14);
+            StartHardwareBlend(1, 1, 1, 0x1F);
             break;
     }
 }

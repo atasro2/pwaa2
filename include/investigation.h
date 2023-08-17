@@ -241,7 +241,7 @@ void InvestigationInspect(struct Main *, struct InvestigationStruct *);
 void InvestigationMove(struct Main *, struct InvestigationStruct *);
 void InvestigationTalk(struct Main *, struct InvestigationStruct *);
 void InvestigationPresent(struct Main *, struct InvestigationStruct *);
-void sub_8010A3C(struct Main *, struct InvestigationStruct *);
+void InvestigationPsycheLock(struct Main *, struct InvestigationStruct *);
 
 void LoadLocationChoiceGraphics(void);
 void LoadTalkChoiceGraphics(void);
