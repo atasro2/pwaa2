@@ -79,13 +79,13 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     ioRegs->lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
-    DmaCopy16(3, (void *)0x0813791C, VRAM, 0x1000);
-    DmaCopy16(3, (void *)0x081400FC, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, (void *)0x0814DBA0, OBJ_PLTT+0xA0, 0x40);
-    DmaCopy16(3, (void *)0x081412FC, OBJ_VRAM0 + 0x3000, 0x200);
-    DmaCopy16(3, (void *)0x0814DC00, OBJ_PLTT+0xE0, 0x20);
-    DmaCopy16(3, (void *)0x081426FC, OBJ_VRAM0 + 0x3200, 0x200);
-    DmaCopy16(3, (void *)0x0814DC60, OBJ_PLTT+0x100, 0x20);
+    DmaCopy16(3, gUnknown_0813791C, VRAM, 0x1000);
+    DmaCopy16(3, gUnknown_081400FC, OBJ_VRAM0 + 0x2000, 0x1000);
+    DmaCopy16(3, gUnknown_0814DBA0, OBJ_PLTT+0xA0, 0x40);
+    DmaCopy16(3, gUnknown_081412FC, OBJ_VRAM0 + 0x3000, 0x200);
+    DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT+0xE0, 0x20);
+    DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x3200, 0x200);
+    DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT+0x100, 0x20);
     DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
     oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
     for(i = 0; i < 4; i++)
@@ -256,7 +256,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
             StartAnimationBlend(0xC, 1);
             investigation->pointerColorCounter = 0;
             investigation->pointerColor = 0;
-            DmaCopy16(3, (void *)0x814DC60, OBJ_PLTT+0x100, 0x20);
+            DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT+0x100, 0x20);
         }
         main->process[GAME_PROCESS_STATE] = INVESTIGATION_INSPECT + investigation->selectedAction;
         main->process[GAME_PROCESS_VAR2] = 0;
@@ -576,7 +576,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
                     investigation->pointerColorCounter = 0;
                     investigation->pointerColor += 1;
                     investigation->pointerColor &= 0xF;
-                    DmaCopy16(3, (void *)(0x0814DC60)+investigation->pointerColor*32, OBJ_PLTT+0x100, 0x20);
+                    DmaCopy16(3, gUnknown_0814DC60+investigation->pointerColor*32, OBJ_PLTT+0x100, 0x20);
                 }
                 break;
             case 2:
@@ -2068,6 +2068,6 @@ void LoadTalkChoiceGraphics(void)
         }
         icons++;
     }
-    DmaCopy16(3, (void *)0x08142BFC, (void *)VRAM+0x15400, 0x200);
-    DmaCopy16(3, (void *)0x0814DE80, (void *)PLTT+0x360, 0x20);
+    DmaCopy16(3, gUnknown_08142BFC, (void *)VRAM+0x15400, 0x200);
+    DmaCopy16(3, gUnknown_0814DE80, (void *)PLTT+0x360, 0x20);
 }
