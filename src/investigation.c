@@ -984,8 +984,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 }
                 icons++;
             }
-            DmaCopy16(3, 0x08142BFC, OBJ_VRAM0+0x5400, 0x200);
-            DmaCopy16(3, 0x0814DE80, PLTT+0x360, 0x20);
+            DmaCopy16(3, gUnknown_08142BFC, OBJ_VRAM0+0x5400, 0x200);
+            DmaCopy16(3, gUnknown_0814DE80, PLTT+0x360, 0x20);
             if(investigation->previousSelectedOption) {
                 investigation->selectedOption = investigation->previousSelectedOption;
                 investigation->previousSelectedOption = 0;
@@ -1029,8 +1029,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
         }
         case 3:
         {
-            DmaCopy16(3, 0x08142BFC, OBJ_VRAM0+0x5400, 0x200);
-            DmaCopy16(3, 0x0814DE80, OBJ_PLTT+0x160, 0x20);
+            DmaCopy16(3, gUnknown_08142BFC, OBJ_VRAM0+0x5400, 0x200);
+            DmaCopy16(3, gUnknown_0814DE80, OBJ_PLTT+0x160, 0x20);
             for(talkData = gTalkData; talkData->roomId != 0xFF; talkData++)
             {
                 if(main->currentRoomId == talkData->roomId
@@ -1149,8 +1149,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                         {
                             u16 blab = sub_800EADC(talkData->talkSection[i]);
                             if(blab) {
-                                DmaCopy16(3, 0x081471FC, OBJ_VRAM0+0x3000, 0x200);
-                                DmaCopy16(3, 0x0814E320, OBJ_PLTT+0xE0, 0x20);
+                                DmaCopy16(3, gUnknown_081471FC, OBJ_VRAM0+0x3000, 0x200);
+                                DmaCopy16(3, gUnknown_0814E320, OBJ_PLTT+0xE0, 0x20);
                                 oam->attr0 = 0x16 + i * 30;
                                 oam->attr1 = 0x8024;
                                 oam->attr2 = 0x7180;
@@ -1227,8 +1227,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             if(investigation->actionState == 0 && main->process[GAME_PROCESS_VAR2] > 12)
             {
 
-                DmaCopy16(3, 0x081412FC, OBJ_VRAM0+0x3000, 0x200);
-                DmaCopy16(3, 0x0814DC00, OBJ_PLTT+0xE0, 0x20);
+                DmaCopy16(3, gUnknown_081412FC, OBJ_VRAM0+0x3000, 0x200);
+                DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT+0xE0, 0x20);
                 SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
                 investigation->inactiveActions += 1 << investigation->selectedAction;
                 investigation->selectedActionYOffset = 8;
