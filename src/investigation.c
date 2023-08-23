@@ -629,7 +629,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*moveLocations)*0x800;
-                    temp += 0x081DE3E8;
+                    temp += (uintptr_t)gUnknown_081DE3E8;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++) // i * 4 fakematch
                     {
@@ -868,7 +868,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
         case 6:
             oam = &gOamObjects[OAM_IDX_GENERIC_TEXT_ICON];
             moveLocations = main->roomData[main->currentRoomId];
-            moveLocations+= 1;
+            moveLocations += 1;
             for(i = 0; i < 4; i++)
             {
                 u8 * vram = OBJ_VRAM0 + 0x3400;
@@ -877,7 +877,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = *moveLocations*0x800; //TODO: label vs value?
-                    temp += (u32)0x081DE3E8;
+                    temp += (uintptr_t)gUnknown_081DE3E8;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -963,7 +963,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*icons) * 0x800;
-                    temp += (uintptr_t)0x081EB3E8;
+                    temp += (uintptr_t)gUnknown_081EB3E8;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -1307,7 +1307,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     {
                         investigation->activeOptions[i] = TRUE;
                         temp = (*icons) * 0x800;
-                        temp += (uintptr_t)0x081EB3E8;
+                        temp += (uintptr_t)gUnknown_081EB3E8;
                         DmaCopy16(3, temp, vram, 0x800);
                         for(j = 0; j < 2; j++)
                         {
@@ -1380,7 +1380,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*icons) * 0x800;
-                    temp += (uintptr_t)0x081EB3E8;
+                    temp += (uintptr_t)gUnknown_081EB3E8;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -2032,7 +2032,7 @@ void LoadLocationChoiceGraphics(void)
         destination += i*0x800;
         if(*roomptr != 0xFF)
 	    {
-            src = (void *)0x081DE3E8+*roomptr*0x800;
+            src = (void *)gUnknown_081DE3E8+*roomptr*0x800;
             DmaCopy16(3, src, destination, 0x800);
         }
         roomptr++;
@@ -2063,7 +2063,7 @@ void LoadTalkChoiceGraphics(void)
         destination += i*0x800;
         if(*icons != 0xFF)
 	    {
-            src = (void *)0x081EB3E8 + *icons*0x800;
+            src = (void *)gUnknown_081EB3E8 + *icons*0x800;
             DmaCopy16(3, src, destination, 0x800);
         }
         icons++;
