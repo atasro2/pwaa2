@@ -18,8 +18,8 @@ struct TalkData
 struct ExaminationData
 {
     /* +0x00 */ u16 examinationSection;
-    /* +0x02 */ u8 unk2;
-    /* +0x03 */ u8 unk3;
+    /* +0x02 */ u8 type;
+    /* +0x03 */ u8 animId;
     /* +0x04 */ struct Point4 area;
 };  
 
@@ -27,10 +27,11 @@ struct InvestigationStruct // unity: tantei_work_
 {
     /* +0x00 */ u16 pointerX; // unity AA4: finger_pos_x
     /* +0x02 */ u16 pointerY; // unity AA4: finger_pos_y
-    /* +0x04 */ u8 filler04[0x2];
-    /* +0x06 */ u8 personActive;
-    /* +0x07 */ u8 unk7;
-    /* +0x08 */ u8 inactiveActions;
+    /* +0x04 */ u8 selectedOption; // unity AA4: sel_place
+    /* +0x05 */ u8 previousSelectedOption;
+    /* +0x06 */ bool8 personActive;
+    /* +0x07 */ bool8 inspectionPaused; // unity AA4: ckeck_no_flag
+    /* +0x08 */ u8 inactiveActions; // unity AA4: menu_mv_be_flag
     /* +0x09 */ u8 spotselectStartCounter; // unity AA4: finger_speed_x
     /* +0x0A */ u8 spotselectId; // unity: siteki_no // 指摘 pointed out
     /* +0x0B */ u8 unkB;
@@ -40,37 +41,12 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x0F */ u8 inactiveActionButtonY; // unity AA4: menu_pos_y
     /* +0x10 */ u8 selectedActionYOffset; // unity AA4: menu_add
     /* +0x11 */ u8 lastActionYOffset; // unity AA4: menu_add_old
-    /* +0x12 */ u8 filler12[0x4];
-    /* +0x16 */ u8 pointerFrame;
-    /* +0x17 */ u8 pointerFrameCounter;
+    /* +0x12 */ bool8 activeOptions[4]; // unity AA4: sel_place_be
+    /* +0x16 */ u8 pointerFrame; // unity AA4: yubi_no // 指 finger
+    /* +0x17 */ u8 pointerFrameCounter; // unity AA4: yubi_timer
     /* +0x18 */ u8 pointerColor; // unity AA4: yubi_col_no
     /* +0x19 */ u8 pointerColorCounter; // unity AA4: yubi_col_timer
 };
-
-#if 0
-struct InvestigationStruct // unity: tantei_work_
-{
-    /* +0x00 */ u16 pointerX; // unity AA4: finger_pos_x
-    /* +0x02 */ u16 pointerY; // unity AA4: finger_pos_y
-    /* +0x04 */ u8 selectedOption; // unity AA4: sel_place
-    /* +0x05 */ bool8 personActive; // unity: person_flag // is person in current room?
-    /* +0x06 */ u8 unk6; // unity AA4: ckeck_no_flag
-    /* +0x07 */ u8 unk7; // unity AA4: menu_mv_be_flag
-    /* +0x08 */ u8 spotselectStartCounter; // unity AA4: finger_speed_x
-    /* +0x09 */ u8 spotselectId; // unity: siteki_no // 指摘 pointed out
-    /* +0x0A */ u8 selectedAction; // unity: menu // selected investigation button, why menu?
-    /* +0x0B */ u8 lastAction; // unity AA4: menu_old
-    /* +0x0C */ u8 actionState; // unity AA4: menu_rno
-    /* +0x0D */ u8 inactiveActionButtonY; // unity AA4: menu_pos_y
-    /* +0x0E */ u8 selectedActionYOffset; // unity AA4: menu_add
-    /* +0x0F */ u8 lastActionYOffset; // unity AA4: menu_add_old
-    /* +0x10 */ bool8 activeOptions[4]; // unity AA4: sel_place_be
-    /* +0x14 */ u8 pointerFrame; // unity AA4: yubi_no // 指 finger
-    /* +0x15 */ u8 pointerFrameCounter; // unity AA4: yubi_timer
-    /* +0x16 */ u8 pointerColor; // unity AA4: yubi_col_no
-    /* +0x17 */ u8 pointerColorCounter; // unity AA4: yubi_col_timer
-};
-#endif
 
 extern struct TalkData gTalkData[32];
 extern struct ExaminationData gExaminationData[24];
@@ -78,6 +54,7 @@ extern struct InvestigationStruct gInvestigation;
 
 /* new stuff needed for segments */
 void sub_800EAC8(u32, u32); // room_seq_chg
+u16 sub_800EADC(u16 arg0);
 /* end data stuff from segments */
 
 void SetInactiveActionButtons(struct InvestigationStruct *, u32);
@@ -252,6 +229,8 @@ extern const struct ExaminationData gUnknown_08022ABC[8];
 extern const struct ExaminationData gUnknown_08022B5C[8];
 /* end autodumped */
 
+extern u32 GetExaminedAreaSection(struct InvestigationStruct *);
+
 void InvestigationInit(struct Main *, struct InvestigationStruct *);
 void InvestigationMain(struct Main *, struct InvestigationStruct *);
 void InvestigationExit(struct Main *, struct InvestigationStruct *);
@@ -262,7 +241,10 @@ void InvestigationInspect(struct Main *, struct InvestigationStruct *);
 void InvestigationMove(struct Main *, struct InvestigationStruct *);
 void InvestigationTalk(struct Main *, struct InvestigationStruct *);
 void InvestigationPresent(struct Main *, struct InvestigationStruct *);
-void sub_8010A3C(struct Main *, struct InvestigationStruct *);
+void InvestigationPsycheLock(struct Main *, struct InvestigationStruct *);
+
+void LoadLocationChoiceGraphics(void);
+void LoadTalkChoiceGraphics(void);
 
 /* Segment 1 */
 void InvestigationSegmentSetup_1_0(struct Main *main);

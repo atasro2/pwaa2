@@ -214,6 +214,7 @@ extern struct OamAttrs gOamObjects[128];
 #define SET_PROCESS_BACKUP_PTR(no_0, no_1, no_2, no_3, main) (*(u32*)main->processCopy = ((no_0) | ((no_1) << 8) | ((no_2) << 16) | ((no_3) << 24)))
 #define BACKUP_PROCESS() (*(u32*)gMain.processCopy = *(u32*)gMain.process)
 #define BACKUP_PROCESS_PTR(main) (*(u32*)main->processCopy = *(u32*)gMain.process)
+#define RESTORE_PROCESS() (*(u32*)gMain.process = *(u32*)gMain.processCopy)
 #define RESTORE_PROCESS_PTR(main) (*(u32*)gMain.process = *(u32*)main->processCopy)
 
 void ClearRamAndInitGame(void);

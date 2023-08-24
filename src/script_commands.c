@@ -793,7 +793,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             break;
     }
     scriptCtx->scriptPtr++;
-    gInvestigation.unk7 = 0;
+    gInvestigation.inspectionPaused = 0;
     return 0;
 }
 
