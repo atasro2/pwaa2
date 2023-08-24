@@ -80,9 +80,9 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
     DmaCopy16(3, gUnknown_0813791C, VRAM, 0x1000);
-    DmaCopy16(3, gUnknown_081400FC, OBJ_VRAM0 + 0x2000, 0x1000);
+    DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
     DmaCopy16(3, gUnknown_0814DBA0, OBJ_PLTT+0xA0, 0x40);
-    DmaCopy16(3, gUnknown_081412FC, OBJ_VRAM0 + 0x3000, 0x200);
+    DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
     DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT+0xE0, 0x20);
     DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x3200, 0x200);
     DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT+0x100, 0x20);
@@ -1227,7 +1227,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             if(investigation->actionState == 0 && main->process[GAME_PROCESS_VAR2] > 12)
             {
 
-                DmaCopy16(3, gUnknown_081412FC, OBJ_VRAM0+0x3000, 0x200);
+                DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0+0x3000, 0x200);
                 DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT+0xE0, 0x20);
                 SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
                 investigation->inactiveActions += 1 << investigation->selectedAction;
@@ -1773,9 +1773,9 @@ void sub_8010FA4(void) {
     struct OamAttrs * oam;
     int i;
 
-    DmaCopy16(3, gUnknown_081400FC, OBJ_VRAM0 + 0x2000, 0x1000);
+    DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
     DmaCopy16(3, gUnknown_0814DBA0, OBJ_PLTT + 0xA0, 0x40);
-    DmaCopy16(3, gUnknown_081412FC, OBJ_VRAM0 + 0x3000, 0x200);
+    DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
     DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT + 0xE0, 0x20);
     DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x3200, 0x200);
     DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT + 0x100, 0x20);

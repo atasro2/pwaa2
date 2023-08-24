@@ -62,17 +62,6 @@ extern u32 sub_800D5B0(struct InvestigationStruct *);
 void sub_800D674(void);
 void sub_800D6C8(void);
 
-void sub_800B808(struct Main *, struct InvestigationStruct *);
-void sub_800BAD4(struct Main *, struct InvestigationStruct *);
-void sub_800BD74(struct Main *, struct InvestigationStruct *);
-void sub_800BDF8(struct Main *, struct InvestigationStruct *);
-void sub_800BE58(struct Main *, struct InvestigationStruct *);
-void sub_800BE7C(struct Main *, struct InvestigationStruct *);
-void sub_800BF90(struct Main *, struct InvestigationStruct *);
-void sub_800C334(struct Main *, struct InvestigationStruct *);
-void sub_800C8B8(struct Main *, struct InvestigationStruct *);
-void sub_800D2B0(struct Main *, struct InvestigationStruct *);
-
 /* autodumped */
 extern const u8 gUnknown_0801C41C[8];
 extern const u8 gUnknown_0801C424[12];

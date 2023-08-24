@@ -49,16 +49,16 @@ gUnknown_0813DC7C:
 gUnknown_0813E0FC:
     .incbin "graphics/ui/trial/unused_testimony_characters.4bpp"
 
-    .global gUnknown_081400FC
-gUnknown_081400FC:
+    .global gGfx4bppInvestigationActions
+gGfx4bppInvestigationActions:
     .incbin "graphics/ui/investigation/action_buttons.4bpp"
 
     .global gGfx4bppControllerButtons
 gGfx4bppControllerButtons:
     .incbin "graphics/ui/court_record/controller_buttons.4bpp"
 
-    .global gUnknown_081412FC
-gUnknown_081412FC:
+    .global gGfx4bppInvestigationScrollButton
+gGfx4bppInvestigationScrollButton:
     .incbin "graphics/ui/investigation/scroll_prompt.4bpp"
 
     .global gUnknown_081414FC

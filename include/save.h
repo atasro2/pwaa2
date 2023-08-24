@@ -34,7 +34,7 @@ struct SaveData
 
 extern EWRAM_DATA struct SaveData gSaveDataBuffer;
 
-extern const char gSaveVersion[0x34];
+extern const char gSaveVersion[0x32];
 
 u32 SaveGameData();
 u32 LoadSaveData();

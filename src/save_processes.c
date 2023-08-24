@@ -7,7 +7,7 @@
 #include "constants/songs.h"
 #include "constants/oam_allocations.h"
 
-const char gSaveVersion[0x34] = "2002 CAPCOM GBA GYAKUTEN-SAIBAN2 07/15 Ver 1.000-";
+const char gSaveVersion[0x32] = "2002 CAPCOM GBA GYAKUTEN-SAIBAN2 07/15 Ver 1.000-";
 
 void (*gSaveGameProcessStates[])(struct Main *) = {
 	SaveGameInit1,
@@ -23,16 +23,16 @@ void (*gSaveGameProcessStates[])(struct Main *) = {
 u32 SaveGameData()
 {
     gSaveDataBuffer.main.saveContinueFlags |= 0x10;
-    DmaCopy16(3, gSaveVersion, gSaveDataBuffer.saveDataVer, 0x32 /* sizeof(gSaveVersion) */);
+    DmaCopy16(3, gSaveVersion, gSaveDataBuffer.saveDataVer, sizeof(gSaveVersion));
     CalculateSaveChecksum();
-    return WriteSramEx((void*)&gSaveDataBuffer, SRAM_START, 0x2BBC /* sizeof(gSaveDataBuffer) */);
+    return WriteSramEx((void*)&gSaveDataBuffer, SRAM_START, sizeof(gSaveDataBuffer));
 }
 
 u32 LoadSaveData()
 {
     u32 i;
     char * sramVer;
-    ReadSram(SRAM_START, (void*)&gSaveDataBuffer, 0x2BBC /* sizeof(gSaveDataBuffer) */);
+    ReadSram(SRAM_START, (void*)&gSaveDataBuffer, sizeof(gSaveDataBuffer));
     sramVer = gSaveDataBuffer.saveDataVer;
     for(i = 0; i < 0x30; i++)
     {
@@ -61,7 +61,7 @@ void CalculateSaveChecksum()
     u32 size;
     gSaveDataBuffer.magic = 0;
     magic = 0;
-    size = 0x2BBC /* sizeof(gSaveDataBuffer) */;
+    size = sizeof(gSaveDataBuffer);
     saveData = (void *) (&gSaveDataBuffer.main);
     while (saveData < (((u8 *) (&gSaveDataBuffer)) + size))
     {
@@ -77,7 +77,7 @@ bool32 CheckSaveChecksum()
 {
     u32 magic = 0;
     u8 * saveData = (u8 *)&gSaveDataBuffer.main;
-    while(saveData < (u8 *)&gSaveDataBuffer+0x2BBC /* sizeof(gSaveDataBuffer) */)
+    while(saveData < (u8 *)&gSaveDataBuffer+sizeof(gSaveDataBuffer))
     {
         magic += *saveData;
         saveData += 4;
@@ -202,8 +202,8 @@ void ClearSaveProcess(struct Main *main)
         {
             if(main->selectedButton == 0)
             {
-                DmaFill32(3, 0, &gSaveDataBuffer, 0x2BBC /* sizeof(gSaveDataBuffer) */);
-                WriteSramEx((void*)&gSaveDataBuffer, SRAM_START, 0x2BBC /* sizeof(gSaveDataBuffer) */);
+                DmaFill32(3, 0, &gSaveDataBuffer, sizeof(gSaveDataBuffer));
+                WriteSramEx((void*)&gSaveDataBuffer, SRAM_START, sizeof(gSaveDataBuffer));
             }
             SET_PROCESS_PTR(CAPCOM_LOGO_PROCESS, 0, 0, 0, main);
         }
