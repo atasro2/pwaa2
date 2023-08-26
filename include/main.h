@@ -34,8 +34,8 @@ struct Main
     /* +0x019 */ bool8 showTextboxCharacters; // unity: message_active_window
     /* +0x01A */ u8 tilemapUpdateBits;
     /* +0x01B */ u8 saveContinueFlags;
-    u8 filler1C[0x1E - 0x1C];
-    /* +0x020 */ u16 unk1E; // unity: Bk_end_mess
+    /* +0x01C */ u16 testimonyBeginningSection; // unity: bk_start_mess
+    /* +0x01E */ u16 unk1E; // unity: Bk_end_mess
     /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
     /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
     /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now

@@ -306,6 +306,69 @@ void TestimonyExit(struct Main * main)
     SET_PROCESS_PTR(COURT_PROCESS, COURT_MAIN, 0, 0, main);
 }
 
+
+void QuestioningAnim(struct Main * main)
+{
+    struct AnimationListEntry * animation;
+    struct AnimationListEntry * animation2;
+    struct AnimationListEntry * animation3;
+    switch(main->process[GAME_PROCESS_VAR1])
+    {
+        case 0:
+            PlayAnimation(ANIM_CROSS_EXAMINATION_START_LEFT);
+            PlayAnimation(ANIM_CROSS_EXAMINATION_START_RIGHT);
+            PlaySE(SE029_BEGIN_QUESTIONING);
+            main->process[GAME_PROCESS_VAR1]++;
+            break;
+        case 1:
+            animation = FindAnimationFromAnimId(ANIM_CROSS_EXAMINATION_START_LEFT);
+            animation2 = FindAnimationFromAnimId(ANIM_CROSS_EXAMINATION_START_RIGHT);
+            animation->animationInfo.xOrigin += 10;
+            animation->flags |= ANIM_ACTIVE;
+            animation2->animationInfo.xOrigin -= 10;
+            animation2->flags |= ANIM_ACTIVE;
+            if(animation->animationInfo.xOrigin >= 120)
+            {
+                StartHardwareBlend(3, 1, 8, 0x1F);
+                DestroyAnimation(animation);
+                DestroyAnimation(animation2);
+                PlayAnimation(ANIM_CROSS_EXAMINATION_START);
+                main->process[GAME_PROCESS_VAR1]++;
+            }
+            break;
+        case 2: // why not just do it in the next case like please
+            if(main->blendMode == 0)
+                main->process[GAME_PROCESS_VAR1]++;
+            break;
+        case 3:
+            animation3 = FindAnimationFromAnimId(ANIM_CROSS_EXAMINATION_START);
+            if(!(animation3->flags & ANIM_PLAYING))
+            {
+                DestroyAnimation(animation3);
+                PlayAnimationAtCustomOrigin(ANIM_CROSS_EXAMINATION_START_LEFT, 120, 60);
+                PlayAnimationAtCustomOrigin(ANIM_CROSS_EXAMINATION_START_RIGHT, 120, 60);
+                main->process[GAME_PROCESS_VAR1]++;
+            }
+            break;
+        case 4:
+            animation = FindAnimationFromAnimId(ANIM_CROSS_EXAMINATION_START_LEFT);
+            animation2 = FindAnimationFromAnimId(ANIM_CROSS_EXAMINATION_START_RIGHT);
+            animation->animationInfo.yOrigin -= 7;
+            animation->flags |= ANIM_ACTIVE;
+            animation2->animationInfo.yOrigin += 7;
+            animation2->flags |= ANIM_ACTIVE;
+            if(animation->animationInfo.yOrigin < -60)
+            {
+                DestroyAnimation(animation);
+                DestroyAnimation(animation2);
+                main->process[GAME_PROCESS_STATE] = QUESTIONING_MAIN;
+                main->process[GAME_PROCESS_VAR1] = 0;
+            }
+        default:
+            break;
+    }
+}
+
 void (*gQuestioningProcessStates[])(struct Main *) = {
 	QuestioningInit,
 	QuestioningMain,
@@ -315,4 +378,24 @@ void (*gQuestioningProcessStates[])(struct Main *) = {
 	QuestioningObjection
 };
 
-// void QuestioningProcess(struct Main * main)
+void QuestioningProcess(struct Main * main)
+{
+    gQuestioningProcessStates[main->process[GAME_PROCESS_STATE]](main);
+}
+
+void QuestioningInit(struct Main * main)
+{
+    DmaCopy16(3, gUnknown_08141CFC, OBJ_VRAM0+0x3000, 0x400);
+    DmaCopy16(3, gUnknown_0814DC40, OBJ_PLTT+0xA0, 0x20);
+    DmaCopy16(3, gGfx4bppTestimonyArrows, 0x1A0, 0x80); // ! WHAT, HOW
+    DmaCopy16(3, gGfx4bppTestimonyArrows + 12 * TILE_SIZE_4BPP, 0x220, 0x80); // ! WHAT, HOW
+    main->testimonyBeginningSection = gScriptContext.currentSection;
+    gCourtRecord.recordArrowCounter = 0;
+    gCourtRecord.recordArrowFrame++;
+    // gTestimony.healthPointX = 0xF0;
+    gTestimony.pressPromptY = 0xE0;
+    gTestimony.presentPromptY = 0xE0;
+    gTestimony.displayState = 0;
+    main->process[GAME_PROCESS_STATE] = QUESTIONING_ANIM;
+    sub_80178E0();
+}
