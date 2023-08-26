@@ -7,8 +7,10 @@
 #include "animation.h"
 #include "sound.h"
 #include "save.h"
+#include "constants/animation.h"
 #include "constants/process.h"
 #include "constants/songs.h"
+#include "constants/oam_allocations.h"
 
 void SetCurrentEpisodeBit()
 {
@@ -169,6 +171,71 @@ void CourtExit(struct Main * main)
     }
 }
 
+void TestimonyAnim(struct Main * main)
+{
+    struct AnimationListEntry * animation;
+    struct AnimationListEntry * animation2;
+    struct AnimationListEntry * animation3;
+    switch(main->process[GAME_PROCESS_VAR1])
+    {
+        case 0:
+            PlayAnimation(ANIM_TESTIMONY_START_LEFT);
+            PlayAnimation(ANIM_TESTIMONY_START_RIGHT);
+            PlaySE(SE029_BEGIN_QUESTIONING);
+            gTestimony.unk4 = 0;
+            main->process[GAME_PROCESS_VAR1]++;
+            break;
+        case 1:
+            animation = FindAnimationFromAnimId(ANIM_TESTIMONY_START_LEFT);
+            animation2 = FindAnimationFromAnimId(ANIM_TESTIMONY_START_RIGHT);
+            animation->animationInfo.xOrigin += 10;
+            animation->flags |= ANIM_ACTIVE;
+            animation2->animationInfo.xOrigin -= 10;
+            animation2->flags |= ANIM_ACTIVE;
+            if(animation->animationInfo.xOrigin >= 120)
+            {
+                StartHardwareBlend(3, 1, 8, 0x1F);
+                DestroyAnimation(animation);
+                DestroyAnimation(animation2);
+                PlayAnimation(ANIM_TESTIMONY_START);
+                main->process[GAME_PROCESS_VAR1]++;
+            }
+            break;
+        case 2: // why not just do it in the next case like please
+            if(main->blendMode == 0)
+                main->process[GAME_PROCESS_VAR1]++;
+            break;
+        case 3:
+            animation3 = FindAnimationFromAnimId(ANIM_TESTIMONY_START);
+            if(!(animation3->flags & ANIM_PLAYING))
+            {
+                DestroyAnimation(animation3);
+                PlayAnimationAtCustomOrigin(ANIM_TESTIMONY_START_LEFT, 120, 60);
+                PlayAnimationAtCustomOrigin(ANIM_TESTIMONY_START_RIGHT, 120, 60);
+                main->process[GAME_PROCESS_VAR1]++;
+            }
+            break;
+        case 4:
+            animation = FindAnimationFromAnimId(ANIM_TESTIMONY_START_LEFT);
+            animation2 = FindAnimationFromAnimId(ANIM_TESTIMONY_START_RIGHT);
+            animation->animationInfo.xOrigin += gTestimony.unk4;
+            animation->flags |= ANIM_ACTIVE;
+            animation2->animationInfo.xOrigin -= gTestimony.unk4;
+            animation2->flags |= ANIM_ACTIVE;
+            gTestimony.unk4++;
+            if(gTestimony.unk4 > 12)
+                gTestimony.unk4 = 12;
+            if(animation->animationInfo.xOrigin > 300)
+            {
+                DestroyAnimation(animation);
+                DestroyAnimation(animation2);
+                main->process[GAME_PROCESS_STATE] = TESTIMONY_MAIN;
+            }
+        default:
+            break;
+    }
+}
+
 void (*gTestimonyProcessStates[])(struct Main *) = {
 	TestimonyInit,
 	TestimonyMain,
@@ -176,7 +243,68 @@ void (*gTestimonyProcessStates[])(struct Main *) = {
 	TestimonyAnim
 };
 
-// void TestimonyProcess(struct Main * main)
+void TestimonyProcess(struct Main * main)
+{
+    gTestimonyProcessStates[main->process[GAME_PROCESS_STATE]](main);
+}
+
+void TestimonyInit(struct Main * main)
+{
+    DmaCopy16(3, gGfx4bppTestimonyTextTiles, OBJ_VRAM0+0x3000, 0x800);
+    DmaCopy16(3, gUnknown_0814DC20, OBJ_PLTT+0xA0, 0x20);
+    gTestimony.timer = 0;
+    main->process[GAME_PROCESS_STATE] = TESTIMONY_ANIM;
+}
+
+void TestimonyMain(struct Main * main)
+{
+    struct OamAttrs * oam;
+    if(main->blendMode)
+        return;
+    if((gJoypad.pressedKeys & START_BUTTON) &&
+    !(main->gameStateFlags & 0x10) &&
+    gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
+    {
+        PauseBGM();
+        DmaCopy16(3, gOamObjects, gSaveDataBuffer.oam, sizeof(gOamObjects));
+        DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
+        if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
+            gSaveDataBuffer.main.showTextboxCharacters = 1;
+        }
+        PlaySE(SE007_MENU_OPEN_SUBMENU);
+        main->gameStateFlags &= ~1;
+        BACKUP_PROCESS_PTR(main);
+        SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 0, main);
+    }
+    else if((gJoypad.pressedKeys & R_BUTTON) &&
+    !(main->gameStateFlags & 0x10) &&
+    gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
+    {
+        sub_8017864();
+        PlaySE(SE007_MENU_OPEN_SUBMENU);
+        BACKUP_PROCESS_PTR(main);
+        SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
+    }
+    gTestimony.timer++;
+    if(gTestimony.timer > 100)
+        gTestimony.timer = 0;
+    oam = &gOamObjects[OAM_IDX_ITESTIMONY_INDICATOR];
+    if(gTestimony.timer <= 80)
+    {
+        oam->attr0 = SPRITE_ATTR0(0, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(0, FALSE, FALSE, 3);
+        oam->attr2 = SPRITE_ATTR2(0x180, 2, 5);
+    }
+    else
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+}
+
+void TestimonyExit(struct Main * main)
+{
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_ITESTIMONY_INDICATOR];
+    oam->attr0 = SPRITE_ATTR0_CLEAR;
+    SET_PROCESS_PTR(COURT_PROCESS, COURT_MAIN, 0, 0, main);
+}
 
 void (*gQuestioningProcessStates[])(struct Main *) = {
 	QuestioningInit,

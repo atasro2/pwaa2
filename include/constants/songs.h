@@ -26,6 +26,8 @@
 
 #define SE027_VOICE_PHOENIX_OBJECTION_JP 81
 
+#define SE029_BEGIN_QUESTIONING 83
+
 //TODO: fill in
 /* END SE */
 
