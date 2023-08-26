@@ -61,8 +61,8 @@ gGfx4bppControllerButtons:
 gGfx4bppInvestigationScrollButton:
     .incbin "graphics/ui/investigation/scroll_prompt.4bpp"
 
-    .global gUnknown_081414FC
-gUnknown_081414FC:
+    .global gGfx4bppTestimonyTextTiles
+gGfx4bppTestimonyTextTiles:
     .incbin "graphics/ui/trial/testimony_text_tiles.4bpp"
 
     .global gUnknown_08141CFC

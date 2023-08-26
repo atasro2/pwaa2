@@ -578,7 +578,7 @@ void SelectEpisodeProcess(struct Main * main)
             caseBit = main->caseEnabledFlags >> 4;
             if((caseBit >> main->selectedButton) & 1) {
                 for(i = 0; i < 8; i++) {
-                    main->unk100[i] = 0xFFFFFFFF; // previously played case == all messages can be skipped?
+                    main->unk100[i] = 0xFFFFFFFF; // ? previously played case == all messages can be skipped?
                 }
             }
             switch(main->selectedButton)
@@ -610,3 +610,318 @@ void SelectEpisodeProcess(struct Main * main)
     }
 }
 
+void ContinueSaveProcess(struct Main * main) {
+    struct OamAttrs * oam;
+    uintptr_t i, j;
+    u32 mask;
+
+    switch (main->process[GAME_PROCESS_STATE]) {
+        case 0:
+            LoadSaveData();
+            EpisodeInit(main);
+            break;
+        case 1:
+            if (main->blendMode == 0) {
+                main->saveContinueFlags = gSaveDataBuffer.main.saveContinueFlags;
+                main->scenarioIdx = gSaveDataBuffer.main.scenarioIdx;
+                DmaCopy16(3, gUnknown_0813791C, BG_CHAR_ADDR(0), 0x1000);
+                DmaCopy16(3, gUnknown_0814F0C4, OBJ_VRAM0 + 0x3400, 0x1000);
+                DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+                DecompressBackgroundIntoBuffer(0xA);
+                CopyBGDataToVram(0xA);
+                main->animationFlags &= ~3;
+                oam = gOamObjects;
+                for (i = 0; i < MAX_OAM_OBJ_COUNT; ++i) {
+                    oam->attr0 = 0x200;
+                    ++oam;
+                }
+                for (i = 0; i < 0x400; ++i) {
+                    gBG2MapBuffer[i] = 0;
+                }
+                SlideInBG2Window(5, 8);
+                PlaySE(SE007_MENU_OPEN_SUBMENU);
+                gIORegisters.lcd_dispcnt = 0x1C40;
+                main->tilemapUpdateBits = 0xC;
+                gIORegisters.lcd_bg2cnt = 0x3E01;
+                main->selectedButton = 0;
+                StartHardwareBlend(1, 0, 1, 0x1F);
+                ++main->process[GAME_PROCESS_STATE];
+            }
+            break;
+        case 2:
+            UpdateBG2Window(&gCourtRecord);
+            if (gCourtRecord.windowScrollSpeed == 0) {
+                main->advanceScriptContext = TRUE;
+                main->showTextboxCharacters = TRUE;
+                gScriptContext.currentSection = 0xFFFF;
+                ChangeScriptSection(main->scenarioIdx + 7);
+                gScriptContext.textXOffset = 9;
+                gScriptContext.textYOffset = 52;
+                main->blendCounter = 0;
+                main->blendDelay = 1;
+                main->blendDeltaY = 16;
+                gIORegisters.lcd_bldcnt = 0x840;
+                gIORegisters.lcd_bldalpha = BLDALPHA_BLEND(0, main->blendDeltaY);
+                ++main->process[GAME_PROCESS_STATE];
+            }
+            break;
+        case 3:
+            if (gScriptContext.flags & 8) {
+                if (main->saveContinueFlags & 1 && gJoypad.pressedKeys & 0xC0) {
+                    PlaySE(SE000_MENU_CHANGE);
+                    main->selectedButton ^= 1;
+                } else if (gJoypad.pressedKeys & 1) {
+                    PlaySE(SE001_MENU_CONFIRM);
+                    main->advanceScriptContext = FALSE;
+                    main->showTextboxCharacters = TRUE;
+                    if ((main->saveContinueFlags & 1) == 0) {
+                        StartHardwareBlend(2, 0, 1, 0x1F);
+                        main->process[GAME_PROCESS_STATE] = 5;
+                    } else {
+                        main->blendCounter = 0;
+                        main->blendDelay = 1;
+                        main->blendDeltaY = 0;
+                        main->process[GAME_PROCESS_STATE] = 7;
+                        main->process[GAME_PROCESS_VAR1] = 0;
+                    }
+                } else if (gJoypad.pressedKeys & 2) {
+                    PlaySE(SE002_MENU_CANCEL);
+                    StartHardwareBlend(2, 0, 1, 0x1F);
+                    main->process[GAME_PROCESS_STATE] += 3;
+                }
+            }
+            if (main->saveContinueFlags & 1) {
+                oam = gOamObjects + OAM_IDX_GENERIC_TEXT_ICON;
+                for (i = 0; i < 2; ++i) {
+                    for (j = 0; j < 2; ++j) {
+                        oam->attr0 = 0x4462 + i * 32;
+                        oam->attr1 = 0xC038 + j * 64;
+                        if (main->selectedButton == i) {
+                            oam->attr2 = j * 0x20 + 0x91A0 + i * 0x40;
+                        } else {
+                            oam->attr2 = j * 0x20 + 0xA1A0 + i * 0x40;
+                        }
+                        ++oam;
+                    }
+                }
+            } else {
+                oam = gOamObjects + OAM_IDX_GENERIC_TEXT_ICON;
+                for (j = 0; j < 2; ++j) {
+                    oam->attr0 = 0x4462;
+                    oam->attr1 = 0xC038 + j * 64;
+                    oam->attr2 = 0x91E0 + j * 32;
+                    ++oam;
+                }
+            }
+            if (main->process[GAME_PROCESS_STATE] == 3 && main->blendDeltaY != 0) {
+                ++main->blendCounter;
+                if (main->blendCounter >= main->blendDelay) {
+                    main->blendCounter = 0;
+                    --main->blendDeltaY;
+                }
+                gIORegisters.lcd_bldalpha = BLDALPHA_BLEND(0x10 - main->blendDeltaY, main->blendDeltaY);
+            }
+            break;
+        case 4:
+            if(main->blendMode != 0)
+                return;
+            HideAllSprites();
+            InitBGs();
+            ResetAnimationSystem();
+            ResetSoundControl();
+            LoadCurrentScriptIntoRam();
+            DmaCopy16(3, gUnusedAsciiCharSet, BG_VRAM + 0x3800, 0x800);
+            DmaCopy16(3, gUnknown_0813791C, BG_VRAM, 0x1000);
+            DmaCopy16(3, gGfxPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
+            i = (uintptr_t)GetBGPalettePtr(0); // ! BAD FAKEMATCH?
+            DmaCopy16(3, i, BG_PLTT, 0x200);
+            DmaCopy16(3, &gSaveDataBuffer.main, &gMain, sizeof(gMain));
+            DmaCopy16(3, gGfxPalEvidenceProfileDesc, BG_PLTT, 0x20);
+            LoadCurrentScriptIntoRam();
+            DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT + 0x100, 0x20);
+            DmaCopy16(3, &gSaveDataBuffer.talkData, &gTalkData, sizeof(gTalkData));
+            DmaCopy16(3, &gSaveDataBuffer.unknown3003B70, &gUnknown_03003B70, sizeof(gUnknown_03003B70));
+            RestoreAnimationsFromBuffer(gSaveDataBuffer.backupAnimations);
+
+            if (main->process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
+                DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
+                DmaCopy16(3, gUnknown_0814DBA0, OBJ_PLTT + 0xA0, 0x40);
+                DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
+                DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT + 0xE0, 0x20);
+                DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x3200, 0x200);
+                DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+
+                if (main->process[GAME_PROCESS_VAR1] == 3) {
+                    if (main->process[GAME_PROCESS_STATE] == INVESTIGATION_MOVE) {
+                        LoadLocationChoiceGraphics();
+                    } else if (main->process[GAME_PROCESS_STATE] == INVESTIGATION_TALK) {
+                        LoadTalkChoiceGraphics();
+                    }
+                }
+            } else {
+                DmaCopy16(3, gUnknown_08231BE8, OBJ_PLTT+0xC0, 0x20);
+                if(main->process[GAME_PROCESS] == TESTIMONY_PROCESS) {
+                    DmaCopy16(3, gGfx4bppTestimonyTextTiles, OBJ_VRAM0 + 0x3000, 0x800);
+                    DmaCopy16(3, gUnknown_0814DC20, OBJ_PLTT + 0xA0, 0x20);
+                } else if(main->process[GAME_PROCESS] == QUESTIONING_PROCESS) {
+                    DmaCopy16(3, gUnknown_08141CFC, OBJ_VRAM0 + 0x3000, 0x400);
+                    DmaCopy16(3, gUnknown_0814DC40, OBJ_PLTT+0xA0, 0x20);
+                    DmaCopy16(3, gGfx4bppTestimonyArrows, OBJ_VRAM0 + 0x3400, 0x80);
+                    DmaCopy16(3, gGfx4bppTestimonyArrows + 12 * TILE_SIZE_4BPP, OBJ_VRAM0 + 0x3480, 0x80);            
+                }
+            }
+            DmaCopy16(3, &gSaveDataBuffer.textBoxCharacters, &gTextBoxCharacters, sizeof(gTextBoxCharacters));
+            RedrawTextboxCharacters();
+            DmaCopy16(3, &gSaveDataBuffer.scriptCtx, &gScriptContext, sizeof(gScriptContext));
+            DmaCopy16(3, &gSaveDataBuffer.ioRegs, &gIORegisters, sizeof(gIORegisters));
+            DmaCopy16(3, &gSaveDataBuffer.courtRecord, &gCourtRecord, sizeof(gCourtRecord));
+            DmaCopy16(3, &gSaveDataBuffer.investigation, &gInvestigation, sizeof(gInvestigation));
+            DmaCopy16(3, &gSaveDataBuffer.testimony, &gTestimony, sizeof(gTestimony));
+            DmaCopy16(3, &gSaveDataBuffer.courtScroll, &gCourtScroll, sizeof(gCourtScroll));
+            DmaCopy16(3, gSaveDataBuffer.examinationData, gExaminationData, sizeof(gExaminationData));
+            sub_8007D5C(main);
+            switch(main->scenarioIdx)
+            {
+                case 0:
+                case 1:
+                    mask = 1;
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    mask = 2;
+                    break;
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                    mask = 4;
+                    break;
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                    mask = 8;
+                    break;
+            }
+            if(mask &= (main->caseEnabledFlags >> 4)) {
+                u8 i;
+                for(i = 0; i < 8; i++) {
+                    main->unk100[i] = 0xFFFFFFFF;
+                }
+            }
+            DmaCopy16(3, gSaveDataBuffer.mapMarker, gMapMarker, sizeof(gMapMarker));
+            MakeMapMarkerSprites();
+            SetTextboxNametag(gScriptContext.textboxNameId & 0x7F, gScriptContext.textboxNameId & 0x80);
+            DmaCopy16(3, gSaveDataBuffer.bg1Map, gBG1MapBuffer, sizeof(gBG1MapBuffer));
+            DmaCopy16(3, gSaveDataBuffer.bg0Map, gBG0MapBuffer, sizeof(gBG0MapBuffer));
+            DecompressBackgroundIntoBuffer(main->currentBG);
+            CopyBGDataToVramAndScrollBG(main->currentBG);
+            if (gScriptContext.flags & 4) {
+                DmaCopy16(3, gCharSet + 0x7100, OBJ_VRAM0 + 0x1F80, 0x80);
+            }
+            if (gScriptContext.flags & 0x400) {
+                DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x1F80, 0x80);
+            }
+            DmaCopy16(3, gSaveDataBuffer.oam, gOamObjects, sizeof(gOamObjects));
+            gJoypad.heldKeys = gJoypad.pressedKeys = gJoypad.previousHeldKeys = gJoypad.previousPressedKeys = 0;
+            SetTimedKeysAndDelay(0x30, 0xF);
+            if (main->itemPlateState > 3) {
+                LoadItemPlateGfx(main);
+            }
+            FadeInBGM(20, main->currentPlayingBgm);
+            if(gMain.unk2BE & 0xF) {
+                switch(gMain.unk2BE >> 4) {
+                    case 0:
+                        sub_800E7B0();
+                        sub_800E7EC(0x18, 0x80, 1);
+                        break;
+                    case 1:
+                        sub_800E8C4();
+                        sub_800E900(0, 0x80, 1);       
+                        break;
+                    case 2:
+                        sub_800E8C4();
+                        sub_800E9D4(0x20, 0x80, 1);
+                }
+            }
+            if(gMain.unk2BA != 0)
+                PlaySE(gMain.unk2BA);
+            StartHardwareBlend(1, 1, 1, 0x1F);
+            break;
+        case 5:
+            if (main->blendMode == 0) {
+                sub_8007D30(main);
+                gMain.unkB0 = gSaveDataBuffer.main.unkB0;
+                gMain.unk9A = gSaveDataBuffer.main.unkB0;
+                gMain.unk98 = gSaveDataBuffer.main.unkB0;
+                SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
+            }
+            break;
+        case 6:
+            if (main->blendMode == 0) {
+                SET_PROCESS_PTR(TITLE_SCREEN_PROCESS, 0, 0, 0, main);
+            }
+            break;
+        case 7:
+            ++main->process[GAME_PROCESS_VAR1];
+            if (main->process[GAME_PROCESS_VAR1] >= 0x30) {
+                if (main->selectedButton == 0) {
+                    main->process[GAME_PROCESS_STATE] = 4;
+                } else {
+                    main->process[GAME_PROCESS_STATE] = 5;
+                }
+                main->process[GAME_PROCESS_VAR1] = 0;
+                oam = gOamObjects + OAM_IDX_GENERIC_TEXT_ICON;
+                if (main->selectedButton == 0) {
+                    oam = gOamObjects + OAM_IDX_GENERIC_TEXT_ICON2;
+                }
+                for (i = 0; i < 2; ++i) {
+                    oam->attr0 = 0x200;
+                    ++oam;
+                }
+                StartHardwareBlend(2, 0, 1, 0x1F);
+                break;
+            } else if (main->saveContinueFlags & 1) {
+                oam = gOamObjects + OAM_IDX_GENERIC_TEXT_ICON;
+                for (i = 0; i < 2; ++i) {
+                    for (j = 0; j < 2; ++j) {
+                        oam->attr1 = 0xC038 + j * 64;
+                        if (main->selectedButton == i) {
+                            oam->attr0 = 0x4062 + i * 32;
+                            oam->attr2 = j * 32 + 0x91A0 + i * 64;
+                        } else {
+                            oam->attr0 = 0x4462 + i * 32;
+                            oam->attr2 = j * 32 + 0xA1A0 + i * 64;
+                        }
+                        ++oam;
+                    }
+                }
+            } else {
+                oam = gOamObjects + OAM_IDX_GENERIC_TEXT_ICON;
+                for (j = 0; j < 2; ++j) {
+                    oam->attr0 = 0x4062;
+                    oam->attr1 = 0xC038 + j * 64;
+                    oam->attr2 = 0x91E0 + j * 32;
+                    ++oam;
+                }
+            }
+            if(main->process[GAME_PROCESS_STATE] == 7 && main->blendDeltaY < 0x10) {
+                    ++main->blendCounter;
+                    if (main->blendCounter >= main->blendDelay) {
+                        main->blendCounter = 0;
+                        ++main->blendDeltaY;
+                    }
+                gIORegisters.lcd_bldalpha = BLDALPHA_BLEND(0x10 - main->blendDeltaY, main->blendDeltaY);
+            }
+    }
+}
