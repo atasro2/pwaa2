@@ -16,9 +16,10 @@
 
 #define gUnknown_0813D91C ((u8*)(GFX_BASE_ADDR + 0xD91C))
 #define gGfx4bppTestimonyArrows ((u8*)(GFX_BASE_ADDR + 0xD97C))
-#define gUnknown_081400FC ((u8*)(GFX_BASE_ADDR + 0x100FC))
+#define gGfx4bppInvestigationActions ((u8*)(GFX_BASE_ADDR + 0x100FC))
 #define gGfx4bppControllerButtons ((u8*)(GFX_BASE_ADDR + 0x110FC))
-#define gUnknown_081412FC ((u8*)(GFX_BASE_ADDR + 0x112FC))
+#define gGfx4bppInvestigationScrollButton ((u8*)(GFX_BASE_ADDR + 0x112FC))
+#define gGfx4bppTestimonyTextTiles ((u8*)(GFX_BASE_ADDR + 0x114FC))
 #define gUnknown_08141CFC ((u8*)(GFX_BASE_ADDR + 0x11CFC))
 #define gUnknown_08141EFC ((u8*)(GFX_BASE_ADDR + 0x11EFC))
 #define gGfx4bppPresentBackTextTiles ((u8*)(GFX_BASE_ADDR + 0x120FC))
@@ -65,6 +66,7 @@
 #define gUnknown_0814DBA0 ((u8*)(GFX_BASE_ADDR + 0x1DBA0))
 #define gUnknown_0814DC00 ((u8*)(GFX_BASE_ADDR + 0x1DC00))
 #define gGfxPalCourtRecordActionText ((u8*)(GFX_BASE_ADDR + 0x1DBE0))
+#define gUnknown_0814DC20 ((u8*)(GFX_BASE_ADDR + 0x1DC20))
 #define gUnknown_0814DC40 ((u8*)(GFX_BASE_ADDR + 0x1DC40))
 #define gUnknown_0814DC60 ((u8*)(GFX_BASE_ADDR + 0x1DC60))
 #define gUnknown_0814DE80 ((u8*)(GFX_BASE_ADDR + 0x1DE80))
@@ -79,6 +81,10 @@
 #define gUnknown_0814E320 ((u8*)(GFX_BASE_ADDR + 0x1E320))
 #define gUnknown_0814E340 ((u8*)(GFX_BASE_ADDR + 0x1E340))
 #define gUnknown_0814E360 ((u8*)(GFX_BASE_ADDR + 0x1E360))
+#define gUnknown_0814E460 ((u8*)(GFX_BASE_ADDR + 0x1E460))
+
+#define gUnknown_0814F0C4 ((u8*)(GFX_BASE_ADDR + 0x1F0C4))
+
 #define gUnknown_081500C4 ((u8*)(GFX_BASE_ADDR + 0x200C4))
 
 #define gUnknown_081508C4 ((u8*)(GFX_BASE_ADDR + 0x208C4))

@@ -682,7 +682,7 @@ _0800DA20: .4byte gTestimonyProcessStates
 	thumb_func_start TestimonyInit
 TestimonyInit: @ 0x0800DA24
 	ldr r2, _0800DA50 @ =0x040000D4
-	ldr r1, _0800DA54 @ =gUnknown_081414FC
+	ldr r1, _0800DA54 @ =gGfx4bppTestimonyTextTiles
 	str r1, [r2]
 	ldr r1, _0800DA58 @ =0x06013000
 	str r1, [r2, #4]
@@ -704,7 +704,7 @@ TestimonyInit: @ 0x0800DA24
 	bx lr
 	.align 2, 0
 _0800DA50: .4byte 0x040000D4
-_0800DA54: .4byte gUnknown_081414FC
+_0800DA54: .4byte gGfx4bppTestimonyTextTiles
 _0800DA58: .4byte 0x06013000
 _0800DA5C: .4byte 0x80000400
 _0800DA60: .4byte gUnknown_0814DC20
