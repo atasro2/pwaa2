@@ -1,12 +1,11 @@
 #include "global.h"
 #include "court.h"
 
-/*
 void SetCurrentEpisodeBit()
 {
     struct Main * main = &gMain;
-	u8 mask;
-	u32 i;
+	u8 mask = 1;
+	u8 i;
     switch(main->scenarioIdx)
     {
         case 0:
@@ -49,11 +48,10 @@ void SetCurrentEpisodeBit()
     }
 	if((main->caseEnabledFlags >> 4) & mask) {
 		for(i = 0; i < 8; i++) {
-			main->unk100[i] = 0x100;
+			main->unk100[i] = ~0;
 		}
 	}
 }
-*/
 
 void (*gCourtProcessStates[])(struct Main *) = {
 	CourtInit,
@@ -61,7 +59,10 @@ void (*gCourtProcessStates[])(struct Main *) = {
 	CourtExit
 };
 
-// void CourtProcess(struct Main * main)
+void CourtProcess(struct Main * main)
+{
+    gCourtProcessStates[main->process[GAME_PROCESS_STATE]](main);
+}
 
 void (*gTestimonyProcessStates[])(struct Main *) = {
 	TestimonyInit,
