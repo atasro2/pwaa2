@@ -620,3 +620,252 @@ void QuestioningObjection(struct Main * main)
     }
     UpdateQuestioningMenuSprites(main, &gTestimony, 0);
 }
+
+
+void VerdictProcess(struct Main * main)
+{
+    u32 i;
+    s16 temp;
+    u32 temp2;
+    struct OamAttrs *oam = &gOamObjects[OAM_IDX_VERDICT_KANJI];
+    switch(main->process[GAME_PROCESS_STATE]) {
+        case VERDICT_SHRINK_KANJI1: { // B088
+            gMain.affineScale -= 0x10; // 1/16 steps 
+            if(gMain.affineScale <= Q_8_8(1.0)) 
+            {
+                temp = fix_inverse(Q_8_8(1.0));
+                gOamObjects[0].attr3 = fix_mul(_Cos(0), temp);
+                gOamObjects[1].attr3 = fix_mul(_Sin(0), temp);
+                gOamObjects[2].attr3 = fix_mul(-_Sin(0), temp);
+                gOamObjects[3].attr3 = fix_mul(_Cos(0), temp);
+                StartHardwareBlend(3, 1, 4, 0x1F);
+                PlaySE(SE02C_GAME_OVER);
+                main->process[GAME_PROCESS_STATE]++;
+                main->process[GAME_PROCESS_VAR1] = 0;
+            }
+            else {
+                temp = fix_inverse(main->affineScale);
+                gOamObjects[0].attr3 = fix_mul(_Cos(0), temp);
+                gOamObjects[1].attr3 = fix_mul(_Sin(0), temp);
+                gOamObjects[2].attr3 = fix_mul(-_Sin(0), temp);
+                gOamObjects[3].attr3 = fix_mul(_Cos(0), temp);
+            }
+            break;
+        }
+        case VERDICT_WAIT_INIT_KANJI2: { // B164
+            if(main->process[GAME_PROCESS_VAR1]++ > 40) {
+                gMain.affineScale = Q_8_8(2.5); // 2.5 times scale
+                oam++;
+                oam->attr0 = SPRITE_ATTR0(255-16, ST_OAM_AFFINE_DOUBLE, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+                oam->attr1 = SPRITE_ATTR1_AFFINE(128, 1, 3);
+                oam->attr2 = SPRITE_ATTR2(0x1E0, 0, 5);
+                temp = fix_inverse(main->affineScale);
+                gOamObjects[4].attr3 = fix_mul(_Cos(0), temp);
+                gOamObjects[5].attr3 = fix_mul(_Sin(0), temp);
+                gOamObjects[6].attr3 = fix_mul(-_Sin(0), temp);
+                gOamObjects[7].attr3 = fix_mul(_Cos(0), temp);
+                main->process[GAME_PROCESS_STATE]++;
+            }
+            break;
+        }
+        case VERDICT_SHRINK_KANJI2: { // B1FC
+            gMain.affineScale -= 0x10; // 1/16 steps
+            if(gMain.affineScale <= Q_8_8(1.0)) {
+                temp = fix_inverse(Q_8_8(1.0));
+                gOamObjects[4].attr3 = fix_mul(_Cos(0), temp);
+                gOamObjects[5].attr3 = fix_mul(_Sin(0), temp);
+                gOamObjects[6].attr3 = fix_mul(-_Sin(0), temp);
+                gOamObjects[7].attr3 = fix_mul(_Cos(0), temp);
+                StartHardwareBlend(3, 1, 4, 0x1F);
+                PlaySE(SE02C_GAME_OVER);
+                gMain.affineScale = Q_8_8(1.0);
+                main->process[GAME_PROCESS_STATE]++;
+                main->process[GAME_PROCESS_VAR1] = 0;
+            }
+            else {
+                temp = fix_inverse(main->affineScale);
+                gOamObjects[4].attr3 = fix_mul(_Cos(0), temp);
+                gOamObjects[5].attr3 = fix_mul(_Sin(0), temp);
+                gOamObjects[6].attr3 = fix_mul(-_Sin(0), temp);
+                gOamObjects[7].attr3 = fix_mul(_Cos(0), temp);
+            }
+            break;
+        }
+        case VERDICT_WAIT: { // B2E4
+            if(main->process[GAME_PROCESS_VAR1]++ > 64) {
+                main->process[GAME_PROCESS_STATE]++;
+                main->process[GAME_PROCESS_VAR1] = 0;
+            }
+            break;
+        }
+        case VERDICT_GROW_KANJI: { // B300
+            if(main->process[GAME_PROCESS_VAR1]++ > 32) {
+                oam->attr0 = SPRITE_ATTR0_CLEAR;
+                oam++;
+                oam->attr0 = SPRITE_ATTR0_CLEAR;
+                if(main->process[GAME_PROCESS_VAR2]) {
+                    main->process[GAME_PROCESS_STATE]++;
+                    main->process[GAME_PROCESS_VAR1] = 0;
+                    break;
+                }
+                RESTORE_PROCESS_PTR(main);
+            }
+            else {
+                main->affineScale += 8; // 1/32 steps
+                temp = fix_inverse(main->affineScale);
+                gOamObjects[0].attr3 = fix_mul(_Cos(0), temp);
+                gOamObjects[1].attr3 = fix_mul(_Sin(0), temp);
+                gOamObjects[2].attr3 = fix_mul(-_Sin(0), temp);
+                gOamObjects[3].attr3 = fix_mul(_Cos(0), temp);
+                gOamObjects[4].attr3 = fix_mul(_Cos(0), temp);
+                gOamObjects[5].attr3 = fix_mul(_Sin(0), temp);
+                gOamObjects[6].attr3 = fix_mul(-_Sin(0), temp);
+                gOamObjects[7].attr3 = fix_mul(_Cos(0), temp);
+                oam->attr0--;
+                oam++;
+                oam->attr0--;
+            }
+            break;
+        }
+        case VERDICT_INIT_CONFETTI: { // B3C8
+            DmaCopy16(3, gUnknown_08145CDC, OBJ_VRAM0+0x1F80, 0x20);
+            DmaCopy16(3, gUnknown_0814DFE0, OBJ_PLTT+0xA0, 0x80);
+            main->process[GAME_PROCESS_STATE]++;
+            break;
+        }
+        case VERDICT_DRAW_CONFETTI: { // B404
+            oam = &gOamObjects[OAM_IDX_CONFETTI];
+            for(i = 0; i < OAM_COUNT_CONFETTI; i++) 
+            {
+                temp2 = Random();
+                temp2 += i * 32;
+                temp2 &= 0x7F;
+                oam->attr0 = temp2;
+                temp2 = Random() & 0x1F;
+                temp2 += i * 32;
+                temp2 &= 0xFF;
+                oam->attr1 = temp2;
+                temp2 = ((Random() & 3) + 5);
+                temp2 <<= 12;
+                oam->attr2 = temp2 + 0xFC + (1 << 10); // random palette + tile 0xFC + priority
+                oam++;
+            }
+            PlaySE(SE03C_COURTROOM_AUDIENCE_VICTORY);
+            main->process[GAME_PROCESS_STATE]++;
+            break;
+        }
+        case VERDICT_ANIMATE_CONFETTI: { // B460
+            oam = &gOamObjects[OAM_IDX_CONFETTI];
+            if(main->process[GAME_PROCESS_VAR1]++ < 240)
+            {
+                for(i = 0; i < OAM_COUNT_CONFETTI; i++)
+                {
+                    
+                    u16 attr0, attr1;
+                    temp2 = oam->attr0;
+                    temp2 += Random() & 3;
+                    if(temp2 >= DISPLAY_HEIGHT+4)
+                        temp2 = 0;
+                    attr0 = oam->attr0 & ~0xFF;
+                    oam->attr0 = attr0 + temp2;
+                    temp2 = oam->attr1;
+                    if(Random() & 1)
+                        temp2 += Random() & 3;
+                    else
+                        temp2 -= Random() & 3;
+                    temp2 &= 0xFF;
+                    attr1 = oam->attr1 & ~0x1FF;
+                    oam->attr1 = attr1 + temp2;
+                    oam++;
+                }
+            }
+            else
+            {
+                for(i = 0; i < OAM_COUNT_CONFETTI; i++)
+                {
+                    oam->attr0 = SPRITE_ATTR0_CLEAR;
+                    oam++;
+                }
+                main->process[GAME_PROCESS_STATE]++;
+            }
+            break;
+        }
+        case VERDICT_NOTGUILTY_EXIT: { // B504
+            RESTORE_PROCESS_PTR(main);
+            break;
+        }
+    }
+}
+
+void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * testimony, u32 unk2) // questioning_menu_disp
+{
+    u32 i;
+    struct OamAttrs * oam;
+    if(gScriptContext.holdItSection == 0 || unk2 == 0)
+    {
+        oam = &gOamObjects[OAM_IDX_BUTTON_PROMPTS];
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam = &gOamObjects[OAM_IDX_HEALTH];
+        return;
+    }
+    if(testimony->displayState == 1)
+    {
+        if(testimony->pressPromptY > 224)
+            testimony->pressPromptY -= 2;
+        else
+            testimony->pressPromptY = 224;
+
+        if(testimony->presentPromptY > 224)
+            testimony->presentPromptY -= 2;
+        else
+            testimony->presentPromptY = 224;
+    }
+    else if(testimony->displayState == 0)
+    {
+        if(testimony->pressPromptY > 0)
+            testimony->pressPromptY += 2;
+
+        if(testimony->presentPromptY > 0)
+            testimony->presentPromptY += 2;
+    }
+    oam = &gOamObjects[OAM_IDX_BUTTON_PROMPTS];
+    if(gScriptContext.holdItSection < 0x80)
+    {
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+    }
+    else
+    {
+        u32 attr1; // needed for matching
+        oam->attr0 = testimony->pressPromptY | 0x4000;
+        attr1 = SPRITE_ATTR1_NONAFFINE(0, FALSE, FALSE, 2);
+        oam->attr1 = attr1;
+        oam->attr2 = SPRITE_ATTR2(0x180, 1, 5);
+        oam++;
+        oam->attr0 = testimony->pressPromptY | 0x4000;
+        attr1 = SPRITE_ATTR1_NONAFFINE(32, FALSE, FALSE, 2);
+        oam->attr1 = attr1;
+        oam->attr2 = SPRITE_ATTR2(0x188, 1, 5);
+        oam++;
+        oam->attr0 = testimony->presentPromptY | 0x4000;
+        attr1 = SPRITE_ATTR1_NONAFFINE(176, FALSE, FALSE, 2);
+        oam->attr1 = attr1;
+        oam->attr2 = SPRITE_ATTR2(0x190, 1, 5);
+        oam++;
+        oam->attr0 = testimony->presentPromptY | 0x4000;
+        attr1 = SPRITE_ATTR1_NONAFFINE(208, FALSE, FALSE, 2);
+        oam->attr1 = attr1;
+        oam->attr2 = SPRITE_ATTR2(0x198, 1, 5);
+    }
+}
