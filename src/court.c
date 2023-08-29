@@ -11,6 +11,7 @@
 #include "constants/process.h"
 #include "constants/songs.h"
 #include "constants/oam_allocations.h"
+#include "constants/persons.h"
 
 void SetCurrentEpisodeBit()
 {
@@ -398,4 +399,224 @@ void QuestioningInit(struct Main * main)
     gTestimony.displayState = 0;
     main->process[GAME_PROCESS_STATE] = QUESTIONING_ANIM;
     sub_80178E0();
+}
+
+void QuestioningMain(struct Main * main)
+{
+    struct OamAttrs * oam;
+
+    if(main->blendMode)
+        return;
+    if(gScriptContext.flags & (SCRIPT_SPOTSELECT_MOVE_TO_START | SCRIPT_SPOTSELECT_INPUT)) {
+        UpdateQuestioningMenuSprites(main, &gTestimony, 1);
+        return;
+    }
+    else if((gJoypad.pressedKeys & START_BUTTON))
+    {
+        if(!(main->gameStateFlags & 0x10) && gScriptContext.flags & (SCRIPT_LOOP | SCRIPT_FULLSCREEN | 1))
+        {
+            PauseBGM();
+            DmaCopy16(3, gOamObjects, gSaveDataBuffer.oam, sizeof(gOamObjects));
+            DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
+            if(gScriptContext.textboxState == 2 && gScriptContext.textboxYPos == 1) {
+                gSaveDataBuffer.main.showTextboxCharacters = 1;
+            }
+            PlaySE(SE007_MENU_OPEN_SUBMENU);
+            main->gameStateFlags &= ~1;
+            BACKUP_PROCESS_PTR(main);
+            SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 0, main);
+        }
+    }
+    else if(gScriptContext.flags & SCRIPT_LOOP)
+    {
+        u32 section;
+        if((gJoypad.pressedKeys & A_BUTTON) || (gJoypad.pressedKeys & DPAD_RIGHT))
+        {
+            if((gJoypad.pressedKeys & A_BUTTON) || gScriptContext.nextSection != main->unk1E)
+            {
+            section = gScriptContext.nextSection;
+            PlaySE(SE001_MENU_CONFIRM);
+            ChangeScriptSection(section);
+            RunScriptContext();
+            }
+        }
+        else if(gJoypad.pressedKeys & (B_BUTTON | DPAD_LEFT))
+        {
+            if(gScriptContext.currentSection-1 != main->testimonyBeginningSection)
+            {
+                section = gScriptContext.currentSection-1;
+                PlaySE(SE001_MENU_CONFIRM);
+                ChangeScriptSection(section);
+                RunScriptContext();
+            }
+        }
+        else if(gJoypad.pressedKeys & L_BUTTON)
+        {
+            if(gScriptContext.holdItSection != 0)
+            {
+                PlayAnimation(ANIM_HOLDIT_LEFT);
+                PlaySE(SE01D_VOICE_PHOENIX_HOLD_IT_JP);
+                StartHardwareBlend(3, 1, 4, 0x1F);
+                gTestimony.timer = 0x40;
+                gTestimony.pressPromptY = 0xE0;
+                gTestimony.presentPromptY = 0xE0;
+                gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
+                main->advanceScriptContext = FALSE;
+                main->showTextboxCharacters = FALSE;
+                SetTextboxNametag(0, 0);
+                main->process[GAME_PROCESS_STATE] = QUESTIONING_HOLD_IT;
+                main->process[GAME_PROCESS_VAR1] = 0;
+                return;
+            }
+        }
+        else if(gJoypad.pressedKeys & R_BUTTON)
+        {
+            sub_8017864();
+            PlaySE(SE007_MENU_OPEN_SUBMENU);
+            BACKUP_PROCESS_PTR(main);
+            SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 1, main);
+        }
+    }
+    else if((gJoypad.pressedKeys & R_BUTTON) &&
+    !(main->gameStateFlags & 0x10) &&
+    gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
+    {
+        sub_8017864();
+        PlaySE(SE007_MENU_OPEN_SUBMENU);
+        BACKUP_PROCESS_PTR(main);
+        SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
+    }
+    
+    UpdateQuestioningMenuSprites(main, &gTestimony, 1);
+
+    UpdateCourtRecordArrows(&gCourtRecord);
+    oam = gOamObjects + OAM_IDX_LR_ARROW;
+    if(gScriptContext.flags & SCRIPT_LOOP)
+    {
+        if(gScriptContext.currentSection-1 != main->testimonyBeginningSection)
+            oam->attr0 = SPRITE_ATTR0(128, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        else
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(0, FALSE, FALSE, 1);
+        oam->attr2 = SPRITE_ATTR2(0x1A0, 0, 2);
+        oam++;
+        if(gScriptContext.nextSection != main->unk1E)
+            oam->attr0 = SPRITE_ATTR0(128, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+        else
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-16, FALSE, FALSE, 1);
+        oam->attr2 = SPRITE_ATTR2(0x1A4, 0, 2);
+    }
+    else
+    {
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+        oam++;
+        oam->attr0 = SPRITE_ATTR0_CLEAR;
+    }
+}
+
+void QuestioningExit(struct Main * main) // ! why a nullsub??
+{
+
+}
+
+void QuestioningHoldIt(struct Main * main)
+{
+    switch(main->process[GAME_PROCESS_VAR1])
+    {
+        case 0:
+            if(gTestimony.timer == 0)
+            {
+                SetCourtScrollPersonAnim(0, 1, PERSON_ANIM_PHOENIX, 0);
+                InitCourtScroll(gUnknown_08478BDC, 0x1E, 0x1F, 1);
+                SlideTextbox(0);
+                main->process[GAME_PROCESS_VAR1]++;
+                break;
+            }
+            gTestimony.timer--;
+            break;
+        case 1:
+            if(gCourtScroll.state)
+                break;
+            if(gScriptContext.holdItFlag)
+            {
+                gMain.advanceScriptContext = TRUE;
+                gMain.showTextboxCharacters = TRUE;
+                gIORegisters.lcd_bg1vofs = 0;
+                gScriptContext.textboxState = 0;
+            }
+            else
+                SlideTextbox(1);
+            ChangeScriptSection(gScriptContext.holdItSection);
+            // gTestimony.healthPointX = 0xF0;
+            gTestimony.pressPromptY = 0xE0;
+            gTestimony.presentPromptY = 0xE0;
+            gTestimony.displayState = 0;
+            main->process[GAME_PROCESS_STATE] = QUESTIONING_MAIN;
+            main->process[GAME_PROCESS_VAR1] = 0;
+            break;
+        default:
+            break;
+    }
+    UpdateQuestioningMenuSprites(main, &gTestimony, 0);
+    gOamObjects[0].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[1].attr0 = SPRITE_ATTR0_CLEAR;
+}
+
+void QuestioningObjection(struct Main * main)
+{
+    switch(main->process[GAME_PROCESS_VAR1])
+    {
+        case 0:
+            if(gTestimony.timer == 0)
+            {
+                StartHardwareBlend(3, 1, 4, 0x1F);
+                gTestimony.timer = 0x40;
+                main->process[GAME_PROCESS_VAR1]++;
+                break;
+            }
+            gTestimony.timer--;
+            break;
+        case 1:
+            if(gTestimony.timer == 0)
+            {
+                SetCourtScrollPersonAnim(0, 1, PERSON_ANIM_PHOENIX, 0x12E0);
+                InitCourtScroll(gUnknown_08478BDC, 0x1E, 0x1F, 1);
+                SlideTextbox(0);
+                main->process[GAME_PROCESS_VAR1]++;
+                break;
+            }
+            gTestimony.timer--;
+            break;
+        case 2:
+            if(gCourtScroll.state)
+                break;
+            gTestimony.timer = 0x14;
+            main->process[GAME_PROCESS_VAR1]++;
+            break;
+        case 3:
+            if(gTestimony.timer == 0)
+            {
+                // gTestimony.healthPointX = 0xF0;
+                gTestimony.pressPromptY = 0xE0;
+                gTestimony.presentPromptY = 0xE0;
+                gTestimony.displayState = 0;
+                if(gScriptContext.slamDesk)
+                {
+                    gMain.advanceScriptContext = TRUE;
+                    gMain.showTextboxCharacters = TRUE;
+                    gIORegisters.lcd_bg1vofs = 0;
+                    gScriptContext.textboxState = 0;
+                }
+                else
+                    SlideTextbox(1);
+                RESTORE_PROCESS_PTR(main);
+                break;
+            } 
+            gTestimony.timer--;
+            break;
+        default:
+            break;
+    }
+    UpdateQuestioningMenuSprites(main, &gTestimony, 0);
 }
