@@ -885,7 +885,7 @@ void sub_800E7EC(s32 arg0, s32 arg1, u8 arg2)
     u32 i;
     oam = &gOamObjects[48];
     if(!(arg2 & 1)) {
-        for(i = 0; i < 4; i++) {
+        for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
         }
@@ -932,9 +932,9 @@ void sub_800E900(s32 arg0, s32 arg1, u8 arg2) {
     gOamObjects[1].attr3 = fix_mul(0, inverseOne);
     gOamObjects[2].attr3 = fix_mul(0, inverseOne);
     gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
-    oam = &gOamObjects[48];
+    oam = &gOamObjects[OAM_IDX_COURT_BENCH];
     if(!(arg2 & 1)) {
-        for(i = 0; i < 4; i++) {
+        for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
         }
@@ -957,9 +957,9 @@ void sub_800E9D4(s32 arg0, s32 arg1, u8 arg2)
     s16 inverseOne;
     u32 i;
     arg0 &= 0x1FF;
-    oam = &gOamObjects[48];
+    oam = &gOamObjects[OAM_IDX_COURT_BENCH];
     if(!(arg2 & 1)) {
-        for(i = 0; i < 4; i++) {
+        for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
         }
@@ -990,8 +990,8 @@ static void sub_800EAA4(void)
 {
     u32 i;
     struct OamAttrs * oam;
-    oam = &gOamObjects[48]; // TODO: needs a define
-    for(i = 0; i < 4; i++) {
+    oam = &gOamObjects[OAM_IDX_COURT_BENCH];
+    for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
         oam->attr0 |= 0x1000;
         oam++;
     }

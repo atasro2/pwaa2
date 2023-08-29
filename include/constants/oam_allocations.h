@@ -32,6 +32,9 @@
 #define OAM_IDX_VERDICT_KANJI 49
 #define OAM_COUNT_VERDICT_KANJI 2
 
+#define OAM_IDX_COURT_BENCH 48
+#define OAM_COUNT_COURT_BENCH 4
+
 // no better name. used as a middle man for shared sprite allocations
 #define OAM_IDX_GENERAL_USE_1 52
 #define OAM_COUNT_GENERAL_USE_1 4 // pray this is correct
