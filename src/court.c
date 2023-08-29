@@ -13,6 +13,8 @@
 #include "constants/oam_allocations.h"
 #include "constants/persons.h"
 
+static void sub_800EAA4(void);
+
 void SetCurrentEpisodeBit()
 {
     struct Main * main = &gMain;
@@ -876,22 +878,115 @@ void sub_800E7B0(void)
     DmaCopy16(3, gUnknown_0814E0E0, OBJ_PLTT+0x140, 0x20);
 }
 
-// void sub_800E7EC(u32, u32, u8)
+void sub_800E7EC(s32 arg0, s32 arg1, u8 arg2)
+{
+    struct OamAttrs * oam;
+    s16 inverseOne;
+    u32 i;
+    oam = &gOamObjects[48];
+    if(!(arg2 & 1)) {
+        for(i = 0; i < 4; i++) {
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+        }
+        return;
+    }
+    arg0 &= 0x1FF;
+    inverseOne = fix_inverse(0x100);
+    gOamObjects[0].attr3 = fix_mul(0x100, inverseOne);
+    gOamObjects[1].attr3 = fix_mul(0, inverseOne);
+    gOamObjects[2].attr3 = fix_mul(0, inverseOne);
+    gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
 
-/*
+    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 3);
+    oam->attr2 = SPRITE_ATTR2(0x100, 3, 10);
+    oam++;
+    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 64, FALSE, FALSE, 2);
+    oam->attr2 = SPRITE_ATTR2(0x120, 3, 10);
+    oam++;
+    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 96, TRUE, FALSE, 2);
+    oam->attr2 = SPRITE_ATTR2(0x120, 3, 10);
+    oam++;
+    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 128, TRUE, FALSE, 3);
+    oam->attr2 = SPRITE_ATTR2(0x100, 3, 10);
+}
+
+
 void sub_800E8C4(void)
 {
     DmaCopy16(3, gUnknown_081462FC, OBJ_VRAM0+0x2000, 0xD00);
     DmaCopy16(3, gUnknown_0814E100, OBJ_PLTT+0x140, 0x20);
 }
-*/
 
-// void sub_800E900(u32, u32, u8)
+void sub_800E900(s32 arg0, s32 arg1, u8 arg2) {
+    struct OamAttrs * oam;
+    s16 inverseOne;
+    s32 i;
+    arg0 &= 0x1FF;
+    inverseOne = fix_inverse(0x100);
+    gOamObjects[0].attr3 = fix_mul(0x100, inverseOne);
+    gOamObjects[1].attr3 = fix_mul(0, inverseOne);
+    gOamObjects[2].attr3 = fix_mul(0, inverseOne);
+    gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
+    oam = &gOamObjects[48];
+    if(!(arg2 & 1)) {
+        for(i = 0; i < 4; i++) {
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+        }
+        return;
+    }
+    for(i = 0; i < 3; i++) {        
+        oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 3) + i * 0x40;
+        oam->attr2 = SPRITE_ATTR2(0x100, 3, 10) + i * 0x20;
+        oam++;
+    }
+    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 2) + i * 0x40;
+    oam->attr2 = SPRITE_ATTR2(0x100, 3, 10) + i * 0x20;
+}
 
-// void sub_800E9D4(u32, u32, u8)
+void sub_800E9D4(s32 arg0, s32 arg1, u8 arg2)
+{
+    struct OamAttrs * oam;
+    s16 inverseOne;
+    u32 i;
+    arg0 &= 0x1FF;
+    oam = &gOamObjects[48];
+    if(!(arg2 & 1)) {
+        for(i = 0; i < 4; i++) {
+            oam->attr0 = SPRITE_ATTR0_CLEAR;
+            oam++;
+        }
+    } else {
+        inverseOne = fix_inverse(0x100);
+        gOamObjects[0].attr3 = fix_mul(0x100, inverseOne);
+        gOamObjects[1].attr3 = fix_mul(0, inverseOne);
+        gOamObjects[2].attr3 = fix_mul(0, inverseOne);
+        gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
 
-/*
-void sub_800EAA4(void)
+        oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, TRUE, FALSE, 2);
+        oam->attr2 = SPRITE_ATTR2(0x160, 3, 10);
+        oam++;
+        for(i = 0; i < 3; i++) {        
+            oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(16, TRUE, FALSE, 3) + i * 0x40 + arg0;
+            oam->attr2 = SPRITE_ATTR2(0x140, 3, 10) - i * 0x20;
+            oam++;
+        }
+    }
+    sub_800EAA4();
+}
+
+
+
+static void sub_800EAA4(void)
 {
     u32 i;
     struct OamAttrs * oam;
@@ -901,4 +996,4 @@ void sub_800EAA4(void)
         oam++;
     }
 }
-*/
+

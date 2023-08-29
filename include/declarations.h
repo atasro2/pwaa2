@@ -19,10 +19,10 @@ extern void sub_8007D30(struct Main * main);
 
 // investigation stuff 
 extern void sub_800E7B0(void);
-extern void sub_800E7EC(u32, u32, u8);
+extern void sub_800E7EC(s32, s32, u8);
 extern void sub_800E8C4(void);
-extern void sub_800E900(u32, u32, u8);
-extern void sub_800E9D4(u32, u32, u8);
+extern void sub_800E900(s32, s32, u8);
+extern void sub_800E9D4(s32, s32, u8);
 extern void sub_8010FA4(void);
 extern void sub_8011088(u16, u16);
 extern void sub_8011198(void);

@@ -40,7 +40,6 @@ SECTIONS {
         src/save_processes.o(.text);
         src/episode_load_processes.o(.text);
         src/court.o(.text);
-        asm/court.o(.text);
         src/investigation.o(.text);
         src/court_record.o(.text);
         src/sound.o(.text);
