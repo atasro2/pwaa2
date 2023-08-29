@@ -4,6 +4,7 @@
 enum {
     PERSON_ANIM_NONE,
     // TODO: fill in
+    PERSON_ANIM_PHOENIX = 3,
 };
 
 #endif//GUARD_CONST_PERSONS_H

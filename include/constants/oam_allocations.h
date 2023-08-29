@@ -32,6 +32,9 @@
 #define OAM_IDX_VERDICT_KANJI 49
 #define OAM_COUNT_VERDICT_KANJI 2
 
+#define OAM_IDX_COURT_BENCH 48
+#define OAM_COUNT_COURT_BENCH 4
+
 // no better name. used as a middle man for shared sprite allocations
 #define OAM_IDX_GENERAL_USE_1 52
 #define OAM_COUNT_GENERAL_USE_1 4 // pray this is correct
@@ -67,7 +70,7 @@
 #define OAM_IDX_MAP_MARKER OAM_IDX_GENERAL_2
 #define OAM_COUNT_MAP_MARKER 8
 
-#define OAM_IDX_CONFETTI OAM_IDX_GENERAL_2
+#define OAM_IDX_CONFETTI OAM_IDX_GENERAL_2+1
 #define OAM_COUNT_CONFETTI 31
 
 #define OAM_IDX_TEXT_FULLSCREEN OAM_IDX_GENERAL_2+1
