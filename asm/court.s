@@ -1,33 +1,6 @@
 	.include "asm/macros.inc"
 	.syntax unified
 
-	thumb_func_start sub_800E7B0
-sub_800E7B0: @ 0x0800E7B0
-	ldr r1, _0800E7D0 @ =0x040000D4
-	ldr r0, _0800E7D4 @ =gUnknown_08145CFC
-	str r0, [r1]
-	ldr r0, _0800E7D8 @ =0x06012000
-	str r0, [r1, #4]
-	ldr r0, _0800E7DC @ =0x80000300
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	ldr r0, _0800E7E0 @ =gUnknown_0814E0E0
-	str r0, [r1]
-	ldr r0, _0800E7E4 @ =0x05000340
-	str r0, [r1, #4]
-	ldr r0, _0800E7E8 @ =0x80000010
-	str r0, [r1, #8]
-	ldr r0, [r1, #8]
-	bx lr
-	.align 2, 0
-_0800E7D0: .4byte 0x040000D4
-_0800E7D4: .4byte gUnknown_08145CFC
-_0800E7D8: .4byte 0x06012000
-_0800E7DC: .4byte 0x80000300
-_0800E7E0: .4byte gUnknown_0814E0E0
-_0800E7E4: .4byte 0x05000340
-_0800E7E8: .4byte 0x80000010
-
 	thumb_func_start sub_800E7EC
 sub_800E7EC: @ 0x0800E7EC
 	push {r4, r5, r6, r7, lr}

@@ -869,3 +869,36 @@ void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * t
         oam->attr2 = SPRITE_ATTR2(0x198, 1, 5);
     }
 }
+
+void sub_800E7B0(void)
+{
+    DmaCopy16(3, gUnknown_08145CFC, OBJ_VRAM0+0x2000, 0x600);
+    DmaCopy16(3, gUnknown_0814E0E0, OBJ_PLTT+0x140, 0x20);
+}
+
+// void sub_800E7EC(u32, u32, u8)
+
+/*
+void sub_800E8C4(void)
+{
+    DmaCopy16(3, gUnknown_081462FC, OBJ_VRAM0+0x2000, 0xD00);
+    DmaCopy16(3, gUnknown_0814E100, OBJ_PLTT+0x140, 0x20);
+}
+*/
+
+// void sub_800E900(u32, u32, u8)
+
+// void sub_800E9D4(u32, u32, u8)
+
+/*
+void sub_800EAA4(void)
+{
+    u32 i;
+    struct OamAttrs * oam;
+    oam = &gOamObjects[48]; // TODO: needs a define
+    for(i = 0; i < 4; i++) {
+        oam->attr0 |= 0x1000;
+        oam++;
+    }
+}
+*/
