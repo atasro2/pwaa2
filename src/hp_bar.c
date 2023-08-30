@@ -126,237 +126,93 @@ void sub_801720C(int arg0, int arg1)
     }
 }
 
-NAKED u32 sub_80172B4(s16 arg0, s16 arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7)
+// ! i am still not sure whether this inline is real or not but it appears on 
+// the 2008 PC port of this code and is used like the function below soooo
+// important thing is that it matches! 
+static inline void SetHVScalingMatrix(u16 matrix, s16 horizontalScale, s16 verticalScale) {
+    gOamObjects[matrix*4 + 0].attr3 = fix_mul(_Cos(0), horizontalScale);
+    gOamObjects[matrix*4 + 1].attr3 = fix_mul(_Sin(0), verticalScale);
+    gOamObjects[matrix*4 + 2].attr3 = fix_mul(-_Sin(0), horizontalScale);
+    gOamObjects[matrix*4 + 3].attr3 = fix_mul(_Cos(0), verticalScale);
+}
+
+u32 sub_80172B4(s16 x, s16 y, int arg2, int tileId, int arg4, int arg5, int arg6, int arg7)
 {
-    asm_unified("	push {r4, r5, r6, r7, lr}\n\
-	mov r7, sl\n\
-	mov r6, sb\n\
-	mov r5, r8\n\
-	push {r5, r6, r7}\n\
-	sub sp, #0x18\n\
-	adds r7, r2, #0\n\
-	str r3, [sp, #8]\n\
-	ldr r6, [sp, #0x3c]\n\
-	lsls r0, r0, #0x10\n\
-	lsrs r0, r0, #0x10\n\
-	str r0, [sp]\n\
-	lsls r1, r1, #0x10\n\
-	lsrs r1, r1, #0x10\n\
-	str r1, [sp, #4]\n\
-	cmp r7, #0\n\
-	bge _080172D8\n\
-	movs r7, #0\n\
-_080172D8:\n\
-	ldr r0, [sp, #0x38]\n\
-	adds r0, r0, r6\n\
-	lsls r0, r0, #3\n\
-	ldr r5, _08017354 @ =gOamObjects\n\
-	adds r0, r0, r5\n\
-	mov sb, r0\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #1\n\
-	mov sl, r0\n\
-	ldr r4, _08017358 @ =gSineTable\n\
-	ldr r1, _0801735C @ =gSineTable+0x80\n\
-	movs r2, #0\n\
-	ldrsh r0, [r1, r2]\n\
-	mov r1, sl\n\
-	bl fix_mul\n\
-	strh r0, [r5, #6]\n\
-	movs r1, #0\n\
-	ldrsh r0, [r4, r1]\n\
-	mov r1, sl\n\
-	bl fix_mul\n\
-	strh r0, [r5, #0xe]\n\
-	ldrh r4, [r4]\n\
-	rsbs r0, r4, #0\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	mov r1, sl\n\
-	bl fix_mul\n\
-	strh r0, [r5, #0x16]\n\
-	ldr r2, _0801735C @ =gSineTable+0x80\n\
-	movs r1, #0\n\
-	ldrsh r0, [r2, r1]\n\
-	mov r1, sl\n\
-	bl fix_mul\n\
-	strh r0, [r5, #0x1e]\n\
-	subs r6, #1\n\
-	cmp r6, #0\n\
-	bge _0801732C\n\
-	movs r6, #0\n\
-_0801732C:\n\
-	mov sl, r6\n\
-	ldr r2, [sp, #8]\n\
-	lsls r0, r2, #0x10\n\
-	lsrs r5, r0, #0x10\n\
-	ldr r1, [sp, #0x40]\n\
-	lsls r0, r1, #0x10\n\
-	lsrs r4, r0, #4\n\
-	lsls r1, r6, #0x14\n\
-	ldr r2, [sp]\n\
-	lsls r0, r2, #0x10\n\
-	adds r2, r1, r0\n\
-	movs r3, #0xff\n\
-	ldr r0, [sp, #4]\n\
-	ands r3, r0\n\
-	movs r0, #0xc0\n\
-	lsls r0, r0, #2\n\
-	orrs r3, r0\n\
-	ldr r6, _08017360 @ =0x000001FF\n\
-	b _0801738E\n\
-	.align 2, 0\n\
-_08017354: .4byte gOamObjects\n\
-_08017358: .4byte gSineTable\n\
-_0801735C: .4byte gSineTable+0x80\n\
-_08017360: .4byte 0x000001FF\n\
-_08017364:\n\
-	lsrs r1, r2, #0x10\n\
-	mov r0, sb\n\
-	strh r3, [r0]\n\
-	ands r1, r6\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #7\n\
-	orrs r1, r0\n\
-	mov r0, sb\n\
-	strh r1, [r0, #2]\n\
-	ldr r0, _08017484 @ =0x000003FF\n\
-	ands r0, r5\n\
-	orrs r0, r4\n\
-	mov r1, sb\n\
-	strh r0, [r1, #4]\n\
-	movs r0, #8\n\
-	add sb, r0\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #0xd\n\
-	adds r2, r2, r1\n\
-	movs r0, #1\n\
-	add sl, r0\n\
-_0801738E:\n\
-	adds r0, r7, #0\n\
-	cmp r7, #0\n\
-	bge _08017396\n\
-	adds r0, #0xf\n\
-_08017396:\n\
-	asrs r0, r0, #4\n\
-	cmp sl, r0\n\
-	blt _08017364\n\
-	mov r1, sl\n\
-	cmp r1, #4\n\
-	bgt _08017470\n\
-	lsls r0, r0, #4\n\
-	subs r7, r7, r0\n\
-	cmp r7, #0\n\
-	beq _08017470\n\
-	ldr r2, [sp, #0x44]\n\
-	lsls r2, r2, #0x10\n\
-	str r2, [sp, #0x10]\n\
-	lsrs r0, r2, #0x10\n\
-	str r0, [sp, #0xc]\n\
-	lsls r0, r7, #0x14\n\
-	asrs r0, r0, #0x10\n\
-	bl fix_inverse\n\
-	adds r5, r0, #0\n\
-	ldr r1, _08017488 @ =gSineTable+0x80\n\
-	movs r2, #0\n\
-	ldrsh r0, [r1, r2]\n\
-	lsls r5, r5, #0x10\n\
-	asrs r5, r5, #0x10\n\
-	adds r1, r5, #0\n\
-	bl fix_mul\n\
-	ldr r1, _0801748C @ =gOamObjects\n\
-	mov r8, r1\n\
-	ldr r2, [sp, #0xc]\n\
-	lsls r1, r2, #5\n\
-	add r1, r8\n\
-	strh r0, [r1, #6]\n\
-	ldr r1, _08017490 @ =gSineTable\n\
-	movs r2, #0\n\
-	ldrsh r0, [r1, r2]\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #1\n\
-	bl fix_mul\n\
-	ldr r1, [sp, #0xc]\n\
-	lsls r4, r1, #2\n\
-	adds r1, r4, #1\n\
-	lsls r1, r1, #3\n\
-	add r1, r8\n\
-	strh r0, [r1, #6]\n\
-	ldr r2, _08017490 @ =gSineTable\n\
-	ldrh r2, [r2]\n\
-	rsbs r0, r2, #0\n\
-	lsls r0, r0, #0x10\n\
-	asrs r0, r0, #0x10\n\
-	adds r1, r5, #0\n\
-	bl fix_mul\n\
-	adds r1, r4, #2\n\
-	lsls r1, r1, #3\n\
-	add r1, r8\n\
-	strh r0, [r1, #6]\n\
-	ldr r1, _08017488 @ =gSineTable+0x80\n\
-	movs r2, #0\n\
-	ldrsh r0, [r1, r2]\n\
-	movs r1, #0x80\n\
-	lsls r1, r1, #1\n\
-	bl fix_mul\n\
-	adds r4, #3\n\
-	lsls r4, r4, #3\n\
-	add r4, r8\n\
-	strh r0, [r4, #6]\n\
-	mov r0, sl\n\
-	lsls r1, r0, #4\n\
-	movs r0, #0x10\n\
-	subs r0, r0, r7\n\
-	lsrs r0, r0, #1\n\
-	subs r1, r1, r0\n\
-	movs r0, #1\n\
-	ands r7, r0\n\
-	subs r1, r1, r7\n\
-	ldr r2, [sp]\n\
-	adds r1, r1, r2\n\
-	ldr r0, [sp, #0x40]\n\
-	lsls r3, r0, #0x10\n\
-	movs r0, #0xff\n\
-	ldr r2, [sp, #4]\n\
-	ands r0, r2\n\
-	movs r2, #0xc0\n\
-	lsls r2, r2, #2\n\
-	orrs r0, r2\n\
-	mov r2, sb\n\
-	strh r0, [r2]\n\
-	lsls r1, r1, #0x17\n\
-	lsrs r1, r1, #0x17\n\
-	ldr r0, [sp, #0xc]\n\
-	lsls r0, r0, #9\n\
-	str r0, [sp, #0x14]\n\
-	orrs r1, r0\n\
-	movs r0, #0x80\n\
-	lsls r0, r0, #7\n\
-	orrs r1, r0\n\
-	strh r1, [r2, #2]\n\
-	ldr r1, [sp, #8]\n\
-	lsls r0, r1, #0x16\n\
-	lsrs r0, r0, #0x16\n\
-	lsrs r3, r3, #4\n\
-	orrs r0, r3\n\
-	strh r0, [r2, #4]\n\
-	movs r2, #1\n\
-	add sl, r2\n\
-_08017470:\n\
-	mov r0, sl\n\
-	add sp, #0x18\n\
-	pop {r3, r4, r5}\n\
-	mov r8, r3\n\
-	mov sb, r4\n\
-	mov sl, r5\n\
-	pop {r4, r5, r6, r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_08017484: .4byte 0x000003FF\n\
-_08017488: .4byte gSineTable+0x80\n\
-_0801748C: .4byte gOamObjects\n\
-_08017490: .4byte gSineTable");
+    struct OamAttrs * oam;
+    s16 res;
+    s16 scale;
+    u32 temp;
+    s32 i;
+    if(arg2 < 0)
+        arg2 = 0;
+    oam = &gOamObjects[arg4 + arg5];
+    SetHVScalingMatrix(0, 0x100, 0x100);
+    
+    arg5--;
+    if(arg5 < 0)
+        arg5 = 0;
+        
+    for(i = arg5; i < (arg2 / 16); i++)
+    {
+        temp = i * 16;
+        {
+            u32 attr0, attr1, attr2;
+            u16 x2 = x + temp;
+            u16 y2 = y;
+            u16 tileId2 = tileId;
+            u16 pal = arg6;
+
+            oam->attr0 = y2;
+            oam->attr0 &= 0xFF;
+            attr0 = 0x300;
+            oam->attr0 |= attr0;
+            
+            attr1 = x2 & 0x1FF;
+            attr1 |= 0x4000;
+            oam->attr1 = attr1;
+            
+            attr2 = tileId2;
+            attr2 &= 0x3FF;
+            oam->attr2 = attr2 | pal << 12;
+        }
+        oam++;
+    }
+    if(i <= 4) {
+        temp = arg2 % 16;
+        if(temp) {
+            SetHVScalingMatrix(arg7, fix_inverse(temp*16), 0x100);            
+            {
+                u32 attr0, attr1, attr2;
+                u16 x2;
+                u16 y2;
+                u16 tileId2;
+                u16 palette;
+                u16 matrix = arg7;
+                x2 = i * 16 - (16 - temp) / 2 - temp % 2 + x;
+                y2 = y;
+                tileId2 = tileId;
+                palette = arg6;
+
+                attr0 = y2;
+                attr0 &= 0xFF;
+                attr0 |= 0x300;
+                oam->attr0 = attr0;
+
+                attr1 = x2;
+                attr1 &= 0x1FF;
+                attr1 |= matrix << 9;
+                attr1 |= 0x4000;
+                oam->attr1 = attr1;
+
+                attr2 = tileId2;
+                attr2 &= 0x3FF;
+                attr2 |= palette << 12;
+                oam->attr2 = attr2;
+            }
+            i++;
+        }
+    }
+    return i;
 }
 
 void sub_8017494(u16 pltt[][16], u16 slot)
