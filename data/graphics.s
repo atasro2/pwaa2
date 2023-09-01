@@ -1270,863 +1270,436 @@ gUnknown_081779E4:
 @ END EVIDENCE PROFILE DESCRIPTIONS
 
 @ BEGIN EVIDENCE PROFILE PICTURES
-    .global gUnknown_08177E28
-gUnknown_08177E28:
-    .global gUnknown_08177E28_pal
-gUnknown_08177E28_pal:
-    .incbin "graphics/evidence_profile_pictures/00177E28.gbapal"
-
-    .global gUnknown_08177E28_gfx
-gUnknown_08177E28_gfx:
-    .incbin "graphics/evidence_profile_pictures/00177E28.4bpp"
-
-    .global gUnknown_08178648_pal
-gUnknown_08178648_pal:
-    .incbin "graphics/evidence_profile_pictures/00178648.gbapal"
-
-    .global gUnknown_08178648_gfx
-gUnknown_08178648_gfx:
-    .incbin "graphics/evidence_profile_pictures/00178648.4bpp"
-
-    .global gUnknown_08178E68_pal
-gUnknown_08178E68_pal:
-    .incbin "graphics/evidence_profile_pictures/00178E68.gbapal"
-
-    .global gUnknown_08178E68_gfx
-gUnknown_08178E68_gfx:
-    .incbin "graphics/evidence_profile_pictures/00178E68.4bpp"
-
-    .global gUnknown_08179688_pal
-gUnknown_08179688_pal:
-    .incbin "graphics/evidence_profile_pictures/00179688.gbapal"
-
-    .global gUnknown_08179688_gfx
-gUnknown_08179688_gfx:
-    .incbin "graphics/evidence_profile_pictures/00179688.4bpp"
-
-    .global gUnknown_08179EA8_pal
-gUnknown_08179EA8_pal:
-    .incbin "graphics/evidence_profile_pictures/00179EA8.gbapal"
-
-    .global gUnknown_08179EA8_gfx
-gUnknown_08179EA8_gfx:
-    .incbin "graphics/evidence_profile_pictures/00179EA8.4bpp"
-
-    .global gUnknown_0817A6C8_pal
-gUnknown_0817A6C8_pal:
-    .incbin "graphics/evidence_profile_pictures/0017A6C8.gbapal"
-
-    .global gUnknown_0817A6C8_gfx
-gUnknown_0817A6C8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017A6C8.4bpp"
-
-    .global gUnknown_0817AEE8_pal
-gUnknown_0817AEE8_pal:
-    .incbin "graphics/evidence_profile_pictures/0017AEE8.gbapal"
-
-    .global gUnknown_0817AEE8_gfx
-gUnknown_0817AEE8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017AEE8.4bpp"
-
-    .global gUnknown_0817B708_pal
-gUnknown_0817B708_pal:
-    .incbin "graphics/evidence_profile_pictures/0017B708.gbapal"
-
-    .global gUnknown_0817B708_gfx
-gUnknown_0817B708_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017B708.4bpp"
-
-    .global gUnknown_0817BF28_pal
-gUnknown_0817BF28_pal:
-    .incbin "graphics/evidence_profile_pictures/0017BF28.gbapal"
-
-    .global gUnknown_0817BF28_gfx
-gUnknown_0817BF28_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017BF28.4bpp"
-
-    .global gUnknown_0817C748_pal
-gUnknown_0817C748_pal:
-    .incbin "graphics/evidence_profile_pictures/0017C748.gbapal"
-
-    .global gUnknown_0817C748_gfx
-gUnknown_0817C748_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017C748.4bpp"
-
-    .global gUnknown_0817CF68_pal
-gUnknown_0817CF68_pal:
-    .incbin "graphics/evidence_profile_pictures/0017CF68.gbapal"
-
-    .global gUnknown_0817CF68_gfx
-gUnknown_0817CF68_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017CF68.4bpp"
-
-    .global gUnknown_0817D788_pal
-gUnknown_0817D788_pal:
-    .incbin "graphics/evidence_profile_pictures/0017D788.gbapal"
-
-    .global gUnknown_0817D788_gfx
-gUnknown_0817D788_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017D788.4bpp"
-
-    .global gUnknown_0817DFA8_pal
-gUnknown_0817DFA8_pal:
-    .incbin "graphics/evidence_profile_pictures/0017DFA8.gbapal"
-
-    .global gUnknown_0817DFA8_gfx
-gUnknown_0817DFA8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017DFA8.4bpp"
-
-    .global gUnknown_0817E7C8_pal
-gUnknown_0817E7C8_pal:
-    .incbin "graphics/evidence_profile_pictures/0017E7C8.gbapal"
-
-    .global gUnknown_0817E7C8_gfx
-gUnknown_0817E7C8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017E7C8.4bpp"
-
-    .global gUnknown_0817EFE8_pal
-gUnknown_0817EFE8_pal:
-    .incbin "graphics/evidence_profile_pictures/0017EFE8.gbapal"
-
-    .global gUnknown_0817EFE8_gfx
-gUnknown_0817EFE8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017EFE8.4bpp"
-
-    .global gUnknown_0817F808_pal
-gUnknown_0817F808_pal:
-    .incbin "graphics/evidence_profile_pictures/0017F808.gbapal"
-
-    .global gUnknown_0817F808_gfx
-gUnknown_0817F808_gfx:
-    .incbin "graphics/evidence_profile_pictures/0017F808.4bpp"
-
-    .global gUnknown_08180028_pal
-gUnknown_08180028_pal:
-    .incbin "graphics/evidence_profile_pictures/00180028.gbapal"
-
-    .global gUnknown_08180028_gfx
-gUnknown_08180028_gfx:
-    .incbin "graphics/evidence_profile_pictures/00180028.4bpp"
-
-    .global gUnknown_08180848_pal
-gUnknown_08180848_pal:
-    .incbin "graphics/evidence_profile_pictures/00180848.gbapal"
-
-    .global gUnknown_08180848_gfx
-gUnknown_08180848_gfx:
-    .incbin "graphics/evidence_profile_pictures/00180848.4bpp"
-
-    .global gUnknown_08181068_pal
-gUnknown_08181068_pal:
-    .incbin "graphics/evidence_profile_pictures/00181068.gbapal"
-
-    .global gUnknown_08181068_gfx
-gUnknown_08181068_gfx:
-    .incbin "graphics/evidence_profile_pictures/00181068.4bpp"
-
-    .global gUnknown_08181888_pal
-gUnknown_08181888_pal:
-    .incbin "graphics/evidence_profile_pictures/00181888.gbapal"
-
-    .global gUnknown_08181888_gfx
-gUnknown_08181888_gfx:
-    .incbin "graphics/evidence_profile_pictures/00181888.4bpp"
-
-    .global gUnknown_081820A8_pal
-gUnknown_081820A8_pal:
-    .incbin "graphics/evidence_profile_pictures/001820A8.gbapal"
-
-    .global gUnknown_081820A8_gfx
-gUnknown_081820A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001820A8.4bpp"
-
-    .global gUnknown_081828C8_pal
-gUnknown_081828C8_pal:
-    .incbin "graphics/evidence_profile_pictures/001828C8.gbapal"
-
-    .global gUnknown_081828C8_gfx
-gUnknown_081828C8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001828C8.4bpp"
-
-    .global gUnknown_081830E8_pal
-gUnknown_081830E8_pal:
-    .incbin "graphics/evidence_profile_pictures/001830E8.gbapal"
-
-    .global gUnknown_081830E8_gfx
-gUnknown_081830E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001830E8.4bpp"
-
-    .global gUnknown_08183908_pal
-gUnknown_08183908_pal:
-    .incbin "graphics/evidence_profile_pictures/00183908.gbapal"
-
-    .global gUnknown_08183908_gfx
-gUnknown_08183908_gfx:
-    .incbin "graphics/evidence_profile_pictures/00183908.4bpp"
-
-    .global gUnknown_08184128_pal
-gUnknown_08184128_pal:
-    .incbin "graphics/evidence_profile_pictures/00184128.gbapal"
-
-    .global gUnknown_08184128_gfx
-gUnknown_08184128_gfx:
-    .incbin "graphics/evidence_profile_pictures/00184128.4bpp"
-
-    .global gUnknown_08184948_pal
-gUnknown_08184948_pal:
-    .incbin "graphics/evidence_profile_pictures/00184948.gbapal"
-
-    .global gUnknown_08184948_gfx
-gUnknown_08184948_gfx:
-    .incbin "graphics/evidence_profile_pictures/00184948.4bpp"
-
-    .global gUnknown_08185168_pal
-gUnknown_08185168_pal:
-    .incbin "graphics/evidence_profile_pictures/00185168.gbapal"
-
-    .global gUnknown_08185168_gfx
-gUnknown_08185168_gfx:
-    .incbin "graphics/evidence_profile_pictures/00185168.4bpp"
-
-    .global gUnknown_08185988_pal
-gUnknown_08185988_pal:
-    .incbin "graphics/evidence_profile_pictures/00185988.gbapal"
-
-    .global gUnknown_08185988_gfx
-gUnknown_08185988_gfx:
-    .incbin "graphics/evidence_profile_pictures/00185988.4bpp"
-
-    .global gUnknown_081861A8_pal
-gUnknown_081861A8_pal:
-    .incbin "graphics/evidence_profile_pictures/001861A8.gbapal"
-
-    .global gUnknown_081861A8_gfx
-gUnknown_081861A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001861A8.4bpp"
-
-    .global gUnknown_081869C8_pal
-gUnknown_081869C8_pal:
-    .incbin "graphics/evidence_profile_pictures/001869C8.gbapal"
-
-    .global gUnknown_081869C8_gfx
-gUnknown_081869C8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001869C8.4bpp"
-
-    .global gUnknown_081871E8_pal
-gUnknown_081871E8_pal:
-    .incbin "graphics/evidence_profile_pictures/001871E8.gbapal"
-
-    .global gUnknown_081871E8_gfx
-gUnknown_081871E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001871E8.4bpp"
-
-    .global gUnknown_08187A08_pal
-gUnknown_08187A08_pal:
-    .incbin "graphics/evidence_profile_pictures/00187A08.gbapal"
-
-    .global gUnknown_08187A08_gfx
-gUnknown_08187A08_gfx:
-    .incbin "graphics/evidence_profile_pictures/00187A08.4bpp"
-
-    .global gUnknown_08188228_pal
-gUnknown_08188228_pal:
-    .incbin "graphics/evidence_profile_pictures/00188228.gbapal"
-
-    .global gUnknown_08188228_gfx
-gUnknown_08188228_gfx:
-    .incbin "graphics/evidence_profile_pictures/00188228.4bpp"
-
-    .global gUnknown_08188A48_pal
-gUnknown_08188A48_pal:
-    .incbin "graphics/evidence_profile_pictures/00188A48.gbapal"
-
-    .global gUnknown_08188A48_gfx
-gUnknown_08188A48_gfx:
-    .incbin "graphics/evidence_profile_pictures/00188A48.4bpp"
-
-    .global gUnknown_08189268_pal
-gUnknown_08189268_pal:
-    .incbin "graphics/evidence_profile_pictures/00189268.gbapal"
-
-    .global gUnknown_08189268_gfx
-gUnknown_08189268_gfx:
-    .incbin "graphics/evidence_profile_pictures/00189268.4bpp"
-
-    .global gUnknown_08189A88_pal
-gUnknown_08189A88_pal:
-    .incbin "graphics/evidence_profile_pictures/00189A88.gbapal"
-
-    .global gUnknown_08189A88_gfx
-gUnknown_08189A88_gfx:
-    .incbin "graphics/evidence_profile_pictures/00189A88.4bpp"
-
-    .global gUnknown_0818A2A8_pal
-gUnknown_0818A2A8_pal:
-    .incbin "graphics/evidence_profile_pictures/0018A2A8.gbapal"
-
-    .global gUnknown_0818A2A8_gfx
-gUnknown_0818A2A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018A2A8.4bpp"
-
-    .global gUnknown_0818AAC8_pal
-gUnknown_0818AAC8_pal:
-    .incbin "graphics/evidence_profile_pictures/0018AAC8.gbapal"
-
-    .global gUnknown_0818AAC8_gfx
-gUnknown_0818AAC8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018AAC8.4bpp"
-
-    .global gUnknown_0818B2E8_pal
-gUnknown_0818B2E8_pal:
-    .incbin "graphics/evidence_profile_pictures/0018B2E8.gbapal"
-
-    .global gUnknown_0818B2E8_gfx
-gUnknown_0818B2E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018B2E8.4bpp"
-
-    .global gUnknown_0818BB08_pal
-gUnknown_0818BB08_pal:
-    .incbin "graphics/evidence_profile_pictures/0018BB08.gbapal"
-
-    .global gUnknown_0818BB08_gfx
-gUnknown_0818BB08_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018BB08.4bpp"
-
-    .global gUnknown_0818C328_pal
-gUnknown_0818C328_pal:
-    .incbin "graphics/evidence_profile_pictures/0018C328.gbapal"
-
-    .global gUnknown_0818C328_gfx
-gUnknown_0818C328_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018C328.4bpp"
-
-    .global gUnknown_0818CB48_pal
-gUnknown_0818CB48_pal:
-    .incbin "graphics/evidence_profile_pictures/0018CB48.gbapal"
-
-    .global gUnknown_0818CB48_gfx
-gUnknown_0818CB48_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018CB48.4bpp"
-
-    .global gUnknown_0818D368_pal
-gUnknown_0818D368_pal:
-    .incbin "graphics/evidence_profile_pictures/0018D368.gbapal"
-
-    .global gUnknown_0818D368_gfx
-gUnknown_0818D368_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018D368.4bpp"
-
-    .global gUnknown_0818DB88_pal
-gUnknown_0818DB88_pal:
-    .incbin "graphics/evidence_profile_pictures/0018DB88.gbapal"
-
-    .global gUnknown_0818DB88_gfx
-gUnknown_0818DB88_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018DB88.4bpp"
-
-    .global gUnknown_0818E3A8_pal
-gUnknown_0818E3A8_pal:
-    .incbin "graphics/evidence_profile_pictures/0018E3A8.gbapal"
-
-    .global gUnknown_0818E3A8_gfx
-gUnknown_0818E3A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018E3A8.4bpp"
-
-    .global gUnknown_0818EBC8_pal
-gUnknown_0818EBC8_pal:
-    .incbin "graphics/evidence_profile_pictures/0018EBC8.gbapal"
-
-    .global gUnknown_0818EBC8_gfx
-gUnknown_0818EBC8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018EBC8.4bpp"
-
-    .global gUnknown_0818F3E8_pal
-gUnknown_0818F3E8_pal:
-    .incbin "graphics/evidence_profile_pictures/0018F3E8.gbapal"
-
-    .global gUnknown_0818F3E8_gfx
-gUnknown_0818F3E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018F3E8.4bpp"
-
-    .global gUnknown_0818FC08_pal
-gUnknown_0818FC08_pal:
-    .incbin "graphics/evidence_profile_pictures/0018FC08.gbapal"
-
-    .global gUnknown_0818FC08_gfx
-gUnknown_0818FC08_gfx:
-    .incbin "graphics/evidence_profile_pictures/0018FC08.4bpp"
-
-    .global gUnknown_08190428_pal
-gUnknown_08190428_pal:
-    .incbin "graphics/evidence_profile_pictures/00190428.gbapal"
-
-    .global gUnknown_08190428_gfx
-gUnknown_08190428_gfx:
-    .incbin "graphics/evidence_profile_pictures/00190428.4bpp"
-
-    .global gUnknown_08190C48_pal
-gUnknown_08190C48_pal:
-    .incbin "graphics/evidence_profile_pictures/00190C48.gbapal"
-
-    .global gUnknown_08190C48_gfx
-gUnknown_08190C48_gfx:
-    .incbin "graphics/evidence_profile_pictures/00190C48.4bpp"
-
-    .global gUnknown_08191468_pal
-gUnknown_08191468_pal:
-    .incbin "graphics/evidence_profile_pictures/00191468.gbapal"
-
-    .global gUnknown_08191468_gfx
-gUnknown_08191468_gfx:
-    .incbin "graphics/evidence_profile_pictures/00191468.4bpp"
-
-    .global gUnknown_08191C88_pal
-gUnknown_08191C88_pal:
-    .incbin "graphics/evidence_profile_pictures/00191C88.gbapal"
-
-    .global gUnknown_08191C88_gfx
-gUnknown_08191C88_gfx:
-    .incbin "graphics/evidence_profile_pictures/00191C88.4bpp"
-
-    .global gUnknown_081924A8_pal
-gUnknown_081924A8_pal:
-    .incbin "graphics/evidence_profile_pictures/001924A8.gbapal"
-
-    .global gUnknown_081924A8_gfx
-gUnknown_081924A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001924A8.4bpp"
-
-    .global gUnknown_08192CC8_pal
-gUnknown_08192CC8_pal:
-    .incbin "graphics/evidence_profile_pictures/00192CC8.gbapal"
-
-    .global gUnknown_08192CC8_gfx
-gUnknown_08192CC8_gfx:
-    .incbin "graphics/evidence_profile_pictures/00192CC8.4bpp"
-
-    .global gUnknown_081934E8_pal
-gUnknown_081934E8_pal:
-    .incbin "graphics/evidence_profile_pictures/001934E8.gbapal"
-
-    .global gUnknown_081934E8_gfx
-gUnknown_081934E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001934E8.4bpp"
-
-    .global gUnknown_08193D08_pal
-gUnknown_08193D08_pal:
-    .incbin "graphics/evidence_profile_pictures/00193D08.gbapal"
-
-    .global gUnknown_08193D08_gfx
-gUnknown_08193D08_gfx:
-    .incbin "graphics/evidence_profile_pictures/00193D08.4bpp"
-
-    .global gUnknown_08194528_pal
-gUnknown_08194528_pal:
-    .incbin "graphics/evidence_profile_pictures/00194528.gbapal"
-
-    .global gUnknown_08194528_gfx
-gUnknown_08194528_gfx:
-    .incbin "graphics/evidence_profile_pictures/00194528.4bpp"
-
-    .global gUnknown_08194D48_pal
-gUnknown_08194D48_pal:
-    .incbin "graphics/evidence_profile_pictures/00194D48.gbapal"
-
-    .global gUnknown_08194D48_gfx
-gUnknown_08194D48_gfx:
-    .incbin "graphics/evidence_profile_pictures/00194D48.4bpp"
-
-    .global gUnknown_08195568_pal
-gUnknown_08195568_pal:
-    .incbin "graphics/evidence_profile_pictures/00195568.gbapal"
-
-    .global gUnknown_08195568_gfx
-gUnknown_08195568_gfx:
-    .incbin "graphics/evidence_profile_pictures/00195568.4bpp"
-
-    .global gUnknown_08195D88_pal
-gUnknown_08195D88_pal:
-    .incbin "graphics/evidence_profile_pictures/00195D88.gbapal"
-
-    .global gUnknown_08195D88_gfx
-gUnknown_08195D88_gfx:
-    .incbin "graphics/evidence_profile_pictures/00195D88.4bpp"
-
-    .global gUnknown_081965A8_pal
-gUnknown_081965A8_pal:
-    .incbin "graphics/evidence_profile_pictures/001965A8.gbapal"
-
-    .global gUnknown_081965A8_gfx
-gUnknown_081965A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001965A8.4bpp"
-
-    .global gUnknown_08196DC8_pal
-gUnknown_08196DC8_pal:
-    .incbin "graphics/evidence_profile_pictures/00196DC8.gbapal"
-
-    .global gUnknown_08196DC8_gfx
-gUnknown_08196DC8_gfx:
-    .incbin "graphics/evidence_profile_pictures/00196DC8.4bpp"
-
-    .global gUnknown_081975E8_pal
-gUnknown_081975E8_pal:
-    .incbin "graphics/evidence_profile_pictures/001975E8.gbapal"
-
-    .global gUnknown_081975E8_gfx
-gUnknown_081975E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001975E8.4bpp"
-
-    .global gUnknown_08197E08_pal
-gUnknown_08197E08_pal:
-    .incbin "graphics/evidence_profile_pictures/00197E08.gbapal"
-
-    .global gUnknown_08197E08_gfx
-gUnknown_08197E08_gfx:
-    .incbin "graphics/evidence_profile_pictures/00197E08.4bpp"
-
-    .global gUnknown_08198628_pal
-gUnknown_08198628_pal:
-    .incbin "graphics/evidence_profile_pictures/00198628.gbapal"
-
-    .global gUnknown_08198628_gfx
-gUnknown_08198628_gfx:
-    .incbin "graphics/evidence_profile_pictures/00198628.4bpp"
-
-    .global gUnknown_08198E48_pal
-gUnknown_08198E48_pal:
-    .incbin "graphics/evidence_profile_pictures/00198E48.gbapal"
-
-    .global gUnknown_08198E48_gfx
-gUnknown_08198E48_gfx:
-    .incbin "graphics/evidence_profile_pictures/00198E48.4bpp"
-
-    .global gUnknown_08199668_pal
-gUnknown_08199668_pal:
-    .incbin "graphics/evidence_profile_pictures/00199668.gbapal"
-
-    .global gUnknown_08199668_gfx
-gUnknown_08199668_gfx:
-    .incbin "graphics/evidence_profile_pictures/00199668.4bpp"
-
-    .global gUnknown_08199E88_pal
-gUnknown_08199E88_pal:
-    .incbin "graphics/evidence_profile_pictures/00199E88.gbapal"
-
-    .global gUnknown_08199E88_gfx
-gUnknown_08199E88_gfx:
-    .incbin "graphics/evidence_profile_pictures/00199E88.4bpp"
-
-    .global gUnknown_0819A6A8_pal
-gUnknown_0819A6A8_pal:
-    .incbin "graphics/evidence_profile_pictures/0019A6A8.gbapal"
-
-    .global gUnknown_0819A6A8_gfx
-gUnknown_0819A6A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019A6A8.4bpp"
-
-    .global gUnknown_0819AEC8_pal
-gUnknown_0819AEC8_pal:
-    .incbin "graphics/evidence_profile_pictures/0019AEC8.gbapal"
-
-    .global gUnknown_0819AEC8_gfx
-gUnknown_0819AEC8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019AEC8.4bpp"
-
-    .global gUnknown_0819B6E8_pal
-gUnknown_0819B6E8_pal:
-    .incbin "graphics/evidence_profile_pictures/0019B6E8.gbapal"
-
-    .global gUnknown_0819B6E8_gfx
-gUnknown_0819B6E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019B6E8.4bpp"
-
-    .global gUnknown_0819BF08_pal
-gUnknown_0819BF08_pal:
-    .incbin "graphics/evidence_profile_pictures/0019BF08.gbapal"
-
-    .global gUnknown_0819BF08_gfx
-gUnknown_0819BF08_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019BF08.4bpp"
-
-    .global gUnknown_0819C728_pal
-gUnknown_0819C728_pal:
-    .incbin "graphics/evidence_profile_pictures/0019C728.gbapal"
-
-    .global gUnknown_0819C728_gfx
-gUnknown_0819C728_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019C728.4bpp"
-
-    .global gUnknown_0819CF48_pal
-gUnknown_0819CF48_pal:
-    .incbin "graphics/evidence_profile_pictures/0019CF48.gbapal"
-
-    .global gUnknown_0819CF48_gfx
-gUnknown_0819CF48_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019CF48.4bpp"
-
-    .global gUnknown_0819D768_pal
-gUnknown_0819D768_pal:
-    .incbin "graphics/evidence_profile_pictures/0019D768.gbapal"
-
-    .global gUnknown_0819D768_gfx
-gUnknown_0819D768_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019D768.4bpp"
-
-    .global gUnknown_0819DF88_pal
-gUnknown_0819DF88_pal:
-    .incbin "graphics/evidence_profile_pictures/0019DF88.gbapal"
-
-    .global gUnknown_0819DF88_gfx
-gUnknown_0819DF88_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019DF88.4bpp"
-
-    .global gUnknown_0819E7A8_pal
-gUnknown_0819E7A8_pal:
-    .incbin "graphics/evidence_profile_pictures/0019E7A8.gbapal"
-
-    .global gUnknown_0819E7A8_gfx
-gUnknown_0819E7A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019E7A8.4bpp"
-
-    .global gUnknown_0819EFC8_pal
-gUnknown_0819EFC8_pal:
-    .incbin "graphics/evidence_profile_pictures/0019EFC8.gbapal"
-
-    .global gUnknown_0819EFC8_gfx
-gUnknown_0819EFC8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019EFC8.4bpp"
-
-    .global gUnknown_0819F7E8_pal
-gUnknown_0819F7E8_pal:
-    .incbin "graphics/evidence_profile_pictures/0019F7E8.gbapal"
-
-    .global gUnknown_0819F7E8_gfx
-gUnknown_0819F7E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/0019F7E8.4bpp"
-
-    .global gUnknown_081A0008_pal
-gUnknown_081A0008_pal:
-    .incbin "graphics/evidence_profile_pictures/001A0008.gbapal"
-
-    .global gUnknown_081A0008_gfx
-gUnknown_081A0008_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A0008.4bpp"
-
-    .global gUnknown_081A0828_pal
-gUnknown_081A0828_pal:
-    .incbin "graphics/evidence_profile_pictures/001A0828.gbapal"
-
-    .global gUnknown_081A0828_gfx
-gUnknown_081A0828_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A0828.4bpp"
-
-    .global gUnknown_081A1048_pal
-gUnknown_081A1048_pal:
-    .incbin "graphics/evidence_profile_pictures/001A1048.gbapal"
-
-    .global gUnknown_081A1048_gfx
-gUnknown_081A1048_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A1048.4bpp"
-
-    .global gUnknown_081A1868_pal
-gUnknown_081A1868_pal:
-    .incbin "graphics/evidence_profile_pictures/001A1868.gbapal"
-
-    .global gUnknown_081A1868_gfx
-gUnknown_081A1868_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A1868.4bpp"
-
-    .global gUnknown_081A2088_pal
-gUnknown_081A2088_pal:
-    .incbin "graphics/evidence_profile_pictures/001A2088.gbapal"
-
-    .global gUnknown_081A2088_gfx
-gUnknown_081A2088_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A2088.4bpp"
-
-    .global gUnknown_081A28A8_pal
-gUnknown_081A28A8_pal:
-    .incbin "graphics/evidence_profile_pictures/001A28A8.gbapal"
-
-    .global gUnknown_081A28A8_gfx
-gUnknown_081A28A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A28A8.4bpp"
-
-    .global gUnknown_081A30C8_pal
-gUnknown_081A30C8_pal:
-    .incbin "graphics/evidence_profile_pictures/001A30C8.gbapal"
-
-    .global gUnknown_081A30C8_gfx
-gUnknown_081A30C8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A30C8.4bpp"
-
-    .global gUnknown_081A38E8_pal
-gUnknown_081A38E8_pal:
-    .incbin "graphics/evidence_profile_pictures/001A38E8.gbapal"
-
-    .global gUnknown_081A38E8_gfx
-gUnknown_081A38E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A38E8.4bpp"
-
-    .global gUnknown_081A4108_pal
-gUnknown_081A4108_pal:
-    .incbin "graphics/evidence_profile_pictures/001A4108.gbapal"
-
-    .global gUnknown_081A4108_gfx
-gUnknown_081A4108_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A4108.4bpp"
-
-    .global gUnknown_081A4928_pal
-gUnknown_081A4928_pal:
-    .incbin "graphics/evidence_profile_pictures/001A4928.gbapal"
-
-    .global gUnknown_081A4928_gfx
-gUnknown_081A4928_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A4928.4bpp"
-
-    .global gUnknown_081A5148_pal
-gUnknown_081A5148_pal:
-    .incbin "graphics/evidence_profile_pictures/001A5148.gbapal"
-
-    .global gUnknown_081A5148_gfx
-gUnknown_081A5148_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A5148.4bpp"
-
-    .global gUnknown_081A5968_pal
-gUnknown_081A5968_pal:
-    .incbin "graphics/evidence_profile_pictures/001A5968.gbapal"
-
-    .global gUnknown_081A5968_gfx
-gUnknown_081A5968_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A5968.4bpp"
-
-    .global gUnknown_081A6188_pal
-gUnknown_081A6188_pal:
-    .incbin "graphics/evidence_profile_pictures/001A6188.gbapal"
-
-    .global gUnknown_081A6188_gfx
-gUnknown_081A6188_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A6188.4bpp"
-
-    .global gUnknown_081A69A8_pal
-gUnknown_081A69A8_pal:
-    .incbin "graphics/evidence_profile_pictures/001A69A8.gbapal"
-
-    .global gUnknown_081A69A8_gfx
-gUnknown_081A69A8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A69A8.4bpp"
-
-    .global gUnknown_081A71C8_pal
-gUnknown_081A71C8_pal:
-    .incbin "graphics/evidence_profile_pictures/001A71C8.gbapal"
-
-    .global gUnknown_081A71C8_gfx
-gUnknown_081A71C8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A71C8.4bpp"
-
-    .global gUnknown_081A79E8_pal
-gUnknown_081A79E8_pal:
-    .incbin "graphics/evidence_profile_pictures/001A79E8.gbapal"
-
-    .global gUnknown_081A79E8_gfx
-gUnknown_081A79E8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A79E8.4bpp"
-
-    .global gUnknown_081A8208_pal
-gUnknown_081A8208_pal:
-    .incbin "graphics/evidence_profile_pictures/001A8208.gbapal"
-
-    .global gUnknown_081A8208_gfx
-gUnknown_081A8208_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A8208.4bpp"
-
-    .global gUnknown_081A8A28_pal
-gUnknown_081A8A28_pal:
-    .incbin "graphics/evidence_profile_pictures/001A8A28.gbapal"
-
-    .global gUnknown_081A8A28_gfx
-gUnknown_081A8A28_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A8A28.4bpp"
-
-    .global gUnknown_081A9248_pal
-gUnknown_081A9248_pal:
-    .incbin "graphics/evidence_profile_pictures/001A9248.gbapal"
-
-    .global gUnknown_081A9248_gfx
-gUnknown_081A9248_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A9248.4bpp"
-
-    .global gUnknown_081A9A68_pal
-gUnknown_081A9A68_pal:
-    .incbin "graphics/evidence_profile_pictures/001A9A68.gbapal"
-
-    .global gUnknown_081A9A68_gfx
-gUnknown_081A9A68_gfx:
-    .incbin "graphics/evidence_profile_pictures/001A9A68.4bpp"
-
-    .global gUnknown_081AA288_pal
-gUnknown_081AA288_pal:
-    .incbin "graphics/evidence_profile_pictures/001AA288.gbapal"
-
-    .global gUnknown_081AA288_gfx
-gUnknown_081AA288_gfx:
-    .incbin "graphics/evidence_profile_pictures/001AA288.4bpp"
-
-    .global gUnknown_081AAAA8_pal
-gUnknown_081AAAA8_pal:
-    .incbin "graphics/evidence_profile_pictures/001AAAA8.gbapal"
-
-    .global gUnknown_081AAAA8_gfx
-gUnknown_081AAAA8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001AAAA8.4bpp"
-
-    .global gUnknown_081AB2C8_pal
-gUnknown_081AB2C8_pal:
-    .incbin "graphics/evidence_profile_pictures/001AB2C8.gbapal"
-
-    .global gUnknown_081AB2C8_gfx
-gUnknown_081AB2C8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001AB2C8.4bpp"
-
-    .global gUnknown_081ABAE8_pal
-gUnknown_081ABAE8_pal:
-    .incbin "graphics/evidence_profile_pictures/001ABAE8.gbapal"
-
-    .global gUnknown_081ABAE8_gfx
-gUnknown_081ABAE8_gfx:
-    .incbin "graphics/evidence_profile_pictures/001ABAE8.4bpp"
-
-    .global gUnknown_081AC308_pal
-gUnknown_081AC308_pal:
-    .incbin "graphics/evidence_profile_pictures/001AC308.gbapal"
-
-    .global gUnknown_081AC308_gfx
-gUnknown_081AC308_gfx:
-    .incbin "graphics/evidence_profile_pictures/001AC308.4bpp"
-
-    .global gUnknown_081ACB28_pal
-gUnknown_081ACB28_pal:
-    .incbin "graphics/evidence_profile_pictures/001ACB28.gbapal"
-
-    .global gUnknown_081ACB28_gfx
-gUnknown_081ACB28_gfx:
-    .incbin "graphics/evidence_profile_pictures/001ACB28.4bpp"
-
-    .global gUnknown_081AD348_pal
-gUnknown_081AD348_pal:
-    .incbin "graphics/evidence_profile_pictures/001AD348.gbapal"
-
-    .global gUnknown_081AD348_gfx
-gUnknown_081AD348_gfx:
-    .incbin "graphics/evidence_profile_pictures/001AD348.4bpp"
-
-    .global gUnknown_081ADB68_pal
-gUnknown_081ADB68_pal:
-    .incbin "graphics/evidence_profile_pictures/001ADB68.gbapal"
-
-    .global gUnknown_081ADB68_gfx
-gUnknown_081ADB68_gfx:
-    .incbin "graphics/evidence_profile_pictures/001ADB68.4bpp"
+    .global gGfxEvidenceProfilePictures
+gGfxEvidenceProfilePictures:
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_autopsy_report.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_autopsy_report.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_photo.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_photo.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/broken_glasses.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/broken_glasses.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/dustins_baseball_glove.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/dustins_baseball_glove.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_letter.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_letter.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/phoenix_cellphone.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/phoenix_cellphone.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/mayas_cellphone.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/mayas_cellphone.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/maya_fey.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/maya_fey.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/maggey_byrde.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/maggey_byrde.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/richard_wellington.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/richard_wellington.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/winston_payne.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/winston_payne.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/dick_gumshoe.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/dick_gumshoe.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/dustin_prince.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/dustin_prince.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/phoenix_business_card.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/phoenix_business_card.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_newspaper_clipping.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_newspaper_clipping.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/meeting_room_screen.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/meeting_room_screen.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/meeting_room_key.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/meeting_room_key.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/dummy_00180848.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/dummy_00180848.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/greys_gun.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/greys_gun.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/mayas_knife.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/mayas_knife.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/mayas_robe.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/mayas_robe.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/001828C8.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/001828C8.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/kurain_sacred_urn.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/kurain_sacred_urn.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/swatch_from_mayas_robe.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/swatch_from_mayas_robe.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/pearls_ball.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/pearls_ball.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/large_box.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/large_box.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/dummy_00185168.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/dummy_00185168.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/magatama_discharged.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/magatama_discharged.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/magatama_charged.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/magatama_charged.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/newspaper_article.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/newspaper_article.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/turner_grey.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/turner_grey.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/pearl_fey.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/pearl_fey.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/lotta_hart.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/lotta_hart.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/morgan_fey.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/morgan_fey.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/mimi_miney.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/mimi_miney.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/ini_miney.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/ini_miney.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/manfred_von_karma.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/manfred_von_karma.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/mia_fey.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/mia_fey.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/note_from_the_safe.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/note_from_the_safe.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/dr_hotti.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/dr_hotti.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/franziska_von_karma.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/franziska_von_karma.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/ami_fey.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/ami_fey.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/max_silk_hat.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/max_silk_hat.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/max_poster.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/max_poster.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/broken_bottle.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/broken_bottle.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/trilo.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/trilo.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/money.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/money.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/engagement_ring.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/engagement_ring.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/large_chest.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/large_chest.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/pepper.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/pepper.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/dummy_00191468.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/dummy_00191468.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/threatening_note_torn.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/threatening_note_torn.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/threatening_note_full.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/threatening_note_full.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/reginas_west.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/reginas_west.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/leon.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/leon.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bloody_scarf.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bloody_scarf.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/playing_cards.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/playing_cards.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/playing_card.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/playing_card.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/regent.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/regent.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/milk.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/milk.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/moes_grapes.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/moes_grapes.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/maximillion_galactica.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/maximillion_galactica.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/regina_berry.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/regina_berry.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/phoenix_badge.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/phoenix_badge.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/ben.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/ben.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/moe.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/moe.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/acro.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/acro.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/russell_berry.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/russell_berry.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/bat.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/bat.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/will_powers.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/will_powers.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/wendy_oldbag.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/wendy_oldbag.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/juan_corrida.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/juan_corrida.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/matt_engarde.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/matt_engarde.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/adrian_andrews.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/adrian_andrews.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/celeste_inpax.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/celeste_inpax.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/disguised_shelly_de_killer.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/disguised_shelly_de_killer.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/shelly_de_killer.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/shelly_de_killer.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/miles_edgeworth.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/profiles/miles_edgeworth.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/admission_ticket.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/admission_ticket.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/transceiver.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/transceiver.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/guitar_case.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/guitar_case.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/tomato_juice.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/tomato_juice.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/juans_autograph.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/juans_autograph.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/gossip_column.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/gossip_column.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_envelope.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_envelope.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/shellys_calling_card.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/shellys_calling_card.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/video_camera.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/video_camera.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/imported_bear.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/imported_bear.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/receipt.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/receipt.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bear_puzzle.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bear_puzzle.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/photo_of_celeste.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/photo_of_celeste.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/001A6188.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/001A6188.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/video_transmitter.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/video_transmitter.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/shoe.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/shoe.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/lottas_camera_case.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/lottas_camera_case.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/frequency_detector.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/frequency_detector.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/tracking_device.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/tracking_device.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/gumshoes_coat.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/gumshoes_coat.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bellboy_uniform.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bellboy_uniform.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/gatewater_hotel_button.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/gatewater_hotel_button.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_video.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_video.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/shelly_pistol.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/shelly_pistol.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/franziskas_whip.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/franziskas_whip.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bloody_button.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bloody_button.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_affidavit.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/generic_affidavit.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bloody_knife.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bloody_knife.4bpp"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bear_clock.gbapal"
+
+    .incbin "graphics/evidence_profile_pictures/evidence/bear_clock.4bpp"
 
 @ END EVIDENCE PROFILE PICTURES
 

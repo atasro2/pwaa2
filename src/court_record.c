@@ -1614,9 +1614,9 @@ void CourtRecordTakeThatSpecial(struct Main * main, struct CourtRecord * courtRe
                     temp2 = 6;
                 }
                 offset = gEvidenceProfileData[temp2].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-                temp = (uintptr_t)gUnknown_08177E28 + offset; //! Evil, uses a u32 for this pointer keep in mind and also global define
+                temp = (uintptr_t)gGfxEvidenceProfilePictures + offset; //! Evil, uses a u32 for this pointer keep in mind and also global define
                 DmaCopy16(3, temp, OBJ_PLTT+0x20, 0x20);
-                temp = (uintptr_t)gUnknown_08177E28 + offset + 0x20;
+                temp = (uintptr_t)gGfxEvidenceProfilePictures + offset + 0x20;
                 DmaCopy16(3, temp, OBJ_VRAM0+0x1000, TILE_SIZE_4BPP * 64);
                 oam->attr0 = SPRITE_ATTR0(16, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
                 oam->attr1 = SPRITE_ATTR1_NONAFFINE(88, FALSE, FALSE, 3);
@@ -1874,9 +1874,9 @@ void LoadEvidenceGraphics(u32 evidenceId)
     u8 * src;
 
     offset = gEvidenceProfileData[evidenceId].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-    src = gUnknown_08177E28 + offset;
+    src = gGfxEvidenceProfilePictures + offset;
     DmaCopy16(3, src, OBJ_PLTT+0x20, 0x20);
-    src = gUnknown_08177E28 + offset + 0x20;
+    src = gGfxEvidenceProfilePictures + offset + 0x20;
     DmaCopy16(3, src, OBJ_VRAM0+0x5000, TILE_SIZE_4BPP * 64);
     src = gEvidenceProfileData[evidenceId].descriptionTiles;
     LZ77UnCompWram(src, eUnknown_0200AFC0);
@@ -2268,9 +2268,9 @@ void LoadItemPlateGfx(struct Main * main)
     u8 * src;
 
     offset = gEvidenceProfileData[main->itemPlateEvidenceId].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-    src = gUnknown_08177E28 + offset;
+    src = gGfxEvidenceProfilePictures + offset;
     DmaCopy16(3, src, OBJ_PLTT+0x20, 0x20);
-    src = gUnknown_08177E28 + offset + 0x20;
+    src = gGfxEvidenceProfilePictures + offset + 0x20;
     DmaCopy16(3, src, OBJ_VRAM0+0x1000, TILE_SIZE_4BPP * 64);
 }
 
