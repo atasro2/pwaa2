@@ -6,7 +6,7 @@
 #include "case_data.h"
 #include "animation.h"
 
-const struct InvestigationPresentData gUnknown_080210F0[46] = {
+const struct InvestigationPresentData gInvestigationPresentData_3_4[46] = {
     {
         .roomId = 0x0,
         .roomseq = 0xFF,
@@ -423,7 +423,7 @@ const struct InvestigationPresentData gUnknown_080210F0[46] = {
     },
 };
 
-const struct TalkData gUnknown_08021318[14] = {
+const struct TalkData gTalkData_3_4[14] = {
     {
         .roomId = 0x0,
         .personId = 0xA,
@@ -552,7 +552,7 @@ const struct TalkData gUnknown_08021318[14] = {
     },
 };
 
-const u8 gUnknown_08021430[26][5] = {
+const u8 gRoomData_3_4[26][5] = {
     { 0x12, 0x01, 0x14, 0x0F, 0xFF },
 	{ 0x11, 0x00, 0x0F, 0xFF, 0xFF },
 	{ 0x22, 0x00, 0xFF, 0xFF, 0xFF },
@@ -581,7 +581,7 @@ const u8 gUnknown_08021430[26][5] = {
 	{ 0x60, 0x15, 0xFF, 0xFF, 0xFF },
 };
 
-const struct ExaminationData gUnknown_080214B4[5] = {
+const struct ExaminationData gExaminationData_3_4_00[5] = {
     {
         .examinationSection = 0x81,
         .type = 0x0,
@@ -639,7 +639,7 @@ const struct ExaminationData gUnknown_080214B4[5] = {
     },
 };
 
-const struct ExaminationData gUnknown_08021518[5] = {
+const struct ExaminationData gExaminationData_3_4_01[5] = {
     {
         .examinationSection = 0x9B,
         .type = 0x0,
@@ -697,7 +697,7 @@ const struct ExaminationData gUnknown_08021518[5] = {
     },
 };
 
-const struct ExaminationData gUnknown_0802157C[2] = {
+const struct ExaminationData gExaminationData_3_4_02[2] = {
     {
         .examinationSection = 0xA0,
         .type = 0x0,
@@ -722,7 +722,7 @@ const struct ExaminationData gUnknown_0802157C[2] = {
     },
 };
 
-const struct ExaminationData gUnknown_080215A4[10] = {
+const struct ExaminationData gExaminationData_3_4_03[10] = {
     {
         .examinationSection = 0xAD,
         .type = 0x0,
@@ -835,7 +835,7 @@ const struct ExaminationData gUnknown_080215A4[10] = {
     },
 };
 
-const struct ExaminationData gUnknown_0802166C[9] = {
+const struct ExaminationData gExaminationData_3_4_04[9] = {
     {
         .examinationSection = 0xB8,
         .type = 0x0,
@@ -937,7 +937,7 @@ const struct ExaminationData gUnknown_0802166C[9] = {
     },
 };
 
-const struct ExaminationData gUnknown_08021720[9] = {
+const struct ExaminationData gExaminationData_3_4_05[9] = {
     {
         .examinationSection = 0xB8,
         .type = 0x0,
@@ -1039,7 +1039,7 @@ const struct ExaminationData gUnknown_08021720[9] = {
     },
 };
 
-const struct ExaminationData gUnknown_080217D4[8] = {
+const struct ExaminationData gExaminationData_3_4_06[8] = {
     {
         .examinationSection = 0xA6,
         .type = 0x0,
@@ -1130,7 +1130,7 @@ const struct ExaminationData gUnknown_080217D4[8] = {
     },
 };
 
-const struct ExaminationData gUnknown_08021874[19] = {
+const struct ExaminationData gExaminationData_3_4_07[19] = {
     {
         .examinationSection = 0xCD,
         .type = 0x0,
@@ -1342,7 +1342,7 @@ const struct ExaminationData gUnknown_08021874[19] = {
     },
 };
 
-const struct ExaminationData gUnknown_080219F0[7] = {
+const struct ExaminationData gExaminationData_3_4_08[7] = {
     {
         .examinationSection = 0xF5,
         .type = 0x0,
@@ -1422,7 +1422,7 @@ const struct ExaminationData gUnknown_080219F0[7] = {
     },
 };
 
-const struct ExaminationData gUnknown_08021A7C[4] = {
+const struct ExaminationData gExaminationData_3_4_09[4] = {
     {
         .examinationSection = 0x10D,
         .type = 0x0,
@@ -1469,7 +1469,7 @@ const struct ExaminationData gUnknown_08021A7C[4] = {
     },
 };
 
-const struct ExaminationData gUnknown_08021ACC[7] = {
+const struct ExaminationData gExaminationData_3_4_10[7] = {
     {
         .examinationSection = 0x11D,
         .type = 0x0,
@@ -1549,7 +1549,7 @@ const struct ExaminationData gUnknown_08021ACC[7] = {
     },
 };
 
-const struct ExaminationData gUnknown_08021B58[8] = {
+const struct ExaminationData gExaminationData_3_4_11[8] = {
     {
         .examinationSection = 0x113,
         .type = 0x0,
@@ -1640,7 +1640,7 @@ const struct ExaminationData gUnknown_08021B58[8] = {
     },
 };
 
-const struct ExaminationData gUnknown_08021BF8[6] = {
+const struct ExaminationData gExaminationData_3_4_12[6] = {
     {
         .examinationSection = 0xFE,
         .type = 0x0,
@@ -1710,8 +1710,8 @@ const struct ExaminationData gUnknown_08021BF8[6] = {
 };
 
 void InvestigationSegmentSetup_3_4(struct Main *main) {
-    DmaCopy16(3, gUnknown_08021430, gMain.roomData, sizeof(gUnknown_08021430));
-    DmaCopy16(3, gUnknown_08021318, gTalkData, sizeof(gUnknown_08021318));
+    DmaCopy16(3, gRoomData_3_4, gMain.roomData, sizeof(gRoomData_3_4));
+    DmaCopy16(3, gTalkData_3_4, gTalkData, sizeof(gTalkData_3_4));
     main->currentRoomId = 0;
 }
 
@@ -1728,10 +1728,10 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
                     PlayBGM(1);
                 }
                 if(!GetFlag(0, 0x95)) {
-                    LOADEXAMDATA(gUnknown_080214B4);
+                    LOADEXAMDATA(gExaminationData_3_4_00);
                 }
                 else {
-                    LOADEXAMDATA(gUnknown_08021518);
+                    LOADEXAMDATA(gExaminationData_3_4_01);
                 }
             }
             else {
@@ -1739,7 +1739,7 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
                     InvestigationSetPersonAnimation(0xA, 0xB48, 0xB48);
                     PlayBGM(1);
                 }
-                LOADEXAMDATA(gUnknown_080214B4);
+                LOADEXAMDATA(gExaminationData_3_4_00);
             }
             break;
         }
@@ -1752,7 +1752,7 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
             else if(!GetFlag(0, 0x9D)) {
                 InvestigationSetScriptSectionAndFlag(0x9F, 0x9D);
             }
-            LOADEXAMDATA(gUnknown_0802157C);
+            LOADEXAMDATA(gExaminationData_3_4_02);
             break;
         }
         case 19: {
@@ -1762,21 +1762,21 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
             else {
                 PlayBGM(0xD7);
             }
-            LOADEXAMDATA(gUnknown_080215A4);
+            LOADEXAMDATA(gExaminationData_3_4_03);
             break;
         }
         case 18: {
             if(!GetFlag(0, 0xA0)) {
                 InvestigationSetScriptSectionAndFlag(0xB3, 0xA0);
-                LOADEXAMDATA(gUnknown_0802166C);
+                LOADEXAMDATA(gExaminationData_3_4_04);
             }
             else if(!GetFlag(0, 0xBB)) {
                 InvestigationSetPersonAnimation(0x18, 0, 0);
                 PlayBGM(0x16);
-                LOADEXAMDATA(gUnknown_0802166C);
+                LOADEXAMDATA(gExaminationData_3_4_04);
             }
             else {
-                LOADEXAMDATA(gUnknown_08021720);
+                LOADEXAMDATA(gExaminationData_3_4_05);
             }
             break;
         }
@@ -1788,7 +1788,7 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
                 InvestigationSetPersonAnimation(0x27, 0, 0);
                 PlayBGM(0xDA);
             }
-            LOADEXAMDATA(gUnknown_080217D4);
+            LOADEXAMDATA(gExaminationData_3_4_06);
             break;
         }
         case 17: {
@@ -1816,14 +1816,14 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
                 }
                 InvestigationSetPersonAnimation(0x4027, 0, 0);
             }
-            LOADEXAMDATA(gUnknown_08021874);
+            LOADEXAMDATA(gExaminationData_3_4_07);
             break;
         }
         case 15: {
             if(!GetFlag(0, 0xA4)) {
                 InvestigationSetScriptSectionAndFlag(0xF4, 0xA4);
             }
-            LOADEXAMDATA(gUnknown_080219F0);
+            LOADEXAMDATA(gExaminationData_3_4_08);
             break;
         }
         case 22: {
@@ -1834,7 +1834,7 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
                 InvestigationSetPersonAnimation(0x25, 0, 0);
                 PlayBGM(0xD3);
             }
-            LOADEXAMDATA(gUnknown_08021ACC);
+            LOADEXAMDATA(gExaminationData_3_4_10);
             break;
         }
         case 21: {
@@ -1846,7 +1846,7 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
                 PlayAnimation(0x1E);
                 PlayBGM(0xD3);
             }
-            LOADEXAMDATA(gUnknown_08021B58);
+            LOADEXAMDATA(gExaminationData_3_4_11);
             break;
         }
         case 2: {
@@ -1865,14 +1865,14 @@ void InvestigationRoomSetup_3_4(struct Main *main) {
             else if(!GetFlag(0, 0xA9)) {
                 InvestigationSetScriptSectionAndFlag(0xFC, 0xA9);
             }
-            LOADEXAMDATA(gUnknown_08021BF8);
+            LOADEXAMDATA(gExaminationData_3_4_12);
             break;
         }
         case 25: {
             if(!GetFlag(0, 0xA6)) {
                 InvestigationSetScriptSectionAndFlag(0x10B, 0xA6);
             }
-            LOADEXAMDATA(gUnknown_08021A7C);
+            LOADEXAMDATA(gExaminationData_3_4_09);
             break;
         }
     }
@@ -1882,13 +1882,13 @@ void InvestigationRoomUpdate_3_4(struct Main *main) {
     switch(main->currentRoomId) {
         case 0: {
             if(GetFlag(0, 0x95)) {
-                LOADEXAMDATA(gUnknown_08021518);
+                LOADEXAMDATA(gExaminationData_3_4_01);
             }
             break;
         }
         case 18: {
             if(GetFlag(0, 0xBB)) {
-                LOADEXAMDATA(gUnknown_08021720);
+                LOADEXAMDATA(gExaminationData_3_4_05);
             }
             break;
         }

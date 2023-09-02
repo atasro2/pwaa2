@@ -256,7 +256,7 @@ void SaveGameInit2(struct Main *main)
     DmaCopy16(3, &gCourtScroll, &gSaveDataBuffer.courtScroll, sizeof(gCourtScroll))
     DmaCopy16(3, gExaminationData, gSaveDataBuffer.examinationData, sizeof(gExaminationData));
     DmaCopy16(3, gTalkData, gSaveDataBuffer.talkData, sizeof(gTalkData));
-    DmaCopy16(3, gUnknown_03003B70, gSaveDataBuffer.unknown3003B70, sizeof(gUnknown_03003B70));
+    DmaCopy16(3, gLoadedPsycheLockedTalkSections, gSaveDataBuffer.loadedPsycheLockedTalkSections, sizeof(gLoadedPsycheLockedTalkSections));
     DmaCopy16(3, gGfxNewGameContinue, OBJ_VRAM0 + 0x3800, 0x400);
     DmaCopy16(3, gPalNewGameContinue, OBJ_PLTT + 0x100, 0xC0);
     DmaCopy16(3, gGfxSaveYesNo, OBJ_VRAM0 + 0x3C00, 0x800);
@@ -451,7 +451,7 @@ void SaveGameExitSaveScreen(struct Main *main)
     DmaCopy16(3, &gSaveDataBuffer.ioRegs, &gIORegisters, sizeof(gIORegisters));
     DmaCopy16(3, gSaveDataBuffer.mapMarker, gMapMarker, sizeof(gMapMarker));
     DmaCopy16(3, gSaveDataBuffer.talkData, gTalkData, sizeof(gTalkData));
-    DmaCopy16(3, gSaveDataBuffer.unknown3003B70, gUnknown_03003B70, sizeof(gUnknown_03003B70));
+    DmaCopy16(3, gSaveDataBuffer.loadedPsycheLockedTalkSections, gLoadedPsycheLockedTalkSections, sizeof(gLoadedPsycheLockedTalkSections));
     main->advanceScriptContext = gSaveDataBuffer.main.advanceScriptContext;
     main->showTextboxCharacters = gSaveDataBuffer.main.showTextboxCharacters;
     main->gameStateFlags = gSaveDataBuffer.main.gameStateFlags;

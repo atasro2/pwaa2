@@ -2478,8 +2478,8 @@ bool32 Command58(struct ScriptContext *scriptCtx)
 bool32 Command59(struct ScriptContext *scriptCtx)
 {
     scriptCtx->scriptPtr++;
-    gMain.unk276[gMain.unk286] = gUnknown_03003B70[*scriptCtx->scriptPtr];
-    gMain.unk286++;
+    gMain.psycheLockedTalkSections[gMain.numPsycheLockedTalkSections] = gLoadedPsycheLockedTalkSections[*scriptCtx->scriptPtr];
+    gMain.numPsycheLockedTalkSections++;
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2489,18 +2489,18 @@ bool32 Command5A(struct ScriptContext *scriptCtx)
 
     u16 i, j, k;
     scriptCtx->scriptPtr++;
-    for(i = 0; i < gMain.unk286; i++) {
-        if(gMain.unk276[i] == gUnknown_03003B70[*scriptCtx->scriptPtr])
-            gMain.unk276[i] = 0;
+    for(i = 0; i < gMain.numPsycheLockedTalkSections; i++) {
+        if(gMain.psycheLockedTalkSections[i] == gLoadedPsycheLockedTalkSections[*scriptCtx->scriptPtr])
+            gMain.psycheLockedTalkSections[i] = 0;
     }
-    for(i = 0; i < gMain.unk286; i++) {
-        if(gMain.unk276[i] == 0) {
-            for(j = i+1, k = i; j < gMain.unk286; j++, k++) {
-                gMain.unk276[k] = gMain.unk276[j];
+    for(i = 0; i < gMain.numPsycheLockedTalkSections; i++) {
+        if(gMain.psycheLockedTalkSections[i] == 0) {
+            for(j = i+1, k = i; j < gMain.numPsycheLockedTalkSections; j++, k++) {
+                gMain.psycheLockedTalkSections[k] = gMain.psycheLockedTalkSections[j];
             }
         }
     }
-    gMain.unk286--;
+    gMain.numPsycheLockedTalkSections--;
     scriptCtx->scriptPtr++;
     return 0;
 }

@@ -5,38 +5,38 @@
 #include "sound.h"
 #include "case_data.h"
 
-const u8 gUnknown_0801FA34[2] = {
+const u8 gCourtRecordInitialItems_3_0[2] = {
     0xFE, 0xFF,
 };
 
-const u8 gUnknown_0801FA36[15] = {
+const u8 gCourtRecordInitialItems_3_1[15] = {
     0x3C, 0x16, 0x02, 0x62, 0x64, 0x65, 0x67, 0x63, 0xFE, 0x05, 0x2B, 0x9A, 0x6E, 0x70, 0xFF,
 };
 
-const u8 gUnknown_0801FA45[27] = {
+const u8 gCourtRecordInitialItems_3_2[27] = {
     0x3C, 0x16, 0x02, 0x3E, 0x6D, 0x62, 0x64, 0x65, 0x67, 0x63, 0x68, 0x69, 0xFE, 0x05, 0x2B, 0x9A, 0x6E, 0x70, 0x72, 0x7C, 0x73, 0x74, 0x76, 0x78, 0x79, 0x7A, 0xFF,
 };
 
-const u8 gUnknown_0801FA60[31] = {
+const u8 gCourtRecordInitialItems_3_3[31] = {
     0x3C, 0x16, 0x02, 0x3E, 0x6D, 0x62, 0x64, 0x65, 0x67, 0x63, 0x68, 0x69, 0xFE, 0x05, 0x2B, 0x9A, 0x6E, 0x70, 0x72, 0x7C, 0x73, 0x75, 0x9B, 0x78, 0x77, 0x79, 0x7A, 0x7D, 0x7E, 0x7F, 0xFF,
 };
 
-const u8 gUnknown_0801FA7F[31] = {
+const u8 gCourtRecordInitialItems_3_4[31] = {
     0x3C, 0x16, 0x02, 0x3E, 0x6D, 0x62, 0x64, 0x65, 0x67, 0x63, 0x68, 0x69, 0xFE, 0x05, 0x2B, 0x9A, 0x6E, 0x70, 0x72, 0x7C, 0x73, 0x75, 0x9B, 0x78, 0x77, 0x79, 0x7A, 0x7D, 0x7E, 0x7F, 0xFF,
 };
 
-const u8 gUnknown_0801FA9E[33] = {
+const u8 gCourtRecordInitialItems_3_5[33] = {
     0x3C, 0x16, 0x02, 0x3E, 0x6D, 0x62, 0x64, 0x65, 0x67, 0x63, 0x68, 0x69, 0x6C, 0xFE, 0x05, 0x2B, 0x9A, 0x6E, 0x70, 0x72, 0x7C, 0x73, 0x75, 0x9B, 0x78, 0x77, 0x79, 0x7A, 0x7D, 0x7E, 0x7F, 0x80, 0xFF,
 };
 
-const u8 gUnknown_0801FABF[39] = {
+const u8 gCourtRecordInitialItems_3_6[39] = {
     0x3C, 0x16, 0x02, 0x3E, 0x6D, 0x62, 0x64, 0x65, 0x67, 0x63, 0x68, 0x69, 0x6C, 0xFE, 0x05, 0x2B, 0x9A, 0x6E, 0x70, 0x72, 0x7C, 0x73, 0x75, 0x9B, 0x78, 0x77, 0x79, 0x7A, 0x7D, 0x7E, 0x7F, 0x80, 0x82, 0x83, 0x84, 0x85, 0x88, 0x86, 0xFF,
 };
 
-const u8 gUnknown_0801FAE6[42] = {
+const u8 gCourtRecordInitialItems_3_7[42] = {
     0x3C, 0x16, 0x02, 0x3E, 0x6D, 0x62, 0x64, 0x65, 0x67, 0x63, 0x68, 0x69, 0x6C, 0xFE, 0x05, 0x2B, 0x9A, 0x6E, 0x70, 0x72, 0x7C, 0x73, 0x75, 0x9B, 0x78, 0x77, 0x79, 0x7A, 0x7D, 0x7E, 0x7F, 0x80, 0x82, 0x83, 0x84, 0x85, 0x88, 0x87, 0x89, 0xFF, 0x00, 0x00,
 };
-const struct CourtPresentData gUnknown_0801FB10[10] = {
+const struct CourtPresentData gCourtPresentData_3_1[10] = {
     {
         .presentingSection = 0x94,
         .evidenceId = 0x7E,
@@ -109,7 +109,7 @@ const struct CourtPresentData gUnknown_0801FB10[10] = {
     },
 };
 
-const struct CourtPresentData gUnknown_0801FB60[18] = {
+const struct CourtPresentData gCourtPresentData_3_3[18] = {
     {
         .presentingSection = 0x85,
         .evidenceId = 0x75,
@@ -238,7 +238,7 @@ const struct CourtPresentData gUnknown_0801FB60[18] = {
     },
 };
 
-const struct CourtPresentData gUnknown_0801FBF0[7] = {
+const struct CourtPresentData gCourtPresentData_3_5[7] = {
     {
         .presentingSection = 0xA4,
         .evidenceId = 0x78,
@@ -290,7 +290,7 @@ const struct CourtPresentData gUnknown_0801FBF0[7] = {
     },
 };
 
-const struct CourtPresentData gUnknown_0801FC28[14] = {
+const struct CourtPresentData gCourtPresentData_3_7[14] = {
     {
         .presentingSection = 0x83,
         .evidenceId = 0x82,
@@ -391,7 +391,7 @@ const struct CourtPresentData gUnknown_0801FC28[14] = {
     },
 };
 
-const struct InvestigationPresentData gUnknown_0801FC98[34] = {
+const struct InvestigationPresentData gInvestigationPresentData_3_0[34] = {
     {
         .roomId = 0x0,
         .roomseq = 0xFF,
@@ -700,7 +700,7 @@ const struct InvestigationPresentData gUnknown_0801FC98[34] = {
     },
 };
 
-const struct TalkData gUnknown_0801FE30[16] = {
+const struct TalkData gTalkData_3_0[16] = {
     {
         .roomId = 0x0,
         .personId = 0x14,
@@ -847,7 +847,7 @@ const struct TalkData gUnknown_0801FE30[16] = {
     },
 };
 
-const u8 gUnknown_0801FF70[25][5] = {
+const u8 gRoomData_3_0[25][5] = {
     { 0x12, 0x01, 0xFF, 0xFF, 0xFF },
 	{ 0x80, 0x00, 0xFF, 0xFF, 0xFF },
 	{ 0x00, 0x00, 0x00, 0x00, 0x00 },
@@ -875,7 +875,7 @@ const u8 gUnknown_0801FF70[25][5] = {
 	{ 0x5F, 0xFF, 0xFF, 0xFF, 0xFF },
 };
 
-const struct ExaminationData gUnknown_0801FFF0[2] = {
+const struct ExaminationData gExaminationData_3_0_00[2] = {
     {
         .examinationSection = 0xCE,
         .type = 0x0,
@@ -900,7 +900,7 @@ const struct ExaminationData gUnknown_0801FFF0[2] = {
     },
 };
 
-const struct ExaminationData gUnknown_08020018[10] = {
+const struct ExaminationData gExaminationData_3_0_01[10] = {
     {
         .examinationSection = 0x83,
         .type = 0x0,
@@ -1013,7 +1013,7 @@ const struct ExaminationData gUnknown_08020018[10] = {
     },
 };
 
-const struct ExaminationData gUnknown_080200E0[10] = {
+const struct ExaminationData gExaminationData_3_0_02[10] = {
     {
         .examinationSection = 0x94,
         .type = 0x0,
@@ -1126,7 +1126,7 @@ const struct ExaminationData gUnknown_080200E0[10] = {
     },
 };
 
-const struct ExaminationData gUnknown_080201A8[9] = {
+const struct ExaminationData gExaminationData_3_0_03[9] = {
     {
         .examinationSection = 0x9D,
         .type = 0x0,
@@ -1228,7 +1228,7 @@ const struct ExaminationData gUnknown_080201A8[9] = {
     },
 };
 
-const struct ExaminationData gUnknown_0802025C[8] = {
+const struct ExaminationData gExaminationData_3_0_04[8] = {
     {
         .examinationSection = 0xAE,
         .type = 0x0,
@@ -1319,7 +1319,7 @@ const struct ExaminationData gUnknown_0802025C[8] = {
     },
 };
 
-const struct ExaminationData gUnknown_080202FC[8] = {
+const struct ExaminationData gExaminationData_3_0_05[8] = {
     {
         .examinationSection = 0xBB,
         .type = 0x0,
@@ -1411,8 +1411,8 @@ const struct ExaminationData gUnknown_080202FC[8] = {
 };
 
 void InvestigationSegmentSetup_3_0(struct Main *main) {
-    DmaCopy16(3, gUnknown_0801FF70, gMain.roomData, sizeof(gUnknown_0801FF70)); // note: size copied is 0x7C, actual size 0x7D
-    DmaCopy16(3, gUnknown_0801FE30, gTalkData, sizeof(gUnknown_0801FE30));
+    DmaCopy16(3, gRoomData_3_0, gMain.roomData, sizeof(gRoomData_3_0)); // note: size copied is 0x7C, actual size 0x7D
+    DmaCopy16(3, gTalkData_3_0, gTalkData, sizeof(gTalkData_3_0));
     main->currentRoomId = 0x13;
     sub_8017910();
 }
@@ -1435,14 +1435,14 @@ void InvestigationRoomSetup_3_0(struct Main *main) {
                 InvestigationSetPersonAnimation(0x23, 0, 0);
                 PlayBGM(0xEE);
             }
-            LOADEXAMDATA(gUnknown_0801FFF0);
+            LOADEXAMDATA(gExaminationData_3_0_00);
             break;
         }
         case 19: {if(GetFlag(0, 0x91)) {
                 if(!GetFlag(0, 0x97)) {
                     InvestigationSetScriptSectionAndFlag(0x93, 0x97);
                 }
-                LOADEXAMDATA(gUnknown_080200E0);
+                LOADEXAMDATA(gExaminationData_3_0_02);
                 break;
             }
             if(GetFlag(0, 0x96)) {
@@ -1455,11 +1455,11 @@ void InvestigationRoomSetup_3_0(struct Main *main) {
                     PlayBGM(0x15);
                 }
             }
-            LOADEXAMDATA(gUnknown_08020018);
+            LOADEXAMDATA(gExaminationData_3_0_01);
             break;
         }
         case 18: {
-            LOADEXAMDATA(gUnknown_080201A8);
+            LOADEXAMDATA(gExaminationData_3_0_03);
             if(GetFlag(0, 0x91)) {
                 if(!GetFlag(0, 0x9B)) {
                     InvestigationSetScriptSectionAndFlag(0xA0, 0x9B);
@@ -1481,7 +1481,7 @@ void InvestigationRoomSetup_3_0(struct Main *main) {
                     InvestigationSetPersonAnimation(0x28, 0, 0);
                     PlayBGM(0xD7);
                 }
-                LOADEXAMDATA(gUnknown_080202FC);
+                LOADEXAMDATA(gExaminationData_3_0_05);
                 break;
             }
             if(!GetFlag(0, 0x98)) {
@@ -1492,10 +1492,10 @@ void InvestigationRoomSetup_3_0(struct Main *main) {
                 PlayBGM(0xDA);
             }
             if(!GetFlag(0, 0xA7)) {
-                LOADEXAMDATA(gUnknown_0802025C);
+                LOADEXAMDATA(gExaminationData_3_0_04);
             }
             else {
-                LOADEXAMDATA(gUnknown_080202FC);
+                LOADEXAMDATA(gExaminationData_3_0_05);
             }
             break;
         }

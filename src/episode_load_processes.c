@@ -740,7 +740,7 @@ void ContinueSaveProcess(struct Main * main) {
             LoadCurrentScriptIntoRam();
             DmaCopy16(3, gPalExamineCursors, OBJ_PLTT + 0x100, 0x20);
             DmaCopy16(3, &gSaveDataBuffer.talkData, &gTalkData, sizeof(gTalkData));
-            DmaCopy16(3, &gSaveDataBuffer.unknown3003B70, &gUnknown_03003B70, sizeof(gUnknown_03003B70));
+            DmaCopy16(3, &gSaveDataBuffer.loadedPsycheLockedTalkSections, &gLoadedPsycheLockedTalkSections, sizeof(gLoadedPsycheLockedTalkSections));
             RestoreAnimationsFromBuffer(gSaveDataBuffer.backupAnimations);
 
             if (main->process[GAME_PROCESS] == INVESTIGATION_PROCESS) {

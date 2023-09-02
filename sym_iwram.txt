@@ -12,7 +12,7 @@
 . = 0x000037B0; gMain = .;
 . = 0x00003A70; gIORegisters = .;
 . = 0x00003AD0; gMapMarker = .;
-. = 0x00003B70; gUnknown_03003B70 = .;
+. = 0x00003B70; gLoadedPsycheLockedTalkSections = .;
 . = 0x00003BA0; gTextColorTileBuffer = .;
 . = 0x00003C20; gInvestigation = .;
 . = 0x00003C40; gScriptContext = .;

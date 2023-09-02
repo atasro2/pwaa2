@@ -107,8 +107,8 @@ void CourtInit(struct Main * main)
     main->gameStateFlags = 0;
     DmaFill32(3, 0, main->unk100, sizeof(main->unk100));
     DmaFill32(3, 0, main->unk25C, sizeof(main->unk25C));
-    DmaFill32(3, 0, main->unk276, sizeof(main->unk276));
-    main->unk286 = 0;
+    DmaFill32(3, 0, main->psycheLockedTalkSections, sizeof(main->psycheLockedTalkSections));
+    main->numPsycheLockedTalkSections = 0;
     main->tilemapUpdateBits = 0xF;
     main->advanceScriptContext = TRUE;
     main->showTextboxCharacters = TRUE;

@@ -36,11 +36,11 @@ void sub_800EAC8(u32 idx, u32 arg1)
     gMain.unk25C[idx] = arg1;
 }
 
-u16 sub_800EADC(u16 arg0)
+u16 isTalkSectionPsycheLocked(u16 arg0)
 {
     u16 i;
-    for(i = 0; i < gMain.unk286; i++) {
-        if(gMain.unk276[i] == arg0) return 1;
+    for(i = 0; i < gMain.numPsycheLockedTalkSections; i++) {
+        if(gMain.psycheLockedTalkSections[i] == arg0) return 1;
     }
     return 0;
 }
@@ -1147,7 +1147,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     {
                         if(GetFlag(2, talkData->talkFlagId[i]))
                         {
-                            u16 blab = sub_800EADC(talkData->talkSection[i]);
+                            u16 blab = isTalkSectionPsycheLocked(talkData->talkSection[i]);
                             if(blab) {
                                 DmaCopy16(3, gGfxInvestigationPsycheLock, OBJ_VRAM0+0x3000, 0x200);
                                 DmaCopy16(3, gPalInvestigationPsycheLock, OBJ_PLTT+0xE0, 0x20);
