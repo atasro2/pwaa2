@@ -2145,17 +2145,17 @@ bool32 Command46(struct ScriptContext * scriptCtx)
         default:
         case 0:
             gMain.horizontolBGScrollSpeed = 14;
-            r6 = gUnknown_08263FD4;
+            r6 = gGfx_BG014;
             r3 = (u16 *)gUnknown_08263FF4;
             break;
         case 1:
             gMain.horizontolBGScrollSpeed = -14;
-            r6 = gUnknown_08265CC4;
+            r6 = gGfx_BG015;
             r3 = (u16 *)gUnknown_08265CE4;
             break;
         case 2:
             gMain.horizontolBGScrollSpeed = -14;
-            r6 = gUnknown_08277A98;
+            r6 = gGfx_BG020;
             r3 = (u16 *)gUnknown_08277AB8;
             break;
     }

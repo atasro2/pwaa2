@@ -159,13 +159,13 @@ void CopyBGDataToVram(u32 bgId)
         }
     }
     if(gScriptContext.flags & 0x40) {
-        src = gUnknown_08263FD4;
+        src = gGfx_BG014;
         dst = (void *)PLTT+0x1C0;
         DmaCopy16(3, src, dst, 0x20);
-        src = gUnknown_08265CC4;
+        src = gGfx_BG015;
         dst = (void *)PLTT+0x1E0;
         DmaCopy16(3, src, dst, 0x20);
-        src = gUnknown_08277A98;
+        src = gGfx_BG020;
         dst = (void *)PLTT+0x1A0;
         DmaCopy16(3, src, dst, 0x20);
         DmaCopy16(3, gUnknown_0847845C, eUnknown_0203B000, 0x500);

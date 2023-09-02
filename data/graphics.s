@@ -2447,71 +2447,71 @@ gUnknown_08232868:
 gUnknown_08232968:
     .incbin "graphics/map_markers/case4_boat_vertical.4bpp"
 
-    .global gUnknown_082329A8
-gUnknown_082329A8:
+    .global gGfx_BG000
+gGfx_BG000:
     .incbin "graphics/striped_images/capcom_screen.4bpp.striped"
 
-    .global gUnknown_08233674
-gUnknown_08233674:
+    .global gGfx_BG001
+gGfx_BG001:
     .incbin "graphics/striped_images/case1_intro_nightmare_1.4bpp.striped"
 
 
-    .global gUnknown_082359B4
-gUnknown_082359B4:
+    .global gGfx_BG002
+gGfx_BG002:
     .incbin "graphics/striped_images/capcom_screen_bw.4bpp.striped"
 
-    .global gUnknown_0823663C
-gUnknown_0823663C:
+    .global gGfx_BG003
+gGfx_BG003:
     .incbin "graphics/striped_images/backgrounds/court/defendant_lobby.8bpp.striped"
     
-    .global gUnknown_0823B3E0
-gUnknown_0823B3E0:
+    .global gGfx_BG004
+gGfx_BG004:
     .incbin "graphics/striped_images/backgrounds/court/defense_side.4bpp.striped"
 
 
-    .global gUnknown_0823CF88
-gUnknown_0823CF88:
+    .global gGfx_BG005
+gGfx_BG005:
     .incbin "graphics/striped_images/backgrounds/court/prosecution_side.4bpp.striped"
 
 
-    .global gUnknown_0823E98C
-gUnknown_0823E98C:
+    .global gGfx_BG006
+gGfx_BG006:
     .incbin "graphics/striped_images/backgrounds/court/witness_backdrop.4bpp.striped"
 
 
-    .global gUnknown_08240624
-gUnknown_08240624:
+    .global gGfx_BG007
+gGfx_BG007:
     .incbin "graphics/striped_images/backgrounds/court/judge_seat.8bpp.striped"
 
 
-    .global gUnknown_08246B24
-gUnknown_08246B24:
+    .global gGfx_BG008
+gGfx_BG008:
     .incbin "graphics/striped_images/backgrounds/court/co_counsel.8bpp.striped"
 
 
-    .global gUnknown_0824C990
-gUnknown_0824C990:
+    .global gGfx_BG009
+gGfx_BG009:
     .incbin "graphics/striped_images/backgrounds/court/court_room.8bpp.striped"
 
 
-    .global gUnknown_082540C0
-gUnknown_082540C0:
+    .global gGfx_BG010
+gGfx_BG010:
     .incbin "graphics/striped_images/court_room_blue.4bpp.striped"
 
-    .global gUnknown_08257B58
-gUnknown_08257B58:
+    .global gGfx_BG011
+gGfx_BG011:
     .incbin "graphics/striped_images/backgrounds/gavel/1.8bpp.striped"
 
-    .global gUnknown_0825A8F0
-gUnknown_0825A8F0:
+    .global gGfx_BG012
+gGfx_BG012:
     .incbin "graphics/striped_images/backgrounds/gavel/2.8bpp.striped"
 
-    .global gUnknown_0825E078
-gUnknown_0825E078:
+    .global gGfx_BG013
+gGfx_BG013:
     .incbin "graphics/striped_images/backgrounds/gavel/3.8bpp.striped"
 
-    .global gUnknown_08263FD4
-gUnknown_08263FD4:
+    .global gGfx_BG014
+gGfx_BG014:
     .incbin "graphics/bustup_phoenix.gbapal"
 
     .global gUnknown_08263FF4
@@ -2522,8 +2522,8 @@ gUnknown_08263FF4:
 gUnknown_082644A4:
     .incbin "graphics/bustup_phoenix.4bpp"
 
-    .global gUnknown_08265CC4
-gUnknown_08265CC4:
+    .global gGfx_BG015
+gGfx_BG015:
     .incbin "graphics/bustup_edgeworth.gbapal"
 
     .global gUnknown_08265CE4
@@ -2534,24 +2534,24 @@ gUnknown_08265CE4:
 gUnknown_08266194:
     .incbin "graphics/bustup_edgeworth.4bpp"
 
-    .global gUnknown_08267F34
-gUnknown_08267F34:
+    .global gGfx_BG016
+gGfx_BG016:
     .incbin "graphics/striped_images/speedlines.4bpp.striped"
 
-    .global gUnknown_08268DE0
-gUnknown_08268DE0:
+    .global gGfx_BG017
+gGfx_BG017:
     .incbin "graphics/striped_images/detention_center.8bpp.striped"
 
-    .global gUnknown_0826C528
-gUnknown_0826C528:
+    .global gGfx_BG018
+gGfx_BG018:
     .incbin "graphics/striped_images/backgrounds/wright_co_law_offices_day.8bpp.striped"
 
-    .global gUnknown_08271C44
-gUnknown_08271C44:
+    .global gGfx_BG019
+gGfx_BG019:
     .incbin "graphics/striped_images/police_station_lobby.8bpp.striped"
 
-    .global gUnknown_08277A98
-gUnknown_08277A98:
+    .global gGfx_BG020
+gGfx_BG020:
     .incbin "graphics/bustup_franziska.gbapal"
 
     .global gUnknown_08277AB8
@@ -2564,510 +2564,510 @@ gUnknown_08277F68:
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-    .global gUnknown_08279388
-gUnknown_08279388:
+    .global gGfx_BG021
+gGfx_BG021:
     .incbin "graphics/striped_images/case1_photo_of_dustin_dead.4bpp.striped"
 
 
-    .global gUnknown_0827C8EC
-gUnknown_0827C8EC:
+    .global gGfx_BG022
+gGfx_BG022:
     .incbin "graphics/striped_images/case1_photo_of_maggeys_name.4bpp.striped"
 
 
-    .global gUnknown_0827FBA8
-gUnknown_0827FBA8:
+    .global gGfx_BG023
+gGfx_BG023:
     .incbin "graphics/striped_images/case1_maggey_with_dustin.4bpp.striped"
 
 
-    .global gUnknown_082837C8
-gUnknown_082837C8:
+    .global gGfx_BG024
+gGfx_BG024:
     .incbin "graphics/striped_images/case1_maggey_spotting_richard.4bpp.striped"
 
 
-    .global gUnknown_08287938
-gUnknown_08287938:
+    .global gGfx_BG025
+gGfx_BG025:
     .incbin "graphics/striped_images/case1_intro_richard_with_fire_extinguisher.8bpp.striped"
 
 
-    .global gUnknown_08292318
-gUnknown_08292318:
+    .global gGfx_BG026
+gGfx_BG026:
     .incbin "graphics/striped_images/case1_intro_nightmare_2.4bpp.striped"
 
 
-    .global gUnknown_08294658
-gUnknown_08294658:
+    .global gGfx_BG027
+gGfx_BG027:
     .incbin "graphics/striped_images/case1_intro_richard_looking.8bpp.striped"
 
 
-    .global gUnknown_08298BA4
-gUnknown_08298BA4:
+    .global gGfx_BG028
+gGfx_BG028:
     .incbin "graphics/striped_images/kurain_village.8bpp.striped"
 
 
-    .global gUnknown_0829F718
-gUnknown_0829F718:
+    .global gGfx_BG029
+gGfx_BG029:
     .incbin "graphics/striped_images/backgrounds/kurain_main_hall.8bpp.striped"
 
 
-    .global gUnknown_082A8370
-gUnknown_082A8370:
+    .global gGfx_BG030
+gGfx_BG030:
     .incbin "graphics/striped_images/backgrounds/meeting_room.8bpp.striped"
 
 
-    .global gUnknown_082B88D4
-gUnknown_082B88D4:
+    .global gGfx_BG031
+gGfx_BG031:
     .incbin "graphics/striped_images/backgrounds/winding_way.8bpp.striped"
 
 
-    .global gUnknown_082C04A0
-gUnknown_082C04A0:
+    .global gGfx_BG032
+gGfx_BG032:
     .incbin "graphics/striped_images/backgrounds/kurain_spare_room_with_box.8bpp.striped"
 
 
-    .global gUnknown_082C7CF0
-gUnknown_082C7CF0:
+    .global gGfx_BG033
+gGfx_BG033:
     .incbin "graphics/striped_images/backgrounds/kurain_spare_room.8bpp.striped"
 
 
-    .global gUnknown_082CF29C
-gUnknown_082CF29C:
+    .global gGfx_BG034
+gGfx_BG034:
     .incbin "graphics/striped_images/backgrounds/hotti_clinic.8bpp.striped"
 
 
-    .global gUnknown_082D5268
-gUnknown_082D5268:
+    .global gGfx_BG035
+gGfx_BG035:
     .incbin "graphics/striped_images/case2_intro_car.8bpp.striped"
 
 
-    .global gUnknown_082DA994
-gUnknown_082DA994:
+    .global gGfx_BG036
+gGfx_BG036:
     .incbin "graphics/striped_images/case2_intro_car_crash.8bpp.striped"
 
 
-    .global gUnknown_082E5168
-gUnknown_082E5168:
+    .global gGfx_BG037
+gGfx_BG037:
     .incbin "graphics/striped_images/case2_intro_phoenix_with_maya.8bpp.striped"
 
 
-    .global gUnknown_082EA99C
-gUnknown_082EA99C:
+    .global gGfx_BG038
+gGfx_BG038:
     .incbin "graphics/striped_images/dummy_background_1.4bpp.striped"
 
 
-    .global gUnknown_082EBA44
-gUnknown_082EBA44:
+    .global gGfx_BG039
+gGfx_BG039:
     .incbin "graphics/striped_images/case2_newspaper_car_crash_page_1.4bpp.striped"
 
 
-    .global gUnknown_082EC9B4
-gUnknown_082EC9B4:
+    .global gGfx_BG040
+gGfx_BG040:
     .incbin "graphics/striped_images/case2_newspaper_car_crash_page_2.4bpp.striped"
 
 
-    .global gUnknown_082ED900
-gUnknown_082ED900:
+    .global gGfx_BG041
+gGfx_BG041:
     .incbin "graphics/striped_images/case2_newspaper_car_crash_page_3.4bpp.striped"
 
 
-    .global gUnknown_082EE868
-gUnknown_082EE868:
+    .global gGfx_BG042
+gGfx_BG042:
     .incbin "graphics/striped_images/case2_diagram_of_meeting_room.4bpp.striped"
 
 
-    .global gUnknown_082EF398
-gUnknown_082EF398:
+    .global gGfx_BG043
+gGfx_BG043:
     .incbin "graphics/striped_images/case2_diagram_of_fey_manor.4bpp.striped"
 
 
-    .global gUnknown_082F0288
-gUnknown_082F0288:
+    .global gGfx_BG044
+gGfx_BG044:
     .incbin "graphics/striped_images/case2_into_car_lights.4bpp.striped"
 
-    .global gUnknown_082F13EC
-gUnknown_082F13EC:
+    .global gGfx_BG045
+gGfx_BG045:
     .incbin "graphics/striped_images/pwaa1_dead_mia_in_office.4bpp.striped"
 
 
-    .global gUnknown_082F4518
-gUnknown_082F4518:
+    .global gGfx_BG046
+gGfx_BG046:
     .incbin "graphics/striped_images/case2_maya_with_turner.4bpp.striped"
 
 
-    .global gUnknown_082F7A14
-gUnknown_082F7A14:
+    .global gGfx_BG047
+gGfx_BG047:
     .incbin "graphics/striped_images/case2_mimi_in_hospital.4bpp.striped"
 
 
-    .global gUnknown_082FB9E4
-gUnknown_082FB9E4:
+    .global gGfx_BG048
+gGfx_BG048:
     .incbin "graphics/striped_images/case2_mayas_robe.4bpp.striped"
 
 
-    .global gUnknown_082FD950
-gUnknown_082FD950:
+    .global gGfx_BG049
+gGfx_BG049:
     .incbin "graphics/striped_images/case2_photo_of_incident.4bpp.striped"
 
 
-    .global gUnknown_08300B30
-gUnknown_08300B30:
+    .global gGfx_BG050
+gGfx_BG050:
     .incbin "graphics/striped_images/case2_photo_of_attacker.4bpp.striped"
 
 
-    .global gUnknown_083040A8
-gUnknown_083040A8:
+    .global gGfx_BG051
+gGfx_BG051:
     .incbin "graphics/striped_images/case2_photo_of_summoned_mia.8bpp.striped"
 
 
-    .global gUnknown_0830948C
-gUnknown_0830948C:
+    .global gGfx_BG052
+gGfx_BG052:
     .incbin "graphics/striped_images/case2_pearl_fixing_urn.4bpp.striped"
 
 
-    .global gUnknown_0830C744
-gUnknown_0830C744:
+    .global gGfx_BG053
+gGfx_BG053:
     .incbin "graphics/striped_images/case2_morgan_fey.8bpp.striped"
 
 
-    .global gUnknown_083130D4
-gUnknown_083130D4:
+    .global gGfx_BG054
+gGfx_BG054:
     .incbin "graphics/striped_images/case2_ini_with_summoned_mimi.4bpp.striped"
 
 
-    .global gUnknown_08316500
-gUnknown_08316500:
+    .global gGfx_BG055
+gGfx_BG055:
     .incbin "graphics/striped_images/case2_ini_with_sleeping_maya.4bpp.striped"
 
 
-    .global gUnknown_083198CC
-gUnknown_083198CC:
+    .global gGfx_BG056
+gGfx_BG056:
     .incbin "graphics/striped_images/case2_box_behind_screen.4bpp.striped"
 
 
-    .global gUnknown_0831C908
-gUnknown_0831C908:
+    .global gGfx_BG057
+gGfx_BG057:
     .incbin "graphics/striped_images/case2_turner_with_gun.4bpp.striped"
 
 
-    .global gUnknown_08320384
-gUnknown_08320384:
+    .global gGfx_BG058
+gGfx_BG058:
     .incbin "graphics/striped_images/case2_maya_with_summoned_mia.8bpp.striped"
 
 
-    .global gUnknown_0832587C
-gUnknown_0832587C:
+    .global gGfx_BG059
+gGfx_BG059:
     .incbin "graphics/striped_images/backgrounds/circus_tent.8bpp.striped"
 
 
-    .global gUnknown_0832D4A0
-gUnknown_0832D4A0:
+    .global gGfx_BG060
+gGfx_BG060:
     .incbin "graphics/striped_images/backgrounds/circus_cafeteria.8bpp.striped"
 
 
-    .global gUnknown_08335060
-gUnknown_08335060:
+    .global gGfx_BG061
+gGfx_BG061:
     .incbin "graphics/striped_images/backgrounds/mr_berrys_office.8bpp.striped"
 
 
-    .global gUnknown_0833C13C
-gUnknown_0833C13C:
+    .global gGfx_BG062
+gGfx_BG062:
     .incbin "graphics/striped_images/backgrounds/berry_big_circus_entrance_day.8bpp.striped"
 
 
-    .global gUnknown_08342954
-gUnknown_08342954:
+    .global gGfx_BG063
+gGfx_BG063:
     .incbin "graphics/striped_images/backgrounds/berry_big_circus_entrance_night.8bpp.striped"
 
 
-    .global gUnknown_083497D4
-gUnknown_083497D4:
+    .global gGfx_BG064
+gGfx_BG064:
     .incbin "graphics/striped_images/backgrounds/circus_courtyard.8bpp.striped"
 
 
-    .global gUnknown_0834FAAC
-gUnknown_0834FAAC:
+    .global gGfx_BG065
+gGfx_BG065:
     .incbin "graphics/striped_images/backgrounds/moes_room.8bpp.striped"
 
 
-    .global gUnknown_08356EB0
-gUnknown_08356EB0:
+    .global gGfx_BG066
+gGfx_BG066:
     .incbin "graphics/striped_images/backgrounds/acros_room.8bpp.striped"
 
 
-    .global gUnknown_0835D154
-gUnknown_0835D154:
+    .global gGfx_BG067
+gGfx_BG067:
     .incbin "graphics/striped_images/case3_intro_lion_blue_yellow.4bpp.striped"
 
 
-    .global gUnknown_08362700
-gUnknown_08362700:
+    .global gGfx_BG068
+gGfx_BG068:
     .incbin "graphics/striped_images/case3_intro_lion_green_red.4bpp.striped"
 
 
-    .global gUnknown_08367768
-gUnknown_08367768:
+    .global gGfx_BG069
+gGfx_BG069:
     .incbin "graphics/striped_images/case2_into_circus.8bpp.striped"
 
 
-    .global gUnknown_08376EA8
-gUnknown_08376EA8:
+    .global gGfx_BG070
+gGfx_BG070:
     .incbin "graphics/striped_images/case3_intro_maximillion.8bpp.striped"
 
 
-    .global gUnknown_0837C934
-gUnknown_0837C934:
+    .global gGfx_BG071
+gGfx_BG071:
     .incbin "graphics/striped_images/case3_threatening_note_text.4bpp.striped"
 
 
-    .global gUnknown_0837D6D8
-gUnknown_0837D6D8:
+    .global gGfx_BG072
+gGfx_BG072:
     .incbin "graphics/striped_images/case3_poster_of_maximillion.8bpp.striped"
 
 
-    .global gUnknown_0838309C
-gUnknown_0838309C:
+    .global gGfx_BG073
+gGfx_BG073:
     .incbin "graphics/striped_images/case3_photo_of_maximillion_with_trophy.8bpp.striped"
 
 
-    .global gUnknown_083899B0
-gUnknown_083899B0:
+    .global gGfx_BG074
+gGfx_BG074:
     .incbin "graphics/striped_images/case3_maximillion_with_contract.4bpp.striped"
 
 
-    .global gUnknown_0838D548
-gUnknown_0838D548:
+    .global gGfx_BG075
+gGfx_BG075:
     .incbin "graphics/striped_images/case3_diagram_circus.4bpp.striped"
 
 
-    .global gUnknown_0838EB18
-gUnknown_0838EB18:
+    .global gGfx_BG076
+gGfx_BG076:
     .incbin "graphics/striped_images/case3_photo_of_russell.4bpp.striped"
 
 
-    .global gUnknown_08391440
-gUnknown_08391440:
+    .global gGfx_BG077
+gGfx_BG077:
     .incbin "graphics/striped_images/case3_dead_russell_outside.4bpp.striped"
 
 
-    .global gUnknown_08393C98
-gUnknown_08393C98:
+    .global gGfx_BG078
+gGfx_BG078:
     .incbin "graphics/striped_images/case3_russell_about_to_get_hit.4bpp.striped"
 
 
-    .global gUnknown_08395F30
-gUnknown_08395F30:
+    .global gGfx_BG079
+gGfx_BG079:
     .incbin "graphics/striped_images/case3_russell_getting_hit.4bpp.striped"
 
 
-    .global gUnknown_08398878
-gUnknown_08398878:
+    .global gGfx_BG080
+gGfx_BG080:
     .incbin "graphics/striped_images/case3_bat_with_lion.4bpp.striped"
 
 
-    .global gUnknown_0839DE10
-gUnknown_0839DE10:
+    .global gGfx_BG081
+gGfx_BG081:
     .incbin "graphics/striped_images/case3_ben_spotting_max.4bpp.striped"
 
 
-    .global gUnknown_083A1590
-gUnknown_083A1590:
+    .global gGfx_BG082
+gGfx_BG082:
     .incbin "graphics/striped_images/case3_acro_spotting_statue.4bpp.striped"
 
 
-    .global gUnknown_083A42C4
-gUnknown_083A42C4:
+    .global gGfx_BG083
+gGfx_BG083:
     .incbin "graphics/striped_images/case3_bust_of_maximillion.8bpp.striped"
 
 
-    .global gUnknown_083A9384
-gUnknown_083A9384:
+    .global gGfx_BG084
+gGfx_BG084:
     .incbin "graphics/striped_images/case3_acro_dropping_statue.4bpp.striped"
 
 
-    .global gUnknown_083AD43C
-gUnknown_083AD43C:
+    .global gGfx_BG085
+gGfx_BG085:
     .incbin "graphics/striped_images/case3_max_grabbing_bottle.4bpp.striped"
 
 
-    .global gUnknown_083B1104
-gUnknown_083B1104:
+    .global gGfx_BG086
+gGfx_BG086:
     .incbin "graphics/striped_images/case3_acros_bottom_half_in_wheelchair.4bpp.striped"
 
 
-    .global gUnknown_083B3140
-gUnknown_083B3140:
+    .global gGfx_BG087
+gGfx_BG087:
     .incbin "graphics/striped_images/case3_edgeworth_at_airport.8bpp.striped"
 
 
-    .global gUnknown_083BBCB0
-gUnknown_083BBCB0:
+    .global gGfx_BG088
+gGfx_BG088:
     .incbin "graphics/striped_images/backgrounds/gatewater_hotel_ballroom.8bpp.striped"
 
 
-    .global gUnknown_083C49C0
-gUnknown_083C49C0:
+    .global gGfx_BG089
+gGfx_BG089:
     .incbin "graphics/striped_images/backgrounds/gatewater_hotel_hallway.8bpp.striped"
 
 
-    .global gUnknown_083CC6F8
-gUnknown_083CC6F8:
+    .global gGfx_BG090
+gGfx_BG090:
     .incbin "graphics/striped_images/backgrounds/matt_engardes_hotel_room.8bpp.striped"
 
 
-    .global gUnknown_083D414C
-gUnknown_083D414C:
+    .global gGfx_BG091
+gGfx_BG091:
     .incbin "graphics/striped_images/backgrounds/juan_corridas_hotel_room.8bpp.striped"
 
 
-    .global gUnknown_083E23A8
-gUnknown_083E23A8:
+    .global gGfx_BG092
+gGfx_BG092:
     .incbin "graphics/striped_images/dummy_background_2.4bpp.striped"
 
 
-    .global gUnknown_083E3490
-gUnknown_083E3490:
+    .global gGfx_BG093
+gGfx_BG093:
     .incbin "graphics/striped_images/backgrounds/gatewater_hotel_lobby.8bpp.striped"
 
 
-    .global gUnknown_083EBD14
-gUnknown_083EBD14:
+    .global gGfx_BG094
+gGfx_BG094:
     .incbin "graphics/striped_images/backgrounds/matt_engardes_house.8bpp.striped"
 
 
-    .global gUnknown_083F3DA8
-gUnknown_083F3DA8:
+    .global gGfx_BG095
+gGfx_BG095:
     .incbin "graphics/striped_images/backgrounds/secret_room.8bpp.striped"
 
 
-    .global gUnknown_083FA848
-gUnknown_083FA848:
+    .global gGfx_BG096
+gGfx_BG096:
     .incbin "graphics/striped_images/backgrounds/wine_cellar.8bpp.striped"
 
 
-    .global gUnknown_08401E1C
-gUnknown_08401E1C:
+    .global gGfx_BG120
+gGfx_BG120:
     .incbin "graphics/striped_images/case4_intro_heroes_lined_up.8bpp.striped"
 
 
-    .global gUnknown_0840EE18
-gUnknown_0840EE18:
+    .global gGfx_BG121
+gGfx_BG121:
     .incbin "graphics/striped_images/case4_intro_nickel_samurai_appears.4bpp.striped"
 
 
-    .global gUnknown_0841101C
-gUnknown_0841101C:
+    .global gGfx_BG122
+gGfx_BG122:
     .incbin "graphics/striped_images/case4_intro_nickel_samurai_with_fan.8bpp.striped"
 
 
-    .global gUnknown_08417880
-gUnknown_08417880:
+    .global gGfx_BG097
+gGfx_BG097:
     .incbin "graphics/striped_images/case4_over_the_clouds.8bpp.striped"
 
 
-    .global gUnknown_0841DE18
-gUnknown_0841DE18:
+    .global gGfx_BG098
+gGfx_BG098:
     .incbin "graphics/striped_images/case4_jammin_ninja_poster.8bpp.striped"
 
 
-    .global gUnknown_08425334
-gUnknown_08425334:
+    .global gGfx_BG099
+gGfx_BG099:
     .incbin "graphics/striped_images/backgrounds/airport.8bpp.striped"
 
 
-    .global gUnknown_0842C52C
-gUnknown_0842C52C:
+    .global gGfx_BG100
+gGfx_BG100:
     .incbin "graphics/striped_images/case4_photo_of_juan_dead.4bpp.striped"
 
 
-    .global gUnknown_0842F748
-gUnknown_0842F748:
+    .global gGfx_BG101
+gGfx_BG101:
     .incbin "graphics/striped_images/case4_diagram_hotel.4bpp.striped"
 
 
-    .global gUnknown_084308EC
-gUnknown_084308EC:
+    .global gGfx_BG102
+gGfx_BG102:
     .incbin "graphics/striped_images/case4_photo_of_nickel_samurai_in_hall.4bpp.striped"
 
 
-    .global gUnknown_0843414C
-gUnknown_0843414C:
+    .global gGfx_BG103
+gGfx_BG103:
     .incbin "graphics/striped_images/case4_nickel_samurai_poster.8bpp.striped"
 
 
-    .global gUnknown_0843B428
-gUnknown_0843B428:
+    .global gGfx_BG104
+gGfx_BG104:
     .incbin "graphics/striped_images/case4_juan_finding_dead_celeste.4bpp.striped"
 
 
-    .global gUnknown_0843E438
-gUnknown_0843E438:
+    .global gGfx_BG105
+gGfx_BG105:
     .incbin "graphics/striped_images/case4_adrian_puttin_on_costume.4bpp.striped"
 
 
-    .global gUnknown_08441C50
-gUnknown_08441C50:
+    .global gGfx_BG106
+gGfx_BG106:
     .incbin "graphics/striped_images/case4_adrian_with_sleeping_matt.4bpp.striped"
 
 
-    .global gUnknown_08444EF8
-gUnknown_08444EF8:
+    .global gGfx_BG107
+gGfx_BG107:
     .incbin "graphics/striped_images/case4_backdrop_of_matt_with_partner.4bpp.striped"
 
 
-    .global gUnknown_084478B0
-gUnknown_084478B0:
+    .global gGfx_BG108
+gGfx_BG108:
     .incbin "graphics/striped_images/pwaa1_edgeworth_picking_up_gun.4bpp.striped"
 
 
-    .global gUnknown_0844DE14
-gUnknown_0844DE14:
+    .global gGfx_BG109
+gGfx_BG109:
     .incbin "graphics/striped_images/case4_matt_getting_juice_from_shelly.4bpp.striped"
 
 
-    .global gUnknown_08451F68
-gUnknown_08451F68:
+    .global gGfx_BG110
+gGfx_BG110:
     .incbin "graphics/striped_images/case4_franziska_entering.8bpp.striped"
 
 
-    .global gUnknown_08458A38
-gUnknown_08458A38:
+    .global gGfx_BG111
+gGfx_BG111:
     .incbin "graphics/striped_images/case4_shelly_handing_over_bear.4bpp.striped"
 
 
-    .global gUnknown_0845BDB0
-gUnknown_0845BDB0:
+    .global gGfx_BG112
+gGfx_BG112:
     .incbin "graphics/striped_images/case4_phoenix_with_maya_and_pearl.8bpp.striped"
 
 
-    .global gUnknown_08462D6C
-gUnknown_08462D6C:
+    .global gGfx_BG113
+gGfx_BG113:
     .incbin "graphics/striped_images/case4_calling_card_with_drawing.8bpp.striped"
 
 
-    .global gUnknown_0846531C
-gUnknown_0846531C:
+    .global gGfx_BG114
+gGfx_BG114:
     .incbin "graphics/striped_images/case4_phoenix_leaving_bad_end.4bpp.striped"
 
 
-    .global gUnknown_08468FD0
-gUnknown_08468FD0:
+    .global gGfx_BG115
+gGfx_BG115:
     .incbin "graphics/striped_images/case4_adrian_finding_juan_with_juice.4bpp.striped"
 
 
-    .global gUnknown_0846CAF0
-gUnknown_0846CAF0:
+    .global gGfx_BG116
+gGfx_BG116:
     .incbin "graphics/striped_images/case4_calling_card.4bpp.striped"
 
-    .global gUnknown_0846DBF0
-gUnknown_0846DBF0:
+    .global gGfx_BG117
+gGfx_BG117:
     .incbin "graphics/striped_images/backgrounds/steel_samurai.8bpp.striped"
 
-    .global gUnknown_0847384C
-gUnknown_0847384C:
+    .global gGfx_BG118
+gGfx_BG118:
     .incbin "graphics/striped_images/case4_tabloid_article.4bpp.striped"
 
 
-    .global gUnknown_084746CC
-gUnknown_084746CC:
+    .global gGfx_BG119
+gGfx_BG119:
     .incbin "graphics/striped_images/pwaa1_class_trial_edgeworth.4bpp.striped"
 
     .global gUnknown_08477C38
