@@ -2281,28 +2281,28 @@ gGfx_BG012:
 gGfx_BG013:
     .incbin "graphics/striped_images/backgrounds/gavel/3.8bpp.striped"
 
-    .global gGfx_BG014
-gGfx_BG014:
+    .global gPal_BG014_BustupPhoenix
+gPal_BG014_BustupPhoenix:
     .incbin "graphics/bustup_phoenix.gbapal"
 
-    .global gUnknown_08263FF4
-gUnknown_08263FF4:
+    .global gMap_BG014_BustupPhoenix
+gMap_BG014_BustupPhoenix:
     .incbin "graphics/bustup_phoenix.bin"
 
-    .global gUnknown_082644A4
-gUnknown_082644A4:
+    .global gGfx_BG014_BustupPhoenix
+gGfx_BG014_BustupPhoenix:
     .incbin "graphics/bustup_phoenix.4bpp"
 
-    .global gGfx_BG015
-gGfx_BG015:
+    .global gPal_BG015_BustupEdgeworth
+gPal_BG015_BustupEdgeworth:
     .incbin "graphics/bustup_edgeworth.gbapal"
 
-    .global gUnknown_08265CE4
-gUnknown_08265CE4:
+    .global gMap_BG015_BustupEdgeworth
+gMap_BG015_BustupEdgeworth:
     .incbin "graphics/bustup_edgeworth.bin"
 
-    .global gUnknown_08266194
-gUnknown_08266194:
+    .global gGfx_BG015_BustupEdgeworth
+gGfx_BG015_BustupEdgeworth:
     .incbin "graphics/bustup_edgeworth.4bpp"
 
     .global gGfx_BG016
@@ -2321,16 +2321,16 @@ gGfx_BG018:
 gGfx_BG019:
     .incbin "graphics/striped_images/police_station_lobby.8bpp.striped"
 
-    .global gGfx_BG020
-gGfx_BG020:
+    .global gPal_BG020_BustupFranziska
+gPal_BG020_BustupFranziska:
     .incbin "graphics/bustup_franziska.gbapal"
 
-    .global gUnknown_08277AB8
-gUnknown_08277AB8:
+    .global gMap_BG020_BustupFranziska
+gMap_BG020_BustupFranziska:
     .incbin "graphics/bustup_franziska.bin"
 
-    .global gUnknown_08277F68
-gUnknown_08277F68:
+    .global gGfx_BG020_BustupFranziska
+gGfx_BG020_BustupFranziska:
     .incbin "graphics/bustup_franziska.4bpp"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

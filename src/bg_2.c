@@ -159,13 +159,13 @@ void CopyBGDataToVram(u32 bgId)
         }
     }
     if(gScriptContext.flags & 0x40) {
-        src = gGfx_BG014;
+        src = gPal_BG014_BustupPhoenix;
         dst = (void *)PLTT+0x1C0;
         DmaCopy16(3, src, dst, 0x20);
-        src = gGfx_BG015;
+        src = gPal_BG015_BustupEdgeworth;
         dst = (void *)PLTT+0x1E0;
         DmaCopy16(3, src, dst, 0x20);
-        src = gGfx_BG020;
+        src = gPal_BG020_BustupFranziska;
         dst = (void *)PLTT+0x1A0;
         DmaCopy16(3, src, dst, 0x20);
         DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eUnknown_0203B000, 0x500);

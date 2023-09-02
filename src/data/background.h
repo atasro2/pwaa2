@@ -58,11 +58,11 @@ const struct Background gBackgroundTable[] = {
         .controlBits = BG_MODE_SIZE_240x160 | BG_MODE_NO_SCROLL | BG_MODE_8BPP,
     },
     {
-        .bgData = gGfx_BG014,
+        .bgData = gPal_BG014_BustupPhoenix,
         .controlBits = BG_MODE_SIZE_240x160 | BG_MODE_NO_SCROLL | BG_MODE_4BPP,
     },
     {
-        .bgData = gGfx_BG015,
+        .bgData = gPal_BG015_BustupEdgeworth,
         .controlBits = BG_MODE_SIZE_240x160 | BG_MODE_NO_SCROLL | BG_MODE_4BPP,
     },
     {
@@ -82,7 +82,7 @@ const struct Background gBackgroundTable[] = {
         .controlBits = BG_MODE_SIZE_240x160 | BG_MODE_NO_SCROLL | BG_MODE_8BPP,
     },
     {
-        .bgData = gGfx_BG020,
+        .bgData = gPal_BG020_BustupFranziska,
         .controlBits = BG_MODE_SIZE_240x160 | BG_MODE_NO_SCROLL | BG_MODE_4BPP,
     },
     {

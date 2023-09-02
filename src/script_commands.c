@@ -2145,18 +2145,18 @@ bool32 Command46(struct ScriptContext * scriptCtx)
         default:
         case 0:
             gMain.horizontolBGScrollSpeed = 14;
-            r6 = gGfx_BG014;
-            r3 = (u16 *)gUnknown_08263FF4;
+            r6 = gPal_BG014_BustupPhoenix;
+            r3 = (u16 *)gMap_BG014_BustupPhoenix;
             break;
         case 1:
             gMain.horizontolBGScrollSpeed = -14;
-            r6 = gGfx_BG015;
-            r3 = (u16 *)gUnknown_08265CE4;
+            r6 = gPal_BG015_BustupEdgeworth;
+            r3 = (u16 *)gMap_BG015_BustupEdgeworth;
             break;
         case 2:
             gMain.horizontolBGScrollSpeed = -14;
-            r6 = gGfx_BG020;
-            r3 = (u16 *)gUnknown_08277AB8;
+            r6 = gPal_BG020_BustupFranziska;
+            r3 = (u16 *)gMap_BG020_BustupFranziska;
             break;
     }
     xOffset = 0;

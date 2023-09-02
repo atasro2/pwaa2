@@ -577,12 +577,12 @@
 #define gGfxSeqAnimation111 ((u8*)(GFX_BASE_ADDR + 0x600AA0))
 #define gGfxPixAnimationTileset03 ((u8*)(GFX_BASE_ADDR + 0x600AC8))
 
-#define gGfx_BG014 ((u8*)(GFX_BASE_ADDR + 0x133FD4))
-#define gUnknown_08263FF4 ((u8*)(GFX_BASE_ADDR + 0x133FF4))
-#define gGfx_BG015 ((u8*)(GFX_BASE_ADDR + 0x135CC4))
-#define gUnknown_08265CE4 ((u8*)(GFX_BASE_ADDR + 0x135CE4))
-#define gGfx_BG020 ((u8*)(GFX_BASE_ADDR + 0x147A98))
-#define gUnknown_08277AB8 ((u8*)(GFX_BASE_ADDR + 0x147AB8))
+#define gPal_BG014_BustupPhoenix ((u8*)(GFX_BASE_ADDR + 0x133FD4))
+#define gMap_BG014_BustupPhoenix ((u8*)(GFX_BASE_ADDR + 0x133FF4))
+#define gPal_BG015_BustupEdgeworth ((u8*)(GFX_BASE_ADDR + 0x135CC4))
+#define gMap_BG015_BustupEdgeworth ((u8*)(GFX_BASE_ADDR + 0x135CE4))
+#define gPal_BG020_BustupFranziska ((u8*)(GFX_BASE_ADDR + 0x147A98))
+#define gMap_BG020_BustupFranziska ((u8*)(GFX_BASE_ADDR + 0x147AB8))
 
 #define gGfxCase3NickelSamuraiZoomin ((u8*)(GFX_BASE_ADDR + 0x347C38))
 #define gMapCase3NickelSamuraiZoomin ((u8*)(GFX_BASE_ADDR + 0x348370))

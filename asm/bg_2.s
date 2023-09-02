@@ -193,7 +193,7 @@ _08002B28:
 	ands r0, r1
 	cmp r0, #0
 	beq _08002C28
-	ldr r1, _08002BD4 @ =gGfx_BG014
+	ldr r1, _08002BD4 @ =gPal_BG014_BustupPhoenix
 	ldr r3, _08002BD8 @ =0x050001C0
 	ldr r2, _08002BDC @ =0x040000D4
 	str r1, [r2]
@@ -201,13 +201,13 @@ _08002B28:
 	ldr r0, _08002BE0 @ =0x80000010
 	str r0, [r2, #8]
 	ldr r1, [r2, #8]
-	ldr r1, _08002BE4 @ =gGfx_BG015
+	ldr r1, _08002BE4 @ =gPal_BG015_BustupEdgeworth
 	adds r3, #0x20
 	str r1, [r2]
 	str r3, [r2, #4]
 	str r0, [r2, #8]
 	ldr r1, [r2, #8]
-	ldr r1, _08002BE8 @ =gGfx_BG020
+	ldr r1, _08002BE8 @ =gPal_BG020_BustupFranziska
 	subs r3, #0x40
 	str r1, [r2]
 	str r3, [r2, #4]
@@ -270,12 +270,12 @@ _08002B28:
 	bl _0800341C
 	.align 2, 0
 _08002BD0: .4byte gScriptContext
-_08002BD4: .4byte gGfx_BG014
+_08002BD4: .4byte gPal_BG014_BustupPhoenix
 _08002BD8: .4byte 0x050001C0
 _08002BDC: .4byte 0x040000D4
 _08002BE0: .4byte 0x80000010
-_08002BE4: .4byte gGfx_BG015
-_08002BE8: .4byte gGfx_BG020
+_08002BE4: .4byte gPal_BG015_BustupEdgeworth
+_08002BE8: .4byte gPal_BG020_BustupFranziska
 _08002BEC: .4byte gGfxSpeedlinesFirstAndLastColumns
 _08002BF0: .4byte gUnknown_0203B000
 _08002BF4: .4byte 0x80000280
