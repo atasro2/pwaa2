@@ -76,7 +76,7 @@ void EnableDetentionCenterMask(bool16 enable)
         map += 6;
     }
     if(enable) {
-        DmaCopy16(3, gUnknown_0813D91C, VRAM+0x1000, 0x60);
+        DmaCopy16(3, gGfxDetentionCenterBottomTiles, VRAM+0x1000, 0x60);
         gIORegisters.lcd_bg0cnt &= ~0x3;
         gIORegisters.lcd_bg0cnt |= BGCNT_PRIORITY(2);
         gIORegisters.lcd_dispcnt |= DISPCNT_BG0_ON;
@@ -168,7 +168,7 @@ void CopyBGDataToVram(u32 bgId)
         src = gGfx_BG020;
         dst = (void *)PLTT+0x1A0;
         DmaCopy16(3, src, dst, 0x20);
-        DmaCopy16(3, gUnknown_0847845C, eUnknown_0203B000, 0x500);
+        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eUnknown_0203B000, 0x500);
         src = eUnknown_0203B000;
         dst = (void *)VRAM+0x8B00;
         DmaCopy16(3, src, dst, 0x5000);
@@ -227,7 +227,7 @@ void CopyBGDataToVram(u32 bgId)
         for(i = 0; i < 20; i++, j++)
             gBG3MapBuffer[i * 0x20 + 0x3F] = j | 0x2000;
         main->isBGScrolling = TRUE;
-        DmaCopy16(3, gUnknown_0847845C, eUnknown_0203B000, 0x500);
+        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eUnknown_0203B000, 0x500);
     }
     if(tempBgCtrl & 0x8000)
     {

@@ -26,26 +26,26 @@ s16 gUnknown_0811246C[] = { // pairs of psychelock X/Y coordinates
 };
 
 u8 * gUnknown_081124D0[] = {
-    gUnknown_081489E8,
-    gUnknown_08148C20,
-    gUnknown_08149010,
-    gUnknown_08149444,
-    gUnknown_08149AB0,
-    gUnknown_0814A224,
-    gUnknown_0814A3A8,
-    gUnknown_0814A610,
-    gUnknown_0814AA70,
-    gUnknown_0814AED0,
-    gUnknown_0814B6E4,
-    gUnknown_0814B944,
-    gUnknown_0814BCE4,
-    gUnknown_0814C094,
-    gUnknown_0814C58C,
-    gUnknown_0814CAA0,
-    gUnknown_0814CC38,
-    gUnknown_0814CEE4,
-    gUnknown_0814D218,
-    gUnknown_0814D5A4
+    gMapPsycheLockChains01,
+    gMapPsycheLockChains02,
+    gMapPsycheLockChains03,
+    gMapPsycheLockChains04,
+    gMapPsycheLockChains05,
+    gMapPsycheLockChains06,
+    gMapPsycheLockChains07,
+    gMapPsycheLockChains08,
+    gMapPsycheLockChains09,
+    gMapPsycheLockChains10,
+    gMapPsycheLockChains11,
+    gMapPsycheLockChains12,
+    gMapPsycheLockChains13,
+    gMapPsycheLockChains14,
+    gMapPsycheLockChains15,
+    gMapPsycheLockChains16,
+    gMapPsycheLockChains17,
+    gMapPsycheLockChains18,
+    gMapPsycheLockChains19,
+    gMapPsycheLockChains20
 };
 void sub_8015F54(struct PscyheLock_10 * arg0);
 
@@ -127,7 +127,7 @@ void sub_8015EB4(void)
     DmaFill16(3, 0, BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
     DmaFill16(3, 0, BG_SCREEN_ADDR(31), BG_SCREEN_SIZE);
     m4aSoundVSyncOff();
-    LZ77UnCompVram(gUnknown_0814777C, BG_CHAR_ADDR(1));
+    LZ77UnCompVram(gGfxPsycheLockChainsTiles, BG_CHAR_ADDR(1));
     m4aSoundVSyncOn();
     DmaCopy16(3, gUnknown_0811242C[0], BG_PLTT+0x1C0, 0x20);
     DmaCopy16(3, gUnknown_0811242C[1], BG_PLTT+0x1E0, 0x20);
@@ -818,9 +818,9 @@ void sub_8016E10(u32 arg0)
 
 void sub_8016E2C(void)
 {
-    DmaCopy16(3, gUnknown_08146FFC, OBJ_VRAM0+0x3000, 0x200);
+    DmaCopy16(3, gGfxInvestigationStopButton, OBJ_VRAM0+0x3000, 0x200);
     DmaCopy16(3, gUnknown_08141EFC, OBJ_VRAM0+0x3200, 0x200);
-    DmaCopy16(3, gUnknown_0814DC40, OBJ_PLTT+0xA0, 0x20);
+    DmaCopy16(3, gPalPressPresentButtons, OBJ_PLTT+0xA0, 0x20);
 }
 
 void sub_8016E7C(void)

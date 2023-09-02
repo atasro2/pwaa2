@@ -213,7 +213,7 @@ _08002B28:
 	str r3, [r2, #4]
 	str r0, [r2, #8]
 	ldr r0, [r2, #8]
-	ldr r0, _08002BEC @ =gUnknown_0847845C
+	ldr r0, _08002BEC @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r2]
 	ldr r1, _08002BF0 @ =gUnknown_0203B000
 	str r1, [r2, #4]
@@ -276,7 +276,7 @@ _08002BDC: .4byte 0x040000D4
 _08002BE0: .4byte 0x80000010
 _08002BE4: .4byte gGfx_BG015
 _08002BE8: .4byte gGfx_BG020
-_08002BEC: .4byte gUnknown_0847845C
+_08002BEC: .4byte gGfxSpeedlinesFirstAndLastColumns
 _08002BF0: .4byte gUnknown_0203B000
 _08002BF4: .4byte 0x80000280
 _08002BF8: .4byte 0x06008B00
@@ -451,7 +451,7 @@ _08002D68:
 	movs r0, #1
 	strb r0, [r7]
 	ldr r1, _08002DC0 @ =0x040000D4
-	ldr r0, _08002DC8 @ =gUnknown_0847845C
+	ldr r0, _08002DC8 @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r1]
 	ldr r0, _08002DCC @ =gUnknown_0203B000
 	str r0, [r1, #4]
@@ -485,7 +485,7 @@ _08002DB8: .4byte gUnknown_0801BBD8
 _08002DBC: .4byte gBG3MapBuffer
 _08002DC0: .4byte 0x040000D4
 _08002DC4: .4byte 0x800002C0
-_08002DC8: .4byte gUnknown_0847845C
+_08002DC8: .4byte gGfxSpeedlinesFirstAndLastColumns
 _08002DCC: .4byte gUnknown_0203B000
 _08002DD0: .4byte 0x80000280
 _08002DD4:

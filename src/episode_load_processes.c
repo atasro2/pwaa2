@@ -23,10 +23,10 @@ void EpisodeLoadGfx(struct Main * main)
     struct OamAttrs * oam;
     u32 i, j;
 
-    LZ77UnCompWram(gUnknown_0814E460, eBGDecompBuffer);
+    LZ77UnCompWram(gGfxEpisodeSelectOptions, eBGDecompBuffer);
     DmaCopy16(3, eBGDecompBuffer, OBJ_VRAM0+0x3400, 0x2800);
-    DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
-    DmaCopy16(3, gUnknown_0813791C, VRAM, 0x1000);
+    DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
+    DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
     DecompressBackgroundIntoBuffer(0xA);
     CopyBGDataToVram(0xA);
     gMain.animationFlags &= ~3;
@@ -624,9 +624,9 @@ void ContinueSaveProcess(struct Main * main) {
             if (main->blendMode == 0) {
                 main->saveContinueFlags = gSaveDataBuffer.main.saveContinueFlags;
                 main->scenarioIdx = gSaveDataBuffer.main.scenarioIdx;
-                DmaCopy16(3, gUnknown_0813791C, BG_CHAR_ADDR(0), 0x1000);
-                DmaCopy16(3, gUnknown_0814F0C4, OBJ_VRAM0 + 0x3400, 0x1000);
-                DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+                DmaCopy16(3, gGfxSaveGameTiles, BG_CHAR_ADDR(0), 0x1000);
+                DmaCopy16(3, gGfxFromSaveOrBeginningOptions, OBJ_VRAM0 + 0x3400, 0x1000);
+                DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
                 DecompressBackgroundIntoBuffer(0xA);
                 CopyBGDataToVram(0xA);
                 main->animationFlags &= ~3;
@@ -731,25 +731,25 @@ void ContinueSaveProcess(struct Main * main) {
             ResetSoundControl();
             LoadCurrentScriptIntoRam();
             DmaCopy16(3, gUnusedAsciiCharSet, BG_VRAM + 0x3800, 0x800);
-            DmaCopy16(3, gUnknown_0813791C, BG_VRAM, 0x1000);
-            DmaCopy16(3, gGfxPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
+            DmaCopy16(3, gGfxSaveGameTiles, BG_VRAM, 0x1000);
+            DmaCopy16(3, gPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
             i = (uintptr_t)GetBGPalettePtr(0); // ! BAD FAKEMATCH?
             DmaCopy16(3, i, BG_PLTT, 0x200);
             DmaCopy16(3, &gSaveDataBuffer.main, &gMain, sizeof(gMain));
-            DmaCopy16(3, gGfxPalEvidenceProfileDesc, BG_PLTT, 0x20);
+            DmaCopy16(3, gPalEvidenceProfileDesc, BG_PLTT, 0x20);
             LoadCurrentScriptIntoRam();
-            DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT + 0x100, 0x20);
+            DmaCopy16(3, gPalExamineCursors, OBJ_PLTT + 0x100, 0x20);
             DmaCopy16(3, &gSaveDataBuffer.talkData, &gTalkData, sizeof(gTalkData));
             DmaCopy16(3, &gSaveDataBuffer.unknown3003B70, &gUnknown_03003B70, sizeof(gUnknown_03003B70));
             RestoreAnimationsFromBuffer(gSaveDataBuffer.backupAnimations);
 
             if (main->process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
                 DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-                DmaCopy16(3, gUnknown_0814DBA0, OBJ_PLTT + 0xA0, 0x40);
+                DmaCopy16(3, gPalActionButtons1, OBJ_PLTT + 0xA0, 0x40);
                 DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
-                DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT + 0xE0, 0x20);
-                DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x3200, 0x200);
-                DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+                DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT + 0xE0, 0x20);
+                DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
+                DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
 
                 if (main->process[GAME_PROCESS_VAR1] == 3) {
                     if (main->process[GAME_PROCESS_STATE] == INVESTIGATION_MOVE) {
@@ -759,13 +759,13 @@ void ContinueSaveProcess(struct Main * main) {
                     }
                 }
             } else {
-                DmaCopy16(3, gUnknown_08231BE8, OBJ_PLTT+0xC0, 0x20);
+                DmaCopy16(3, gPalMapMarkers, OBJ_PLTT+0xC0, 0x20);
                 if(main->process[GAME_PROCESS] == TESTIMONY_PROCESS) {
                     DmaCopy16(3, gGfx4bppTestimonyTextTiles, OBJ_VRAM0 + 0x3000, 0x800);
-                    DmaCopy16(3, gUnknown_0814DC20, OBJ_PLTT + 0xA0, 0x20);
+                    DmaCopy16(3, gPalTestimonyTextTiles, OBJ_PLTT + 0xA0, 0x20);
                 } else if(main->process[GAME_PROCESS] == QUESTIONING_PROCESS) {
-                    DmaCopy16(3, gUnknown_08141CFC, OBJ_VRAM0 + 0x3000, 0x400);
-                    DmaCopy16(3, gUnknown_0814DC40, OBJ_PLTT+0xA0, 0x20);
+                    DmaCopy16(3, gGfxPressPresentButtons, OBJ_VRAM0 + 0x3000, 0x400);
+                    DmaCopy16(3, gPalPressPresentButtons, OBJ_PLTT+0xA0, 0x20);
                     DmaCopy16(3, gGfx4bppTestimonyArrows, OBJ_VRAM0 + 0x3400, 0x80);
                     DmaCopy16(3, gGfx4bppTestimonyArrows + 12 * TILE_SIZE_4BPP, OBJ_VRAM0 + 0x3480, 0x80);            
                 }
@@ -830,7 +830,7 @@ void ContinueSaveProcess(struct Main * main) {
                 DmaCopy16(3, gCharSet + 0x7100, OBJ_VRAM0 + 0x1F80, 0x80);
             }
             if (gScriptContext.flags & 0x400) {
-                DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x1F80, 0x80);
+                DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x1F80, 0x80);
             }
             DmaCopy16(3, gSaveDataBuffer.oam, gOamObjects, sizeof(gOamObjects));
             gJoypad.heldKeys = gJoypad.pressedKeys = gJoypad.previousHeldKeys = gJoypad.previousPressedKeys = 0;

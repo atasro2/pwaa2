@@ -6,7 +6,7 @@ extern struct Struct3006390 gUnknown_03006390[8];
 
 extern u8 * gUnknown_081124D0[];
 
-extern u8 gUnknown_0814777C[];
+extern u8 gGfxPsycheLockChainsTiles[];
 
 // ??
 extern void sub_8003988(u16,u16,u16);

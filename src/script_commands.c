@@ -34,9 +34,9 @@ const u8 gSoundCueTable[] = {
    probably left over from when the scroll
    was more than a single graphic */
 u8 * const gCourtScrollGfxPointers[] = {
-    gUnknown_08478BDC,
-    gUnknown_08478BDC,
-    gUnknown_08478BDC,
+    gPalCourtScroll,
+    gPalCourtScroll,
+    gPalCourtScroll,
 };
 
 const u8 gTextboxDownArrowTileIndexes[] = {
@@ -993,8 +993,8 @@ bool32 Command29(struct ScriptContext *scriptCtx)
     }
     else if (*scriptCtx->scriptPtr == 4)
     {
-        DmaCopy16(3, gUnknown_08141CFC, OBJ_VRAM0 + 0x3000, 0x400);
-        DmaCopy16(3, gUnknown_0814DC40, OBJ_PLTT+0xA0, 0x20);
+        DmaCopy16(3, gGfxPressPresentButtons, OBJ_VRAM0 + 0x3000, 0x400);
+        DmaCopy16(3, gPalPressPresentButtons, OBJ_PLTT+0xA0, 0x20);
         DmaCopy16(3, gGfx4bppTestimonyArrows, 0x1A0, 0x80);
         DmaCopy16(3, gGfx4bppTestimonyArrows + 12 * TILE_SIZE_4BPP, 0x220, 0x80);
         gTestimony.pressPromptY = 0xE0;
@@ -1269,35 +1269,35 @@ struct MapMarkerSprite
 
 const struct MapMarkerSprite sMapMarkerSprites[] = {
     {
-        .tiles = gUnknown_08231C08,
+        .tiles = gGfxMapMarkersKiller,
         .size = 0x80,
         .attr0 = 0x0000,
         .attr1 = 0x4000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08231C88,
+        .tiles = gGfxMapMarkersVictim,
         .size = 0x80,
         .attr0 = 0x0000,
         .attr1 = 0x4000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08231D08,
+        .tiles = gGfxMapMarkersGreen,
         .size = 0x80,
         .attr0 = 0x0000,
         .attr1 = 0x4000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08231D88,
+        .tiles = gGfxMapMarkersDoubleDoorDiagram,
         .size = 0x400,
         .attr0 = 0x8000,
         .attr1 = 0xc000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08232188,
+        .tiles = gGfxMapMarkersFoldingScreen,
         .size = 0x100,
         .attr0 = 0x8000,
         .attr1 = 0x8000,
@@ -1318,14 +1318,14 @@ const struct MapMarkerSprite sMapMarkerSprites[] = {
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08231D08,
+        .tiles = gGfxMapMarkersGreen,
         .size = 0x80,
         .attr0 = 0x0000,
         .attr1 = 0x4000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08232488,
+        .tiles = gGfxMapMarkersRedDot,
         .size = 0x20,
         .attr0 = 0x0000,
         .attr1 = 0x0000,
@@ -1353,7 +1353,7 @@ bool32 Command39(struct ScriptContext *scriptCtx)
             mapMarker->id = id;
             mapMarker->vramPtr = scriptCtx->mapMarkerVramPtr;
             DmaCopy16(3, sMapMarkerSprites[id].tiles, mapMarker->vramPtr, size = sMapMarkerSprites[id].size); // weird shit going on here
-            DmaCopy16(3, gUnknown_08231BE8, OBJ_PLTT + 0xC0, 0x20);
+            DmaCopy16(3, gPalMapMarkers, OBJ_PLTT + 0xC0, 0x20);
             mapMarker->oamIdx = oamIdx;
             oamObject = &gOamObjects[oamIdx];
 
@@ -1474,8 +1474,8 @@ bool32 Command3D(struct ScriptContext *scriptCtx)
 bool32 Command3E(struct ScriptContext *scriptCtx)
 {
     scriptCtx->scriptPtr++;
-    DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x1F80, 0x80);
-    DmaCopy16(3, &gUnknown_0814DC60[0], OBJ_PLTT + 0x100, 0x20);
+    DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x1F80, 0x80);
+    DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT + 0x100, 0x20);
     gInvestigation.pointerX = 0xF0;
     gInvestigation.pointerY = 0x30;
     gInvestigation.pointerColorCounter = 0;
@@ -1975,7 +1975,7 @@ bool32 Command3F(struct ScriptContext *scriptCtx)
             else
                 ChangeScriptSection(spotselect->defaultSection);
             scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
-            DmaCopy16(3, &gUnknown_0814DC60[0], OBJ_PLTT + 0x100, 0x20);
+            DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT + 0x100, 0x20);
             PlaySE(SE001_MENU_CONFIRM);
             scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
             gOamObjects[OAM_IDX_POINTER].attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
@@ -1989,7 +1989,7 @@ bool32 Command3F(struct ScriptContext *scriptCtx)
             investigation->pointerColorCounter = 0;
             investigation->pointerColor++;
             investigation->pointerColor &= 0xF;
-            DmaCopy16(3, &gUnknown_0814DC60[investigation->pointerColor * 0x20], OBJ_PLTT + 0x100, 0x20);
+            DmaCopy16(3, &gPalExamineCursors[investigation->pointerColor * 0x20], OBJ_PLTT + 0x100, 0x20);
         }
     }
     scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
@@ -2108,15 +2108,15 @@ bool32 Command44(struct ScriptContext * scriptCtx)
     BACKUP_PROCESS();
     if(*scriptCtx->scriptPtr) 
     {
-        DmaCopy16(3, gUnknown_081438DC, OBJ_VRAM0+0x3400, 0x1000);
-        DmaCopy16(3, gUnknown_0814DEC0, OBJ_PLTT+0xA0, 0x20);
+        DmaCopy16(3, gGfxGuilty1, OBJ_VRAM0+0x3400, 0x1000);
+        DmaCopy16(3, gPalGuilty, OBJ_PLTT+0xA0, 0x20);
         SET_PROCESS(VERDICT_PROCESS,0,0,0);
     }
     else 
     {
-        DmaCopy16(3, gUnknown_081430DC, OBJ_VRAM0+0x3400, 0x800);
-        DmaCopy16(3, gUnknown_081440DC, OBJ_VRAM0+0x3C00, 0x800);
-        DmaCopy16(3, gUnknown_0814DEE0, OBJ_PLTT+0xA0, 0x20);
+        DmaCopy16(3, gGfxNotGuilty1, OBJ_VRAM0+0x3400, 0x800);
+        DmaCopy16(3, gGfxGuiltyNotGuilty2, OBJ_VRAM0+0x3C00, 0x800);
+        DmaCopy16(3, gPalNotGuilty, OBJ_PLTT+0xA0, 0x20);
         SET_PROCESS(VERDICT_PROCESS,0,0,1);
     }
     scriptCtx->scriptPtr++;

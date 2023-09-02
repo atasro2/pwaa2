@@ -243,11 +243,11 @@ void sub_801816C(void)
     gIORegisters.lcd_bg2pb = 0;
     gIORegisters.lcd_bg2pc = 0;
     gIORegisters.lcd_bg2pd = 0;
-    LZ77UnCompWram(gUnknown_08477C38, eUnknown_02036500);
+    LZ77UnCompWram(gGfxCase3NickelSamuraiZoomin, eUnknown_02036500);
     DmaCopy16(3, eUnknown_02036500, BG_CHAR_ADDR(1), 0x1300);
-    LZ77UnCompWram(gUnknown_08478370, eUnknown_02036500);
+    LZ77UnCompWram(gMapCase3NickelSamuraiZoomin, eUnknown_02036500);
     DmaCopy16(3, eUnknown_02036500, gBG2MapBuffer, sizeof(gBG2MapBuffer));
-    LZ77UnCompWram(gUnknown_084783F8, eUnknown_02036500);
+    LZ77UnCompWram(gPalCase3NickelSamuraiZoomin, eUnknown_02036500);
     DmaCopy16(3, eUnknown_02036500, BG_PLTT, BG_PLTT_SIZE);
     *(u16*)BG_PLTT = 0xFFFF; // white backdrop
     sub_8018138();

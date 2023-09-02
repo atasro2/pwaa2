@@ -1268,7 +1268,7 @@ void CourtRecordChangeRecord(struct Main * main, struct CourtRecord * courtRecor
         else
         {
             courtRecord->flags |= COURT_RECORD_VIEW_PROFILES;
-            DmaCopy16(3, gUnknown_081424FC, OBJ_VRAM0+0x3500, 0x200);
+            DmaCopy16(3, gGfxEvidenceText, OBJ_VRAM0+0x3500, 0x200);
             courtRecord->displayItemCount = courtRecord->profileCount;
             courtRecord->displayItemList = courtRecord->profileList;
         }
@@ -1819,9 +1819,9 @@ void LoadEvidenceWindowGraphics(void)
     DmaCopy16(3, gGfx4bppControllerButtons, OBJ_VRAM0+0x3800, TILE_SIZE_4BPP*16);
     DmaCopy16(3, gGfx4bppPresentBackTextTiles, OBJ_VRAM0+0x3A00, TILE_SIZE_4BPP*16);
     DmaCopy16(3, gGfx4bppProfileTextTiles, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
-    DmaCopy16(3, gGfxPalCrossExamUI, OBJ_PLTT+0x60, 0x20);
-    DmaCopy16(3, gGfxPalCourtRecordActionText, OBJ_PLTT+0x80, 0x20);
-    DmaCopy16(3, gGfxPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
+    DmaCopy16(3, gPalCrossExamUI, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, gPalCourtRecordActionText, OBJ_PLTT+0x80, 0x20);
+    DmaCopy16(3, gPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
 }
 
 void UpdateRecordSprites(struct CourtRecord * courtRecord)

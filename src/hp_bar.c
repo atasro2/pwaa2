@@ -50,12 +50,12 @@ u16 gUnknown_08112700[15][16] = {
 
 void sub_8017178(void)
 {
-    DmaCopy16(3, gUnknown_081475FC, OBJ_VRAM0+0x3780, 0x180);
-    DmaCopy16(3, gUnknown_0814E340, OBJ_PLTT+0x60, 0x20);
-    DmaCopy16(3, gUnknown_0814E360, OBJ_PLTT+0x80, 0x20);
-    DmaCopy16(3, gUnknown_0814757C, OBJ_VRAM0+0x2E00, 0x80);
-    DmaCopy16(3, gUnknown_0814747C, OBJ_VRAM0+0x2E80, 0x100);
-    DmaCopy16(3, gUnknown_081473FC, OBJ_VRAM0+0x2F80, 0x80);
+    DmaCopy16(3, gGfxHPBarProgress, OBJ_VRAM0+0x3780, 0x180);
+    DmaCopy16(3, gPalHPBarFrame, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, gPalHPBarProgress, OBJ_PLTT+0x80, 0x20);
+    DmaCopy16(3, gGfxHPBarFrame3, OBJ_VRAM0+0x2E00, 0x80);
+    DmaCopy16(3, gGfxHPBarFrame2, OBJ_VRAM0+0x2E80, 0x100);
+    DmaCopy16(3, gGfxHPBarFrame1, OBJ_VRAM0+0x2F80, 0x80);
 }
 
 void sub_801720C(int arg0, int arg1)

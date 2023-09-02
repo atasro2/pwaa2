@@ -314,7 +314,7 @@ void sub_8003B1C(u16 arg0, u16 arg1, u16 arg2)
     u16 * benchpal;
     u32 i;
     arg0 -= 4;
-    benchpal = arg0 < 2 ? (u16*)gUnknown_0814E100 : (u16*)gUnknown_0814E0E0;
+    benchpal = arg0 < 2 ? (u16*)gPalCounselBench : (u16*)gPalWitnessBench;
     DmaCopy16(3, benchpal, pal, 0x20);
     for(i = 0; i < 0x10; i++) {
         pal[i] = sub_800389C(pal[i], arg1, arg2);
@@ -325,8 +325,8 @@ void sub_8003B1C(u16 arg0, u16 arg1, u16 arg2)
 void sub_8003B8C(u16 arg0, u16 arg1)
 {
     u16 pal[0x10];
-    u32 * framedata = (u32*)gUnknown_086E9B5C;
-    u16 * spritepal = (u16*)(gUnknown_086DF2DC + 4 + *(framedata+1));
+    u32 * framedata = (u32*)gGfxSeqAnimation10;
+    u16 * spritepal = (u16*)(gGfxPixAnimationTileset01 + 4 + *(framedata+1));
     u32 i;
     DmaCopy16(3, spritepal, pal, 0x20);
     for(i = 0; i < 0x10; i++) {
