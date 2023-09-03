@@ -4,28 +4,28 @@
 extern struct PscyheLock gPsycheLock;
 extern struct FlowerPetal gFlowerPetals[8];
 
-extern u8 * gUnknown_081124D0[];
+extern u8 * gPsycheLockChainTilemaps[];
 
 extern u8 gGfxPsycheLockChainsTiles[];
 
 // ??
-extern void sub_8003988(u16,u16,u16);
-extern void sub_8003A7C(u16,u16);
-extern void sub_8003B1C(u16,u16,u16);
-extern void sub_8003B8C(u16,u16);
+extern void LoadAndAdjustBGPaletteByMode(u16,u16,u16);
+extern void LoadAndAdjustCurrentAnimation01PaletteByMode(u16,u16);
+extern void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16,u16,u16);
+extern void LoadAndAdjustAnimation10PaletteByMode(u16,u16);
 
 // script_main
 extern void ClearSectionReadFlags(struct Main * main);
 
 // investigation stuff 
 extern void LoadWitnessBenchGraphics(void);
-extern void sub_800E7EC(s32, s32, u8);
+extern void SetOAMForCourtBenchSpritesWitness(s32, s32, u8);
 extern void LoadCounselBenchGraphics(void);
-extern void sub_800E900(s32, s32, u8);
-extern void sub_800E9D4(s32, s32, u8);
-extern void sub_8010FA4(void);
-extern void sub_8011088(u16, u16);
-extern void sub_8011198(void);
+extern void SetOAMForCourtBenchSpritesDefense(s32, s32, u8);
+extern void SetOAMForCourtBenchSpritesProsecution(s32, s32, u8);
+extern void ReloadInvestigationGraphics(void);
+extern void SetInvestigationStateToReturnAfterPsycheLocks(u16, u16);
+extern void ClearInvestigationActionButtonOAM(void);
 
 // new file
 int FindPlayingHPBarSmokeAnimations(void);
@@ -41,9 +41,9 @@ void DestroyAllFlowerPetals(void);
 extern void UpdateNickelSamuraiZoominAnimation(void);
 extern void InitNickelSamuraiZoominAnimation(void);
 extern void FinishNickelSamuraiZoominAnimation(void);
-extern void sub_80183D8(void);
-extern void sub_8018690(void);
-extern void sub_80186EC(void);
-extern void sub_8018720(void);
+extern void ProcessSignalDetector(void);
+extern void BeginSignalDetector(void);
+extern void ReturnToSignalDetector(void);
+extern void EndSignalDetector(void);
 
 #endif//GUARD_DECLARATIONS_H

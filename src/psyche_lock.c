@@ -12,12 +12,12 @@
 #include "constants/animation.h"
 #include "constants/script.h"
 
-u16 gUnknown_0811242C[][16] = {
+u16 gPsycheLockChainPalettes[][16] = {
     {0x0000, 0x0842, 0x1084, 0x14a5, 0x18c6, 0x1ce8, 0x252a, 0x294b, 0x318d, 0x39ce, 0x4210, 0x4632, 0x4a53, 0x5295, 0x5ad6, 0x6318},
     {0x0000, 0x0842, 0x1084, 0x18c6, 0x2529, 0x2d6b, 0x39ce, 0x4210, 0x4a52, 0x4e73, 0x56b5, 0x5ad6, 0x6318, 0x6739, 0x6f7b, 0x739c}
 };
 
-s16 gUnknown_0811246C[] = { // pairs of psychelock X/Y coordinates
+s16 gPsycheLockLockPositions[] = { // pairs of psychelock X/Y coordinates
 	88,  88, 0,   0,   0,   0,   0,   0,   0,   0,   // 1 lock
     24,  80, 152, 80,  0,   0,   0,   0,   0,   0,   // 2 locks
     88,  88, 16,  64,  160, 64,  0,   0,   0,   0,   // 3 locks
@@ -25,7 +25,7 @@ s16 gUnknown_0811246C[] = { // pairs of psychelock X/Y coordinates
     88,  88, 40,  24,  136, 24,  8,   80,  168, 80,  // 5 locks 
 };
 
-u8 * gUnknown_081124D0[] = {
+u8 * gPsycheLockChainTilemaps[] = {
     gMapPsycheLockChains01,
     gMapPsycheLockChains02,
     gMapPsycheLockChains03,
@@ -47,14 +47,14 @@ u8 * gUnknown_081124D0[] = {
     gMapPsycheLockChains19,
     gMapPsycheLockChains20
 };
-void sub_8015F54(struct PscyheLock_10 * arg0);
+void CopyPsycheLockChainBlocksToBGMapBuffer(struct PscyheLock_10 * arg0);
 
-void sub_8015CE0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2, s32 arg3)
+void sub_8015CE0(struct PscyheLock_10 * arg0, s32 arg1, s32 targetBGMapBuffer, s32 arg3)
 {
     arg0->unk2 = arg1;
-    arg0->unk0 = arg2;
+    arg0->targetBGMapBuffer = targetBGMapBuffer;
     arg0->unk4 = arg3;
-    sub_8015F54(arg0);
+    CopyPsycheLockChainBlocksToBGMapBuffer(arg0);
 }
 
 void sub_8015CF0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2)
@@ -63,7 +63,7 @@ void sub_8015CF0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2)
     void * decompBuff;
     DmaFill16(3, 0, arg0, sizeof(*arg0));
     decompBuff = arg1 % 10 <= 4 ? (void*)0x2036500 : (void*)0x203A500;
-    LZ77UnCompWram(gUnknown_081124D0[arg1], decompBuff);
+    LZ77UnCompWram(gPsycheLockChainTilemaps[arg1], decompBuff);
     arg0->unk8 = decompBuff;
     decompBuff += 8;
     for(i = 0; i < arg0->unk8->unk6; i++)
@@ -75,7 +75,7 @@ void sub_8015CF0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2)
     {
         int count;
         int j;
-        arg0->unkCC[i] = decompBuff;
+        arg0->chainBlocks[i] = decompBuff;
         count = *(u32*)decompBuff;
         decompBuff += 4;
         for(j = 0; j < count; j++)
@@ -97,7 +97,7 @@ void sub_8015DBC(struct PscyheLock_10 * arg0)
     {
         arg0->unk6 = 0;
         arg0->unk4++;
-        sub_8015F54(arg0);
+        CopyPsycheLockChainBlocksToBGMapBuffer(arg0);
     }
 }
 
@@ -119,7 +119,7 @@ bool32 sub_8015E9C(struct PscyheLock_10 * arg0)
     return FALSE;
 }
 
-void sub_8015EB4(void)
+void LoadPsycheLockChainGraphics(void)
 {
     gMain.unk30 = 0x7F;
     gIORegisters.lcd_bg0cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(28) | BGCNT_MOSAIC | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
@@ -129,11 +129,11 @@ void sub_8015EB4(void)
     m4aSoundVSyncOff();
     LZ77UnCompVram(gGfxPsycheLockChainsTiles, BG_CHAR_ADDR(1));
     m4aSoundVSyncOn();
-    DmaCopy16(3, gUnknown_0811242C[0], BG_PLTT+0x1C0, 0x20);
-    DmaCopy16(3, gUnknown_0811242C[1], BG_PLTT+0x1E0, 0x20);
+    DmaCopy16(3, gPsycheLockChainPalettes[0], BG_PLTT+0x1C0, 0x20);
+    DmaCopy16(3, gPsycheLockChainPalettes[1], BG_PLTT+0x1E0, 0x20);
 }
 
-void sub_8015F54(struct PscyheLock_10 * arg0)
+void CopyPsycheLockChainBlocksToBGMapBuffer(struct PscyheLock_10 * arg0)
 {
     short i;
     void * data;
@@ -147,7 +147,7 @@ void sub_8015F54(struct PscyheLock_10 * arg0)
     int temp;
     bool32 sp10;
 
-    data = arg0->unkCC[arg0->unkC[arg0->unk4]->unk0];
+    data = arg0->chainBlocks[arg0->unkC[arg0->unk4]->unk0];
     count = *(u32*)data;
     data += 4;
 
@@ -155,7 +155,7 @@ void sub_8015F54(struct PscyheLock_10 * arg0)
     mapXOffset = 0;
     palIdx = 14;
     sp10 = FALSE;
-    switch(arg0->unk0)
+    switch(arg0->targetBGMapBuffer)
     {
         case 0:
             mapXOffset = -8;
@@ -381,7 +381,7 @@ _080163C2: // psylock_move_chain_appear
         default:
             return;
         case 0:
-            sub_8015EB4();
+            LoadPsycheLockChainGraphics();
             sub_8015CF0(&gPsycheLock.unk10[0], gPsycheLock.unk0 - 1, 3);
             sub_8015CF0(&gPsycheLock.unk10[1], gPsycheLock.unk0 + 5 - 1, 0);
             PlaySE(0x7F + gPsycheLock.unk0);
@@ -421,8 +421,8 @@ _08016498: // psylock_move_lock_appear
                 s32 temp = gPsycheLock.unk0 - 1;
                 s32 xOrigin = temp * 10 + i * 2;
                 s32 yOrigin = temp * 10 + i * 2 + 1;
-                xOrigin = gUnknown_0811246C[xOrigin] + 32;
-                yOrigin = gUnknown_0811246C[yOrigin] + 16;
+                xOrigin = gPsycheLockLockPositions[xOrigin] + 32;
+                yOrigin = gPsycheLockLockPositions[yOrigin] + 16;
                 gPsycheLock.lockAnims[i] = PlayAnimationAtCustomOrigin(40 + i, xOrigin, yOrigin);
                 gPsycheLock.lockAnims[i]->flags |= 0x100;
                 gPsycheLock.lockAnims[i]->flags &= ~ANIM_ACTIVE;
@@ -507,8 +507,8 @@ _0801667C: // psylock_move_lock_unlock
             temp = gPsycheLock.unk0 - 1;
             xOrigin = temp * 10 + gPsycheLock.unk2 * 2;
             yOrigin = temp * 10 + gPsycheLock.unk2 * 2 + 1;
-            xOrigin = gUnknown_0811246C[xOrigin] + 32;
-            yOrigin = gUnknown_0811246C[yOrigin] + 16;
+            xOrigin = gPsycheLockLockPositions[xOrigin] + 32;
+            yOrigin = gPsycheLockLockPositions[yOrigin] + 16;
             gPsycheLock.lockAnims[gPsycheLock.unk2] = PlayAnimationAtCustomOrigin(50 + gPsycheLock.unk2, xOrigin, yOrigin);
             gMain.gameStateFlags |= 1;
             gMain.shakeTimer = 2;
@@ -708,7 +708,7 @@ _08016B3C: // psylock_move_clear_all
             gMain.previousBG = gMain.currentBG;
             gMain.currentBG = i;
             gMain.currentBgStripe = 1;
-            sub_8010FA4();
+            ReloadInvestigationGraphics();
             m4aSoundVSyncOn();
             gPsycheLock.unk4 = 0;
             gPsycheLock.unk6 = 0;
@@ -751,7 +751,7 @@ void sub_8016C7C(u32 arg0) // PsylockDisp_show_static
     int i;
 
     sub_8016124(arg0);
-    sub_8015EB4();
+    LoadPsycheLockChainGraphics();
     sub_8015CF0(&gPsycheLock.unk10[0], gPsycheLock.unk0 - 1, 3);
     sub_8015CF0(&gPsycheLock.unk10[1], gPsycheLock.unk0 + 5 - 1, 0);
     sub_8015CE0(&gPsycheLock.unk10[0], gPsycheLock.unk0 - 1, 3, gPsycheLock.unk10[0].unk8->unk6-1);
@@ -761,8 +761,8 @@ void sub_8016C7C(u32 arg0) // PsylockDisp_show_static
         s32 temp = (gPsycheLock.unk0-1);
         s32 xOrigin = temp * 10 + i * 2;
         s32 yOrigin = temp * 10 + i * 2 + 1;
-        xOrigin = gUnknown_0811246C[xOrigin] + 32;
-        yOrigin = gUnknown_0811246C[yOrigin] + 16;
+        xOrigin = gPsycheLockLockPositions[xOrigin] + 32;
+        yOrigin = gPsycheLockLockPositions[yOrigin] + 16;
         gPsycheLock.lockAnims[i] = PlayAnimationAtCustomOrigin(45 + i, xOrigin, yOrigin);
     }
 }
@@ -774,7 +774,7 @@ void sub_8016D40(void) // PsylockDisp_reset_static
     sub_801622C();
     for(i = 0; i < gPsycheLock.unk0; i++)
         DestroyAnimation(gPsycheLock.lockAnims[i]);
-    sub_8010FA4();
+    ReloadInvestigationGraphics();
     gInvestigation.unkB &= ~1;
 }
 

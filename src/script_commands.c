@@ -460,7 +460,7 @@ bool32 Command0E(struct ScriptContext * scriptCtx)
     scriptCtx->scriptPtr++;
     scriptCtx->textboxNameId = (*scriptCtx->scriptPtr >> 8);
     scriptCtx->textboxNameId &= ~0x80; // side bit
-    sub_80037C8();
+    CopyTextboxTilesToBG1MapBuffer();
     SetTextboxNametag(scriptCtx->textboxNameId, *scriptCtx->scriptPtr & 0xFF);
     soundCue = gSoundCueTable[scriptCtx->textboxNameId];
     scriptCtx->currentSoundCue = soundCue;
@@ -716,7 +716,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             gMain.showTextboxCharacters = TRUE;
             gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
             gIORegisters.lcd_bg1vofs = 0;
-            sub_80037C8();
+            CopyTextboxTilesToBG1MapBuffer();
             SetTextboxNametag(gMain.unk2BC, gMain.unk2BD);
             break;
         case 1: // disable textbox
@@ -2512,7 +2512,7 @@ bool32 Command5B(struct ScriptContext *scriptCtx)
     var0 = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
     var1 = *scriptCtx->scriptPtr;
-    sub_8011088(var0, var1);
+    SetInvestigationStateToReturnAfterPsycheLocks(var0, var1);
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2636,26 +2636,26 @@ bool32 Command65(struct ScriptContext *scriptCtx)
         case 0:
             if(var1 == 1) {
                 LoadWitnessBenchGraphics();
-                sub_800E7EC(0x18, 0x80, 1);
+                SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
             } else {
-                sub_800E7EC(0x18, 0x80, 0);
+                SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 0);
             }
             break;
         case 1:
             if(var1 == 1) {
                 LoadCounselBenchGraphics();
-                sub_800E900(0, 0x80, 1);
+                SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
             } else {
-                sub_800E900(0, 0, 0);
+                SetOAMForCourtBenchSpritesDefense(0, 0, 0);
             }
             break;
         case 2:
             if(var2 != 2) break;
             if(var1 == 1) {
                 LoadCounselBenchGraphics();
-                sub_800E9D4(0x20, 0x80, 1);
+                SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
             } else {
-                sub_800E900(0, 0, 0);
+                SetOAMForCourtBenchSpritesDefense(0, 0, 0);
             }
             break;
     }
@@ -2744,13 +2744,13 @@ bool32 Command6D(struct ScriptContext *scriptCtx)
     scriptCtx->scriptPtr++;
     switch(*scriptCtx->scriptPtr) {
         case 0:
-            sub_8018690();
+            BeginSignalDetector();
             break;
         case 1:
-            sub_8018720();
+            EndSignalDetector();
             break;
         case 2:
-            sub_80186EC();
+            ReturnToSignalDetector();
     }
     scriptCtx->scriptPtr++;
     return 0;

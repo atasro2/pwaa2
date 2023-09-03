@@ -150,14 +150,14 @@ _08002ACE:
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800E900
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08002B28
 _08002ADE:
 	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800E7EC
+	bl SetOAMForCourtBenchSpritesWitness
 	b _08002B28
 _08002AEE:
 	bl LoadCounselBenchGraphics
@@ -165,27 +165,27 @@ _08002AEE:
 _08002AF4:
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800E9D4
+	bl SetOAMForCourtBenchSpritesProsecution
 	b _08002B28
 _08002AFE:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800E7EC
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800E900
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08002B28
 _08002B14:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800E7EC
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800E900
+	bl SetOAMForCourtBenchSpritesDefense
 _08002B28:
 	ldr r1, _08002BD0 @ =gScriptContext
 	movs r0, #0x40
@@ -337,7 +337,7 @@ _08002C28:
 	movs r0, #6
 	movs r1, #0x20
 	movs r2, #1
-	bl sub_8003B1C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 _08002C8A:
 	mov r1, sp
 	movs r0, #0x1f
@@ -1275,7 +1275,7 @@ _080033AE:
 	ldrh r0, [r1, #0x2e]
 	movs r1, #0x20
 	movs r2, #1
-	bl sub_8003988
+	bl LoadAndAdjustBGPaletteByMode
 	b _080033E8
 	.align 2, 0
 _080033D4: .4byte 0x0000FFFE
@@ -1285,7 +1285,7 @@ _080033DC:
 	ldrh r0, [r2, #0x2e]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_8003988
+	bl LoadAndAdjustBGPaletteByMode
 _080033E8:
 	mov r3, r8
 	ldrh r0, [r3, #0x2e]
@@ -1301,7 +1301,7 @@ _080033E8:
 	ldrh r0, [r3, #0x2e]
 	movs r1, #0x20
 	movs r2, #1
-	bl sub_8003B1C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 	b _0800341C
 	.align 2, 0
 _0800340C: .4byte 0x0000FFFE
@@ -1310,7 +1310,7 @@ _08003410:
 	ldrh r0, [r6, #0x2e]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_8003B1C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 _0800341C:
 	add sp, #0x10
 	pop {r3, r4, r5}

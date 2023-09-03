@@ -475,15 +475,15 @@ void SaveGameExitSaveScreen(struct Main *main)
         switch(gMain.unk2BE >> 4) {
             case 0:
                 LoadWitnessBenchGraphics();
-                sub_800E7EC(0x18, 0x80, 1);
+                SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
                 break;
             case 1:
                 LoadCounselBenchGraphics();
-                sub_800E900(0, 0x80, 1);       
+                SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);       
                 break;
             case 2:
                 LoadCounselBenchGraphics();
-                sub_800E9D4(0x20, 0x80, 1);
+                SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
         }
     }
     if(gMain.unk2BA != 0)

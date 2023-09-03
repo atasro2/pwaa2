@@ -13,7 +13,7 @@
 #include "constants/oam_allocations.h"
 #include "constants/persons.h"
 
-static void sub_800EAA4(void);
+static void SetMosaicFlagOnCourtBenchSprites(void);
 
 void SetCurrentEpisodeBit()
 {
@@ -878,40 +878,40 @@ void LoadWitnessBenchGraphics(void)
     DmaCopy16(3, gPalWitnessBench, OBJ_PLTT+0x140, 0x20);
 }
 
-void sub_800E7EC(s32 arg0, s32 arg1, u8 arg2)
+void SetOAMForCourtBenchSpritesWitness(s32 x, s32 y, u8 clearOAM)
 {
     struct OamAttrs * oam;
     s16 inverseOne;
     u32 i;
     oam = &gOamObjects[48];
-    if(!(arg2 & 1)) {
+    if(!(clearOAM & 1)) {
         for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
         }
         return;
     }
-    arg0 &= 0x1FF;
+    x &= 0x1FF;
     inverseOne = fix_inverse(0x100);
     gOamObjects[0].attr3 = fix_mul(0x100, inverseOne);
     gOamObjects[1].attr3 = fix_mul(0, inverseOne);
     gOamObjects[2].attr3 = fix_mul(0, inverseOne);
     gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
 
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 3);
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x, FALSE, FALSE, 3);
     oam->attr2 = SPRITE_ATTR2(0x100, 3, 10);
     oam++;
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 64, FALSE, FALSE, 2);
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x + 64, FALSE, FALSE, 2);
     oam->attr2 = SPRITE_ATTR2(0x120, 3, 10);
     oam++;
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 96, TRUE, FALSE, 2);
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x + 96, TRUE, FALSE, 2);
     oam->attr2 = SPRITE_ATTR2(0x120, 3, 10);
     oam++;
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 128, TRUE, FALSE, 3);
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x + 128, TRUE, FALSE, 3);
     oam->attr2 = SPRITE_ATTR2(0x100, 3, 10);
 }
 
@@ -922,18 +922,18 @@ void LoadCounselBenchGraphics(void)
     DmaCopy16(3, gPalCounselBench, OBJ_PLTT+0x140, 0x20);
 }
 
-void sub_800E900(s32 arg0, s32 arg1, u8 arg2) {
+void SetOAMForCourtBenchSpritesDefense(s32 x, s32 y, u8 clearOAM) {
     struct OamAttrs * oam;
     s16 inverseOne;
     s32 i;
-    arg0 &= 0x1FF;
-    inverseOne = fix_inverse(0x100);
-    gOamObjects[0].attr3 = fix_mul(0x100, inverseOne);
+    x &= 0x1FF;
+    inverseOne = fix_inverse(Q_8_8(1));
+    gOamObjects[0].attr3 = fix_mul(Q_8_8(1), inverseOne);
     gOamObjects[1].attr3 = fix_mul(0, inverseOne);
     gOamObjects[2].attr3 = fix_mul(0, inverseOne);
-    gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
+    gOamObjects[3].attr3 = fix_mul(Q_8_8(1), inverseOne);
     oam = &gOamObjects[OAM_IDX_COURT_BENCH];
-    if(!(arg2 & 1)) {
+    if(!(clearOAM & 1)) {
         for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
@@ -941,24 +941,24 @@ void sub_800E900(s32 arg0, s32 arg1, u8 arg2) {
         return;
     }
     for(i = 0; i < 3; i++) {        
-        oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-        oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 3) + i * 0x40;
+        oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(x, FALSE, FALSE, 3) + i * 0x40;
         oam->attr2 = SPRITE_ATTR2(0x100, 3, 10) + i * 0x20;
         oam++;
     }
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 2) + i * 0x40;
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x, FALSE, FALSE, 2) + i * 0x40;
     oam->attr2 = SPRITE_ATTR2(0x100, 3, 10) + i * 0x20;
 }
 
-void sub_800E9D4(s32 arg0, s32 arg1, u8 arg2)
+void SetOAMForCourtBenchSpritesProsecution(s32 x, s32 y, u8 clearOAM)
 {
     struct OamAttrs * oam;
     s16 inverseOne;
     u32 i;
-    arg0 &= 0x1FF;
+    x &= 0x1FF;
     oam = &gOamObjects[OAM_IDX_COURT_BENCH];
-    if(!(arg2 & 1)) {
+    if(!(clearOAM & 1)) {
         for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
@@ -970,23 +970,23 @@ void sub_800E9D4(s32 arg0, s32 arg1, u8 arg2)
         gOamObjects[2].attr3 = fix_mul(0, inverseOne);
         gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
 
-        oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
-        oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, TRUE, FALSE, 2);
+        oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(x, TRUE, FALSE, 2);
         oam->attr2 = SPRITE_ATTR2(0x160, 3, 10);
         oam++;
         for(i = 0; i < 3; i++) {        
-            oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-            oam->attr1 = SPRITE_ATTR1_NONAFFINE(16, TRUE, FALSE, 3) + i * 0x40 + arg0;
+            oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(16, TRUE, FALSE, 3) + i * 0x40 + x;
             oam->attr2 = SPRITE_ATTR2(0x140, 3, 10) - i * 0x20;
             oam++;
         }
     }
-    sub_800EAA4();
+    SetMosaicFlagOnCourtBenchSprites();
 }
 
 
 
-static void sub_800EAA4(void)
+static void SetMosaicFlagOnCourtBenchSprites(void)
 {
     u32 i;
     struct OamAttrs * oam;

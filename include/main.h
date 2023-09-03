@@ -81,7 +81,6 @@ struct Main
     /* +0x08E */ s8 itemPlateSize;
     /* +0x08F */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
     /* +0x090 */ u8 itemPlateAction;
-    u8 filler91[0x92 - 0x91];
     /* +0x092 */ s16 affineScale; // used for the scale of oam sprites in court record, deliver judgement, episode unlocked
     /* +0x094 */ u16 xPosCounter; // used in episode selection menu
     /* +0x096 */ u8 hpBarState; // unity: gauge_rno_0
@@ -103,7 +102,6 @@ struct Main
     /* +0x0B5 */ s8 health; // unity: rest
     /* +0x0B6 */ u16 talkingAnimationOffset; // unity: Def_talk_foa
     /* +0x0B8 */ u16 idleAnimationOffset; // unity: Def_wait_foa
-    //2 byte filler
     /* +0x0BC */ u32 scriptFlags[8]; // unity: sce_flag matches debug menu
     /* +0x0DC */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0E0 */ u32 talkEndFlags[8]; // unity: talk_end_flag // TODO: find right size
@@ -122,7 +120,6 @@ struct Main
     u8 unk24E;
     u8 unk24F;
     u8 unk250;
-    u8 filler251[0x254 - 0x251];
     /* +0x254 */ u32 soundFlags;
     /* +0x258 */ u32 unk258;
     u8 unk25C[25]; // unity: roomseq
@@ -140,7 +137,7 @@ struct Main
     } spotlights[2];
     u8 spotlightStopSweepingFlag; // unity: spotlight_command_status
     u8 filler2B1[0x2B4 - 0x2B1];
-    u8 unk2B4;
+    u8 signalDetectorState;
     u8 filler2B5[0x2B8 - 0x2B5];
     u16 unk2B8;
     u16 unk2BA;

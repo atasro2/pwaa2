@@ -113,49 +113,49 @@ void CopyBGDataToVram(u32 bgId)
     if(gMain.process[GAME_PROCESS] != INVESTIGATION_PROCESS) {
         if(bgId == 4) {
             LoadCounselBenchGraphics();
-            sub_800E900(0, 0x80, 1);
+            SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
         } else if(bgId == 5) {
             LoadCounselBenchGraphics();
-            sub_800E9D4(0x20, 0x80, 1);
+            SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
         } else if(bgId == 6) {
             LoadWitnessBenchGraphics();
-            sub_800E7EC(0x18, 0x80, 1);
+            SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
         } else if((bgId == 0x16 || bgId == 0x18)
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && gAnimation[1].animationInfo.personId == 0x10
                && (!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
             LoadWitnessBenchGraphics();
-            sub_800E7EC(0x18, 0x80, 1);
+            SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
         } else if(bgId == 0x53
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && gAnimation[1].animationInfo.personId == 3
                && (!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
             LoadCounselBenchGraphics();
-            sub_800E900(0, 0x80, 1);
+            SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
         } else if(bgId == 0x80
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && (gAnimation[1].flags & ANIM_QUEUED_PAL_UPLOAD)) {
             switch(gAnimation[1].animationInfo.personId) {
                 case 3:
                     LoadCounselBenchGraphics();
-                    sub_800E900(0, 0x80, 1);
+                    SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
                     break;
                 case 0x18:
                     LoadWitnessBenchGraphics();
-                    sub_800E7EC(0x18, 0x80, 1);
+                    SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
                     break;
                 case 8:
                     LoadCounselBenchGraphics();
-                    sub_800E9D4(0x18, 0x80, 1);
+                    SetOAMForCourtBenchSpritesProsecution(0x18, 0x80, 1);
                     break;
                 default:
-                    sub_800E7EC(0, 0, 0);
-                    sub_800E900(0, 0, 0);
+                    SetOAMForCourtBenchSpritesWitness(0, 0, 0);
+                    SetOAMForCourtBenchSpritesDefense(0, 0, 0);
                     break;
             }
         } else {
-            sub_800E7EC(0, 0, 0);
-            sub_800E900(0, 0, 0);
+            SetOAMForCourtBenchSpritesWitness(0, 0, 0);
+            SetOAMForCourtBenchSpritesDefense(0, 0, 0);
         }
     }
     if(gScriptContext.flags & 0x40) {
@@ -204,7 +204,7 @@ void CopyBGDataToVram(u32 bgId)
         DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
         if(main->unk84 == 0xFFFE) {
             if(gAnimation[1].animationInfo.personId == 0x25)
-                sub_8003B1C(6, 0x20, 1);
+                LoadAndAdjustCounselWitnessBenchPaletteByMode(6, 0x20, 1);
             DmaFill16(3, 0x1F, BG_PLTT+0x40, 0x1C0);
             DmaFill16(3, 0x2222, BG_CHAR_ADDR(1), 0x9600);
         } else {
@@ -451,14 +451,14 @@ void CopyBGDataToVram(u32 bgId)
     if((!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
         if(main->unk84 == 0xFFFD || main->unk84 == 0xFFFE) {
             if(main->unk84 == 0xFFFE)
-                sub_8003988(main->currentBG, 0x20, 1);
+                LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 1);
             else
-                sub_8003988(main->currentBG, 0x20, 0);
+                LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 0);
             if(main->currentBG == 4 || main->currentBG == 5 || main->currentBG == 6) {
                 if(main->unk84 == 0xFFFE) 
-                    sub_8003B1C(main->currentBG, 0x20, 1);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 1);
                 else
-                    sub_8003B1C(main->currentBG, 0x20, 0);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 0);
             }
         }
     }

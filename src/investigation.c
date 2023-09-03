@@ -87,7 +87,7 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
     DmaCopy16(3, gPalExamineCursors, OBJ_PLTT+0x100, 0x20);
     DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
-    oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
+    oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
     for(i = 0; i < 4; i++)
     {
         oam->attr0 = SPRITE_ATTR0(-32 & 0xFF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -1654,8 +1654,8 @@ _08010CB6:
             investigation->selectedAction = 3;
             investigation->lastAction = 3;
             gMain.advanceScriptContext = 1;
-            sub_8010FA4();
-            sub_8011198();
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
             psycheLockData->unk0 = 0;
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
     }
@@ -1690,8 +1690,8 @@ _08010D9C:
             }
             break;
         case 5:
-            sub_8010FA4();
-            sub_8011198();
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
             gInvestigation.unkB &= ~1;
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
             if(psycheLockData->unk14 != 0xFFFF)
@@ -1757,8 +1757,8 @@ _08010EAC:
         case 5:
             gMain.hpBarDisplayValue = 1;
             gMain.hpBarValue = 1;
-            sub_8010FA4();
-            sub_8011198();
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
             gInvestigation.unkB &= ~1;
             SlideTextbox(0);
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
@@ -1769,7 +1769,7 @@ _08010EAC:
     }
 }
 
-void sub_8010FA4(void) {
+void ReloadInvestigationGraphics(void) {
     struct OamAttrs * oam;
     int i;
 
@@ -1789,10 +1789,10 @@ void sub_8010FA4(void) {
     }
 }
 
-void sub_8011088(u16 arg0, u16 arg1) {
+void SetInvestigationStateToReturnAfterPsycheLocks(u16 arg0, u16 arg1) {
     struct OamAttrs * oam;
     u32 i;
-    sub_8010FA4();
+    ReloadInvestigationGraphics();
     if(arg0 == 0) {
         gInvestigation.unkB &= ~1;
         gInvestigation.selectedAction = 3;
@@ -1828,7 +1828,7 @@ void sub_8011088(u16 arg0, u16 arg1) {
     }
 }
 
-void sub_8011198(void) {
+void ClearInvestigationActionButtonOAM(void) {
     struct OamAttrs * oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
     u32 attr1;
     oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);

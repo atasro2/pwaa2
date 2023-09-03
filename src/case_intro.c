@@ -12,7 +12,7 @@
 #include "constants/animation.h"
 #include "constants/script.h"
 
-extern u8 * gUnknown_081124D0[];
+extern u8 * gPsycheLockChainTilemaps[];
 
 bool32 DidAllSpotlightsFinishSweeping(void)
 {

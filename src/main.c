@@ -228,7 +228,7 @@ void DoGameProcess(void)
     }
     ProcessHPBar();
     gGameProcesses[gMain.process[GAME_PROCESS]](&gMain);
-    sub_80183D8();
+    ProcessSignalDetector();
     gMain.doGameProcessCounter++;
 
     if (courtScroll->state != 0)
@@ -571,13 +571,13 @@ void sub_8000A80(void)
             {
                 main->unk86 = 0;
                 main->unk89++;
-                sub_8003988(main->currentBG, main->unk89, 0);
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->unk89, 0);
                 if(main->unk84 == 3 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    sub_8003A7C(main->unk89, 0);
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->unk89, 0);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
                 || main->currentBG == 6)
-                    sub_8003B1C(main->currentBG, main->unk89, 0);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->unk89, 0);
             }
             
             if(main->unk89 == 0x20)
@@ -591,13 +591,13 @@ void sub_8000A80(void)
             {
                 main->unk86 = 0;
                 main->unk89--;
-                sub_8003988(main->currentBG, main->unk89, 0);
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->unk89, 0);
                 if(main->unk84 == 4 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    sub_8003A7C(main->unk89, 0);
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->unk89, 0);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
                 || main->currentBG == 6)
-                    sub_8003B1C(main->currentBG, main->unk89, 0);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->unk89, 0);
             }
             
             if(main->unk89 == 0)
@@ -610,13 +610,13 @@ void sub_8000A80(void)
             {
                 main->unk86 = 0;
                 main->unk89--;
-                sub_8003988(main->currentBG, main->unk89, 1);
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->unk89, 1);
                 if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    sub_8003A7C(main->unk89, 1);
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->unk89, 1);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
                 || main->currentBG == 6)
-                    sub_8003B1C(main->currentBG, main->unk89, 1);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->unk89, 1);
             }
             
             if(main->unk89 == 0)
@@ -629,17 +629,17 @@ void sub_8000A80(void)
             {
                 main->unk86 = 0;
                 main->unk89++;
-                sub_8003988(main->currentBG, main->unk89, 1);
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->unk89, 1);
                 if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    sub_8003A7C(main->unk89, 1);
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->unk89, 1);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
                 || main->currentBG == 6)
-                    sub_8003B1C(main->currentBG, main->unk89, 1);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->unk89, 1);
                 if(main->currentBG == 0x80)
                 {
                     if(gAnimation[1].animationInfo.personId == 0x26)
-                        sub_8003B1C(6, main->unk89, 1);
+                        LoadAndAdjustCounselWitnessBenchPaletteByMode(6, main->unk89, 1);
                 }
             }
             
@@ -658,17 +658,17 @@ void sub_8000A80(void)
                     main->unk86 = 0;
                     main->unk89++;
                     if(main->unk84 == 11)
-                        sub_8003B8C(main->unk89, 2);
+                        LoadAndAdjustAnimation10PaletteByMode(main->unk89, 2);
                     else
-                        sub_8003B8C(main->unk89, 0);
+                        LoadAndAdjustAnimation10PaletteByMode(main->unk89, 0);
                 }
             }
             if(main->unk89 == 0x20)
             {
                 if(main->unk84 == 11)
-                    sub_8003B8C(main->unk89, 2);
+                    LoadAndAdjustAnimation10PaletteByMode(main->unk89, 2);
                 else
-                    sub_8003B8C(main->unk89, 0);
+                    LoadAndAdjustAnimation10PaletteByMode(main->unk89, 0);
                 main->unk84 = 0;
             }
             break;
@@ -683,17 +683,17 @@ void sub_8000A80(void)
                     main->unk86 = 0;
                     main->unk89--;
                     if(main->unk84 == 12)
-                        sub_8003B8C(main->unk89, 2);
+                        LoadAndAdjustAnimation10PaletteByMode(main->unk89, 2);
                     else
-                        sub_8003B8C(main->unk89, 0);
+                        LoadAndAdjustAnimation10PaletteByMode(main->unk89, 0);
                 }
             }
             if(main->unk89 == 0)
             {
                 if(main->unk84 == 12)
-                    sub_8003B8C(main->unk89, 2);
+                    LoadAndAdjustAnimation10PaletteByMode(main->unk89, 2);
                 else
-                    sub_8003B8C(main->unk89, 0);
+                    LoadAndAdjustAnimation10PaletteByMode(main->unk89, 0);
                 main->unk84 = 0;
             }
             break;

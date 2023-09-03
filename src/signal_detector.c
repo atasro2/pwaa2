@@ -3,6 +3,7 @@
 #include "investigation.h"
 #include "script.h"
 #include "sound.h"
+#include "constants/oam_allocations.h"
 
 //! not marked const
 struct Point4 gUnknown_081128E0[] = { 
@@ -56,12 +57,12 @@ u16 gUnknown_08112A40[] = {
 	0x00d8
 };
 
-void sub_8018280(s32 unk0, u32 unk1) {
+void UpdateSignalDetectorAnimation(s32 distance, u32 signalArea) {
     struct AnimationListEntry * animation;
-    u8 * unk2B4 = &gMain.unk2B4; // ! why
+    u8 * signalDetectorState = &gMain.signalDetectorState; // ! why
     u32 new, old;
 
-    switch(*unk2B4) {
+    switch(*signalDetectorState) {
     case 0:
         break;
     case 3:
@@ -73,7 +74,7 @@ void sub_8018280(s32 unk0, u32 unk1) {
             DestroyAnimation(animation);
         break;
     default:
-        if(unk1 == -1) {
+        if(signalArea == -1) {
             new = 0x44;
             old = 0x45;
         } else {
@@ -90,8 +91,8 @@ void sub_8018280(s32 unk0, u32 unk1) {
     }
 }
 
-void sub_80182F8(bool32 show) { // copy of UpdateScrollPromptSprite
-    struct OamAttrs * oam = &gOamObjects[56];
+void UpdateScrollPromptSpriteSignalDetector(bool32 show) { // copy of UpdateScrollPromptSprite
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_BUTTON_PROMPTS+3];
     u32 r6 = 0; // ! UNUSED, This is present in the assembly for this function somehow
     oam->attr0 = SPRITE_ATTR0_CLEAR;
     if(show) {
@@ -126,15 +127,15 @@ s32 FindDistanceToClosestSignalArea(void) {
     return distance;
 }
 
-void sub_80183D8(void)
+void ProcessSignalDetector(void)
 {
     struct Rect rect;
-    u8 * unk2B4 = &gMain.unk2B4;
+    u8 * signalDetectorState = &gMain.signalDetectorState;
     u32 signalArea = -1;
     u32 trueDistance;
     s32 distance;
     s32 i;
-    switch(*unk2B4) {
+    switch(*signalDetectorState) {
         case 0:
             break;
         case 1:
@@ -145,7 +146,7 @@ void sub_80183D8(void)
                 gScriptContext.flags &= ~0x80;
                 gScriptContext.flags |= 0x100 | 0x8;
                 gInvestigation.spotselectStartCounter = 0;
-                (*unk2B4)++;
+                (*signalDetectorState)++;
             }
             break;
         case 2:
@@ -178,7 +179,7 @@ void sub_80183D8(void)
                 if(gInvestigation.pointerY > 158)
                     gInvestigation.pointerY = 158;
             }
-            sub_80182F8(TRUE);
+            UpdateScrollPromptSpriteSignalDetector(TRUE);
             if(gJoypad.pressedKeys & A_BUTTON) {
                 PlaySE(0x2B);
                 gScriptContext.flags &= ~(0x100 | 0x8);
@@ -198,7 +199,7 @@ void sub_80183D8(void)
                     gMain.horizontolBGScrollSpeed = 6;
                 else
                     gMain.horizontolBGScrollSpeed = -6;
-                *unk2B4 = 3;
+                *signalDetectorState = 3;
             }
             trueDistance = FindDistanceToClosestSignalArea();
             distance = trueDistance;
@@ -210,7 +211,7 @@ void sub_80183D8(void)
             }
             break;
         case 3: // _0801863C
-            sub_80182F8(FALSE);
+            UpdateScrollPromptSpriteSignalDetector(FALSE);
             if(gMain.Bg256_pos_x == 0 || gMain.Bg256_pos_x == 240) {
                 if(gMain.Bg256_pos_x == 0) {
                     gInvestigation.pointerX = 230;
@@ -220,14 +221,14 @@ void sub_80183D8(void)
                     gInvestigation.pointerX = 11;
                     gInvestigation.pointerY = 80;
                 }
-                *unk2B4 = 2;
+                *signalDetectorState = 2;
             }
     }
-    sub_8018280(trueDistance, signalArea);
+    UpdateSignalDetectorAnimation(trueDistance, signalArea);
 }
 
-void sub_8018690(void) {
-    u8 * unk2B4 = &gMain.unk2B4;
+void BeginSignalDetector(void) {
+    u8 * signalDetectorState = &gMain.signalDetectorState;
     s32 i;
 
     gScriptContext.flags |= 0x80;
@@ -238,31 +239,31 @@ void sub_8018690(void) {
     gMain.showTextboxCharacters = FALSE;
     for(i = 0; i < 0x100; i++)
         gBG1MapBuffer[0x180+i] = 0;
-    *unk2B4 = 1;
+    *signalDetectorState = 1;
 }
 
-void sub_80186EC(void) {
+void ReturnToSignalDetector(void) {
     u32 pointerX, pointerY;
-    u8 * unk2B4 = &gMain.unk2B4;
+    u8 * signalDetectorState = &gMain.signalDetectorState;
     pointerX = gInvestigation.pointerX;
     pointerY = gInvestigation.pointerY;
-    sub_8018690();
+    BeginSignalDetector();
     gInvestigation.pointerX = pointerX;
     gInvestigation.pointerY = pointerY;
     gInvestigation.spotselectStartCounter = 0;
-    *unk2B4 = 2;
+    *signalDetectorState = 2;
 }
 
-void sub_8018720(void) {
+void EndSignalDetector(void) {
     struct AnimationListEntry * animation;
-    u8 * unk2B4 = &gMain.unk2B4;
+    u8 * signalDetectorState = &gMain.signalDetectorState;
     animation = FindAnimationFromAnimId(0x44);
     if(animation)
         DestroyAnimation(animation);
     animation = FindAnimationFromAnimId(0x45);
     if(animation)
         DestroyAnimation(animation);
-    *unk2B4 = 0;
+    *signalDetectorState = 0;
 }
 
 void nullsub_12(void) {

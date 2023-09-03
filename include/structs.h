@@ -51,13 +51,13 @@ struct PscyheLock_Block {
 };
 
 struct PscyheLock_10 {
-    s16 unk0;
+    s16 targetBGMapBuffer;
     s16 unk2;
     s16 unk4;
     s16 unk6;
     struct PscyheLock_10_8 * unk8;
     struct PscyheLock_10_C * unkC[48];
-    void * unkCC[48];
+    void * chainBlocks[48]; // Pointer to u32 followed by struct PscyheLock_Block
 };
 
 struct PscyheLock {

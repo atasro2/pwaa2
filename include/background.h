@@ -72,9 +72,9 @@ void UpdateTextbox(void);
 void SlideTextbox(u32);
 void SlideInBG2Window(u32, u32);
 void UpdateBG2Window(struct CourtRecord *);
-extern void sub_80037C8(void);
+extern void CopyTextboxTilesToBG1MapBuffer(void);
 void SetTextboxNametag(u32, u32);
 void UpdateBGTilemaps(void);
-u16 sub_800389C(u16 color, u16 y, u16 mode);
+u16 AdjustColorByMode(u16 color, u16 y, u16 mode);
 
 #endif//GUARD_BACKGROUND_H

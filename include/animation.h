@@ -158,6 +158,6 @@ void MoveAnimationTilesToRam(bool32 arg0);
 void UpdateAnimations(u32 arg0);
 void SetCourtScrollPersonAnim(u32 arg0, u32 arg1, u32 arg2, u32 arg3);
 
-void sub_80146F0(u32 animId, u32 animOffset);
+void SetCurrentPersonAnimationOffset(u32 animId, u32 animOffset);
 
 #endif//GUARD_ANIMATION_H

@@ -1513,15 +1513,15 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 switch(gMain.unk2BE >> 4) {
                     case 0:
                         LoadWitnessBenchGraphics();
-                        sub_800E7EC(0x18, 0x80, 1);
+                        SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
                         break;
                     case 1:
                         LoadCounselBenchGraphics();
-                        sub_800E900(0, 0x80, 1);       
+                        SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);       
                         break;
                     case 2:
                         LoadCounselBenchGraphics();
-                        sub_800E9D4(0x20, 0x80, 1);
+                        SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
                 }
             }
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
@@ -2274,7 +2274,7 @@ void LoadItemPlateGfx(struct Main * main)
     DmaCopy16(3, src, OBJ_VRAM0+0x1000, TILE_SIZE_4BPP * 64);
 }
 
-void sub_801355C(struct Main * main) {
+void DrawItemPlateLeftSide(struct Main * main) {
     u16 * map = gBG1MapBuffer+32+1;
     u32 i;
     map++;
@@ -2306,7 +2306,7 @@ void sub_801355C(struct Main * main) {
     }
 }
 
-void sub_801364C(struct Main * main) {
+void DrawItemPlateRightSide(struct Main * main) {
     u16 * map = gBG1MapBuffer+32+28;
     u32 i;
     map--;
@@ -2355,20 +2355,20 @@ void DrawItemPlate(struct Main * main) // how did i match this
             break;
         case 1:
             if(main->itemPlateSide != 0)
-                sub_801364C(main);
+                DrawItemPlateRightSide(main);
             else
-                sub_801355C(main);
+                DrawItemPlateLeftSide(main);
             break;
         case 2:
         default:
             break;
         case 3:
         case 4:
-            sub_801355C(main);
+            DrawItemPlateLeftSide(main);
             break;
         case 5:
         case 6:
-            sub_801364C(main);
+            DrawItemPlateRightSide(main);
             break;
     }
     main->itemPlateCounter++;
