@@ -84,11 +84,11 @@ struct Main
     u8 filler91[0x92 - 0x91];
     /* +0x092 */ s16 affineScale; // used for the scale of oam sprites in court record, deliver judgement, episode unlocked
     /* +0x094 */ u16 xPosCounter; // used in episode selection menu
-    /* +0x096 */ u8 unk96; // unity: gauge_rno_0
-    /* +0x097 */ u8 unk97; // unity: gauge_rno_1
+    /* +0x096 */ u8 hpBar_state; // unity: gauge_rno_0
+    /* +0x097 */ u8 hpBar_subState; // unity: gauge_rno_1
     /* +0x098 */ s16 hpBar_value; // unity: gauge_hp
     /* +0x09A */ s16 hpBar_display_value; // unity: gauge_hp_disp
-    /* +0x09C */ s16 unk9C; // unity: gauge_dmg_cnt
+    /* +0x09C */ s16 hpBar_damageAmount; // unity: gauge_dmg_cnt
     /* +0x09E */ s16 hpBar_pos_x; // unity: gauge_pos_x
     /* +0x0A0 */ s16 hpBar_pos_y; // unity: gauge_pos_y
     /* +0x0A2 */ s16 unkA2; // unity: gauge_cnt_0

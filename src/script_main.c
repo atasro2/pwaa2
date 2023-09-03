@@ -185,7 +185,7 @@ void RunScriptContext(void)
 void ChangeScriptSection(u32 newSection)
 {
     gScriptContext.previousSection = gScriptContext.currentSection;
-    markSectionAsRead(&gMain, gScriptContext.currentSection);
+    MarkSectionAsRead(&gMain, gScriptContext.currentSection);
     gScriptContext.currentSection = newSection;
     InitScriptSection(&gScriptContext);
     gScriptContext.scriptPtr++;
@@ -266,7 +266,7 @@ static void AdvanceScriptContext(struct ScriptContext * scriptCtx)
             && main->unk84 != 5
             && main->unk84 != 6)
             {
-                if(hasSectionBeenRead(main, scriptCtx->currentSection))
+                if(HasSectionBeenRead(main, scriptCtx->currentSection))
                 {
                     if(scriptCtx->textSkip > 0 || main->process[GAME_PROCESS] == 4)
                     {
@@ -595,7 +595,7 @@ void RedrawTextboxCharacters(void)
     }
 }
 
-void markSectionAsRead(struct Main * main, s32 section)
+void MarkSectionAsRead(struct Main * main, s32 section)
 {
     u32 word;
     u32 bit;
@@ -612,7 +612,7 @@ void markSectionAsRead(struct Main * main, s32 section)
     main->sectionReadFlags[word] |= 1 << bit;
 }
 
-bool32 hasSectionBeenRead(struct Main * main, s32 section)
+bool32 HasSectionBeenRead(struct Main * main, s32 section)
 {
     u32 word;
     u32 bit;
@@ -629,7 +629,7 @@ bool32 hasSectionBeenRead(struct Main * main, s32 section)
     return main->sectionReadFlags[word] & (1 << bit); // please return a bool :(
 }
 
-void clearSectionReadFlags(struct Main * main)
+void ClearSectionReadFlags(struct Main * main)
 {
     u16 i;
     for(i = 0; i < 8; i++)

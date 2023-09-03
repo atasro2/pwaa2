@@ -226,7 +226,7 @@ void DoGameProcess(void)
         main->shakeAmountX = 0;
         main->shakeAmountY = 0;
     }
-    processHPBar();
+    ProcessHPBar();
     gGameProcesses[gMain.process[GAME_PROCESS]](&gMain);
     sub_80183D8();
     gMain.doGameProcessCounter++;
@@ -275,7 +275,7 @@ void ResetGameState(void)
     DmaFill16(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     DmaFill16(3, 0, &gMain, sizeof(gMain));
-    clearSectionReadFlags(main);
+    ClearSectionReadFlags(main);
     DmaFill16(3, 0, &gScriptContext, sizeof(gScriptContext));
     DmaFill16(3, 0, &gCourtScroll, sizeof(gCourtScroll));
     DmaFill16(3, 0, &gTestimony, sizeof(gTestimony));

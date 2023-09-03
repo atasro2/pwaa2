@@ -120,9 +120,9 @@ void RunScriptContext(void);
 void InitScriptSection(struct ScriptContext *scriptCtx);
 void RedrawTextboxCharacters(void);
 
-void markSectionAsRead(struct Main *, s32);
-bool32 hasSectionBeenRead(struct Main *, s32);
-void clearSectionReadFlags(struct Main *);
+void MarkSectionAsRead(struct Main *, s32);
+bool32 HasSectionBeenRead(struct Main *, s32);
+void ClearSectionReadFlags(struct Main *);
 void loadSectionReadFlagsFromSaveDataBuffer(struct Main *);
 
 void MakeMapMarkerSprites(void);

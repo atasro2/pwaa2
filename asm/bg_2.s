@@ -60,7 +60,7 @@ _08002A1E:
 	beq _08002ACE
 	cmp r4, #5
 	bne _08002A34
-	bl loadCounselBenchGraphics
+	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	b _08002AF4
 	.align 2, 0
@@ -146,21 +146,21 @@ _08002AC8:
 	beq _08002ADE
 	b _08002AFE
 _08002ACE:
-	bl loadCounselBenchGraphics
+	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
 	bl sub_800E900
 	b _08002B28
 _08002ADE:
-	bl loadWitnessBenchGraphics
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
 	bl sub_800E7EC
 	b _08002B28
 _08002AEE:
-	bl loadCounselBenchGraphics
+	bl LoadCounselBenchGraphics
 	movs r0, #0x18
 _08002AF4:
 	movs r1, #0x80

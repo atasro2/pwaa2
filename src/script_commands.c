@@ -448,7 +448,7 @@ bool32 Command0C(struct ScriptContext * scriptCtx)
 bool32 Command0D(struct ScriptContext * scriptCtx)
 {
     scriptCtx->previousSection = scriptCtx->currentSection;
-    markSectionAsRead(&gMain, scriptCtx->currentSection);
+    MarkSectionAsRead(&gMain, scriptCtx->currentSection);
     scriptCtx->currentSection = scriptCtx->nextSection;
     scriptCtx->scriptPtr++;
     return 2;
@@ -1194,7 +1194,7 @@ bool32 Command35(struct ScriptContext *scriptCtx)
         jmpArgs = (u16 *)heapPtr;
         offset = jmpArgs[0] / 2;
         temp = jmpArgs[1];
-        markSectionAsRead(&gMain, scriptCtx->currentSection);
+        MarkSectionAsRead(&gMain, scriptCtx->currentSection);
         gScriptContext.textSkip = 0; // ! INCONFUCKINGSISTENT USE OF POINTERS AND GLOBALS
         scriptCtx->currentSection = temp + 0x80;
         heapPtr = eScriptHeap;
@@ -1224,7 +1224,7 @@ bool32 Command36(struct ScriptContext *scriptCtx)
     ptr = (u16 *)(heapPtr + idx + 1);
     offset = ptr[0] / 2;
     idx = ptr[1];
-    markSectionAsRead(&gMain, scriptCtx->currentSection);
+    MarkSectionAsRead(&gMain, scriptCtx->currentSection);
     gScriptContext.textSkip = 0; // ! INCONFUCKINGSISTENT USE OF POINTERS AND GLOBALS
     scriptCtx->currentSection = idx + 0x80;
     scriptCtx->scriptSectionPtr = eScriptHeap + ((u32 *)eScriptHeap)[idx + 1];
@@ -2437,7 +2437,7 @@ bool32 Command54(struct ScriptContext *scriptCtx)
             gMain.hpBar_display_flag = array[1];
             break;
         case 2:
-            gMain.unk9C = array[1];
+            gMain.hpBar_damageAmount = array[1];
             break;
     }
     scriptCtx->scriptPtr++;
@@ -2635,7 +2635,7 @@ bool32 Command65(struct ScriptContext *scriptCtx)
     switch(var0) {
         case 0:
             if(var1 == 1) {
-                loadWitnessBenchGraphics();
+                LoadWitnessBenchGraphics();
                 sub_800E7EC(0x18, 0x80, 1);
             } else {
                 sub_800E7EC(0x18, 0x80, 0);
@@ -2643,7 +2643,7 @@ bool32 Command65(struct ScriptContext *scriptCtx)
             break;
         case 1:
             if(var1 == 1) {
-                loadCounselBenchGraphics();
+                LoadCounselBenchGraphics();
                 sub_800E900(0, 0x80, 1);
             } else {
                 sub_800E900(0, 0, 0);
@@ -2652,7 +2652,7 @@ bool32 Command65(struct ScriptContext *scriptCtx)
         case 2:
             if(var2 != 2) break;
             if(var1 == 1) {
-                loadCounselBenchGraphics();
+                LoadCounselBenchGraphics();
                 sub_800E9D4(0x20, 0x80, 1);
             } else {
                 sub_800E900(0, 0, 0);
@@ -2694,16 +2694,16 @@ bool32 Command68(struct ScriptContext *scriptCtx)
 bool32 Command69(struct ScriptContext *scriptCtx)
 {
     if(gInvestigation.pointerX == 0) {
-        initNickelSamuraiZoominAnimation();
+        InitNickelSamuraiZoominAnimation();
         return 1;
     } else if((s16)gInvestigation.pointerX >= 0) { // TODO: look further into the type for this
-        updateNickelSamuraiZoominAnimation();
+        UpdateNickelSamuraiZoominAnimation();
         if(gInvestigation.pointerX > 32)
             return 1;
         gInvestigation.pointerX = SHRT_MIN;
         return 1;
     }
-    finishNickelSamuraiZoominAnimation();
+    FinishNickelSamuraiZoominAnimation();
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2712,16 +2712,16 @@ bool32 Command6A(struct ScriptContext *scriptCtx)
 {
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr == 1)
-        spawnAllFlowerPetals();
+        SpawnAllFlowerPetals();
     else if(*scriptCtx->scriptPtr == 0)
-        destroyAllFlowerPetals();
+        DestroyAllFlowerPetals();
     scriptCtx->scriptPtr++;
     return 0;
 }
 
 bool32 Command6B(struct ScriptContext *scriptCtx)
 {
-    setSpotlightStopSweepingFlag();
+    SetSpotlightStopSweepingFlag();
     scriptCtx->scriptPtr+=2;
     return 0;
 }

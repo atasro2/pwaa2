@@ -145,7 +145,7 @@ void CourtMain(struct Main * main)
     !(main->gameStateFlags & 0x10) &&
     gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
     {
-        clearHPBarOAM();
+        ClearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
@@ -154,7 +154,7 @@ void CourtMain(struct Main * main)
 
 void CourtExit(struct Main * main)
 {
-    clearSectionReadFlags(main);
+    ClearSectionReadFlags(main);
     DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
     SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 1, main);
     if(main->scenarioIdx == 2)
@@ -283,7 +283,7 @@ void TestimonyMain(struct Main * main)
     !(main->gameStateFlags & 0x10) &&
     gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
     {
-        clearHPBarOAM();
+        ClearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
@@ -473,7 +473,7 @@ void QuestioningMain(struct Main * main)
         }
         else if(gJoypad.pressedKeys & R_BUTTON)
         {
-            clearHPBarOAM();
+            ClearHPBarOAM();
             PlaySE(SE007_MENU_OPEN_SUBMENU);
             BACKUP_PROCESS_PTR(main);
             SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 1, main);
@@ -483,7 +483,7 @@ void QuestioningMain(struct Main * main)
     !(main->gameStateFlags & 0x10) &&
     gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
     {
-        clearHPBarOAM();
+        ClearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
@@ -872,7 +872,7 @@ void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * t
     }
 }
 
-void loadWitnessBenchGraphics(void)
+void LoadWitnessBenchGraphics(void)
 {
     DmaCopy16(3, gGfxWitnessBench1, OBJ_VRAM0+0x2000, 0x600);
     DmaCopy16(3, gPalWitnessBench, OBJ_PLTT+0x140, 0x20);
@@ -916,7 +916,7 @@ void sub_800E7EC(s32 arg0, s32 arg1, u8 arg2)
 }
 
 
-void loadCounselBenchGraphics(void)
+void LoadCounselBenchGraphics(void)
 {
     DmaCopy16(3, gGfxCounselBench1, OBJ_VRAM0+0x2000, 0xD00);
     DmaCopy16(3, gPalCounselBench, OBJ_PLTT+0x140, 0x20);

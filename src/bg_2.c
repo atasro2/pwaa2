@@ -112,40 +112,40 @@ void CopyBGDataToVram(u32 bgId)
     }
     if(gMain.process[GAME_PROCESS] != INVESTIGATION_PROCESS) {
         if(bgId == 4) {
-            loadCounselBenchGraphics();
+            LoadCounselBenchGraphics();
             sub_800E900(0, 0x80, 1);
         } else if(bgId == 5) {
-            loadCounselBenchGraphics();
+            LoadCounselBenchGraphics();
             sub_800E9D4(0x20, 0x80, 1);
         } else if(bgId == 6) {
-            loadWitnessBenchGraphics();
+            LoadWitnessBenchGraphics();
             sub_800E7EC(0x18, 0x80, 1);
         } else if((bgId == 0x16 || bgId == 0x18)
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && gAnimation[1].animationInfo.personId == 0x10
                && (!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
-            loadWitnessBenchGraphics();
+            LoadWitnessBenchGraphics();
             sub_800E7EC(0x18, 0x80, 1);
         } else if(bgId == 0x53
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && gAnimation[1].animationInfo.personId == 3
                && (!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
-            loadCounselBenchGraphics();
+            LoadCounselBenchGraphics();
             sub_800E900(0, 0x80, 1);
         } else if(bgId == 0x80
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && (gAnimation[1].flags & ANIM_QUEUED_PAL_UPLOAD)) {
             switch(gAnimation[1].animationInfo.personId) {
                 case 3:
-                    loadCounselBenchGraphics();
+                    LoadCounselBenchGraphics();
                     sub_800E900(0, 0x80, 1);
                     break;
                 case 0x18:
-                    loadWitnessBenchGraphics();
+                    LoadWitnessBenchGraphics();
                     sub_800E7EC(0x18, 0x80, 1);
                     break;
                 case 8:
-                    loadCounselBenchGraphics();
+                    LoadCounselBenchGraphics();
                     sub_800E9D4(0x18, 0x80, 1);
                     break;
                 default:

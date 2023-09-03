@@ -842,15 +842,15 @@ void ContinueSaveProcess(struct Main * main) {
             if(gMain.unk2BE & 0xF) {
                 switch(gMain.unk2BE >> 4) {
                     case 0:
-                        loadWitnessBenchGraphics();
+                        LoadWitnessBenchGraphics();
                         sub_800E7EC(0x18, 0x80, 1);
                         break;
                     case 1:
-                        loadCounselBenchGraphics();
+                        LoadCounselBenchGraphics();
                         sub_800E900(0, 0x80, 1);       
                         break;
                     case 2:
-                        loadCounselBenchGraphics();
+                        LoadCounselBenchGraphics();
                         sub_800E9D4(0x20, 0x80, 1);
                 }
             }
@@ -860,7 +860,7 @@ void ContinueSaveProcess(struct Main * main) {
             break;
         case 5:
             if (main->blendMode == 0) {
-                clearSectionReadFlags(main);
+                ClearSectionReadFlags(main);
                 gMain.unkB0 = gSaveDataBuffer.main.unkB0;
                 gMain.hpBar_display_value = gSaveDataBuffer.main.unkB0;
                 gMain.hpBar_value = gSaveDataBuffer.main.unkB0;

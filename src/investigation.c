@@ -296,7 +296,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
 // ! still the same as CourtExit, thanks capcom
 void InvestigationExit(struct Main * main, struct InvestigationStruct * investigation) // tantei_exit
 {
-    clearSectionReadFlags(main);
+    ClearSectionReadFlags(main);
     DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
     SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 1, main);
     if(main->scenarioIdx == 2)
@@ -1544,7 +1544,7 @@ _08010AD4:
     && (main->gameStateFlags & 0x10) == 0
     && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN | SCRIPT_LOOP))
     {
-        clearHPBarOAM();
+        ClearHPBarOAM();
         sub_80170AC();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
@@ -1563,11 +1563,11 @@ _08010AD4:
     if(gMain.unk24A == 0
     && sub_801715C() == FALSE
     && gJoypad.pressedKeys == R_BUTTON
-    && findPlayingHPBarSmokeAnimations() == 0
+    && FindPlayingHPBarSmokeAnimations() == 0
     && (main->gameStateFlags & 0x10) == 0
     && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN))
     {
-        clearHPBarOAM();
+        ClearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 4, main);
@@ -1629,7 +1629,7 @@ _08010CB6:
             sub_80161E4();
             if(gMain.hpBar_value < 80) {
                 sub_8017928(1);
-                gMain.unk9C = -40;
+                gMain.hpBar_damageAmount = -40;
                 sub_8017928(3);
             }
             main->process[GAME_PROCESS_VAR2]++;

@@ -14,7 +14,7 @@
 
 extern u8 * gUnknown_081124D0[];
 
-bool32 sub_8017C94(void)
+bool32 DidAllSpotlightsFinishSweeping(void)
 {
     int i;
     for(i = 0; i < 2; i++)
@@ -25,7 +25,7 @@ bool32 sub_8017C94(void)
     return TRUE;
 }
 
-void animateSpotlight(struct Spotlight * spotlight, int spotlightId, struct AnimationListEntry * arg2)
+void AnimateSpotlight(struct Spotlight * spotlight, int spotlightId, struct AnimationListEntry * arg2)
 {
     switch(spotlight->state)
     {
@@ -87,7 +87,7 @@ void animateSpotlight(struct Spotlight * spotlight, int spotlightId, struct Anim
                 spotlight->state = 0;
             break;
         case 3: // _08017E0A
-            if(sub_8017C94())
+            if(DidAllSpotlightsFinishSweeping())
             {
                 if(spotlightId == 0)
                     spotlight->x = Q_16_16(-64);
@@ -120,36 +120,36 @@ void animateSpotlight(struct Spotlight * spotlight, int spotlightId, struct Anim
     }
 }
 
-void animateAllSpotlights(void)
+void AnimateAllSpotlights(void)
 {
     struct AnimationListEntry * anim = FindAnimationFromAnimId(0x8F);
     if(anim != NULL)
     {
-        animateSpotlight(&gMain.spotlights[0], 0, anim);
+        AnimateSpotlight(&gMain.spotlights[0], 0, anim);
         SetAnimationScale(anim, 0, Q_8_8(1.5));
     }
     anim = FindAnimationFromAnimId(0x90);
     if(anim != NULL)
     {
-        animateSpotlight(&gMain.spotlights[1], 1, anim);
+        AnimateSpotlight(&gMain.spotlights[1], 1, anim);
         SetAnimationScale(anim, 1, Q_8_8(1.5));
     }
 }
 
-void clearAllSpotlights(void)
+void ClearAllSpotlights(void)
 {
     DmaFill16(3, 0, &gMain.spotlights[0], sizeof(gMain.spotlights[0]));
     DmaFill16(3, 0, &gMain.spotlights[1], sizeof(gMain.spotlights[1]));
 }
 
-void setSpotlightStopSweepingFlag(void)
+void SetSpotlightStopSweepingFlag(void)
 {
     gMain.spotlightStopSweepingFlag = 1;
 }
 
 // case 4 opening flower petal code
 
-void updateFlowerPetal(struct FlowerPetal * petal, int petalId)
+void UpdateFlowerPetal(struct FlowerPetal * petal, int petalId)
 {
     petal->y = Q_16_16(-16);
     petal->x = Q_16_16(Random() % 256 + 64);
@@ -164,20 +164,20 @@ void updateFlowerPetal(struct FlowerPetal * petal, int petalId)
     petal->randomIncrement = Random() % 3;
 }
 
-void spawnFlowerPetal(struct FlowerPetal * petal, int petalId)
+void SpawnFlowerPetal(struct FlowerPetal * petal, int petalId)
 {
     petal->id = petalId;
     petal->UpdateDelay = Random() % 256;
-    updateFlowerPetal(petal, petalId);
+    UpdateFlowerPetal(petal, petalId);
     petal->anim = PlayAnimationAtCustomOrigin(0x7F + petal->id, Q_16_16_TO_INT(petal->x), Q_16_16_TO_INT(petal->y));
 }
 
-void destroyFlowerPetal(struct FlowerPetal * petal, int petalId)
+void DestroyFlowerPetal(struct FlowerPetal * petal, int petalId)
 {
     DestroyAnimation(petal->anim);
 }
 
-void animateFlowerPetal(struct FlowerPetal * petal)
+void AnimateFlowerPetal(struct FlowerPetal * petal)
 {
     struct AnimationListEntry * anim = FindAnimationFromAnimId(0x7F + petal->id);
     if(anim == 0)
@@ -191,7 +191,7 @@ void animateFlowerPetal(struct FlowerPetal * petal)
             petal->x += (petal->xVelocity * _Sin((petal->randomSeed += petal->randomIncrement) % 256)) / 255;
         SetAnimationOriginCoords(petal->anim, Q_16_16_TO_INT(petal->x), Q_16_16_TO_INT(petal->y));
         if (Q_16_16_TO_INT(petal->y) >= 170)
-            updateFlowerPetal(petal, petal->id);
+            UpdateFlowerPetal(petal, petal->id);
     }
     else
     {
@@ -199,29 +199,29 @@ void animateFlowerPetal(struct FlowerPetal * petal)
     }
 }
 
-void spawnAllFlowerPetals(void)
+void SpawnAllFlowerPetals(void)
 {
     int i;
     DmaFill16(3, 0, gFlowerPetals, sizeof(gFlowerPetals));
     for(i = 0; i < 16; i++)
-       spawnFlowerPetal(&gFlowerPetals[i], i); 
+       SpawnFlowerPetal(&gFlowerPetals[i], i); 
 }
 
-void destroyAllFlowerPetals(void)
+void DestroyAllFlowerPetals(void)
 {
     int i;
     for(i = 0; i < 16; i++)
-       destroyFlowerPetal(&gFlowerPetals[i], i); 
+       DestroyFlowerPetal(&gFlowerPetals[i], i); 
 }
 
-void animateAllFlowerPetals(void)
+void AnimateAllFlowerPetals(void)
 {
     int i;
     for(i = 0; i < 16; i++)
-       animateFlowerPetal(&gFlowerPetals[i]); 
+       AnimateFlowerPetal(&gFlowerPetals[i]); 
 }
 
-void updateNickelSamuraiZoominAnimation(void)
+void UpdateNickelSamuraiZoominAnimation(void)
 {
     gInvestigation.pointerX -= 0xE;
     gIORegisters.lcd_bg2x = (0x40 - gInvestigation.pointerX / 2) << 8;
@@ -230,7 +230,7 @@ void updateNickelSamuraiZoominAnimation(void)
     gIORegisters.lcd_bg2pd = gInvestigation.pointerX;
 }
 
-void initNickelSamuraiZoominAnimation(void)
+void InitNickelSamuraiZoominAnimation(void)
 {
     gInvestigation.pointerX = 0xE0;
     gIORegisters.lcd_dispcnt &= ~7;
@@ -250,10 +250,10 @@ void initNickelSamuraiZoominAnimation(void)
     LZ77UnCompWram(gPalCase3NickelSamuraiZoomin, eUnknown_02036500);
     DmaCopy16(3, eUnknown_02036500, BG_PLTT, BG_PLTT_SIZE);
     *(u16*)BG_PLTT = 0xFFFF; // white backdrop
-    updateNickelSamuraiZoominAnimation();
+    UpdateNickelSamuraiZoominAnimation();
 }
 
-void finishNickelSamuraiZoominAnimation(void)
+void FinishNickelSamuraiZoominAnimation(void)
 {
     gIORegisters.lcd_dispcnt &= ~7;
     gIORegisters.lcd_dispcnt |= DISPCNT_BG3_ON;
