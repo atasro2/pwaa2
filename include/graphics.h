@@ -21,7 +21,6 @@
 #define gGfx4bppInvestigationScrollButton ((u8*)(GFX_BASE_ADDR + 0x112FC))
 #define gGfx4bppTestimonyTextTiles ((u8*)(GFX_BASE_ADDR + 0x114FC))
 #define gGfxPressPresentButtons ((u8*)(GFX_BASE_ADDR + 0x11CFC))
-#define gUnknown_08141EFC ((u8*)(GFX_BASE_ADDR + 0x11EFC))
 #define gGfx4bppPresentBackTextTiles ((u8*)(GFX_BASE_ADDR + 0x120FC))
 #define gGfx4bppProfileTextTiles ((u8*)(GFX_BASE_ADDR + 0x122FC))
 #define gGfxEvidenceText ((u8*)(GFX_BASE_ADDR + 0x124FC))

@@ -1,7 +1,7 @@
 #ifndef GUARD_DECLARATIONS_H //TODO: get rid of this file when it's possible to move everything to its own header
 #define GUARD_DECLARATIONS_H
 
-extern struct PscyheLock gPsycheLock;
+extern struct PsycheLock gPsycheLock;
 extern struct FlowerPetal gFlowerPetals[8];
 
 extern u8 * gPsycheLockChainTilemaps[];

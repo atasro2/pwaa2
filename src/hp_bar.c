@@ -11,6 +11,7 @@
 #include "case_intro.h"
 #include "constants/animation.h"
 #include "constants/script.h"
+#include "constants/oam_allocations.h"
 
 u16 gUnknown_08112520[15][16] = {
 	{0x43f0, 0x2368, 0x02e0, 0x0260, 0x01c0, 0x01c0, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
@@ -273,8 +274,8 @@ void AnimateHPBar(void)
         LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112700, 7);
         xOffset = 0; // useless!
         yOffset = (gMain.frameCounter / 2) % 2;
-        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarDisplayValue, 444, 37, 0, 4, 20);
-        SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarValue, 444, 37, nextIndex, 7, 21);
+        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarDisplayValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
+        SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, nextIndex, 7, 21);
     }
     else if(gMain.hpBarValue < gMain.hpBarDisplayValue)
     {
@@ -282,19 +283,19 @@ void AnimateHPBar(void)
         LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
         xOffset = Random() % 2 - 2;
         yOffset = Random() % 3 - 4;
-        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarValue, 444, 37, 0, 4, 20);
-        SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarDisplayValue, 444, 37, nextIndex, 7, 21);
+        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
+        SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarDisplayValue, 444, OAM_IDX_HPBAR_LIFE, nextIndex, 7, 21);
     }
     else if(gMain.hpBarDamageAmount > 0)
     {
         LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
-        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue - gMain.hpBarDamageAmount, 444, 37, 0, 4, 20);
-        SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, 444, 37, nextIndex, 7, 21);
+        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue - gMain.hpBarDamageAmount, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
+        SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, nextIndex, 7, 21);
     }
     else 
     {
         LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
-        SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, 444, 37, 0, 4, 20);
+        SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
     }
     sub_801720C(gMain.hpBarX + xOffset, gMain.hpBarY + yOffset);
 }
@@ -302,8 +303,8 @@ void AnimateHPBar(void)
 void ClearHPBarOAM(void)
 {
     int i;
-    for(i = 0; i < 14; i++)
-        gOamObjects[34+i].attr0 = SPRITE_ATTR0_CLEAR;
+    for(i = 0; i < OAM_COUNT_HPBAR; i++)
+        gOamObjects[OAM_IDX_HPBAR+i].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
 void CheckAndDrawHPBar(void)

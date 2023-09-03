@@ -1515,26 +1515,26 @@ void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * in
     if(main->process[GAME_PROCESS_VAR1] == 9)
         goto _08010E54;
 
-    psycheLockData = &main->unk1A4[main->unk244];
+    psycheLockData = &main->psycheLockData[main->currentPsycheLockDataIndex];
     sub_8016E7C();
     goto *states[main->process[GAME_PROCESS_VAR1]];
 
 _08010A78:
     ResetHPBar();
     psycheLockData->unk8 = psycheLockData->unk9;
-    sub_8016124(psycheLockData->unk9);
-    sub_8016150();
+    InitPsycheLockState(psycheLockData->unk9);
+    SetPsycheLockAnimationStateShowChains();
     sub_8016DFC();
     gMain.unk24A = 0;
     investigation->unkB |= 1;
     main->process[GAME_PROCESS_VAR1]++;
 _08010AA6:
-    sub_801622C();
-    if(sub_8016214())
+    UpdatePsycheLockAnimation();
+    if(IsPsycheLockAnimationInWaitState())
         main->process[GAME_PROCESS_VAR1]++;
     return;
 _08010AC4:
-    ChangeScriptSection(psycheLockData->unkA);
+    ChangeScriptSection(psycheLockData->startScriptSection);
     gMain.advanceScriptContext = TRUE;
     main->process[GAME_PROCESS_VAR1] = 3;
 _08010AD4:
@@ -1584,11 +1584,11 @@ _08010C14:
             gMain.showTextboxCharacters = FALSE;
             gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
             gIORegisters.lcd_bg1vofs = 0;
-            sub_80161B4();
+            SetPsycheLockAnimationStateUnlock();
             main->process[GAME_PROCESS_VAR2]++;
         case 1:
-            sub_801622C();
-            if(sub_8016214()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
                 main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
@@ -1609,7 +1609,7 @@ _08010C14:
     }
     return;
 _08010CA4:
-    ChangeScriptSection(psycheLockData->unk10);
+    ChangeScriptSection(psycheLockData->invalidEvidencePresentedSection);
     SlideTextbox(1);
 _08010CB0:
     main->process[GAME_PROCESS_VAR1] = 3;
@@ -1620,13 +1620,13 @@ _08010CB6:
         case 0:
             gMain.advanceScriptContext = FALSE;
             FadeOutBGM(30);
-            sub_80161C4();
+            SetPsycheLockAnimationStateRemoveChains();
             main->process[GAME_PROCESS_VAR2]++;
         case 1:
-            sub_801622C();
-            if(!sub_8016214())
+            UpdatePsycheLockAnimation();
+            if(!IsPsycheLockAnimationInWaitState())
                 break;
-            sub_80161E4();
+            SetPsycheLockAnimationStateClearLocksAndChains();
             if(gMain.hpBarValue < 80) {
                 SetOrQueueHPBarState(1);
                 gMain.hpBarDamageAmount = -40;
@@ -1635,15 +1635,15 @@ _08010CB6:
             main->process[GAME_PROCESS_VAR2]++;
             break;
         case 2:
-            sub_801622C();
-            if(!sub_8016214())
+            UpdatePsycheLockAnimation();
+            if(!IsPsycheLockAnimationInWaitState())
                 break;
-            sub_80161D4();
+            SetPsycheLockAnimationStateDisplayUnlockMessage();
             main->process[GAME_PROCESS_VAR2]++;
             break;
         case 3:
-            sub_801622C();
-            if(!sub_8016214())
+            UpdatePsycheLockAnimation();
+            if(!IsPsycheLockAnimationInWaitState())
                 break;
             if(IsHPBarAnimating())
                 break;
@@ -1656,14 +1656,14 @@ _08010CB6:
             gMain.advanceScriptContext = 1;
             ReloadInvestigationGraphics();
             ClearInvestigationActionButtonOAM();
-            psycheLockData->unk0 = 0;
+            psycheLockData->enabled = 0;
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
     }
     return;
 _08010D9C:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
-            ChangeScriptSection(psycheLockData->unkC);
+            ChangeScriptSection(psycheLockData->cancelScriptSection);
             if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
                 SlideTextbox(1);
             main->process[GAME_PROCESS_VAR2]++;
@@ -1680,11 +1680,11 @@ _08010D9C:
                 main->process[GAME_PROCESS_VAR2]++;
             break;
         case 3:
-            sub_80161E4();
+            SetPsycheLockAnimationStateClearLocksAndChains();
             main->process[GAME_PROCESS_VAR2]++;
         case 4:
-            sub_801622C();
-            if(sub_8016214()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
                 main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
@@ -1706,12 +1706,12 @@ _08010E54:
             gMain.advanceScriptContext = FALSE;
             investigation->unkB |= 1;
             SlideTextbox(0);
-            sub_8016124(main->unk244);
-            sub_8016150();
+            InitPsycheLockState(main->currentPsycheLockDataIndex);
+            SetPsycheLockAnimationStateShowChains();
             main->process[GAME_PROCESS_VAR2]++;
         case 1:
-            sub_801622C();
-            if(sub_8016214()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
                 main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
@@ -1727,7 +1727,7 @@ _08010EA6: // what the fuck
 _08010EAC:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
-            ChangeScriptSection(psycheLockData->unk12);
+            ChangeScriptSection(psycheLockData->noHPLeftScriptSection);
             if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
                 SlideTextbox(1);
             main->process[GAME_PROCESS_VAR2]++;
@@ -1745,11 +1745,11 @@ _08010EAC:
             }
             break;
         case 3:
-            sub_80161E4();
+            SetPsycheLockAnimationStateClearLocksAndChains();
             main->process[GAME_PROCESS_VAR2]++;
         case 4:
-            sub_801622C();
-            if(sub_8016214()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
                 main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
@@ -1823,8 +1823,8 @@ void SetInvestigationStateToReturnAfterPsycheLocks(u16 arg0, u16 arg1) {
         gMain.process[GAME_PROCESS_VAR1] = 1;
         gInvestigation.previousSelectedOption = arg1;
         gIORegisters.lcd_bg1vofs = -77;
-        if(gMain.unk1A4[gMain.unk244].unk16 != 0xFFFF)
-            PlayBGM(gMain.unk1A4[gMain.unk244].unk16);
+        if(gMain.psycheLockData[gMain.currentPsycheLockDataIndex].unk16 != 0xFFFF)
+            PlayBGM(gMain.psycheLockData[gMain.currentPsycheLockDataIndex].unk16);
     }
 }
 

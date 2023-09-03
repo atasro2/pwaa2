@@ -3,35 +3,35 @@
 
 struct PsycheLockData
 {
-    u32 unk0; // unity: status
-    u16 unk4; // unity: room
-    u16 unk6; // unity: pl_id 
+    u32 enabled; // unity: status
+    u16 roomId; // unity: room
+    u16 personId; // unity: pl_id 
     u8 unk8; // unity: level
     u8 unk9; // unity: size
-    u16 unkA; // unity: start_message
-    u16 unkC; // unity: cancel_message
-    u16 unkE; // unity: correct_message
-    u16 unk10; // unity: wrong_message
-    u16 unk12; // unity: die_message
+    u16 startScriptSection; // unity: start_message
+    u16 cancelScriptSection; // unity: cancel_message
+    u16 validEvidencePresentedSection; // unity: correct_message
+    u16 invalidEvidencePresentedSection; // unity: wrong_message
+    u16 noHPLeftScriptSection; // unity: die_message
     u16 unk14; // unity: cancel_bgm
     u16 unk16; // unity: unlock_bgm
-    u32 unk18; // unity: item_size
-    u8 unk1C[4]; // unity: item_no
-    u16 unk20[4]; //  unity: item_correct_message
+    u32 numValidEvidence; // unity: item_size
+    u8 validEvidenceIds[4]; // unity: item_no
+    u16 validEvidenceScriptSections[4]; //  unity: item_correct_message
 };
 
-struct PscyheLock_10_8 {
+struct PsycheLockChains_8 {
     u8 fill0[0x4];
     u16 unk4;   
     u16 unk6;
 };
 
-struct PscyheLock_10_C {
+struct PsycheLockChains_C {
     u16 unk0;
     u8 fill02[0x6];
 };
 
-struct PscyheLock_Block {
+struct PsycheLock_Block {
     s8 tileXstart;
     s8 tileYstart;
     u8 mapXstart;
@@ -50,26 +50,26 @@ struct PscyheLock_Block {
     } blockData;
 };
 
-struct PscyheLock_10 {
+struct PsycheLockChains {
     s16 targetBGMapBuffer;
     s16 unk2;
     s16 unk4;
     s16 unk6;
-    struct PscyheLock_10_8 * unk8;
-    struct PscyheLock_10_C * unkC[48];
-    void * chainBlocks[48]; // Pointer to u32 followed by struct PscyheLock_Block
+    struct PsycheLockChains_8 * unk8;
+    struct PsycheLockChains_C * unkC[48];
+    void * chainBlocks[48]; // Pointer to u32 followed by struct PsycheLock_Block
 };
 
-struct PscyheLock {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
+struct PsycheLock {
+    s16 numLocksTotal;
+    s16 numLocksRemaining;
+    s16 state;
+    s16 subState;
     s16 unk8; // unused?
-    s16 unkA;
-    s16 unkC;
+    s16 animationCounter;
+    s16 animationIntroCounter;
     s16 unkE; // padding?
-    struct PscyheLock_10 unk10[2];
+    struct PsycheLockChains chains[2];
     struct AnimationListEntry * lockAnims[5];
 };
 

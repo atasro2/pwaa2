@@ -47,9 +47,9 @@ u8 * gPsycheLockChainTilemaps[] = {
     gMapPsycheLockChains19,
     gMapPsycheLockChains20
 };
-void CopyPsycheLockChainBlocksToBGMapBuffer(struct PscyheLock_10 * arg0);
+void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * arg0);
 
-void sub_8015CE0(struct PscyheLock_10 * arg0, s32 arg1, s32 targetBGMapBuffer, s32 arg3)
+void sub_8015CE0(struct PsycheLockChains * arg0, s32 arg1, s32 targetBGMapBuffer, s32 arg3)
 {
     arg0->unk2 = arg1;
     arg0->targetBGMapBuffer = targetBGMapBuffer;
@@ -57,7 +57,7 @@ void sub_8015CE0(struct PscyheLock_10 * arg0, s32 arg1, s32 targetBGMapBuffer, s
     CopyPsycheLockChainBlocksToBGMapBuffer(arg0);
 }
 
-void sub_8015CF0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2)
+void LoadPsycheLockChainBlocks(struct PsycheLockChains * arg0, s32 arg1, s32 arg2)
 {
     int i;
     void * decompBuff;
@@ -80,7 +80,7 @@ void sub_8015CF0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2)
         decompBuff += 4;
         for(j = 0; j < count; j++)
         {
-            struct PscyheLock_Block * block = decompBuff;
+            struct PsycheLock_Block * block = decompBuff;
             if(!(block->unk6 & 0xF000))
                 decompBuff += 0x14;
             else
@@ -90,7 +90,7 @@ void sub_8015CF0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2)
     sub_8015CE0(arg0, arg1, arg2, 0);
 }
 
-void sub_8015DBC(struct PscyheLock_10 * arg0)
+void sub_8015DBC(struct PsycheLockChains * arg0)
 {
     arg0->unk6++;
     if(arg0->unk4 < arg0->unk8->unk6-1 && (gMain.frameCounter % 3) == 0)
@@ -101,7 +101,7 @@ void sub_8015DBC(struct PscyheLock_10 * arg0)
     }
 }
 
-void sub_8015DFC(void)
+void ClearBGStateAfterPsychelock(void)
 {
     DmaFill16(3, 0, gBG0MapBuffer, sizeof(gBG0MapBuffer));
     DmaFill16(3, 0, gBG3MapBuffer, sizeof(gBG3MapBuffer));
@@ -112,7 +112,7 @@ void sub_8015DFC(void)
     gIORegisters.lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
 }
 
-bool32 sub_8015E9C(struct PscyheLock_10 * arg0)
+bool32 sub_8015E9C(struct PsycheLockChains * arg0)
 {
     if(arg0->unk4 >= arg0->unk8->unk6-1)
         return TRUE;
@@ -133,7 +133,7 @@ void LoadPsycheLockChainGraphics(void)
     DmaCopy16(3, gPsycheLockChainPalettes[1], BG_PLTT+0x1E0, 0x20);
 }
 
-void CopyPsycheLockChainBlocksToBGMapBuffer(struct PscyheLock_10 * arg0)
+void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * arg0)
 {
     short i;
     void * data;
@@ -182,7 +182,7 @@ void CopyPsycheLockChainBlocksToBGMapBuffer(struct PscyheLock_10 * arg0)
     for(i = 0; i < count; i++)
     {
         int j;
-        struct PscyheLock_Block * block = data;
+        struct PsycheLock_Block * block = data;
 
         data += (block->unk6 & 0xF000) == 0 ? 0x14 : 0x10;
 
@@ -220,81 +220,82 @@ void CopyPsycheLockChainBlocksToBGMapBuffer(struct PscyheLock_10 * arg0)
     }
 }
 
-void sub_8016124(u32 arg0) // PsylockDisp_init
+void InitPsycheLockState(u32 numPsycheLocks) // PsylockDisp_init
 {
     DmaFill32(3, 0, &gPsycheLock, sizeof(gPsycheLock));
-    gPsycheLock.unk0 = arg0;
-    gPsycheLock.unk2 = arg0;
+    gPsycheLock.numLocksTotal = numPsycheLocks;
+    gPsycheLock.numLocksRemaining = numPsycheLocks;
 }
 
-void sub_8016150(void) // PsylockDisp_appear
+void SetPsycheLockAnimationStateShowChains(void) // PsylockDisp_appear
 {
-    bool32 unk0 = FALSE;
+    bool32 isAnyAcroBirdAnimationPlaying = FALSE;
 
     if(FindAnimationFromAnimId(0x3D)) {
         DestroyAnimation(FindAnimationFromAnimId(0x3D));
-        unk0 = TRUE;
+        isAnyAcroBirdAnimationPlaying = TRUE;
     }
     if(FindAnimationFromAnimId(0x3E)) {
         DestroyAnimation(FindAnimationFromAnimId(0x3E));
-        unk0 = TRUE;
+        isAnyAcroBirdAnimationPlaying = TRUE;
     }
     if(FindAnimationFromAnimId(0x3F)) {
         DestroyAnimation(FindAnimationFromAnimId(0x3F));
-        unk0 = TRUE;
+        isAnyAcroBirdAnimationPlaying = TRUE;
     }
 
-    if(unk0)
+    // Play birds flying away animation
+    if(isAnyAcroBirdAnimationPlaying)
         PlayAnimation(0x40);
 
-    gPsycheLock.unk4 = 1;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 1;
+    gPsycheLock.subState = 0;
 }
 
-void sub_80161B4(void) // PsylockDisp_unlock
+void SetPsycheLockAnimationStateUnlock(void) // PsylockDisp_unlock
 {
-    gPsycheLock.unk4 = 4;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 4;
+    gPsycheLock.subState = 0;
 }
 
-void sub_80161C4(void) // PsylockDisp_disappear
+void SetPsycheLockAnimationStateRemoveChains(void) // PsylockDisp_disappear
 {
-    gPsycheLock.unk4 = 5;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 5;
+    gPsycheLock.subState = 0;
 }
 
-void sub_80161D4(void) // PsylockDisp_unlock_message
+void SetPsycheLockAnimationStateDisplayUnlockMessage(void) // PsylockDisp_unlock_message
 {
-    gPsycheLock.unk4 = 6;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 6;
+    gPsycheLock.subState = 0;
 }
 
-void sub_80161E4(void) // PsylockDisp_clear_all
+void SetPsycheLockAnimationStateClearLocksAndChains(void) // PsylockDisp_clear_all
 {
-    gPsycheLock.unk4 = 7;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 7;
+    gPsycheLock.subState = 0;
 }
 
-void sub_80161F4(void) // PsylockDisp_to_normal_bg
+void SetPsycheLockAnimationStateReturnToNormalBackground(void) // PsylockDisp_to_normal_bg
 {
-    gPsycheLock.unk4 = 8;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 8;
+    gPsycheLock.subState = 0;
 }
 
-void sub_8016204(void) // PsylockDisp_redisp
+void SetPsycheLockAnimationStateRedrawRemainingLocks(void) // PsylockDisp_redisp
 {
-    gPsycheLock.unk4 = 9;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 9;
+    gPsycheLock.subState = 0;
 }
 
-bool32 sub_8016214(void) // PsylockDisp_is_wait
+bool32 IsPsycheLockAnimationInWaitState(void) // PsylockDisp_is_wait
 {
-    if(gPsycheLock.unk4 == 0)
+    if(gPsycheLock.state == 0)
         return TRUE;
     return FALSE;
 }
 
-void sub_801622C(void) // PsylockDisp_move
+void UpdatePsycheLockAnimation(void) // PsylockDisp_move
 {
     int i;
     void * states[] = {
@@ -310,23 +311,25 @@ void sub_801622C(void) // PsylockDisp_move
         &&_08016C0C,
         &&_08016C6A,
     };
-    goto *states[gPsycheLock.unk4];
+    goto *states[gPsycheLock.state];
     
 _08016260: // psylock_move_wait
     return;
 
 _08016264: // psylock_move_whiteshock
+    // Wait until Acros birds flying away has finished
     if(FindAnimationFromAnimId(0x40))
     {
         if(FindAnimationFromAnimId(0x40)->flags & ANIM_PLAYING)
             return;
         DestroyAnimation(FindAnimationFromAnimId(0x40));
     }
-    switch(gPsycheLock.unk6)
+    switch(gPsycheLock.subState)
     {
         case 0:
             PlaySE(0x7A);
             gMain.unk30 = 0x7F;
+            // invert palette colors
             for(i = 33; i < 256; i++)
             {
                 u32 r = i[(u16*)PLTT] & 0x1F;
@@ -337,22 +340,23 @@ _08016264: // psylock_move_whiteshock
                 b = ~b & 0x1F;
                 i[(u16*)PLTT] = (b << 10) | (g << 5) | r;
             }
-            gPsycheLock.unkA = 0xFF;
-            gPsycheLock.unkC = 0;
-            gPsycheLock.unk6++;
+            gPsycheLock.animationCounter = 255; // ???
+            gPsycheLock.animationIntroCounter = 0;
+            gPsycheLock.subState++;
             // fallthrough
         case 1:
-            if(gPsycheLock.unkA++ > 70)
+            if(gPsycheLock.animationCounter++ > 70)
             {
-                gPsycheLock.unkA = 0;
-                gPsycheLock.unkC++;
-                if(gPsycheLock.unkC >= 2)
-                    gPsycheLock.unk6++;
+                gPsycheLock.animationCounter = 0;
+                gPsycheLock.animationIntroCounter++;
+                if(gPsycheLock.animationIntroCounter >= 2)
+                    gPsycheLock.subState++;
                 else
                     StartHardwareBlend(3, 1, 4, 0x1F);
             }
             break;
         case 2:
+            // fade palette to black
             for(i = 33; i < 256; i++)
             {
                 s16 r = i[(u16*)PLTT] & 0x1F;
@@ -366,59 +370,59 @@ _08016264: // psylock_move_whiteshock
                 if(b < 0) b = 0;
                 i[(u16*)PLTT] = r | (g << 5) | (b << 10);
             }
-            if(gPsycheLock.unkA++ > 32)
-                gPsycheLock.unk6++;
+            if(gPsycheLock.animationCounter++ > 32)
+                gPsycheLock.subState++;
             break;
         default:
-            gPsycheLock.unk4++;
-            gPsycheLock.unk6 = 0;
+            gPsycheLock.state++;
+            gPsycheLock.subState = 0;
             break;
     }
     return;
 _080163C2: // psylock_move_chain_appear
-    switch(gPsycheLock.unk6)
+    switch(gPsycheLock.subState)
     {
         default:
             return;
         case 0:
             LoadPsycheLockChainGraphics();
-            sub_8015CF0(&gPsycheLock.unk10[0], gPsycheLock.unk0 - 1, 3);
-            sub_8015CF0(&gPsycheLock.unk10[1], gPsycheLock.unk0 + 5 - 1, 0);
-            PlaySE(0x7F + gPsycheLock.unk0);
-            gPsycheLock.unk6++;
+            LoadPsycheLockChainBlocks(&gPsycheLock.chains[0], gPsycheLock.numLocksTotal - 1, 3);
+            LoadPsycheLockChainBlocks(&gPsycheLock.chains[1], gPsycheLock.numLocksTotal + 5 - 1, 0);
+            PlaySE(0x7F + gPsycheLock.numLocksTotal);
+            gPsycheLock.subState++;
             // fallthrough
         case 1:
-            sub_8015DBC(&gPsycheLock.unk10[0]);
-            sub_8015DBC(&gPsycheLock.unk10[1]);
-            if(sub_8015E9C(&gPsycheLock.unk10[0])
-            && sub_8015E9C(&gPsycheLock.unk10[1]))
-                gPsycheLock.unk6++;
+            sub_8015DBC(&gPsycheLock.chains[0]);
+            sub_8015DBC(&gPsycheLock.chains[1]);
+            if(sub_8015E9C(&gPsycheLock.chains[0])
+            && sub_8015E9C(&gPsycheLock.chains[1]))
+                gPsycheLock.subState++;
             gMain.gameStateFlags |= 1;
             gMain.shakeTimer = 2;
             gMain.shakeIntensity = 1;
             return;
         case 2:
-            sub_80138B0(gPsycheLock.unk0 + 127, 60);
-            gPsycheLock.unkA = 0;
-            gPsycheLock.unk6++;
+            sub_80138B0(gPsycheLock.numLocksTotal + 127, 60);
+            gPsycheLock.animationCounter = 0;
+            gPsycheLock.subState++;
             break;
         case 3:
             break;
     }
-    if(gPsycheLock.unkA++ >= 30)
+    if(gPsycheLock.animationCounter++ >= 30)
     {
-        gPsycheLock.unk4++;
-        gPsycheLock.unk6 = 0;
+        gPsycheLock.state++;
+        gPsycheLock.subState = 0;
     }
     return;
 
 _08016498: // psylock_move_lock_appear
-    switch(gPsycheLock.unk6)
+    switch(gPsycheLock.subState)
     {
         case 0:
-            for(i = 0; i < gPsycheLock.unk0; i++)
+            for(i = 0; i < gPsycheLock.numLocksTotal; i++)
             {
-                s32 temp = gPsycheLock.unk0 - 1;
+                s32 temp = gPsycheLock.numLocksTotal - 1;
                 s32 xOrigin = temp * 10 + i * 2;
                 s32 yOrigin = temp * 10 + i * 2 + 1;
                 xOrigin = gPsycheLockLockPositions[xOrigin] + 32;
@@ -427,15 +431,15 @@ _08016498: // psylock_move_lock_appear
                 gPsycheLock.lockAnims[i]->flags |= 0x100;
                 gPsycheLock.lockAnims[i]->flags &= ~ANIM_ACTIVE;
             }
-            gPsycheLock.unkA = 0;
-            gPsycheLock.unk6++;
+            gPsycheLock.animationCounter = 0;
+            gPsycheLock.subState++;
             //fallthrough
         case 1:
-            gPsycheLock.unkA++;
-            for(i = 0; i < gPsycheLock.unk0; i++)
+            gPsycheLock.animationCounter++;
+            for(i = 0; i < gPsycheLock.numLocksTotal; i++)
             {
                 s32 temp = i * 8;
-                s32 temp2 = gPsycheLock.unkA - temp;
+                s32 temp2 = gPsycheLock.animationCounter - temp;
                 if(temp2 > 0)
                 {
                     gPsycheLock.lockAnims[i]->flags |= ANIM_ACTIVE;
@@ -452,191 +456,191 @@ _08016498: // psylock_move_lock_appear
                     }
                 }
             }
-            if(gPsycheLock.unkA > gPsycheLock.unk0 * 8)
+            if(gPsycheLock.animationCounter > gPsycheLock.numLocksTotal * 8)
             {
-                for(i = 0; i < gPsycheLock.unk0; i++)
+                for(i = 0; i < gPsycheLock.numLocksTotal; i++)
                     DisableAnimationScale(gPsycheLock.lockAnims[i]);
-                gPsycheLock.unkA = 0;
-                gPsycheLock.unk6++;
+                gPsycheLock.animationCounter = 0;
+                gPsycheLock.subState++;
             }
             break;
         case 2:
             gMain.gameStateFlags |= 1;
             gMain.shakeTimer = 2;
             gMain.shakeIntensity = 2;
-            if(gPsycheLock.unkA++ > 20)
+            if(gPsycheLock.animationCounter++ > 20)
             {
                 StartHardwareBlend(4, 1, 8, 0x1F);
-                gPsycheLock.unkA = 0;
-                gPsycheLock.unk6++;
+                gPsycheLock.animationCounter = 0;
+                gPsycheLock.subState++;
             }
             break;
         case 3:
-            if(gPsycheLock.unkA++ > 10)
+            if(gPsycheLock.animationCounter++ > 10)
             {
                 StartHardwareBlend(3, 0, 0, 0x1F);
-                gPsycheLock.unkA = 0;
-                gPsycheLock.unk6++;
+                gPsycheLock.animationCounter = 0;
+                gPsycheLock.subState++;
             }
             break;
         case 4:
-            if(gPsycheLock.unkA++ > 40)
+            if(gPsycheLock.animationCounter++ > 40)
             {
-                gPsycheLock.unkA = 0;
-                gPsycheLock.unk6++;
+                gPsycheLock.animationCounter = 0;
+                gPsycheLock.subState++;
             }
             break;
         case 5:
-            gPsycheLock.unk4 = 0;
-            gPsycheLock.unk6 = 0;
+            gPsycheLock.state = 0;
+            gPsycheLock.subState = 0;
             break;
     }
     return;
 
 _0801667C: // psylock_move_lock_unlock
-    switch(gPsycheLock.unk6)
+    switch(gPsycheLock.subState)
     {
         case 0:
         {
             s32 xOrigin;
             s32 yOrigin;
             s32 temp;
-            gPsycheLock.unk2--;
+            gPsycheLock.numLocksRemaining--;
             PlaySE(0x74);
-            DestroyAnimation(gPsycheLock.lockAnims[gPsycheLock.unk2]);
-            temp = gPsycheLock.unk0 - 1;
-            xOrigin = temp * 10 + gPsycheLock.unk2 * 2;
-            yOrigin = temp * 10 + gPsycheLock.unk2 * 2 + 1;
+            DestroyAnimation(gPsycheLock.lockAnims[gPsycheLock.numLocksRemaining]);
+            temp = gPsycheLock.numLocksTotal - 1;
+            xOrigin = temp * 10 + gPsycheLock.numLocksRemaining * 2;
+            yOrigin = temp * 10 + gPsycheLock.numLocksRemaining * 2 + 1;
             xOrigin = gPsycheLockLockPositions[xOrigin] + 32;
             yOrigin = gPsycheLockLockPositions[yOrigin] + 16;
-            gPsycheLock.lockAnims[gPsycheLock.unk2] = PlayAnimationAtCustomOrigin(50 + gPsycheLock.unk2, xOrigin, yOrigin);
+            gPsycheLock.lockAnims[gPsycheLock.numLocksRemaining] = PlayAnimationAtCustomOrigin(50 + gPsycheLock.numLocksRemaining, xOrigin, yOrigin);
             gMain.gameStateFlags |= 1;
             gMain.shakeTimer = 2;
             gMain.shakeIntensity = 2;
             StartHardwareBlend(4, 0, 0, 0x1F);
-            gPsycheLock.unkA = 0;
-            gPsycheLock.unk6++;
+            gPsycheLock.animationCounter = 0;
+            gPsycheLock.subState++;
             break;
         }
         case 1:
-            if(gPsycheLock.unkA++ > 2)
+            if(gPsycheLock.animationCounter++ > 2)
             {
                 StartHardwareBlend(3, 0, 0, 0x1F);
-                gPsycheLock.unkA = 0;
-                gPsycheLock.unk6++;
+                gPsycheLock.animationCounter = 0;
+                gPsycheLock.subState++;
             }
             break;
         case 2:
-            if(gPsycheLock.unkA++ > 60)
+            if(gPsycheLock.animationCounter++ > 60)
             {
-                DestroyAnimation(gPsycheLock.lockAnims[gPsycheLock.unk2]);
-                gPsycheLock.lockAnims[gPsycheLock.unk2] = NULL;
-                gPsycheLock.unk4 = 0;
-                gPsycheLock.unk6 = 0;
+                DestroyAnimation(gPsycheLock.lockAnims[gPsycheLock.numLocksRemaining]);
+                gPsycheLock.lockAnims[gPsycheLock.numLocksRemaining] = NULL;
+                gPsycheLock.state = 0;
+                gPsycheLock.subState = 0;
             }
             break;
     }
     return;
 
 _0801678A: // psylock_move_chain_disappear
-    switch(gPsycheLock.unk6)
+    switch(gPsycheLock.subState)
     {
         case 0:
-            gPsycheLock.unkA = 0;
-            gPsycheLock.unk6++;
+            gPsycheLock.animationCounter = 0;
+            gPsycheLock.subState++;
         case 1:
-            if(gPsycheLock.unkA++ > 20)
+            if(gPsycheLock.animationCounter++ > 20)
             {
-                gPsycheLock.unkA = 0;
-                gPsycheLock.unk6++;
+                gPsycheLock.animationCounter = 0;
+                gPsycheLock.subState++;
             }
             return;
         case 2:
         {
             gIORegisters.lcd_bg0cnt |= BGCNT_MOSAIC;
             gIORegisters.lcd_bg3cnt |= BGCNT_MOSAIC;
-            gPsycheLock.unkA = 0;
-            gPsycheLock.unk6++;
+            gPsycheLock.animationCounter = 0;
+            gPsycheLock.subState++;
         }
         case 3:
             if((gMain.frameCounter % 8) != 0)
             {
-                if(gPsycheLock.unkA++ > 4)
-                    gPsycheLock.unk6++;
+                if(gPsycheLock.animationCounter++ > 4)
+                    gPsycheLock.subState++;
             }
             return;
         case 4:
             if((gMain.frameCounter % 5) != 0)
             {
-                gIORegisters.lcd_mosaic = gPsycheLock.unkA << 4 | gPsycheLock.unkA;
-                if (gPsycheLock.unkA-- <= 0)
+                gIORegisters.lcd_mosaic = gPsycheLock.animationCounter << 4 | gPsycheLock.animationCounter;
+                if (gPsycheLock.animationCounter-- <= 0)
                 {
                     gIORegisters.lcd_bg0cnt &= ~BGCNT_MOSAIC;
                     gIORegisters.lcd_bg3cnt &= ~BGCNT_MOSAIC;
                     gIORegisters.lcd_mosaic = 0;
-                    gPsycheLock.unkA = 0;
-                    gPsycheLock.unk6++;
+                    gPsycheLock.animationCounter = 0;
+                    gPsycheLock.subState++;
                 }
             }
             return;
         case 5:
-            if(gPsycheLock.unkA++ > 40)
+            if(gPsycheLock.animationCounter++ > 40)
             {
-                sub_8015CF0(&gPsycheLock.unk10[0], gPsycheLock.unk0 + 10 - 1, 3);
-                sub_8015CF0(&gPsycheLock.unk10[1], gPsycheLock.unk0 + 10 + 5 - 1, 0);
-                PlaySE(127 + gPsycheLock.unk0);
-                gPsycheLock.unk6++;
+                LoadPsycheLockChainBlocks(&gPsycheLock.chains[0], gPsycheLock.numLocksTotal + 10 - 1, 3);
+                LoadPsycheLockChainBlocks(&gPsycheLock.chains[1], gPsycheLock.numLocksTotal + 10 + 5 - 1, 0);
+                PlaySE(127 + gPsycheLock.numLocksTotal);
+                gPsycheLock.subState++;
             }
             return;
         case 6:
-            sub_8015DBC(&gPsycheLock.unk10[0]);
-            sub_8015DBC(&gPsycheLock.unk10[1]);
+            sub_8015DBC(&gPsycheLock.chains[0]);
+            sub_8015DBC(&gPsycheLock.chains[1]);
             
-            if(sub_8015E9C(&gPsycheLock.unk10[0])
-            && sub_8015E9C(&gPsycheLock.unk10[1])) {
-                sub_80138B0(127 + gPsycheLock.unk0, 60);
-                gPsycheLock.unk6++;
-                gPsycheLock.unkA = 0;
+            if(sub_8015E9C(&gPsycheLock.chains[0])
+            && sub_8015E9C(&gPsycheLock.chains[1])) {
+                sub_80138B0(127 + gPsycheLock.numLocksTotal, 60);
+                gPsycheLock.subState++;
+                gPsycheLock.animationCounter = 0;
             }
             gMain.gameStateFlags |= 1;
             gMain.shakeTimer = 2;
             gMain.shakeIntensity = 1;
             return;
         case 7:
-            if(gPsycheLock.unkA++ > 80)
+            if(gPsycheLock.animationCounter++ > 80)
             {
                 StartHardwareBlend(4, 1, 8, 0x1F);
-                gPsycheLock.unkA = 0;
-                gPsycheLock.unk6++;
+                gPsycheLock.animationCounter = 0;
+                gPsycheLock.subState++;
             }
             return;
         case 8:
             if(gMain.blendMode)
                 return;
-            gPsycheLock.unkA = 0;
-            gPsycheLock.unk6++;
+            gPsycheLock.animationCounter = 0;
+            gPsycheLock.subState++;
             return;
         case 9:
-            if(gPsycheLock.unkA++ > 20)
-                gPsycheLock.unk6++;
+            if(gPsycheLock.animationCounter++ > 20)
+                gPsycheLock.subState++;
             return;
     }
-    gPsycheLock.unk4 = 0;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 0;
+    gPsycheLock.subState = 0;
     return;
 
 _080169A0: // psylock_move_unlock_message
 {
     struct AnimationListEntry * animation;
     struct AnimationListEntry * animation2;
-    switch(gPsycheLock.unk6)
+    switch(gPsycheLock.subState)
     {
         case 0:
             StartHardwareBlend(1, 0, 0, 0x1F);
             PlayAnimation(0x38);
             PlayAnimation(0x39);
             PlaySE(166);
-            gPsycheLock.unk6++;
+            gPsycheLock.subState++;
             // fallthrough
         case 1:
             animation = FindAnimationFromAnimId(0x38);
@@ -646,18 +650,18 @@ _080169A0: // psylock_move_unlock_message
             animation2->animationInfo.xOrigin -= 10;
             animation2->flags |= ANIM_ACTIVE;
             if(animation->animationInfo.xOrigin >= 120)
-                gPsycheLock.unk6++;
+                gPsycheLock.subState++;
             break;
         case 2:
             StartHardwareBlend(3, 1, 8, 0x1F);
             DestroyAnimation(FindAnimationFromAnimId(0x38));
             DestroyAnimation(FindAnimationFromAnimId(0x39));
             PlayAnimation(0x37);
-            gPsycheLock.unk6++;
+            gPsycheLock.subState++;
             break;
         case 3:
             if(gMain.blendMode == 0)
-                gPsycheLock.unk6++;
+                gPsycheLock.subState++;
             break;
         case 4:
             animation = FindAnimationFromAnimId(0x37);
@@ -667,7 +671,7 @@ _080169A0: // psylock_move_unlock_message
                 PlayAnimationAtCustomOrigin(0x38, 120, 60);
                 PlayAnimationAtCustomOrigin(0x39, 120, 60);
                 PlaySE(167);
-                gPsycheLock.unk6++;
+                gPsycheLock.subState++;
             }
             break;
         case 5:
@@ -681,27 +685,27 @@ _080169A0: // psylock_move_unlock_message
             {
                 DestroyAnimation(animation);
                 DestroyAnimation(animation2);
-                gPsycheLock.unk6++;
+                gPsycheLock.subState++;
             }
             break;
         case 6:
             if(IsHPBarAnimating() == 0)
             {
-                gPsycheLock.unk4 = 0;
-                gPsycheLock.unk6 = 0;
+                gPsycheLock.state = 0;
+                gPsycheLock.subState = 0;
             }
             break;
     }
     return;
 }
 _08016B3C: // psylock_move_clear_all
-    switch(gPsycheLock.unk6)
+    switch(gPsycheLock.subState)
     {
         case 0:
-            for(i = 0; i < gPsycheLock.unk0; i++)
+            for(i = 0; i < gPsycheLock.numLocksTotal; i++)
                 DestroyAnimation(gPsycheLock.lockAnims[i]);
             m4aSoundVSyncOff();
-            sub_8015DFC();
+            ClearBGStateAfterPsychelock();
             UpdateBGTilemaps();
             SetLCDIORegs();
             i = gMain.roomData[gMain.currentRoomId][0];
@@ -710,34 +714,34 @@ _08016B3C: // psylock_move_clear_all
             gMain.currentBgStripe = 1;
             ReloadInvestigationGraphics();
             m4aSoundVSyncOn();
-            gPsycheLock.unk4 = 0;
-            gPsycheLock.unk6 = 0;
+            gPsycheLock.state = 0;
+            gPsycheLock.subState = 0;
     }
     return;
 _08016BB8: // psylock_move_to_normal_bg
-    for(i = 0; i < gPsycheLock.unk0; i++)
+    for(i = 0; i < gPsycheLock.numLocksTotal; i++)
     {
         DestroyAnimation(gPsycheLock.lockAnims[i]);
         gPsycheLock.lockAnims[i] = NULL;
     }
-    sub_8015DFC();
+    ClearBGStateAfterPsychelock();
     DmaFill16(3, 0, gBG0MapBuffer, sizeof(gBG0MapBuffer));
-    gPsycheLock.unk4 = 0;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 0;
+    gPsycheLock.subState = 0;
     return;
     
 _08016C0C: // psylock_move_redisp
 {
-    u32 temp = gPsycheLock.unk2;
-    sub_8016C7C(gPsycheLock.unk0);
-    gPsycheLock.unk2 = temp;
-    for(i = 0; i < gPsycheLock.unk0 - gPsycheLock.unk2; i++)
+    u32 temp = gPsycheLock.numLocksRemaining;
+    sub_8016C7C(gPsycheLock.numLocksTotal);
+    gPsycheLock.numLocksRemaining = temp;
+    for(i = 0; i < gPsycheLock.numLocksTotal - gPsycheLock.numLocksRemaining; i++)
     {
-        DestroyAnimation(gPsycheLock.lockAnims[gPsycheLock.unk0 - 1 - i]);
-        gPsycheLock.lockAnims[gPsycheLock.unk0 - 1 - i] = NULL;
+        DestroyAnimation(gPsycheLock.lockAnims[gPsycheLock.numLocksTotal - 1 - i]);
+        gPsycheLock.lockAnims[gPsycheLock.numLocksTotal - 1 - i] = NULL;
     }
-    gPsycheLock.unk4 = 0;
-    gPsycheLock.unk6 = 0;
+    gPsycheLock.state = 0;
+    gPsycheLock.subState = 0;
     return;
 }
 _08016C6A: // psylock_move_null
@@ -746,19 +750,19 @@ _08016C6A: // psylock_move_null
     //_08016C6A function return
 }
 
-void sub_8016C7C(u32 arg0) // PsylockDisp_show_static
+void sub_8016C7C(u32 numPsycheLocks) // PsylockDisp_show_static
 {
     int i;
 
-    sub_8016124(arg0);
+    InitPsycheLockState(numPsycheLocks);
     LoadPsycheLockChainGraphics();
-    sub_8015CF0(&gPsycheLock.unk10[0], gPsycheLock.unk0 - 1, 3);
-    sub_8015CF0(&gPsycheLock.unk10[1], gPsycheLock.unk0 + 5 - 1, 0);
-    sub_8015CE0(&gPsycheLock.unk10[0], gPsycheLock.unk0 - 1, 3, gPsycheLock.unk10[0].unk8->unk6-1);
-    sub_8015CE0(&gPsycheLock.unk10[1], gPsycheLock.unk0 + 5 - 1, 0, gPsycheLock.unk10[1].unk8->unk6-1);
-    for(i = 0; i < gPsycheLock.unk0; i++)
+    LoadPsycheLockChainBlocks(&gPsycheLock.chains[0], gPsycheLock.numLocksTotal - 1, 3);
+    LoadPsycheLockChainBlocks(&gPsycheLock.chains[1], gPsycheLock.numLocksTotal + 5 - 1, 0);
+    sub_8015CE0(&gPsycheLock.chains[0], gPsycheLock.numLocksTotal - 1, 3, gPsycheLock.chains[0].unk8->unk6-1);
+    sub_8015CE0(&gPsycheLock.chains[1], gPsycheLock.numLocksTotal + 5 - 1, 0, gPsycheLock.chains[1].unk8->unk6-1);
+    for(i = 0; i < gPsycheLock.numLocksTotal; i++)
     {
-        s32 temp = (gPsycheLock.unk0-1);
+        s32 temp = (gPsycheLock.numLocksTotal-1);
         s32 xOrigin = temp * 10 + i * 2;
         s32 yOrigin = temp * 10 + i * 2 + 1;
         xOrigin = gPsycheLockLockPositions[xOrigin] + 32;
@@ -770,36 +774,36 @@ void sub_8016C7C(u32 arg0) // PsylockDisp_show_static
 void sub_8016D40(void) // PsylockDisp_reset_static
 {
     int i;
-    sub_80161E4();
-    sub_801622C();
-    for(i = 0; i < gPsycheLock.unk0; i++)
+    SetPsycheLockAnimationStateClearLocksAndChains();
+    UpdatePsycheLockAnimation();
+    for(i = 0; i < gPsycheLock.numLocksTotal; i++)
         DestroyAnimation(gPsycheLock.lockAnims[i]);
     ReloadInvestigationGraphics();
     gInvestigation.unkB &= ~1;
 }
 
-s32 sub_8016D8C(u16 arg0, u16 arg1) // is_on_psylock_flag_in_room
+s32 GetPsycheLockDataIndexByRoomAndPerson(u16 roomId, u16 personId) // is_on_psylock_flag_in_room
 {
     int i;
     for(i = 0; i < 4; i++)
     {
-        struct PsycheLockData * data = &gMain.unk1A4[i];
-        if(data->unk0 & 1
-        && data->unk4 == arg0
-        && data->unk6 == arg1)
+        struct PsycheLockData * data = &gMain.psycheLockData[i];
+        if(data->enabled & 1
+        && data->roomId == roomId
+        && data->personId == personId)
             return i;
     }
     return -1;
 }
 
-s32 sub_8016DCC(struct PsycheLockData * data, u16 arg1) // is_psylock_correct_item
+s32 IsPresentedEvidenceValidForPsycheLock(struct PsycheLockData * data, u16 evidenceId) // is_psylock_correct_item
 {
     s32 retVal = -1;
     int i;
     
-    for(i = 0; i < data->unk18; i++)
+    for(i = 0; i < data->numValidEvidence; i++)
     {
-        if(data->unk1C[i] == arg1)
+        if(data->validEvidenceIds[i] == evidenceId)
             retVal = i;
     }
     return retVal;
@@ -816,10 +820,11 @@ void sub_8016E10(u32 arg0)
     gMain.unk249 = 0;
 }
 
-void sub_8016E2C(void)
+void LoadPsycheLockButtonGraphics(void)
 {
     DmaCopy16(3, gGfxInvestigationStopButton, OBJ_VRAM0+0x3000, 0x200);
-    DmaCopy16(3, gUnknown_08141EFC, OBJ_VRAM0+0x3200, 0x200);
+    // Only load Present button graphics
+    DmaCopy16(3, gGfxPressPresentButtons+0x200, OBJ_VRAM0+0x3200, 0x200);
     DmaCopy16(3, gPalPressPresentButtons, OBJ_PLTT+0xA0, 0x20);
 }
 
@@ -873,7 +878,7 @@ void sub_8016E7C(void)
             gMain.unk246 = 64;
             sub_8016E10(0);
     }
-    sub_8016E2C();
+    LoadPsycheLockButtonGraphics();
     if(gMain.unk24A & 1)
     {
         // this code masks the y position with 0x1FF instead of 0xFF
@@ -908,7 +913,7 @@ void sub_8016E7C(void)
 
 void sub_80170AC(void)
 {
-    sub_8016E2C();
+    LoadPsycheLockButtonGraphics();
     if(gMain.unk24A & 1)
     {
         gOamObjects[50].attr0 = SPRITE_ATTR0(-gMain.unk246 & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);

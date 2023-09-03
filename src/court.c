@@ -561,8 +561,8 @@ void QuestioningHoldIt(struct Main * main)
             break;
     }
     UpdateQuestioningMenuSprites(main, &gTestimony, 0);
-    gOamObjects[0].attr0 = SPRITE_ATTR0_CLEAR;
-    gOamObjects[1].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_LR_ARROW_LEFT].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_LR_ARROW_RIGHT].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
 void QuestioningObjection(struct Main * main)
@@ -813,7 +813,7 @@ void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * t
         oam->attr0 = SPRITE_ATTR0_CLEAR;
         oam++;
         oam->attr0 = SPRITE_ATTR0_CLEAR;
-        oam = &gOamObjects[OAM_IDX_HEALTH];
+        oam = &gOamObjects[OAM_IDX_HPBAR+1];
         return;
     }
     if(testimony->displayState == 1)

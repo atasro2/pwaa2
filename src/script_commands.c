@@ -277,7 +277,7 @@ bool32 Command08(struct ScriptContext * scriptCtx)
     }
     if(gMain.process[GAME_PROCESS] == 7)
     {
-        gOamObjects[57].attr0 = SPRITE_ATTR0_CLEAR;
+        gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr0 = SPRITE_ATTR0_CLEAR;
         return TRUE;
     }
     if(scriptCtx->fullscreenInputDelayCounter > 0)
@@ -322,12 +322,12 @@ bool32 Command08(struct ScriptContext * scriptCtx)
             gTextBoxCharacters[i].state &= ~0x8000;
         for(i = 58; i < 89; i++)
             gOamObjects[i].attr0 = SPRITE_ATTR0_CLEAR;
-        gOamObjects[57].attr0 = SPRITE_ATTR0_CLEAR;
+        gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr0 = SPRITE_ATTR0_CLEAR;
         return FALSE;
     }
-    gOamObjects[57].attr0 = SPRITE_ATTR0(scriptCtx->fullscreenCursorPos*20 + scriptCtx->fullscreenTextYOffset, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-    gOamObjects[57].attr1 = SPRITE_ATTR1_NONAFFINE(scriptCtx->fullscreenTextXOffset-13, FALSE, FALSE, 1);
-    gOamObjects[57].attr2 = SPRITE_ATTR2(0xFC, 1, 0);
+    gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr0 = SPRITE_ATTR0(scriptCtx->fullscreenCursorPos*20 + scriptCtx->fullscreenTextYOffset, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr1 = SPRITE_ATTR1_NONAFFINE(scriptCtx->fullscreenTextXOffset-13, FALSE, FALSE, 1);
+    gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr2 = SPRITE_ATTR2(0xFC, 1, 0);
     return TRUE;
 }
 
@@ -349,7 +349,7 @@ bool32 Command09(struct ScriptContext * scriptCtx)
     }
     if(gMain.process[GAME_PROCESS] == 7)
     {
-        gOamObjects[57].attr0 = SPRITE_ATTR0_CLEAR;
+        gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr0 = SPRITE_ATTR0_CLEAR;
         return TRUE;
     }
     if(scriptCtx->fullscreenInputDelayCounter > 0)
@@ -398,12 +398,12 @@ bool32 Command09(struct ScriptContext * scriptCtx)
             gTextBoxCharacters[i].state &= ~0x8000;
         for(i = 58; i < 89; i++)
             gOamObjects[i].attr0 = SPRITE_ATTR0_CLEAR;
-        gOamObjects[57].attr0 = SPRITE_ATTR0_CLEAR;
+        gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr0 = SPRITE_ATTR0_CLEAR;
         return FALSE;
     }
-    gOamObjects[57].attr0 = SPRITE_ATTR0(scriptCtx->fullscreenCursorPos*20 + scriptCtx->fullscreenTextYOffset, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-    gOamObjects[57].attr1 = SPRITE_ATTR1_NONAFFINE(scriptCtx->fullscreenTextXOffset-13, FALSE, FALSE, 1);
-    gOamObjects[57].attr2 = SPRITE_ATTR2(0xFC, 1, 0);
+    gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr0 = SPRITE_ATTR0(scriptCtx->fullscreenCursorPos*20 + scriptCtx->fullscreenTextYOffset, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr1 = SPRITE_ATTR1_NONAFFINE(scriptCtx->fullscreenTextXOffset-13, FALSE, FALSE, 1);
+    gOamObjects[OAM_IDX_TEXT_FULLSCREEN_POINTER].attr2 = SPRITE_ATTR2(0xFC, 1, 0);
     return TRUE;
 }
 
@@ -2102,7 +2102,7 @@ bool32 Command44(struct ScriptContext * scriptCtx)
 {
     u32 i;
     struct OamAttrs *oam;
-    oam = &gOamObjects[49];
+    oam = &gOamObjects[OAM_IDX_VERDICT_KANJI];
     scriptCtx->scriptPtr++;
     gMain.affineScale = 0x280;
     BACKUP_PROCESS();
@@ -2348,9 +2348,9 @@ bool32 Command4F(struct ScriptContext *scriptCtx)
 {
     struct PsycheLockData * psycheLockData;
     scriptCtx->scriptPtr++;
-    gMain.unk244 = *scriptCtx->scriptPtr;
-    psycheLockData = &gMain.unk1A4[gMain.unk244];
-    gMain.unk1A4[*scriptCtx->scriptPtr].unk0 |= 1;
+    gMain.currentPsycheLockDataIndex = *scriptCtx->scriptPtr;
+    psycheLockData = &gMain.psycheLockData[gMain.currentPsycheLockDataIndex];
+    gMain.psycheLockData[*scriptCtx->scriptPtr].enabled |= 1;
 
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr != 0xFFFF)
@@ -2358,23 +2358,23 @@ bool32 Command4F(struct ScriptContext *scriptCtx)
 
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr != 0xFFFF)
-        psycheLockData->unk6 = *scriptCtx->scriptPtr;
+        psycheLockData->personId = *scriptCtx->scriptPtr;
 
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr != 0xFFFF)
-        psycheLockData->unk4 = *scriptCtx->scriptPtr;
+        psycheLockData->roomId = *scriptCtx->scriptPtr;
 
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr != 0xFFFF)
-        psycheLockData->unkA = *scriptCtx->scriptPtr;
+        psycheLockData->startScriptSection = *scriptCtx->scriptPtr;
 
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr != 0xFFFF)
-        psycheLockData->unkC = *scriptCtx->scriptPtr;
+        psycheLockData->cancelScriptSection = *scriptCtx->scriptPtr;
 
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr != 0xFFFF)
-        psycheLockData->unk12 = *scriptCtx->scriptPtr;
+        psycheLockData->noHPLeftScriptSection = *scriptCtx->scriptPtr;
     
     scriptCtx->scriptPtr++;
     return 0;
@@ -2384,7 +2384,7 @@ bool32 Command50(struct ScriptContext *scriptCtx)
 {
     struct PsycheLockData * psycheLockData;
     scriptCtx->scriptPtr++;
-    psycheLockData = &gMain.unk1A4[*scriptCtx->scriptPtr];
+    psycheLockData = &gMain.psycheLockData[*scriptCtx->scriptPtr];
     DmaFill16(3, 0, psycheLockData, sizeof(*psycheLockData));
     scriptCtx->scriptPtr++;
     return 0;
@@ -2459,7 +2459,7 @@ bool32 Command56(struct ScriptContext *scriptCtx)
 bool32 Command57(struct ScriptContext *scriptCtx)
 {
     scriptCtx->scriptPtr++;
-    gMain.unk244 = *scriptCtx->scriptPtr;
+    gMain.currentPsycheLockDataIndex = *scriptCtx->scriptPtr;
     BACKUP_PROCESS();
     SET_PROCESS(INVESTIGATION_PROCESS, 10, 9, 0);
     gMain.unk24B = 1;
@@ -2564,15 +2564,15 @@ bool32 Command60(struct ScriptContext *scriptCtx)
     struct PsycheLockData * data;
     
     scriptCtx->scriptPtr++;
-    data = &gMain.unk1A4[*scriptCtx->scriptPtr];
+    data = &gMain.psycheLockData[*scriptCtx->scriptPtr];
     scriptCtx->scriptPtr++;
-    data->unk1C[0] = *scriptCtx->scriptPtr;
+    data->validEvidenceIds[0] = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
-    data->unk20[0] = *scriptCtx->scriptPtr;
+    data->validEvidenceScriptSections[0] = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
-    data->unk10 = *scriptCtx->scriptPtr;
+    data->invalidEvidencePresentedSection = *scriptCtx->scriptPtr;
 
-    data->unk18 = 1;
+    data->numValidEvidence = 1;
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2582,20 +2582,20 @@ bool32 Command61(struct ScriptContext *scriptCtx)
     u32 id;
     struct PsycheLockData * data;
     scriptCtx->scriptPtr++;
-    data = &gMain.unk1A4[*scriptCtx->scriptPtr];
+    data = &gMain.psycheLockData[*scriptCtx->scriptPtr];
     scriptCtx->scriptPtr++;
-    data->unk1C[data->unk18] = *scriptCtx->scriptPtr;
+    data->validEvidenceIds[data->numValidEvidence] = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
-    data->unk20[data->unk18] = *scriptCtx->scriptPtr;
-    data->unk18++;
+    data->validEvidenceScriptSections[data->numValidEvidence] = *scriptCtx->scriptPtr;
+    data->numValidEvidence++;
     scriptCtx->scriptPtr++;
     return 0;
 }
 
 bool32 Command62(struct ScriptContext *scriptCtx)
 {
-    sub_80161F4();
-    sub_801622C();
+    SetPsycheLockAnimationStateReturnToNormalBackground();
+    UpdatePsycheLockAnimation();
     gMain.currentBG = 0;
     gMain.unk24B = 2;
     scriptCtx->scriptPtr++;
@@ -2604,8 +2604,8 @@ bool32 Command62(struct ScriptContext *scriptCtx)
 
 bool32 Command63(struct ScriptContext *scriptCtx)
 {
-    sub_8016204();
-    sub_801622C();
+    SetPsycheLockAnimationStateRedrawRemainingLocks();
+    UpdatePsycheLockAnimation();
     gMain.unk24B = 0;
     scriptCtx->scriptPtr++;
     return 0;
@@ -2616,8 +2616,8 @@ bool32 Command64(struct ScriptContext *scriptCtx)
     struct PsycheLockData * data;
     scriptCtx->scriptPtr++;
     // ! There was dead code here causing gMain to get loaded as gMain+0x1A4 for the SET_PROCESS
-    data = gMain.unk1A4;
-    if(data->unk0) ;
+    data = gMain.psycheLockData;
+    if(data->enabled) ;
     SET_PROCESS(INVESTIGATION_PROCESS, 10, 4, 0);
     scriptCtx->scriptPtr++;
     return 1;
@@ -2667,8 +2667,8 @@ bool32 Command66(struct ScriptContext *scriptCtx)
 {
     struct PsycheLockData * data;
     scriptCtx->scriptPtr++;
-    gMain.unk244 = *scriptCtx->scriptPtr;
-    data = &gMain.unk1A4[gMain.unk244];
+    gMain.currentPsycheLockDataIndex = *scriptCtx->scriptPtr;
+    data = &gMain.psycheLockData[gMain.currentPsycheLockDataIndex];
     scriptCtx->scriptPtr++;
     data->unk14 = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
@@ -2796,9 +2796,9 @@ bool32 Command71(struct ScriptContext *scriptCtx)
     scriptCtx->scriptPtr++;
     var0 = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
-    // ! force gMain.unk1A4 load via dead code
-    data = gMain.unk1A4;
-    if(data->unk0) ;
+    // ! force gMain.psycheLockData load via dead code
+    data = gMain.psycheLockData;
+    if(data->enabled) ;
     switch(var0) {
         case 0:
             SET_PROCESS(INVESTIGATION_PROCESS, 10, 4, 0);

@@ -1103,7 +1103,7 @@ void CourtRecordMain(struct Main * main, struct CourtRecord * courtRecord) // st
         {
             if(main->process[GAME_PROCESS_VAR2] == 2) {
                 if(courtRecord->displayItemList[courtRecord->selectedItem] == 0x2B) {
-                    if(sub_8016D8C(main->currentRoomId, anim->animationInfo.personId) >= 0) {
+                    if(GetPsycheLockDataIndexByRoomAndPerson(main->currentRoomId, anim->animationInfo.personId) >= 0) {
                         gInvestigation.unkB |= 1;
                         oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_PRESENT];
                         oam->attr0 = SPRITE_ATTR0_CLEAR;
@@ -1142,7 +1142,7 @@ void CourtRecordMain(struct Main * main, struct CourtRecord * courtRecord) // st
                 SlideInBG2Window(4, 0x12);
                 SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_TAKE_THAT_SPECIAL, 0, 0, main);
                 courtRecord->flags |= 0x10;
-                if(sub_8016DCC(&gMain.unk1A4[gMain.unk244], courtRecord->displayItemList[courtRecord->selectedItem]) != -1) {
+                if(IsPresentedEvidenceValidForPsycheLock(&gMain.psycheLockData[gMain.currentPsycheLockDataIndex], courtRecord->displayItemList[courtRecord->selectedItem]) != -1) {
                     StopBGM();
                 }
                 return;
@@ -1299,8 +1299,8 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
                 if(gMain.unk24B != 2 && gMain.unk30 == 0x7F) {
-                    sub_80161F4();
-                    sub_801622C();
+                    SetPsycheLockAnimationStateReturnToNormalBackground();
+                    UpdatePsycheLockAnimation();
                     sub_8017134();
                 }
             } else {
@@ -1527,13 +1527,13 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
                 if(gMain.unk24B != 2) {
-                    sub_8016204();
-                    sub_801622C();
+                    SetPsycheLockAnimationStateRedrawRemainingLocks();
+                    UpdatePsycheLockAnimation();
                 }
                 sub_80170AC();
             } else {
                 if(gMain.unk24B == 1) {
-                    sub_8016C7C(gMain.unk244);
+                    sub_8016C7C(gMain.currentPsycheLockDataIndex);
                 }
             }
             StartHardwareBlend(1, 1, 2, 0x1F);
@@ -1647,19 +1647,19 @@ void CourtRecordTakeThatSpecial(struct Main * main, struct CourtRecord * courtRe
                 if(courtRecord->flags & 8) {
                     oam->attr0 = SPRITE_ATTR0_CLEAR;
                     courtRecord->flags &= ~8;
-                    main->unk244 = sub_8016D8C(main->currentRoomId, anim->animationInfo.personId);
+                    main->currentPsycheLockDataIndex = GetPsycheLockDataIndexByRoomAndPerson(main->currentRoomId, anim->animationInfo.personId);
                     SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_10, 0, 0, main);
                     return;
                 } else if(courtRecord->flags & 0x10) {
                     s32 answer;
                     courtRecord->flags &= ~0x10;
                     gMain.unk24A = 0;
-                    answer = sub_8016DCC(&main->unk1A4[main->unk244], courtRecord->displayItemList[courtRecord->selectedItem]);
+                    answer = IsPresentedEvidenceValidForPsycheLock(&main->psycheLockData[main->currentPsycheLockDataIndex], courtRecord->displayItemList[courtRecord->selectedItem]);
                     if(answer >= 0) {
-                        main->unk1A4[main->unk244].unkE = main->unk1A4[main->unk244].unk20[answer];
-                        ChangeScriptSection(main->unk1A4[main->unk244].unkE);
+                        main->psycheLockData[main->currentPsycheLockDataIndex].validEvidencePresentedSection = main->psycheLockData[main->currentPsycheLockDataIndex].validEvidenceScriptSections[answer];
+                        ChangeScriptSection(main->psycheLockData[main->currentPsycheLockDataIndex].validEvidencePresentedSection);
                     } else {
-                        ChangeScriptSection(main->unk1A4[main->unk244].unk10);
+                        ChangeScriptSection(main->psycheLockData[main->currentPsycheLockDataIndex].invalidEvidencePresentedSection);
                     }
                     SlideTextbox(1);
                     SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_10, 3, 0, main);

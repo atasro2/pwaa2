@@ -107,8 +107,8 @@ struct Main
     /* +0x0E0 */ u32 talkEndFlags[8]; // unity: talk_end_flag // TODO: find right size
     /* +0x100 */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
-    /* +0x1A4 */ struct PsycheLockData unk1A4[4];
-    s8 unk244;
+    /* +0x1A4 */ struct PsycheLockData psycheLockData[4];
+    /* +0x244 */ s8 currentPsycheLockDataIndex;
     u8 unk245;
     u16 unk246;
     u8 unk248;
