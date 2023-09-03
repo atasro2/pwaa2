@@ -57,7 +57,7 @@ void InitPsycheLockChain(struct PsycheLockChains * chains, s32 arg1, s32 targetB
     CopyPsycheLockChainBlocksToBGMapBuffer(chains);
 }
 
-void LoadPsycheLockChainBlocks(struct PsycheLockChains * chains, s32 arg1, s32 arg2)
+void LoadPsycheLockChainBlocks(struct PsycheLockChains * chains, s32 arg1, s32 targetBGMap)
 {
     int i;
     void * decompBuff;
@@ -87,7 +87,7 @@ void LoadPsycheLockChainBlocks(struct PsycheLockChains * chains, s32 arg1, s32 a
                 decompBuff += 0x10;
         }
     }
-    InitPsycheLockChain(chains, arg1, arg2, 0);
+    InitPsycheLockChain(chains, arg1, targetBGMap, 0);
 }
 
 void LoadNextPsycheLockChainFrame(struct PsycheLockChains * chains)
