@@ -20,7 +20,7 @@ void ResetPsycheLockStopPresentButtonsState(void);
 void SetPsycheLockStopPresentButtonsState(u32);
 void AnimatePsycheLockStopBresentButtons(void);
 void SetPsycheLockPresentButtonOAMInCourtRecord(void);
-void sub_8017134(void);
-bool32 sub_801715C(void);
+void ClearPsycheLockStopPresentButtonsOAM(void);
+bool32 IsPsycheLockStopPresentButtonsAnimating(void);
 
 #endif//GUARD_PSYCHE_LOCK_H

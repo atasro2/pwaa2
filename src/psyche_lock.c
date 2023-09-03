@@ -402,7 +402,7 @@ _080163C2: // psylock_move_chain_appear
             gMain.shakeIntensity = 1;
             return;
         case 2:
-            sub_80138B0(gPsycheLock.numLocksTotal + 127, 60);
+            FadeOutSE(gPsycheLock.numLocksTotal + 127, 60);
             gPsycheLock.animationCounter = 0;
             gPsycheLock.subState++;
             break;
@@ -598,7 +598,7 @@ _0801678A: // psylock_move_chain_disappear
             
             if(sub_8015E9C(&gPsycheLock.chains[0])
             && sub_8015E9C(&gPsycheLock.chains[1])) {
-                sub_80138B0(127 + gPsycheLock.numLocksTotal, 60);
+                FadeOutSE(127 + gPsycheLock.numLocksTotal, 60);
                 gPsycheLock.subState++;
                 gPsycheLock.animationCounter = 0;
             }
@@ -925,7 +925,7 @@ void SetPsycheLockPresentButtonOAMInCourtRecord(void)
     gOamObjects[49].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
-void sub_8017134(void)
+void ClearPsycheLockStopPresentButtonsOAM(void)
 {
     gOamObjects[50].attr0 = SPRITE_ATTR0_CLEAR;
     gOamObjects[51].attr0 = SPRITE_ATTR0_CLEAR;
@@ -933,7 +933,7 @@ void sub_8017134(void)
     gOamObjects[49].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
-bool32 sub_801715C(void)
+bool32 IsPsycheLockStopPresentButtonsAnimating(void)
 {
     if(gMain.psycheLockStopPresentButtonsState == 0)
         return FALSE;

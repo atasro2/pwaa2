@@ -121,7 +121,7 @@ struct Main
     u8 unk250;
     /* +0x254 */ u32 soundFlags;
     /* +0x258 */ u32 unk258;
-    u8 unk25C[25]; // unity: roomseq
+    u8 currentRoomSeq[25]; // unity: roomseq
     /* +0x276 */ u16 psycheLockedTalkSections[8]; // unity: lockdat
     /* +0x286 */ u16 numPsycheLockedTalkSections; // unity: lock_max
     struct Spotlight {
@@ -138,8 +138,8 @@ struct Main
     u8 filler2B1[0x2B4 - 0x2B1];
     /* +0x2B4 */ u8 signalDetectorState;
     u8 filler2B5[0x2B8 - 0x2B5];
-    u16 unk2B8;
-    u16 unk2BA;
+    /* +0x2B8 */ u16 currentlyPlayingSfx;
+    u16 currentlyPlayingLoopedSfx;
     u8 unk2BC;
     u8 unk2BD;
     u8 unk2BE;

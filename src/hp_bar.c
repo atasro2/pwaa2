@@ -61,7 +61,7 @@ void LoadHPBarGraphics(void)
 
 void sub_801720C(int xPos, int yPos)
 {
-    struct OamAttrs * next = &gOamObjects[43];
+    struct OamAttrs * next = &gOamObjects[OAM_IDX_HPBAR_SOMETHING];
 
     {
         u32 attr0;
@@ -481,8 +481,8 @@ _08017AAC:
                 {
                     if(FindPlayingHPBarSmokeAnimations() == 0)
                     {
-                        sub_8013878(76);
-                        sub_8013878(156);
+                        StopSE(76);
+                        StopSE(156);
                         gMain.hpBarSlideOutDelay = 0;
                         gMain.hpBarSubState++;
                     }

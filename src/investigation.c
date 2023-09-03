@@ -31,12 +31,12 @@ void (*gInvestigationProcessStates[])(struct Main *, struct InvestigationStruct 
 void UpdateScrollPromptSprite(struct Main *, u32);
 void UpdateInvestigationActionSprites(struct InvestigationStruct *);
 
-void sub_800EAC8(u32 idx, u32 arg1)
+void SetRoomSeq(u32 roomId, u32 seq)
 {
-    gMain.unk25C[idx] = arg1;
+    gMain.currentRoomSeq[roomId] = seq;
 }
 
-u16 isTalkSectionPsycheLocked(u16 arg0)
+u16 IsTalkSectionPsycheLocked(u16 arg0)
 {
     u16 i;
     for(i = 0; i < gMain.numPsycheLockedTalkSections; i++) {
@@ -1147,7 +1147,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     {
                         if(GetFlag(2, talkData->talkFlagId[i]))
                         {
-                            u16 blab = isTalkSectionPsycheLocked(talkData->talkSection[i]);
+                            u16 blab = IsTalkSectionPsycheLocked(talkData->talkSection[i]);
                             if(blab) {
                                 DmaCopy16(3, gGfxInvestigationPsycheLock, OBJ_VRAM0+0x3000, 0x200);
                                 DmaCopy16(3, gPalInvestigationPsycheLock, OBJ_PLTT+0xE0, 0x20);
@@ -1551,7 +1551,7 @@ _08010AD4:
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 3, main);
     }
     if(gMain.psycheLockStopPresentButtonsActive & 2
-    && sub_801715C() == FALSE
+    && IsPsycheLockStopPresentButtonsAnimating() == FALSE
     && gMain.psycheLockStopPresentButtonsState == 0
     && gJoypad.pressedKeys == L_BUTTON)
     {
@@ -1561,7 +1561,7 @@ _08010AD4:
         goto _08010D9C; // goto state 8 immediately
     }
     if(gMain.psycheLockStopPresentButtonsActive == 0
-    && sub_801715C() == FALSE
+    && IsPsycheLockStopPresentButtonsAnimating() == FALSE
     && gJoypad.pressedKeys == R_BUTTON
     && FindPlayingHPBarSmokeAnimations() == 0
     && (main->gameStateFlags & 0x10) == 0

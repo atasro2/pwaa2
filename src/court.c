@@ -106,7 +106,7 @@ void CourtInit(struct Main * main)
     DmaFill32(3, 0, main->scriptFlags, sizeof(main->scriptFlags));
     main->gameStateFlags = 0;
     DmaFill32(3, 0, main->sectionReadFlags, sizeof(main->sectionReadFlags));
-    DmaFill32(3, 0, main->unk25C, sizeof(main->unk25C));
+    DmaFill32(3, 0, main->currentRoomSeq, sizeof(main->currentRoomSeq));
     DmaFill32(3, 0, main->psycheLockedTalkSections, sizeof(main->psycheLockedTalkSections));
     main->numPsycheLockedTalkSections = 0;
     main->tilemapUpdateBits = 0xF;

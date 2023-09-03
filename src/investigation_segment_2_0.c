@@ -2567,7 +2567,7 @@ void InvestigationRoomSetup_2_0(struct Main *main) {
             if(GetFlag(0, 0xB5) && GetFlag(0, 0xB6)) {
                 if(!GetFlag(0, 0x94)) {
                     InvestigationSetScriptSectionAndFlag(0xAD, 0x94);
-                    sub_800EAC8(1, 1);
+                    SetRoomSeq(1, 1);
                 }
                 else {
                     InvestigationSetPersonAnimation(0x1D, 0x1FEC, 0x1FEC);

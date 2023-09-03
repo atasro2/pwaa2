@@ -873,9 +873,9 @@ void CourtRecordInit(struct Main * main, struct CourtRecord * courtRecord) // st
     u16 * map;
     struct OamAttrs * oam;
     ClearHPBarOAM();
-    temp = gMain.unk2BA;
-    sub_8013878(gMain.unk2BA);
-    gMain.unk2BA = temp;
+    temp = gMain.currentlyPlayingLoopedSfx;
+    StopSE(gMain.currentlyPlayingLoopedSfx);
+    gMain.currentlyPlayingLoopedSfx = temp;
     map = gBG2MapBuffer; 
     for(i = 0; i < 0x400; i++, map++)
         *map = 0;
@@ -1215,8 +1215,8 @@ void CourtRecordExit(struct Main * main, struct CourtRecord * courtRecord) // st
             gBG1MapBuffer[623] = 0x21;
         }
         RESTORE_PROCESS_PTR(main);
-        if(gMain.unk2BA)
-            PlaySE(gMain.unk2BA);
+        if(gMain.currentlyPlayingLoopedSfx)
+            PlaySE(gMain.currentlyPlayingLoopedSfx);
     }
 }
 
@@ -1301,7 +1301,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 if(gMain.unk24B != 2 && gMain.unk30 == 0x7F) {
                     SetPsycheLockAnimationStateReturnToNormalBackground();
                     UpdatePsycheLockAnimation();
-                    sub_8017134();
+                    ClearPsycheLockStopPresentButtonsOAM();
                 }
             } else {
                 if(gMain.unk24B == 1){
@@ -2160,7 +2160,7 @@ u32 GetEvidenceCommentSection(struct Main * main, u32 evidenceId, bool8 isProfil
     {
         if(gAnimation[1].animationInfo.personId == presetData->personId
         && isProfile == presetData->isProfile
-        && (main->unk25C[main->currentRoomId] == presetData->roomseq || presetData->roomseq == 0xFF))
+        && (main->currentRoomSeq[main->currentRoomId] == presetData->roomseq || presetData->roomseq == 0xFF))
         {
             if(evidenceId == presetData->evidenceId
             || presetData->evidenceId == 0xFF)

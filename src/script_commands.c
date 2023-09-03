@@ -101,7 +101,7 @@ bool32 Command02(struct ScriptContext * scriptCtx)
     }
     if(gMain.process[GAME_PROCESS] >= 3 && gMain.process[GAME_PROCESS] <= 6)
     {
-        if(IsHPBarAnimating() || sub_801715C()) return 1;
+        if(IsHPBarAnimating() || IsPsycheLockStopPresentButtonsAnimating()) return 1;
         
         if(scriptCtx->paragraphSkipDelayCounter > 0)
             scriptCtx->paragraphSkipDelayCounter--;
@@ -253,7 +253,7 @@ bool32 Command06(struct ScriptContext * scriptCtx)
     if(flag)
         PlaySE(soundNum);
     else
-        sub_8013878(soundNum);
+        StopSE(soundNum);
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2397,7 +2397,7 @@ bool32 Command51(struct ScriptContext *scriptCtx)
     var0 = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
     var1 = *scriptCtx->scriptPtr;
-    sub_800EAC8(var0, var1);
+    SetRoomSeq(var0, var1);
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2783,7 +2783,7 @@ bool32 Command70(struct ScriptContext *scriptCtx)
     vol = scriptCtx->scriptPtr[1];
     scriptCtx->scriptPtr++;
     scriptCtx->scriptPtr++;
-    sub_80138FC(songId, vol);
+    ChangeTrackVolumeBySongNum(songId, vol);
     scriptCtx->scriptPtr++;
     return 0;
 }

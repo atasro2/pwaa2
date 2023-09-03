@@ -2351,7 +2351,7 @@ void InvestigationRoomSetup_2_2(struct Main *main) {
         }
         case 11: {
             if(GetFlag(0, 0xD4) && GetFlag(0, 0xD5) && GetFlag(0, 0xD6)) {
-                sub_800EAC8(11, 1);
+                SetRoomSeq(11, 1);
                 ChangeFlag(0, 0xF5, 1);
                 if(!GetFlag(0, 0xE2)) {
                     InvestigationSetScriptSectionAndFlag(0xDD, 0xE2);

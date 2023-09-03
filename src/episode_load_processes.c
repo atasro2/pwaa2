@@ -854,8 +854,8 @@ void ContinueSaveProcess(struct Main * main) {
                         SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
                 }
             }
-            if(gMain.unk2BA != 0)
-                PlaySE(gMain.unk2BA);
+            if(gMain.currentlyPlayingLoopedSfx != 0)
+                PlaySE(gMain.currentlyPlayingLoopedSfx);
             StartHardwareBlend(1, 1, 1, 0x1F);
             break;
         case 5:

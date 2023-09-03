@@ -236,9 +236,9 @@ void SaveGameInit1(struct Main *main)
     }
     SaveAnimationDataToBuffer(gSaveDataBuffer.backupAnimations);
     main->advanceScriptContext = FALSE;
-    temp2BA = gMain.unk2BA;
-    sub_8013878(temp2BA);
-    gMain.unk2BA = temp2BA;
+    temp2BA = gMain.currentlyPlayingLoopedSfx;
+    StopSE(temp2BA);
+    gMain.currentlyPlayingLoopedSfx = temp2BA;
     StartHardwareBlend(2, 0, 1, 0x1F);
     main->process[GAME_PROCESS_STATE]++;
 }
@@ -486,8 +486,8 @@ void SaveGameExitSaveScreen(struct Main *main)
                 SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
         }
     }
-    if(gMain.unk2BA != 0)
-        PlaySE(gMain.unk2BA);
+    if(gMain.currentlyPlayingLoopedSfx != 0)
+        PlaySE(gMain.currentlyPlayingLoopedSfx);
     if(main->currentBG == 0x23) {
         struct AnimationListEntry * animation;
         gIORegisters.lcd_bg3hofs = 8;

@@ -53,8 +53,8 @@ extern struct ExaminationData gExaminationData[24];
 extern struct InvestigationStruct gInvestigation;
 
 /* new stuff needed for segments */
-void sub_800EAC8(u32, u32); // room_seq_chg
-u16 isTalkSectionPsycheLocked(u16 arg0);
+void SetRoomSeq(u32, u32); // room_seq_chg
+u16 IsTalkSectionPsycheLocked(u16 arg0);
 /* end data stuff from segments */
 
 void SetInactiveActionButtons(struct InvestigationStruct *, u32);
