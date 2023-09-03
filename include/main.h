@@ -91,12 +91,12 @@ struct Main
     /* +0x09C */ s16 hpBarDamageAmount; // unity: gauge_dmg_cnt
     /* +0x09E */ s16 hpBarX; // unity: gauge_pos_x
     /* +0x0A0 */ s16 hpBarY; // unity: gauge_pos_y
-    /* +0x0A2 */ s16 unkA2; // unity: gauge_cnt_0
-    /* +0x0A4 */ s16 unkA4; // unity: gauge_cnt_1
+    /* +0x0A2 */ s16 hpBarSlideOutDelay; // unity: gauge_cnt_0
+    /* +0x0A4 */ s16 hpBarQueuedState; // unity: gauge_cnt_1
     /* +0x0A6 */ s16 hpBarDisplayFlag; // unity: gauge_disp_flag
-    /* +0x0A8 */ s32 unkA8; // unity: gauge_hp_fixed
-    /* +0x0AC */ s32 unkAC; // unity: gauge_hp_fixed_diff
-    /* +0x0B0 */ s16 unkB0; // unity: gauge_hp_scenario_end
+    /* +0x0A8 */ s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
+    /* +0x0AC */ s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
+    /* +0x0B0 */ s16 hpBarValueAtEndOfSegment; // unity: gauge_hp_scenario_end
     /* +0x0B2 */ u8 currentRoomId;
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;

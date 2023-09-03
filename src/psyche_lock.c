@@ -685,7 +685,7 @@ _080169A0: // psylock_move_unlock_message
             }
             break;
         case 6:
-            if(sub_8017C78() == 0)
+            if(IsHPBarAnimating() == 0)
             {
                 gPsycheLock.unk4 = 0;
                 gPsycheLock.unk6 = 0;

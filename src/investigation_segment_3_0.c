@@ -1414,7 +1414,7 @@ void InvestigationSegmentSetup_3_0(struct Main *main) {
     DmaCopy16(3, gRoomData_3_0, gMain.roomData, sizeof(gRoomData_3_0)); // note: size copied is 0x7C, actual size 0x7D
     DmaCopy16(3, gTalkData_3_0, gTalkData, sizeof(gTalkData_3_0));
     main->currentRoomId = 0x13;
-    sub_8017910();
+    ResetHPBarHealthToMax();
 }
 
 void InvestigationRoomSetup_3_0(struct Main *main) {

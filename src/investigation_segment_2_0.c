@@ -2543,7 +2543,7 @@ void InvestigationSegmentSetup_2_0(struct Main *main) {
     DmaCopy16(3, gTalkData_2_0, gTalkData, sizeof(gTalkData_2_0));
     DmaCopy16(3, gPsycheLockedTalkSections_2_0, gLoadedPsycheLockedTalkSections, sizeof(gPsycheLockedTalkSections_2_0));
     main->currentRoomId = 0;
-    sub_8017910();
+    ResetHPBarHealthToMax();
 }
 
 void InvestigationRoomSetup_2_0(struct Main *main) {

@@ -1520,7 +1520,7 @@ void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * in
     goto *states[main->process[GAME_PROCESS_VAR1]];
 
 _08010A78:
-    sub_80178E0();
+    ResetHPBar();
     psycheLockData->unk8 = psycheLockData->unk9;
     sub_8016124(psycheLockData->unk9);
     sub_8016150();
@@ -1574,7 +1574,7 @@ _08010AD4:
     }
     if(main->hpBarValue <= 0
     && main->hpBarDisplayValue <= 0
-    && sub_8017C78() == FALSE)
+    && IsHPBarAnimating() == FALSE)
         main->process[GAME_PROCESS_VAR1] = 11;
     return;
 _08010C14:
@@ -1628,9 +1628,9 @@ _08010CB6:
                 break;
             sub_80161E4();
             if(gMain.hpBarValue < 80) {
-                sub_8017928(1);
+                SetOrQueueHPBarState(1);
                 gMain.hpBarDamageAmount = -40;
-                sub_8017928(3);
+                SetOrQueueHPBarState(3);
             }
             main->process[GAME_PROCESS_VAR2]++;
             break;
@@ -1645,9 +1645,9 @@ _08010CB6:
             sub_801622C();
             if(!sub_8016214())
                 break;
-            if(sub_8017C78())
+            if(IsHPBarAnimating())
                 break;
-            sub_8017928(2);
+            SetOrQueueHPBarState(2);
             main->process[GAME_PROCESS_VAR2]++;
             break;
         case 4:

@@ -296,8 +296,8 @@ void ResetGameState(void)
     ResetAnimationSystem(); //init animation system?
     ResetSoundControl();
     LoadCurrentScriptIntoRam();
-    sub_80178E0();
-    sub_8017910();
+    ResetHPBar();
+    ResetHPBarHealthToMax();
     SetTimedKeysAndDelay(DPAD_RIGHT | DPAD_LEFT, 15);
     m4aMPlayAllStop();
 }

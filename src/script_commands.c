@@ -101,7 +101,7 @@ bool32 Command02(struct ScriptContext * scriptCtx)
     }
     if(gMain.process[GAME_PROCESS] >= 3 && gMain.process[GAME_PROCESS] <= 6)
     {
-        if(sub_8017C78() || sub_801715C()) return 1;
+        if(IsHPBarAnimating() || sub_801715C()) return 1;
         
         if(scriptCtx->paragraphSkipDelayCounter > 0)
             scriptCtx->paragraphSkipDelayCounter--;
@@ -560,7 +560,7 @@ bool32 Command16(struct ScriptContext * scriptCtx)
     scriptCtx->scriptPtr++;
     main->advanceScriptContext = FALSE;
     main->showTextboxCharacters = FALSE;
-    main->unkB0 = main->hpBarValue;
+    main->hpBarValueAtEndOfSegment = main->hpBarValue;
     SET_PROCESS(3, 2, 0, 0);
     gInvestigation.selectedAction = 0;
     gInvestigation.lastAction = 0;
@@ -2091,9 +2091,9 @@ bool32 Command43(struct ScriptContext * scriptCtx)
 {
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr)
-        sub_8017928(1);
+        SetOrQueueHPBarState(1);
     else
-        sub_8017928(2);
+        SetOrQueueHPBarState(2);
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2431,7 +2431,7 @@ bool32 Command54(struct ScriptContext *scriptCtx)
     }
     switch(array[0]) {
         case 0:
-            sub_8017928(array[1]);
+            SetOrQueueHPBarState(array[1]);
             break;
         case 1:
             gMain.hpBarDisplayFlag = array[1];

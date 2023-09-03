@@ -1962,7 +1962,7 @@ void InvestigationSegmentSetup_1_0(struct Main *main) {
     DmaCopy16(3, gTalkData_1_0, gTalkData, sizeof(gTalkData_1_0));
     DmaCopy16(3, gPsycheLockedTalkSections_1_0, gLoadedPsycheLockedTalkSections, sizeof(gPsycheLockedTalkSections_1_0));
     main->currentRoomId = 0;
-    sub_8017910();
+    ResetHPBarHealthToMax();
 }
 
 void InvestigationRoomSetup_1_0(struct Main *main) {

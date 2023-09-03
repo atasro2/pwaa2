@@ -30,11 +30,11 @@ extern void sub_8011198(void);
 // new file
 int FindPlayingHPBarSmokeAnimations(void);
 void ClearHPBarOAM(void);
-void sub_80178E0(void);
-void sub_8017910(void);
-void sub_8017928(u32);
+void ResetHPBar(void);
+void ResetHPBarHealthToMax(void);
+void SetOrQueueHPBarState(u32);
 void ProcessHPBar(void);
-bool32 sub_8017C78(void);
+bool32 IsHPBarAnimating(void);
 void SetSpotlightStopSweepingFlag(void);
 void SpawnAllFlowerPetals(void);
 void DestroyAllFlowerPetals(void);

@@ -102,7 +102,7 @@ void CourtInit(struct Main * main)
     ioRegs->lcd_bg1vofs = ~80; // ??????
     ioRegs->lcd_dispcnt &= ~DISPCNT_BG1_ON; // what the fuck is this doing
     InitializeCourtRecordForScenario(main, &gCourtRecord);
-    sub_80178E0();
+    ResetHPBar();
     DmaFill32(3, 0, main->scriptFlags, sizeof(main->scriptFlags));
     main->gameStateFlags = 0;
     DmaFill32(3, 0, main->sectionReadFlags, sizeof(main->sectionReadFlags));
@@ -400,7 +400,7 @@ void QuestioningInit(struct Main * main)
     gTestimony.presentPromptY = 0xE0;
     gTestimony.displayState = 0;
     main->process[GAME_PROCESS_STATE] = QUESTIONING_ANIM;
-    sub_80178E0();
+    ResetHPBar();
 }
 
 void QuestioningMain(struct Main * main)
