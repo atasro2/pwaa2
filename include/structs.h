@@ -83,7 +83,7 @@ struct FlowerPetal { // unity class is different names are interpreted
     s32 randomIncrement; // unity: yuragi_add
     struct AnimationListEntry * anim;
     u16 fill20;
-    s16 UpdateDelay; // unity: cnt
+    s16 updateDelay; // unity: cnt
 };
 
 #endif//GUARD_STRUCTS_H

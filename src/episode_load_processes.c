@@ -862,8 +862,8 @@ void ContinueSaveProcess(struct Main * main) {
             if (main->blendMode == 0) {
                 ClearSectionReadFlags(main);
                 gMain.unkB0 = gSaveDataBuffer.main.unkB0;
-                gMain.hpBar_display_value = gSaveDataBuffer.main.unkB0;
-                gMain.hpBar_value = gSaveDataBuffer.main.unkB0;
+                gMain.hpBarDisplayValue = gSaveDataBuffer.main.unkB0;
+                gMain.hpBarValue = gSaveDataBuffer.main.unkB0;
                 SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
             }
             break;

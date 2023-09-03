@@ -167,7 +167,7 @@ void UpdateFlowerPetal(struct FlowerPetal * petal, int petalId)
 void SpawnFlowerPetal(struct FlowerPetal * petal, int petalId)
 {
     petal->id = petalId;
-    petal->UpdateDelay = Random() % 256;
+    petal->updateDelay = Random() % 256;
     UpdateFlowerPetal(petal, petalId);
     petal->anim = PlayAnimationAtCustomOrigin(0x7F + petal->id, Q_16_16_TO_INT(petal->x), Q_16_16_TO_INT(petal->y));
 }
@@ -183,7 +183,7 @@ void AnimateFlowerPetal(struct FlowerPetal * petal)
     if(anim == 0)
         return;
     
-    if (petal->UpdateDelay <= 0)
+    if (petal->updateDelay <= 0)
     {
         petal->x += petal->xVelocity;
         petal->y += petal->yVelocity;
@@ -195,7 +195,7 @@ void AnimateFlowerPetal(struct FlowerPetal * petal)
     }
     else
     {
-        petal->UpdateDelay--;
+        petal->updateDelay--;
     }
 }
 

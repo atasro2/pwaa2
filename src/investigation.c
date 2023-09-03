@@ -1572,8 +1572,8 @@ _08010AD4:
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 4, main);
     }
-    if(main->hpBar_value <= 0
-    && main->hpBar_display_value <= 0
+    if(main->hpBarValue <= 0
+    && main->hpBarDisplayValue <= 0
     && sub_8017C78() == FALSE)
         main->process[GAME_PROCESS_VAR1] = 11;
     return;
@@ -1615,7 +1615,7 @@ _08010CB0:
     main->process[GAME_PROCESS_VAR1] = 3;
     return;
 _08010CB6:
-    gMain.hpBar_pos_y = 100;
+    gMain.hpBarY = 100;
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
             gMain.advanceScriptContext = FALSE;
@@ -1627,9 +1627,9 @@ _08010CB6:
             if(!sub_8016214())
                 break;
             sub_80161E4();
-            if(gMain.hpBar_value < 80) {
+            if(gMain.hpBarValue < 80) {
                 sub_8017928(1);
-                gMain.hpBar_damageAmount = -40;
+                gMain.hpBarDamageAmount = -40;
                 sub_8017928(3);
             }
             main->process[GAME_PROCESS_VAR2]++;
@@ -1755,8 +1755,8 @@ _08010EAC:
             }
             break;
         case 5:
-            gMain.hpBar_display_value = 1;
-            gMain.hpBar_value = 1;
+            gMain.hpBarDisplayValue = 1;
+            gMain.hpBarValue = 1;
             sub_8010FA4();
             sub_8011198();
             gInvestigation.unkB &= ~1;

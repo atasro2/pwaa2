@@ -159,7 +159,7 @@ bool32 Command02(struct ScriptContext * scriptCtx)
         scriptCtx->flags |= 0x20;
         if(scriptCtx->currentToken == 0xA) // if script cmd is 0xA ?
         {
-            if(gMain.hpBar_value > 0)
+            if(gMain.hpBarValue > 0)
                 scriptCtx->nextSection = *(scriptCtx->scriptPtr+1);
         }
         else
@@ -560,7 +560,7 @@ bool32 Command16(struct ScriptContext * scriptCtx)
     scriptCtx->scriptPtr++;
     main->advanceScriptContext = FALSE;
     main->showTextboxCharacters = FALSE;
-    main->unkB0 = main->hpBar_value;
+    main->unkB0 = main->hpBarValue;
     SET_PROCESS(3, 2, 0, 0);
     gInvestigation.selectedAction = 0;
     gInvestigation.lastAction = 0;
@@ -2434,10 +2434,10 @@ bool32 Command54(struct ScriptContext *scriptCtx)
             sub_8017928(array[1]);
             break;
         case 1:
-            gMain.hpBar_display_flag = array[1];
+            gMain.hpBarDisplayFlag = array[1];
             break;
         case 2:
-            gMain.hpBar_damageAmount = array[1];
+            gMain.hpBarDamageAmount = array[1];
             break;
     }
     scriptCtx->scriptPtr++;
