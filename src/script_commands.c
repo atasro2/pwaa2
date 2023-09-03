@@ -2354,7 +2354,7 @@ bool32 Command4F(struct ScriptContext *scriptCtx)
 
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr != 0xFFFF)
-        psycheLockData->unk8 = psycheLockData->unk9 = *scriptCtx->scriptPtr;
+        psycheLockData->numLocksRemaining = psycheLockData->numLocksTotal = *scriptCtx->scriptPtr;
 
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr != 0xFFFF)
@@ -2670,9 +2670,9 @@ bool32 Command66(struct ScriptContext *scriptCtx)
     gMain.currentPsycheLockDataIndex = *scriptCtx->scriptPtr;
     data = &gMain.psycheLockData[gMain.currentPsycheLockDataIndex];
     scriptCtx->scriptPtr++;
-    data->unk14 = *scriptCtx->scriptPtr;
+    data->bgmToPlayAfterStop = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
-    data->unk16 = *scriptCtx->scriptPtr;
+    data->bgmToPlayAfterUnlock = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
     return 0;
 }

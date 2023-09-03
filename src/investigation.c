@@ -1521,8 +1521,8 @@ void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * in
 
 _08010A78:
     ResetHPBar();
-    psycheLockData->unk8 = psycheLockData->unk9;
-    InitPsycheLockState(psycheLockData->unk9);
+    psycheLockData->numLocksRemaining = psycheLockData->numLocksTotal;
+    InitPsycheLockState(psycheLockData->numLocksTotal);
     SetPsycheLockAnimationStateShowChains();
     ResetPsycheLockStopPresentButtonsState();
     gMain.psycheLockStopPresentButtonsActive = 0;
@@ -1594,8 +1594,8 @@ _08010C14:
             }
             break;
         case 2:
-            psycheLockData->unk8--;
-            if(psycheLockData->unk8 == 0 && gMain.unk24C == 0) {
+            psycheLockData->numLocksRemaining--;
+            if(psycheLockData->numLocksRemaining == 0 && gMain.unk24C == 0) {
                 main->process[GAME_PROCESS_VAR1] = 7;
                 main->process[GAME_PROCESS_VAR2] = 0;
                 break;
@@ -1694,8 +1694,8 @@ _08010D9C:
             ClearInvestigationActionButtonOAM();
             gInvestigation.inPsycheLockChallengeFlag &= ~1;
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
-            if(psycheLockData->unk14 != 0xFFFF)
-                PlayBGM(psycheLockData->unk14);
+            if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
+                PlayBGM(psycheLockData->bgmToPlayAfterStop);
             StartHardwareBlend(1, 1, 1, 0x1F);
             break;
     }
@@ -1762,8 +1762,8 @@ _08010EAC:
             gInvestigation.inPsycheLockChallengeFlag &= ~1;
             SlideTextbox(0);
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
-            if(psycheLockData->unk14 != 0xFFFF)
-                PlayBGM(psycheLockData->unk14);
+            if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
+                PlayBGM(psycheLockData->bgmToPlayAfterStop);
             StartHardwareBlend(1, 1, 1, 0x1F);
             break;
     }
@@ -1823,8 +1823,8 @@ void SetInvestigationStateToReturnAfterPsycheLocks(u16 arg0, u16 arg1) {
         gMain.process[GAME_PROCESS_VAR1] = 1;
         gInvestigation.previousSelectedOption = arg1;
         gIORegisters.lcd_bg1vofs = -77;
-        if(gMain.psycheLockData[gMain.currentPsycheLockDataIndex].unk16 != 0xFFFF)
-            PlayBGM(gMain.psycheLockData[gMain.currentPsycheLockDataIndex].unk16);
+        if(gMain.psycheLockData[gMain.currentPsycheLockDataIndex].bgmToPlayAfterUnlock != 0xFFFF)
+            PlayBGM(gMain.psycheLockData[gMain.currentPsycheLockDataIndex].bgmToPlayAfterUnlock);
     }
 }
 

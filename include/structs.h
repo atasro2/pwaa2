@@ -6,15 +6,15 @@ struct PsycheLockData
     u32 enabled; // unity: status
     u16 roomId; // unity: room
     u16 personId; // unity: pl_id 
-    u8 unk8; // unity: level
-    u8 unk9; // unity: size
+    u8 numLocksRemaining; // unity: level
+    u8 numLocksTotal; // unity: size
     u16 startScriptSection; // unity: start_message
     u16 cancelScriptSection; // unity: cancel_message
     u16 validEvidencePresentedSection; // unity: correct_message
     u16 invalidEvidencePresentedSection; // unity: wrong_message
     u16 noHPLeftScriptSection; // unity: die_message
-    u16 unk14; // unity: cancel_bgm
-    u16 unk16; // unity: unlock_bgm
+    u16 bgmToPlayAfterStop; // unity: cancel_bgm
+    u16 bgmToPlayAfterUnlock; // unity: unlock_bgm
     u32 numValidEvidence; // unity: item_size
     u8 validEvidenceIds[4]; // unity: item_no
     u16 validEvidenceScriptSections[4]; //  unity: item_correct_message
@@ -37,7 +37,7 @@ struct PsycheLock_Block {
     u8 mapXstart;
     u8 mapYstart;
     u8 fill04[0x2];
-    u16 unk6;
+    u16 sizeTypeFlag;
     union {
         struct {
             u8 fill08[0x8];

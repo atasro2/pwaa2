@@ -81,7 +81,7 @@ void LoadPsycheLockChainBlocks(struct PsycheLockChains * chains, s32 arg1, s32 t
         for(j = 0; j < count; j++)
         {
             struct PsycheLock_Block * block = decompBuff;
-            if(!(block->unk6 & 0xF000))
+            if(!(block->sizeTypeFlag & 0xF000))
                 decompBuff += 0x14;
             else
                 decompBuff += 0x10;
@@ -184,11 +184,11 @@ void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * chains)
         int j;
         struct PsycheLock_Block * block = data;
 
-        data += (block->unk6 & 0xF000) == 0 ? 0x14 : 0x10;
+        data += (block->sizeTypeFlag & 0xF000) == 0 ? 0x14 : 0x10;
 
-        if(block->unk6 & 0xF000)
+        if(block->sizeTypeFlag & 0xF000)
         {
-            blockWidth = blockHeight = ((block->unk6 & 0xF000) >> 12) * 8;
+            blockWidth = blockHeight = ((block->sizeTypeFlag & 0xF000) >> 12) * 8;
         }
         else
         {
