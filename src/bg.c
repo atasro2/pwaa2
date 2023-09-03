@@ -773,7 +773,7 @@ void UpdateBackground() // BG256_main
     }
     if(main->currentBG == 0x7A) {
         s32 i;
-        switch(gMain.unk24F) {
+        switch(gMain.case4OtherBGAnimationState) {
             case 0:
                 DmaFill16(3, 0x30, VRAM+0xE000, 0x20);
                 animation = FindAnimationFromAnimId(0x79);
@@ -793,8 +793,8 @@ void UpdateBackground() // BG256_main
                         animation->animationInfo.yOrigin = -80;
                     }
                 }
-                gMain.unk24F++;
-                gMain.unk250 = 0;
+                gMain.case4OtherBGAnimationState++;
+                gMain.case4OtherBGAnimationCounter = 0;
                 break;
             case 1:
                 main->Bg256_scroll_y += 0x10;
@@ -807,8 +807,8 @@ void UpdateBackground() // BG256_main
                         animation->animationInfo.yOrigin -= 0x10;
                 }
                 OffsetAllAnimations(0, 0x10);
-                gMain.unk250++;
-                if(gMain.unk250 >= 10) {
+                gMain.case4OtherBGAnimationCounter++;
+                if(gMain.case4OtherBGAnimationCounter >= 10) {
                     const u16 * map;
                     u16 * mapbuf;
                     if((animation = FindAnimationFromAnimId(0x8F)))
@@ -825,8 +825,8 @@ void UpdateBackground() // BG256_main
                     DmaFill16(3, 0, PLTT+0x40, 0x1C0);
                     DmaFill16(3, 0x2222, BG_CHAR_ADDR(1), 0x9600);
                     main->Bg256_scroll_y = 0;
-                    gMain.unk24F++;
-                    gMain.unk250 = 0;
+                    gMain.case4OtherBGAnimationState++;
+                    gMain.case4OtherBGAnimationCounter = 0;
                 }
                 break;
             case 2: // _080020CC
@@ -836,9 +836,9 @@ void UpdateBackground() // BG256_main
                         animation->animationInfo.yOrigin -= 0x10;
                 }
                 OffsetAllAnimations(0, 0x10);
-                main->unk250++;
-                if(main->unk250 >= 10)
-                    gMain.unk24F++;
+                main->case4OtherBGAnimationCounter++;
+                if(main->case4OtherBGAnimationCounter >= 10)
+                    gMain.case4OtherBGAnimationState++;
         }
         ioRegs->lcd_bg3vofs = 8 - main->Bg256_scroll_y;
         ioRegs->lcd_bg3hofs = 8;

@@ -113,14 +113,14 @@ struct Main
     /* +0x248 */ u8 psycheLockStopPresentButtonsState;
     /* +0x249 */ u8 psycheLockStopPresentButtonsSubstate;
     /* +0x24A */ u8 psycheLockStopPresentButtonsActive; // unity: psy_menu_active_flag
-    u8 unk24B;
-    u8 unk24C; // unity: psy_unlock_not_unlock_message
+    /* +0x24B */ u8 psycheLockShownByScriptFlag;
+    /* +0x24C */ u8 preventUnlockFlag; // unity: psy_unlock_not_unlock_message
     /* +0x24D */ u8 case4HeroLineupVerticalScrollState;
     /* +0x24E */ u8 case4HeroLineupVerticalScrollCounter;
-    u8 unk24F;
-    u8 unk250;
+    /* +0x24F */ u8 case4OtherBGAnimationState; // todo: definitively needs a better name
+    /* +0x250 */ u8 case4OtherBGAnimationCounter; // todo: definitively needs a better name
     /* +0x254 */ u32 soundFlags;
-    /* +0x258 */ u32 unk258;
+    /* +0x258 */ u32 unused258; // this gets set in TitleScreenProcess but is never used
     u8 currentRoomSeq[25]; // unity: roomseq
     /* +0x276 */ u16 psycheLockedTalkSections[8]; // unity: lockdat
     /* +0x286 */ u16 numPsycheLockedTalkSections; // unity: lock_max

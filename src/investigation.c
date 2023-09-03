@@ -1595,13 +1595,13 @@ _08010C14:
             break;
         case 2:
             psycheLockData->numLocksRemaining--;
-            if(psycheLockData->numLocksRemaining == 0 && gMain.unk24C == 0) {
+            if(psycheLockData->numLocksRemaining == 0 && gMain.preventUnlockFlag == 0) {
                 main->process[GAME_PROCESS_VAR1] = 7;
                 main->process[GAME_PROCESS_VAR2] = 0;
                 break;
             }
             gMain.advanceScriptContext = TRUE;
-            if(gMain.unk24C == 0)
+            if(gMain.preventUnlockFlag == 0)
                 SlideTextbox(1);
             main->process[GAME_PROCESS_VAR1] = 3;
             main->process[GAME_PROCESS_VAR2] = 0;

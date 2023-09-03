@@ -98,7 +98,7 @@ void TitleScreenProcess(struct Main *main)
         main->selectedButton = 0;
         if(main->saveContinueFlags & 0xF0)
             main->selectedButton = 1;
-        main->unk258 |= 4;
+        main->unused258 |= 4;
         main->tilemapUpdateBits = 9;
         StartHardwareBlend(1, 1, 1, 0x1F);
         SET_PROCESS_PTR(TITLE_SCREEN_PROCESS, 2, 0, 0, main);

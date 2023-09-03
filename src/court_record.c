@@ -1298,13 +1298,13 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 break;
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
-                if(gMain.unk24B != 2 && gMain.unk30 == 0x7F) {
+                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.unk30 == 0x7F) {
                     SetPsycheLockAnimationStateReturnToNormalBackground();
                     UpdatePsycheLockAnimation();
                     ClearPsycheLockStopPresentButtonsOAM();
                 }
             } else {
-                if(gMain.unk24B == 1){
+                if(gMain.psycheLockShownByScriptFlag == 1){
                     ClearPsycheLockLocksAndChainsWithoutAnimating();
                 }
             }
@@ -1526,13 +1526,13 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             }
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
-                if(gMain.unk24B != 2) {
+                if(gMain.psycheLockShownByScriptFlag != 2) {
                     SetPsycheLockAnimationStateRedrawRemainingLocks();
                     UpdatePsycheLockAnimation();
                 }
                 SetPsycheLockPresentButtonOAMInCourtRecord();
             } else {
-                if(gMain.unk24B == 1) {
+                if(gMain.psycheLockShownByScriptFlag == 1) {
                     ShowPsycheLockLocksAndChainsWithoutAnimating(gMain.currentPsycheLockDataIndex);
                 }
             }

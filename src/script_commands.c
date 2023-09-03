@@ -2462,7 +2462,7 @@ bool32 Command57(struct ScriptContext *scriptCtx)
     gMain.currentPsycheLockDataIndex = *scriptCtx->scriptPtr;
     BACKUP_PROCESS();
     SET_PROCESS(INVESTIGATION_PROCESS, 10, 9, 0);
-    gMain.unk24B = 1;
+    gMain.psycheLockShownByScriptFlag = 1;
     scriptCtx->scriptPtr++;
     return 1;
 }
@@ -2471,7 +2471,7 @@ bool32 Command58(struct ScriptContext *scriptCtx)
 {
     scriptCtx->scriptPtr++;
     ClearPsycheLockLocksAndChainsWithoutAnimating();
-    gMain.unk24B = 0;
+    gMain.psycheLockShownByScriptFlag = 0;
     return 0;
 }
 
@@ -2597,7 +2597,7 @@ bool32 Command62(struct ScriptContext *scriptCtx)
     SetPsycheLockAnimationStateReturnToNormalBackground();
     UpdatePsycheLockAnimation();
     gMain.currentBG = 0;
-    gMain.unk24B = 2;
+    gMain.psycheLockShownByScriptFlag = 2;
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2606,7 +2606,7 @@ bool32 Command63(struct ScriptContext *scriptCtx)
 {
     SetPsycheLockAnimationStateRedrawRemainingLocks();
     UpdatePsycheLockAnimation();
-    gMain.unk24B = 0;
+    gMain.psycheLockShownByScriptFlag = 0;
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2802,12 +2802,12 @@ bool32 Command71(struct ScriptContext *scriptCtx)
     switch(var0) {
         case 0:
             SET_PROCESS(INVESTIGATION_PROCESS, 10, 4, 0);
-            gMain.unk24C = 1;
+            gMain.preventUnlockFlag = 1;
             break;
         case 1:
             SlideTextbox(0);
             SET_PROCESS(INVESTIGATION_PROCESS, 10, 7, 0);
-            gMain.unk24C = 0;
+            gMain.preventUnlockFlag = 0;
     }
     scriptCtx->scriptPtr++;
     return 1;
