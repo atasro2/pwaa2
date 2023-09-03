@@ -144,7 +144,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
     {
         if(!(main->gameStateFlags & 0x10))
         {
-            if(gScriptContext.flags & (SCRIPT_FULLSCREEN | 1) && gMain.unk30 != 0x7F)
+            if(gScriptContext.flags & (SCRIPT_FULLSCREEN | 1) && gMain.loadedBG != 0x7F)
             {
                 /*
                 PauseBGM();
@@ -191,7 +191,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
     UpdateScrollPromptSprite(main, 1);
     if(gJoypad.pressedKeys & START_BUTTON)
     {
-        if(!(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+        if(!(main->gameStateFlags & 0x10) && gMain.loadedBG != 0x7F)
         {
             s:
             PauseBGM();
@@ -421,7 +421,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
     
     if(gJoypad.pressedKeys & START_BUTTON
     && !(main->gameStateFlags & 0x10)
-    && gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)  && gMain.unk30 != 0x7F)
+    && gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)  && gMain.loadedBG != 0x7F)
         goto s;
     else if(gJoypad.pressedKeys & R_BUTTON
     && !(main->gameStateFlags & 0x10)
@@ -449,7 +449,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
             case 1:
                 temp = 3;
                 if(gJoypad.pressedKeys & START_BUTTON
-                && !(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+                && !(main->gameStateFlags & 0x10) && gMain.loadedBG != 0x7F)
                 {
                     s:
                     PauseBGM();
@@ -725,7 +725,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
             }
             if(gJoypad.pressedKeys & START_BUTTON)
             {
-                if(!(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+                if(!(main->gameStateFlags & 0x10) && gMain.loadedBG != 0x7F)
                 {
                     PauseBGM();
                     DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
@@ -1043,7 +1043,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             {
                 if(gJoypad.pressedKeys & START_BUTTON)
                 {
-                    if(!(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+                    if(!(main->gameStateFlags & 0x10) && gMain.loadedBG != 0x7F)
                     {
                         PauseBGM();
                         DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
@@ -1242,7 +1242,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             {
                 if(!(main->gameStateFlags & 0x10))
                 {
-                    if((gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)) && gMain.unk30 != 0x7F)
+                    if((gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)) && gMain.loadedBG != 0x7F)
                     {
                         PauseBGM();
                         DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));

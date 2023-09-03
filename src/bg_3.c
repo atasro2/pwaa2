@@ -27,7 +27,7 @@ void CopyBGDataToVramAndScrollBG(u32 bgId)
     u16 spC = main->Bg256_pos_y;
     u8 r6 = main->horizontolBGScrollSpeed;
     u8 r5 = main->verticalBGScrollSpeed;
-    u32 unk0;
+    u32 controlBits;
     CopyBGDataToVram(bgId);
     main->previousBG = sp0;
     main->isBGScrolling = r8;
@@ -35,49 +35,49 @@ void CopyBGDataToVramAndScrollBG(u32 bgId)
     main->verticalBGScrollSpeed = r5;
     main->Bg256_scroll_x = main->Bg256_pos_x - sl;
     main->Bg256_scroll_y = main->Bg256_pos_y - spC;
-    unk0 = gBackgroundTable[main->currentBG].controlBits;
-    if(unk0 & BG_MODE_SPECIAL_SPEEDLINE)
+    controlBits = gBackgroundTable[main->currentBG].controlBits;
+    if(controlBits & BG_MODE_SPECIAL_SPEEDLINE)
         return;
-    unk0 &= BG_MODE_4BPP;
+    controlBits &= BG_MODE_4BPP;
     if(main->Bg256_scroll_x > 0)
     {
         main->Bg256_pos_x = sl;
         main->Bg256_scroll_x *= -1;
         if(gBackgroundTable[main->currentBG].controlBits & BG_MODE_SIZE_480x160)
-            unk0 |= 480;
+            controlBits |= 480;
         else
-            unk0 |= 360;
-        bg256_right_scroll(main, unk0);
+            controlBits |= 360;
+        bg256_right_scroll(main, controlBits);
     }
     else if(main->Bg256_scroll_x < 0)
     {
         main->Bg256_pos_x = sl;
         main->Bg256_scroll_x *= -1;
         if(gBackgroundTable[main->currentBG].controlBits & BG_MODE_SIZE_480x160)
-            unk0 |= 480;
+            controlBits |= 480;
         else
-            unk0 |= 360;
-        bg256_left_scroll(main, unk0);
+            controlBits |= 360;
+        bg256_left_scroll(main, controlBits);
     }
     else if(main->Bg256_scroll_y > 0)
     {
         main->Bg256_pos_y = spC;
         main->Bg256_scroll_y *= -1;
         if(gBackgroundTable[main->currentBG].controlBits & BG_MODE_SIZE_240x320)
-            unk0 |= 320;
+            controlBits |= 320;
         else
-            unk0 |= 240;
-        bg256_down_scroll(main, unk0);
+            controlBits |= 240;
+        bg256_down_scroll(main, controlBits);
     }
     else if(main->Bg256_scroll_y < 0)
     {
         main->Bg256_pos_y = spC;
         main->Bg256_scroll_y *= -1;
         if(gBackgroundTable[main->currentBG].controlBits & BG_MODE_SIZE_240x320)
-            unk0 |= 320;
+            controlBits |= 320;
         else
-            unk0 |= 240;
-        bg256_up_scroll(main, unk0);
+            controlBits |= 240;
+        bg256_up_scroll(main, controlBits);
     }
 }
 
@@ -111,7 +111,7 @@ void SetTextboxSize(u32 unk0)
         SetTextboxNametag(scriptCtx->textboxNameId & 0x7F, (u8)(scriptCtx->textboxNameId & 0x80));
         break;
     case 1:
-        scriptCtx->unk3A = 0;
+        scriptCtx->unused3A = 0;
         scriptCtx->textboxYPos = 14;
         scriptCtx->textboxState = 2;
         SetTextboxNametag(0, FALSE);
@@ -151,10 +151,10 @@ void UpdateTextbox()
     case 1:
         break;
     case 2:
-        scriptCtx->unk3A += 2;
-        if(scriptCtx->unk3A < 2)
+        scriptCtx->unused3A += 2;
+        if(scriptCtx->unused3A < 2)
             break;
-        scriptCtx->unk3A = 0;
+        scriptCtx->unused3A = 0;
         tiley = scriptCtx->textboxYPos * 32;
         for(i = 0; i < 32; i++)
         {
@@ -554,8 +554,8 @@ void SetTextboxNametag(u32 nametagId, u32 rightSide)
     u32 offset = rightSide;
 
     /* begin wat */
-    gMain.unk2BC = nametagId;
-    gMain.unk2BD = rightSide;
+    gMain.currentNametagId = nametagId;
+    gMain.currentNametagSide = rightSide;
     nametagId = gUnknown_08111ED0[nametagId];
     /* end wat */
     

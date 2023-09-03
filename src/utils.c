@@ -417,14 +417,14 @@ union s32asBitfields
 u8 Random(void)
 {
     struct Main * main = &gMain;
-    union s32asBitfields unk0;
-    union s32asBitfields unk1;
-    unk0.shorts.low = (s16)main->rngSeed;
-    unk1.shorts.low = (s16)main->rngSeed * 3;
-    unk0.bytes.low += (u8)unk1.bytes.high;
-    unk0.bytes.high = unk1.bytes.high;
-    main->rngSeed = unk0.w;
-    return unk0.w;
+    union s32asBitfields field1;
+    union s32asBitfields field2;
+    field1.shorts.low = (s16)main->rngSeed;
+    field2.shorts.low = (s16)main->rngSeed * 3;
+    field1.bytes.low += (u8)field2.bytes.high;
+    field1.bytes.high = field2.bytes.high;
+    main->rngSeed = field1.w;
+    return field1.w;
 }
 
 u32 * gFlagPtrs[] = {

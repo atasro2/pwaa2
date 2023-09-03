@@ -424,14 +424,14 @@ void SaveGameExitSaveScreen(struct Main *main)
     main->currentBG = gSaveDataBuffer.main.currentBG;
     main->previousBG = gSaveDataBuffer.main.previousBG;
     main->currentBgStripe = gSaveDataBuffer.main.currentBgStripe;
-    main->unk35 = gSaveDataBuffer.main.unk35;
+    main->disableDetentionCenterMask = gSaveDataBuffer.main.disableDetentionCenterMask;
     main->isBGScrolling = gSaveDataBuffer.main.isBGScrolling;
     main->Bg256_stop_line = gSaveDataBuffer.main.Bg256_stop_line;
     main->Bg256_scroll_x = gSaveDataBuffer.main.Bg256_scroll_x;
     main->Bg256_scroll_y = gSaveDataBuffer.main.Bg256_scroll_y;
     main->Bg256_pos_x = gSaveDataBuffer.main.Bg256_pos_x;
     main->Bg256_pos_y = gSaveDataBuffer.main.Bg256_pos_y;
-    main->unk40 = gSaveDataBuffer.main.unk40;
+    main->unused40 = gSaveDataBuffer.main.unused40;
     main->Bg256_dir = gSaveDataBuffer.main.Bg256_dir;
     main->horizontolBGScrollSpeed = gSaveDataBuffer.main.horizontolBGScrollSpeed;
     main->verticalBGScrollSpeed = gSaveDataBuffer.main.verticalBGScrollSpeed;
@@ -471,8 +471,8 @@ void SaveGameExitSaveScreen(struct Main *main)
         else if(main->process[GAME_PROCESS_STATE] == INVESTIGATION_TALK)
             LoadTalkChoiceGraphics();
     }
-    if(gMain.unk2BE & 0xF) {
-        switch(gMain.unk2BE >> 4) {
+    if(gMain.courtBenchSpritesTypeFlag & 0xF) {
+        switch(gMain.courtBenchSpritesTypeFlag >> 4) {
             case 0:
                 LoadWitnessBenchGraphics();
                 SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);

@@ -448,7 +448,7 @@ _08017AAC:
                 gMain.hpBarQ16_16DisplayChangeAmount /= 40;
             else
                 gMain.hpBarQ16_16DisplayChangeAmount /= 100;
-            gTestimony.unk4 = 40;
+            gTestimony.counter = 40;
             gMain.advanceScriptContext = FALSE;
             gMain.hpBarSubState++;
             break;
@@ -466,11 +466,11 @@ _08017AAC:
                 if(gMain.hpBarDisplayValue > gMain.hpBarValue)
                     gMain.hpBarDisplayValue = gMain.hpBarValue;
             }
-            if(gTestimony.unk4 > 0)
-                gTestimony.unk4--;
+            if(gTestimony.counter > 0)
+                gTestimony.counter--;
             if(gMain.hpBarValue == gMain.hpBarDisplayValue)
             {
-                if(gTestimony.unk4 > 0)
+                if(gTestimony.counter > 0)
                 {
                     if(gMain.hpBarQ16_16DisplayChangeAmount <= 0)
                         gMain.hpBarDisplayValue++;

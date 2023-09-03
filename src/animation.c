@@ -1284,7 +1284,7 @@ void MoveAnimationTilesToRam(bool32 arg0)
             palCount *= 32;
             tileData = animation->animationInfo.animGfxDataStartPtr+4;
             if(animation->flags & 0x200)
-                tileData = animation->unk30;
+                tileData = animation->tileData;
             
             if(animation->flags & 0x400) {
                 u16 buf[0x30];
@@ -1337,7 +1337,7 @@ void UpdateAnimations(u32 arg0)
                         }
                     }
                 }
-                if(main->unk30 == 0x7F)
+                if(main->loadedBG == 0x7F)
                     ChangeAnimationActivity(animation, 0);
             } else if(animation->animationInfo.animId >= 70 && animation->animationInfo.animId <= 99) {
                 if(arg0 != animation->bgId) {
@@ -1351,7 +1351,7 @@ void UpdateAnimations(u32 arg0)
                 if(main->blendMode == 0) {
                     if(gAnimation[1].animationInfo.personId == 32) {
                         if((gAnimation[1].flags & ANIM_INACTIVE)
-                        || main->unk30 == 0x7F
+                        || main->loadedBG == 0x7F
                         || courtScroll->state != 0) {
                             ChangeAnimationActivity(animation, 0);
                         } else if(animation->flags & ANIM_INACTIVE){

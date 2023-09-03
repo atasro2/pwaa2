@@ -63,7 +63,7 @@ void AnimateSpotlight(struct Spotlight * spotlight, int spotlightId, struct Anim
                 if(spotlight->x >= Q_16_16(DISPLAY_WIDTH + 64))
                 {
                     spotlight->state++;
-                    spotlight->unk1 = Random() % 256;
+                    spotlight->respawnDelay = Random() % 256;
                 }
             }
             else
@@ -71,7 +71,7 @@ void AnimateSpotlight(struct Spotlight * spotlight, int spotlightId, struct Anim
                 if(spotlight->x <= Q_16_16(-64))
                 {
                     spotlight->state++;
-                    spotlight->unk1 = Random() % 256;
+                    spotlight->respawnDelay = Random() % 256;
                 }
             } 
             break;
@@ -83,7 +83,7 @@ void AnimateSpotlight(struct Spotlight * spotlight, int spotlightId, struct Anim
             }
 
             arg2->animationInfo.xOrigin = DISPLAY_WIDTH + 64;
-            if(spotlight->unk1-- < 0)
+            if(spotlight->respawnDelay-- < 0)
                 spotlight->state = 0;
             break;
         case 3: // _08017E0A

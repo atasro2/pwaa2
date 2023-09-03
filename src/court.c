@@ -185,7 +185,7 @@ void TestimonyAnim(struct Main * main)
             PlayAnimation(ANIM_TESTIMONY_START_LEFT);
             PlayAnimation(ANIM_TESTIMONY_START_RIGHT);
             PlaySE(SE029_BEGIN_QUESTIONING);
-            gTestimony.unk4 = 0;
+            gTestimony.counter = 0;
             main->process[GAME_PROCESS_VAR1]++;
             break;
         case 1:
@@ -221,13 +221,13 @@ void TestimonyAnim(struct Main * main)
         case 4:
             animation = FindAnimationFromAnimId(ANIM_TESTIMONY_START_LEFT);
             animation2 = FindAnimationFromAnimId(ANIM_TESTIMONY_START_RIGHT);
-            animation->animationInfo.xOrigin += gTestimony.unk4;
+            animation->animationInfo.xOrigin += gTestimony.counter;
             animation->flags |= ANIM_ACTIVE;
-            animation2->animationInfo.xOrigin -= gTestimony.unk4;
+            animation2->animationInfo.xOrigin -= gTestimony.counter;
             animation2->flags |= ANIM_ACTIVE;
-            gTestimony.unk4++;
-            if(gTestimony.unk4 > 12)
-                gTestimony.unk4 = 12;
+            gTestimony.counter++;
+            if(gTestimony.counter > 12)
+                gTestimony.counter = 12;
             if(animation->animationInfo.xOrigin > 300)
             {
                 DestroyAnimation(animation);
@@ -434,7 +434,7 @@ void QuestioningMain(struct Main * main)
         u32 section;
         if((gJoypad.pressedKeys & A_BUTTON) || (gJoypad.pressedKeys & DPAD_RIGHT))
         {
-            if((gJoypad.pressedKeys & A_BUTTON) || gScriptContext.nextSection != main->unk1E)
+            if((gJoypad.pressedKeys & A_BUTTON) || gScriptContext.nextSection != main->testimonyLastSection)
             {
             section = gScriptContext.nextSection;
             PlaySE(SE001_MENU_CONFIRM);
@@ -502,7 +502,7 @@ void QuestioningMain(struct Main * main)
         oam->attr1 = SPRITE_ATTR1_NONAFFINE(0, FALSE, FALSE, 1);
         oam->attr2 = SPRITE_ATTR2(0x1A0, 0, 2);
         oam++;
-        if(gScriptContext.nextSection != main->unk1E)
+        if(gScriptContext.nextSection != main->testimonyLastSection)
             oam->attr0 = SPRITE_ATTR0(128, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
         else
             oam->attr0 = SPRITE_ATTR0_CLEAR;
@@ -799,11 +799,11 @@ void VerdictProcess(struct Main * main)
     }
 }
 
-void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * testimony, u32 unk2) // questioning_menu_disp
+void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * testimony, u32 clearButtonOAMs) // questioning_menu_disp
 {
     u32 i;
     struct OamAttrs * oam;
-    if(gScriptContext.holdItSection == 0 || unk2 == 0)
+    if(gScriptContext.holdItSection == 0 || clearButtonOAMs == 0)
     {
         oam = &gOamObjects[OAM_IDX_BUTTON_PROMPTS];
         oam->attr0 = SPRITE_ATTR0_CLEAR;
