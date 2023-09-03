@@ -202,7 +202,7 @@ void CopyBGDataToVram(u32 bgId)
         src = gUnknown_0801BBD8;
         dst = gBG3MapBuffer;
         DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
-        if(main->unk84 == 0xFFFE) {
+        if(main->effectType == 0xFFFE) {
             if(gAnimation[1].animationInfo.personId == 0x25)
                 LoadAndAdjustCounselWitnessBenchPaletteByMode(6, 0x20, 1);
             DmaFill16(3, 0x1F, BG_PLTT+0x40, 0x1C0);
@@ -429,33 +429,33 @@ void CopyBGDataToVram(u32 bgId)
         DmaCopy16(3, src, dst, BG_SCREEN_SIZE);
     }
     if(main->currentBG == 0xA) {
-        switch(main->unk84) {
+        switch(main->effectType) {
             case 3:
             case 7:
-                main->unk84 = 0xFFFD;
+                main->effectType = 0xFFFD;
                 break;
             case 4:
             case 8:
-                main->unk84 = 0;
+                main->effectType = 0;
                 break;
             case 5:
-                main->unk84 = 0;
+                main->effectType = 0;
                 break;
             case 6:
-                main->unk84 = 0xFFFE;
+                main->effectType = 0xFFFE;
                 break;
         }
         if(main->currentBG == 0xA) // ! ???
             return;
     }
     if((!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
-        if(main->unk84 == 0xFFFD || main->unk84 == 0xFFFE) {
-            if(main->unk84 == 0xFFFE)
+        if(main->effectType == 0xFFFD || main->effectType == 0xFFFE) {
+            if(main->effectType == 0xFFFE)
                 LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 1);
             else
                 LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 0);
             if(main->currentBG == 4 || main->currentBG == 5 || main->currentBG == 6) {
-                if(main->unk84 == 0xFFFE) 
+                if(main->effectType == 0xFFFE)
                     LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 1);
                 else
                     LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 0);

@@ -50,7 +50,7 @@ static void HBlankIntr(void);
 static void IntrDummy(void);
 static void UpdateHardwareBlend(void);
 static void UpdateCourtScroll(struct CourtScroll * );
-static void sub_8000A80(void);
+static void UpdateSpecialEffects(void);
 
 static void (* const IntrTableFunctionPtrs[])() =
 {
@@ -123,7 +123,7 @@ void AgbMain(void)
             DoGameProcess();
             UpdateAnimations(gMain.previousBG);
             UpdateHardwareBlend();
-            sub_8000A80();
+            UpdateSpecialEffects();
         }
         else
         {
@@ -516,12 +516,12 @@ void UpdateHardwareBlend(void)
     }
 }
 
-void sub_8000A80(void)
+void UpdateSpecialEffects(void)
 {
     struct Main * main = &gMain; //r5 
     struct IORegisters * ioRegs = &gIORegisters; //r3
 
-    switch(main->unk84)
+    switch(main->effectType)
     {
         case 0:     // cases required for matching
         case 0xFFFD:
@@ -530,195 +530,195 @@ void sub_8000A80(void)
             break;
         case 1:
             //_08000AE2:
-            main->unk86++;
-            if(main->unk86 >= main->unk88)
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
             {
-                u32 temp = main->unk89 << 8;
-                main->unk86 = 0;
-                if((ioRegs->lcd_mosaic & 0xFF) < main->unk89)
+                u32 temp = main->effectIntensity << 8;
+                main->effectCounter = 0;
+                if((ioRegs->lcd_mosaic & 0xFF) < main->effectIntensity)
                     ioRegs->lcd_mosaic &= 0xFFFF;
                 else
-                    ioRegs->lcd_mosaic -= temp + main->unk89;
+                    ioRegs->lcd_mosaic -= temp + main->effectIntensity;
                 ioRegs--;ioRegs++;
             }
             if((ioRegs->lcd_mosaic & 0xFF) == 0)
             {
                 ioRegs->lcd_bg3cnt &= ~BGCNT_MOSAIC;
                 ioRegs->lcd_bg2cnt &= ~BGCNT_MOSAIC;
-                main->unk84 = 0;
+                main->effectType = 0;
             }
             break;
         case 2:
             //_08000B54:
-            main->unk86++;
-            if(main->unk86 >= main->unk88)
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
             {
-                u32 temp = main->unk89 << 8;
-                main->unk86 = 0;
-                if(0x100 <= (ioRegs->lcd_mosaic & 0xFF)+main->unk89)
+                u32 temp = main->effectIntensity << 8;
+                main->effectCounter = 0;
+                if(0x100 <= (ioRegs->lcd_mosaic & 0xFF)+main->effectIntensity)
                     ioRegs->lcd_mosaic |= 0xFFFF;
                 else
-                    ioRegs->lcd_mosaic += temp + main->unk89;
+                    ioRegs->lcd_mosaic += temp + main->effectIntensity;
             }
             if((ioRegs->lcd_mosaic & 0xFF) == 0xFF)
-                main->unk84 = 0xFFFF;
+                main->effectType = 0xFFFF;
             break;
         case 3:
         case 7:
             //_08000BB8:
-            main->unk86++;
-            if(main->unk86 >= main->unk88)
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
             {
-                main->unk86 = 0;
-                main->unk89++;
-                LoadAndAdjustBGPaletteByMode(main->currentBG, main->unk89, 0);
-                if(main->unk84 == 3 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->unk89, 0);
+                main->effectCounter = 0;
+                main->effectIntensity++;
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->effectIntensity, 0);
+                if(main->effectType == 3 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 0);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
                 || main->currentBG == 6)
-                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->unk89, 0);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->effectIntensity, 0);
             }
             
-            if(main->unk89 == 0x20)
-                main->unk84 = 0xFFFD;
+            if(main->effectIntensity == 0x20)
+                main->effectType = 0xFFFD;
             break;
         case 4:
         case 8:
             //_08000C38:
-            main->unk86++;
-            if(main->unk86 >= main->unk88)
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
             {
-                main->unk86 = 0;
-                main->unk89--;
-                LoadAndAdjustBGPaletteByMode(main->currentBG, main->unk89, 0);
-                if(main->unk84 == 4 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->unk89, 0);
+                main->effectCounter = 0;
+                main->effectIntensity--;
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->effectIntensity, 0);
+                if(main->effectType == 4 && gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 0);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
                 || main->currentBG == 6)
-                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->unk89, 0);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->effectIntensity, 0);
             }
             
-            if(main->unk89 == 0)
-                main->unk84 = 0;
+            if(main->effectIntensity == 0)
+                main->effectType = 0;
             break;
         case 5:
             //_08000CA0:
-            main->unk86++;
-            if(main->unk86 >= main->unk88)
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
             {
-                main->unk86 = 0;
-                main->unk89--;
-                LoadAndAdjustBGPaletteByMode(main->currentBG, main->unk89, 1);
+                main->effectCounter = 0;
+                main->effectIntensity--;
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->effectIntensity, 1);
                 if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->unk89, 1);
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 1);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
                 || main->currentBG == 6)
-                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->unk89, 1);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->effectIntensity, 1);
             }
             
-            if(main->unk89 == 0)
-                main->unk84 = 0;
+            if(main->effectIntensity == 0)
+                main->effectType = 0;
             break;
         case 6:
             //_08000D10:
-            main->unk86++;
-            if(main->unk86 >= main->unk88)
+            main->effectCounter++;
+            if(main->effectCounter >= main->effectDelay)
             {
-                main->unk86 = 0;
-                main->unk89++;
-                LoadAndAdjustBGPaletteByMode(main->currentBG, main->unk89, 1);
+                main->effectCounter = 0;
+                main->effectIntensity++;
+                LoadAndAdjustBGPaletteByMode(main->currentBG, main->effectIntensity, 1);
                 if(gAnimation[1].flags & (ANIM_ALLOCATED | ANIM_QUEUED_PAL_UPLOAD))
-                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->unk89, 1);
+                    LoadAndAdjustCurrentAnimation01PaletteByMode(main->effectIntensity, 1);
                 if(main->currentBG == 4 
                 || main->currentBG == 5 
                 || main->currentBG == 6)
-                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->unk89, 1);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, main->effectIntensity, 1);
                 if(main->currentBG == 0x80)
                 {
                     if(gAnimation[1].animationInfo.personId == 0x26)
-                        LoadAndAdjustCounselWitnessBenchPaletteByMode(6, main->unk89, 1);
+                        LoadAndAdjustCounselWitnessBenchPaletteByMode(6, main->effectIntensity, 1);
                 }
             }
             
-            if(main->unk89 == 0x20)
-                main->unk84 = 0xFFFE;
+            if(main->effectIntensity == 0x20)
+                main->effectType = 0xFFFE;
             break;
         case 9:
         case 11:
             //_08000DA0:
-            if(main->unk88 != 0)
+            if(main->effectDelay != 0)
             {
-                main->unk86++;
-                if(main->unk86 >= main->unk88)
+                main->effectCounter++;
+                if(main->effectCounter >= main->effectDelay)
                 {
-                    u32 temp = main->unk89 << 8;
-                    main->unk86 = 0;
-                    main->unk89++;
-                    if(main->unk84 == 11)
-                        LoadAndAdjustAnimation10PaletteByMode(main->unk89, 2);
+                    u32 temp = main->effectIntensity << 8;
+                    main->effectCounter = 0;
+                    main->effectIntensity++;
+                    if(main->effectType == 11)
+                        LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 2);
                     else
-                        LoadAndAdjustAnimation10PaletteByMode(main->unk89, 0);
+                        LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 0);
                 }
             }
-            if(main->unk89 == 0x20)
+            if(main->effectIntensity == 0x20)
             {
-                if(main->unk84 == 11)
-                    LoadAndAdjustAnimation10PaletteByMode(main->unk89, 2);
+                if(main->effectType == 11)
+                    LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 2);
                 else
-                    LoadAndAdjustAnimation10PaletteByMode(main->unk89, 0);
-                main->unk84 = 0;
+                    LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 0);
+                main->effectType = 0;
             }
             break;
         case 10:
         case 12:
             //_08000DFE:
-            if(main->unk88 != 0)
+            if(main->effectDelay != 0)
             {
-                main->unk86++;
-                if(main->unk86 >= main->unk88)
+                main->effectCounter++;
+                if(main->effectCounter >= main->effectDelay)
                 {
-                    main->unk86 = 0;
-                    main->unk89--;
-                    if(main->unk84 == 12)
-                        LoadAndAdjustAnimation10PaletteByMode(main->unk89, 2);
+                    main->effectCounter = 0;
+                    main->effectIntensity--;
+                    if(main->effectType == 12)
+                        LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 2);
                     else
-                        LoadAndAdjustAnimation10PaletteByMode(main->unk89, 0);
+                        LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 0);
                 }
             }
-            if(main->unk89 == 0)
+            if(main->effectIntensity == 0)
             {
-                if(main->unk84 == 12)
-                    LoadAndAdjustAnimation10PaletteByMode(main->unk89, 2);
+                if(main->effectType == 12)
+                    LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 2);
                 else
-                    LoadAndAdjustAnimation10PaletteByMode(main->unk89, 0);
-                main->unk84 = 0;
+                    LoadAndAdjustAnimation10PaletteByMode(main->effectIntensity, 0);
+                main->effectType = 0;
             }
             break;
     }
 }
 
-void sub_8000E78(u32 unk0, u32 unk1, u32 unk2)
+void InitSpecialEffectsWithMosaic(u32 type, u32 delay, u32 intensity)
 {
     struct Main * main = &gMain;
     struct IORegisters * ioRegs = &gIORegisters;
-    main->unk84 = unk0;
-    main->unk88 = unk1;
-    main->unk89 = unk2;
+    main->effectType = type;
+    main->effectDelay = delay;
+    main->effectIntensity = intensity;
     ioRegs->lcd_bg3cnt |= BGCNT_MOSAIC;
     ioRegs->lcd_bg2cnt |= BGCNT_MOSAIC;
-    main->unk86 = 0;
+    main->effectCounter = 0;
 }
 
-void sub_8000EB4(u32 unk0, u32 unk1, u32 unk2)
+void InitSpecialEffects(u32 type, u32 delay, u32 intensity)
 {
     struct Main * main = &gMain;
-    main->unk84 = unk0;
-    main->unk88 = unk1;
-    main->unk89 = unk2;
-    main->unk86 = 0;
+    main->effectType = type;
+    main->effectDelay = delay;
+    main->effectIntensity = intensity;
+    main->effectCounter = 0;
 }
 
 void VBlankIntr()

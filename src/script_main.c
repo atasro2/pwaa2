@@ -259,12 +259,12 @@ static void AdvanceScriptContext(struct ScriptContext * scriptCtx)
     {
         if(gJoypad.pressedKeys & A_BUTTON || gJoypad.heldKeys & B_BUTTON)
         {
-            if(main->unk84 != 1
-            && main->unk84 != 2
-            && main->unk84 != 0xFFFF
-            && main->unk84 != 0xFFFE
-            && main->unk84 != 5
-            && main->unk84 != 6)
+            if(main->effectType != 1
+            && main->effectType != 2
+            && main->effectType != 0xFFFF
+            && main->effectType != 0xFFFE
+            && main->effectType != 5
+            && main->effectType != 6)
             {
                 if(HasSectionBeenRead(main, scriptCtx->currentSection))
                 {
@@ -347,7 +347,7 @@ static void AdvanceScriptContext(struct ScriptContext * scriptCtx)
             return;    
         if(!(gMain.gameStateFlags & 1))
         {
-            if(gMain.unk84 == 0)
+            if(gMain.effectType == 0)
                 goto continueScript;
         }
     }

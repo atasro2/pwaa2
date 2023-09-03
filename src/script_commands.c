@@ -94,10 +94,10 @@ bool32 Command02(struct ScriptContext * scriptCtx)
             return 1;
         }
     }
-    if(gMain.process[GAME_PROCESS] == 4 && (gMain.unk84 == 3 || gMain.unk84 == 7))
+    if(gMain.process[GAME_PROCESS] == 4 && (gMain.effectType == 3 || gMain.effectType == 7))
     {
-        gMain.unk86 = gMain.unk88;
-        gMain.unk89 = 0x1F;
+        gMain.effectCounter = gMain.effectDelay;
+        gMain.effectIntensity = 0x1F;
     }
     if(gMain.process[GAME_PROCESS] >= 3 && gMain.process[GAME_PROCESS] <= 6)
     {
@@ -2526,7 +2526,7 @@ bool32 Command5C(struct ScriptContext *scriptCtx)
     var1 = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
     var2 = *scriptCtx->scriptPtr;
-    sub_8000E78(var0, var1, var2);
+    InitSpecialEffectsWithMosaic(var0, var1, var2);
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2553,7 +2553,7 @@ bool32 Command5F(struct ScriptContext *scriptCtx)
     var1 = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
     var2 = *scriptCtx->scriptPtr;
-    sub_8000EB4(var0, var1, var2);
+    InitSpecialEffects(var0, var1, var2);
     scriptCtx->scriptPtr++;
     return 0;
 }

@@ -1151,7 +1151,7 @@ void UpdateAllAnimationSprites()
                 else
                     oam->attr2 |= (animation->animationInfo.paletteSlot + ((spriteTemplates->data >> 11) & 1)) << 12;
                 tileNum += spriteSizeData->tileSize / TILE_SIZE_4BPP;
-                if(main->unk84 == 1 || main->unk84 == 2 || main->unk84 == 0xFFFF)
+                if(main->effectType == 1 || main->effectType == 2 || main->effectType == 0xFFFF)
                     oam->attr0 |= 0x1000; // mosaic
                 if(animation->animationInfo.animId == 0x79 
                 || animation->animationInfo.animId == 0x7B) {
@@ -1290,7 +1290,7 @@ void MoveAnimationTilesToRam(bool32 arg0)
                 u16 buf[0x30];
                 DmaCopy16(3, tileData, buf, palCount);
                 for(i = 0; i < 0x30; i++) {
-                    if(gMain.unk84 == 0xFFFE)
+                    if(gMain.effectType == 0xFFFE)
                         buf[i] = AdjustColorByMode(buf[i], 0x20, 1);
                     else
                         buf[i] = AdjustColorByMode(buf[i], 0x20, 0);

@@ -70,10 +70,10 @@ struct Main
     /* +0x080 */ u16 blendCounter; // unity: Fade_timer
     /* +0x082 */ u8 blendDelay; // unity: fade_time
     /* +0x083 */ u8 blendDeltaY; // unity: fade_speed
-    /* +0x084 */ u16 unk84; // unity AA4: SpEf_status?
-    /* +0x086 */ u16 unk86; // unity AA4: SpEf_timer?
-    /* +0x088 */ u8 unk88; // unity AA4: SpEf_time?
-    /* +0x089 */ u8 unk89; // unity AA4: SpEf_speed?
+    /* +0x084 */ u16 effectType; // unity AA4: SpEf_status?
+    /* +0x086 */ u16 effectCounter; // unity AA4: SpEf_timer?
+    /* +0x088 */ u8 effectDelay; // unity AA4: SpEf_time?
+    /* +0x089 */ u8 effectIntensity; // unity AA4: SpEf_speed?
     /* +0x08A */ u8 itemPlateEvidenceId;
     /* +0x08B */ u8 itemPlateState;
     /* +0x08C */ u8 itemPlateSide;
@@ -221,6 +221,6 @@ u32 ReadKeysAndTestResetCombo(void);
 void StartHardwareBlend(u32 mode, u32 delay, u32 deltaY, u32 target);
 void InitCourtScroll(u8 *, u32, u32, u32);
 void ResetGameState(void);
-void sub_8000E78(u32, u32, u32);
-void sub_8000EB4(u32, u32, u32);
+void InitSpecialEffectsWithMosaic(u32, u32, u32);
+void InitSpecialEffects(u32, u32, u32);
 #endif//GUARD_MAIN_H
