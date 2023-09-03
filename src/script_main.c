@@ -185,7 +185,7 @@ void RunScriptContext(void)
 void ChangeScriptSection(u32 newSection)
 {
     gScriptContext.previousSection = gScriptContext.currentSection;
-    sub_8007CCC(&gMain, gScriptContext.currentSection);
+    markSectionAsRead(&gMain, gScriptContext.currentSection);
     gScriptContext.currentSection = newSection;
     InitScriptSection(&gScriptContext);
     gScriptContext.scriptPtr++;
@@ -266,7 +266,7 @@ static void AdvanceScriptContext(struct ScriptContext * scriptCtx)
             && main->unk84 != 5
             && main->unk84 != 6)
             {
-                if(sub_8007CFC(main, scriptCtx->currentSection))
+                if(hasSectionBeenRead(main, scriptCtx->currentSection))
                 {
                     if(scriptCtx->textSkip > 0 || main->process[GAME_PROCESS] == 4)
                     {
@@ -595,7 +595,7 @@ void RedrawTextboxCharacters(void)
     }
 }
 
-void sub_8007CCC(struct Main * main, s32 section)
+void markSectionAsRead(struct Main * main, s32 section)
 {
     u32 word;
     u32 bit;
@@ -609,10 +609,10 @@ void sub_8007CCC(struct Main * main, s32 section)
     
     word = section / 32;
     bit = section % 32;
-    main->unk100[word] |= 1 << bit;
+    main->sectionReadFlags[word] |= 1 << bit;
 }
 
-bool32 sub_8007CFC(struct Main * main, s32 section)
+bool32 hasSectionBeenRead(struct Main * main, s32 section)
 {
     u32 word;
     u32 bit;
@@ -626,24 +626,24 @@ bool32 sub_8007CFC(struct Main * main, s32 section)
 
     word = section / 32;
     bit = section % 32;
-    return main->unk100[word] & (1 << bit); // please return a bool :(
+    return main->sectionReadFlags[word] & (1 << bit); // please return a bool :(
 }
 
-void sub_8007D30(struct Main * main)
+void clearSectionReadFlags(struct Main * main)
 {
     u16 i;
     for(i = 0; i < 8; i++)
     {
-        main->unk100[i] = 0;
+        main->sectionReadFlags[i] = 0;
         main->talkEndFlags[i] = 0;
     }
 }
 
-void sub_8007D5C(struct Main * main)
+void loadSectionReadFlagsFromSaveDataBuffer(struct Main * main)
 {
     u16 i;
     for(i = 0; i < 8; i++)
     {
-        main->unk100[i] = gSaveDataBuffer.main.unk100[i];
+        main->sectionReadFlags[i] = gSaveDataBuffer.main.sectionReadFlags[i];
     }
 }

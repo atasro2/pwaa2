@@ -296,7 +296,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
 // ! still the same as CourtExit, thanks capcom
 void InvestigationExit(struct Main * main, struct InvestigationStruct * investigation) // tantei_exit
 {
-    sub_8007D30(main);
+    clearSectionReadFlags(main);
     DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
     SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 1, main);
     if(main->scenarioIdx == 2)
@@ -1544,7 +1544,7 @@ _08010AD4:
     && (main->gameStateFlags & 0x10) == 0
     && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN | SCRIPT_LOOP))
     {
-        sub_8017864();
+        clearHPBarOAM();
         sub_80170AC();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
@@ -1563,17 +1563,17 @@ _08010AD4:
     if(gMain.unk24A == 0
     && sub_801715C() == FALSE
     && gJoypad.pressedKeys == R_BUTTON
-    && sub_80175C0() == 0
+    && findPlayingHPBarSmokeAnimations() == 0
     && (main->gameStateFlags & 0x10) == 0
     && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN))
     {
-        sub_8017864();
+        clearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 4, main);
     }
-    if(main->unk98 <= 0
-    && main->unk9A <= 0
+    if(main->hpBar_value <= 0
+    && main->hpBar_display_value <= 0
     && sub_8017C78() == FALSE)
         main->process[GAME_PROCESS_VAR1] = 11;
     return;
@@ -1615,7 +1615,7 @@ _08010CB0:
     main->process[GAME_PROCESS_VAR1] = 3;
     return;
 _08010CB6:
-    gMain.unkA0 = 100;
+    gMain.hpBar_pos_y = 100;
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
             gMain.advanceScriptContext = FALSE;
@@ -1627,7 +1627,7 @@ _08010CB6:
             if(!sub_8016214())
                 break;
             sub_80161E4();
-            if(gMain.unk98 < 80) {
+            if(gMain.hpBar_value < 80) {
                 sub_8017928(1);
                 gMain.unk9C = -40;
                 sub_8017928(3);
@@ -1755,8 +1755,8 @@ _08010EAC:
             }
             break;
         case 5:
-            gMain.unk9A = 1;
-            gMain.unk98 = 1;
+            gMain.hpBar_display_value = 1;
+            gMain.hpBar_value = 1;
             sub_8010FA4();
             sub_8011198();
             gInvestigation.unkB &= ~1;

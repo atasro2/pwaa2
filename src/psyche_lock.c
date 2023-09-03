@@ -93,7 +93,7 @@ void sub_8015CF0(struct PscyheLock_10 * arg0, s32 arg1, s32 arg2)
 void sub_8015DBC(struct PscyheLock_10 * arg0)
 {
     arg0->unk6++;
-    if(arg0->unk4 < arg0->unk8->unk6-1 && (gMain.unk0 % 3) == 0)
+    if(arg0->unk4 < arg0->unk8->unk6-1 && (gMain.frameCounter % 3) == 0)
     {
         arg0->unk6 = 0;
         arg0->unk4++;
@@ -559,14 +559,14 @@ _0801678A: // psylock_move_chain_disappear
             gPsycheLock.unk6++;
         }
         case 3:
-            if((gMain.unk0 % 8) != 0)
+            if((gMain.frameCounter % 8) != 0)
             {
                 if(gPsycheLock.unkA++ > 4)
                     gPsycheLock.unk6++;
             }
             return;
         case 4:
-            if((gMain.unk0 % 5) != 0)
+            if((gMain.frameCounter % 5) != 0)
             {
                 gIORegisters.lcd_mosaic = gPsycheLock.unkA << 4 | gPsycheLock.unkA;
                 if (gPsycheLock.unkA-- <= 0)

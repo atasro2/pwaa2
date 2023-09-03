@@ -872,7 +872,7 @@ void CourtRecordInit(struct Main * main, struct CourtRecord * courtRecord) // st
     u32 temp;
     u16 * map;
     struct OamAttrs * oam;
-    sub_8017864();
+    clearHPBarOAM();
     temp = gMain.unk2BA;
     sub_8013878(gMain.unk2BA);
     gMain.unk2BA = temp;
@@ -1512,15 +1512,15 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             if(gMain.unk2BE & 0xF) {
                 switch(gMain.unk2BE >> 4) {
                     case 0:
-                        sub_800E7B0();
+                        loadWitnessBenchGraphics();
                         sub_800E7EC(0x18, 0x80, 1);
                         break;
                     case 1:
-                        sub_800E8C4();
+                        loadCounselBenchGraphics();
                         sub_800E900(0, 0x80, 1);       
                         break;
                     case 2:
-                        sub_800E8C4();
+                        loadCounselBenchGraphics();
                         sub_800E9D4(0x20, 0x80, 1);
                 }
             }

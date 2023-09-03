@@ -48,7 +48,7 @@ u16 gUnknown_08112700[15][16] = {
 	{0x7ffd, 0x7fb9, 0x7f97, 0x7f74, 0x7f51, 0x7f51, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
 };
 
-void sub_8017178(void)
+void loadHPBarGraphics(void)
 {
     DmaCopy16(3, gGfxHPBarProgress, OBJ_VRAM0+0x3780, 0x180);
     DmaCopy16(3, gPalHPBarFrame, OBJ_PLTT+0x60, 0x20);
@@ -215,38 +215,38 @@ u32 sub_80172B4(s16 x, s16 y, int arg2, int tileId, int arg4, int arg5, int arg6
     return i;
 }
 
-void sub_8017494(u16 pltt[][16], u16 slot)
+void loadHPBarPaletteIntoSlotOnIntervalByInterval(u16 pltt[][16], u16 slot)
 {
     int interval = 4;
-    if((gMain.unk0 % interval) == 0)
+    if((gMain.frameCounter % interval) == 0)
     {
-        int index = (gMain.unk0 / interval) % 15;
+        int index = (gMain.frameCounter / interval) % 15;
         DmaCopy16(3, pltt[index], OBJ_PLTT + slot * 0x20, 0x20);
     }
 }
 
 void sub_80174E8(int arg0, int arg1)
 {
-    int unkTable1[12] = {-4, 4, 0, 8, 8, 6, -11, -8, 18, -2, 8, -8};
-    int unkTable2[7] = {0, 9, 18, 27, 42, 51, 60};
+    int smokeOffsetPairs[12] = {-4, 4, 0, 8, 8, 6, -11, -8, 18, -2, 8, -8};
+    int smokePlayFrameTimes[7] = {0, 9, 18, 27, 42, 51, 60}; // hardcoded for 60Hz refresh!
     int i; // r8
-    int rem = gMain.unk0 % unkTable2[6];
+    int currentFrameInSecond = gMain.frameCounter % smokePlayFrameTimes[6];
     for(i = 0; i < 6; i++) 
     {
         struct AnimationListEntry * animation;
-        if(unkTable2[i] == rem || sub_80175C0() == 0)
+        if(smokePlayFrameTimes[i] == currentFrameInSecond || findPlayingHPBarSmokeAnimations() == 0)
         {
             animation = FindAnimationFromAnimId(58 + i % 3);
             if(animation == NULL)
             {
-                animation = PlayAnimationAtCustomOrigin(58 + i % 3, arg0 + unkTable1[i * 2], arg1 + unkTable1[i * 2 + 1] + 8);
+                animation = PlayAnimationAtCustomOrigin(58 + i % 3, arg0 + smokeOffsetPairs[i * 2], arg1 + smokeOffsetPairs[i * 2 + 1] + 8);
                 SetAnimationScale(animation, 16 + i % 3, 256 + Random() % 256);
             }
         }
     }
 }
 
-int sub_80175C0(void)
+int findPlayingHPBarSmokeAnimations(void)
 {
     int count = 0;
     int i;
@@ -263,55 +263,55 @@ void sub_80175E4(void)
     int xOffset = 0;
     int yOffset = 0;
     int temp;
-    if(gMain.unk98 > gMain.unk9A)
+    if(gMain.hpBar_value > gMain.hpBar_display_value)
     {
-        sub_8017494(gUnknown_08112700, 7);
+        loadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112700, 7);
         xOffset = 0; // useless!
-        yOffset = (gMain.unk0 / 2) % 2;
-        temp = sub_80172B4(gMain.unk9E - 8 + xOffset, gMain.unkA0 - 8 + yOffset, gMain.unk9A, 444, 37, 0, 4, 20);
-        sub_80172B4(gMain.unk9E - 8 + xOffset, gMain.unkA0 - 8 + yOffset, gMain.unk98, 444, 37, temp, 7, 21);
+        yOffset = (gMain.frameCounter / 2) % 2;
+        temp = sub_80172B4(gMain.hpBar_pos_x - 8 + xOffset, gMain.hpBar_pos_y - 8 + yOffset, gMain.hpBar_display_value, 444, 37, 0, 4, 20);
+        sub_80172B4(gMain.hpBar_pos_x - 8 + xOffset, gMain.hpBar_pos_y - 8 + yOffset, gMain.hpBar_value, 444, 37, temp, 7, 21);
     }
-    else if(gMain.unk98 < gMain.unk9A)
+    else if(gMain.hpBar_value < gMain.hpBar_display_value)
     {
-        sub_80174E8(gMain.unk9E + gMain.unk9A, gMain.unkA0);
-        sub_8017494(gUnknown_08112520, 7);
+        sub_80174E8(gMain.hpBar_pos_x + gMain.hpBar_display_value, gMain.hpBar_pos_y);
+        loadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
         xOffset = Random() % 2 - 2;
         yOffset = Random() % 3 - 4;
-        temp = sub_80172B4(gMain.unk9E - 8 + xOffset, gMain.unkA0 - 8 + yOffset, gMain.unk98, 444, 37, 0, 4, 20);
-        sub_80172B4(gMain.unk9E - 8 + xOffset, gMain.unkA0 - 8 + yOffset, gMain.unk9A, 444, 37, temp, 7, 21);
+        temp = sub_80172B4(gMain.hpBar_pos_x - 8 + xOffset, gMain.hpBar_pos_y - 8 + yOffset, gMain.hpBar_value, 444, 37, 0, 4, 20);
+        sub_80172B4(gMain.hpBar_pos_x - 8 + xOffset, gMain.hpBar_pos_y - 8 + yOffset, gMain.hpBar_display_value, 444, 37, temp, 7, 21);
     }
     else if(gMain.unk9C > 0)
     {
-        sub_8017494(gUnknown_08112520, 7);
-        temp = sub_80172B4(gMain.unk9E - 8, gMain.unkA0 - 8, gMain.unk98 - gMain.unk9C, 444, 37, 0, 4, 20);
-        sub_80172B4(gMain.unk9E - 8, gMain.unkA0 - 8, gMain.unk98, 444, 37, temp, 7, 21);
+        loadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
+        temp = sub_80172B4(gMain.hpBar_pos_x - 8, gMain.hpBar_pos_y - 8, gMain.hpBar_value - gMain.unk9C, 444, 37, 0, 4, 20);
+        sub_80172B4(gMain.hpBar_pos_x - 8, gMain.hpBar_pos_y - 8, gMain.hpBar_value, 444, 37, temp, 7, 21);
     }
     else 
     {
-        sub_8017494(gUnknown_08112520, 7);
-        sub_80172B4(gMain.unk9E - 8, gMain.unkA0 - 8, gMain.unk98, 444, 37, 0, 4, 20);
+        loadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
+        sub_80172B4(gMain.hpBar_pos_x - 8, gMain.hpBar_pos_y - 8, gMain.hpBar_value, 444, 37, 0, 4, 20);
     }
-    sub_801720C(gMain.unk9E + xOffset, gMain.unkA0 + yOffset);
+    sub_801720C(gMain.hpBar_pos_x + xOffset, gMain.hpBar_pos_y + yOffset);
 }
 
-void sub_8017864(void)
+void clearHPBarOAM(void)
 {
     int i;
     for(i = 0; i < 14; i++)
         gOamObjects[34+i].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
-void sub_8017884(void)
+void checkAndDrawHPBar(void)
 {
-    if(!(gMain.unk9E == 284 && gMain.unkA0 == 20))
+    if(!(gMain.hpBar_pos_x == 284 && gMain.hpBar_pos_y == 20))
     {
         if(gMain.process[GAME_PROCESS] >= 3 && gMain.process[GAME_PROCESS] <= 6)
         {
-            sub_8017864();
+            clearHPBarOAM();
             if(!(gScriptContext.flags & SCRIPT_FULLSCREEN)
-            && gMain.unkA6)
+            && gMain.hpBar_display_flag)
             {
-                sub_8017178();
+                loadHPBarGraphics();
                 sub_80175E4();
             }
         }
@@ -320,9 +320,9 @@ void sub_8017884(void)
 
 void sub_80178E0(void)
 {
-    gMain.unk9E = 284;
-    gMain.unkA0 = 20;
-    gMain.unkA6 = 1;
+    gMain.hpBar_pos_x = 284;
+    gMain.hpBar_pos_y = 20;
+    gMain.hpBar_display_flag = 1;
     gMain.unk9C = 0;
     sub_8017928(0);
 }
@@ -330,8 +330,8 @@ void sub_80178E0(void)
 void sub_8017910(void)
 {
     gMain.unkB0 = 0x50;
-    gMain.unk9A = 0x50;
-    gMain.unk98 = 0x50;
+    gMain.hpBar_display_value = 0x50;
+    gMain.hpBar_value = 0x50;
 }
 
 void sub_8017928(u32 arg0)
@@ -356,7 +356,7 @@ void sub_8017950(void)
     gMain.unkA4 = 0;
 }
 
-void sub_801798C(void)
+void processHPBar(void)
 {
     void * states[] = {
         &&_080179C0,
@@ -365,13 +365,13 @@ void sub_801798C(void)
         &&_08017AAC,
         &&_08017C54,
     };
-    sub_8017884();
-    sub_8017E9C();
-    sub_8018118();
+    checkAndDrawHPBar();
+    animateAllSpotlights();
+    animateAllFlowerPetals();
     goto *states[gMain.unk96];
 _080179C0:
-    gMain.unkA0 = 0x14;
-    if(gMain.unk98 <= 0)
+    gMain.hpBar_pos_y = 0x14;
+    if(gMain.hpBar_value <= 0)
     {
         if(gMain.process[GAME_PROCESS] == 3 || gMain.process[GAME_PROCESS] == 5 || gMain.process[GAME_PROCESS] == 6 || gMain.process[GAME_PROCESS] == 5)
         {
@@ -386,22 +386,22 @@ _08017A10:
         case 0:
             gMain.unk97++; // ????
         case 1:
-            gMain.unk9E -= 4;
+            gMain.hpBar_pos_x -= 4;
             if(gMain.process[GAME_PROCESS] == 4
             && gMain.process[GAME_PROCESS_STATE] == 10 
             && gMain.process[GAME_PROCESS_VAR1] == 7)
             {
-                if(gMain.unk9E <= 84)
+                if(gMain.hpBar_pos_x <= 84)
                 {
-                    gMain.unk9E = 84;
+                    gMain.hpBar_pos_x = 84;
                     sub_8017950();
                 }
             }
             else
             {
-                if(gMain.unk9E <= 156)
+                if(gMain.hpBar_pos_x <= 156)
                 {
-                    gMain.unk9E = 156;
+                    gMain.hpBar_pos_x = 156;
                     sub_8017950();
                 }
             }
@@ -413,10 +413,10 @@ _08017A6C:
         case 0:
             gMain.unk97++; // ????
         case 1:
-            gMain.unk9E += 4;
-            if(gMain.unk9E >= 284)
+            gMain.hpBar_pos_x += 4;
+            if(gMain.hpBar_pos_x >= 284)
             {
-                gMain.unk9E = 284;
+                gMain.hpBar_pos_x = 284;
                 sub_8017950();
             }
     }
@@ -429,15 +429,15 @@ _08017AAC:
                 PlaySE(156);
             else if(gMain.unk9C > 0)
                 PlaySE(76);
-            gMain.unk98 -= gMain.unk9C;
-            if(gMain.unk98 < 0)
-                gMain.unk98 = 0;
-            if(gMain.unk98 > 80)
-                gMain.unk98 = 80;
-            gMain.unk288[0].unk4 = gMain.unk9C;
+            gMain.hpBar_value -= gMain.unk9C;
+            if(gMain.hpBar_value < 0)
+                gMain.hpBar_value = 0;
+            if(gMain.hpBar_value > 80)
+                gMain.hpBar_value = 80;
+            gMain.spotlights[0].x = gMain.unk9C;
             gMain.unk9C = 0;
-            gMain.unkA8 = gMain.unk9A << 0x10;
-            gMain.unkAC = (gMain.unk98 - gMain.unk9A) << 0x10;
+            gMain.unkA8 = gMain.hpBar_display_value << 0x10;
+            gMain.unkAC = (gMain.hpBar_value - gMain.hpBar_display_value) << 0x10;
             if(gMain.unkAC <= 0)
                 gMain.unkAC /= 40;
             else
@@ -449,31 +449,31 @@ _08017AAC:
         case 1:
         {
             gMain.unkA8 += gMain.unkAC;
-            gMain.unk9A = gMain.unkA8 >> 0x10;
+            gMain.hpBar_display_value = gMain.unkA8 >> 0x10;
             if(gMain.unkAC <= 0)
             {
-                if(gMain.unk9A < gMain.unk98)
-                     gMain.unk9A = gMain.unk98;
+                if(gMain.hpBar_display_value < gMain.hpBar_value)
+                     gMain.hpBar_display_value = gMain.hpBar_value;
             }
             else 
             {
-                if(gMain.unk9A > gMain.unk98)
-                    gMain.unk9A = gMain.unk98;
+                if(gMain.hpBar_display_value > gMain.hpBar_value)
+                    gMain.hpBar_display_value = gMain.hpBar_value;
             }
             if(gTestimony.unk4 > 0)
                 gTestimony.unk4--;
-            if(gMain.unk98 == gMain.unk9A)
+            if(gMain.hpBar_value == gMain.hpBar_display_value)
             {
                 if(gTestimony.unk4 > 0)
                 {
                     if(gMain.unkAC <= 0)
-                        gMain.unk9A++;
+                        gMain.hpBar_display_value++;
                     else
-                        gMain.unk9A--;
+                        gMain.hpBar_display_value--;
                 }
                 else 
                 {
-                    s32 temp = sub_80175C0(); 
+                    s32 temp = findPlayingHPBarSmokeAnimations(); 
                     if(temp == 0)
                     {
                         sub_8013878(76);
@@ -491,12 +491,12 @@ _08017AAC:
                 gMain.unkA2++;
                 break;
             }
-            gMain.unk9E += 4;
-            if(gMain.unk9E >= 284)
+            gMain.hpBar_pos_x += 4;
+            if(gMain.hpBar_pos_x >= 284)
             {
-                gMain.unk9E = 284;
+                gMain.hpBar_pos_x = 284;
                 sub_8017950();
-                if(gMain.unk288[0].unk4 > 0)
+                if(gMain.spotlights[0].x > 0)
                     gMain.advanceScriptContext = TRUE;
             }
     }
@@ -505,7 +505,7 @@ _08017C54:
     if(gMain.unk97 == 0)
     {
         gMain.unk97 = 1;
-        gMain.unkA6 = 0;
+        gMain.hpBar_display_flag = 0;
     }
     return;
 }

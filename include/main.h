@@ -19,8 +19,8 @@ struct Joypad
 
 struct Main
 {
-    /* +0x000 */ u32 unk0;
-    /* +0x004 */ u32 unk4;
+    /* +0x000 */ u32 frameCounter;
+    /* +0x004 */ u32 doGameProcessCounter;
     /* +0x008 */ u8 process[0x4];
     /* +0x00C */ u8 processCopy[0x4];
     /* +0x010 */ u8 vblankWaitCounter;
@@ -86,14 +86,14 @@ struct Main
     /* +0x094 */ u16 xPosCounter; // used in episode selection menu
     /* +0x096 */ u8 unk96; // unity: gauge_rno_0
     /* +0x097 */ u8 unk97; // unity: gauge_rno_1
-    /* +0x098 */ s16 unk98; // unity: gauge_hp
-    /* +0x09A */ s16 unk9A; // unity: gauge_hp_disp
+    /* +0x098 */ s16 hpBar_value; // unity: gauge_hp
+    /* +0x09A */ s16 hpBar_display_value; // unity: gauge_hp_disp
     /* +0x09C */ s16 unk9C; // unity: gauge_dmg_cnt
-    /* +0x09E */ s16 unk9E; // unity: gauge_pos_x
-    /* +0x0A0 */ s16 unkA0; // unity: gauge_pos_y
+    /* +0x09E */ s16 hpBar_pos_x; // unity: gauge_pos_x
+    /* +0x0A0 */ s16 hpBar_pos_y; // unity: gauge_pos_y
     /* +0x0A2 */ s16 unkA2; // unity: gauge_cnt_0
     /* +0x0A4 */ s16 unkA4; // unity: gauge_cnt_1
-    /* +0x0A6 */ s16 unkA6; // unity: gauge_disp_flag
+    /* +0x0A6 */ s16 hpBar_display_flag; // unity: gauge_disp_flag
     /* +0x0A8 */ s32 unkA8; // unity: gauge_hp_fixed
     /* +0x0AC */ s32 unkAC; // unity: gauge_hp_fixed_diff
     /* +0x0B0 */ s16 unkB0; // unity: gauge_hp_scenario_end
@@ -107,7 +107,7 @@ struct Main
     /* +0x0BC */ u32 scriptFlags[8]; // unity: sce_flag matches debug menu
     /* +0x0DC */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0E0 */ u32 talkEndFlags[8]; // unity: talk_end_flag // TODO: find right size
-    /* +0x100 */ u32 unk100[8]; // script related, apollo's FW_Mess_flag??
+    /* +0x100 */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
     /* +0x1A4 */ struct PsycheLockData unk1A4[4];
     s8 unk244;
@@ -128,17 +128,17 @@ struct Main
     u8 unk25C[25]; // unity: roomseq
     u16 psycheLockedTalkSections[8]; // unity: lockdat
     u16 numPsycheLockedTalkSections; // unity: lock_max
-    struct Main_288 {
-        u8 unk0;
+    struct Spotlight {
+        u8 state;
         s8 unk1;
         s8 unk2;
         s8 unk3;
-        s32 unk4;
-        s32 unk8;
-        s32 unkC;
-        s32 unk10;
-    } unk288[2];
-    u8 unk2B0; // unity: spotlight_command_status
+        s32 x;
+        s32 y;
+        s32 xVelocity;
+        s32 yVelocity;
+    } spotlights[2];
+    u8 spotlightStopSweepingFlag; // unity: spotlight_command_status
     u8 filler2B1[0x2B4 - 0x2B1];
     u8 unk2B4;
     u8 filler2B5[0x2B8 - 0x2B5];

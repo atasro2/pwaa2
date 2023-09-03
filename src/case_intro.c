@@ -19,91 +19,91 @@ bool32 sub_8017C94(void)
     int i;
     for(i = 0; i < 2; i++)
     {
-        if(gMain.unk288[i].unk0 < 3)
+        if(gMain.spotlights[i].state < 3)
             return FALSE;
     }
     return TRUE;
 }
 
-void sub_8017CB8(struct Main_288 * arg0, int arg1, struct AnimationListEntry * arg2)
+void animateSpotlight(struct Spotlight * spotlight, int spotlightId, struct AnimationListEntry * arg2)
 {
-    switch(arg0->unk0)
+    switch(spotlight->state)
     {
         case 0: // _08017CF0
-            if(arg1 == 0)
+            if(spotlightId == 0)
             {
-                arg0->unk4 = Q_16_16(-64);
-                arg0->unk8 = Q_16_16(Random() % DISPLAY_HEIGHT);
-                arg0->unkC = Q_16_16(9.5);
-                arg0->unk10 = Q_16_16(-2) + Q_16_16(Random() % 16) * 2 / 8;
+                spotlight->x = Q_16_16(-64);
+                spotlight->y = Q_16_16(Random() % DISPLAY_HEIGHT);
+                spotlight->xVelocity = Q_16_16(9.5);
+                spotlight->yVelocity = Q_16_16(-2) + Q_16_16(Random() % 16) * 2 / 8;
             }
             else
             {
-                arg0->unk4 = Q_16_16(DISPLAY_WIDTH + 64);
-                arg0->unk8 = Q_16_16(Random() % (DISPLAY_WIDTH/2));
-                arg0->unkC = Q_16_16(-9.5);
-                arg0->unk10 = Q_16_16(-2) + Q_16_16(Random() % 16) * 2 / 8;
+                spotlight->x = Q_16_16(DISPLAY_WIDTH + 64);
+                spotlight->y = Q_16_16(Random() % (DISPLAY_WIDTH/2));
+                spotlight->xVelocity = Q_16_16(-9.5);
+                spotlight->yVelocity = Q_16_16(-2) + Q_16_16(Random() % 16) * 2 / 8;
             }
             if(gMain.currentBG == 120)
             {
-                arg0->unk8 += Q_16_16(DISPLAY_HEIGHT - gMain.Bg256_scroll_y);
-                arg0->unk8 += Q_16_16(32);
+                spotlight->y += Q_16_16(DISPLAY_HEIGHT - gMain.Bg256_scroll_y);
+                spotlight->y += Q_16_16(32);
             }
-            arg0->unk0++;
+            spotlight->state++;
             break;
         case 1: // _08017D78
-            arg0->unk4 += arg0->unkC;
-            arg0->unk8 += arg0->unk10;
-            arg2->animationInfo.xOrigin = Q_16_16_TO_INT(arg0->unk4);
-            arg2->animationInfo.yOrigin = Q_16_16_TO_INT(arg0->unk8);
+            spotlight->x += spotlight->xVelocity;
+            spotlight->y += spotlight->yVelocity;
+            arg2->animationInfo.xOrigin = Q_16_16_TO_INT(spotlight->x);
+            arg2->animationInfo.yOrigin = Q_16_16_TO_INT(spotlight->y);
             if(gMain.currentBG == 120)
-                arg0->unk8 += Q_16_16(-1);
-            if(arg1 == 0)
+                spotlight->y += Q_16_16(-1);
+            if(spotlightId == 0)
             {
-                if(arg0->unk4 >= Q_16_16(DISPLAY_WIDTH + 64))
+                if(spotlight->x >= Q_16_16(DISPLAY_WIDTH + 64))
                 {
-                    arg0->unk0++;
-                    arg0->unk1 = Random() % 256;
+                    spotlight->state++;
+                    spotlight->unk1 = Random() % 256;
                 }
             }
             else
             {
-                if(arg0->unk4 <= Q_16_16(-64))
+                if(spotlight->x <= Q_16_16(-64))
                 {
-                    arg0->unk0++;
-                    arg0->unk1 = Random() % 256;
+                    spotlight->state++;
+                    spotlight->unk1 = Random() % 256;
                 }
             } 
             break;
         case 2: // _08017DDC
-            if(gMain.unk2B0 == 1)
+            if(gMain.spotlightStopSweepingFlag == 1)
             {
-                arg0->unk0 = 3;
+                spotlight->state = 3;
                 break;
             }
 
             arg2->animationInfo.xOrigin = DISPLAY_WIDTH + 64;
-            if(arg0->unk1-- < 0)
-                arg0->unk0 = 0;
+            if(spotlight->unk1-- < 0)
+                spotlight->state = 0;
             break;
         case 3: // _08017E0A
             if(sub_8017C94())
             {
-                if(arg1 == 0)
-                    arg0->unk4 = Q_16_16(-64);
+                if(spotlightId == 0)
+                    spotlight->x = Q_16_16(-64);
                 else
-                    arg0->unk4 = Q_16_16(DISPLAY_WIDTH + 64);
-                arg0->unk8 = Q_16_16(Random() % 80);
-                arg0->unkC = (Q_16_16(128) - arg0->unk4) / 96;
-                arg0->unk10 = (Q_16_16(60) - arg0->unk8) / 96;
-                arg0->unk0++;
+                    spotlight->x = Q_16_16(DISPLAY_WIDTH + 64);
+                spotlight->y = Q_16_16(Random() % 80);
+                spotlight->xVelocity = (Q_16_16(128) - spotlight->x) / 96;
+                spotlight->yVelocity = (Q_16_16(60) - spotlight->y) / 96;
+                spotlight->state++;
             }
             break;
         case 4: // _08017E5C
-            arg0->unk4 += arg0->unkC;
-            arg0->unk8 += arg0->unk10;
-            arg2->animationInfo.xOrigin = Q_16_16_TO_INT(arg0->unk4);
-            arg2->animationInfo.yOrigin = Q_16_16_TO_INT(arg0->unk8);
+            spotlight->x += spotlight->xVelocity;
+            spotlight->y += spotlight->yVelocity;
+            arg2->animationInfo.xOrigin = Q_16_16_TO_INT(spotlight->x);
+            arg2->animationInfo.yOrigin = Q_16_16_TO_INT(spotlight->y);
             
             if( arg2->animationInfo.xOrigin > 126
             && arg2->animationInfo.xOrigin <= 128
@@ -112,7 +112,7 @@ void sub_8017CB8(struct Main_288 * arg0, int arg1, struct AnimationListEntry * a
             {
                 arg2->animationInfo.xOrigin = 128;
                 arg2->animationInfo.yOrigin = 60;
-                arg0->unk0++;
+                spotlight->state++;
             }
             break;
         case 5: // _08017E94
@@ -120,108 +120,108 @@ void sub_8017CB8(struct Main_288 * arg0, int arg1, struct AnimationListEntry * a
     }
 }
 
-void sub_8017E9C(void)
+void animateAllSpotlights(void)
 {
     struct AnimationListEntry * anim = FindAnimationFromAnimId(0x8F);
     if(anim != NULL)
     {
-        sub_8017CB8(&gMain.unk288[0], 0, anim);
+        animateSpotlight(&gMain.spotlights[0], 0, anim);
         SetAnimationScale(anim, 0, Q_8_8(1.5));
     }
     anim = FindAnimationFromAnimId(0x90);
     if(anim != NULL)
     {
-        sub_8017CB8(&gMain.unk288[1], 1, anim);
+        animateSpotlight(&gMain.spotlights[1], 1, anim);
         SetAnimationScale(anim, 1, Q_8_8(1.5));
     }
 }
 
-void sub_8017EF0(void)
+void clearAllSpotlights(void)
 {
-    DmaFill16(3, 0, &gMain.unk288[0], sizeof(gMain.unk288[0]));
-    DmaFill16(3, 0, &gMain.unk288[1], sizeof(gMain.unk288[1]));
+    DmaFill16(3, 0, &gMain.spotlights[0], sizeof(gMain.spotlights[0]));
+    DmaFill16(3, 0, &gMain.spotlights[1], sizeof(gMain.spotlights[1]));
 }
 
-void sub_8017F2C(void)
+void setSpotlightStopSweepingFlag(void)
 {
-    gMain.unk2B0 = 1;
+    gMain.spotlightStopSweepingFlag = 1;
 }
 
 // case 4 opening flower petal code
 
-void sub_8017F40(struct Struct3006390 * arg0, int arg1)
+void updateFlowerPetal(struct FlowerPetal * petal, int petalId)
 {
-    arg0->unk8 = Q_16_16(-16);
-    arg0->unk4 = Q_16_16(Random() % 256 + 64);
-    arg0->unkC = Q_16_16(-1) + Q_16_16((Random() % 16)) / 256;
-    arg0->unk10 = Q_16_16(1) + Q_16_16((Random() % 24)) / 256;
-    if(arg1 >= 8)
+    petal->y = Q_16_16(-16);
+    petal->x = Q_16_16(Random() % 256 + 64);
+    petal->xVelocity = Q_16_16(-1) + Q_16_16((Random() % 16)) / 256;
+    petal->yVelocity = Q_16_16(1) + Q_16_16((Random() % 24)) / 256;
+    if(petalId >= 8)
     {
-        arg0->unkC /= 2;
-        arg0->unk10 /= 2;
+        petal->xVelocity /= 2;
+        petal->yVelocity /= 2;
     }
-    arg0->unk14 = Random() % 256;
-    arg0->unk18 = Random() % 3;
+    petal->randomSeed = Random() % 256;
+    petal->randomIncrement = Random() % 3;
 }
 
-void sub_8017FD4(struct Struct3006390 * arg0, int arg1)
+void spawnFlowerPetal(struct FlowerPetal * petal, int petalId)
 {
-    arg0->unk0 = arg1;
-    arg0->unk22 = Random() % 256;
-    sub_8017F40(arg0, arg1);
-    arg0->anim = PlayAnimationAtCustomOrigin(0x7F + arg0->unk0, Q_16_16_TO_INT(arg0->unk4), Q_16_16_TO_INT(arg0->unk8));
+    petal->id = petalId;
+    petal->UpdateDelay = Random() % 256;
+    updateFlowerPetal(petal, petalId);
+    petal->anim = PlayAnimationAtCustomOrigin(0x7F + petal->id, Q_16_16_TO_INT(petal->x), Q_16_16_TO_INT(petal->y));
 }
 
-void sub_8018010(struct Struct3006390 * arg0, int arg1)
+void destroyFlowerPetal(struct FlowerPetal * petal, int petalId)
 {
-    DestroyAnimation(arg0->anim);
+    DestroyAnimation(petal->anim);
 }
 
-void sub_801801C(struct Struct3006390 * arg0)
+void animateFlowerPetal(struct FlowerPetal * petal)
 {
-    struct AnimationListEntry * anim = FindAnimationFromAnimId(0x7F + arg0->unk0);
+    struct AnimationListEntry * anim = FindAnimationFromAnimId(0x7F + petal->id);
     if(anim == 0)
         return;
     
-    if (arg0->unk22 <= 0)
+    if (petal->UpdateDelay <= 0)
     {
-        arg0->unk4 += arg0->unkC;
-        arg0->unk8 += arg0->unk10;
-        if(gMain.unk0 % 2)
-            arg0->unk4 += (arg0->unkC * _Sin((arg0->unk14 += arg0->unk18) % 256)) / 255;
-        SetAnimationOriginCoords(arg0->anim, Q_16_16_TO_INT(arg0->unk4), Q_16_16_TO_INT(arg0->unk8));
-        if (Q_16_16_TO_INT(arg0->unk8) >= 170)
-            sub_8017F40(arg0, arg0->unk0);
+        petal->x += petal->xVelocity;
+        petal->y += petal->yVelocity;
+        if(gMain.frameCounter % 2)
+            petal->x += (petal->xVelocity * _Sin((petal->randomSeed += petal->randomIncrement) % 256)) / 255;
+        SetAnimationOriginCoords(petal->anim, Q_16_16_TO_INT(petal->x), Q_16_16_TO_INT(petal->y));
+        if (Q_16_16_TO_INT(petal->y) >= 170)
+            updateFlowerPetal(petal, petal->id);
     }
     else
     {
-        arg0->unk22--;
+        petal->UpdateDelay--;
     }
 }
 
-void sub_80180B4(void)
+void spawnAllFlowerPetals(void)
 {
     int i;
-    DmaFill16(3, 0, gUnknown_03006390, sizeof(gUnknown_03006390));
+    DmaFill16(3, 0, gFlowerPetals, sizeof(gFlowerPetals));
     for(i = 0; i < 16; i++)
-       sub_8017FD4(&gUnknown_03006390[i], i); 
+       spawnFlowerPetal(&gFlowerPetals[i], i); 
 }
 
-void sub_80180F8(void)
-{
-    int i;
-    for(i = 0; i < 16; i++)
-       sub_8018010(&gUnknown_03006390[i], i); 
-}
-
-void sub_8018118(void)
+void destroyAllFlowerPetals(void)
 {
     int i;
     for(i = 0; i < 16; i++)
-       sub_801801C(&gUnknown_03006390[i]); 
+       destroyFlowerPetal(&gFlowerPetals[i], i); 
 }
 
-void sub_8018138(void)
+void animateAllFlowerPetals(void)
+{
+    int i;
+    for(i = 0; i < 16; i++)
+       animateFlowerPetal(&gFlowerPetals[i]); 
+}
+
+void updateNickelSamuraiZoominAnimation(void)
 {
     gInvestigation.pointerX -= 0xE;
     gIORegisters.lcd_bg2x = (0x40 - gInvestigation.pointerX / 2) << 8;
@@ -230,7 +230,7 @@ void sub_8018138(void)
     gIORegisters.lcd_bg2pd = gInvestigation.pointerX;
 }
 
-void sub_801816C(void)
+void initNickelSamuraiZoominAnimation(void)
 {
     gInvestigation.pointerX = 0xE0;
     gIORegisters.lcd_dispcnt &= ~7;
@@ -250,10 +250,10 @@ void sub_801816C(void)
     LZ77UnCompWram(gPalCase3NickelSamuraiZoomin, eUnknown_02036500);
     DmaCopy16(3, eUnknown_02036500, BG_PLTT, BG_PLTT_SIZE);
     *(u16*)BG_PLTT = 0xFFFF; // white backdrop
-    sub_8018138();
+    updateNickelSamuraiZoominAnimation();
 }
 
-void sub_801823C(void)
+void finishNickelSamuraiZoominAnimation(void)
 {
     gIORegisters.lcd_dispcnt &= ~7;
     gIORegisters.lcd_dispcnt |= DISPCNT_BG3_ON;

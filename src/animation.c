@@ -1436,7 +1436,7 @@ void ScrollMode2AnimationUpdate(struct AnimationListEntry * animation, struct Co
     }
     /* end wtf */
     if(courtScroll->frameCounter == 0xF) {
-        sub_800E8C4();
+        loadCounselBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xE) {
         sub_800E900(index-480, 0x80, 1);
@@ -1470,7 +1470,7 @@ void ScrollMode3AnimationUpdate(struct AnimationListEntry * animation, struct Co
     }
     /* end wtf */
     if(courtScroll->frameCounter == 0xF) {
-        sub_800E8C4();
+        loadCounselBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xE) {
         sub_800E900(index, 0x80, 1);
@@ -1499,7 +1499,7 @@ void ScrollMode4AnimationUpdate(struct AnimationListEntry * animation, struct Co
         sub_80146F0(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
     }
     if(courtScroll->frameCounter == 0xE) {
-        sub_800E7B0();
+        loadWitnessBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xD) {
         sub_800E7EC(index-285, 0x80, 1);
@@ -1532,7 +1532,7 @@ void ScrollMode5AnimationUpdate(struct AnimationListEntry * animation, struct Co
         sub_80146F0(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
     }
     if(courtScroll->frameCounter == 0xE) {
-        sub_800E8C4();
+        loadCounselBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xD) {
         sub_800E7EC(24-index, 0x80, 1);
@@ -1561,7 +1561,7 @@ void ScrollMode0AnimationUpdate(struct AnimationListEntry * animation, struct Co
     }
     /* end wtf */
     if(courtScroll->frameCounter == 0xE) {
-        sub_800E7B0();
+        loadWitnessBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xD) {
         sub_800E7EC(-179-index, 0x80, 1);
@@ -1594,7 +1594,7 @@ void ScrollMode1AnimationUpdate(struct AnimationListEntry * animation, struct Co
     }
     /* end wtf */
     if(courtScroll->frameCounter == 0xE) {
-        sub_800E8C4();
+        loadCounselBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xD) {
         sub_800E7EC(index+24, 0x80, 1);

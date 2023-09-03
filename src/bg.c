@@ -609,9 +609,9 @@ void UpdateBackground() // BG256_main
     u32 unk1;
     if(main->currentBG == 0x1A) {
         struct AnimationListEntry * animation;
-        DmaCopy16(3, gPalCase1OpeningPurpleClouds + ((main->unk0 / 10) % 15) * 0x20, PLTT+0x40, 0x20);
+        DmaCopy16(3, gPalCase1OpeningPurpleClouds + ((main->frameCounter / 10) % 15) * 0x20, PLTT+0x40, 0x20);
         if((animation = FindAnimationFromAnimId(0x65))) {
-            if((main->unk0 % 7) == 1) {
+            if((main->frameCounter % 7) == 1) {
                 if(animation->animationInfo.yOrigin < 0x70) {
                     animation->animationInfo.yOrigin++;
                     animation = FindAnimationFromAnimId(0x69);
@@ -621,13 +621,13 @@ void UpdateBackground() // BG256_main
             }
         } else {
             if((animation = FindAnimationFromAnimId(0x64))) {
-                if((main->unk0 % 10) == 1) {
+                if((main->frameCounter % 10) == 1) {
                     if(animation->animationInfo.xOrigin > 120)
                         animation->animationInfo.xOrigin--;
                 }
             }
             if((animation = FindAnimationFromAnimId(0x66))) {
-                if((main->unk0 % 20) == 1) {
+                if((main->frameCounter % 20) == 1) {
                     if(animation->animationInfo.xOrigin < 120)
                         animation->animationInfo.xOrigin++;
                     if(animation->animationInfo.yOrigin > 32)
@@ -638,8 +638,8 @@ void UpdateBackground() // BG256_main
     }
     //_08001AFE
     if(main->currentBG == 0x23) {
-        if(main->unk0 % 40 > 12 && main->unk0 % 40 <= 24) {
-            if(main->unk0 % 6 < 3) {
+        if(main->frameCounter % 40 > 12 && main->frameCounter % 40 <= 24) {
+            if(main->frameCounter % 6 < 3) {
                 animation = FindAnimationFromAnimId(0x6B);
                 if(animation)
                     animation->animationInfo.xOrigin--;
@@ -732,7 +732,7 @@ void UpdateBackground() // BG256_main
                     break;
                 animation = FindAnimationFromAnimId(0x7B);
                 if(animation) {
-                    if(gMain.unk0 % 2)
+                    if(gMain.frameCounter % 2)
                         animation->animationInfo.yOrigin++;
                 }
                 OffsetAllAnimations(0, -1);
@@ -746,7 +746,7 @@ void UpdateBackground() // BG256_main
                 }
                 animation = FindAnimationFromAnimId(0x7B);
                 if(animation) {
-                    if(gMain.unk0 % 2)
+                    if(gMain.frameCounter % 2)
                         animation->animationInfo.yOrigin++;
                 }
                 OffsetAllAnimations(0, -1);
@@ -768,7 +768,7 @@ void UpdateBackground() // BG256_main
     // _08001EB8
     if(main->currentBG == 0x79) {
         main->Bg256_scroll_y = 0;
-        if((gMain.unk0 % 2) != 0)
+        if((gMain.frameCounter % 2) != 0)
             return;
     }
     if(main->currentBG == 0x7A) {
@@ -803,7 +803,7 @@ void UpdateBackground() // BG256_main
                 }
                 animation = FindAnimationFromAnimId(0x7B);
                 if(animation) {
-                    if(gMain.unk0 % 2)
+                    if(gMain.frameCounter % 2)
                         animation->animationInfo.yOrigin -= 0x10;
                 }
                 OffsetAllAnimations(0, 0x10);
@@ -832,7 +832,7 @@ void UpdateBackground() // BG256_main
             case 2: // _080020CC
                 animation = FindAnimationFromAnimId(0x7B);
                 if(animation) {
-                    if(gMain.unk0 % 2)
+                    if(gMain.frameCounter % 2)
                         animation->animationInfo.yOrigin -= 0x10;
                 }
                 OffsetAllAnimations(0, 0x10);
@@ -846,7 +846,7 @@ void UpdateBackground() // BG256_main
     }
     if(main->currentBG == 0x61) {
         struct AnimationListEntry * animation = FindAnimationFromAnimId(0x96);
-        if((gMain.unk0 % 36) == 0)
+        if((gMain.frameCounter % 36) == 0)
             animation->animationInfo.xOrigin--;
     }
     if(courtScroll->state != 0 && (courtScroll->frameCounter & 1) == 0) // frameCounter divisible by 2?
@@ -901,7 +901,7 @@ void UpdateBackground() // BG256_main
             return;
         }
         if(main->currentBG == 0x57) {
-            if(gMain.unk0 % 4)
+            if(gMain.frameCounter % 4)
                 return;
         }
         if(main->currentBG == 0x45) {

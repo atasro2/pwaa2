@@ -578,7 +578,7 @@ void SelectEpisodeProcess(struct Main * main)
             caseBit = main->caseEnabledFlags >> 4;
             if((caseBit >> main->selectedButton) & 1) {
                 for(i = 0; i < 8; i++) {
-                    main->unk100[i] = 0xFFFFFFFF; // ? previously played case == all messages can be skipped?
+                    main->sectionReadFlags[i] = 0xFFFFFFFF; // ? previously played case == all messages can be skipped?
                 }
             }
             switch(main->selectedButton)
@@ -598,7 +598,7 @@ void SelectEpisodeProcess(struct Main * main)
                 default:
                     main->scenarioIdx = 0;
             }
-            gMain.unk4 = 0;
+            gMain.doGameProcessCounter = 0;
             SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
             break;
         } 
@@ -779,7 +779,7 @@ void ContinueSaveProcess(struct Main * main) {
             DmaCopy16(3, &gSaveDataBuffer.testimony, &gTestimony, sizeof(gTestimony));
             DmaCopy16(3, &gSaveDataBuffer.courtScroll, &gCourtScroll, sizeof(gCourtScroll));
             DmaCopy16(3, gSaveDataBuffer.examinationData, gExaminationData, sizeof(gExaminationData));
-            sub_8007D5C(main);
+            loadSectionReadFlagsFromSaveDataBuffer(main);
             switch(main->scenarioIdx)
             {
                 case 0:
@@ -816,7 +816,7 @@ void ContinueSaveProcess(struct Main * main) {
             if(mask &= (main->caseEnabledFlags >> 4)) {
                 u8 i;
                 for(i = 0; i < 8; i++) {
-                    main->unk100[i] = 0xFFFFFFFF;
+                    main->sectionReadFlags[i] = 0xFFFFFFFF;
                 }
             }
             DmaCopy16(3, gSaveDataBuffer.mapMarker, gMapMarker, sizeof(gMapMarker));
@@ -842,15 +842,15 @@ void ContinueSaveProcess(struct Main * main) {
             if(gMain.unk2BE & 0xF) {
                 switch(gMain.unk2BE >> 4) {
                     case 0:
-                        sub_800E7B0();
+                        loadWitnessBenchGraphics();
                         sub_800E7EC(0x18, 0x80, 1);
                         break;
                     case 1:
-                        sub_800E8C4();
+                        loadCounselBenchGraphics();
                         sub_800E900(0, 0x80, 1);       
                         break;
                     case 2:
-                        sub_800E8C4();
+                        loadCounselBenchGraphics();
                         sub_800E9D4(0x20, 0x80, 1);
                 }
             }
@@ -860,10 +860,10 @@ void ContinueSaveProcess(struct Main * main) {
             break;
         case 5:
             if (main->blendMode == 0) {
-                sub_8007D30(main);
+                clearSectionReadFlags(main);
                 gMain.unkB0 = gSaveDataBuffer.main.unkB0;
-                gMain.unk9A = gSaveDataBuffer.main.unkB0;
-                gMain.unk98 = gSaveDataBuffer.main.unkB0;
+                gMain.hpBar_display_value = gSaveDataBuffer.main.unkB0;
+                gMain.hpBar_value = gSaveDataBuffer.main.unkB0;
                 SET_PROCESS_PTR(gCaseStartProcess[main->scenarioIdx], 0, 0, 0, main);
             }
             break;

@@ -2,7 +2,7 @@
 #define GUARD_DECLARATIONS_H
 
 extern struct PscyheLock gPsycheLock;
-extern struct Struct3006390 gUnknown_03006390[8];
+extern struct FlowerPetal gFlowerPetals[8];
 
 extern u8 * gUnknown_081124D0[];
 
@@ -15,12 +15,12 @@ extern void sub_8003B1C(u16,u16,u16);
 extern void sub_8003B8C(u16,u16);
 
 // script_main
-extern void sub_8007D30(struct Main * main);
+extern void clearSectionReadFlags(struct Main * main);
 
 // investigation stuff 
-extern void sub_800E7B0(void);
+extern void loadWitnessBenchGraphics(void);
 extern void sub_800E7EC(s32, s32, u8);
-extern void sub_800E8C4(void);
+extern void loadCounselBenchGraphics(void);
 extern void sub_800E900(s32, s32, u8);
 extern void sub_800E9D4(s32, s32, u8);
 extern void sub_8010FA4(void);
@@ -28,19 +28,19 @@ extern void sub_8011088(u16, u16);
 extern void sub_8011198(void);
 
 // new file
-int sub_80175C0(void);
-void sub_8017864(void);
+int findPlayingHPBarSmokeAnimations(void);
+void clearHPBarOAM(void);
 void sub_80178E0(void);
 void sub_8017910(void);
 void sub_8017928(u32);
-void sub_801798C(void);
+void processHPBar(void);
 bool32 sub_8017C78(void);
-void sub_8017F2C(void);
-void sub_80180B4(void);
-void sub_80180F8(void);
-extern void sub_8018138(void);
-extern void sub_801816C(void);
-extern void sub_801823C(void);
+void setSpotlightStopSweepingFlag(void);
+void spawnAllFlowerPetals(void);
+void destroyAllFlowerPetals(void);
+extern void updateNickelSamuraiZoominAnimation(void);
+extern void initNickelSamuraiZoominAnimation(void);
+extern void finishNickelSamuraiZoominAnimation(void);
 extern void sub_80183D8(void);
 extern void sub_8018690(void);
 extern void sub_80186EC(void);

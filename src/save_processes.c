@@ -457,7 +457,7 @@ void SaveGameExitSaveScreen(struct Main *main)
     main->gameStateFlags = gSaveDataBuffer.main.gameStateFlags;
     main->shakeTimer = gSaveDataBuffer.main.shakeTimer;
     main->tilemapUpdateBits = gSaveDataBuffer.main.tilemapUpdateBits;
-    sub_8007D5C(main);
+    loadSectionReadFlagsFromSaveDataBuffer(main);
     RestoreAnimationsFromBuffer(gSaveDataBuffer.backupAnimations);
     gMain.animationFlags |= 3;
     DmaCopy16(3, gSaveDataBuffer.oam, gOamObjects, sizeof(gOamObjects));
@@ -474,15 +474,15 @@ void SaveGameExitSaveScreen(struct Main *main)
     if(gMain.unk2BE & 0xF) {
         switch(gMain.unk2BE >> 4) {
             case 0:
-                sub_800E7B0();
+                loadWitnessBenchGraphics();
                 sub_800E7EC(0x18, 0x80, 1);
                 break;
             case 1:
-                sub_800E8C4();
+                loadCounselBenchGraphics();
                 sub_800E900(0, 0x80, 1);       
                 break;
             case 2:
-                sub_800E8C4();
+                loadCounselBenchGraphics();
                 sub_800E9D4(0x20, 0x80, 1);
         }
     }

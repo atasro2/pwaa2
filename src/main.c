@@ -97,7 +97,7 @@ void AgbMain(void)
 
         if (gMain.currentBgStripe == 0)
         {
-            gMain.unk0++;
+            gMain.frameCounter++;
             UpdateBackground();
             UpdateBGTilemaps();
             MoveAnimationTilesToRam(0);
@@ -226,10 +226,10 @@ void DoGameProcess(void)
         main->shakeAmountX = 0;
         main->shakeAmountY = 0;
     }
-    sub_801798C();
+    processHPBar();
     gGameProcesses[gMain.process[GAME_PROCESS]](&gMain);
     sub_80183D8();
-    gMain.unk4++;
+    gMain.doGameProcessCounter++;
 
     if (courtScroll->state != 0)
     {
@@ -275,7 +275,7 @@ void ResetGameState(void)
     DmaFill16(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     DmaFill16(3, 0, &gMain, sizeof(gMain));
-    sub_8007D30(main);
+    clearSectionReadFlags(main);
     DmaFill16(3, 0, &gScriptContext, sizeof(gScriptContext));
     DmaFill16(3, 0, &gCourtScroll, sizeof(gCourtScroll));
     DmaFill16(3, 0, &gTestimony, sizeof(gTestimony));

@@ -159,7 +159,7 @@ void sub_80183D8(void)
                     break;
                 }
             }
-            if((gMain.unk0 % 3) == 0) { // ! why not use key repeat this is cursed
+            if((gMain.frameCounter % 3) == 0) { // ! why not use key repeat this is cursed
                 if(gJoypad.heldKeys & DPAD_LEFT)
                     gInvestigation.pointerX--;
                 else if(gJoypad.heldKeys & DPAD_RIGHT)
