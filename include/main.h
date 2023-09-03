@@ -109,7 +109,6 @@ struct Main
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
     /* +0x1A4 */ struct PsycheLockData psycheLockData[4];
     /* +0x244 */ s8 currentPsycheLockDataIndex;
-    u8 unk245; // unused
     /* +0x246 */ u16 psycheLockStopPresentButtonsY;
     /* +0x248 */ u8 psycheLockStopPresentButtonsState;
     /* +0x249 */ u8 psycheLockStopPresentButtonsSubstate;
