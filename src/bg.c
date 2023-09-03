@@ -719,13 +719,13 @@ void UpdateBackground() // BG256_main
     if(main->currentBG == 0x78) { // really big
         struct AnimationListEntry * animation;
         s32 i;
-        switch(gMain.unk24D) { // inconsistent use of globals and pointers
+        switch(gMain.case4HeroLineupVerticalScrollState) { // inconsistent use of globals and pointers
             case 0:
                 DmaFill16(3, 0x4040, VRAM+0xE000, 0x20);
                 DmaCopy16(3, gBG3MapBuffer, gTilemapBuffer, sizeof(gBG3MapBuffer));
                 DmaFill16(3, 0x700, gBG3MapBuffer, sizeof(gBG3MapBuffer));
-                gMain.unk24D++;
-                gMain.unk24E = 0;
+                gMain.case4HeroLineupVerticalScrollState++;
+                gMain.case4HeroLineupVerticalScrollCounter = 0;
                 break;
             case 1:
                 if(gMain.blendMode)
@@ -736,9 +736,9 @@ void UpdateBackground() // BG256_main
                         animation->animationInfo.yOrigin++;
                 }
                 OffsetAllAnimations(0, -1);
-                gMain.unk24E++;
-                if(gMain.unk24E >= DISPLAY_HEIGHT)
-                    gMain.unk24D++;
+                gMain.case4HeroLineupVerticalScrollCounter++;
+                if(gMain.case4HeroLineupVerticalScrollCounter >= DISPLAY_HEIGHT)
+                    gMain.case4HeroLineupVerticalScrollState++;
                 break;
             case 2:
                 for(i = 0; i < main->Bg256_scroll_y / 8 + 2 && i < 32; i++) {
@@ -752,7 +752,7 @@ void UpdateBackground() // BG256_main
                 OffsetAllAnimations(0, -1);
                 main->Bg256_scroll_y++;
                 if(main->Bg256_scroll_y >= DISPLAY_HEIGHT)
-                    gMain.unk24D++;
+                    gMain.case4HeroLineupVerticalScrollState++;
                 break;
             case 3:
                 DmaCopy16(3, gTilemapBuffer, gBG3MapBuffer, sizeof(gBG3MapBuffer));

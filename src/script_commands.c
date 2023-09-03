@@ -2407,16 +2407,16 @@ bool32 Command52(struct ScriptContext *scriptCtx)
     u32 temp;
     scriptCtx->scriptPtr++;
     temp = *scriptCtx->scriptPtr;
-    gMain.unk24A |= temp;
-    sub_8016E10(1);
+    gMain.psycheLockStopPresentButtonsActive |= temp;
+    SetPsycheLockStopPresentButtonsState(1);
     scriptCtx->scriptPtr++;
     return 0;
 }
 
 bool32 Command53(struct ScriptContext *scriptCtx)
 {
-    gMain.unk24A = 0;
-    sub_8016E10(2);
+    gMain.psycheLockStopPresentButtonsActive = 0;
+    SetPsycheLockStopPresentButtonsState(2);
     scriptCtx->scriptPtr++;
     return 0;
 }
@@ -2470,7 +2470,7 @@ bool32 Command57(struct ScriptContext *scriptCtx)
 bool32 Command58(struct ScriptContext *scriptCtx)
 {
     scriptCtx->scriptPtr++;
-    sub_8016D40();
+    ClearPsycheLockLocksAndChainsWithoutAnimating();
     gMain.unk24B = 0;
     return 0;
 }

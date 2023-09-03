@@ -34,7 +34,7 @@ struct InvestigationStruct // unity: tantei_work_
     /* +0x08 */ u8 inactiveActions; // unity AA4: menu_mv_be_flag
     /* +0x09 */ u8 spotselectStartCounter; // unity AA4: finger_speed_x
     /* +0x0A */ u8 spotselectId; // unity: siteki_no // 指摘 pointed out
-    /* +0x0B */ u8 unkB;
+    /* +0x0B */ u8 inPsycheLockChallengeFlag;
     /* +0x0C */ u8 selectedAction; // unity: menu // selected investigation button, why menu?
     /* +0x0D */ u8 lastAction; // unity AA4: menu_old
     /* +0x0E */ u8 actionState; // unity AA4: menu_rno

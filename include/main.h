@@ -109,15 +109,15 @@ struct Main
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
     /* +0x1A4 */ struct PsycheLockData psycheLockData[4];
     /* +0x244 */ s8 currentPsycheLockDataIndex;
-    u8 unk245;
-    u16 unk246;
-    u8 unk248;
-    u8 unk249;
-    u8 unk24A;
+    u8 unk245; // unused
+    /* +0x246 */ u16 psycheLockStopPresentButtonsY;
+    /* +0x248 */ u8 psycheLockStopPresentButtonsState;
+    /* +0x249 */ u8 psycheLockStopPresentButtonsSubstate;
+    /* +0x24A */ u8 psycheLockStopPresentButtonsActive; // unity: psy_menu_active_flag
     u8 unk24B;
     u8 unk24C; // unity: psy_unlock_not_unlock_message
-    u8 unk24D;
-    u8 unk24E;
+    /* +0x24D */ u8 case4HeroLineupVerticalScrollState;
+    /* +0x24E */ u8 case4HeroLineupVerticalScrollCounter;
     u8 unk24F;
     u8 unk250;
     /* +0x254 */ u32 soundFlags;

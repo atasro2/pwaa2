@@ -1104,7 +1104,7 @@ void CourtRecordMain(struct Main * main, struct CourtRecord * courtRecord) // st
             if(main->process[GAME_PROCESS_VAR2] == 2) {
                 if(courtRecord->displayItemList[courtRecord->selectedItem] == 0x2B) {
                     if(GetPsycheLockDataIndexByRoomAndPerson(main->currentRoomId, anim->animationInfo.personId) >= 0) {
-                        gInvestigation.unkB |= 1;
+                        gInvestigation.inPsycheLockChallengeFlag |= 1;
                         oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_PRESENT];
                         oam->attr0 = SPRITE_ATTR0_CLEAR;
                         ClearEvidenceSprites(courtRecord);
@@ -1305,7 +1305,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 }
             } else {
                 if(gMain.unk24B == 1){
-                    sub_8016D40();
+                    ClearPsycheLockLocksAndChainsWithoutAnimating();
                 }
             }
             courtRecord->fullScreenPage = 0;
@@ -1530,10 +1530,10 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                     SetPsycheLockAnimationStateRedrawRemainingLocks();
                     UpdatePsycheLockAnimation();
                 }
-                sub_80170AC();
+                SetPsycheLockPresentButtonOAMInCourtRecord();
             } else {
                 if(gMain.unk24B == 1) {
-                    sub_8016C7C(gMain.currentPsycheLockDataIndex);
+                    ShowPsycheLockLocksAndChainsWithoutAnimating(gMain.currentPsycheLockDataIndex);
                 }
             }
             StartHardwareBlend(1, 1, 2, 0x1F);
@@ -1653,7 +1653,7 @@ void CourtRecordTakeThatSpecial(struct Main * main, struct CourtRecord * courtRe
                 } else if(courtRecord->flags & 0x10) {
                     s32 answer;
                     courtRecord->flags &= ~0x10;
-                    gMain.unk24A = 0;
+                    gMain.psycheLockStopPresentButtonsActive = 0;
                     answer = IsPresentedEvidenceValidForPsycheLock(&main->psycheLockData[main->currentPsycheLockDataIndex], courtRecord->displayItemList[courtRecord->selectedItem]);
                     if(answer >= 0) {
                         main->psycheLockData[main->currentPsycheLockDataIndex].validEvidencePresentedSection = main->psycheLockData[main->currentPsycheLockDataIndex].validEvidenceScriptSections[answer];

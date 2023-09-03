@@ -1516,7 +1516,7 @@ void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * in
         goto _08010E54;
 
     psycheLockData = &main->psycheLockData[main->currentPsycheLockDataIndex];
-    sub_8016E7C();
+    AnimatePsycheLockStopBresentButtons();
     goto *states[main->process[GAME_PROCESS_VAR1]];
 
 _08010A78:
@@ -1524,9 +1524,9 @@ _08010A78:
     psycheLockData->unk8 = psycheLockData->unk9;
     InitPsycheLockState(psycheLockData->unk9);
     SetPsycheLockAnimationStateShowChains();
-    sub_8016DFC();
-    gMain.unk24A = 0;
-    investigation->unkB |= 1;
+    ResetPsycheLockStopPresentButtonsState();
+    gMain.psycheLockStopPresentButtonsActive = 0;
+    investigation->inPsycheLockChallengeFlag |= 1;
     main->process[GAME_PROCESS_VAR1]++;
 _08010AA6:
     UpdatePsycheLockAnimation();
@@ -1538,21 +1538,21 @@ _08010AC4:
     gMain.advanceScriptContext = TRUE;
     main->process[GAME_PROCESS_VAR1] = 3;
 _08010AD4:
-    if(gMain.unk24A & 1
+    if(gMain.psycheLockStopPresentButtonsActive & 1
     && gJoypad.pressedKeys == R_BUTTON
-    && gMain.unk248 == 0
+    && gMain.psycheLockStopPresentButtonsState == 0
     && (main->gameStateFlags & 0x10) == 0
     && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN | SCRIPT_LOOP))
     {
         ClearHPBarOAM();
-        sub_80170AC();
+        SetPsycheLockPresentButtonOAMInCourtRecord();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 3, main);
     }
-    if(gMain.unk24A & 2
+    if(gMain.psycheLockStopPresentButtonsActive & 2
     && sub_801715C() == FALSE
-    && gMain.unk248 == 0
+    && gMain.psycheLockStopPresentButtonsState == 0
     && gJoypad.pressedKeys == L_BUTTON)
     {
         PlaySE(SE002_MENU_CANCEL);
@@ -1560,7 +1560,7 @@ _08010AD4:
         main->process[GAME_PROCESS_VAR2] = 0;
         goto _08010D9C; // goto state 8 immediately
     }
-    if(gMain.unk24A == 0
+    if(gMain.psycheLockStopPresentButtonsActive == 0
     && sub_801715C() == FALSE
     && gJoypad.pressedKeys == R_BUTTON
     && FindPlayingHPBarSmokeAnimations() == 0
@@ -1692,7 +1692,7 @@ _08010D9C:
         case 5:
             ReloadInvestigationGraphics();
             ClearInvestigationActionButtonOAM();
-            gInvestigation.unkB &= ~1;
+            gInvestigation.inPsycheLockChallengeFlag &= ~1;
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
             if(psycheLockData->unk14 != 0xFFFF)
                 PlayBGM(psycheLockData->unk14);
@@ -1704,7 +1704,7 @@ _08010E54:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
             gMain.advanceScriptContext = FALSE;
-            investigation->unkB |= 1;
+            investigation->inPsycheLockChallengeFlag |= 1;
             SlideTextbox(0);
             InitPsycheLockState(main->currentPsycheLockDataIndex);
             SetPsycheLockAnimationStateShowChains();
@@ -1759,7 +1759,7 @@ _08010EAC:
             gMain.hpBarValue = 1;
             ReloadInvestigationGraphics();
             ClearInvestigationActionButtonOAM();
-            gInvestigation.unkB &= ~1;
+            gInvestigation.inPsycheLockChallengeFlag &= ~1;
             SlideTextbox(0);
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
             if(psycheLockData->unk14 != 0xFFFF)
@@ -1794,11 +1794,11 @@ void SetInvestigationStateToReturnAfterPsycheLocks(u16 arg0, u16 arg1) {
     u32 i;
     ReloadInvestigationGraphics();
     if(arg0 == 0) {
-        gInvestigation.unkB &= ~1;
+        gInvestigation.inPsycheLockChallengeFlag &= ~1;
         gInvestigation.selectedAction = 3;
         gInvestigation.lastAction = 3;
     } else if(arg0 == 1) {
-        gInvestigation.unkB &= ~1;
+        gInvestigation.inPsycheLockChallengeFlag &= ~1;
         oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
         for(i = 0; i < 4; i++) {
             oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -1812,7 +1812,7 @@ void SetInvestigationStateToReturnAfterPsycheLocks(u16 arg0, u16 arg1) {
         gInvestigation.lastActionYOffset = 0;
         gInvestigation.selectedAction = 2;
         gInvestigation.lastAction = 2;
-        gInvestigation.unkB &= ~1;
+        gInvestigation.inPsycheLockChallengeFlag &= ~1;
         gInvestigation.actionState = 5;
         oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_TALK];
         oam->attr0 &= 0xFF00;
@@ -1856,7 +1856,7 @@ void UpdateInvestigationActionSprites(struct InvestigationStruct * investigation
     u32 i;
     u32 y;
 
-    if(!(investigation->unkB & 1)) {
+    if(!(investigation->inPsycheLockChallengeFlag & 1)) {
         switch(investigation->actionState)
         {
             case 0:
