@@ -58,9 +58,6 @@ u16 IsTalkSectionPsycheLocked(u16 arg0);
 /* end data stuff from segments */
 
 void SetInactiveActionButtons(struct InvestigationStruct *, u32);
-extern u32 sub_800D5B0(struct InvestigationStruct *);
-void sub_800D674(void);
-void sub_800D6C8(void);
 
 /* autodumped */
 extern const u8 gCourtRecordInitialItems_0_0[8];

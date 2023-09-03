@@ -20,14 +20,14 @@ struct PsycheLockData
     u16 validEvidenceScriptSections[4]; //  unity: item_correct_message
 };
 
-struct PsycheLockChains_8 {
+struct PsycheLockChainsTilemapHeader {
     u8 fill0[0x4];
-    u16 unk4;   
-    u16 unk6;
+    u16 numBlocks;   
+    u16 numFrames;
 };
 
-struct PsycheLockChains_C {
-    u16 unk0;
+struct PsycheLockChainsFrameDescription {
+    u16 blockId;
     u8 fill02[0x6];
 };
 
@@ -52,11 +52,11 @@ struct PsycheLock_Block {
 
 struct PsycheLockChains {
     s16 targetBGMapBuffer;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    struct PsycheLockChains_8 * unk8;
-    struct PsycheLockChains_C * unkC[48];
+    s16 setButNeverUsed; // set in InitPsycheLockChain, never used after
+    s16 currentChainFrame;
+    s16 loadCounter; // only ever used in LoadNextPsycheLockChainFrame
+    struct PsycheLockChainsTilemapHeader * mapHeader;
+    struct PsycheLockChainsFrameDescription * frames[48];
     void * chainBlocks[48]; // Pointer to u32 followed by struct PsycheLock_Block
 };
 

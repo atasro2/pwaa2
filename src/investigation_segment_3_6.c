@@ -2598,7 +2598,7 @@ void InvestigationRoomSetup_3_6(struct Main *main) {
                 PlayAnimation(0x1D);
             }
             if(!GetFlag(0, 0xA8)) {
-                sub_8004458(0x157, 0xA8);
+                InvestigationSetScriptSectionAndFlagTextboxSlide2(0x157, 0xA8);
             }
             LOADEXAMDATA(gExaminationData_3_6_09);
             break;

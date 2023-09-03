@@ -47,35 +47,35 @@ u8 * gPsycheLockChainTilemaps[] = {
     gMapPsycheLockChains19,
     gMapPsycheLockChains20
 };
-void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * arg0);
+void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * chains);
 
-void sub_8015CE0(struct PsycheLockChains * arg0, s32 arg1, s32 targetBGMapBuffer, s32 arg3)
+void InitPsycheLockChain(struct PsycheLockChains * chains, s32 arg1, s32 targetBGMapBuffer, s32 arg3)
 {
-    arg0->unk2 = arg1;
-    arg0->targetBGMapBuffer = targetBGMapBuffer;
-    arg0->unk4 = arg3;
-    CopyPsycheLockChainBlocksToBGMapBuffer(arg0);
+    chains->setButNeverUsed = arg1;
+    chains->targetBGMapBuffer = targetBGMapBuffer;
+    chains->currentChainFrame = arg3;
+    CopyPsycheLockChainBlocksToBGMapBuffer(chains);
 }
 
-void LoadPsycheLockChainBlocks(struct PsycheLockChains * arg0, s32 arg1, s32 arg2)
+void LoadPsycheLockChainBlocks(struct PsycheLockChains * chains, s32 arg1, s32 arg2)
 {
     int i;
     void * decompBuff;
-    DmaFill16(3, 0, arg0, sizeof(*arg0));
+    DmaFill16(3, 0, chains, sizeof(*chains));
     decompBuff = arg1 % 10 <= 4 ? (void*)0x2036500 : (void*)0x203A500;
     LZ77UnCompWram(gPsycheLockChainTilemaps[arg1], decompBuff);
-    arg0->unk8 = decompBuff;
-    decompBuff += 8;
-    for(i = 0; i < arg0->unk8->unk6; i++)
+    chains->mapHeader = decompBuff;
+    decompBuff += sizeof(struct PsycheLockChainsTilemapHeader);
+    for(i = 0; i < chains->mapHeader->numFrames; i++)
     {
-        arg0->unkC[i] = decompBuff;
-        decompBuff += 8;
+        chains->frames[i] = decompBuff;
+        decompBuff += sizeof(struct PsycheLockChainsFrameDescription);
     }
-    for(i = 0; i < arg0->unk8->unk4; i++)
+    for(i = 0; i < chains->mapHeader->numBlocks; i++)
     {
         int count;
         int j;
-        arg0->chainBlocks[i] = decompBuff;
+        chains->chainBlocks[i] = decompBuff;
         count = *(u32*)decompBuff;
         decompBuff += 4;
         for(j = 0; j < count; j++)
@@ -87,17 +87,17 @@ void LoadPsycheLockChainBlocks(struct PsycheLockChains * arg0, s32 arg1, s32 arg
                 decompBuff += 0x10;
         }
     }
-    sub_8015CE0(arg0, arg1, arg2, 0);
+    InitPsycheLockChain(chains, arg1, arg2, 0);
 }
 
-void sub_8015DBC(struct PsycheLockChains * arg0)
+void LoadNextPsycheLockChainFrame(struct PsycheLockChains * chains)
 {
-    arg0->unk6++;
-    if(arg0->unk4 < arg0->unk8->unk6-1 && (gMain.frameCounter % 3) == 0)
+    chains->loadCounter++;
+    if(chains->currentChainFrame < chains->mapHeader->numFrames-1 && (gMain.frameCounter % 3) == 0)
     {
-        arg0->unk6 = 0;
-        arg0->unk4++;
-        CopyPsycheLockChainBlocksToBGMapBuffer(arg0);
+        chains->loadCounter = 0;
+        chains->currentChainFrame++;
+        CopyPsycheLockChainBlocksToBGMapBuffer(chains);
     }
 }
 
@@ -112,9 +112,9 @@ void ClearBGStateAfterPsychelock(void)
     gIORegisters.lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
 }
 
-bool32 sub_8015E9C(struct PsycheLockChains * arg0)
+bool32 HavePsycheLockChainsFinishedAnimating(struct PsycheLockChains * chains)
 {
-    if(arg0->unk4 >= arg0->unk8->unk6-1)
+    if(chains->currentChainFrame >= chains->mapHeader->numFrames-1)
         return TRUE;
     return FALSE;
 }
@@ -133,7 +133,7 @@ void LoadPsycheLockChainGraphics(void)
     DmaCopy16(3, gPsycheLockChainPalettes[1], BG_PLTT+0x1E0, 0x20);
 }
 
-void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * arg0)
+void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * chains)
 {
     short i;
     void * data;
@@ -147,7 +147,7 @@ void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * arg0)
     int temp;
     bool32 sp10;
 
-    data = arg0->chainBlocks[arg0->unkC[arg0->unk4]->unk0];
+    data = chains->chainBlocks[chains->frames[chains->currentChainFrame]->blockId];
     count = *(u32*)data;
     data += 4;
 
@@ -155,7 +155,7 @@ void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * arg0)
     mapXOffset = 0;
     palIdx = 14;
     sp10 = FALSE;
-    switch(arg0->targetBGMapBuffer)
+    switch(chains->targetBGMapBuffer)
     {
         case 0:
             mapXOffset = -8;
@@ -392,10 +392,10 @@ _080163C2: // psylock_move_chain_appear
             gPsycheLock.subState++;
             // fallthrough
         case 1:
-            sub_8015DBC(&gPsycheLock.chains[0]);
-            sub_8015DBC(&gPsycheLock.chains[1]);
-            if(sub_8015E9C(&gPsycheLock.chains[0])
-            && sub_8015E9C(&gPsycheLock.chains[1]))
+            LoadNextPsycheLockChainFrame(&gPsycheLock.chains[0]);
+            LoadNextPsycheLockChainFrame(&gPsycheLock.chains[1]);
+            if(HavePsycheLockChainsFinishedAnimating(&gPsycheLock.chains[0])
+            && HavePsycheLockChainsFinishedAnimating(&gPsycheLock.chains[1]))
                 gPsycheLock.subState++;
             gMain.gameStateFlags |= 1;
             gMain.shakeTimer = 2;
@@ -593,11 +593,11 @@ _0801678A: // psylock_move_chain_disappear
             }
             return;
         case 6:
-            sub_8015DBC(&gPsycheLock.chains[0]);
-            sub_8015DBC(&gPsycheLock.chains[1]);
+            LoadNextPsycheLockChainFrame(&gPsycheLock.chains[0]);
+            LoadNextPsycheLockChainFrame(&gPsycheLock.chains[1]);
             
-            if(sub_8015E9C(&gPsycheLock.chains[0])
-            && sub_8015E9C(&gPsycheLock.chains[1])) {
+            if(HavePsycheLockChainsFinishedAnimating(&gPsycheLock.chains[0])
+            && HavePsycheLockChainsFinishedAnimating(&gPsycheLock.chains[1])) {
                 FadeOutSE(127 + gPsycheLock.numLocksTotal, 60);
                 gPsycheLock.subState++;
                 gPsycheLock.animationCounter = 0;
@@ -758,8 +758,8 @@ void ShowPsycheLockLocksAndChainsWithoutAnimating(u32 numPsycheLocks) // Psylock
     LoadPsycheLockChainGraphics();
     LoadPsycheLockChainBlocks(&gPsycheLock.chains[0], gPsycheLock.numLocksTotal - 1, 3);
     LoadPsycheLockChainBlocks(&gPsycheLock.chains[1], gPsycheLock.numLocksTotal + 5 - 1, 0);
-    sub_8015CE0(&gPsycheLock.chains[0], gPsycheLock.numLocksTotal - 1, 3, gPsycheLock.chains[0].unk8->unk6-1);
-    sub_8015CE0(&gPsycheLock.chains[1], gPsycheLock.numLocksTotal + 5 - 1, 0, gPsycheLock.chains[1].unk8->unk6-1);
+    InitPsycheLockChain(&gPsycheLock.chains[0], gPsycheLock.numLocksTotal - 1, 3, gPsycheLock.chains[0].mapHeader->numFrames-1);
+    InitPsycheLockChain(&gPsycheLock.chains[1], gPsycheLock.numLocksTotal + 5 - 1, 0, gPsycheLock.chains[1].mapHeader->numFrames-1);
     for(i = 0; i < gPsycheLock.numLocksTotal; i++)
     {
         s32 temp = (gPsycheLock.numLocksTotal-1);
@@ -814,9 +814,9 @@ void ResetPsycheLockStopPresentButtonsState(void)
     gMain.psycheLockStopPresentButtonsState = 0;
 }
 
-void SetPsycheLockStopPresentButtonsState(u32 arg0)
+void SetPsycheLockStopPresentButtonsState(u32 state)
 {
-    gMain.psycheLockStopPresentButtonsState = arg0;
+    gMain.psycheLockStopPresentButtonsState = state;
     gMain.psycheLockStopPresentButtonsSubstate = 0;
 }
 

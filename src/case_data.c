@@ -195,7 +195,7 @@ void InvestigationSetScriptSectionAndFlag(u32 section, u32 flagId) // Set_event
     PauseBGM();
 }
 
-void sub_8004458(u32 section, u32 flagId) // Set_event
+void InvestigationSetScriptSectionAndFlagTextboxSlide2(u32 section, u32 flagId) // Set_event
 {
     ChangeFlag(0, flagId, TRUE);
     ChangeScriptSection(section);
