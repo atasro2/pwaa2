@@ -266,6 +266,6 @@ void EndSignalDetector(void) {
     *signalDetectorState = 0;
 }
 
-void nullsub_12(void) {
+void SignalDetectorUnused(void) {
     
 }
