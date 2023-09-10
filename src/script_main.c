@@ -202,7 +202,7 @@ void InitScriptSection(struct ScriptContext *scriptCtx)
     scriptCtx->textY = 0;
     if (gMain.process[GAME_PROCESS] != 4 || gMain.process[GAME_PROCESS_STATE] != 8)
         scriptCtx->textSkip = 0;
-    scriptCtx->unused15 = 0;
+    scriptCtx->unk15 = 0;
     scriptCtx->paragraphSkipDelayCounter = 8;
     scriptCtx->soundCueSkip = 1;
     scriptCtx->currentSoundCue = 0;

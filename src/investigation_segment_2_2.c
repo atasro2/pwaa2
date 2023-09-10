@@ -854,7 +854,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0x0,
         .personId = 0x4,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x1,
         .iconId = { 0x27, 0x28, 0xFF, 0xFF },
         .talkFlagId = { 0x73, 0x74, 0xFF, 0xFF },
@@ -863,7 +863,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0x1,
         .personId = 0x1D,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x1,
         .iconId = { 0x3B, 0x3C, 0xFF, 0xFF },
         .talkFlagId = { 0x75, 0x76, 0xFF, 0xFF },
@@ -872,7 +872,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0x1,
         .personId = 0x1D,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x3B, 0x3C, 0x3D, 0xFF },
         .talkFlagId = { 0x75, 0x76, 0x77, 0xFF },
@@ -881,7 +881,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0x8,
         .personId = 0x1E,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x1,
         .iconId = { 0x3C, 0x3E, 0x2E, 0xFF },
         .talkFlagId = { 0x78, 0x79, 0x7A, 0xFF },
@@ -890,7 +890,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0x9,
         .personId = 0x1C,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x1,
         .iconId = { 0x39, 0x31, 0xFF, 0xFF },
         .talkFlagId = { 0x87, 0x88, 0xFF, 0xFF },
@@ -899,7 +899,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0x9,
         .personId = 0x1C,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x39, 0x3F, 0xFF, 0xFF },
         .talkFlagId = { 0x87, 0x89, 0xFF, 0xFF },
@@ -908,7 +908,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xA,
         .personId = 0xF,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x1,
         .iconId = { 0x36, 0x44, 0xFF, 0xFF },
         .talkFlagId = { 0x7F, 0x80, 0xFF, 0xFF },
@@ -917,7 +917,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xA,
         .personId = 0xF,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x36, 0x44, 0x45, 0xFF },
         .talkFlagId = { 0x7F, 0x80, 0x81, 0xFF },
@@ -926,7 +926,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xA,
         .personId = 0xF,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x36, 0x44, 0x45, 0x46 },
         .talkFlagId = { 0x7F, 0x80, 0x81, 0x82 },
@@ -935,7 +935,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xB,
         .personId = 0x1F,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x1,
         .iconId = { 0x3C, 0x3A, 0xFF, 0xFF },
         .talkFlagId = { 0x7B, 0x7C, 0xFF, 0xFF },
@@ -944,7 +944,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xB,
         .personId = 0x1F,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x3C, 0x3A, 0x40, 0xFF },
         .talkFlagId = { 0x7B, 0x7C, 0x7D, 0xFF },
@@ -953,7 +953,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xB,
         .personId = 0x1F,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x3C, 0x3A, 0x40, 0x41 },
         .talkFlagId = { 0x7B, 0x7C, 0x7D, 0x7E },
@@ -962,7 +962,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xB,
         .personId = 0x1F,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x3A, 0x2A, 0xFF, 0xFF },
         .talkFlagId = { 0x7C, 0x8A, 0xFF, 0xFF },
@@ -971,7 +971,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xB,
         .personId = 0x1F,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x3A, 0x2A, 0x42, 0xFF },
         .talkFlagId = { 0x7C, 0x8A, 0x8D, 0xFF },
@@ -980,7 +980,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xB,
         .personId = 0x1F,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x3A, 0x2A, 0x42, 0xFF },
         .talkFlagId = { 0x7C, 0x8A, 0x8D, 0xFF },
@@ -989,7 +989,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xB,
         .personId = 0x1F,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x3A, 0x2A, 0x42, 0xFF },
         .talkFlagId = { 0x7C, 0x8A, 0x8E, 0xFF },
@@ -998,7 +998,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xB,
         .personId = 0x1F,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x3A, 0x2A, 0x42, 0x43 },
         .talkFlagId = { 0x7C, 0x8A, 0x8E, 0x8F },
@@ -1007,7 +1007,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xE,
         .personId = 0x20,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x1,
         .iconId = { 0x2A, 0x47, 0x2B, 0xFF },
         .talkFlagId = { 0x83, 0x84, 0x85, 0xFF },
@@ -1016,7 +1016,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xE,
         .personId = 0x20,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x2A, 0x47, 0x2B, 0xFF },
         .talkFlagId = { 0x83, 0x84, 0x85, 0xFF },
@@ -1025,7 +1025,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xE,
         .personId = 0x20,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x2A, 0x47, 0x2B, 0xFF },
         .talkFlagId = { 0x83, 0x8B, 0x85, 0xFF },
@@ -1034,7 +1034,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xE,
         .personId = 0x20,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x2A, 0x48, 0x2B, 0xFF },
         .talkFlagId = { 0x83, 0x8C, 0x85, 0xFF },
@@ -1043,7 +1043,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xE,
         .personId = 0x20,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x2A, 0x47, 0x2B, 0x3A },
         .talkFlagId = { 0x83, 0x84, 0x85, 0x86 },
@@ -1052,7 +1052,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xE,
         .personId = 0x20,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x2A, 0x47, 0x2B, 0x3A },
         .talkFlagId = { 0x83, 0x84, 0x85, 0x86 },
@@ -1061,7 +1061,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xE,
         .personId = 0x20,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x2A, 0x47, 0x2B, 0x3A },
         .talkFlagId = { 0x83, 0x8B, 0x85, 0x86 },
@@ -1070,7 +1070,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xE,
         .personId = 0x20,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0x0,
         .iconId = { 0x2A, 0x48, 0x2B, 0x3A },
         .talkFlagId = { 0x83, 0x8C, 0x85, 0x86 },
@@ -1079,7 +1079,7 @@ const struct TalkData gTalkData_2_2[26] = {
     {
         .roomId = 0xFF,
         .personId = 0xFF,
-        .unused2 = 0xFF,
+        .unk2 = 0xFF,
         .enableFlag = 0xFF,
         .iconId = { 0xFF, 0xFF, 0xFF, 0xFF },
         .talkFlagId = { 0xFF, 0xFF, 0xFF, 0xFF },

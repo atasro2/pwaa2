@@ -1298,7 +1298,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 break;
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
-                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.loadedBG == 0x7F) {
+                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.unk30 == 0x7F) {
                     SetPsycheLockAnimationStateReturnToNormalBackground();
                     UpdatePsycheLockAnimation();
                     ClearPsycheLockStopPresentButtonsOAM();
@@ -1466,14 +1466,14 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             main->currentBG = gSaveDataBuffer.main.currentBG;
             main->previousBG = gSaveDataBuffer.main.previousBG;
             main->currentBgStripe = gSaveDataBuffer.main.currentBgStripe;
-            main->disableDetentionCenterMask = gSaveDataBuffer.main.disableDetentionCenterMask;
+            main->unk35 = gSaveDataBuffer.main.unk35;
             main->isBGScrolling = gSaveDataBuffer.main.isBGScrolling;
             main->Bg256_stop_line = gSaveDataBuffer.main.Bg256_stop_line;
             main->Bg256_scroll_x = gSaveDataBuffer.main.Bg256_scroll_x;
             main->Bg256_scroll_y = gSaveDataBuffer.main.Bg256_scroll_y;
             main->Bg256_pos_x = gSaveDataBuffer.main.Bg256_pos_x;
             main->Bg256_pos_y = gSaveDataBuffer.main.Bg256_pos_y;
-            main->unused40 = gSaveDataBuffer.main.unused40;
+            main->unk40 = gSaveDataBuffer.main.unk40;
             main->Bg256_dir = gSaveDataBuffer.main.Bg256_dir;
             main->horizontolBGScrollSpeed = gSaveDataBuffer.main.horizontolBGScrollSpeed;
             main->verticalBGScrollSpeed = gSaveDataBuffer.main.verticalBGScrollSpeed;
@@ -1509,8 +1509,8 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 if(anim)
                     anim->animationInfo.xOrigin = DISPLAY_WIDTH/2;
             }
-            if(gMain.courtBenchSpritesTypeFlag & 0xF) {
-                switch(gMain.courtBenchSpritesTypeFlag >> 4) {
+            if(gMain.unk2BE & 0xF) {
+                switch(gMain.unk2BE >> 4) {
                     case 0:
                         LoadWitnessBenchGraphics();
                         SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);

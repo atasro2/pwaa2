@@ -32,6 +32,7 @@ struct AnimationInfo
 {
     /* +0x00 */ u16 animId;
     /* +0x02 */ u8 personId;
+    /* +0x03 */ u8 unk3;
     /* +0x04 */ s16 xOrigin;
     /* +0x06 */ s16 yOrigin;
     /* +0x08 */ u8 *volatile animFrameDataStartPtr; // !! THESE 4 POINTERS ARE VOLATILE TO MATCH MoveAnimationTilesToRam AND THAT COULD BE INCORRECT
@@ -62,7 +63,7 @@ struct AnimationListEntry
     /* +0x2C */ u8 bgId;
     /* +0x2D */ u8 roomId;
     /* +0x2E */ s16 specialEffectVar;
-    /* +0x30 */ u8 * tileData;
+    /* +0x30 */ u8 * unk30;
     /* +0x34 */ struct SpriteTemplate * spriteData;
     /* +0x38 */ struct AnimationFrame * frameData;
     /* +0x3C */ u16 tileNum;
@@ -76,15 +77,16 @@ struct AnimationBackupStruct
 {
     /* +0x00 */ u16 animId;
     /* +0x02 */ u8 personId;
+    /* +0x03 */ u8 unk3; // animationInfo.unk3
     /* +0x04 */ s16 xOrigin;
     /* +0x06 */ s16 yOrigin;
     /* +0x08 */ u8 * animFrameDataStartPtr;
     /* +0x0C */ u16 frameDurationCounter;
-    /* +0x0E */ u8 animVar0;
-    /* +0x0F */ u8 animVar1;
+    /* +0x0E */ u8 unkE; // unk2A
+    /* +0x0F */ u8 unkF; // unk2B
     /* +0x10 */ u8 bgId;
     /* +0x11 */ u8 roomId;
-    /* +0x12 */ u16 specialEffectVar;
+    /* +0x12 */ u16 unk12; // unk2E
     /* +0x14 */ u32 flags;
     /* +0x18 */ struct AnimationFrame * frameData;
 };
@@ -94,7 +96,7 @@ struct PersonAnimationData
     /* +0x00 */ u8* gfxData;
     /* +0x04 */ u8* frameData;
     /* +0x08 */ u16 spriteCount;
-    /* +0x0A */ u16 unusedA;
+    /* +0x0A */ u16 unkA;
 };
 
 struct AnimationData

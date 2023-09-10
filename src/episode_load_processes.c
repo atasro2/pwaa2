@@ -839,8 +839,8 @@ void ContinueSaveProcess(struct Main * main) {
                 LoadItemPlateGfx(main);
             }
             FadeInBGM(20, main->currentPlayingBgm);
-            if(gMain.courtBenchSpritesTypeFlag & 0xF) {
-                switch(gMain.courtBenchSpritesTypeFlag >> 4) {
+            if(gMain.unk2BE & 0xF) {
+                switch(gMain.unk2BE >> 4) {
                     case 0:
                         LoadWitnessBenchGraphics();
                         SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);

@@ -102,12 +102,12 @@ void CopyBGDataToVram(u32 bgId)
     if(bgId == 0x57)
         main->Bg256_scroll_y = 0;
     if(bgId == 0x11) {
-        if(main->disableDetentionCenterMask == 1)
+        if(main->unk35 == 1)
             EnableDetentionCenterMask(FALSE);
         else
             EnableDetentionCenterMask(TRUE);
     } else {
-        main->disableDetentionCenterMask = 0;
+        main->unk35 = 0;
         EnableDetentionCenterMask(FALSE);
     }
     if(gMain.process[GAME_PROCESS] != INVESTIGATION_PROCESS) {
@@ -196,7 +196,7 @@ void CopyBGDataToVram(u32 bgId)
     main->Bg256_pos_x = 0;
     main->Bg256_pos_y = 0;
     main->currentBG = bgId;
-    main->loadedBG = bgId;
+    main->unk30 = bgId;
     if(bgId == 0x80)
     {
         src = gUnknown_0801BBD8;
