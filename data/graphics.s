@@ -27,7 +27,7 @@ gPalEvidenceProfileDesc:
 
     .global gGfxSaveGameTiles
 gGfxSaveGameTiles:
-    .incbin "graphics/ui/message_box/13791C.4bpp"
+    .incbin "graphics/ui/message_box/save_game_tiles.4bpp"
 
     .global gGfxNameTags
 gGfxNameTags:
