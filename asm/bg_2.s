@@ -60,7 +60,7 @@ _08002A1E:
 	beq _08002ACE
 	cmp r4, #5
 	bne _08002A34
-	bl sub_800E8C4
+	bl LoadCounselBenchGraphics
 	movs r0, #0x20
 	b _08002AF4
 	.align 2, 0
@@ -146,46 +146,46 @@ _08002AC8:
 	beq _08002ADE
 	b _08002AFE
 _08002ACE:
-	bl sub_800E8C4
+	bl LoadCounselBenchGraphics
 	movs r0, #0
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800E900
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08002B28
 _08002ADE:
-	bl sub_800E7B0
+	bl LoadWitnessBenchGraphics
 	movs r0, #0x18
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800E7EC
+	bl SetOAMForCourtBenchSpritesWitness
 	b _08002B28
 _08002AEE:
-	bl sub_800E8C4
+	bl LoadCounselBenchGraphics
 	movs r0, #0x18
 _08002AF4:
 	movs r1, #0x80
 	movs r2, #1
-	bl sub_800E9D4
+	bl SetOAMForCourtBenchSpritesProsecution
 	b _08002B28
 _08002AFE:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800E7EC
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800E900
+	bl SetOAMForCourtBenchSpritesDefense
 	b _08002B28
 _08002B14:
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800E7EC
+	bl SetOAMForCourtBenchSpritesWitness
 	movs r0, #0
 	movs r1, #0
 	movs r2, #0
-	bl sub_800E900
+	bl SetOAMForCourtBenchSpritesDefense
 _08002B28:
 	ldr r1, _08002BD0 @ =gScriptContext
 	movs r0, #0x40
@@ -193,7 +193,7 @@ _08002B28:
 	ands r0, r1
 	cmp r0, #0
 	beq _08002C28
-	ldr r1, _08002BD4 @ =gUnknown_08263FD4
+	ldr r1, _08002BD4 @ =gPal_BG014_BustupPhoenix
 	ldr r3, _08002BD8 @ =0x050001C0
 	ldr r2, _08002BDC @ =0x040000D4
 	str r1, [r2]
@@ -201,19 +201,19 @@ _08002B28:
 	ldr r0, _08002BE0 @ =0x80000010
 	str r0, [r2, #8]
 	ldr r1, [r2, #8]
-	ldr r1, _08002BE4 @ =gUnknown_08265CC4
+	ldr r1, _08002BE4 @ =gPal_BG015_BustupEdgeworth
 	adds r3, #0x20
 	str r1, [r2]
 	str r3, [r2, #4]
 	str r0, [r2, #8]
 	ldr r1, [r2, #8]
-	ldr r1, _08002BE8 @ =gUnknown_08277A98
+	ldr r1, _08002BE8 @ =gPal_BG020_BustupFranziska
 	subs r3, #0x40
 	str r1, [r2]
 	str r3, [r2, #4]
 	str r0, [r2, #8]
 	ldr r0, [r2, #8]
-	ldr r0, _08002BEC @ =gUnknown_0847845C
+	ldr r0, _08002BEC @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r2]
 	ldr r1, _08002BF0 @ =gUnknown_0203B000
 	str r1, [r2, #4]
@@ -270,13 +270,13 @@ _08002B28:
 	bl _0800341C
 	.align 2, 0
 _08002BD0: .4byte gScriptContext
-_08002BD4: .4byte gUnknown_08263FD4
+_08002BD4: .4byte gPal_BG014_BustupPhoenix
 _08002BD8: .4byte 0x050001C0
 _08002BDC: .4byte 0x040000D4
 _08002BE0: .4byte 0x80000010
-_08002BE4: .4byte gUnknown_08265CC4
-_08002BE8: .4byte gUnknown_08277A98
-_08002BEC: .4byte gUnknown_0847845C
+_08002BE4: .4byte gPal_BG015_BustupEdgeworth
+_08002BE8: .4byte gPal_BG020_BustupFranziska
+_08002BEC: .4byte gGfxSpeedlinesFirstAndLastColumns
 _08002BF0: .4byte gUnknown_0203B000
 _08002BF4: .4byte 0x80000280
 _08002BF8: .4byte 0x06008B00
@@ -337,7 +337,7 @@ _08002C28:
 	movs r0, #6
 	movs r1, #0x20
 	movs r2, #1
-	bl sub_8003B1C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 _08002C8A:
 	mov r1, sp
 	movs r0, #0x1f
@@ -451,7 +451,7 @@ _08002D68:
 	movs r0, #1
 	strb r0, [r7]
 	ldr r1, _08002DC0 @ =0x040000D4
-	ldr r0, _08002DC8 @ =gUnknown_0847845C
+	ldr r0, _08002DC8 @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r1]
 	ldr r0, _08002DCC @ =gUnknown_0203B000
 	str r0, [r1, #4]
@@ -485,7 +485,7 @@ _08002DB8: .4byte gUnknown_0801BBD8
 _08002DBC: .4byte gBG3MapBuffer
 _08002DC0: .4byte 0x040000D4
 _08002DC4: .4byte 0x800002C0
-_08002DC8: .4byte gUnknown_0847845C
+_08002DC8: .4byte gGfxSpeedlinesFirstAndLastColumns
 _08002DCC: .4byte gUnknown_0203B000
 _08002DD0: .4byte 0x80000280
 _08002DD4:
@@ -1275,7 +1275,7 @@ _080033AE:
 	ldrh r0, [r1, #0x2e]
 	movs r1, #0x20
 	movs r2, #1
-	bl sub_8003988
+	bl LoadAndAdjustBGPaletteByMode
 	b _080033E8
 	.align 2, 0
 _080033D4: .4byte 0x0000FFFE
@@ -1285,7 +1285,7 @@ _080033DC:
 	ldrh r0, [r2, #0x2e]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_8003988
+	bl LoadAndAdjustBGPaletteByMode
 _080033E8:
 	mov r3, r8
 	ldrh r0, [r3, #0x2e]
@@ -1301,7 +1301,7 @@ _080033E8:
 	ldrh r0, [r3, #0x2e]
 	movs r1, #0x20
 	movs r2, #1
-	bl sub_8003B1C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 	b _0800341C
 	.align 2, 0
 _0800340C: .4byte 0x0000FFFE
@@ -1310,7 +1310,7 @@ _08003410:
 	ldrh r0, [r6, #0x2e]
 	movs r1, #0x20
 	movs r2, #0
-	bl sub_8003B1C
+	bl LoadAndAdjustCounselWitnessBenchPaletteByMode
 _0800341C:
 	add sp, #0x10
 	pop {r3, r4, r5}

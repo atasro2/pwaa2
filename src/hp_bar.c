@@ -11,6 +11,7 @@
 #include "case_intro.h"
 #include "constants/animation.h"
 #include "constants/script.h"
+#include "constants/oam_allocations.h"
 
 u16 gUnknown_08112520[15][16] = {
 	{0x43f0, 0x2368, 0x02e0, 0x0260, 0x01c0, 0x01c0, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
@@ -48,25 +49,25 @@ u16 gUnknown_08112700[15][16] = {
 	{0x7ffd, 0x7fb9, 0x7f97, 0x7f74, 0x7f51, 0x7f51, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
 };
 
-void sub_8017178(void)
+void LoadHPBarGraphics(void)
 {
-    DmaCopy16(3, gUnknown_081475FC, OBJ_VRAM0+0x3780, 0x180);
-    DmaCopy16(3, gUnknown_0814E340, OBJ_PLTT+0x60, 0x20);
-    DmaCopy16(3, gUnknown_0814E360, OBJ_PLTT+0x80, 0x20);
-    DmaCopy16(3, gUnknown_0814757C, OBJ_VRAM0+0x2E00, 0x80);
-    DmaCopy16(3, gUnknown_0814747C, OBJ_VRAM0+0x2E80, 0x100);
-    DmaCopy16(3, gUnknown_081473FC, OBJ_VRAM0+0x2F80, 0x80);
+    DmaCopy16(3, gGfxHPBarProgress, OBJ_VRAM0+0x3780, 0x180);
+    DmaCopy16(3, gPalHPBarFrame, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, gPalHPBarProgress, OBJ_PLTT+0x80, 0x20);
+    DmaCopy16(3, gGfxHPBarFrame3, OBJ_VRAM0+0x2E00, 0x80);
+    DmaCopy16(3, gGfxHPBarFrame2, OBJ_VRAM0+0x2E80, 0x100);
+    DmaCopy16(3, gGfxHPBarFrame1, OBJ_VRAM0+0x2F80, 0x80);
 }
 
-void sub_801720C(int arg0, int arg1)
+void sub_801720C(int xPos, int yPos)
 {
-    struct OamAttrs * next = &gOamObjects[43];
+    struct OamAttrs * next = &gOamObjects[OAM_IDX_HPBAR_SOMETHING];
 
     {
         u32 attr0;
         u32 attr1;
-        u16 x = arg0 - 8;
-        u16 y = arg1;
+        u16 x = xPos - 8;
+        u16 y = yPos;
         struct OamAttrs * oam = next++;
         attr0 = y;
         attr0 &= 0xFF;
@@ -80,8 +81,8 @@ void sub_801720C(int arg0, int arg1)
     {
         u32 attr0;
         u32 attr1;
-        u16 x = arg0 + 8;
-        u16 y = arg1;
+        u16 x = xPos + 8;
+        u16 y = yPos;
         struct OamAttrs * oam = next++;
         attr0 = y;
         attr0 &= 0xFF;
@@ -96,8 +97,8 @@ void sub_801720C(int arg0, int arg1)
     {
         u32 attr0;
         u32 attr1;
-        u16 x = arg0 + 40;
-        u16 y = arg1;
+        u16 x = xPos + 40;
+        u16 y = yPos;
         struct OamAttrs * oam = next++;
         attr0 = y;
         attr0 &= 0xFF;
@@ -112,8 +113,8 @@ void sub_801720C(int arg0, int arg1)
     {
         u32 attr0;
         u32 attr1;
-        u16 x = arg0 + 72;
-        u16 y = arg1;
+        u16 x = xPos + 72;
+        u16 y = yPos;
         struct OamAttrs * oam = next++;
         attr0 = y;
         attr0 &= 0xFF;
@@ -136,23 +137,28 @@ static inline void SetHVScalingMatrix(u16 matrix, s16 horizontalScale, s16 verti
     gOamObjects[matrix*4 + 3].attr3 = fix_mul(_Cos(0), verticalScale);
 }
 
-u32 sub_80172B4(s16 x, s16 y, int arg2, int tileId, int arg4, int arg5, int arg6, int arg7)
+// This runs, from left to right, through all affected OAMs according to hpValue and configures the OAM values
+// The bar animation within an OAM block is done via a scaling matrix (horizontal scale)
+// Returns the first OAM _after_ the affected ones
+// Return value is used in AnimateHPBar to animate the static and dynamic parts different
+// E.g. when gaining HP, the complete bar shakes but the amount gained is colored differently
+u32 SetHPBarOAMAndMatrices(s16 x, s16 y, int hpValue, int tileId, int barFillStartOAM, int firstOAMToApplyTo, int paletteId, int matrixId)
 {
     struct OamAttrs * oam;
     s16 res;
     s16 scale;
     u32 temp;
     s32 i;
-    if(arg2 < 0)
-        arg2 = 0;
-    oam = &gOamObjects[arg4 + arg5];
-    SetHVScalingMatrix(0, 0x100, 0x100);
+    if(hpValue < 0)
+        hpValue = 0;
+    oam = &gOamObjects[barFillStartOAM + firstOAMToApplyTo];
+    SetHVScalingMatrix(0, Q_8_8(1), Q_8_8(1));
     
-    arg5--;
-    if(arg5 < 0)
-        arg5 = 0;
+    firstOAMToApplyTo--;
+    if(firstOAMToApplyTo < 0)
+        firstOAMToApplyTo = 0;
         
-    for(i = arg5; i < (arg2 / 16); i++)
+    for(i = firstOAMToApplyTo; i < (hpValue / 16); i++)
     {
         temp = i * 16;
         {
@@ -160,7 +166,7 @@ u32 sub_80172B4(s16 x, s16 y, int arg2, int tileId, int arg4, int arg5, int arg6
             u16 x2 = x + temp;
             u16 y2 = y;
             u16 tileId2 = tileId;
-            u16 pal = arg6;
+            u16 pal = paletteId;
 
             oam->attr0 = y2;
             oam->attr0 &= 0xFF;
@@ -178,20 +184,20 @@ u32 sub_80172B4(s16 x, s16 y, int arg2, int tileId, int arg4, int arg5, int arg6
         oam++;
     }
     if(i <= 4) {
-        temp = arg2 % 16;
+        temp = hpValue % 16;
         if(temp) {
-            SetHVScalingMatrix(arg7, fix_inverse(temp*16), 0x100);            
+            SetHVScalingMatrix(matrixId, fix_inverse(temp*16), Q_8_8(1));            
             {
                 u32 attr0, attr1, attr2;
                 u16 x2;
                 u16 y2;
                 u16 tileId2;
                 u16 palette;
-                u16 matrix = arg7;
+                u16 matrix = matrixId;
                 x2 = i * 16 - (16 - temp) / 2 - temp % 2 + x;
                 y2 = y;
                 tileId2 = tileId;
-                palette = arg6;
+                palette = paletteId;
 
                 attr0 = y2;
                 attr0 &= 0xFF;
@@ -215,38 +221,38 @@ u32 sub_80172B4(s16 x, s16 y, int arg2, int tileId, int arg4, int arg5, int arg6
     return i;
 }
 
-void sub_8017494(u16 pltt[][16], u16 slot)
+void LoadHPBarPaletteIntoSlotOnIntervalByInterval(u16 pltt[][16], u16 slot)
 {
     int interval = 4;
-    if((gMain.unk0 % interval) == 0)
+    if((gMain.frameCounter % interval) == 0)
     {
-        int index = (gMain.unk0 / interval) % 15;
+        int index = (gMain.frameCounter / interval) % 15;
         DmaCopy16(3, pltt[index], OBJ_PLTT + slot * 0x20, 0x20);
     }
 }
 
-void sub_80174E8(int arg0, int arg1)
+void DoHPBarSmokeAnimations(int xPos, int yPos)
 {
-    int unkTable1[12] = {-4, 4, 0, 8, 8, 6, -11, -8, 18, -2, 8, -8};
-    int unkTable2[7] = {0, 9, 18, 27, 42, 51, 60};
+    int smokeOffsetPairs[12] = {-4, 4, 0, 8, 8, 6, -11, -8, 18, -2, 8, -8};
+    int smokePlayFrameTimes[7] = {0, 9, 18, 27, 42, 51, 60}; // hardcoded for 60Hz refresh!
     int i; // r8
-    int rem = gMain.unk0 % unkTable2[6];
+    int currentFrameInSecond = gMain.frameCounter % smokePlayFrameTimes[6];
     for(i = 0; i < 6; i++) 
     {
         struct AnimationListEntry * animation;
-        if(unkTable2[i] == rem || sub_80175C0() == 0)
+        if(smokePlayFrameTimes[i] == currentFrameInSecond || FindPlayingHPBarSmokeAnimations() == 0)
         {
             animation = FindAnimationFromAnimId(58 + i % 3);
             if(animation == NULL)
             {
-                animation = PlayAnimationAtCustomOrigin(58 + i % 3, arg0 + unkTable1[i * 2], arg1 + unkTable1[i * 2 + 1] + 8);
+                animation = PlayAnimationAtCustomOrigin(58 + i % 3, xPos + smokeOffsetPairs[i * 2], yPos + smokeOffsetPairs[i * 2 + 1] + 8);
                 SetAnimationScale(animation, 16 + i % 3, 256 + Random() % 256);
             }
         }
     }
 }
 
-int sub_80175C0(void)
+int FindPlayingHPBarSmokeAnimations(void)
 {
     int count = 0;
     int i;
@@ -258,105 +264,105 @@ int sub_80175C0(void)
     return count;
 }
 
-void sub_80175E4(void)
+void AnimateHPBar(void)
 {
     int xOffset = 0;
     int yOffset = 0;
-    int temp;
-    if(gMain.unk98 > gMain.unk9A)
+    int nextIndex;
+    if(gMain.hpBarValue > gMain.hpBarDisplayValue)
     {
-        sub_8017494(gUnknown_08112700, 7);
+        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112700, 7);
         xOffset = 0; // useless!
-        yOffset = (gMain.unk0 / 2) % 2;
-        temp = sub_80172B4(gMain.unk9E - 8 + xOffset, gMain.unkA0 - 8 + yOffset, gMain.unk9A, 444, 37, 0, 4, 20);
-        sub_80172B4(gMain.unk9E - 8 + xOffset, gMain.unkA0 - 8 + yOffset, gMain.unk98, 444, 37, temp, 7, 21);
+        yOffset = (gMain.frameCounter / 2) % 2;
+        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarDisplayValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
+        SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, nextIndex, 7, 21);
     }
-    else if(gMain.unk98 < gMain.unk9A)
+    else if(gMain.hpBarValue < gMain.hpBarDisplayValue)
     {
-        sub_80174E8(gMain.unk9E + gMain.unk9A, gMain.unkA0);
-        sub_8017494(gUnknown_08112520, 7);
+        DoHPBarSmokeAnimations(gMain.hpBarX + gMain.hpBarDisplayValue, gMain.hpBarY);
+        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
         xOffset = Random() % 2 - 2;
         yOffset = Random() % 3 - 4;
-        temp = sub_80172B4(gMain.unk9E - 8 + xOffset, gMain.unkA0 - 8 + yOffset, gMain.unk98, 444, 37, 0, 4, 20);
-        sub_80172B4(gMain.unk9E - 8 + xOffset, gMain.unkA0 - 8 + yOffset, gMain.unk9A, 444, 37, temp, 7, 21);
+        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
+        SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarDisplayValue, 444, OAM_IDX_HPBAR_LIFE, nextIndex, 7, 21);
     }
-    else if(gMain.unk9C > 0)
+    else if(gMain.hpBarDamageAmount > 0)
     {
-        sub_8017494(gUnknown_08112520, 7);
-        temp = sub_80172B4(gMain.unk9E - 8, gMain.unkA0 - 8, gMain.unk98 - gMain.unk9C, 444, 37, 0, 4, 20);
-        sub_80172B4(gMain.unk9E - 8, gMain.unkA0 - 8, gMain.unk98, 444, 37, temp, 7, 21);
+        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
+        nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue - gMain.hpBarDamageAmount, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
+        SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, nextIndex, 7, 21);
     }
     else 
     {
-        sub_8017494(gUnknown_08112520, 7);
-        sub_80172B4(gMain.unk9E - 8, gMain.unkA0 - 8, gMain.unk98, 444, 37, 0, 4, 20);
+        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
+        SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
     }
-    sub_801720C(gMain.unk9E + xOffset, gMain.unkA0 + yOffset);
+    sub_801720C(gMain.hpBarX + xOffset, gMain.hpBarY + yOffset);
 }
 
-void sub_8017864(void)
+void ClearHPBarOAM(void)
 {
     int i;
-    for(i = 0; i < 14; i++)
-        gOamObjects[34+i].attr0 = SPRITE_ATTR0_CLEAR;
+    for(i = 0; i < OAM_COUNT_HPBAR; i++)
+        gOamObjects[OAM_IDX_HPBAR+i].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
-void sub_8017884(void)
+void CheckAndDrawHPBar(void)
 {
-    if(!(gMain.unk9E == 284 && gMain.unkA0 == 20))
+    if(!(gMain.hpBarX == 284 && gMain.hpBarY == 20))
     {
         if(gMain.process[GAME_PROCESS] >= 3 && gMain.process[GAME_PROCESS] <= 6)
         {
-            sub_8017864();
+            ClearHPBarOAM();
             if(!(gScriptContext.flags & SCRIPT_FULLSCREEN)
-            && gMain.unkA6)
+            && gMain.hpBarDisplayFlag)
             {
-                sub_8017178();
-                sub_80175E4();
+                LoadHPBarGraphics();
+                AnimateHPBar();
             }
         }
     }
 }
 
-void sub_80178E0(void)
+void ResetHPBar(void)
 {
-    gMain.unk9E = 284;
-    gMain.unkA0 = 20;
-    gMain.unkA6 = 1;
-    gMain.unk9C = 0;
-    sub_8017928(0);
+    gMain.hpBarX = 284;
+    gMain.hpBarY = 20;
+    gMain.hpBarDisplayFlag = 1;
+    gMain.hpBarDamageAmount = 0;
+    SetOrQueueHPBarState(0);
 }
 
-void sub_8017910(void)
+void ResetHPBarHealthToMax(void)
 {
-    gMain.unkB0 = 0x50;
-    gMain.unk9A = 0x50;
-    gMain.unk98 = 0x50;
+    gMain.hpBarValueAtEndOfSegment = 80;
+    gMain.hpBarDisplayValue = 80;
+    gMain.hpBarValue = 80;
 }
 
-void sub_8017928(u32 arg0)
+void SetOrQueueHPBarState(u32 wantedState)
 {
-    gMain.unk97 = 0;
-    gMain.unkA2 = 0;
-    gMain.unkA4 = 0;
-    if(gMain.unk96 == 0)
-        gMain.unk96 = arg0;
+    gMain.hpBarSubState = 0;
+    gMain.hpBarSlideOutDelay = 0;
+    gMain.hpBarQueuedState = 0;
+    if(gMain.hpBarState == 0)
+        gMain.hpBarState = wantedState;
     else
-        gMain.unkA4 = arg0;
+        gMain.hpBarQueuedState = wantedState;
 }
 
-void sub_8017950(void)
+void ReturnToQueuedOrZeroHPBarState(void)
 {
-    if(gMain.unkA4 > 0)
-        gMain.unk96 = gMain.unkA4;
+    if(gMain.hpBarQueuedState > 0)
+        gMain.hpBarState = gMain.hpBarQueuedState;
     else
-        gMain.unk96 = 0;
-    gMain.unk97 = 0;
-    gMain.unkA2 = 0;
-    gMain.unkA4 = 0;
+        gMain.hpBarState = 0;
+    gMain.hpBarSubState = 0;
+    gMain.hpBarSlideOutDelay = 0;
+    gMain.hpBarQueuedState = 0;
 }
 
-void sub_801798C(void)
+void ProcessHPBar(void)
 {
     void * states[] = {
         &&_080179C0,
@@ -365,154 +371,153 @@ void sub_801798C(void)
         &&_08017AAC,
         &&_08017C54,
     };
-    sub_8017884();
-    sub_8017E9C();
-    sub_8018118();
-    goto *states[gMain.unk96];
+    CheckAndDrawHPBar();
+    AnimateAllSpotlights();
+    AnimateAllFlowerPetals();
+    goto *states[gMain.hpBarState];
 _080179C0:
-    gMain.unkA0 = 0x14;
-    if(gMain.unk98 <= 0)
+    gMain.hpBarY = 20;
+    if(gMain.hpBarValue <= 0)
     {
         if(gMain.process[GAME_PROCESS] == 3 || gMain.process[GAME_PROCESS] == 5 || gMain.process[GAME_PROCESS] == 6 || gMain.process[GAME_PROCESS] == 5)
         {
             ChangeScriptSection(gCaseGameoverSections[gMain.scenarioIdx]);
-            sub_8017928(4);
+            SetOrQueueHPBarState(4);
         }
     }
     return;
 _08017A10:
-    switch(gMain.unk97)
+    switch(gMain.hpBarSubState)
     {
         case 0:
-            gMain.unk97++; // ????
+            gMain.hpBarSubState++; // ????
         case 1:
-            gMain.unk9E -= 4;
+            gMain.hpBarX -= 4;
             if(gMain.process[GAME_PROCESS] == 4
             && gMain.process[GAME_PROCESS_STATE] == 10 
             && gMain.process[GAME_PROCESS_VAR1] == 7)
             {
-                if(gMain.unk9E <= 84)
+                if(gMain.hpBarX <= 84)
                 {
-                    gMain.unk9E = 84;
-                    sub_8017950();
+                    gMain.hpBarX = 84;
+                    ReturnToQueuedOrZeroHPBarState();
                 }
             }
             else
             {
-                if(gMain.unk9E <= 156)
+                if(gMain.hpBarX <= 156)
                 {
-                    gMain.unk9E = 156;
-                    sub_8017950();
+                    gMain.hpBarX = 156;
+                    ReturnToQueuedOrZeroHPBarState();
                 }
             }
     }
     return;
 _08017A6C:
-    switch(gMain.unk97)
+    switch(gMain.hpBarSubState)
     {
         case 0:
-            gMain.unk97++; // ????
+            gMain.hpBarSubState++; // ????
         case 1:
-            gMain.unk9E += 4;
-            if(gMain.unk9E >= 284)
+            gMain.hpBarX += 4;
+            if(gMain.hpBarX >= 284)
             {
-                gMain.unk9E = 284;
-                sub_8017950();
+                gMain.hpBarX = 284;
+                ReturnToQueuedOrZeroHPBarState();
             }
     }
     return;
 _08017AAC:
-    switch(gMain.unk97)
+    switch(gMain.hpBarSubState)
     {
         case 0: // remove hp?
-            if(gMain.unk9C < 0)
+            if(gMain.hpBarDamageAmount < 0)
                 PlaySE(156);
-            else if(gMain.unk9C > 0)
+            else if(gMain.hpBarDamageAmount > 0)
                 PlaySE(76);
-            gMain.unk98 -= gMain.unk9C;
-            if(gMain.unk98 < 0)
-                gMain.unk98 = 0;
-            if(gMain.unk98 > 80)
-                gMain.unk98 = 80;
-            gMain.unk288[0].unk4 = gMain.unk9C;
-            gMain.unk9C = 0;
-            gMain.unkA8 = gMain.unk9A << 0x10;
-            gMain.unkAC = (gMain.unk98 - gMain.unk9A) << 0x10;
-            if(gMain.unkAC <= 0)
-                gMain.unkAC /= 40;
+            gMain.hpBarValue -= gMain.hpBarDamageAmount;
+            if(gMain.hpBarValue < 0)
+                gMain.hpBarValue = 0;
+            if(gMain.hpBarValue > 80)
+                gMain.hpBarValue = 80;
+            gMain.spotlights[0].x = gMain.hpBarDamageAmount;
+            gMain.hpBarDamageAmount = 0;
+            gMain.hpBarQ16_16DisplayValue = Q_16_16(gMain.hpBarDisplayValue);
+            gMain.hpBarQ16_16DisplayChangeAmount = Q_16_16(gMain.hpBarValue - gMain.hpBarDisplayValue);
+            if(gMain.hpBarQ16_16DisplayChangeAmount <= 0)
+                gMain.hpBarQ16_16DisplayChangeAmount /= 40;
             else
-                gMain.unkAC /= 100;
+                gMain.hpBarQ16_16DisplayChangeAmount /= 100;
             gTestimony.unk4 = 40;
             gMain.advanceScriptContext = FALSE;
-            gMain.unk97++;
+            gMain.hpBarSubState++;
             break;
         case 1:
         {
-            gMain.unkA8 += gMain.unkAC;
-            gMain.unk9A = gMain.unkA8 >> 0x10;
-            if(gMain.unkAC <= 0)
+            gMain.hpBarQ16_16DisplayValue += gMain.hpBarQ16_16DisplayChangeAmount;
+            gMain.hpBarDisplayValue = Q_16_16_TO_INT(gMain.hpBarQ16_16DisplayValue);
+            if(gMain.hpBarQ16_16DisplayChangeAmount <= 0)
             {
-                if(gMain.unk9A < gMain.unk98)
-                     gMain.unk9A = gMain.unk98;
+                if(gMain.hpBarDisplayValue < gMain.hpBarValue)
+                     gMain.hpBarDisplayValue = gMain.hpBarValue;
             }
             else 
             {
-                if(gMain.unk9A > gMain.unk98)
-                    gMain.unk9A = gMain.unk98;
+                if(gMain.hpBarDisplayValue > gMain.hpBarValue)
+                    gMain.hpBarDisplayValue = gMain.hpBarValue;
             }
             if(gTestimony.unk4 > 0)
                 gTestimony.unk4--;
-            if(gMain.unk98 == gMain.unk9A)
+            if(gMain.hpBarValue == gMain.hpBarDisplayValue)
             {
                 if(gTestimony.unk4 > 0)
                 {
-                    if(gMain.unkAC <= 0)
-                        gMain.unk9A++;
+                    if(gMain.hpBarQ16_16DisplayChangeAmount <= 0)
+                        gMain.hpBarDisplayValue++;
                     else
-                        gMain.unk9A--;
+                        gMain.hpBarDisplayValue--;
                 }
                 else 
                 {
-                    s32 temp = sub_80175C0(); 
-                    if(temp == 0)
+                    if(FindPlayingHPBarSmokeAnimations() == 0)
                     {
-                        sub_8013878(76);
-                        sub_8013878(156);
-                        gMain.unkA2 = temp;
-                        gMain.unk97++;
+                        StopSE(76);
+                        StopSE(156);
+                        gMain.hpBarSlideOutDelay = 0;
+                        gMain.hpBarSubState++;
                     }
                 }
             }
             break;
         }
         case 2:
-            if(gMain.unkA2 < 30)
+            if(gMain.hpBarSlideOutDelay < 30)
             {
-                gMain.unkA2++;
+                gMain.hpBarSlideOutDelay++;
                 break;
             }
-            gMain.unk9E += 4;
-            if(gMain.unk9E >= 284)
+            gMain.hpBarX += 4;
+            if(gMain.hpBarX >= 284)
             {
-                gMain.unk9E = 284;
-                sub_8017950();
-                if(gMain.unk288[0].unk4 > 0)
+                gMain.hpBarX = 284;
+                ReturnToQueuedOrZeroHPBarState();
+                if(gMain.spotlights[0].x > 0)
                     gMain.advanceScriptContext = TRUE;
             }
     }
     return;
 _08017C54:
-    if(gMain.unk97 == 0)
+    if(gMain.hpBarSubState == 0)
     {
-        gMain.unk97 = 1;
-        gMain.unkA6 = 0;
+        gMain.hpBarSubState = 1;
+        gMain.hpBarDisplayFlag = 0;
     }
     return;
 }
 
-bool32 sub_8017C78(void)
+bool32 IsHPBarAnimating(void)
 {
-    if(gMain.unk96 == 0 || gMain.unk96 == 4)
+    if(gMain.hpBarState == 0 || gMain.hpBarState == 4)
         return FALSE;
     return TRUE; 
 }

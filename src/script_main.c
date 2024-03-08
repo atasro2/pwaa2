@@ -185,7 +185,7 @@ void RunScriptContext(void)
 void ChangeScriptSection(u32 newSection)
 {
     gScriptContext.previousSection = gScriptContext.currentSection;
-    sub_8007CCC(&gMain, gScriptContext.currentSection);
+    MarkSectionAsRead(&gMain, gScriptContext.currentSection);
     gScriptContext.currentSection = newSection;
     InitScriptSection(&gScriptContext);
     gScriptContext.scriptPtr++;
@@ -259,14 +259,14 @@ static void AdvanceScriptContext(struct ScriptContext * scriptCtx)
     {
         if(gJoypad.pressedKeys & A_BUTTON || gJoypad.heldKeys & B_BUTTON)
         {
-            if(main->unk84 != 1
-            && main->unk84 != 2
-            && main->unk84 != 0xFFFF
-            && main->unk84 != 0xFFFE
-            && main->unk84 != 5
-            && main->unk84 != 6)
+            if(main->effectType != 1
+            && main->effectType != 2
+            && main->effectType != 0xFFFF
+            && main->effectType != 0xFFFE
+            && main->effectType != 5
+            && main->effectType != 6)
             {
-                if(sub_8007CFC(main, scriptCtx->currentSection))
+                if(HasSectionBeenRead(main, scriptCtx->currentSection))
                 {
                     if(scriptCtx->textSkip > 0 || main->process[GAME_PROCESS] == 4)
                     {
@@ -347,7 +347,7 @@ static void AdvanceScriptContext(struct ScriptContext * scriptCtx)
             return;    
         if(!(gMain.gameStateFlags & 1))
         {
-            if(gMain.unk84 == 0)
+            if(gMain.effectType == 0)
                 goto continueScript;
         }
     }
@@ -595,7 +595,7 @@ void RedrawTextboxCharacters(void)
     }
 }
 
-void sub_8007CCC(struct Main * main, s32 section)
+void MarkSectionAsRead(struct Main * main, s32 section)
 {
     u32 word;
     u32 bit;
@@ -609,10 +609,10 @@ void sub_8007CCC(struct Main * main, s32 section)
     
     word = section / 32;
     bit = section % 32;
-    main->unk100[word] |= 1 << bit;
+    main->sectionReadFlags[word] |= 1 << bit;
 }
 
-bool32 sub_8007CFC(struct Main * main, s32 section)
+bool32 HasSectionBeenRead(struct Main * main, s32 section)
 {
     u32 word;
     u32 bit;
@@ -626,24 +626,24 @@ bool32 sub_8007CFC(struct Main * main, s32 section)
 
     word = section / 32;
     bit = section % 32;
-    return main->unk100[word] & (1 << bit); // please return a bool :(
+    return main->sectionReadFlags[word] & (1 << bit); // please return a bool :(
 }
 
-void sub_8007D30(struct Main * main)
+void ClearSectionReadFlags(struct Main * main)
 {
     u16 i;
     for(i = 0; i < 8; i++)
     {
-        main->unk100[i] = 0;
+        main->sectionReadFlags[i] = 0;
         main->talkEndFlags[i] = 0;
     }
 }
 
-void sub_8007D5C(struct Main * main)
+void loadSectionReadFlagsFromSaveDataBuffer(struct Main * main)
 {
     u16 i;
     for(i = 0; i < 8; i++)
     {
-        main->unk100[i] = gSaveDataBuffer.main.unk100[i];
+        main->sectionReadFlags[i] = gSaveDataBuffer.main.sectionReadFlags[i];
     }
 }

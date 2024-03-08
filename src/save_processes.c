@@ -100,11 +100,11 @@ void ClearSaveProcess(struct Main *main)
     case 0:
         DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
         DmaCopy16(3, GetBGPalettePtr(0), PLTT, BG_PLTT_SIZE);
-        DmaCopy16(3, gUnknown_0813791C, VRAM, 0x1000);
-        DmaCopy16(3, gUnknown_081500C4, OBJ_VRAM0 + 0x3C00, 0x800);
-        DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+        DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
+        DmaCopy16(3, gGfxSaveYesNo, OBJ_VRAM0 + 0x3C00, 0x800);
+        DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
         DmaCopy16(3, gTextPal, OBJ_PLTT, 0x20);
-        DmaCopy16(3, gGfxPalEvidenceProfileDesc, PLTT, 0x20);
+        DmaCopy16(3, gPalEvidenceProfileDesc, PLTT, 0x20);
         gIORegisters.lcd_bg0cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(28) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
         gIORegisters.lcd_bg1cnt = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
         gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
@@ -236,9 +236,9 @@ void SaveGameInit1(struct Main *main)
     }
     SaveAnimationDataToBuffer(gSaveDataBuffer.backupAnimations);
     main->advanceScriptContext = FALSE;
-    temp2BA = gMain.unk2BA;
-    sub_8013878(temp2BA);
-    gMain.unk2BA = temp2BA;
+    temp2BA = gMain.currentlyPlayingLoopedSfx;
+    StopSE(temp2BA);
+    gMain.currentlyPlayingLoopedSfx = temp2BA;
     StartHardwareBlend(2, 0, 1, 0x1F);
     main->process[GAME_PROCESS_STATE]++;
 }
@@ -256,11 +256,11 @@ void SaveGameInit2(struct Main *main)
     DmaCopy16(3, &gCourtScroll, &gSaveDataBuffer.courtScroll, sizeof(gCourtScroll))
     DmaCopy16(3, gExaminationData, gSaveDataBuffer.examinationData, sizeof(gExaminationData));
     DmaCopy16(3, gTalkData, gSaveDataBuffer.talkData, sizeof(gTalkData));
-    DmaCopy16(3, gUnknown_03003B70, gSaveDataBuffer.unknown3003B70, sizeof(gUnknown_03003B70));
-    DmaCopy16(3, gUnknown_081458DC, OBJ_VRAM0 + 0x3800, 0x400);
-    DmaCopy16(3, gUnknown_0814DF20, OBJ_PLTT + 0x100, 0xC0);
-    DmaCopy16(3, gUnknown_081500C4, OBJ_VRAM0 + 0x3C00, 0x800);
-    DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+    DmaCopy16(3, gLoadedPsycheLockedTalkSections, gSaveDataBuffer.loadedPsycheLockedTalkSections, sizeof(gLoadedPsycheLockedTalkSections));
+    DmaCopy16(3, gGfxNewGameContinue, OBJ_VRAM0 + 0x3800, 0x400);
+    DmaCopy16(3, gPalNewGameContinue, OBJ_PLTT + 0x100, 0xC0);
+    DmaCopy16(3, gGfxSaveYesNo, OBJ_VRAM0 + 0x3C00, 0x800);
+    DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
     DecompressBackgroundIntoBuffer(0xA);
     CopyBGDataToVram(0xA);
     main->animationFlags &= ~3;
@@ -451,17 +451,17 @@ void SaveGameExitSaveScreen(struct Main *main)
     DmaCopy16(3, &gSaveDataBuffer.ioRegs, &gIORegisters, sizeof(gIORegisters));
     DmaCopy16(3, gSaveDataBuffer.mapMarker, gMapMarker, sizeof(gMapMarker));
     DmaCopy16(3, gSaveDataBuffer.talkData, gTalkData, sizeof(gTalkData));
-    DmaCopy16(3, gSaveDataBuffer.unknown3003B70, gUnknown_03003B70, sizeof(gUnknown_03003B70));
+    DmaCopy16(3, gSaveDataBuffer.loadedPsycheLockedTalkSections, gLoadedPsycheLockedTalkSections, sizeof(gLoadedPsycheLockedTalkSections));
     main->advanceScriptContext = gSaveDataBuffer.main.advanceScriptContext;
     main->showTextboxCharacters = gSaveDataBuffer.main.showTextboxCharacters;
     main->gameStateFlags = gSaveDataBuffer.main.gameStateFlags;
     main->shakeTimer = gSaveDataBuffer.main.shakeTimer;
     main->tilemapUpdateBits = gSaveDataBuffer.main.tilemapUpdateBits;
-    sub_8007D5C(main);
+    loadSectionReadFlagsFromSaveDataBuffer(main);
     RestoreAnimationsFromBuffer(gSaveDataBuffer.backupAnimations);
     gMain.animationFlags |= 3;
     DmaCopy16(3, gSaveDataBuffer.oam, gOamObjects, sizeof(gOamObjects));
-    DmaCopy16(3, &gUnknown_0814DC60[0], OBJ_PLTT+0x100, 0x20);
+    DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT+0x100, 0x20);
     main->soundFlags = gSaveDataBuffer.main.soundFlags;
     RESTORE_PROCESS_PTR(main);
     if(main->process[GAME_PROCESS] == INVESTIGATION_PROCESS && main->process[GAME_PROCESS_VAR1] == 3)
@@ -474,20 +474,20 @@ void SaveGameExitSaveScreen(struct Main *main)
     if(gMain.unk2BE & 0xF) {
         switch(gMain.unk2BE >> 4) {
             case 0:
-                sub_800E7B0();
-                sub_800E7EC(0x18, 0x80, 1);
+                LoadWitnessBenchGraphics();
+                SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
                 break;
             case 1:
-                sub_800E8C4();
-                sub_800E900(0, 0x80, 1);       
+                LoadCounselBenchGraphics();
+                SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);       
                 break;
             case 2:
-                sub_800E8C4();
-                sub_800E9D4(0x20, 0x80, 1);
+                LoadCounselBenchGraphics();
+                SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
         }
     }
-    if(gMain.unk2BA != 0)
-        PlaySE(gMain.unk2BA);
+    if(gMain.currentlyPlayingLoopedSfx != 0)
+        PlaySE(gMain.currentlyPlayingLoopedSfx);
     if(main->currentBG == 0x23) {
         struct AnimationListEntry * animation;
         gIORegisters.lcd_bg3hofs = 8;

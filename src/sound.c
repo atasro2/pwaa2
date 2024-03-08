@@ -7,7 +7,7 @@ extern struct MusicPlayerInfo gMPlayInfo_SE1;
 extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_SE3;
 
-static bool32 sub_8013930(u32 songNum);
+static bool32 IsLoopedSE(u32 songNum);
 
 void ResetSoundControl() // Bgm_init
 {
@@ -16,8 +16,8 @@ void ResetSoundControl() // Bgm_init
     gMain.bgmVolume = 0x100 * 10;
     gMain.bgmFadeAmount = 0;
     gMain.currentPlayingBgm = 0xFF-1;
-    gMain.unk2B8 = 0;
-    gMain.unk2BA = 0;
+    gMain.currentlyPlayingSfx = 0;
+    gMain.currentlyPlayingLoopedSfx = 0;
 }
 
 void PlaySE(u32 songNum) // Se_play?
@@ -26,51 +26,51 @@ void PlaySE(u32 songNum) // Se_play?
     if(!(main->soundFlags & SOUND_FLAG_DISABLE_SE))
     {
         m4aSongNumStart(songNum);
-        gMain.unk2B8 = songNum;
-        if(sub_8013930(songNum))
-            gMain.unk2BA = songNum;
+        gMain.currentlyPlayingSfx = songNum;
+        if(IsLoopedSE(songNum))
+            gMain.currentlyPlayingLoopedSfx = songNum;
     }
 }
 
-void sub_8013878(u32 songNum)
+void StopSE(u32 songNum)
 {
     m4aSongNumStop(songNum);
-    gMain.unk2B8 = 0;
-    if(sub_8013930(songNum))
-        gMain.unk2BA = 0;
+    gMain.currentlyPlayingSfx = 0;
+    if(IsLoopedSE(songNum))
+        gMain.currentlyPlayingLoopedSfx = 0;
 }
 
-void sub_80138B0(u32 songNum, u32 speed)
+void FadeOutSE(u32 songNum, u32 speed)
 {
     
     m4aMPlayFadeOut(gMPlayTable[gSongTable[songNum].ms].info, speed / 16);
-    if(sub_8013930(songNum))
-        gMain.unk2BA = 0;
+    if(IsLoopedSE(songNum))
+        gMain.currentlyPlayingLoopedSfx = 0;
 }
 
-void sub_80138FC(u32 songNum, u32 vol)
+void ChangeTrackVolumeBySongNum(u32 songNum, u32 vol)
 {
     m4aMPlayVolumeControl(gMPlayTable[gSongTable[songNum].ms].info, 0xFFFF, vol);
 }
 
-static bool32 sub_8013930(u32 songNum)
+static bool32 IsLoopedSE(u32 songNum)
 {
-    static s16 gUnknown_081123D4[] = 
+    static s16 loopedSfxTable[] = 
     {106, 107, 133, 137,
      140, 145, 146, 149,
      151, 152, 156, 163,
      164, 171, 174, -1};
     u32 i;
 
-    for(i = 0; gUnknown_081123D4[i] != -1; i++)
+    for(i = 0; loopedSfxTable[i] != -1; i++)
     {
-        if(songNum == gUnknown_081123D4[i])
+        if(songNum == loopedSfxTable[i])
             return TRUE;
     }
     return FALSE;
 }
 
-bool32 sub_801396C(u32 songNum)
+bool32 IsSongPlaying(u32 songNum) // unreferenced
 {
     if(!(gMPlayTable[gSongTable[songNum].ms].info->status & MUSICPLAYER_STATUS_TRACK))
         return FALSE;

@@ -76,7 +76,7 @@ void EnableDetentionCenterMask(bool16 enable)
         map += 6;
     }
     if(enable) {
-        DmaCopy16(3, gUnknown_0813D91C, VRAM+0x1000, 0x60);
+        DmaCopy16(3, gGfxDetentionCenterBottomTiles, VRAM+0x1000, 0x60);
         gIORegisters.lcd_bg0cnt &= ~0x3;
         gIORegisters.lcd_bg0cnt |= BGCNT_PRIORITY(2);
         gIORegisters.lcd_dispcnt |= DISPCNT_BG0_ON;
@@ -112,63 +112,63 @@ void CopyBGDataToVram(u32 bgId)
     }
     if(gMain.process[GAME_PROCESS] != INVESTIGATION_PROCESS) {
         if(bgId == 4) {
-            sub_800E8C4();
-            sub_800E900(0, 0x80, 1);
+            LoadCounselBenchGraphics();
+            SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
         } else if(bgId == 5) {
-            sub_800E8C4();
-            sub_800E9D4(0x20, 0x80, 1);
+            LoadCounselBenchGraphics();
+            SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
         } else if(bgId == 6) {
-            sub_800E7B0();
-            sub_800E7EC(0x18, 0x80, 1);
+            LoadWitnessBenchGraphics();
+            SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
         } else if((bgId == 0x16 || bgId == 0x18)
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && gAnimation[1].animationInfo.personId == 0x10
                && (!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
-            sub_800E7B0();
-            sub_800E7EC(0x18, 0x80, 1);
+            LoadWitnessBenchGraphics();
+            SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
         } else if(bgId == 0x53
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && gAnimation[1].animationInfo.personId == 3
                && (!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
-            sub_800E8C4();
-            sub_800E900(0, 0x80, 1);
+            LoadCounselBenchGraphics();
+            SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
         } else if(bgId == 0x80
                && (gAnimation[1].flags & ANIM_ALLOCATED)
                && (gAnimation[1].flags & ANIM_QUEUED_PAL_UPLOAD)) {
             switch(gAnimation[1].animationInfo.personId) {
                 case 3:
-                    sub_800E8C4();
-                    sub_800E900(0, 0x80, 1);
+                    LoadCounselBenchGraphics();
+                    SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
                     break;
                 case 0x18:
-                    sub_800E7B0();
-                    sub_800E7EC(0x18, 0x80, 1);
+                    LoadWitnessBenchGraphics();
+                    SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
                     break;
                 case 8:
-                    sub_800E8C4();
-                    sub_800E9D4(0x18, 0x80, 1);
+                    LoadCounselBenchGraphics();
+                    SetOAMForCourtBenchSpritesProsecution(0x18, 0x80, 1);
                     break;
                 default:
-                    sub_800E7EC(0, 0, 0);
-                    sub_800E900(0, 0, 0);
+                    SetOAMForCourtBenchSpritesWitness(0, 0, 0);
+                    SetOAMForCourtBenchSpritesDefense(0, 0, 0);
                     break;
             }
         } else {
-            sub_800E7EC(0, 0, 0);
-            sub_800E900(0, 0, 0);
+            SetOAMForCourtBenchSpritesWitness(0, 0, 0);
+            SetOAMForCourtBenchSpritesDefense(0, 0, 0);
         }
     }
     if(gScriptContext.flags & 0x40) {
-        src = gUnknown_08263FD4;
+        src = gPal_BG014_BustupPhoenix;
         dst = (void *)PLTT+0x1C0;
         DmaCopy16(3, src, dst, 0x20);
-        src = gUnknown_08265CC4;
+        src = gPal_BG015_BustupEdgeworth;
         dst = (void *)PLTT+0x1E0;
         DmaCopy16(3, src, dst, 0x20);
-        src = gUnknown_08277A98;
+        src = gPal_BG020_BustupFranziska;
         dst = (void *)PLTT+0x1A0;
         DmaCopy16(3, src, dst, 0x20);
-        DmaCopy16(3, gUnknown_0847845C, eUnknown_0203B000, 0x500);
+        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eUnknown_0203B000, 0x500);
         src = eUnknown_0203B000;
         dst = (void *)VRAM+0x8B00;
         DmaCopy16(3, src, dst, 0x5000);
@@ -202,9 +202,9 @@ void CopyBGDataToVram(u32 bgId)
         src = gUnknown_0801BBD8;
         dst = gBG3MapBuffer;
         DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
-        if(main->unk84 == 0xFFFE) {
+        if(main->effectType == 0xFFFE) {
             if(gAnimation[1].animationInfo.personId == 0x25)
-                sub_8003B1C(6, 0x20, 1);
+                LoadAndAdjustCounselWitnessBenchPaletteByMode(6, 0x20, 1);
             DmaFill16(3, 0x1F, BG_PLTT+0x40, 0x1C0);
             DmaFill16(3, 0x2222, BG_CHAR_ADDR(1), 0x9600);
         } else {
@@ -227,7 +227,7 @@ void CopyBGDataToVram(u32 bgId)
         for(i = 0; i < 20; i++, j++)
             gBG3MapBuffer[i * 0x20 + 0x3F] = j | 0x2000;
         main->isBGScrolling = TRUE;
-        DmaCopy16(3, gUnknown_0847845C, eUnknown_0203B000, 0x500);
+        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eUnknown_0203B000, 0x500);
     }
     if(tempBgCtrl & 0x8000)
     {
@@ -429,36 +429,36 @@ void CopyBGDataToVram(u32 bgId)
         DmaCopy16(3, src, dst, BG_SCREEN_SIZE);
     }
     if(main->currentBG == 0xA) {
-        switch(main->unk84) {
+        switch(main->effectType) {
             case 3:
             case 7:
-                main->unk84 = 0xFFFD;
+                main->effectType = 0xFFFD;
                 break;
             case 4:
             case 8:
-                main->unk84 = 0;
+                main->effectType = 0;
                 break;
             case 5:
-                main->unk84 = 0;
+                main->effectType = 0;
                 break;
             case 6:
-                main->unk84 = 0xFFFE;
+                main->effectType = 0xFFFE;
                 break;
         }
         if(main->currentBG == 0xA) // ! ???
             return;
     }
     if((!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
-        if(main->unk84 == 0xFFFD || main->unk84 == 0xFFFE) {
-            if(main->unk84 == 0xFFFE)
-                sub_8003988(main->currentBG, 0x20, 1);
+        if(main->effectType == 0xFFFD || main->effectType == 0xFFFE) {
+            if(main->effectType == 0xFFFE)
+                LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 1);
             else
-                sub_8003988(main->currentBG, 0x20, 0);
+                LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 0);
             if(main->currentBG == 4 || main->currentBG == 5 || main->currentBG == 6) {
-                if(main->unk84 == 0xFFFE) 
-                    sub_8003B1C(main->currentBG, 0x20, 1);
+                if(main->effectType == 0xFFFE)
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 1);
                 else
-                    sub_8003B1C(main->currentBG, 0x20, 0);
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 0);
             }
         }
     }

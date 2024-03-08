@@ -26,782 +26,782 @@ struct EvidenceProfileData
 
 const struct EvidenceProfileData gEvidenceProfileData[] = {
     {
-        .descriptionTiles = gUnknown_081508C4,
+        .descriptionTiles = gGfxProfilesMaggeyByrde_description,
         .evidenceImageId = 0x8,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08150CCC,
+        .descriptionTiles = gGfxProfilesWinstonPayne_description,
         .evidenceImageId = 0xA,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08151104,
+        .descriptionTiles = gGfxProfilesDickGumshoe_description,
         .evidenceImageId = 0xB,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08151568,
+        .descriptionTiles = gGfxProfilesDustinPrince_description,
         .evidenceImageId = 0xC,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081519B8,
+        .descriptionTiles = gGfxProfilesMayaFey0_description,
         .evidenceImageId = 0x7,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08151D54,
+        .descriptionTiles = gGfxEvidencePhoenixBadge_description,
         .evidenceImageId = 0x3F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08152124,
+        .descriptionTiles = gGfxEvidencePhoenixCellphone0_description,
         .evidenceImageId = 0x5,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081524CC,
+        .descriptionTiles = gGfxEvidenceGenericAutopsyReport0_description,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08152970,
+        .descriptionTiles = gGfxEvidenceGenericPhoto0_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x1,
     },
     {
-        .descriptionTiles = gUnknown_08152DBC,
+        .descriptionTiles = gGfxEvidenceBrokenGlasses_description,
         .evidenceImageId = 0x2,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081531C8,
+        .descriptionTiles = gGfxEvidenceGenericPhoto1_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x2,
     },
     {
-        .descriptionTiles = gUnknown_081535F8,
+        .descriptionTiles = gGfxEvidenceDustinsBaseballGlove_description,
         .evidenceImageId = 0x3,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081539C8,
+        .descriptionTiles = gGfxEvidenceGenericLetter0_description,
         .evidenceImageId = 0x4,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08153DE8,
+        .descriptionTiles = gGfxEvidenceGenericLetter1_description,
         .evidenceImageId = 0x4,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815421C,
+        .descriptionTiles = gGfxEvidencePhoenixCellphone1_description,
         .evidenceImageId = 0x5,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815464C,
+        .descriptionTiles = gGfxEvidencePhoenixBusinessCard0_description,
         .evidenceImageId = 0xD,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08154AD0,
+        .descriptionTiles = gGfxEvidencePhoenixBusinessCard1_description,
         .evidenceImageId = 0xD,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08154F20,
+        .descriptionTiles = gGfxEvidenceMayasCellphone_description,
         .evidenceImageId = 0x6,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815523C,
+        .descriptionTiles = gGfxProfilesRichardWellington_description,
         .evidenceImageId = 0x9,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815566C,
+        .descriptionTiles = gGfxProfilesTurnerGrey0_description,
         .evidenceImageId = 0x1E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08155AE4,
+        .descriptionTiles = gGfxProfilesTurnerGrey1_description,
         .evidenceImageId = 0x1E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08155FBC,
+        .descriptionTiles = gGfxProfilesPearlFey0_description,
         .evidenceImageId = 0x1F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081563D0,
+        .descriptionTiles = gGfxProfilesPearlFey1_description,
         .evidenceImageId = 0x1F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815680C,
+        .descriptionTiles = gGfxProfilesMayaFey1_description,
         .evidenceImageId = 0x7,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08156C20,
+        .descriptionTiles = gGfxProfilesMayaFey2_description,
         .evidenceImageId = 0x7,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081570B8,
+        .descriptionTiles = gGfxProfilesMiaFey_description,
         .evidenceImageId = 0x25,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08157500,
+        .descriptionTiles = gGfxProfilesLottaHart0_description,
         .evidenceImageId = 0x20,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08157904,
+        .descriptionTiles = gGfxProfilesMorganFey0_description,
         .evidenceImageId = 0x21,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08157D08,
+        .descriptionTiles = gGfxProfilesMorganFey1_description,
         .evidenceImageId = 0x21,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08158134,
+        .descriptionTiles = gGfxProfilesMimiMiney_description,
         .evidenceImageId = 0x22,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081585C4,
+        .descriptionTiles = gGfxProfilesIniMiney0_description,
         .evidenceImageId = 0x23,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081589AC,
+        .descriptionTiles = gGfxProfilesIniMiney1_description,
         .evidenceImageId = 0x23,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08158E10,
+        .descriptionTiles = gGfxProfilesFranziskaVonKarma0_description,
         .evidenceImageId = 0x28,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08159200,
+        .descriptionTiles = gGfxProfilesAmiFey_description,
         .evidenceImageId = 0x29,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815965C,
+        .descriptionTiles = gGfxProfilesDrHotti_description,
         .evidenceImageId = 0x27,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08159AA4,
+        .descriptionTiles = gGfxEvidenceGenericPhoto2_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x3,
     },
     {
-        .descriptionTiles = gUnknown_08159EEC,
+        .descriptionTiles = gGfxEvidenceGenericPhoto3_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x4,
     },
     {
-        .descriptionTiles = gUnknown_0815A350,
+        .descriptionTiles = gGfxEvidenceGenericAutopsyReport1_description,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815A7F4,
+        .descriptionTiles = gGfxEvidenceGenericAutopsyReport2_description,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815ACC8,
+        .descriptionTiles = gGfxEvidenceNewspaperArticle_description,
         .evidenceImageId = 0x1D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815B100,
+        .descriptionTiles = gGfxEvidenceGenericNewspaperClipping0_description,
         .evidenceImageId = 0xE,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815B5CC,
+        .descriptionTiles = gGfxEvidenceGenericNewspaperClipping1_description,
         .evidenceImageId = 0xE,
         .evidenceDetailId = 0x8,
     },
     {
-        .descriptionTiles = gUnknown_0815B9F0,
+        .descriptionTiles = gGfxEvidenceMagatamaDischarged_description,
         .evidenceImageId = 0x1B,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815BDE0,
+        .descriptionTiles = gGfxEvidenceMagatamaCharged_description,
         .evidenceImageId = 0x1C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815C1C0,
+        .descriptionTiles = gGfxEvidenceMeetingRoomScreen_description,
         .evidenceImageId = 0xF,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815C590,
+        .descriptionTiles = gGfxEvidenceMeetingRoomKey_description,
         .evidenceImageId = 0x10,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815C9A0,
+        .descriptionTiles = gGfxEvidenceGreysGun_description,
         .evidenceImageId = 0x12,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815CE18,
+        .descriptionTiles = gGfxEvidenceMayasKnife_description,
         .evidenceImageId = 0x13,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815D230,
+        .descriptionTiles = gGfxEvidenceMayasRobe0_description,
         .evidenceImageId = 0x14,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815D668,
+        .descriptionTiles = gGfxEvidenceMayasRobe1_description,
         .evidenceImageId = 0x14,
         .evidenceDetailId = 0x5,
     },
     {
-        .descriptionTiles = gUnknown_0815DA90,
+        .descriptionTiles = gGfxEvidence001828C80_description,
         .evidenceImageId = 0x15,
         .evidenceDetailId = 0x6,
     },
     {
-        .descriptionTiles = gUnknown_0815DEB4,
+        .descriptionTiles = gGfxEvidence001828C81_description,
         .evidenceImageId = 0x15,
         .evidenceDetailId = 0x6,
     },
     {
-        .descriptionTiles = gUnknown_0815E2E4,
+        .descriptionTiles = gGfxEvidence001828C82_description,
         .evidenceImageId = 0x15,
         .evidenceDetailId = 0x7,
     },
     {
-        .descriptionTiles = gUnknown_0815E73C,
+        .descriptionTiles = gGfxEvidenceKurainSacredUrn0_description,
         .evidenceImageId = 0x16,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815EB38,
+        .descriptionTiles = gGfxEvidenceKurainSacredUrn1_description,
         .evidenceImageId = 0x16,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815EFC0,
+        .descriptionTiles = gGfxEvidenceSwatchFromMayasRobe_description,
         .evidenceImageId = 0x17,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815F3CC,
+        .descriptionTiles = gGfxEvidencePearlsBall_description,
         .evidenceImageId = 0x18,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815F7C8,
+        .descriptionTiles = gGfxEvidenceLargeBox_description,
         .evidenceImageId = 0x19,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0815FBC4,
+        .descriptionTiles = gGfxProfilesIniMiney2_description,
         .evidenceImageId = 0x23,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816000C,
+        .descriptionTiles = gGfxEvidenceNoteFromTheSafe0_description,
         .evidenceImageId = 0x26,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08160318,
+        .descriptionTiles = gGfxProfilesMayaFey3_description,
         .evidenceImageId = 0x7,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08160758,
+        .descriptionTiles = gGfxProfilesMaximillionGalactica_description,
         .evidenceImageId = 0x3D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08160B6C,
+        .descriptionTiles = gGfxProfilesFranziskaVonKarma1_description,
         .evidenceImageId = 0x28,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08160F68,
+        .descriptionTiles = gGfxProfilesRussellBerry_description,
         .evidenceImageId = 0x43,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08161378,
+        .descriptionTiles = gGfxProfilesReginaBerry_description,
         .evidenceImageId = 0x3E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08161764,
+        .descriptionTiles = gGfxProfilesBen0_description,
         .evidenceImageId = 0x40,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08161B40,
+        .descriptionTiles = gGfxProfilesBen1_description,
         .evidenceImageId = 0x40,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08161EF8,
+        .descriptionTiles = gGfxProfilesMoe_description,
         .evidenceImageId = 0x41,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081622C4,
+        .descriptionTiles = gGfxProfilesAcro0_description,
         .evidenceImageId = 0x42,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816264C,
+        .descriptionTiles = gGfxProfilesAcro1_description,
         .evidenceImageId = 0x42,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08162A54,
+        .descriptionTiles = gGfxProfilesBat_description,
         .evidenceImageId = 0x44,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08162E54,
+        .descriptionTiles = gGfxEvidenceGenericPhoto4_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x9,
     },
     {
-        .descriptionTiles = gUnknown_08163274,
+        .descriptionTiles = gGfxEvidenceMaxSilkHat_description,
         .evidenceImageId = 0x2A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816365C,
+        .descriptionTiles = gGfxEvidenceGenericPhoto5_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0xA,
     },
     {
-        .descriptionTiles = gUnknown_08163A80,
+        .descriptionTiles = gGfxEvidenceGenericLetter2_description,
         .evidenceImageId = 0x4,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08163EB8,
+        .descriptionTiles = gGfxEvidenceMaxPoster_description,
         .evidenceImageId = 0x2B,
         .evidenceDetailId = 0xB,
     },
     {
-        .descriptionTiles = gUnknown_081642BC,
+        .descriptionTiles = gGfxEvidenceBrokenBottle_description,
         .evidenceImageId = 0x2C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08164670,
+        .descriptionTiles = gGfxEvidenceTrilo_description,
         .evidenceImageId = 0x2D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08164A14,
+        .descriptionTiles = gGfxEvidenceMoney_description,
         .evidenceImageId = 0x2E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08164DD4,
+        .descriptionTiles = gGfxEvidenceGenericAutopsyReport3_description,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08165280,
+        .descriptionTiles = gGfxEvidenceLargeChest_description,
         .evidenceImageId = 0x30,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08165670,
+        .descriptionTiles = gGfxEvidencePepper_description,
         .evidenceImageId = 0x31,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08165AA0,
+        .descriptionTiles = gGfxEvidenceEngagementRing_description,
         .evidenceImageId = 0x2F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08165EA4,
+        .descriptionTiles = gGfxEvidenceGenericPhoto6_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0xC,
     },
     {
-        .descriptionTiles = gUnknown_081662C0,
+        .descriptionTiles = gGfxEvidenceGenericPhoto7_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0xD,
     },
     {
-        .descriptionTiles = gUnknown_0816670C,
+        .descriptionTiles = gGfxEvidenceThreateningNoteTorn_description,
         .evidenceImageId = 0x33,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08166B4C,
+        .descriptionTiles = gGfxEvidenceThreateningNoteFull0_description,
         .evidenceImageId = 0x34,
         .evidenceDetailId = 0xE,
     },
     {
-        .descriptionTiles = gUnknown_08166F74,
+        .descriptionTiles = gGfxEvidenceThreateningNoteFull1_description,
         .evidenceImageId = 0x34,
         .evidenceDetailId = 0xF,
     },
     {
-        .descriptionTiles = gUnknown_08167370,
+        .descriptionTiles = gGfxEvidenceThreateningNoteFull2_description,
         .evidenceImageId = 0x34,
         .evidenceDetailId = 0x10,
     },
     {
-        .descriptionTiles = gUnknown_0816777C,
+        .descriptionTiles = gGfxEvidenceLeon_description,
         .evidenceImageId = 0x36,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08167B98,
+        .descriptionTiles = gGfxEvidenceReginasWest_description,
         .evidenceImageId = 0x35,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08167F64,
+        .descriptionTiles = gGfxEvidenceBloodyScarf_description,
         .evidenceImageId = 0x37,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08168378,
+        .descriptionTiles = gGfxEvidenceRegent_description,
         .evidenceImageId = 0x3A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08168650,
+        .descriptionTiles = gGfxEvidenceThreateningNoteFull3_description,
         .evidenceImageId = 0x34,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08168994,
+        .descriptionTiles = gGfxEvidenceMilk_description,
         .evidenceImageId = 0x3B,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08168C6C,
+        .descriptionTiles = gGfxEvidencePlayingCard_description,
         .evidenceImageId = 0x39,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08168F38,
+        .descriptionTiles = gGfxEvidencePlayingCards_description,
         .evidenceImageId = 0x38,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08169228,
+        .descriptionTiles = gGfxEvidenceMoesGrapes_description,
         .evidenceImageId = 0x3C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08169504,
+        .descriptionTiles = gGfxProfilesWillPowers_description,
         .evidenceImageId = 0x45,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081698E4,
+        .descriptionTiles = gGfxProfilesWendyOldbag_description,
         .evidenceImageId = 0x46,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08169CC8,
+        .descriptionTiles = gGfxProfilesLottaHart1_description,
         .evidenceImageId = 0x20,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816A0C0,
+        .descriptionTiles = gGfxProfilesJuanCorrida_description,
         .evidenceImageId = 0x47,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816A528,
+        .descriptionTiles = gGfxProfilesMattEngarde0_description,
         .evidenceImageId = 0x48,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816A92C,
+        .descriptionTiles = gGfxProfilesMattEngarde1_description,
         .evidenceImageId = 0x48,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816AD64,
+        .descriptionTiles = gGfxProfilesAdrianAndrews_description,
         .evidenceImageId = 0x49,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816B188,
+        .descriptionTiles = gGfxProfilesCelesteInpax0_description,
         .evidenceImageId = 0x4A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816B5E4,
+        .descriptionTiles = gGfxProfilesCelesteInpax1_description,
         .evidenceImageId = 0x4A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816BA60,
+        .descriptionTiles = gGfxProfilesDisguisedShellyDeKiller_description,
         .evidenceImageId = 0x4B,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816BEC8,
+        .descriptionTiles = gGfxProfilesShellyDeKiller_description,
         .evidenceImageId = 0x4C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816C304,
+        .descriptionTiles = gGfxProfilesMilesEdgeworth_description,
         .evidenceImageId = 0x4D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816C748,
+        .descriptionTiles = gGfxEvidenceAdmissionTicket_description,
         .evidenceImageId = 0x4E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816CB90,
+        .descriptionTiles = gGfxEvidenceTransceiver0_description,
         .evidenceImageId = 0x4F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816CF80,
+        .descriptionTiles = gGfxEvidenceTransceiver1_description,
         .evidenceImageId = 0x4F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816D35C,
+        .descriptionTiles = gGfxEvidenceLottasCameraCase0_description,
         .evidenceImageId = 0x5E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816D774,
+        .descriptionTiles = gGfxEvidenceLottasCameraCase1_description,
         .evidenceImageId = 0x5E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816DB84,
+        .descriptionTiles = gGfxEvidenceGenericPhoto8_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x11,
     },
     {
-        .descriptionTiles = gUnknown_0816DFC4,
+        .descriptionTiles = gGfxEvidenceGuitarCase0_description,
         .evidenceImageId = 0x50,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816E3E8,
+        .descriptionTiles = gGfxEvidenceGuitarCase1_description,
         .evidenceImageId = 0x50,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816E810,
+        .descriptionTiles = gGfxEvidenceTomatoJuice0_description,
         .evidenceImageId = 0x51,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816EC1C,
+        .descriptionTiles = gGfxEvidenceBloodyButton_description,
         .evidenceImageId = 0x67,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816F0A4,
+        .descriptionTiles = gGfxEvidenceGenericPhoto9_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x12,
     },
     {
-        .descriptionTiles = gUnknown_0816F4FC,
+        .descriptionTiles = gGfxEvidenceGenericEnvelope0_description,
         .evidenceImageId = 0x54,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816F998,
+        .descriptionTiles = gGfxEvidenceGenericEnvelope1_description,
         .evidenceImageId = 0x54,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0816FE30,
+        .descriptionTiles = gGfxEvidenceJuansAutograph_description,
         .evidenceImageId = 0x52,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08170210,
+        .descriptionTiles = gGfxEvidenceGossipColumn_description,
         .evidenceImageId = 0x53,
         .evidenceDetailId = 0x13,
     },
     {
-        .descriptionTiles = gUnknown_08170678,
+        .descriptionTiles = gGfxEvidenceGenericAutopsyReport4_description,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08170B20,
+        .descriptionTiles = gGfxEvidenceBloodyKnife_description,
         .evidenceImageId = 0x69,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08170F70,
+        .descriptionTiles = gGfxEvidenceGenericPhoto10_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x14,
     },
     {
-        .descriptionTiles = gUnknown_081713B4,
+        .descriptionTiles = gGfxEvidenceShellysCallingCard_description,
         .evidenceImageId = 0x55,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081717BC,
+        .descriptionTiles = gGfxEvidenceNoteFromTheSafe1_description,
         .evidenceImageId = 0x26,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08171BC4,
+        .descriptionTiles = gGfxEvidenceVideoCamera_description,
         .evidenceImageId = 0x56,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08172060,
+        .descriptionTiles = gGfxEvidenceVideoTransmitter_description,
         .evidenceImageId = 0x5C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08172478,
+        .descriptionTiles = gGfxEvidenceImportedBear_description,
         .evidenceImageId = 0x57,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0817288C,
+        .descriptionTiles = gGfxEvidenceReceipt_description,
         .evidenceImageId = 0x58,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08172D00,
+        .descriptionTiles = gGfxEvidenceBearPuzzle0_description,
         .evidenceImageId = 0x59,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0817311C,
+        .descriptionTiles = gGfxEvidenceBearPuzzle1_description,
         .evidenceImageId = 0x59,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08173544,
+        .descriptionTiles = gGfxEvidencePhotoOfCeleste_description,
         .evidenceImageId = 0x5A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0817399C,
+        .descriptionTiles = gGfxEvidenceNoteFromTheSafe2_description,
         .evidenceImageId = 0x26,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08173DE8,
+        .descriptionTiles = gGfxEvidenceNoteFromTheSafe3_description,
         .evidenceImageId = 0x26,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081740C8,
+        .descriptionTiles = gGfxEvidenceGenericAffidavit0_description,
         .evidenceImageId = 0x68,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081743A0,
+        .descriptionTiles = gGfxEvidenceGenericAffidavit1_description,
         .evidenceImageId = 0x68,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081747CC,
+        .descriptionTiles = gGfxEvidenceBearClock_description,
         .evidenceImageId = 0x6A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08174AA8,
+        .descriptionTiles = gGfxEvidenceFrequencyDetector_description,
         .evidenceImageId = 0x5F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08174D74,
+        .descriptionTiles = gGfxEvidenceShoe_description,
         .evidenceImageId = 0x5D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08175034,
+        .descriptionTiles = gGfxEvidenceBellboyUniform0_description,
         .evidenceImageId = 0x62,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08175484,
+        .descriptionTiles = gGfxEvidenceBellboyUniform1_description,
         .evidenceImageId = 0x62,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081758CC,
+        .descriptionTiles = gGfxEvidenceGenericVideo0_description,
         .evidenceImageId = 0x64,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08175CD4,
+        .descriptionTiles = gGfxEvidenceGenericVideo1_description,
         .evidenceImageId = 0x64,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081760F0,
+        .descriptionTiles = gGfxEvidenceShellyPistol0_description,
         .evidenceImageId = 0x65,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0817651C,
+        .descriptionTiles = gGfxEvidenceShellyPistol1_description,
         .evidenceImageId = 0x65,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08176920,
+        .descriptionTiles = gGfxEvidenceFranziskasWhip_description,
         .evidenceImageId = 0x66,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_08176CF0,
+        .descriptionTiles = gGfxEvidenceTrackingDevice_description,
         .evidenceImageId = 0x60,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_0817701C,
+        .descriptionTiles = gGfxEvidenceGumshoesCoat_description,
         .evidenceImageId = 0x61,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081772D4,
+        .descriptionTiles = gGfxEvidenceGatewaterHotelButton_description,
         .evidenceImageId = 0x63,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gUnknown_081775FC,
+        .descriptionTiles = gGfxEvidenceGenericPhoto11_description,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x15,
     },
     {
-        .descriptionTiles = gUnknown_081779E4,
+        .descriptionTiles = gGfxEvidenceTomatoJuice1_description,
         .evidenceImageId = 0x51,
         .evidenceDetailId = 0x0,
     },
@@ -872,10 +872,10 @@ void CourtRecordInit(struct Main * main, struct CourtRecord * courtRecord) // st
     u32 temp;
     u16 * map;
     struct OamAttrs * oam;
-    sub_8017864();
-    temp = gMain.unk2BA;
-    sub_8013878(gMain.unk2BA);
-    gMain.unk2BA = temp;
+    ClearHPBarOAM();
+    temp = gMain.currentlyPlayingLoopedSfx;
+    StopSE(gMain.currentlyPlayingLoopedSfx);
+    gMain.currentlyPlayingLoopedSfx = temp;
     map = gBG2MapBuffer; 
     for(i = 0; i < 0x400; i++, map++)
         *map = 0;
@@ -1103,8 +1103,8 @@ void CourtRecordMain(struct Main * main, struct CourtRecord * courtRecord) // st
         {
             if(main->process[GAME_PROCESS_VAR2] == 2) {
                 if(courtRecord->displayItemList[courtRecord->selectedItem] == 0x2B) {
-                    if(sub_8016D8C(main->currentRoomId, anim->animationInfo.personId) >= 0) {
-                        gInvestigation.unkB |= 1;
+                    if(GetPsycheLockDataIndexByRoomAndPerson(main->currentRoomId, anim->animationInfo.personId) >= 0) {
+                        gInvestigation.inPsycheLockChallengeFlag |= 1;
                         oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_PRESENT];
                         oam->attr0 = SPRITE_ATTR0_CLEAR;
                         ClearEvidenceSprites(courtRecord);
@@ -1142,7 +1142,7 @@ void CourtRecordMain(struct Main * main, struct CourtRecord * courtRecord) // st
                 SlideInBG2Window(4, 0x12);
                 SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_TAKE_THAT_SPECIAL, 0, 0, main);
                 courtRecord->flags |= 0x10;
-                if(sub_8016DCC(&gMain.unk1A4[gMain.unk244], courtRecord->displayItemList[courtRecord->selectedItem]) != -1) {
+                if(IsPresentedEvidenceValidForPsycheLock(&gMain.psycheLockData[gMain.currentPsycheLockDataIndex], courtRecord->displayItemList[courtRecord->selectedItem]) != -1) {
                     StopBGM();
                 }
                 return;
@@ -1215,8 +1215,8 @@ void CourtRecordExit(struct Main * main, struct CourtRecord * courtRecord) // st
             gBG1MapBuffer[623] = 0x21;
         }
         RESTORE_PROCESS_PTR(main);
-        if(gMain.unk2BA)
-            PlaySE(gMain.unk2BA);
+        if(gMain.currentlyPlayingLoopedSfx)
+            PlaySE(gMain.currentlyPlayingLoopedSfx);
     }
 }
 
@@ -1268,7 +1268,7 @@ void CourtRecordChangeRecord(struct Main * main, struct CourtRecord * courtRecor
         else
         {
             courtRecord->flags |= COURT_RECORD_VIEW_PROFILES;
-            DmaCopy16(3, gUnknown_081424FC, OBJ_VRAM0+0x3500, 0x200);
+            DmaCopy16(3, gGfxEvidenceText, OBJ_VRAM0+0x3500, 0x200);
             courtRecord->displayItemCount = courtRecord->profileCount;
             courtRecord->displayItemList = courtRecord->profileList;
         }
@@ -1298,14 +1298,14 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 break;
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
-                if(gMain.unk24B != 2 && gMain.unk30 == 0x7F) {
-                    sub_80161F4();
-                    sub_801622C();
-                    sub_8017134();
+                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.unk30 == 0x7F) {
+                    SetPsycheLockAnimationStateReturnToNormalBackground();
+                    UpdatePsycheLockAnimation();
+                    ClearPsycheLockStopPresentButtonsOAM();
                 }
             } else {
-                if(gMain.unk24B == 1){
-                    sub_8016D40();
+                if(gMain.psycheLockShownByScriptFlag == 1){
+                    ClearPsycheLockLocksAndChainsWithoutAnimating();
                 }
             }
             courtRecord->fullScreenPage = 0;
@@ -1512,28 +1512,28 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             if(gMain.unk2BE & 0xF) {
                 switch(gMain.unk2BE >> 4) {
                     case 0:
-                        sub_800E7B0();
-                        sub_800E7EC(0x18, 0x80, 1);
+                        LoadWitnessBenchGraphics();
+                        SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
                         break;
                     case 1:
-                        sub_800E8C4();
-                        sub_800E900(0, 0x80, 1);       
+                        LoadCounselBenchGraphics();
+                        SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);       
                         break;
                     case 2:
-                        sub_800E8C4();
-                        sub_800E9D4(0x20, 0x80, 1);
+                        LoadCounselBenchGraphics();
+                        SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
                 }
             }
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
-                if(gMain.unk24B != 2) {
-                    sub_8016204();
-                    sub_801622C();
+                if(gMain.psycheLockShownByScriptFlag != 2) {
+                    SetPsycheLockAnimationStateRedrawRemainingLocks();
+                    UpdatePsycheLockAnimation();
                 }
-                sub_80170AC();
+                SetPsycheLockPresentButtonOAMInCourtRecord();
             } else {
-                if(gMain.unk24B == 1) {
-                    sub_8016C7C(gMain.unk244);
+                if(gMain.psycheLockShownByScriptFlag == 1) {
+                    ShowPsycheLockLocksAndChainsWithoutAnimating(gMain.currentPsycheLockDataIndex);
                 }
             }
             StartHardwareBlend(1, 1, 2, 0x1F);
@@ -1614,9 +1614,9 @@ void CourtRecordTakeThatSpecial(struct Main * main, struct CourtRecord * courtRe
                     temp2 = 6;
                 }
                 offset = gEvidenceProfileData[temp2].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-                temp = (uintptr_t)gUnknown_08177E28 + offset; //! Evil, uses a u32 for this pointer keep in mind and also global define
+                temp = (uintptr_t)gGfxEvidenceProfilePictures + offset; //! Evil, uses a u32 for this pointer keep in mind and also global define
                 DmaCopy16(3, temp, OBJ_PLTT+0x20, 0x20);
-                temp = (uintptr_t)gUnknown_08177E28 + offset + 0x20;
+                temp = (uintptr_t)gGfxEvidenceProfilePictures + offset + 0x20;
                 DmaCopy16(3, temp, OBJ_VRAM0+0x1000, TILE_SIZE_4BPP * 64);
                 oam->attr0 = SPRITE_ATTR0(16, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
                 oam->attr1 = SPRITE_ATTR1_NONAFFINE(88, FALSE, FALSE, 3);
@@ -1647,19 +1647,19 @@ void CourtRecordTakeThatSpecial(struct Main * main, struct CourtRecord * courtRe
                 if(courtRecord->flags & 8) {
                     oam->attr0 = SPRITE_ATTR0_CLEAR;
                     courtRecord->flags &= ~8;
-                    main->unk244 = sub_8016D8C(main->currentRoomId, anim->animationInfo.personId);
+                    main->currentPsycheLockDataIndex = GetPsycheLockDataIndexByRoomAndPerson(main->currentRoomId, anim->animationInfo.personId);
                     SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_10, 0, 0, main);
                     return;
                 } else if(courtRecord->flags & 0x10) {
                     s32 answer;
                     courtRecord->flags &= ~0x10;
-                    gMain.unk24A = 0;
-                    answer = sub_8016DCC(&main->unk1A4[main->unk244], courtRecord->displayItemList[courtRecord->selectedItem]);
+                    gMain.psycheLockStopPresentButtonsActive = 0;
+                    answer = IsPresentedEvidenceValidForPsycheLock(&main->psycheLockData[main->currentPsycheLockDataIndex], courtRecord->displayItemList[courtRecord->selectedItem]);
                     if(answer >= 0) {
-                        main->unk1A4[main->unk244].unkE = main->unk1A4[main->unk244].unk20[answer];
-                        ChangeScriptSection(main->unk1A4[main->unk244].unkE);
+                        main->psycheLockData[main->currentPsycheLockDataIndex].validEvidencePresentedSection = main->psycheLockData[main->currentPsycheLockDataIndex].validEvidenceScriptSections[answer];
+                        ChangeScriptSection(main->psycheLockData[main->currentPsycheLockDataIndex].validEvidencePresentedSection);
                     } else {
-                        ChangeScriptSection(main->unk1A4[main->unk244].unk10);
+                        ChangeScriptSection(main->psycheLockData[main->currentPsycheLockDataIndex].invalidEvidencePresentedSection);
                     }
                     SlideTextbox(1);
                     SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_10, 3, 0, main);
@@ -1819,9 +1819,9 @@ void LoadEvidenceWindowGraphics(void)
     DmaCopy16(3, gGfx4bppControllerButtons, OBJ_VRAM0+0x3800, TILE_SIZE_4BPP*16);
     DmaCopy16(3, gGfx4bppPresentBackTextTiles, OBJ_VRAM0+0x3A00, TILE_SIZE_4BPP*16);
     DmaCopy16(3, gGfx4bppProfileTextTiles, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
-    DmaCopy16(3, gGfxPalCrossExamUI, OBJ_PLTT+0x60, 0x20);
-    DmaCopy16(3, gGfxPalCourtRecordActionText, OBJ_PLTT+0x80, 0x20);
-    DmaCopy16(3, gGfxPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
+    DmaCopy16(3, gPalCrossExamUI, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, gPalCourtRecordActionText, OBJ_PLTT+0x80, 0x20);
+    DmaCopy16(3, gPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
 }
 
 void UpdateRecordSprites(struct CourtRecord * courtRecord)
@@ -1874,9 +1874,9 @@ void LoadEvidenceGraphics(u32 evidenceId)
     u8 * src;
 
     offset = gEvidenceProfileData[evidenceId].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-    src = gUnknown_08177E28 + offset;
+    src = gGfxEvidenceProfilePictures + offset;
     DmaCopy16(3, src, OBJ_PLTT+0x20, 0x20);
-    src = gUnknown_08177E28 + offset + 0x20;
+    src = gGfxEvidenceProfilePictures + offset + 0x20;
     DmaCopy16(3, src, OBJ_VRAM0+0x5000, TILE_SIZE_4BPP * 64);
     src = gEvidenceProfileData[evidenceId].descriptionTiles;
     LZ77UnCompWram(src, eUnknown_0200AFC0);
@@ -2160,7 +2160,7 @@ u32 GetEvidenceCommentSection(struct Main * main, u32 evidenceId, bool8 isProfil
     {
         if(gAnimation[1].animationInfo.personId == presetData->personId
         && isProfile == presetData->isProfile
-        && (main->unk25C[main->currentRoomId] == presetData->roomseq || presetData->roomseq == 0xFF))
+        && (main->currentRoomSeq[main->currentRoomId] == presetData->roomseq || presetData->roomseq == 0xFF))
         {
             if(evidenceId == presetData->evidenceId
             || presetData->evidenceId == 0xFF)
@@ -2268,13 +2268,13 @@ void LoadItemPlateGfx(struct Main * main)
     u8 * src;
 
     offset = gEvidenceProfileData[main->itemPlateEvidenceId].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-    src = gUnknown_08177E28 + offset;
+    src = gGfxEvidenceProfilePictures + offset;
     DmaCopy16(3, src, OBJ_PLTT+0x20, 0x20);
-    src = gUnknown_08177E28 + offset + 0x20;
+    src = gGfxEvidenceProfilePictures + offset + 0x20;
     DmaCopy16(3, src, OBJ_VRAM0+0x1000, TILE_SIZE_4BPP * 64);
 }
 
-void sub_801355C(struct Main * main) {
+void DrawItemPlateLeftSide(struct Main * main) {
     u16 * map = gBG1MapBuffer+32+1;
     u32 i;
     map++;
@@ -2306,7 +2306,7 @@ void sub_801355C(struct Main * main) {
     }
 }
 
-void sub_801364C(struct Main * main) {
+void DrawItemPlateRightSide(struct Main * main) {
     u16 * map = gBG1MapBuffer+32+28;
     u32 i;
     map--;
@@ -2355,20 +2355,20 @@ void DrawItemPlate(struct Main * main) // how did i match this
             break;
         case 1:
             if(main->itemPlateSide != 0)
-                sub_801364C(main);
+                DrawItemPlateRightSide(main);
             else
-                sub_801355C(main);
+                DrawItemPlateLeftSide(main);
             break;
         case 2:
         default:
             break;
         case 3:
         case 4:
-            sub_801355C(main);
+            DrawItemPlateLeftSide(main);
             break;
         case 5:
         case 6:
-            sub_801364C(main);
+            DrawItemPlateRightSide(main);
             break;
     }
     main->itemPlateCounter++;

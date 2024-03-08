@@ -83,7 +83,7 @@ struct MapMarker
 extern struct ScriptContext gScriptContext;
 extern struct TextBoxCharacter gTextBoxCharacters[0x3F];
 extern struct MapMarker gMapMarker[8];
-extern u16 gUnknown_03003B70[20];
+extern u16 gLoadedPsycheLockedTalkSections[20];
 
 /* begin script data */
 
@@ -120,10 +120,10 @@ void RunScriptContext(void);
 void InitScriptSection(struct ScriptContext *scriptCtx);
 void RedrawTextboxCharacters(void);
 
-void sub_8007CCC(struct Main *, s32);
-bool32 sub_8007CFC(struct Main *, s32);
-void sub_8007D30(struct Main *);
-void sub_8007D5C(struct Main *);
+void MarkSectionAsRead(struct Main *, s32);
+bool32 HasSectionBeenRead(struct Main *, s32);
+void ClearSectionReadFlags(struct Main *);
+void loadSectionReadFlagsFromSaveDataBuffer(struct Main *);
 
 void MakeMapMarkerSprites(void);
 u32 GetMapMarkerIndexFromId(u32);

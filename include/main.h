@@ -19,8 +19,8 @@ struct Joypad
 
 struct Main
 {
-    /* +0x000 */ u32 unk0;
-    /* +0x004 */ u32 unk4;
+    /* +0x000 */ u32 frameCounter;
+    /* +0x004 */ u32 doGameProcessCounter;
     /* +0x008 */ u8 process[0x4];
     /* +0x00C */ u8 processCopy[0x4];
     /* +0x010 */ u8 vblankWaitCounter;
@@ -70,10 +70,10 @@ struct Main
     /* +0x080 */ u16 blendCounter; // unity: Fade_timer
     /* +0x082 */ u8 blendDelay; // unity: fade_time
     /* +0x083 */ u8 blendDeltaY; // unity: fade_speed
-    /* +0x084 */ u16 unk84; // unity AA4: SpEf_status?
-    /* +0x086 */ u16 unk86; // unity AA4: SpEf_timer?
-    /* +0x088 */ u8 unk88; // unity AA4: SpEf_time?
-    /* +0x089 */ u8 unk89; // unity AA4: SpEf_speed?
+    /* +0x084 */ u16 effectType; // unity AA4: SpEf_status?
+    /* +0x086 */ u16 effectCounter; // unity AA4: SpEf_timer?
+    /* +0x088 */ u8 effectDelay; // unity AA4: SpEf_time?
+    /* +0x089 */ u8 effectIntensity; // unity AA4: SpEf_speed?
     /* +0x08A */ u8 itemPlateEvidenceId;
     /* +0x08B */ u8 itemPlateState;
     /* +0x08C */ u8 itemPlateSide;
@@ -81,69 +81,65 @@ struct Main
     /* +0x08E */ s8 itemPlateSize;
     /* +0x08F */ u8 itemPlateCounter; // counter which was most likely used to slow down the speed which the item plate changes size 
     /* +0x090 */ u8 itemPlateAction;
-    u8 filler91[0x92 - 0x91];
     /* +0x092 */ s16 affineScale; // used for the scale of oam sprites in court record, deliver judgement, episode unlocked
     /* +0x094 */ u16 xPosCounter; // used in episode selection menu
-    /* +0x096 */ u8 unk96; // unity: gauge_rno_0
-    /* +0x097 */ u8 unk97; // unity: gauge_rno_1
-    /* +0x098 */ s16 unk98; // unity: gauge_hp
-    /* +0x09A */ s16 unk9A; // unity: gauge_hp_disp
-    /* +0x09C */ s16 unk9C; // unity: gauge_dmg_cnt
-    /* +0x09E */ s16 unk9E; // unity: gauge_pos_x
-    /* +0x0A0 */ s16 unkA0; // unity: gauge_pos_y
-    /* +0x0A2 */ s16 unkA2; // unity: gauge_cnt_0
-    /* +0x0A4 */ s16 unkA4; // unity: gauge_cnt_1
-    /* +0x0A6 */ s16 unkA6; // unity: gauge_disp_flag
-    /* +0x0A8 */ s32 unkA8; // unity: gauge_hp_fixed
-    /* +0x0AC */ s32 unkAC; // unity: gauge_hp_fixed_diff
-    /* +0x0B0 */ s16 unkB0; // unity: gauge_hp_scenario_end
+    /* +0x096 */ u8 hpBarState; // unity: gauge_rno_0
+    /* +0x097 */ u8 hpBarSubState; // unity: gauge_rno_1
+    /* +0x098 */ s16 hpBarValue; // unity: gauge_hp
+    /* +0x09A */ s16 hpBarDisplayValue; // unity: gauge_hp_disp
+    /* +0x09C */ s16 hpBarDamageAmount; // unity: gauge_dmg_cnt
+    /* +0x09E */ s16 hpBarX; // unity: gauge_pos_x
+    /* +0x0A0 */ s16 hpBarY; // unity: gauge_pos_y
+    /* +0x0A2 */ s16 hpBarSlideOutDelay; // unity: gauge_cnt_0
+    /* +0x0A4 */ s16 hpBarQueuedState; // unity: gauge_cnt_1
+    /* +0x0A6 */ s16 hpBarDisplayFlag; // unity: gauge_disp_flag
+    /* +0x0A8 */ s32 hpBarQ16_16DisplayValue; // unity: gauge_hp_fixed
+    /* +0x0AC */ s32 hpBarQ16_16DisplayChangeAmount; // unity: gauge_hp_fixed_diff
+    /* +0x0B0 */ s16 hpBarValueAtEndOfSegment; // unity: gauge_hp_scenario_end
     /* +0x0B2 */ u8 currentRoomId;
     /* +0x0B3 */ u8 scenarioIdx;
     /* +0x0B4 */ u8 caseEnabledFlags;
     /* +0x0B5 */ s8 health; // unity: rest
     /* +0x0B6 */ u16 talkingAnimationOffset; // unity: Def_talk_foa
     /* +0x0B8 */ u16 idleAnimationOffset; // unity: Def_wait_foa
-    //2 byte filler
     /* +0x0BC */ u32 scriptFlags[8]; // unity: sce_flag matches debug menu
     /* +0x0DC */ u32 gameStateFlags; // unity: status_flag matches debug menu
     /* +0x0E0 */ u32 talkEndFlags[8]; // unity: talk_end_flag // TODO: find right size
-    /* +0x100 */ u32 unk100[8]; // script related, apollo's FW_Mess_flag??
+    /* +0x100 */ u32 sectionReadFlags[8]; // script related, apollo's FW_Mess_flag??
     /* +0x120 */ u8 roomData[26][5]; // unity: Map_data //TODO: first size might be wrong
-    /* +0x1A4 */ struct PsycheLockData unk1A4[4];
-    s8 unk244;
-    u8 unk245;
-    u16 unk246;
-    u8 unk248;
-    u8 unk249;
-    u8 unk24A;
-    u8 unk24B;
-    u8 unk24C; // unity: psy_unlock_not_unlock_message
-    u8 unk24D;
-    u8 unk24E;
-    u8 unk24F;
-    u8 unk250;
-    u8 filler251[0x254 - 0x251];
+    /* +0x1A4 */ struct PsycheLockData psycheLockData[4];
+    /* +0x244 */ s8 currentPsycheLockDataIndex;
+    /* +0x246 */ u16 psycheLockStopPresentButtonsY;
+    /* +0x248 */ u8 psycheLockStopPresentButtonsState;
+    /* +0x249 */ u8 psycheLockStopPresentButtonsSubstate;
+    /* +0x24A */ u8 psycheLockStopPresentButtonsActive; // unity: psy_menu_active_flag
+    /* +0x24B */ u8 psycheLockShownByScriptFlag;
+    /* +0x24C */ u8 preventUnlockFlag; // unity: psy_unlock_not_unlock_message
+    /* +0x24D */ u8 case4HeroLineupVerticalScrollState;
+    /* +0x24E */ u8 case4HeroLineupVerticalScrollCounter;
+    /* +0x24F */ u8 case4OtherBGAnimationState; // todo: definitively needs a better name
+    /* +0x250 */ u8 case4OtherBGAnimationCounter; // todo: definitively needs a better name
     /* +0x254 */ u32 soundFlags;
-    /* +0x258 */ u32 unk258;
-    u8 unk25C[25]; // unity: roomseq
-    u16 unk276[8]; // unity: lockdat
-    u16 unk286; // unity: lock_max
-    struct Main_288 {
-        u8 unk0;
+    /* +0x258 */ u32 unused258; // this gets set in TitleScreenProcess but is never used
+    u8 currentRoomSeq[25]; // unity: roomseq
+    /* +0x276 */ u16 psycheLockedTalkSections[8]; // unity: lockdat
+    /* +0x286 */ u16 numPsycheLockedTalkSections; // unity: lock_max
+    struct Spotlight {
+        u8 state;
         s8 unk1;
         s8 unk2;
         s8 unk3;
-        s32 unk4;
-        s32 unk8;
-        s32 unkC;
-        s32 unk10;
-    } unk288[2];
-    u8 unk2B0; // unity: spotlight_command_status
+        s32 x;
+        s32 y;
+        s32 xVelocity;
+        s32 yVelocity;
+    /* +0x288 */ } spotlights[2];
+    /* +0x2B0 */ u8 spotlightStopSweepingFlag; // unity: spotlight_command_status
     u8 filler2B1[0x2B4 - 0x2B1];
-    u8 unk2B4;
+    /* +0x2B4 */ u8 signalDetectorState;
     u8 filler2B5[0x2B8 - 0x2B5];
-    u16 unk2B8;
-    u16 unk2BA;
+    /* +0x2B8 */ u16 currentlyPlayingSfx;
+    u16 currentlyPlayingLoopedSfx;
     u8 unk2BC;
     u8 unk2BD;
     u8 unk2BE;
@@ -225,6 +221,6 @@ u32 ReadKeysAndTestResetCombo(void);
 void StartHardwareBlend(u32 mode, u32 delay, u32 deltaY, u32 target);
 void InitCourtScroll(u8 *, u32, u32, u32);
 void ResetGameState(void);
-void sub_8000E78(u32, u32, u32);
-void sub_8000EB4(u32, u32, u32);
+void InitSpecialEffectsWithMosaic(u32, u32, u32);
+void InitSpecialEffects(u32, u32, u32);
 #endif//GUARD_MAIN_H

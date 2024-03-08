@@ -1,49 +1,49 @@
 #ifndef GUARD_DECLARATIONS_H //TODO: get rid of this file when it's possible to move everything to its own header
 #define GUARD_DECLARATIONS_H
 
-extern struct PscyheLock gPsycheLock;
-extern struct Struct3006390 gUnknown_03006390[8];
+extern struct PsycheLock gPsycheLock;
+extern struct FlowerPetal gFlowerPetals[8];
 
-extern u8 * gUnknown_081124D0[];
+extern u8 * gPsycheLockChainTilemaps[];
 
-extern u8 gUnknown_0814777C[];
+extern u8 gGfxPsycheLockChainsTiles[];
 
 // ??
-extern void sub_8003988(u16,u16,u16);
-extern void sub_8003A7C(u16,u16);
-extern void sub_8003B1C(u16,u16,u16);
-extern void sub_8003B8C(u16,u16);
+extern void LoadAndAdjustBGPaletteByMode(u16,u16,u16);
+extern void LoadAndAdjustCurrentAnimation01PaletteByMode(u16,u16);
+extern void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16,u16,u16);
+extern void LoadAndAdjustAnimation10PaletteByMode(u16,u16);
 
 // script_main
-extern void sub_8007D30(struct Main * main);
+extern void ClearSectionReadFlags(struct Main * main);
 
 // investigation stuff 
-extern void sub_800E7B0(void);
-extern void sub_800E7EC(s32, s32, u8);
-extern void sub_800E8C4(void);
-extern void sub_800E900(s32, s32, u8);
-extern void sub_800E9D4(s32, s32, u8);
-extern void sub_8010FA4(void);
-extern void sub_8011088(u16, u16);
-extern void sub_8011198(void);
+extern void LoadWitnessBenchGraphics(void);
+extern void SetOAMForCourtBenchSpritesWitness(s32, s32, u8);
+extern void LoadCounselBenchGraphics(void);
+extern void SetOAMForCourtBenchSpritesDefense(s32, s32, u8);
+extern void SetOAMForCourtBenchSpritesProsecution(s32, s32, u8);
+extern void ReloadInvestigationGraphics(void);
+extern void SetInvestigationStateToReturnAfterPsycheLocks(u16, u16);
+extern void ClearInvestigationActionButtonOAM(void);
 
 // new file
-int sub_80175C0(void);
-void sub_8017864(void);
-void sub_80178E0(void);
-void sub_8017910(void);
-void sub_8017928(u32);
-void sub_801798C(void);
-bool32 sub_8017C78(void);
-void sub_8017F2C(void);
-void sub_80180B4(void);
-void sub_80180F8(void);
-extern void sub_8018138(void);
-extern void sub_801816C(void);
-extern void sub_801823C(void);
-extern void sub_80183D8(void);
-extern void sub_8018690(void);
-extern void sub_80186EC(void);
-extern void sub_8018720(void);
+int FindPlayingHPBarSmokeAnimations(void);
+void ClearHPBarOAM(void);
+void ResetHPBar(void);
+void ResetHPBarHealthToMax(void);
+void SetOrQueueHPBarState(u32);
+void ProcessHPBar(void);
+bool32 IsHPBarAnimating(void);
+void SetSpotlightStopSweepingFlag(void);
+void SpawnAllFlowerPetals(void);
+void DestroyAllFlowerPetals(void);
+extern void UpdateNickelSamuraiZoominAnimation(void);
+extern void InitNickelSamuraiZoominAnimation(void);
+extern void FinishNickelSamuraiZoominAnimation(void);
+extern void ProcessSignalDetector(void);
+extern void BeginSignalDetector(void);
+extern void ReturnToSignalDetector(void);
+extern void EndSignalDetector(void);
 
 #endif//GUARD_DECLARATIONS_H

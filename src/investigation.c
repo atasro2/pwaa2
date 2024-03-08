@@ -31,16 +31,16 @@ void (*gInvestigationProcessStates[])(struct Main *, struct InvestigationStruct 
 void UpdateScrollPromptSprite(struct Main *, u32);
 void UpdateInvestigationActionSprites(struct InvestigationStruct *);
 
-void sub_800EAC8(u32 idx, u32 arg1)
+void SetRoomSeq(u32 roomId, u32 seq)
 {
-    gMain.unk25C[idx] = arg1;
+    gMain.currentRoomSeq[roomId] = seq;
 }
 
-u16 sub_800EADC(u16 arg0)
+u16 IsTalkSectionPsycheLocked(u16 arg0)
 {
     u16 i;
-    for(i = 0; i < gMain.unk286; i++) {
-        if(gMain.unk276[i] == arg0) return 1;
+    for(i = 0; i < gMain.numPsycheLockedTalkSections; i++) {
+        if(gMain.psycheLockedTalkSections[i] == arg0) return 1;
     }
     return 0;
 }
@@ -79,15 +79,15 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     ioRegs->lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
-    DmaCopy16(3, gUnknown_0813791C, VRAM, 0x1000);
+    DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
     DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, gUnknown_0814DBA0, OBJ_PLTT+0xA0, 0x40);
+    DmaCopy16(3, gPalActionButtons1, OBJ_PLTT+0xA0, 0x40);
     DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
-    DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT+0xE0, 0x20);
-    DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x3200, 0x200);
-    DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT+0x100, 0x20);
-    DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
-    oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
+    DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT+0xE0, 0x20);
+    DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
+    DmaCopy16(3, gPalExamineCursors, OBJ_PLTT+0x100, 0x20);
+    DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
+    oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
     for(i = 0; i < 4; i++)
     {
         oam->attr0 = SPRITE_ATTR0(-32 & 0xFF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -256,7 +256,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
             StartAnimationBlend(0xC, 1);
             investigation->pointerColorCounter = 0;
             investigation->pointerColor = 0;
-            DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT+0x100, 0x20);
+            DmaCopy16(3, gPalExamineCursors, OBJ_PLTT+0x100, 0x20);
         }
         main->process[GAME_PROCESS_STATE] = INVESTIGATION_INSPECT + investigation->selectedAction;
         main->process[GAME_PROCESS_VAR2] = 0;
@@ -296,7 +296,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
 // ! still the same as CourtExit, thanks capcom
 void InvestigationExit(struct Main * main, struct InvestigationStruct * investigation) // tantei_exit
 {
-    sub_8007D30(main);
+    ClearSectionReadFlags(main);
     DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
     SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 1, main);
     if(main->scenarioIdx == 2)
@@ -576,7 +576,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
                     investigation->pointerColorCounter = 0;
                     investigation->pointerColor += 1;
                     investigation->pointerColor &= 0xF;
-                    DmaCopy16(3, gUnknown_0814DC60+investigation->pointerColor*32, OBJ_PLTT+0x100, 0x20);
+                    DmaCopy16(3, gPalExamineCursors+investigation->pointerColor*32, OBJ_PLTT+0x100, 0x20);
                 }
                 break;
             case 2:
@@ -984,8 +984,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 }
                 icons++;
             }
-            DmaCopy16(3, gUnknown_08142BFC, OBJ_VRAM0+0x5400, 0x200);
-            DmaCopy16(3, gUnknown_0814DE80, PLTT+0x360, 0x20);
+            DmaCopy16(3, gGfxCheckmark, OBJ_VRAM0+0x5400, 0x200);
+            DmaCopy16(3, gPalCheckmark, PLTT+0x360, 0x20);
             if(investigation->previousSelectedOption) {
                 investigation->selectedOption = investigation->previousSelectedOption;
                 investigation->previousSelectedOption = 0;
@@ -1029,8 +1029,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
         }
         case 3:
         {
-            DmaCopy16(3, gUnknown_08142BFC, OBJ_VRAM0+0x5400, 0x200);
-            DmaCopy16(3, gUnknown_0814DE80, OBJ_PLTT+0x160, 0x20);
+            DmaCopy16(3, gGfxCheckmark, OBJ_VRAM0+0x5400, 0x200);
+            DmaCopy16(3, gPalCheckmark, OBJ_PLTT+0x160, 0x20);
             for(talkData = gTalkData; talkData->roomId != 0xFF; talkData++)
             {
                 if(main->currentRoomId == talkData->roomId
@@ -1147,10 +1147,10 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     {
                         if(GetFlag(2, talkData->talkFlagId[i]))
                         {
-                            u16 blab = sub_800EADC(talkData->talkSection[i]);
+                            u16 blab = IsTalkSectionPsycheLocked(talkData->talkSection[i]);
                             if(blab) {
-                                DmaCopy16(3, gUnknown_081471FC, OBJ_VRAM0+0x3000, 0x200);
-                                DmaCopy16(3, gUnknown_0814E320, OBJ_PLTT+0xE0, 0x20);
+                                DmaCopy16(3, gGfxInvestigationPsycheLock, OBJ_VRAM0+0x3000, 0x200);
+                                DmaCopy16(3, gPalInvestigationPsycheLock, OBJ_PLTT+0xE0, 0x20);
                                 oam->attr0 = 0x16 + i * 30;
                                 oam->attr1 = 0x8024;
                                 oam->attr2 = 0x7180;
@@ -1228,7 +1228,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             {
 
                 DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0+0x3000, 0x200);
-                DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT+0xE0, 0x20);
+                DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT+0xE0, 0x20);
                 SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
                 investigation->inactiveActions += 1 << investigation->selectedAction;
                 investigation->selectedActionYOffset = 8;
@@ -1515,44 +1515,44 @@ void InvestigationPsycheLock(struct Main * main, struct InvestigationStruct * in
     if(main->process[GAME_PROCESS_VAR1] == 9)
         goto _08010E54;
 
-    psycheLockData = &main->unk1A4[main->unk244];
-    sub_8016E7C();
+    psycheLockData = &main->psycheLockData[main->currentPsycheLockDataIndex];
+    AnimatePsycheLockStopBresentButtons();
     goto *states[main->process[GAME_PROCESS_VAR1]];
 
 _08010A78:
-    sub_80178E0();
-    psycheLockData->unk8 = psycheLockData->unk9;
-    sub_8016124(psycheLockData->unk9);
-    sub_8016150();
-    sub_8016DFC();
-    gMain.unk24A = 0;
-    investigation->unkB |= 1;
+    ResetHPBar();
+    psycheLockData->numLocksRemaining = psycheLockData->numLocksTotal;
+    InitPsycheLockState(psycheLockData->numLocksTotal);
+    SetPsycheLockAnimationStateShowChains();
+    ResetPsycheLockStopPresentButtonsState();
+    gMain.psycheLockStopPresentButtonsActive = 0;
+    investigation->inPsycheLockChallengeFlag |= 1;
     main->process[GAME_PROCESS_VAR1]++;
 _08010AA6:
-    sub_801622C();
-    if(sub_8016214())
+    UpdatePsycheLockAnimation();
+    if(IsPsycheLockAnimationInWaitState())
         main->process[GAME_PROCESS_VAR1]++;
     return;
 _08010AC4:
-    ChangeScriptSection(psycheLockData->unkA);
+    ChangeScriptSection(psycheLockData->startScriptSection);
     gMain.advanceScriptContext = TRUE;
     main->process[GAME_PROCESS_VAR1] = 3;
 _08010AD4:
-    if(gMain.unk24A & 1
+    if(gMain.psycheLockStopPresentButtonsActive & 1
     && gJoypad.pressedKeys == R_BUTTON
-    && gMain.unk248 == 0
+    && gMain.psycheLockStopPresentButtonsState == 0
     && (main->gameStateFlags & 0x10) == 0
     && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN | SCRIPT_LOOP))
     {
-        sub_8017864();
-        sub_80170AC();
+        ClearHPBarOAM();
+        SetPsycheLockPresentButtonOAMInCourtRecord();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 3, main);
     }
-    if(gMain.unk24A & 2
-    && sub_801715C() == FALSE
-    && gMain.unk248 == 0
+    if(gMain.psycheLockStopPresentButtonsActive & 2
+    && IsPsycheLockStopPresentButtonsAnimating() == FALSE
+    && gMain.psycheLockStopPresentButtonsState == 0
     && gJoypad.pressedKeys == L_BUTTON)
     {
         PlaySE(SE002_MENU_CANCEL);
@@ -1560,21 +1560,21 @@ _08010AD4:
         main->process[GAME_PROCESS_VAR2] = 0;
         goto _08010D9C; // goto state 8 immediately
     }
-    if(gMain.unk24A == 0
-    && sub_801715C() == FALSE
+    if(gMain.psycheLockStopPresentButtonsActive == 0
+    && IsPsycheLockStopPresentButtonsAnimating() == FALSE
     && gJoypad.pressedKeys == R_BUTTON
-    && sub_80175C0() == 0
+    && FindPlayingHPBarSmokeAnimations() == 0
     && (main->gameStateFlags & 0x10) == 0
     && gScriptContext.flags & (1 | SCRIPT_FULLSCREEN))
     {
-        sub_8017864();
+        ClearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 4, main);
     }
-    if(main->unk98 <= 0
-    && main->unk9A <= 0
-    && sub_8017C78() == FALSE)
+    if(main->hpBarValue <= 0
+    && main->hpBarDisplayValue <= 0
+    && IsHPBarAnimating() == FALSE)
         main->process[GAME_PROCESS_VAR1] = 11;
     return;
 _08010C14:
@@ -1584,24 +1584,24 @@ _08010C14:
             gMain.showTextboxCharacters = FALSE;
             gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
             gIORegisters.lcd_bg1vofs = 0;
-            sub_80161B4();
+            SetPsycheLockAnimationStateUnlock();
             main->process[GAME_PROCESS_VAR2]++;
         case 1:
-            sub_801622C();
-            if(sub_8016214()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
                 main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
             break;
         case 2:
-            psycheLockData->unk8--;
-            if(psycheLockData->unk8 == 0 && gMain.unk24C == 0) {
+            psycheLockData->numLocksRemaining--;
+            if(psycheLockData->numLocksRemaining == 0 && gMain.preventUnlockFlag == 0) {
                 main->process[GAME_PROCESS_VAR1] = 7;
                 main->process[GAME_PROCESS_VAR2] = 0;
                 break;
             }
             gMain.advanceScriptContext = TRUE;
-            if(gMain.unk24C == 0)
+            if(gMain.preventUnlockFlag == 0)
                 SlideTextbox(1);
             main->process[GAME_PROCESS_VAR1] = 3;
             main->process[GAME_PROCESS_VAR2] = 0;
@@ -1609,61 +1609,61 @@ _08010C14:
     }
     return;
 _08010CA4:
-    ChangeScriptSection(psycheLockData->unk10);
+    ChangeScriptSection(psycheLockData->invalidEvidencePresentedSection);
     SlideTextbox(1);
 _08010CB0:
     main->process[GAME_PROCESS_VAR1] = 3;
     return;
 _08010CB6:
-    gMain.unkA0 = 100;
+    gMain.hpBarY = 100;
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
             gMain.advanceScriptContext = FALSE;
             FadeOutBGM(30);
-            sub_80161C4();
+            SetPsycheLockAnimationStateRemoveChains();
             main->process[GAME_PROCESS_VAR2]++;
         case 1:
-            sub_801622C();
-            if(!sub_8016214())
+            UpdatePsycheLockAnimation();
+            if(!IsPsycheLockAnimationInWaitState())
                 break;
-            sub_80161E4();
-            if(gMain.unk98 < 80) {
-                sub_8017928(1);
-                gMain.unk9C = -40;
-                sub_8017928(3);
+            SetPsycheLockAnimationStateClearLocksAndChains();
+            if(gMain.hpBarValue < 80) {
+                SetOrQueueHPBarState(1);
+                gMain.hpBarDamageAmount = -40;
+                SetOrQueueHPBarState(3);
             }
             main->process[GAME_PROCESS_VAR2]++;
             break;
         case 2:
-            sub_801622C();
-            if(!sub_8016214())
+            UpdatePsycheLockAnimation();
+            if(!IsPsycheLockAnimationInWaitState())
                 break;
-            sub_80161D4();
+            SetPsycheLockAnimationStateDisplayUnlockMessage();
             main->process[GAME_PROCESS_VAR2]++;
             break;
         case 3:
-            sub_801622C();
-            if(!sub_8016214())
+            UpdatePsycheLockAnimation();
+            if(!IsPsycheLockAnimationInWaitState())
                 break;
-            if(sub_8017C78())
+            if(IsHPBarAnimating())
                 break;
-            sub_8017928(2);
+            SetOrQueueHPBarState(2);
             main->process[GAME_PROCESS_VAR2]++;
             break;
         case 4:
             investigation->selectedAction = 3;
             investigation->lastAction = 3;
             gMain.advanceScriptContext = 1;
-            sub_8010FA4();
-            sub_8011198();
-            psycheLockData->unk0 = 0;
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
+            psycheLockData->enabled = 0;
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
     }
     return;
 _08010D9C:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
-            ChangeScriptSection(psycheLockData->unkC);
+            ChangeScriptSection(psycheLockData->cancelScriptSection);
             if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
                 SlideTextbox(1);
             main->process[GAME_PROCESS_VAR2]++;
@@ -1680,22 +1680,22 @@ _08010D9C:
                 main->process[GAME_PROCESS_VAR2]++;
             break;
         case 3:
-            sub_80161E4();
+            SetPsycheLockAnimationStateClearLocksAndChains();
             main->process[GAME_PROCESS_VAR2]++;
         case 4:
-            sub_801622C();
-            if(sub_8016214()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
                 main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
             break;
         case 5:
-            sub_8010FA4();
-            sub_8011198();
-            gInvestigation.unkB &= ~1;
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
+            gInvestigation.inPsycheLockChallengeFlag &= ~1;
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
-            if(psycheLockData->unk14 != 0xFFFF)
-                PlayBGM(psycheLockData->unk14);
+            if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
+                PlayBGM(psycheLockData->bgmToPlayAfterStop);
             StartHardwareBlend(1, 1, 1, 0x1F);
             break;
     }
@@ -1704,14 +1704,14 @@ _08010E54:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
             gMain.advanceScriptContext = FALSE;
-            investigation->unkB |= 1;
+            investigation->inPsycheLockChallengeFlag |= 1;
             SlideTextbox(0);
-            sub_8016124(main->unk244);
-            sub_8016150();
+            InitPsycheLockState(main->currentPsycheLockDataIndex);
+            SetPsycheLockAnimationStateShowChains();
             main->process[GAME_PROCESS_VAR2]++;
         case 1:
-            sub_801622C();
-            if(sub_8016214()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
                 main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
@@ -1727,7 +1727,7 @@ _08010EA6: // what the fuck
 _08010EAC:
     switch(main->process[GAME_PROCESS_VAR2]) {
         case 0:
-            ChangeScriptSection(psycheLockData->unk12);
+            ChangeScriptSection(psycheLockData->noHPLeftScriptSection);
             if(gScriptContext.textboxState == 1 || gScriptContext.textboxState == 4)
                 SlideTextbox(1);
             main->process[GAME_PROCESS_VAR2]++;
@@ -1745,41 +1745,41 @@ _08010EAC:
             }
             break;
         case 3:
-            sub_80161E4();
+            SetPsycheLockAnimationStateClearLocksAndChains();
             main->process[GAME_PROCESS_VAR2]++;
         case 4:
-            sub_801622C();
-            if(sub_8016214()) {
+            UpdatePsycheLockAnimation();
+            if(IsPsycheLockAnimationInWaitState()) {
                 main->process[GAME_PROCESS_VAR2]++;
                 break;
             }
             break;
         case 5:
-            gMain.unk9A = 1;
-            gMain.unk98 = 1;
-            sub_8010FA4();
-            sub_8011198();
-            gInvestigation.unkB &= ~1;
+            gMain.hpBarDisplayValue = 1;
+            gMain.hpBarValue = 1;
+            ReloadInvestigationGraphics();
+            ClearInvestigationActionButtonOAM();
+            gInvestigation.inPsycheLockChallengeFlag &= ~1;
             SlideTextbox(0);
             SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
-            if(psycheLockData->unk14 != 0xFFFF)
-                PlayBGM(psycheLockData->unk14);
+            if(psycheLockData->bgmToPlayAfterStop != 0xFFFF)
+                PlayBGM(psycheLockData->bgmToPlayAfterStop);
             StartHardwareBlend(1, 1, 1, 0x1F);
             break;
     }
 }
 
-void sub_8010FA4(void) {
+void ReloadInvestigationGraphics(void) {
     struct OamAttrs * oam;
     int i;
 
     DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, gUnknown_0814DBA0, OBJ_PLTT + 0xA0, 0x40);
+    DmaCopy16(3, gPalActionButtons1, OBJ_PLTT + 0xA0, 0x40);
     DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
-    DmaCopy16(3, gUnknown_0814DC00, OBJ_PLTT + 0xE0, 0x20);
-    DmaCopy16(3, gUnknown_081426FC, OBJ_VRAM0 + 0x3200, 0x200);
-    DmaCopy16(3, gUnknown_0814DC60, OBJ_PLTT + 0x100, 0x20);
-    DmaCopy16(3, gGfxPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+    DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT + 0xE0, 0x20);
+    DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
+    DmaCopy16(3, gPalExamineCursors, OBJ_PLTT + 0x100, 0x20);
+    DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
     oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
     for(i = 0; i < 4; i++) {
         oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -1789,16 +1789,16 @@ void sub_8010FA4(void) {
     }
 }
 
-void sub_8011088(u16 arg0, u16 arg1) {
+void SetInvestigationStateToReturnAfterPsycheLocks(u16 arg0, u16 arg1) {
     struct OamAttrs * oam;
     u32 i;
-    sub_8010FA4();
+    ReloadInvestigationGraphics();
     if(arg0 == 0) {
-        gInvestigation.unkB &= ~1;
+        gInvestigation.inPsycheLockChallengeFlag &= ~1;
         gInvestigation.selectedAction = 3;
         gInvestigation.lastAction = 3;
     } else if(arg0 == 1) {
-        gInvestigation.unkB &= ~1;
+        gInvestigation.inPsycheLockChallengeFlag &= ~1;
         oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
         for(i = 0; i < 4; i++) {
             oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -1812,7 +1812,7 @@ void sub_8011088(u16 arg0, u16 arg1) {
         gInvestigation.lastActionYOffset = 0;
         gInvestigation.selectedAction = 2;
         gInvestigation.lastAction = 2;
-        gInvestigation.unkB &= ~1;
+        gInvestigation.inPsycheLockChallengeFlag &= ~1;
         gInvestigation.actionState = 5;
         oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTION_TALK];
         oam->attr0 &= 0xFF00;
@@ -1823,12 +1823,12 @@ void sub_8011088(u16 arg0, u16 arg1) {
         gMain.process[GAME_PROCESS_VAR1] = 1;
         gInvestigation.previousSelectedOption = arg1;
         gIORegisters.lcd_bg1vofs = -77;
-        if(gMain.unk1A4[gMain.unk244].unk16 != 0xFFFF)
-            PlayBGM(gMain.unk1A4[gMain.unk244].unk16);
+        if(gMain.psycheLockData[gMain.currentPsycheLockDataIndex].bgmToPlayAfterUnlock != 0xFFFF)
+            PlayBGM(gMain.psycheLockData[gMain.currentPsycheLockDataIndex].bgmToPlayAfterUnlock);
     }
 }
 
-void sub_8011198(void) {
+void ClearInvestigationActionButtonOAM(void) {
     struct OamAttrs * oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
     u32 attr1;
     oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -1856,7 +1856,7 @@ void UpdateInvestigationActionSprites(struct InvestigationStruct * investigation
     u32 i;
     u32 y;
 
-    if(!(investigation->unkB & 1)) {
+    if(!(investigation->inPsycheLockChallengeFlag & 1)) {
         switch(investigation->actionState)
         {
             case 0:
@@ -2068,6 +2068,6 @@ void LoadTalkChoiceGraphics(void)
         }
         icons++;
     }
-    DmaCopy16(3, gUnknown_08142BFC, (void *)VRAM+0x15400, 0x200);
-    DmaCopy16(3, gUnknown_0814DE80, (void *)PLTT+0x360, 0x20);
+    DmaCopy16(3, gGfxCheckmark, (void *)VRAM+0x15400, 0x200);
+    DmaCopy16(3, gPalCheckmark, (void *)PLTT+0x360, 0x20);
 }

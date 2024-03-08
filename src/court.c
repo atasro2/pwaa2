@@ -13,7 +13,7 @@
 #include "constants/oam_allocations.h"
 #include "constants/persons.h"
 
-static void sub_800EAA4(void);
+static void SetMosaicFlagOnCourtBenchSprites(void);
 
 void SetCurrentEpisodeBit()
 {
@@ -62,7 +62,7 @@ void SetCurrentEpisodeBit()
     }
 	if((main->caseEnabledFlags >> 4) & mask) {
 		for(i = 0; i < 8; i++) {
-			main->unk100[i] = ~0;
+			main->sectionReadFlags[i] = ~0;
 		}
 	}
 }
@@ -93,22 +93,22 @@ void CourtInit(struct Main * main)
     ioRegs->lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
-    DmaCopy16(3, gUnknown_0813791C, VRAM, 0x1000);
-    DmaCopy16(3, &gUnknown_0814DC60[0], OBJ_PLTT+0x100, 0x20);
-    DmaCopy16(3, gGfxPalEvidenceProfileDesc, OBJ_PLTT + 0x40, 0x20);
+    DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
+    DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT+0x100, 0x20);
+    DmaCopy16(3, gPalEvidenceProfileDesc, OBJ_PLTT + 0x40, 0x20);
     DecompressBackgroundIntoBuffer(1);
     CopyBGDataToVram(1);
     CopyBGDataToVram(0x80);
     ioRegs->lcd_bg1vofs = ~80; // ??????
     ioRegs->lcd_dispcnt &= ~DISPCNT_BG1_ON; // what the fuck is this doing
     InitializeCourtRecordForScenario(main, &gCourtRecord);
-    sub_80178E0();
+    ResetHPBar();
     DmaFill32(3, 0, main->scriptFlags, sizeof(main->scriptFlags));
     main->gameStateFlags = 0;
-    DmaFill32(3, 0, main->unk100, sizeof(main->unk100));
-    DmaFill32(3, 0, main->unk25C, sizeof(main->unk25C));
-    DmaFill32(3, 0, main->unk276, sizeof(main->unk276));
-    main->unk286 = 0;
+    DmaFill32(3, 0, main->sectionReadFlags, sizeof(main->sectionReadFlags));
+    DmaFill32(3, 0, main->currentRoomSeq, sizeof(main->currentRoomSeq));
+    DmaFill32(3, 0, main->psycheLockedTalkSections, sizeof(main->psycheLockedTalkSections));
+    main->numPsycheLockedTalkSections = 0;
     main->tilemapUpdateBits = 0xF;
     main->advanceScriptContext = TRUE;
     main->showTextboxCharacters = TRUE;
@@ -145,7 +145,7 @@ void CourtMain(struct Main * main)
     !(main->gameStateFlags & 0x10) &&
     gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
     {
-        sub_8017864();
+        ClearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
@@ -154,7 +154,7 @@ void CourtMain(struct Main * main)
 
 void CourtExit(struct Main * main)
 {
-    sub_8007D30(main);
+    ClearSectionReadFlags(main);
     DmaCopy16(3, &gMain, &gSaveDataBuffer.main, sizeof(gMain));
     SET_PROCESS_PTR(SAVE_GAME_PROCESS, 0, 0, 1, main);
     if(main->scenarioIdx == 2)
@@ -254,7 +254,7 @@ void TestimonyProcess(struct Main * main)
 void TestimonyInit(struct Main * main)
 {
     DmaCopy16(3, gGfx4bppTestimonyTextTiles, OBJ_VRAM0+0x3000, 0x800);
-    DmaCopy16(3, gUnknown_0814DC20, OBJ_PLTT+0xA0, 0x20);
+    DmaCopy16(3, gPalTestimonyTextTiles, OBJ_PLTT+0xA0, 0x20);
     gTestimony.timer = 0;
     main->process[GAME_PROCESS_STATE] = TESTIMONY_ANIM;
 }
@@ -283,7 +283,7 @@ void TestimonyMain(struct Main * main)
     !(main->gameStateFlags & 0x10) &&
     gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
     {
-        sub_8017864();
+        ClearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
@@ -388,8 +388,8 @@ void QuestioningProcess(struct Main * main)
 
 void QuestioningInit(struct Main * main)
 {
-    DmaCopy16(3, gUnknown_08141CFC, OBJ_VRAM0+0x3000, 0x400);
-    DmaCopy16(3, gUnknown_0814DC40, OBJ_PLTT+0xA0, 0x20);
+    DmaCopy16(3, gGfxPressPresentButtons, OBJ_VRAM0+0x3000, 0x400);
+    DmaCopy16(3, gPalPressPresentButtons, OBJ_PLTT+0xA0, 0x20);
     DmaCopy16(3, gGfx4bppTestimonyArrows, 0x1A0, 0x80); // ! WHAT, HOW
     DmaCopy16(3, gGfx4bppTestimonyArrows + 12 * TILE_SIZE_4BPP, 0x220, 0x80); // ! WHAT, HOW
     main->testimonyBeginningSection = gScriptContext.currentSection;
@@ -400,7 +400,7 @@ void QuestioningInit(struct Main * main)
     gTestimony.presentPromptY = 0xE0;
     gTestimony.displayState = 0;
     main->process[GAME_PROCESS_STATE] = QUESTIONING_ANIM;
-    sub_80178E0();
+    ResetHPBar();
 }
 
 void QuestioningMain(struct Main * main)
@@ -473,7 +473,7 @@ void QuestioningMain(struct Main * main)
         }
         else if(gJoypad.pressedKeys & R_BUTTON)
         {
-            sub_8017864();
+            ClearHPBarOAM();
             PlaySE(SE007_MENU_OPEN_SUBMENU);
             BACKUP_PROCESS_PTR(main);
             SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 1, main);
@@ -483,7 +483,7 @@ void QuestioningMain(struct Main * main)
     !(main->gameStateFlags & 0x10) &&
     gScriptContext.flags & (SCRIPT_FULLSCREEN | 1))
     {
-        sub_8017864();
+        ClearHPBarOAM();
         PlaySE(SE007_MENU_OPEN_SUBMENU);
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, RECORD_INIT, 0, 0, main);
@@ -530,7 +530,7 @@ void QuestioningHoldIt(struct Main * main)
             if(gTestimony.timer == 0)
             {
                 SetCourtScrollPersonAnim(0, 1, PERSON_ANIM_PHOENIX, 0);
-                InitCourtScroll(gUnknown_08478BDC, 0x1E, 0x1F, 1);
+                InitCourtScroll(gPalCourtScroll, 0x1E, 0x1F, 1);
                 SlideTextbox(0);
                 main->process[GAME_PROCESS_VAR1]++;
                 break;
@@ -561,8 +561,8 @@ void QuestioningHoldIt(struct Main * main)
             break;
     }
     UpdateQuestioningMenuSprites(main, &gTestimony, 0);
-    gOamObjects[0].attr0 = SPRITE_ATTR0_CLEAR;
-    gOamObjects[1].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_LR_ARROW_LEFT].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_LR_ARROW_RIGHT].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
 void QuestioningObjection(struct Main * main)
@@ -583,7 +583,7 @@ void QuestioningObjection(struct Main * main)
             if(gTestimony.timer == 0)
             {
                 SetCourtScrollPersonAnim(0, 1, PERSON_ANIM_PHOENIX, 0x12E0);
-                InitCourtScroll(gUnknown_08478BDC, 0x1E, 0x1F, 1);
+                InitCourtScroll(gPalCourtScroll, 0x1E, 0x1F, 1);
                 SlideTextbox(0);
                 main->process[GAME_PROCESS_VAR1]++;
                 break;
@@ -730,8 +730,8 @@ void VerdictProcess(struct Main * main)
             break;
         }
         case VERDICT_INIT_CONFETTI: { // B3C8
-            DmaCopy16(3, gUnknown_08145CDC, OBJ_VRAM0+0x1F80, 0x20);
-            DmaCopy16(3, gUnknown_0814DFE0, OBJ_PLTT+0xA0, 0x80);
+            DmaCopy16(3, gGfxConfetti, OBJ_VRAM0+0x1F80, 0x20);
+            DmaCopy16(3, gPalConfetti0, OBJ_PLTT+0xA0, 0x80);
             main->process[GAME_PROCESS_STATE]++;
             break;
         }
@@ -813,7 +813,7 @@ void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * t
         oam->attr0 = SPRITE_ATTR0_CLEAR;
         oam++;
         oam->attr0 = SPRITE_ATTR0_CLEAR;
-        oam = &gOamObjects[OAM_IDX_HEALTH];
+        oam = &gOamObjects[OAM_IDX_HPBAR+1];
         return;
     }
     if(testimony->displayState == 1)
@@ -872,68 +872,68 @@ void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * t
     }
 }
 
-void sub_800E7B0(void)
+void LoadWitnessBenchGraphics(void)
 {
-    DmaCopy16(3, gUnknown_08145CFC, OBJ_VRAM0+0x2000, 0x600);
-    DmaCopy16(3, gUnknown_0814E0E0, OBJ_PLTT+0x140, 0x20);
+    DmaCopy16(3, gGfxWitnessBench1, OBJ_VRAM0+0x2000, 0x600);
+    DmaCopy16(3, gPalWitnessBench, OBJ_PLTT+0x140, 0x20);
 }
 
-void sub_800E7EC(s32 arg0, s32 arg1, u8 arg2)
+void SetOAMForCourtBenchSpritesWitness(s32 x, s32 y, u8 clearOAM)
 {
     struct OamAttrs * oam;
     s16 inverseOne;
     u32 i;
     oam = &gOamObjects[48];
-    if(!(arg2 & 1)) {
+    if(!(clearOAM & 1)) {
         for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
         }
         return;
     }
-    arg0 &= 0x1FF;
+    x &= 0x1FF;
     inverseOne = fix_inverse(0x100);
     gOamObjects[0].attr3 = fix_mul(0x100, inverseOne);
     gOamObjects[1].attr3 = fix_mul(0, inverseOne);
     gOamObjects[2].attr3 = fix_mul(0, inverseOne);
     gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
 
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 3);
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x, FALSE, FALSE, 3);
     oam->attr2 = SPRITE_ATTR2(0x100, 3, 10);
     oam++;
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 64, FALSE, FALSE, 2);
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x + 64, FALSE, FALSE, 2);
     oam->attr2 = SPRITE_ATTR2(0x120, 3, 10);
     oam++;
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 96, TRUE, FALSE, 2);
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x + 96, TRUE, FALSE, 2);
     oam->attr2 = SPRITE_ATTR2(0x120, 3, 10);
     oam++;
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0 + 128, TRUE, FALSE, 3);
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x + 128, TRUE, FALSE, 3);
     oam->attr2 = SPRITE_ATTR2(0x100, 3, 10);
 }
 
 
-void sub_800E8C4(void)
+void LoadCounselBenchGraphics(void)
 {
-    DmaCopy16(3, gUnknown_081462FC, OBJ_VRAM0+0x2000, 0xD00);
-    DmaCopy16(3, gUnknown_0814E100, OBJ_PLTT+0x140, 0x20);
+    DmaCopy16(3, gGfxCounselBench1, OBJ_VRAM0+0x2000, 0xD00);
+    DmaCopy16(3, gPalCounselBench, OBJ_PLTT+0x140, 0x20);
 }
 
-void sub_800E900(s32 arg0, s32 arg1, u8 arg2) {
+void SetOAMForCourtBenchSpritesDefense(s32 x, s32 y, u8 clearOAM) {
     struct OamAttrs * oam;
     s16 inverseOne;
     s32 i;
-    arg0 &= 0x1FF;
-    inverseOne = fix_inverse(0x100);
-    gOamObjects[0].attr3 = fix_mul(0x100, inverseOne);
+    x &= 0x1FF;
+    inverseOne = fix_inverse(Q_8_8(1));
+    gOamObjects[0].attr3 = fix_mul(Q_8_8(1), inverseOne);
     gOamObjects[1].attr3 = fix_mul(0, inverseOne);
     gOamObjects[2].attr3 = fix_mul(0, inverseOne);
-    gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
+    gOamObjects[3].attr3 = fix_mul(Q_8_8(1), inverseOne);
     oam = &gOamObjects[OAM_IDX_COURT_BENCH];
-    if(!(arg2 & 1)) {
+    if(!(clearOAM & 1)) {
         for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
@@ -941,24 +941,24 @@ void sub_800E900(s32 arg0, s32 arg1, u8 arg2) {
         return;
     }
     for(i = 0; i < 3; i++) {        
-        oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-        oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 3) + i * 0x40;
+        oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(x, FALSE, FALSE, 3) + i * 0x40;
         oam->attr2 = SPRITE_ATTR2(0x100, 3, 10) + i * 0x20;
         oam++;
     }
-    oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
-    oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, FALSE, FALSE, 2) + i * 0x40;
+    oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
+    oam->attr1 = SPRITE_ATTR1_NONAFFINE(x, FALSE, FALSE, 2) + i * 0x40;
     oam->attr2 = SPRITE_ATTR2(0x100, 3, 10) + i * 0x20;
 }
 
-void sub_800E9D4(s32 arg0, s32 arg1, u8 arg2)
+void SetOAMForCourtBenchSpritesProsecution(s32 x, s32 y, u8 clearOAM)
 {
     struct OamAttrs * oam;
     s16 inverseOne;
     u32 i;
-    arg0 &= 0x1FF;
+    x &= 0x1FF;
     oam = &gOamObjects[OAM_IDX_COURT_BENCH];
-    if(!(arg2 & 1)) {
+    if(!(clearOAM & 1)) {
         for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
             oam++;
@@ -970,23 +970,23 @@ void sub_800E9D4(s32 arg0, s32 arg1, u8 arg2)
         gOamObjects[2].attr3 = fix_mul(0, inverseOne);
         gOamObjects[3].attr3 = fix_mul(0x100, inverseOne);
 
-        oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
-        oam->attr1 = SPRITE_ATTR1_NONAFFINE(arg0, TRUE, FALSE, 2);
+        oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_V_RECTANGLE);
+        oam->attr1 = SPRITE_ATTR1_NONAFFINE(x, TRUE, FALSE, 2);
         oam->attr2 = SPRITE_ATTR2(0x160, 3, 10);
         oam++;
         for(i = 0; i < 3; i++) {        
-            oam->attr0 = SPRITE_ATTR0(arg1, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-            oam->attr1 = SPRITE_ATTR1_NONAFFINE(16, TRUE, FALSE, 3) + i * 0x40 + arg0;
+            oam->attr0 = SPRITE_ATTR0(y, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+            oam->attr1 = SPRITE_ATTR1_NONAFFINE(16, TRUE, FALSE, 3) + i * 0x40 + x;
             oam->attr2 = SPRITE_ATTR2(0x140, 3, 10) - i * 0x20;
             oam++;
         }
     }
-    sub_800EAA4();
+    SetMosaicFlagOnCourtBenchSprites();
 }
 
 
 
-static void sub_800EAA4(void)
+static void SetMosaicFlagOnCourtBenchSprites(void)
 {
     u32 i;
     struct OamAttrs * oam;

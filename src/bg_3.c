@@ -196,7 +196,7 @@ void UpdateTextbox()
     }
 }
 
-void sub_80037C8()
+void CopyTextboxTilesToBG1MapBuffer()
 {
     s32 i;
     for(i = 0x1C0; i < 0x3C0; i++) {
@@ -208,7 +208,7 @@ void SlideTextbox(u32 slideUp)
 {
     gMain.advanceScriptContext = 0;
     gMain.showTextboxCharacters = 0;
-    sub_80037C8();
+    CopyTextboxTilesToBG1MapBuffer();
     SetTextboxNametag(0, FALSE);
     if(slideUp == 1)
     {
@@ -229,31 +229,34 @@ void SlideTextbox(u32 slideUp)
     }
 }
 
-u16 sub_800389C(u16 color, u16 y, u16 mode)
+u16 AdjustColorByMode(u16 color, u16 intensity, u16 mode)
 {
     u16 r = (color & 0x1F);
     u16 g = (color & 0x3E0) >> 5;
     u16 b = (color & 0x7C00) >> 10;
     u16 average = (r + g + b) / 3;
 
-    if(y > 32)
-        y = 32;
+    if(intensity > 32)
+        intensity = 32;
     
     switch(mode) {
+        // Fade to black
         case 2:
-            r = (r * (32 - y)) / 32;
-            g = (g * (32 - y)) / 32;
-            b = (b * (32 - y)) / 32;
+            r = (r * (32 - intensity)) / 32;
+            g = (g * (32 - intensity)) / 32;
+            b = (b * (32 - intensity)) / 32;
             break;
+        // Fade to red
         case 1:
-            r = (r * (32 - y) + y * 31) / 32;
-            g = (g * (32 - y)) / 32;
-            b = (b * (32 - y)) / 32;
+            r = (r * (32 - intensity) + intensity * 31) / 32;
+            g = (g * (32 - intensity)) / 32;
+            b = (b * (32 - intensity)) / 32;
             break;
+        // Fade to grey
         default:
-            r = (r * (32 - y) + y * average) / 32;
-            g = (g * (32 - y) + y * average) / 32;
-            b = (b * (32 - y) + y * average) / 32;
+            r = (r * (32 - intensity) + intensity * average) / 32;
+            g = (g * (32 - intensity) + intensity * average) / 32;
+            b = (b * (32 - intensity) + intensity * average) / 32;
     }
     r &= 0x1F;
     g &= 0x1F;
@@ -261,36 +264,38 @@ u16 sub_800389C(u16 color, u16 y, u16 mode)
     return (b << 10) | (g << 5) | (r);
 }
 
-void sub_8003988(u16 bgId, u16 arg1, u16 arg2)
+void LoadAndAdjustBGPaletteByMode(u16 bgId, u16 intensity, u16 mode)
 {
     u16 pal[0x100];
     u32 i;
     if(bgId == 0x80) {
         for(i = 0x20; i < 0x100; i++) {
             pal[i] = 0;
-            pal[i] = sub_800389C(pal[i], arg1, arg2);
+            pal[i] = AdjustColorByMode(pal[i], intensity, mode);
         }
         DmaCopy16(3, pal+0x20, PLTT+0x40, 0x1C0);
     } else {
         u32 bits = GetBGControlBits(bgId);
         u16 * bgpal = (u16 *)GetBGPalettePtr(bgId);
         if(bits & 0x80000000) {
+            // 4bpp
             DmaCopy16(3, bgpal, pal, 0x20);
             for(i = 0; i < 0x10; i++) {
-                pal[i] = sub_800389C(pal[i], arg1, arg2);
+                pal[i] = AdjustColorByMode(pal[i], intensity, mode);
             }
             DmaCopy16(3, pal, PLTT+0x40, 0x20);
         } else {
+            // 8bpp
             DmaCopy16(3, bgpal, pal, 0x200);
             for(i = 0x20; i < 0x100; i++) {
-                pal[i] = sub_800389C(pal[i], arg1, arg2);
+                pal[i] = AdjustColorByMode(pal[i], intensity, mode);
             }
             DmaCopy16(3, pal+0x20, PLTT+0x40, 0x1C0);
         }
     }
 }
 
-void sub_8003A7C(u16 arg0, u16 arg1) {
+void LoadAndAdjustCurrentAnimation01PaletteByMode(u16 intensity, u16 mode) {
     u16 pal[0x30];
     u32 * gfx = (u32*)gAnimation[1].animationInfo.animGfxDataStartPtr;
     u32 paletteCount = *gfx++;
@@ -299,7 +304,7 @@ void sub_8003A7C(u16 arg0, u16 arg1) {
     DmaCopy16(3, gfx, pal, 0x40);
     }while(0);
     for(i = 0; i < paletteCount*16; i++) {
-        pal[i] = sub_800389C(pal[i], arg0, arg1);
+        pal[i] = AdjustColorByMode(pal[i], intensity, mode);
     }
     if(paletteCount == 3) {
         DmaCopy16(3, pal, OBJ_PLTT+0x1A0, 0x60);
@@ -308,33 +313,33 @@ void sub_8003A7C(u16 arg0, u16 arg1) {
     }
 }
 
-void sub_8003B1C(u16 arg0, u16 arg1, u16 arg2)
+void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16 bgId, u16 intensity, u16 mode)
 {
     u16 pal[0x10];
     u16 * benchpal;
     u32 i;
-    arg0 -= 4;
-    benchpal = arg0 < 2 ? (u16*)gUnknown_0814E100 : (u16*)gUnknown_0814E0E0;
+    bgId -= 4;
+    benchpal = bgId < 2 ? (u16*)gPalCounselBench : (u16*)gPalWitnessBench;
     DmaCopy16(3, benchpal, pal, 0x20);
     for(i = 0; i < 0x10; i++) {
-        pal[i] = sub_800389C(pal[i], arg1, arg2);
+        pal[i] = AdjustColorByMode(pal[i], intensity, mode);
     }
     DmaCopy16(3, pal, OBJ_PLTT+0x140, 0x20);
 }
 
-void sub_8003B8C(u16 arg0, u16 arg1)
+void LoadAndAdjustAnimation10PaletteByMode(u16 intensity, u16 mode)
 {
     u16 pal[0x10];
-    u32 * framedata = (u32*)gUnknown_086E9B5C;
-    u16 * spritepal = (u16*)(gUnknown_086DF2DC + 4 + *(framedata+1));
+    u32 * framedata = (u32*)gGfxSeqAnimation10;
+    u16 * spritepal = (u16*)(gGfxPixAnimationTileset01 + 4 + *(framedata+1));
     u32 i;
     DmaCopy16(3, spritepal, pal, 0x20);
     for(i = 0; i < 0x10; i++) {
-        if(arg1 == 2) {
-            pal[i] = sub_800389C(pal[i], 32,0);
-            pal[i] = sub_800389C(pal[i], arg0, 2);
+        if(mode == 2) {
+            pal[i] = AdjustColorByMode(pal[i], 32,0);
+            pal[i] = AdjustColorByMode(pal[i], intensity, 2);
         } else {
-            pal[i] = sub_800389C(pal[i], arg0, arg1);
+            pal[i] = AdjustColorByMode(pal[i], intensity, mode);
         }
     }
     DmaCopy16(3, pal, OBJ_PLTT+0x140, 0x20);

@@ -609,9 +609,9 @@ void UpdateBackground() // BG256_main
     u32 unk1;
     if(main->currentBG == 0x1A) {
         struct AnimationListEntry * animation;
-        DmaCopy16(3, gUnknown_0814E120 + ((main->unk0 / 10) % 15) * 0x20, PLTT+0x40, 0x20);
+        DmaCopy16(3, gPalCase1OpeningPurpleClouds + ((main->frameCounter / 10) % 15) * 0x20, PLTT+0x40, 0x20);
         if((animation = FindAnimationFromAnimId(0x65))) {
-            if((main->unk0 % 7) == 1) {
+            if((main->frameCounter % 7) == 1) {
                 if(animation->animationInfo.yOrigin < 0x70) {
                     animation->animationInfo.yOrigin++;
                     animation = FindAnimationFromAnimId(0x69);
@@ -621,13 +621,13 @@ void UpdateBackground() // BG256_main
             }
         } else {
             if((animation = FindAnimationFromAnimId(0x64))) {
-                if((main->unk0 % 10) == 1) {
+                if((main->frameCounter % 10) == 1) {
                     if(animation->animationInfo.xOrigin > 120)
                         animation->animationInfo.xOrigin--;
                 }
             }
             if((animation = FindAnimationFromAnimId(0x66))) {
-                if((main->unk0 % 20) == 1) {
+                if((main->frameCounter % 20) == 1) {
                     if(animation->animationInfo.xOrigin < 120)
                         animation->animationInfo.xOrigin++;
                     if(animation->animationInfo.yOrigin > 32)
@@ -638,8 +638,8 @@ void UpdateBackground() // BG256_main
     }
     //_08001AFE
     if(main->currentBG == 0x23) {
-        if(main->unk0 % 40 > 12 && main->unk0 % 40 <= 24) {
-            if(main->unk0 % 6 < 3) {
+        if(main->frameCounter % 40 > 12 && main->frameCounter % 40 <= 24) {
+            if(main->frameCounter % 6 < 3) {
                 animation = FindAnimationFromAnimId(0x6B);
                 if(animation)
                     animation->animationInfo.xOrigin--;
@@ -719,26 +719,26 @@ void UpdateBackground() // BG256_main
     if(main->currentBG == 0x78) { // really big
         struct AnimationListEntry * animation;
         s32 i;
-        switch(gMain.unk24D) { // inconsistent use of globals and pointers
+        switch(gMain.case4HeroLineupVerticalScrollState) { // inconsistent use of globals and pointers
             case 0:
                 DmaFill16(3, 0x4040, VRAM+0xE000, 0x20);
                 DmaCopy16(3, gBG3MapBuffer, gTilemapBuffer, sizeof(gBG3MapBuffer));
                 DmaFill16(3, 0x700, gBG3MapBuffer, sizeof(gBG3MapBuffer));
-                gMain.unk24D++;
-                gMain.unk24E = 0;
+                gMain.case4HeroLineupVerticalScrollState++;
+                gMain.case4HeroLineupVerticalScrollCounter = 0;
                 break;
             case 1:
                 if(gMain.blendMode)
                     break;
                 animation = FindAnimationFromAnimId(0x7B);
                 if(animation) {
-                    if(gMain.unk0 % 2)
+                    if(gMain.frameCounter % 2)
                         animation->animationInfo.yOrigin++;
                 }
                 OffsetAllAnimations(0, -1);
-                gMain.unk24E++;
-                if(gMain.unk24E >= DISPLAY_HEIGHT)
-                    gMain.unk24D++;
+                gMain.case4HeroLineupVerticalScrollCounter++;
+                if(gMain.case4HeroLineupVerticalScrollCounter >= DISPLAY_HEIGHT)
+                    gMain.case4HeroLineupVerticalScrollState++;
                 break;
             case 2:
                 for(i = 0; i < main->Bg256_scroll_y / 8 + 2 && i < 32; i++) {
@@ -746,13 +746,13 @@ void UpdateBackground() // BG256_main
                 }
                 animation = FindAnimationFromAnimId(0x7B);
                 if(animation) {
-                    if(gMain.unk0 % 2)
+                    if(gMain.frameCounter % 2)
                         animation->animationInfo.yOrigin++;
                 }
                 OffsetAllAnimations(0, -1);
                 main->Bg256_scroll_y++;
                 if(main->Bg256_scroll_y >= DISPLAY_HEIGHT)
-                    gMain.unk24D++;
+                    gMain.case4HeroLineupVerticalScrollState++;
                 break;
             case 3:
                 DmaCopy16(3, gTilemapBuffer, gBG3MapBuffer, sizeof(gBG3MapBuffer));
@@ -768,12 +768,12 @@ void UpdateBackground() // BG256_main
     // _08001EB8
     if(main->currentBG == 0x79) {
         main->Bg256_scroll_y = 0;
-        if((gMain.unk0 % 2) != 0)
+        if((gMain.frameCounter % 2) != 0)
             return;
     }
     if(main->currentBG == 0x7A) {
         s32 i;
-        switch(gMain.unk24F) {
+        switch(gMain.case4OtherBGAnimationState) {
             case 0:
                 DmaFill16(3, 0x30, VRAM+0xE000, 0x20);
                 animation = FindAnimationFromAnimId(0x79);
@@ -793,8 +793,8 @@ void UpdateBackground() // BG256_main
                         animation->animationInfo.yOrigin = -80;
                     }
                 }
-                gMain.unk24F++;
-                gMain.unk250 = 0;
+                gMain.case4OtherBGAnimationState++;
+                gMain.case4OtherBGAnimationCounter = 0;
                 break;
             case 1:
                 main->Bg256_scroll_y += 0x10;
@@ -803,12 +803,12 @@ void UpdateBackground() // BG256_main
                 }
                 animation = FindAnimationFromAnimId(0x7B);
                 if(animation) {
-                    if(gMain.unk0 % 2)
+                    if(gMain.frameCounter % 2)
                         animation->animationInfo.yOrigin -= 0x10;
                 }
                 OffsetAllAnimations(0, 0x10);
-                gMain.unk250++;
-                if(gMain.unk250 >= 10) {
+                gMain.case4OtherBGAnimationCounter++;
+                if(gMain.case4OtherBGAnimationCounter >= 10) {
                     const u16 * map;
                     u16 * mapbuf;
                     if((animation = FindAnimationFromAnimId(0x8F)))
@@ -825,20 +825,20 @@ void UpdateBackground() // BG256_main
                     DmaFill16(3, 0, PLTT+0x40, 0x1C0);
                     DmaFill16(3, 0x2222, BG_CHAR_ADDR(1), 0x9600);
                     main->Bg256_scroll_y = 0;
-                    gMain.unk24F++;
-                    gMain.unk250 = 0;
+                    gMain.case4OtherBGAnimationState++;
+                    gMain.case4OtherBGAnimationCounter = 0;
                 }
                 break;
             case 2: // _080020CC
                 animation = FindAnimationFromAnimId(0x7B);
                 if(animation) {
-                    if(gMain.unk0 % 2)
+                    if(gMain.frameCounter % 2)
                         animation->animationInfo.yOrigin -= 0x10;
                 }
                 OffsetAllAnimations(0, 0x10);
-                main->unk250++;
-                if(main->unk250 >= 10)
-                    gMain.unk24F++;
+                main->case4OtherBGAnimationCounter++;
+                if(main->case4OtherBGAnimationCounter >= 10)
+                    gMain.case4OtherBGAnimationState++;
         }
         ioRegs->lcd_bg3vofs = 8 - main->Bg256_scroll_y;
         ioRegs->lcd_bg3hofs = 8;
@@ -846,7 +846,7 @@ void UpdateBackground() // BG256_main
     }
     if(main->currentBG == 0x61) {
         struct AnimationListEntry * animation = FindAnimationFromAnimId(0x96);
-        if((gMain.unk0 % 36) == 0)
+        if((gMain.frameCounter % 36) == 0)
             animation->animationInfo.xOrigin--;
     }
     if(courtScroll->state != 0 && (courtScroll->frameCounter & 1) == 0) // frameCounter divisible by 2?
@@ -901,7 +901,7 @@ void UpdateBackground() // BG256_main
             return;
         }
         if(main->currentBG == 0x57) {
-            if(gMain.unk0 % 4)
+            if(gMain.frameCounter % 4)
                 return;
         }
         if(main->currentBG == 0x45) {

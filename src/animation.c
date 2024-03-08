@@ -630,7 +630,7 @@ struct AnimationListEntry *PlayPersonAnimation(u32 arg0, u32 arg1, u32 talkingAn
     return PlayPersonAnimationAtCustomOrigin(arg0, talkingAnimOff, xOrigin, DISPLAY_HEIGHT/2, arg1);
 }
 
-void sub_80146F0(u32 animId, u32 animOffset)
+void SetCurrentPersonAnimationOffset(u32 animId, u32 animOffset)
 {
     gMain.idleAnimationOffset = animOffset;
     gMain.talkingAnimationOffset = animOffset;
@@ -1151,7 +1151,7 @@ void UpdateAllAnimationSprites()
                 else
                     oam->attr2 |= (animation->animationInfo.paletteSlot + ((spriteTemplates->data >> 11) & 1)) << 12;
                 tileNum += spriteSizeData->tileSize / TILE_SIZE_4BPP;
-                if(main->unk84 == 1 || main->unk84 == 2 || main->unk84 == 0xFFFF)
+                if(main->effectType == 1 || main->effectType == 2 || main->effectType == 0xFFFF)
                     oam->attr0 |= 0x1000; // mosaic
                 if(animation->animationInfo.animId == 0x79 
                 || animation->animationInfo.animId == 0x7B) {
@@ -1290,10 +1290,10 @@ void MoveAnimationTilesToRam(bool32 arg0)
                 u16 buf[0x30];
                 DmaCopy16(3, tileData, buf, palCount);
                 for(i = 0; i < 0x30; i++) {
-                    if(gMain.unk84 == 0xFFFE)
-                        buf[i] = sub_800389C(buf[i], 0x20, 1);
+                    if(gMain.effectType == 0xFFFE)
+                        buf[i] = AdjustColorByMode(buf[i], 0x20, 1);
                     else
-                        buf[i] = sub_800389C(buf[i], 0x20, 0);
+                        buf[i] = AdjustColorByMode(buf[i], 0x20, 0);
                 }
                 DmaCopy16(3, buf, dest, palCount);
             } else {
@@ -1425,7 +1425,7 @@ void ScrollMode2AnimationUpdate(struct AnimationListEntry * animation, struct Co
     animation->animationInfo.xOrigin += gCourtScroll01AnimOffsets[courtScroll->frameCounter];
     if(courtScroll->frameCounter == 0xF) {
         PlayPersonAnimationAtCustomOrigin(courtScroll->scrollingPersonAnimId, courtScroll->animOffset, -110, 80, 0);
-        sub_80146F0(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
+        SetCurrentPersonAnimationOffset(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
     }
     /* begin wtf */
     index = 0;
@@ -1436,13 +1436,13 @@ void ScrollMode2AnimationUpdate(struct AnimationListEntry * animation, struct Co
     }
     /* end wtf */
     if(courtScroll->frameCounter == 0xF) {
-        sub_800E8C4();
+        LoadCounselBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xE) {
-        sub_800E900(index-480, 0x80, 1);
+        SetOAMForCourtBenchSpritesDefense(index-480, 0x80, 1);
     }
     else {
-        sub_800E9D4(index+32, 0x80, 1);
+        SetOAMForCourtBenchSpritesProsecution(index+32, 0x80, 1);
     }
 }
 
@@ -1454,7 +1454,7 @@ void ScrollMode3AnimationUpdate(struct AnimationListEntry * animation, struct Co
     animation->animationInfo.xOrigin -= gCourtScroll01AnimOffsets[30-courtScroll->frameCounter];
     if(courtScroll->frameCounter == 0xF) {
         PlayPersonAnimationAtCustomOrigin(courtScroll->scrollingPersonAnimId, courtScroll->animOffset, 350, 80, 0);
-        sub_80146F0(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
+        SetCurrentPersonAnimationOffset(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
     }
     /* begin wtf */
     index = 0;
@@ -1470,13 +1470,13 @@ void ScrollMode3AnimationUpdate(struct AnimationListEntry * animation, struct Co
     }
     /* end wtf */
     if(courtScroll->frameCounter == 0xF) {
-        sub_800E8C4();
+        LoadCounselBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xE) {
-        sub_800E900(index, 0x80, 1);
+        SetOAMForCourtBenchSpritesDefense(index, 0x80, 1);
     }
     else {
-        sub_800E9D4(index+544, 0x80, 1);
+        SetOAMForCourtBenchSpritesProsecution(index+544, 0x80, 1);
     }
 }
 
@@ -1496,16 +1496,16 @@ void ScrollMode4AnimationUpdate(struct AnimationListEntry * animation, struct Co
     /* end wtf */
     if(courtScroll->frameCounter == 0xE) {
         PlayPersonAnimationAtCustomOrigin(courtScroll->scrollingPersonAnimId, courtScroll->animOffset, -84, 80, 0);
-        sub_80146F0(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
+        SetCurrentPersonAnimationOffset(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
     }
     if(courtScroll->frameCounter == 0xE) {
-        sub_800E7B0();
+        LoadWitnessBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xD) {
-        sub_800E7EC(index-285, 0x80, 1);
+        SetOAMForCourtBenchSpritesWitness(index-285, 0x80, 1);
     }
     else {
-        sub_800E9D4(index+32, 0x80, 1);
+        SetOAMForCourtBenchSpritesProsecution(index+32, 0x80, 1);
     }
 }
 
@@ -1529,16 +1529,16 @@ void ScrollMode5AnimationUpdate(struct AnimationListEntry * animation, struct Co
     /* end wtf */
     if(courtScroll->frameCounter == 0xE) {
         PlayPersonAnimationAtCustomOrigin(courtScroll->scrollingPersonAnimId, courtScroll->animOffset, 220, 80, 0);
-        sub_80146F0(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
+        SetCurrentPersonAnimationOffset(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
     }
     if(courtScroll->frameCounter == 0xE) {
-        sub_800E8C4();
+        LoadCounselBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xD) {
-        sub_800E7EC(24-index, 0x80, 1);
+        SetOAMForCourtBenchSpritesWitness(24-index, 0x80, 1);
     }
     else {
-        sub_800E9D4(362-index, 0x80, 1);
+        SetOAMForCourtBenchSpritesProsecution(362-index, 0x80, 1);
     }
 }
 
@@ -1550,7 +1550,7 @@ void ScrollMode0AnimationUpdate(struct AnimationListEntry * animation, struct Co
     animation->animationInfo.xOrigin -= gCourtScroll02AnimOffsets[courtScroll->frameCounter];
     if(courtScroll->frameCounter == 0xE) {
         PlayPersonAnimationAtCustomOrigin(courtScroll->scrollingPersonAnimId, courtScroll->animOffset, 324, 80, 0);
-        sub_80146F0(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
+        SetCurrentPersonAnimationOffset(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
     }
     /* begin wtf */
     index = 0;
@@ -1561,13 +1561,13 @@ void ScrollMode0AnimationUpdate(struct AnimationListEntry * animation, struct Co
     }
     /* end wtf */
     if(courtScroll->frameCounter == 0xE) {
-        sub_800E7B0();
+        LoadWitnessBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xD) {
-        sub_800E7EC(-179-index, 0x80, 1);
+        SetOAMForCourtBenchSpritesWitness(-179-index, 0x80, 1);
     }
     else {
-        sub_800E900(-index, 0x80, 1);
+        SetOAMForCourtBenchSpritesDefense(-index, 0x80, 1);
     }
 }
 
@@ -1579,7 +1579,7 @@ void ScrollMode1AnimationUpdate(struct AnimationListEntry * animation, struct Co
     animation->animationInfo.xOrigin += gCourtScroll03AnimOffsets[courtScroll->frameCounter];
     if(courtScroll->frameCounter == 0xE) {
         PlayPersonAnimationAtCustomOrigin(courtScroll->scrollingPersonAnimId, courtScroll->animOffset, 20, 80, 0);
-        sub_80146F0(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
+        SetCurrentPersonAnimationOffset(courtScroll->scrollingPersonAnimId, courtScroll->animOffset);
     }
     /* begin wtf */
     index = 0;
@@ -1594,13 +1594,13 @@ void ScrollMode1AnimationUpdate(struct AnimationListEntry * animation, struct Co
     }
     /* end wtf */
     if(courtScroll->frameCounter == 0xE) {
-        sub_800E8C4();
+        LoadCounselBenchGraphics();
     }
     if(courtScroll->frameCounter > 0xD) {
-        sub_800E7EC(index+24, 0x80, 1);
+        SetOAMForCourtBenchSpritesWitness(index+24, 0x80, 1);
     }
     else {
-        sub_800E900(index-330, 0x80, 1);
+        SetOAMForCourtBenchSpritesDefense(index-330, 0x80, 1);
     }
 }
 
