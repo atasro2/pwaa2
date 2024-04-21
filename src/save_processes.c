@@ -501,7 +501,7 @@ void SaveGameExitSaveScreen(struct Main *main)
 
 void SaveGame5(struct Main *main)
 {
-    u32 showNewEpsiode;
+    u32 showNewEpisode;
     u32 newEpisodeId;
     if(main->blendMode != 0)
         return;
@@ -509,22 +509,22 @@ void SaveGame5(struct Main *main)
     if(main->scenarioIdx == 2)
     {
         newEpisodeId = 1;
-        showNewEpsiode = TRUE;
+        showNewEpisode = TRUE;
     }
     else if(main->scenarioIdx == 8)
     {
         newEpisodeId = 2;
-        showNewEpsiode = TRUE;
+        showNewEpisode = TRUE;
     }
     else if(main->scenarioIdx == 14)
     {
         newEpisodeId = 3;
-        showNewEpsiode = TRUE;
+        showNewEpisode = TRUE;
     }
     else
-        showNewEpsiode = FALSE;
+        showNewEpisode = FALSE;
 
-    if(showNewEpsiode)
+    if(showNewEpisode)
     {
         main->advanceScriptContext = 0;
         main->showTextboxCharacters = 0;
