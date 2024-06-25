@@ -413,7 +413,7 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
 void InvestigationInspect(struct Main * main, struct InvestigationStruct * investigation) // tantei_inspect // ! goto
 {
     u32 temp;
-    struct OamAttrs * oam = &gOamObjects[58]; // this was OAM_IDX_POINTER == 88 in pwaa1
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_38_1]; // this was OAM_IDX_POINTER == 88 in pwaa1
     if(gAnimation[1].flags & ANIM_BLEND_ACTIVE)
         return;
     if(main->blendMode)
@@ -1538,7 +1538,7 @@ _08010AC4:
     gMain.advanceScriptContext = TRUE;
     main->process[GAME_PROCESS_VAR1] = 3;
 _08010AD4:
-    if(gMain.psycheLockStopPresentButtonsActive & 1
+    if(gMain.psycheLockStopPresentButtonsActive & PSYLOCK_ENABLE_PRESENT
     && gJoypad.pressedKeys == R_BUTTON
     && gMain.psycheLockStopPresentButtonsState == 0
     && (main->gameStateFlags & 0x10) == 0
@@ -1550,7 +1550,7 @@ _08010AD4:
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 3, main);
     }
-    if(gMain.psycheLockStopPresentButtonsActive & 2
+    if(gMain.psycheLockStopPresentButtonsActive & PSYLOCK_ENABLE_STOP
     && IsPsycheLockStopPresentButtonsAnimating() == FALSE
     && gMain.psycheLockStopPresentButtonsState == 0
     && gJoypad.pressedKeys == L_BUTTON)

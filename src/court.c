@@ -883,7 +883,7 @@ void SetOAMForCourtBenchSpritesWitness(s32 x, s32 y, u8 clearOAM)
     struct OamAttrs * oam;
     s16 inverseOne;
     u32 i;
-    oam = &gOamObjects[48];
+    oam = &gOamObjects[OAM_IDX_COURT_BENCH];
     if(!(clearOAM & 1)) {
         for(i = 0; i < OAM_COUNT_COURT_BENCH; i++) {
             oam->attr0 = SPRITE_ATTR0_CLEAR;
