@@ -81,7 +81,7 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
     DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
     DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, gPalActionButtons1, OBJ_PLTT+0xA0, 0x40);
+    DmaCopy16(3, gPalActionButtons, OBJ_PLTT+0xA0, 0x40);
     DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
     DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT+0xE0, 0x20);
     DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
@@ -1774,7 +1774,7 @@ void ReloadInvestigationGraphics(void) {
     int i;
 
     DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, gPalActionButtons1, OBJ_PLTT + 0xA0, 0x40);
+    DmaCopy16(3, gPalActionButtons, OBJ_PLTT + 0xA0, 0x40);
     DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
     DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT + 0xE0, 0x20);
     DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);

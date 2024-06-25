@@ -1819,7 +1819,7 @@ void LoadEvidenceWindowGraphics(void)
     DmaCopy16(3, gGfx4bppControllerButtons, OBJ_VRAM0+0x3800, TILE_SIZE_4BPP*16);
     DmaCopy16(3, gGfx4bppPresentBackTextTiles, OBJ_VRAM0+0x3A00, TILE_SIZE_4BPP*16);
     DmaCopy16(3, gGfx4bppProfileTextTiles, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
-    DmaCopy16(3, gPalCrossExamUI, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, gPalCrossExaminationUI, OBJ_PLTT+0x60, 0x20);
     DmaCopy16(3, gPalCourtRecordActionText, OBJ_PLTT+0x80, 0x20);
     DmaCopy16(3, gPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
 }

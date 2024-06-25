@@ -14,9 +14,9 @@ void bg256_up_scroll(struct Main * main, u32 sp0);
 
 extern const u8 gNameTagTiles[24];
 
-extern const u16 gUnknown_0801B5D8[32*12];
-extern const u16 gUnknown_0801B8D8[32*12];
-extern const u16 gUnknown_0801BBD8[0x2C0];
+extern const u16 gMapCourtRecordNormalWindow[32*12];
+extern const u16 gMapCourtRecordSaveWindow[32*12];
+extern const u16 gMapSpeedlines[0x2C0];
 
 void CopyBGDataToVramAndScrollBG(u32 bgId)
 {
@@ -422,14 +422,14 @@ void ScrollWindowWithPrevWindow(struct CourtRecord * courtRecord)
         {
             for(i = 0x40; i < 0x180; i += 0x20)
             {
-                gBG2MapBuffer[i + 31] = gUnknown_0801B8D8[courtRecord->windowTileX + i];
+                gBG2MapBuffer[i + 31] = gMapCourtRecordSaveWindow[courtRecord->windowTileX + i];
             }
         }
         else
         {
             for(i = 0x40; i < 0x180; i += 0x20)
             {
-                gBG2MapBuffer[i + 31] = gUnknown_0801B5D8[courtRecord->windowTileX + i];
+                gBG2MapBuffer[i + 31] = gMapCourtRecordNormalWindow[courtRecord->windowTileX + i];
             }
         }
     }
@@ -453,14 +453,14 @@ void ScrollWindowWithPrevWindow(struct CourtRecord * courtRecord)
         {
             for(i = 0x40; i < 0x180; i += 0x20)
             {
-                gBG2MapBuffer[i] = gUnknown_0801B8D8[courtRecord->windowTileX + i];
+                gBG2MapBuffer[i] = gMapCourtRecordSaveWindow[courtRecord->windowTileX + i];
             }
         }
         else
         {
             for(i = 0x40; i < 0x180; i += 0x20)
             {
-                gBG2MapBuffer[i] = gUnknown_0801B5D8[courtRecord->windowTileX + i];
+                gBG2MapBuffer[i] = gMapCourtRecordNormalWindow[courtRecord->windowTileX + i];
             }
         }
     }

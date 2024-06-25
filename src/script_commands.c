@@ -1304,14 +1304,14 @@ const struct MapMarkerSprite sMapMarkerSprites[] = {
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08232288,
+        .tiles = gGfxMapMarkersFoldingScreen+0x100,
         .size = 0x100,
         .attr0 = 0x8000,
         .attr1 = 0x8000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08232388,
+        .tiles = gGfxMapMarkersFoldingScreen+0x200,
         .size = 0x100,
         .attr0 = 0x8000,
         .attr1 = 0x8000,

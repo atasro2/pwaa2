@@ -315,7 +315,7 @@ _08002C28:
 	adds r7, r1, #0
 	cmp r4, #0x80
 	bne _08002D08
-	ldr r1, _08002CA8 @ =gUnknown_0801BBD8
+	ldr r1, _08002CA8 @ =gMapSpeedlines
 	ldr r3, _08002CAC @ =gBG3MapBuffer
 	ldr r4, _08002CB0 @ =0x040000D4
 	str r1, [r4]
@@ -353,7 +353,7 @@ _08002C8A:
 	b _08002CE2
 	.align 2, 0
 _08002CA4: .4byte 0xFFFF7FFF
-_08002CA8: .4byte gUnknown_0801BBD8
+_08002CA8: .4byte gMapSpeedlines
 _08002CAC: .4byte gBG3MapBuffer
 _08002CB0: .4byte 0x040000D4
 _08002CB4: .4byte 0x800002C0
@@ -407,7 +407,7 @@ _08002D08:
 	str r3, [sp, #8]
 	cmp r0, #0
 	beq _08002D8C
-	ldr r1, _08002DB8 @ =gUnknown_0801BBD8
+	ldr r1, _08002DB8 @ =gMapSpeedlines
 	ldr r3, _08002DBC @ =gBG3MapBuffer
 	ldr r0, _08002DC0 @ =0x040000D4
 	str r1, [r0]
@@ -481,7 +481,7 @@ _08002D8C:
 	b _08002E12
 	.align 2, 0
 _08002DB4: .4byte gBackgroundTable
-_08002DB8: .4byte gUnknown_0801BBD8
+_08002DB8: .4byte gMapSpeedlines
 _08002DBC: .4byte gBG3MapBuffer
 _08002DC0: .4byte 0x040000D4
 _08002DC4: .4byte 0x800002C0
@@ -627,7 +627,7 @@ _08002ED4:
 	ands r0, r6
 	cmp r0, #0
 	bne _08002EF6
-	ldr r1, _08002F38 @ =gUnknown_0801BBD8
+	ldr r1, _08002F38 @ =gMapSpeedlines
 	ldr r3, _08002F3C @ =gBG3MapBuffer
 	ldr r0, _08002F28 @ =0x040000D4
 	str r1, [r0]
@@ -665,7 +665,7 @@ _08002F28: .4byte 0x040000D4
 _08002F2C: .4byte 0x80000100
 _08002F30: .4byte gBGDecompBuffer
 _08002F34: .4byte eBGDecompBuffer2
-_08002F38: .4byte gUnknown_0801BBD8
+_08002F38: .4byte gMapSpeedlines
 _08002F3C: .4byte gBG3MapBuffer
 _08002F40: .4byte 0x800002C0
 _08002F44: .4byte 0x0600F800

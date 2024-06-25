@@ -199,9 +199,9 @@ void CopyBGDataToVram(u32 bgId)
     main->unk30 = bgId;
     if(bgId == 0x80)
     {
-        src = gUnknown_0801BBD8;
+        src = gMapSpeedlines;
         dst = gBG3MapBuffer;
-        DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
+        DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
         if(main->effectType == 0xFFFE) {
             if(gAnimation[1].animationInfo.personId == 0x25)
                 LoadAndAdjustCounselWitnessBenchPaletteByMode(6, 0x20, 1);
@@ -217,9 +217,9 @@ void CopyBGDataToVram(u32 bgId)
     if(i & BG_MODE_SPECIAL_SPEEDLINE)
     {
         //u32 temp;
-        src = gUnknown_0801BBD8;
+        src = gMapSpeedlines;
         dst = gBG3MapBuffer;
-        DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
+        DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
         j = 0x258;
         j++;j--;
         for(i = 0; i < 20; i++, j++)
@@ -280,9 +280,9 @@ void CopyBGDataToVram(u32 bgId)
     {
         if((tempBgCtrl & BG_MODE_SPECIAL_SPEEDLINE) == 0)
         {
-            src = gUnknown_0801BBD8;
+            src = gMapSpeedlines;
             dst = gBG3MapBuffer;
-            DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
+            DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
         }
         src = gBG3MapBuffer;
         dst = (void *)BG_SCREEN_ADDR(31);

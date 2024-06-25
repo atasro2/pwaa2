@@ -66,8 +66,8 @@
 #define gMapPsycheLockChains19 ((u8*)(GFX_BASE_ADDR + 0x1D218))
 #define gMapPsycheLockChains20 ((u8*)(GFX_BASE_ADDR + 0x1D5A4))
 
-#define gPalCrossExamUI ((u8*)(GFX_BASE_ADDR + 0x1DA80))
-#define gPalActionButtons1 ((u8*)(GFX_BASE_ADDR + 0x1DBA0))
+#define gPalCrossExaminationUI ((u8*)(GFX_BASE_ADDR + 0x1DA80))
+#define gPalActionButtons ((u8*)(GFX_BASE_ADDR + 0x1DBA0))
 #define gPalInvestigationScrollPrompt ((u8*)(GFX_BASE_ADDR + 0x1DC00))
 #define gPalCourtRecordActionText ((u8*)(GFX_BASE_ADDR + 0x1DBE0))
 #define gPalTestimonyTextTiles ((u8*)(GFX_BASE_ADDR + 0x1DC20))
@@ -261,8 +261,6 @@
 #define gGfxMapMarkersGreen ((u8*)(GFX_BASE_ADDR + 0x101D08))
 #define gGfxMapMarkersDoubleDoorDiagram ((u8*)(GFX_BASE_ADDR + 0x101D88))
 #define gGfxMapMarkersFoldingScreen ((u8*)(GFX_BASE_ADDR + 0x102188))
-#define gUnknown_08232288 ((u8*)(GFX_BASE_ADDR + 0x102288))
-#define gUnknown_08232388 ((u8*)(GFX_BASE_ADDR + 0x102388))
 #define gGfxMapMarkersRedDot ((u8*)(GFX_BASE_ADDR + 0x102488))
 
 #define gGfx_BG000 ((u8*)(GFX_BASE_ADDR + 0x1029A8))
