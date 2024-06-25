@@ -3004,6 +3004,10 @@ gGfxSeqAnimation110:
 gGfxSeqAnimation111:
     .incbin "graphics/animations/animation111.seq"
 
+    .global gGfxSeqAnimation112
+gGfxSeqAnimation112:
+    .incbin "graphics/animations/animation112.seq"
+
     .global gGfxPixAnimationTileset03
 gGfxPixAnimationTileset03:
     .incbin "graphics/animations/tileset03.pix"
