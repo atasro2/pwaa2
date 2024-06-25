@@ -533,7 +533,7 @@ void UpdateBG2Window(struct CourtRecord * courtRecord)
     }
 }
 
-u8 gUnknown_08111ED0[56] = {
+u8 gSpeakerToNametagMap[56] = {
     0x00, 0x01, 0x01, 0x02, 0x03, 0x0C, 0x0C, 0x09,
     0x1F, 0x04, 0x05, 0x06, 0x00, 0x07, 0x0B, 0x0B,
     0x0A, 0x08, 0x08, 0x0E, 0x10, 0x0F, 0x11, 0x12,
@@ -554,9 +554,9 @@ void SetTextboxNametag(u32 nametagId, u32 rightSide)
     u32 offset = rightSide;
 
     /* begin wat */
-    gMain.unk2BC = nametagId;
-    gMain.unk2BD = rightSide;
-    nametagId = gUnknown_08111ED0[nametagId];
+    gMain.currentSpeaker = nametagId;
+    gMain.currentNametagRightSide = rightSide;
+    nametagId = gSpeakerToNametagMap[nametagId];
     /* end wat */
     
     // this reuses r0 instead of loading into r5

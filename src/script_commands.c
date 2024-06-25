@@ -717,7 +717,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
             gIORegisters.lcd_bg1vofs = 0;
             CopyTextboxTilesToBG1MapBuffer();
-            SetTextboxNametag(gMain.unk2BC, gMain.unk2BD);
+            SetTextboxNametag(gMain.currentSpeaker, gMain.currentNametagRightSide);
             break;
         case 1: // disable textbox
             gMain.showTextboxCharacters = FALSE;

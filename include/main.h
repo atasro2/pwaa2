@@ -140,8 +140,8 @@ struct Main
     u8 filler2B5[0x2B8 - 0x2B5];
     /* +0x2B8 */ u16 currentlyPlayingSfx;
     u16 currentlyPlayingLoopedSfx;
-    u8 unk2BC;
-    u8 unk2BD;
+    u8 currentSpeaker;
+    u8 currentNametagRightSide;
     u8 unk2BE;
     u8 unk2BF;
 }; /* size 0x2C0 */

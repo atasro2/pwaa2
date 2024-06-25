@@ -215,7 +215,7 @@ _08002B28:
 	ldr r0, [r2, #8]
 	ldr r0, _08002BEC @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r2]
-	ldr r1, _08002BF0 @ =gUnknown_0203B000
+	ldr r1, _08002BF0 @ =eSpeedlineDecompBuffer
 	str r1, [r2, #4]
 	ldr r0, _08002BF4 @ =0x80000280
 	str r0, [r2, #8]
@@ -277,7 +277,7 @@ _08002BE0: .4byte 0x80000010
 _08002BE4: .4byte gPal_BG015_BustupEdgeworth
 _08002BE8: .4byte gPal_BG020_BustupFranziska
 _08002BEC: .4byte gGfxSpeedlinesFirstAndLastColumns
-_08002BF0: .4byte gUnknown_0203B000
+_08002BF0: .4byte eSpeedlineDecompBuffer
 _08002BF4: .4byte 0x80000280
 _08002BF8: .4byte 0x06008B00
 _08002BFC: .4byte 0x80002800
@@ -453,7 +453,7 @@ _08002D68:
 	ldr r1, _08002DC0 @ =0x040000D4
 	ldr r0, _08002DC8 @ =gGfxSpeedlinesFirstAndLastColumns
 	str r0, [r1]
-	ldr r0, _08002DCC @ =gUnknown_0203B000
+	ldr r0, _08002DCC @ =eSpeedlineDecompBuffer
 	str r0, [r1, #4]
 	ldr r0, _08002DD0 @ =0x80000280
 	str r0, [r1, #8]
@@ -486,7 +486,7 @@ _08002DBC: .4byte gBG3MapBuffer
 _08002DC0: .4byte 0x040000D4
 _08002DC4: .4byte 0x800002C0
 _08002DC8: .4byte gGfxSpeedlinesFirstAndLastColumns
-_08002DCC: .4byte gUnknown_0203B000
+_08002DCC: .4byte eSpeedlineDecompBuffer
 _08002DD0: .4byte 0x80000280
 _08002DD4:
 	movs r0, #0x80
@@ -616,7 +616,7 @@ _08002EA0:
 	ldr r7, _08002F30 @ =gBGDecompBuffer
 	cmp r0, #0
 	bne _08002ED4
-	ldr r7, _08002F34 @ =gUnknown_02036500
+	ldr r7, _08002F34 @ =eBGDecompBuffer2
 _08002ED4:
 	adds r0, r6, #0
 	ands r0, r1
@@ -664,7 +664,7 @@ _08002EF6:
 _08002F28: .4byte 0x040000D4
 _08002F2C: .4byte 0x80000100
 _08002F30: .4byte gBGDecompBuffer
-_08002F34: .4byte gUnknown_02036500
+_08002F34: .4byte eBGDecompBuffer2
 _08002F38: .4byte gUnknown_0801BBD8
 _08002F3C: .4byte gBG3MapBuffer
 _08002F40: .4byte 0x800002C0

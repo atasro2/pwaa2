@@ -1,7 +1,7 @@
 #define DUMMYPERSON { .gfxData = 0, .frameData = 0, .spriteCount = 0, .unkA = 0 }
 #define DUMMYANIMATION { .gfxData = 0, .vramPtr = 0, .frameData = 0, .xOrigin = 0, .yOrigin = 0, .paletteSlot = 0, .spriteCount = 0, .priority = 0, .flags = 0x0, }
 
-const struct PersonAnimationData gPersonAnimData[46] = {
+const struct PersonAnimationData gPersonAnimData[] = {
 	[0] = DUMMYPERSON,
 	[1] = DUMMYPERSON,
 	[2] = DUMMYPERSON,

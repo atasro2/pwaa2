@@ -629,7 +629,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*moveLocations)*0x800;
-                    temp += (uintptr_t)gUnknown_081DE3E8;
+                    temp += (uintptr_t)gGfxLocationChoices;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++) // i * 4 fakematch
                     {
@@ -877,7 +877,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = *moveLocations*0x800; //TODO: label vs value?
-                    temp += (uintptr_t)gUnknown_081DE3E8;
+                    temp += (uintptr_t)gGfxLocationChoices;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -963,7 +963,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*icons) * 0x800;
-                    temp += (uintptr_t)gUnknown_081EB3E8;
+                    temp += (uintptr_t)gGfxTalkChoices;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -1307,7 +1307,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     {
                         investigation->activeOptions[i] = TRUE;
                         temp = (*icons) * 0x800;
-                        temp += (uintptr_t)gUnknown_081EB3E8;
+                        temp += (uintptr_t)gGfxTalkChoices;
                         DmaCopy16(3, temp, vram, 0x800);
                         for(j = 0; j < 2; j++)
                         {
@@ -1380,7 +1380,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*icons) * 0x800;
-                    temp += (uintptr_t)gUnknown_081EB3E8;
+                    temp += (uintptr_t)gGfxTalkChoices;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -2032,7 +2032,7 @@ void LoadLocationChoiceGraphics(void)
         destination += i*0x800;
         if(*roomptr != 0xFF)
 	    {
-            src = (void *)gUnknown_081DE3E8+*roomptr*0x800;
+            src = (void *)gGfxLocationChoices+*roomptr*0x800;
             DmaCopy16(3, src, destination, 0x800);
         }
         roomptr++;
@@ -2063,7 +2063,7 @@ void LoadTalkChoiceGraphics(void)
         destination += i*0x800;
         if(*icons != 0xFF)
 	    {
-            src = (void *)gUnknown_081EB3E8 + *icons*0x800;
+            src = (void *)gGfxTalkChoices + *icons*0x800;
             DmaCopy16(3, src, destination, 0x800);
         }
         icons++;

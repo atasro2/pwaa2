@@ -251,8 +251,8 @@
 #define gGfxEvidenceTomatoJuice1_description ((u8*)(GFX_BASE_ADDR + 0x479E4))
 #define gGfxEvidenceProfilePictures ((u8*)(GFX_BASE_ADDR + 0x47E28))
 
-#define gUnknown_081DE3E8 ((u8*)(GFX_BASE_ADDR + 0xAE3E8))
-#define gUnknown_081EB3E8 ((u8*)(GFX_BASE_ADDR + 0xBB3E8))
+#define gGfxLocationChoices ((u8*)(GFX_BASE_ADDR + 0xAE3E8))
+#define gGfxTalkChoices ((u8*)(GFX_BASE_ADDR + 0xBB3E8))
 
 #define gPalMapMarkers ((u8*)(GFX_BASE_ADDR + 0x101BE8))
 
@@ -306,7 +306,6 @@
 #define gGfx_BG041 ((u8*)(GFX_BASE_ADDR + 0x1BD900))
 #define gGfx_BG042 ((u8*)(GFX_BASE_ADDR + 0x1BE868))
 #define gGfx_BG043 ((u8*)(GFX_BASE_ADDR + 0x1BF398))
-#define gGfx_BG044 ((u8*)(GFX_BASE_ADDR + 0x1C0288))
 #define gGfx_BG044 ((u8*)(GFX_BASE_ADDR + 0x1C0288))
 #define gGfx_BG045 ((u8*)(GFX_BASE_ADDR + 0x1C13EC))
 #define gGfx_BG046 ((u8*)(GFX_BASE_ADDR + 0x1C4518))

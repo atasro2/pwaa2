@@ -2,18 +2,19 @@
 #define GUARD_EWRAM_H
 
 
-extern u8 eUnknown_02002BBC;
-extern u8 eUnknown_02002BBD;
-extern u8 eUnknown_02002BBE;
-extern u8 eUnknown_02002BBF;
-extern u8 eUnknown_02002BC0;
-extern u8 eUnknown_02002BC1;
+extern u8 eCase3IntroBG69ScrollSubTick;
+extern u8 eCase3IntroBG69ScrollTick;
+extern u8 eCase3IntroBG69MaxAnimationSubTick;
+extern u8 eCase3IntroBG69MaxAnimationTickIndex;
 
-#define eUnknown_0200AFC0 ((void *)EWRAM_START+0xAFC0)
+// used for acceleration and deceleration of scroll
+extern u8 eCase3IntroBG67ScrollSubTick;
+extern u8 eCase3IntroBG67ScrollTick;
+
+#define eGeneralScratchpadBuffer ((void *)EWRAM_START+0xAFC0)
 #define eScriptHeap ((void*) (EWRAM_START + 0x11FC0))
 #define eBGDecompBuffer ((void*) (EWRAM_START + 0x2CFC0))
-#define eUnknown_02031FC0 ((void*) (EWRAM_START + 0x31FC0))
-#define eUnknown_02036500 ((void*) (EWRAM_START + 0x36500))
-#define eUnknown_0203B000 ((void*) (EWRAM_START + 0x3B000))
-#define eUnknown_0203B500 ((void*) (EWRAM_START + 0x3B500))
+#define eBGDecompBuffer2 ((void*) (EWRAM_START + 0x36500))
+#define eSpeedlineDecompBuffer ((void*) (EWRAM_START + 0x3B000))
+#define eUnknown_0203B500 ((void*) (EWRAM_START + 0x3B500)) // only used in Command46, the data never gets accessed elsewhere. was eUnknown_02031FC0 in pwaa1
 #endif//GUARD_EWRAM_H

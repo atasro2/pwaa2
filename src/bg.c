@@ -208,7 +208,7 @@ u16 gUnknown_08111E54[2][0x10] = {
     0x003F, 0x004C, 0x0059, 0x0066, 0x0072, 0x007E, 0x0080, 0x0082,
 };
 
-u8 gUnknown_08111E94[0x28] = {
+u8 gCase3IntroBG69MaxAnimationTicks[0x28] = {
     0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x09,
     0x09, 0x09, 0x08, 0x08, 0x08, 0x08, 0x07, 0x06,
     0x06, 0x04, 0x04, 0x04, 0x04, 0x03, 0x03, 0x02,
@@ -904,29 +904,29 @@ void UpdateBackground() // BG256_main
             if(gMain.frameCounter % 4)
                 return;
         }
-        if(main->currentBG == 0x45) {
+        if(main->currentBG == 0x45) { // case3_intro_circus
             if(main->Bg256_pos_x < 10){
-                eUnknown_02002BBC++;
-                if(eUnknown_02002BBC < eUnknown_02002BBD)
+                eCase3IntroBG69ScrollSubTick++;
+                if(eCase3IntroBG69ScrollSubTick < eCase3IntroBG69ScrollTick)
                     return;
-                eUnknown_02002BBC = 0;
-                eUnknown_02002BBD++;
+                eCase3IntroBG69ScrollSubTick = 0;
+                eCase3IntroBG69ScrollTick++;
             }
             if(main->currentBG == 0x45) { // ??
                 struct AnimationListEntry * animation;
                 if(main->Bg256_pos_x == 240) {
-                    eUnknown_02002BBC = 0;
-                    eUnknown_02002BBD = 0;
-                    eUnknown_02002BBE = 0;
-                    eUnknown_02002BBF = 0;
+                    eCase3IntroBG69ScrollSubTick = 0;
+                    eCase3IntroBG69ScrollTick = 0;
+                    eCase3IntroBG69MaxAnimationSubTick = 0;
+                    eCase3IntroBG69MaxAnimationTickIndex = 0;
                 }
                 animation = FindAnimationFromAnimId(0x74);
                 if(animation) {
-                    eUnknown_02002BBE++;
-                    if(eUnknown_02002BBE == gUnknown_08111E94[eUnknown_02002BBF]) {
-                        eUnknown_02002BBE = 0;
+                    eCase3IntroBG69MaxAnimationSubTick++;
+                    if(eCase3IntroBG69MaxAnimationSubTick == gCase3IntroBG69MaxAnimationTicks[eCase3IntroBG69MaxAnimationTickIndex]) {
+                        eCase3IntroBG69MaxAnimationSubTick = 0;
                         animation->animationInfo.xOrigin--;
-                        eUnknown_02002BBF++;
+                        eCase3IntroBG69MaxAnimationTickIndex++;
                     }
                     if(main->Bg256_pos_x > 140) {
                         if((main->Bg256_pos_x % 10) == 0)
@@ -984,7 +984,7 @@ void UpdateBackground() // BG256_main
             main->isBGScrolling = FALSE;
             return;
         }
-        if(main->currentBG == 0x43) {
+        if(main->currentBG == 0x43) { // case3_intro_lion_blue_yellow
             struct AnimationListEntry * animation = FindAnimationFromAnimId(0x73);
             if(animation) {
                 if(main->Bg256_pos_y > 120) {
@@ -997,23 +997,23 @@ void UpdateBackground() // BG256_main
                 }
             }
             if(main->Bg256_pos_y == 160) {
-                eUnknown_02002BC0 = 0;
-                eUnknown_02002BC1 = 5;
+                eCase3IntroBG67ScrollSubTick = 0;
+                eCase3IntroBG67ScrollTick = 5;
             } else {
                 if(main->Bg256_pos_y >= 156
-                && eUnknown_02002BC1) {
-                    eUnknown_02002BC0++;
-                    if(eUnknown_02002BC0 != eUnknown_02002BC1)
+                && eCase3IntroBG67ScrollTick) {
+                    eCase3IntroBG67ScrollSubTick++;
+                    if(eCase3IntroBG67ScrollSubTick != eCase3IntroBG67ScrollTick)
                         return;
-                    eUnknown_02002BC0 = 0;
-                    eUnknown_02002BC1--;
+                    eCase3IntroBG67ScrollSubTick = 0;
+                    eCase3IntroBG67ScrollTick--;
                 }
                 if(main->Bg256_pos_y < 40) {
-                    eUnknown_02002BC0++;
-                    if(eUnknown_02002BC0 < eUnknown_02002BC1)
+                    eCase3IntroBG67ScrollSubTick++;
+                    if(eCase3IntroBG67ScrollSubTick < eCase3IntroBG67ScrollTick)
                         return;
-                    eUnknown_02002BC0 = 0;
-                    eUnknown_02002BC1++;
+                    eCase3IntroBG67ScrollSubTick = 0;
+                    eCase3IntroBG67ScrollTick++;
                 }
             }
         }
@@ -1107,7 +1107,7 @@ void DecompressCurrentBGStripe(u32 bgId)
         else
             bgData += 0x200;
         if((flags & BG_MODE_SIZE_MASK) == BG_MODE_SIZE_240x160)
-            gMain.bgStripeDestPtr = eUnknown_02036500;
+            gMain.bgStripeDestPtr = eBGDecompBuffer2;
         else
             gMain.bgStripeDestPtr = eBGDecompBuffer;
     }
