@@ -16,8 +16,13 @@ $(EVIDENCE_PROFILE_DESCRIPTIONS_PROFILES)/%.4bpp: $(EVIDENCE_PROFILE_DESCRIPTION
 $(EVIDENCE_PROFILE_DESCRIPTIONS_PROFILES)/%.4bpp.lz: $(EVIDENCE_PROFILE_DESCRIPTIONS_PROFILES)/%.4bpp
 	$(GBAGFX) $< $@ -search 8
 
-TALK_LOCATION_CHOICES := graphics/talk_location_choices
-$(TALK_LOCATION_CHOICES)/%.4bpp: $(TALK_LOCATION_CHOICES)/%.png
+LOCATION_CHOICES := graphics/location_choices
+TALK_CHOICES := graphics/talk_choices
+
+$(LOCATION_CHOICES)/%.4bpp: $(LOCATION_CHOICES)/%.png
+	$(GBAGFX) $< $@ -mwidth 8 -mheight 4
+
+$(TALK_CHOICES)/%.4bpp: $(TALK_CHOICES)/%.png
 	$(GBAGFX) $< $@ -mwidth 8 -mheight 4
 
 graphics/title_screen.8bpp.lz: graphics/title_screen.8bpp
