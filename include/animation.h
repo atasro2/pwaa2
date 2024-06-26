@@ -82,11 +82,11 @@ struct AnimationBackupStruct
     /* +0x06 */ s16 yOrigin;
     /* +0x08 */ u8 * animFrameDataStartPtr;
     /* +0x0C */ u16 frameDurationCounter;
-    /* +0x0E */ u8 unkE; // unk2A
-    /* +0x0F */ u8 unkF; // unk2B
+    /* +0x0E */ u8 animVar0;
+    /* +0x0F */ u8 animVar1;
     /* +0x10 */ u8 bgId;
     /* +0x11 */ u8 roomId;
-    /* +0x12 */ u16 unk12; // unk2E
+    /* +0x12 */ u16 specialEffectVar;
     /* +0x14 */ u32 flags;
     /* +0x18 */ struct AnimationFrame * frameData;
 };
@@ -96,7 +96,7 @@ struct PersonAnimationData
     /* +0x00 */ u8* gfxData;
     /* +0x04 */ u8* frameData;
     /* +0x08 */ u16 spriteCount;
-    /* +0x0A */ u16 unkA;
+    /* +0x0A */ u16 fillerA;
 };
 
 struct AnimationData

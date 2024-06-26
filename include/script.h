@@ -22,7 +22,7 @@ struct ScriptContext
     /* +0x12 */ u8 fullscreenTextX;
     /* +0x13 */ u8 textSkip;
     /* +0x14 */ u8 paragraphSkipDelayCounter;
-    /* +0x15 */ u8 unk15; // unused
+    /* +0x15 */ u8 unused15; // unused
     /* +0x16 */ u8 soundCueSkip;
     /* +0x17 */ u8 currentSoundCue;
     /* +0x18 */ u16 textXOffset;
@@ -39,8 +39,8 @@ struct ScriptContext
     /* +0x2A */ u16 fullscreenTextYOffset;
     /* +0x2C */ u16 holdItSection;
     /* +0x2E */ u8 holdItFlag;
-    /* +0x2F */ u8 unk2F;
-    /* +0x30 */ u16 unk30;
+    /* +0x2F */ u8 filler2F;
+    /* +0x30 */ u16 personIdFrozenInIdle;
     /* +0x32 */ u8 personAnimPauseCounter; // unity: rt_wait_timer
     /* +0x33 */ bool8 slamDesk; // unity: desk_attack
     /* +0x34 */ u8 textboxNameId; // unity: speaker_id
@@ -49,7 +49,7 @@ struct ScriptContext
     /* +0x37 */ u8 textboxDownArrowDelayCounter; // unity AA4: enter_type_timer
     /* +0x38 */ u8 textboxState; // unity: mess_win_rno
     /* +0x39 */ u8 fullscreenCursorPos;
-    /* +0x3A */ u8 unk3A; // unity AA4: add_y, used but does practically nothing
+    /* +0x3A */ u8 unused3A; // unity AA4: add_y, used but has no effect where its used
     /* +0x3B */ u8 textboxYPos; // unity AA4: frame_y
     /* +0x3C */ u8 * mapMarkerVramPtr; // unity AA4: Expl_now_vram_addr?
 };

@@ -65,10 +65,10 @@ struct PsycheLock {
     s16 numLocksRemaining;
     s16 state;
     s16 subState;
-    s16 unk8; // unused?
+    s16 filler8; // unused?
     s16 animationCounter;
     s16 animationIntroCounter;
-    s16 unkE; // padding?
+    s16 fillerE; // padding?
     struct PsycheLockChains chains[2];
     struct AnimationListEntry * lockAnims[5];
 };

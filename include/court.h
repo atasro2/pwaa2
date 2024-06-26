@@ -7,7 +7,7 @@ struct TestimonyStruct
     /* +0x01 */ u8 timer; // unity AA4: wait_timer
     /* +0x02 */ u8 pressPromptY; // unity AA4: pos_y_yusaburu
     /* +0x03 */ u8 presentPromptY; // unity AA4: pos_y_tukitukeru
-    /* +0x04 */ u8 unk4; // ??
+    /* +0x04 */ u8 animationOffsetX; // this gets (ab)userd both for testimony arrows and health bar stuff
     u8 fill5[3];
 };
 

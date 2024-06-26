@@ -638,7 +638,7 @@ struct AnimationListEntry *PlayPersonAnimationAtCustomOrigin(u32 arg0, u32 talki
         return NULL;
     }
     animationInfo.animId = 0xFF;
-    *(u16 *)(&animationInfo.personId) = arg0; // this assignment matches but sucks. doing it like this allows unk2 to not be an array which makes everything else more sane
+    *(u16 *)(&animationInfo.personId) = arg0; // this assignment matches but sucks. doing it like this allows animationInfo to not be an array which makes everything else more sane
     arg0 = personId; // ?! just use personId for the rest of the function like the previous dev and a good human :sob:
     animationInfo.vramPtr = OBJ_VRAM0 + 0x5800;
     animationInfo.animGfxDataStartPtr = gPersonAnimData[personId].gfxData;
@@ -1326,7 +1326,7 @@ void UpdateAnimations(u32 arg0)
                         }
                     }
                 }
-                if(main->unk30 == 0x7F)
+                if(main->currentBG2 == 0x7F)
                     ChangeAnimationActivity(animation, 0);
             } else if(animation->animationInfo.animId >= 70 && animation->animationInfo.animId <= 99) {
                 if(arg0 != animation->bgId) {
@@ -1340,7 +1340,7 @@ void UpdateAnimations(u32 arg0)
                 if(main->blendMode == 0) {
                     if(gAnimation[1].animationInfo.personId == 32) {
                         if((gAnimation[1].flags & ANIM_INACTIVE)
-                        || main->unk30 == 0x7F
+                        || main->currentBG2 == 0x7F
                         || courtScroll->state != 0) {
                             ChangeAnimationActivity(animation, 0);
                         } else if(animation->flags & ANIM_INACTIVE){

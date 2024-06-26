@@ -16,6 +16,6 @@ extern u8 eCase3IntroBG67ScrollTick;
 #define eBGDecompBuffer ((void*) (EWRAM_START + 0x2CFC0))
 #define eBGDecompBuffer2 ((void*) (EWRAM_START + 0x36500))
 #define eSpeedlineDecompBuffer ((void*) (EWRAM_START + 0x3B000))
-#define eVRAMScratchpadBuffer ((void*) (EWRAM_START + 0x3B500)) // only used in Command46, the data never gets accessed elsewhere. was eUnknown_02031FC0 in pwaa1
+#define eVRAMScratchpadBuffer ((void*) (EWRAM_START + 0x3B500))
 
 #endif//GUARD_EWRAM_H
