@@ -1273,7 +1273,7 @@ void MoveAnimationTilesToRam(bool32 arg0)
             palCount *= 32;
             tileData = animation->animationInfo.animGfxDataStartPtr+4;
             if(animation->flags & 0x200)
-                tileData = animation->unk30;
+                tileData = animation->overridePalette;
             
             if(animation->flags & 0x400) {
                 u16 buf[0x30];
