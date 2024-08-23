@@ -5,7 +5,7 @@
 #include "constants/process.h"
 #include "constants/oam_allocations.h"
 
-const u8 gUnknown_08022E6C[152] = {
+const u8 gMapTrialGameOverDoors[152] = {
     0x01, 0x02, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
     0x03, 0x03, 0x03, 0x04, 0x05, 0x06, 0x07, 0x01,
     0x08, 0x16, 0x09, 0x09, 0x09, 0x09, 0x09, 0x09,
@@ -73,7 +73,7 @@ void GameOverScreenProcess(struct Main *main)
             ptr2 += main->process[GAME_PROCESS_VAR1];
             for(j = 0; j < main->process[GAME_PROCESS_VAR1]; j++)
             {
-                temp = gUnknown_08022E6C[0xE - j + i * 0xF] + 0x10A0;
+                temp = gMapTrialGameOverDoors[0xE - j + i * 0xF] + 0x10A0;
                 *ptr2 = temp;
                 *(ptr2+0x140) = temp; 
                 ptr2--;
@@ -85,7 +85,7 @@ void GameOverScreenProcess(struct Main *main)
             ptr2 += 0x1F-main->process[GAME_PROCESS_VAR1];
             for(j = 0; j < main->process[GAME_PROCESS_VAR1]; j++)
             {
-                temp = gUnknown_08022E6C[0xE - j + i * 0xF] + 0x14A0;
+                temp = gMapTrialGameOverDoors[0xE - j + i * 0xF] + 0x14A0;
                 *ptr2 = temp;
                 *(ptr2+0x140) = temp; 
                 ptr2++;

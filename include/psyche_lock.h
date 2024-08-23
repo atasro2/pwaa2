@@ -1,6 +1,9 @@
 #ifndef GUARD_PSYCHE_LOCK_H
 #define GUARD_PSYCHE_LOCK_H
 
+#define PSYLOCK_ENABLE_PRESENT 0x1
+#define PSYLOCK_ENABLE_STOP 0x2
+
 void InitPsycheLockState(u32 arg0);
 void SetPsycheLockAnimationStateShowChains(void);
 

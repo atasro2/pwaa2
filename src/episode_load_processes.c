@@ -745,7 +745,7 @@ void ContinueSaveProcess(struct Main * main) {
 
             if (main->process[GAME_PROCESS] == INVESTIGATION_PROCESS) {
                 DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-                DmaCopy16(3, gPalActionButtons1, OBJ_PLTT + 0xA0, 0x40);
+                DmaCopy16(3, gPalActionButtons, OBJ_PLTT + 0xA0, 0x40);
                 DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
                 DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT + 0xE0, 0x20);
                 DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
@@ -839,8 +839,8 @@ void ContinueSaveProcess(struct Main * main) {
                 LoadItemPlateGfx(main);
             }
             FadeInBGM(20, main->currentPlayingBgm);
-            if(gMain.unk2BE & 0xF) {
-                switch(gMain.unk2BE >> 4) {
+            if(gMain.currentCourtroomScene & 0xF) {
+                switch(gMain.currentCourtroomScene >> 4) {
                     case 0:
                         LoadWitnessBenchGraphics();
                         SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);

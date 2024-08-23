@@ -6,7 +6,7 @@
 #include "constants/oam_allocations.h"
 
 //! not marked const
-struct Point4 gUnknown_081128E0[] = { 
+struct Point4 gSignalDetectorAreaRects[] = { 
     {{{0x0051, 0x000f}, {0x0054, 0x000f}, {0x0054, 0x0012}, {0x0051, 0x0012}}},
     {{{0x001c, 0x0014}, {0x002e, 0x0014}, {0x002e, 0x0033}, {0x001c, 0x0033}}},
     {{{0x000f, 0x002f}, {0x001c, 0x002f}, {0x001c, 0x0044}, {0x000f, 0x0044}}},
@@ -32,7 +32,7 @@ struct Point4 gUnknown_081128E0[] = {
 };
 
 //! not marked const
-u16 gUnknown_08112A40[] = {
+u16 gSignalDetectorScriptSections[] = {
     0x00ea,
     0x00e4,
 	0x00e5,
@@ -112,7 +112,7 @@ s32 FindDistanceToClosestSignalArea(void) {
     u32 distance = UINT32_MAX;
     s32 i;
     for(i = 0; i < 22; i++) {
-        struct Point4 * area = &gUnknown_081128E0[i];
+        struct Point4 * area = &gSignalDetectorAreaRects[i];
         u32 areaDistance = 0;
         s32 x, y;
         x = (area->points[0].x + area->points[1].x + area->points[2].x + area->points[3].x) / 4;
@@ -155,7 +155,7 @@ void ProcessSignalDetector(void)
             rect.w = 1;
             rect.h = 1;
             for(i = 0; i < 21; i++) {
-                if(CheckRectCollisionWithArea(&rect, &gUnknown_081128E0[i])) {
+                if(CheckRectCollisionWithArea(&rect, &gSignalDetectorAreaRects[i])) {
                     signalArea = i;
                     break;
                 }
@@ -184,9 +184,9 @@ void ProcessSignalDetector(void)
                 PlaySE(0x2B);
                 gScriptContext.flags &= ~(0x100 | 0x8);
                 if(signalArea != -1)
-                    ChangeScriptSection(gUnknown_08112A40[i]);
+                    ChangeScriptSection(gSignalDetectorScriptSections[i]);
                 else
-                    ChangeScriptSection(gUnknown_08112A40[21]);
+                    ChangeScriptSection(gSignalDetectorScriptSections[21]);
                 gScriptContext.flags |= 0x400;
                 gMain.advanceScriptContext = TRUE;
                 gIORegisters.lcd_bldcnt = BLDCNT_TGT1_BG1 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ;

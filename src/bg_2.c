@@ -38,7 +38,7 @@ void DecompressBackgroundIntoBuffer(u32 bgId)
         bgData += 0x200;
     bgData += gMain.bgStripeOffsets[1];
     if(!(flags & 0xF)) {
-        gMain.bgStripeDestPtr = eUnknown_02036500;
+        gMain.bgStripeDestPtr = eBGDecompBuffer2;
     }
     else {
         gMain.bgStripeDestPtr = eBGDecompBuffer;
@@ -102,12 +102,12 @@ void CopyBGDataToVram(u32 bgId)
     if(bgId == 0x57)
         main->Bg256_scroll_y = 0;
     if(bgId == 0x11) {
-        if(main->unk35 == 1)
+        if(main->disableDetentionCenterMaskInDetentionCenter == 1)
             EnableDetentionCenterMask(FALSE);
         else
             EnableDetentionCenterMask(TRUE);
     } else {
-        main->unk35 = 0;
+        main->disableDetentionCenterMaskInDetentionCenter = 0;
         EnableDetentionCenterMask(FALSE);
     }
     if(gMain.process[GAME_PROCESS] != INVESTIGATION_PROCESS) {
@@ -168,8 +168,8 @@ void CopyBGDataToVram(u32 bgId)
         src = gPal_BG020_BustupFranziska;
         dst = (void *)PLTT+0x1A0;
         DmaCopy16(3, src, dst, 0x20);
-        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eUnknown_0203B000, 0x500);
-        src = eUnknown_0203B000;
+        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eSpeedlineDecompBuffer, 0x500);
+        src = eSpeedlineDecompBuffer;
         dst = (void *)VRAM+0x8B00;
         DmaCopy16(3, src, dst, 0x5000);
         src = gBG2MapBuffer;
@@ -196,12 +196,12 @@ void CopyBGDataToVram(u32 bgId)
     main->Bg256_pos_x = 0;
     main->Bg256_pos_y = 0;
     main->currentBG = bgId;
-    main->unk30 = bgId;
+    main->currentBG2 = bgId;
     if(bgId == 0x80)
     {
-        src = gUnknown_0801BBD8;
+        src = gMapSpeedlines;
         dst = gBG3MapBuffer;
-        DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
+        DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
         if(main->effectType == 0xFFFE) {
             if(gAnimation[1].animationInfo.personId == 0x25)
                 LoadAndAdjustCounselWitnessBenchPaletteByMode(6, 0x20, 1);
@@ -217,9 +217,9 @@ void CopyBGDataToVram(u32 bgId)
     if(i & BG_MODE_SPECIAL_SPEEDLINE)
     {
         //u32 temp;
-        src = gUnknown_0801BBD8;
+        src = gMapSpeedlines;
         dst = gBG3MapBuffer;
-        DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
+        DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
         j = 0x258;
         j++;j--;
         for(i = 0; i < 20; i++, j++)
@@ -227,7 +227,7 @@ void CopyBGDataToVram(u32 bgId)
         for(i = 0; i < 20; i++, j++)
             gBG3MapBuffer[i * 0x20 + 0x3F] = j | 0x2000;
         main->isBGScrolling = TRUE;
-        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eUnknown_0203B000, 0x500);
+        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eSpeedlineDecompBuffer, 0x500);
     }
     if(tempBgCtrl & 0x8000)
     {
@@ -275,14 +275,14 @@ void CopyBGDataToVram(u32 bgId)
     *(u16*)&REG_BG3CNT = *(u16*)&ioReg->lcd_bg3cnt;
     *(u32*)&REG_BG3HOFS = *(u32*)&ioReg->lcd_bg3hofs;
     main->Bg256_dir = tempBgCtrl;
-    bgData = (gBackgroundTable[bgId].controlBits & BG_MODE_SIZE_MASK) == BG_MODE_SIZE_240x160 ? eUnknown_02036500 : eBGDecompBuffer;
+    bgData = (gBackgroundTable[bgId].controlBits & BG_MODE_SIZE_MASK) == BG_MODE_SIZE_240x160 ? eBGDecompBuffer2 : eBGDecompBuffer;
     if((tempBgCtrl & BG_MODE_SIZE_MASK) == 0)
     {
         if((tempBgCtrl & BG_MODE_SPECIAL_SPEEDLINE) == 0)
         {
-            src = gUnknown_0801BBD8;
+            src = gMapSpeedlines;
             dst = gBG3MapBuffer;
-            DmaCopy16(3, src, dst, sizeof(gUnknown_0801BBD8));
+            DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
         }
         src = gBG3MapBuffer;
         dst = (void *)BG_SCREEN_ADDR(31);

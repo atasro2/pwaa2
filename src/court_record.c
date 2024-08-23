@@ -1298,7 +1298,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 break;
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
-                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.unk30 == 0x7F) {
+                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.currentBG2 == 0x7F) {
                     SetPsycheLockAnimationStateReturnToNormalBackground();
                     UpdatePsycheLockAnimation();
                     ClearPsycheLockStopPresentButtonsOAM();
@@ -1466,14 +1466,14 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
             main->currentBG = gSaveDataBuffer.main.currentBG;
             main->previousBG = gSaveDataBuffer.main.previousBG;
             main->currentBgStripe = gSaveDataBuffer.main.currentBgStripe;
-            main->unk35 = gSaveDataBuffer.main.unk35;
+            main->disableDetentionCenterMaskInDetentionCenter = gSaveDataBuffer.main.disableDetentionCenterMaskInDetentionCenter;
             main->isBGScrolling = gSaveDataBuffer.main.isBGScrolling;
             main->Bg256_stop_line = gSaveDataBuffer.main.Bg256_stop_line;
             main->Bg256_scroll_x = gSaveDataBuffer.main.Bg256_scroll_x;
             main->Bg256_scroll_y = gSaveDataBuffer.main.Bg256_scroll_y;
             main->Bg256_pos_x = gSaveDataBuffer.main.Bg256_pos_x;
             main->Bg256_pos_y = gSaveDataBuffer.main.Bg256_pos_y;
-            main->unk40 = gSaveDataBuffer.main.unk40;
+            main->unused40 = gSaveDataBuffer.main.unused40;
             main->Bg256_dir = gSaveDataBuffer.main.Bg256_dir;
             main->horizontolBGScrollSpeed = gSaveDataBuffer.main.horizontolBGScrollSpeed;
             main->verticalBGScrollSpeed = gSaveDataBuffer.main.verticalBGScrollSpeed;
@@ -1509,8 +1509,8 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 if(anim)
                     anim->animationInfo.xOrigin = DISPLAY_WIDTH/2;
             }
-            if(gMain.unk2BE & 0xF) {
-                switch(gMain.unk2BE >> 4) {
+            if(gMain.currentCourtroomScene & 0xF) {
+                switch(gMain.currentCourtroomScene >> 4) {
                     case 0:
                         LoadWitnessBenchGraphics();
                         SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
@@ -1819,7 +1819,7 @@ void LoadEvidenceWindowGraphics(void)
     DmaCopy16(3, gGfx4bppControllerButtons, OBJ_VRAM0+0x3800, TILE_SIZE_4BPP*16);
     DmaCopy16(3, gGfx4bppPresentBackTextTiles, OBJ_VRAM0+0x3A00, TILE_SIZE_4BPP*16);
     DmaCopy16(3, gGfx4bppProfileTextTiles, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
-    DmaCopy16(3, gPalCrossExamUI, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, gPalCrossExaminationUI, OBJ_PLTT+0x60, 0x20);
     DmaCopy16(3, gPalCourtRecordActionText, OBJ_PLTT+0x80, 0x20);
     DmaCopy16(3, gPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
 }
@@ -1879,8 +1879,8 @@ void LoadEvidenceGraphics(u32 evidenceId)
     src = gGfxEvidenceProfilePictures + offset + 0x20;
     DmaCopy16(3, src, OBJ_VRAM0+0x5000, TILE_SIZE_4BPP * 64);
     src = gEvidenceProfileData[evidenceId].descriptionTiles;
-    LZ77UnCompWram(src, eUnknown_0200AFC0);
-    DmaCopy16(3, eUnknown_0200AFC0, (void *)OBJ_VRAM0+0x3C00, TILE_SIZE_4BPP * 160);
+    LZ77UnCompWram(src, eGeneralScratchpadBuffer);
+    DmaCopy16(3, eGeneralScratchpadBuffer, (void *)OBJ_VRAM0+0x3C00, TILE_SIZE_4BPP * 160);
 }
 
 void UpdateEvidenceSprites(struct CourtRecord * courtRecord)
@@ -2094,7 +2094,7 @@ s32 FindFirstEmptySlotInCourtRecord(u32 isProfile)
 
 void SortCourtRecordAndSyncListCount(struct CourtRecord * courtRecord)
 {
-    u8 * ewram = eUnknown_0200AFC0;
+    u8 * ewram = eGeneralScratchpadBuffer;
     u32 i;
 
     DmaCopy16(3, courtRecord->profileList, ewram, 0x20);

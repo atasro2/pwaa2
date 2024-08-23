@@ -14,9 +14,9 @@ void bg256_up_scroll(struct Main * main, u32 sp0);
 
 extern const u8 gNameTagTiles[24];
 
-extern const u16 gUnknown_0801B5D8[32*12];
-extern const u16 gUnknown_0801B8D8[32*12];
-extern const u16 gUnknown_0801BBD8[0x2C0];
+extern const u16 gMapCourtRecordNormalWindow[32*12];
+extern const u16 gMapCourtRecordSaveWindow[32*12];
+extern const u16 gMapSpeedlines[0x2C0];
 
 void CopyBGDataToVramAndScrollBG(u32 bgId)
 {
@@ -94,12 +94,12 @@ u8 * GetBGPalettePtr(u32 bgId)
 // from bg.c in pwaa1
 
 
-void SetTextboxSize(u32 unk0)
+void SetTextboxSize(u32 arg0)
 {
     struct ScriptContext * scriptCtx = &gScriptContext;
     u16 * map;
     u32 i;
-    switch(unk0)
+    switch(arg0)
     {
     case 0:
         map = gBG1MapBuffer;
@@ -111,7 +111,7 @@ void SetTextboxSize(u32 unk0)
         SetTextboxNametag(scriptCtx->textboxNameId & 0x7F, (u8)(scriptCtx->textboxNameId & 0x80));
         break;
     case 1:
-        scriptCtx->unk3A = 0;
+        scriptCtx->unused3A = 0;
         scriptCtx->textboxYPos = 14;
         scriptCtx->textboxState = 2;
         SetTextboxNametag(0, FALSE);
@@ -151,10 +151,10 @@ void UpdateTextbox()
     case 1:
         break;
     case 2:
-        scriptCtx->unk3A += 2;
-        if(scriptCtx->unk3A < 2)
+        scriptCtx->unused3A += 2;
+        if(scriptCtx->unused3A < 2)
             break;
-        scriptCtx->unk3A = 0;
+        scriptCtx->unused3A = 0;
         tiley = scriptCtx->textboxYPos * 32;
         for(i = 0; i < 32; i++)
         {
@@ -422,14 +422,14 @@ void ScrollWindowWithPrevWindow(struct CourtRecord * courtRecord)
         {
             for(i = 0x40; i < 0x180; i += 0x20)
             {
-                gBG2MapBuffer[i + 31] = gUnknown_0801B8D8[courtRecord->windowTileX + i];
+                gBG2MapBuffer[i + 31] = gMapCourtRecordSaveWindow[courtRecord->windowTileX + i];
             }
         }
         else
         {
             for(i = 0x40; i < 0x180; i += 0x20)
             {
-                gBG2MapBuffer[i + 31] = gUnknown_0801B5D8[courtRecord->windowTileX + i];
+                gBG2MapBuffer[i + 31] = gMapCourtRecordNormalWindow[courtRecord->windowTileX + i];
             }
         }
     }
@@ -453,14 +453,14 @@ void ScrollWindowWithPrevWindow(struct CourtRecord * courtRecord)
         {
             for(i = 0x40; i < 0x180; i += 0x20)
             {
-                gBG2MapBuffer[i] = gUnknown_0801B8D8[courtRecord->windowTileX + i];
+                gBG2MapBuffer[i] = gMapCourtRecordSaveWindow[courtRecord->windowTileX + i];
             }
         }
         else
         {
             for(i = 0x40; i < 0x180; i += 0x20)
             {
-                gBG2MapBuffer[i] = gUnknown_0801B5D8[courtRecord->windowTileX + i];
+                gBG2MapBuffer[i] = gMapCourtRecordNormalWindow[courtRecord->windowTileX + i];
             }
         }
     }
@@ -533,7 +533,7 @@ void UpdateBG2Window(struct CourtRecord * courtRecord)
     }
 }
 
-u8 gUnknown_08111ED0[56] = {
+u8 gSpeakerToNametagMap[56] = {
     0x00, 0x01, 0x01, 0x02, 0x03, 0x0C, 0x0C, 0x09,
     0x1F, 0x04, 0x05, 0x06, 0x00, 0x07, 0x0B, 0x0B,
     0x0A, 0x08, 0x08, 0x0E, 0x10, 0x0F, 0x11, 0x12,
@@ -554,9 +554,9 @@ void SetTextboxNametag(u32 nametagId, u32 rightSide)
     u32 offset = rightSide;
 
     /* begin wat */
-    gMain.unk2BC = nametagId;
-    gMain.unk2BD = rightSide;
-    nametagId = gUnknown_08111ED0[nametagId];
+    gMain.currentSpeaker = nametagId;
+    gMain.currentNametagRightSide = rightSide;
+    nametagId = gSpeakerToNametagMap[nametagId];
     /* end wat */
     
     // this reuses r0 instead of loading into r5

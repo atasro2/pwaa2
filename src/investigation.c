@@ -81,7 +81,7 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
     DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
     DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, gPalActionButtons1, OBJ_PLTT+0xA0, 0x40);
+    DmaCopy16(3, gPalActionButtons, OBJ_PLTT+0xA0, 0x40);
     DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
     DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT+0xE0, 0x20);
     DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
@@ -144,7 +144,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
     {
         if(!(main->gameStateFlags & 0x10))
         {
-            if(gScriptContext.flags & (SCRIPT_FULLSCREEN | 1) && gMain.unk30 != 0x7F)
+            if(gScriptContext.flags & (SCRIPT_FULLSCREEN | 1) && gMain.currentBG2 != 0x7F)
             {
                 /*
                 PauseBGM();
@@ -191,7 +191,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
     UpdateScrollPromptSprite(main, 1);
     if(gJoypad.pressedKeys & START_BUTTON)
     {
-        if(!(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+        if(!(main->gameStateFlags & 0x10) && gMain.currentBG2 != 0x7F)
         {
             s:
             PauseBGM();
@@ -413,7 +413,7 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
 void InvestigationInspect(struct Main * main, struct InvestigationStruct * investigation) // tantei_inspect // ! goto
 {
     u32 temp;
-    struct OamAttrs * oam = &gOamObjects[58]; // this was OAM_IDX_POINTER == 88 in pwaa1
+    struct OamAttrs * oam = &gOamObjects[OAM_IDX_38_1]; // this was OAM_IDX_POINTER == 88 in pwaa1
     if(gAnimation[1].flags & ANIM_BLEND_ACTIVE)
         return;
     if(main->blendMode)
@@ -421,7 +421,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
     
     if(gJoypad.pressedKeys & START_BUTTON
     && !(main->gameStateFlags & 0x10)
-    && gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)  && gMain.unk30 != 0x7F)
+    && gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)  && gMain.currentBG2 != 0x7F)
         goto s;
     else if(gJoypad.pressedKeys & R_BUTTON
     && !(main->gameStateFlags & 0x10)
@@ -449,7 +449,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
             case 1:
                 temp = 3;
                 if(gJoypad.pressedKeys & START_BUTTON
-                && !(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+                && !(main->gameStateFlags & 0x10) && gMain.currentBG2 != 0x7F)
                 {
                     s:
                     PauseBGM();
@@ -629,7 +629,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*moveLocations)*0x800;
-                    temp += (uintptr_t)gUnknown_081DE3E8;
+                    temp += (uintptr_t)gGfxLocationChoices;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++) // i * 4 fakematch
                     {
@@ -725,7 +725,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
             }
             if(gJoypad.pressedKeys & START_BUTTON)
             {
-                if(!(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+                if(!(main->gameStateFlags & 0x10) && gMain.currentBG2 != 0x7F)
                 {
                     PauseBGM();
                     DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
@@ -877,7 +877,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = *moveLocations*0x800; //TODO: label vs value?
-                    temp += (uintptr_t)gUnknown_081DE3E8;
+                    temp += (uintptr_t)gGfxLocationChoices;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -963,7 +963,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*icons) * 0x800;
-                    temp += (uintptr_t)gUnknown_081EB3E8;
+                    temp += (uintptr_t)gGfxTalkChoices;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -1043,7 +1043,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             {
                 if(gJoypad.pressedKeys & START_BUTTON)
                 {
-                    if(!(main->gameStateFlags & 0x10) && gMain.unk30 != 0x7F)
+                    if(!(main->gameStateFlags & 0x10) && gMain.currentBG2 != 0x7F)
                     {
                         PauseBGM();
                         DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
@@ -1242,7 +1242,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             {
                 if(!(main->gameStateFlags & 0x10))
                 {
-                    if((gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)) && gMain.unk30 != 0x7F)
+                    if((gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)) && gMain.currentBG2 != 0x7F)
                     {
                         PauseBGM();
                         DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
@@ -1307,7 +1307,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     {
                         investigation->activeOptions[i] = TRUE;
                         temp = (*icons) * 0x800;
-                        temp += (uintptr_t)gUnknown_081EB3E8;
+                        temp += (uintptr_t)gGfxTalkChoices;
                         DmaCopy16(3, temp, vram, 0x800);
                         for(j = 0; j < 2; j++)
                         {
@@ -1380,7 +1380,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*icons) * 0x800;
-                    temp += (uintptr_t)gUnknown_081EB3E8;
+                    temp += (uintptr_t)gGfxTalkChoices;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -1538,7 +1538,7 @@ _08010AC4:
     gMain.advanceScriptContext = TRUE;
     main->process[GAME_PROCESS_VAR1] = 3;
 _08010AD4:
-    if(gMain.psycheLockStopPresentButtonsActive & 1
+    if(gMain.psycheLockStopPresentButtonsActive & PSYLOCK_ENABLE_PRESENT
     && gJoypad.pressedKeys == R_BUTTON
     && gMain.psycheLockStopPresentButtonsState == 0
     && (main->gameStateFlags & 0x10) == 0
@@ -1550,7 +1550,7 @@ _08010AD4:
         BACKUP_PROCESS_PTR(main);
         SET_PROCESS_PTR(COURT_RECORD_PROCESS, COURT_INIT, 0, 3, main);
     }
-    if(gMain.psycheLockStopPresentButtonsActive & 2
+    if(gMain.psycheLockStopPresentButtonsActive & PSYLOCK_ENABLE_STOP
     && IsPsycheLockStopPresentButtonsAnimating() == FALSE
     && gMain.psycheLockStopPresentButtonsState == 0
     && gJoypad.pressedKeys == L_BUTTON)
@@ -1774,7 +1774,7 @@ void ReloadInvestigationGraphics(void) {
     int i;
 
     DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, gPalActionButtons1, OBJ_PLTT + 0xA0, 0x40);
+    DmaCopy16(3, gPalActionButtons, OBJ_PLTT + 0xA0, 0x40);
     DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
     DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT + 0xE0, 0x20);
     DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
@@ -2032,7 +2032,7 @@ void LoadLocationChoiceGraphics(void)
         destination += i*0x800;
         if(*roomptr != 0xFF)
 	    {
-            src = (void *)gUnknown_081DE3E8+*roomptr*0x800;
+            src = (void *)gGfxLocationChoices+*roomptr*0x800;
             DmaCopy16(3, src, destination, 0x800);
         }
         roomptr++;
@@ -2063,7 +2063,7 @@ void LoadTalkChoiceGraphics(void)
         destination += i*0x800;
         if(*icons != 0xFF)
 	    {
-            src = (void *)gUnknown_081EB3E8 + *icons*0x800;
+            src = (void *)gGfxTalkChoices + *icons*0x800;
             DmaCopy16(3, src, destination, 0x800);
         }
         icons++;

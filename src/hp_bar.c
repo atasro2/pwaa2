@@ -13,7 +13,7 @@
 #include "constants/script.h"
 #include "constants/oam_allocations.h"
 
-u16 gUnknown_08112520[15][16] = {
+u16 gPalHPBarLoseLifePalettes[15][16] = {
 	{0x43f0, 0x2368, 0x02e0, 0x0260, 0x01c0, 0x01c0, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
 	{0x3bd2, 0x1f4b, 0x02c4, 0x0244, 0x01c4, 0x01c4, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
 	{0x37b4, 0x1f2e, 0x06c8, 0x0648, 0x05c8, 0x01c4, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
@@ -31,7 +31,7 @@ u16 gUnknown_08112520[15][16] = {
 	{0x43f0, 0x2368, 0x02e0, 0x0260, 0x01c0, 0x01c0, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000}
 };
 
-u16 gUnknown_08112700[15][16] = {
+u16 gPalHPBarGainLifePalettes[15][16] = {
 	{0x7ffd, 0x7fb9, 0x7f97, 0x7f74, 0x7f51, 0x7f51, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
 	{0x7bbb, 0x7b77, 0x7b55, 0x7b32, 0x7b0f, 0x7f51, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
 	{0x7b99, 0x7b55, 0x7b33, 0x7b10, 0x7aed, 0x7f51, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000},
@@ -271,7 +271,7 @@ void AnimateHPBar(void)
     int nextIndex;
     if(gMain.hpBarValue > gMain.hpBarDisplayValue)
     {
-        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112700, 7);
+        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gPalHPBarGainLifePalettes, 7);
         xOffset = 0; // useless!
         yOffset = (gMain.frameCounter / 2) % 2;
         nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarDisplayValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
@@ -280,7 +280,7 @@ void AnimateHPBar(void)
     else if(gMain.hpBarValue < gMain.hpBarDisplayValue)
     {
         DoHPBarSmokeAnimations(gMain.hpBarX + gMain.hpBarDisplayValue, gMain.hpBarY);
-        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
+        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gPalHPBarLoseLifePalettes, 7);
         xOffset = Random() % 2 - 2;
         yOffset = Random() % 3 - 4;
         nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8 + xOffset, gMain.hpBarY - 8 + yOffset, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
@@ -288,13 +288,13 @@ void AnimateHPBar(void)
     }
     else if(gMain.hpBarDamageAmount > 0)
     {
-        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
+        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gPalHPBarLoseLifePalettes, 7);
         nextIndex = SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue - gMain.hpBarDamageAmount, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
         SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, nextIndex, 7, 21);
     }
     else 
     {
-        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gUnknown_08112520, 7);
+        LoadHPBarPaletteIntoSlotOnIntervalByInterval(gPalHPBarLoseLifePalettes, 7);
         SetHPBarOAMAndMatrices(gMain.hpBarX - 8, gMain.hpBarY - 8, gMain.hpBarValue, 444, OAM_IDX_HPBAR_LIFE, 0, 4, 20);
     }
     sub_801720C(gMain.hpBarX + xOffset, gMain.hpBarY + yOffset);
@@ -448,7 +448,7 @@ _08017AAC:
                 gMain.hpBarQ16_16DisplayChangeAmount /= 40;
             else
                 gMain.hpBarQ16_16DisplayChangeAmount /= 100;
-            gTestimony.unk4 = 40;
+            gTestimony.animationOffsetX = 40;
             gMain.advanceScriptContext = FALSE;
             gMain.hpBarSubState++;
             break;
@@ -466,11 +466,11 @@ _08017AAC:
                 if(gMain.hpBarDisplayValue > gMain.hpBarValue)
                     gMain.hpBarDisplayValue = gMain.hpBarValue;
             }
-            if(gTestimony.unk4 > 0)
-                gTestimony.unk4--;
+            if(gTestimony.animationOffsetX > 0)
+                gTestimony.animationOffsetX--;
             if(gMain.hpBarValue == gMain.hpBarDisplayValue)
             {
-                if(gTestimony.unk4 > 0)
+                if(gTestimony.animationOffsetX > 0)
                 {
                     if(gMain.hpBarQ16_16DisplayChangeAmount <= 0)
                         gMain.hpBarDisplayValue++;

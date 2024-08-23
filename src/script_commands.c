@@ -717,7 +717,7 @@ u32 Command1C(struct ScriptContext * scriptCtx)
             gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
             gIORegisters.lcd_bg1vofs = 0;
             CopyTextboxTilesToBG1MapBuffer();
-            SetTextboxNametag(gMain.unk2BC, gMain.unk2BD);
+            SetTextboxNametag(gMain.currentSpeaker, gMain.currentNametagRightSide);
             break;
         case 1: // disable textbox
             gMain.showTextboxCharacters = FALSE;
@@ -1304,14 +1304,14 @@ const struct MapMarkerSprite sMapMarkerSprites[] = {
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08232288,
+        .tiles = gGfxMapMarkersFoldingScreen+0x100,
         .size = 0x100,
         .attr0 = 0x8000,
         .attr1 = 0x8000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gUnknown_08232388,
+        .tiles = gGfxMapMarkersFoldingScreen+0x200,
         .size = 0x100,
         .attr0 = 0x8000,
         .attr1 = 0x8000,
@@ -1494,7 +1494,7 @@ struct SpotSelectData
     /* +0x20 */ u16 firstAreaSection;
     /* +0x22 */ u16 secondAreaSection;
     /* +0x24 */ u16 defaultSection;
-    /* +0x26 */ u16 unk26; // Unused, called a dummy in unity
+    /* +0x26 */ u16 filler26; // Unused, called a dummy in unity
     /* +0x28 */ u8 left;
     /* +0x29 */ u8 top;
     /* +0x2A */ u8 right;
@@ -1546,7 +1546,7 @@ const struct SpotSelectData gSpotSelectData[] = {
         .firstAreaSection = 0xB0,
         .secondAreaSection = 0xAE,
         .defaultSection = 0xAF,
-        .unk26 = 0,
+        .filler26 = 0,
         .left = 2,
         .top = 2,
         .right = 222,
@@ -1596,7 +1596,7 @@ const struct SpotSelectData gSpotSelectData[] = {
         .firstAreaSection = 0xC8,
         .secondAreaSection = 0xC6,
         .defaultSection = 0xC7,
-        .unk26 = 0,
+        .filler26 = 0,
         .left = 2,
         .top = 2,
         .right = 222,
@@ -1646,7 +1646,7 @@ const struct SpotSelectData gSpotSelectData[] = {
         .firstAreaSection = 0xD4,
         .secondAreaSection = 0xD1,
         .defaultSection = 0xD3,
-        .unk26 = 0,
+        .filler26 = 0,
         .left = 2,
         .top = 2,
         .right = 222,
@@ -1696,7 +1696,7 @@ const struct SpotSelectData gSpotSelectData[] = {
         .firstAreaSection = 0xFE,
         .secondAreaSection = 0xFD,
         .defaultSection = 0xFD,
-        .unk26 = 0,
+        .filler26 = 0,
         .left = 2,
         .top = 2,
         .right = 222,
@@ -1746,7 +1746,7 @@ const struct SpotSelectData gSpotSelectData[] = {
         .firstAreaSection = 0x101,
         .secondAreaSection = 0x100,
         .defaultSection = 0x100,
-        .unk26 = 0,
+        .filler26 = 0,
         .left = 2,
         .top = 2,
         .right = 222,
@@ -1796,7 +1796,7 @@ const struct SpotSelectData gSpotSelectData[] = {
         .firstAreaSection = 0x125,
         .secondAreaSection = 0x125,
         .defaultSection = 0x124,
-        .unk26 = 0,
+        .filler26 = 0,
         .left = 2,
         .top = 16,
         .right = 222,
@@ -1846,7 +1846,7 @@ const struct SpotSelectData gSpotSelectData[] = {
         .firstAreaSection = 0xA2,
         .secondAreaSection = 0x9F,
         .defaultSection = 0xA0,
-        .unk26 = 0,
+        .filler26 = 0,
         .left = 2,
         .top = 2,
         .right = 222,
@@ -1896,7 +1896,7 @@ const struct SpotSelectData gSpotSelectData[] = {
         .firstAreaSection = 0xF7,
         .secondAreaSection = 0xF4,
         .defaultSection = 0xF6,
-        .unk26 = 0,
+        .filler26 = 0,
         .left = 2,
         .top = 2,
         .right = 222,
@@ -2052,8 +2052,8 @@ bool32 Command41(struct ScriptContext * scriptCtx)
     struct OamAttrs *oam;
     scriptCtx->scriptPtr++;
     // this has to be outside of the loop, else the load order breaks...
-    oam = &gOamObjects[52];
-    for(i = 0; i < 4; i++)
+    oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
+    for(i = 0; i < OAM_COUNT_GENERAL_USE_1; i++)
     {
         oam->attr0 = SPRITE_ATTR0((-32 & 255), ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
     // 64x32 sprite size
@@ -2189,7 +2189,7 @@ bool32 Command46(struct ScriptContext * scriptCtx)
         }
     }
     r6 += 32 + 20*30*2;
-    DmaCopy16(3, r6, eUnknown_0203B500, 30*20*TILE_SIZE_4BPP);
+    DmaCopy16(3, r6, eVRAMScratchpadBuffer, 30*20*TILE_SIZE_4BPP);
     gIORegisters.lcd_dispcnt |= DISPCNT_BG2_ON;
     gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR;
     if(flag & 0x20)
@@ -2306,9 +2306,9 @@ bool32 Command4D(struct ScriptContext *scriptCtx)
     gMain.currentBgStripe = 1;
     scriptCtx->scriptPtr++;
     if(*scriptCtx->scriptPtr == 0)
-        gMain.unk35 = 1;
+        gMain.disableDetentionCenterMaskInDetentionCenter = 1;
     else
-        gMain.unk35 = 0;
+        gMain.disableDetentionCenterMaskInDetentionCenter = 0;
     scriptCtx->scriptPtr++;
     return 1;
 }
@@ -2323,14 +2323,14 @@ bool32 Command4E(struct ScriptContext *scriptCtx)
         return 0;
     }
     if(scriptCtx->waitTimer != 0) {
-        if(scriptCtx->unk30 != gAnimation[1].animationInfo.personId) {
+        if(scriptCtx->personIdFrozenInIdle != gAnimation[1].animationInfo.personId) {
             SetAnimationFrameOffset(&gAnimation[1], gMain.idleAnimationOffset);
-            scriptCtx->unk30 = gAnimation[1].animationInfo.personId;
+            scriptCtx->personIdFrozenInIdle = gAnimation[1].animationInfo.personId;
         }
         scriptCtx->waitTimer--;
         if(scriptCtx->waitTimer == 0) {
             scriptCtx->scriptPtr += 2;
-            scriptCtx->unk30 = 0;
+            scriptCtx->personIdFrozenInIdle = 0;
             return 0;
         }
         
@@ -2338,7 +2338,7 @@ bool32 Command4E(struct ScriptContext *scriptCtx)
         scriptCtx->scriptPtr++;
         scriptCtx->waitTimer = *scriptCtx->scriptPtr;
         scriptCtx->scriptPtr--;
-        scriptCtx->unk30 = 0;
+        scriptCtx->personIdFrozenInIdle = 0;
     }
 
     return 1;
@@ -2631,7 +2631,7 @@ bool32 Command65(struct ScriptContext *scriptCtx)
     var2 = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
     var1 = *scriptCtx->scriptPtr;
-    gMain.unk2BE = (var0 << 4) | (var1 & 0xF);
+    gMain.currentCourtroomScene = (var0 << 4) | (var1 & 0xF);
     switch(var0) {
         case 0:
             if(var1 == 1) {
@@ -2770,7 +2770,7 @@ bool32 Command6E(struct ScriptContext *scriptCtx)
 bool32 Command6F(struct ScriptContext *scriptCtx)
 {
     scriptCtx->scriptPtr++;
-    gMain.unk1E = *scriptCtx->scriptPtr;
+    gMain.loopBridgeSection = *scriptCtx->scriptPtr;
     scriptCtx->scriptPtr++;
     return 0;
 }

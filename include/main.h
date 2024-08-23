@@ -35,7 +35,7 @@ struct Main
     /* +0x01A */ u8 tilemapUpdateBits;
     /* +0x01B */ u8 saveContinueFlags;
     /* +0x01C */ u16 testimonyBeginningSection; // unity: bk_start_mess
-    /* +0x01E */ u16 unk1E; // unity: Bk_end_mess
+    /* +0x01E */ u16 loopBridgeSection; // unity: Bk_end_mess
     /* +0x020 */ s16 bgmFadeVolume; // unity: bgm_vol_next?
     /* +0x022 */ u8 soundStatus; // unity: sound_status, comes after currentPlayingBgm in unity?
     /* +0x023 */ u8 currentPlayingBgm; // unity: bgm_now
@@ -47,17 +47,17 @@ struct Main
     /* +0x02C */ u8 gottenEvidenceType; // unity: get_note_file / only written to 
     /* +0x02D */ u8 gottenEvidenceId; // unity: get_note_id
     /* +0x02E */ u16 currentBG; // unity AA4: Bg256_no? BG related code not in GlobalWork struct, this might be another struct on its own but i'm not sure
-    /* +0x030 */ u16 unk30; // unity AA4: Bg256_load_no?
+    /* +0x030 */ u16 currentBG2; // unity AA4: Bg256_load_no?
     /* +0x032 */ s16 previousBG; // unity AA4: Bg256_no_old? probably wrong
     /* +0x034 */ s8 currentBgStripe; // maybe Bg256_rno_0?
-    /* +0x035 */ u8 unk35;
+    /* +0x035 */ u8 disableDetentionCenterMaskInDetentionCenter;
     /* +0x036 */ bool8 isBGScrolling; // unity AA4: Bg256_scroll_flag
     /* +0x037 */ u8 Bg256_stop_line; // unity AA4: Bg256_stop_line
     /* +0x038 */ s16 Bg256_scroll_x; // unity AA4: Bg256_scroll_x
     /* +0x03A */ s16 Bg256_scroll_y; // unity AA4: Bg256_scroll_y
     /* +0x03C */ s16 Bg256_pos_x; // unity AA4: Bg256_pos_x
     /* +0x03E */ s16 Bg256_pos_y; // unity AA4: Bg256_pos_y
-    /* +0x040 */ u16 unk40; // unity AA4: Bg256_add? unused but is background related 100%
+    /* +0x040 */ u16 unused40; // unity AA4: Bg256_add? unused but is background related 100%
     /* +0x042 */ s16 Bg256_dir; // unity AA4: Bg256_dir
     /* +0x044 */ s8 horizontolBGScrollSpeed; // unity AA4: Bg256_scroll_speed_x
     /* +0x045 */ s8 verticalBGScrollSpeed; // unity AA4: Bg256_scroll_speed_y
@@ -126,9 +126,9 @@ struct Main
     /* +0x286 */ u16 numPsycheLockedTalkSections; // unity: lock_max
     struct Spotlight {
         u8 state;
-        s8 unk1;
-        s8 unk2;
-        s8 unk3;
+        s8 respawnDelay;
+        u8 filler2;
+        u8 filler3;
         s32 x;
         s32 y;
         s32 xVelocity;
@@ -140,10 +140,10 @@ struct Main
     u8 filler2B5[0x2B8 - 0x2B5];
     /* +0x2B8 */ u16 currentlyPlayingSfx;
     u16 currentlyPlayingLoopedSfx;
-    u8 unk2BC;
-    u8 unk2BD;
-    u8 unk2BE;
-    u8 unk2BF;
+    u8 currentSpeaker;
+    u8 currentNametagRightSide;
+    u8 currentCourtroomScene;
+    u8 filler2BF;
 }; /* size 0x2C0 */
 
 struct IORegisters

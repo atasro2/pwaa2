@@ -80,7 +80,7 @@ const u8 gTextboxTiles[0x400] = { /* gTextboxTiles */
     0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
 };
 
-const u16 gUnknown_0801B5D8[32*12] = {
+const u16 gMapCourtRecordNormalWindow[32*12] = {
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
     0x0000, 0x0041, 0x0042, 0x0042, 0x0042, 0x0042, 0x0042, 0x0042, 0x0042, 0x0042, 0x0043, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x004A, 0x0000,
@@ -95,7 +95,7 @@ const u16 gUnknown_0801B5D8[32*12] = {
     0x0000, 0x0046, 0x0047, 0x0047, 0x0047, 0x0047, 0x0047, 0x0047, 0x0047, 0x0047, 0x0048, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004D, 0x0000,
 };
 
-const u16 gUnknown_0801B8D8[32*12] = {
+const u16 gMapCourtRecordSaveWindow[32*12] = {
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
     0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
     0x0000, 0x0000, 0x0000, 0x0000, 0x004E, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x0049, 0x004A, 0x0000, 0x0000, 0x0000, 0x0000,
@@ -110,7 +110,7 @@ const u16 gUnknown_0801B8D8[32*12] = {
     0x0000, 0x0000, 0x0000, 0x0000, 0x0050, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004C, 0x004D, 0x0000, 0x0000, 0x0000, 0x0000,
 };
 
-const u16 gUnknown_0801BBD8[0x2C0] = {
+const u16 gMapSpeedlines[0x2C0] = {
     0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276,
     0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276,
     0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276,
@@ -201,14 +201,14 @@ const u16 gUnknown_0801BBD8[0x2C0] = {
     0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276, 0x2276,
 };
 
-u16 gUnknown_08111E54[2][0x10] = {
+u16 gCourtScrollGfxFrameIndices[2][0x10] = {
     0x0000, 0x0001, 0x0002, 0x0003, 0x0009, 0x000F, 0x0016, 0x001D,
     0x0024, 0x002B, 0x0032, 0x0039, 0x0040, 0x0047, 0x003F, 0x0041,
     0x0000, 0x0002, 0x0004, 0x0006, 0x000D, 0x0019, 0x0025, 0x0032,
     0x003F, 0x004C, 0x0059, 0x0066, 0x0072, 0x007E, 0x0080, 0x0082,
 };
 
-u8 gUnknown_08111E94[0x28] = {
+u8 gCase3IntroBG69MaxAnimationTicks[0x28] = {
     0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x0A, 0x09,
     0x09, 0x09, 0x08, 0x08, 0x08, 0x08, 0x07, 0x06,
     0x06, 0x04, 0x04, 0x04, 0x04, 0x03, 0x03, 0x02,
@@ -819,9 +819,9 @@ void UpdateBackground() // BG256_main
                         if((animation = FindAnimationFromAnimId(0x91+i)))
                             DestroyAnimation(animation);
                     }
-                    map = gUnknown_0801BBD8;
+                    map = gMapSpeedlines;
                     mapbuf = gBG3MapBuffer;
-                    DmaCopy16(3, map, mapbuf, sizeof(gUnknown_0801BBD8));
+                    DmaCopy16(3, map, mapbuf, sizeof(gMapSpeedlines));
                     DmaFill16(3, 0, PLTT+0x40, 0x1C0);
                     DmaFill16(3, 0x2222, BG_CHAR_ADDR(1), 0x9600);
                     main->Bg256_scroll_y = 0;
@@ -859,16 +859,16 @@ void UpdateBackground() // BG256_main
         switch(courtScroll->scrollMode) {
             case 0:
             case 1:
-                temp = gUnknown_08111E54[0][courtScroll->frameCounter / 2];
+                temp = gCourtScrollGfxFrameIndices[0][courtScroll->frameCounter / 2];
                 break;
             case 2:
             case 3: {
-                temp = 130 - gUnknown_08111E54[1][courtScroll->frameCounter / 2];
+                temp = 130 - gCourtScrollGfxFrameIndices[1][courtScroll->frameCounter / 2];
                 break;
             }
             case 4:
             case 5:
-                temp = 130 - gUnknown_08111E54[0][courtScroll->frameCounter / 2];
+                temp = 130 - gCourtScrollGfxFrameIndices[0][courtScroll->frameCounter / 2];
                 break;
         }
         gIORegisters.lcd_bg3cnt &= ~BGCNT_256COLOR;
@@ -904,29 +904,29 @@ void UpdateBackground() // BG256_main
             if(gMain.frameCounter % 4)
                 return;
         }
-        if(main->currentBG == 0x45) {
+        if(main->currentBG == 0x45) { // case3_intro_circus
             if(main->Bg256_pos_x < 10){
-                eUnknown_02002BBC++;
-                if(eUnknown_02002BBC < eUnknown_02002BBD)
+                eCase3IntroBG69ScrollSubTick++;
+                if(eCase3IntroBG69ScrollSubTick < eCase3IntroBG69ScrollTick)
                     return;
-                eUnknown_02002BBC = 0;
-                eUnknown_02002BBD++;
+                eCase3IntroBG69ScrollSubTick = 0;
+                eCase3IntroBG69ScrollTick++;
             }
             if(main->currentBG == 0x45) { // ??
                 struct AnimationListEntry * animation;
                 if(main->Bg256_pos_x == 240) {
-                    eUnknown_02002BBC = 0;
-                    eUnknown_02002BBD = 0;
-                    eUnknown_02002BBE = 0;
-                    eUnknown_02002BBF = 0;
+                    eCase3IntroBG69ScrollSubTick = 0;
+                    eCase3IntroBG69ScrollTick = 0;
+                    eCase3IntroBG69MaxAnimationSubTick = 0;
+                    eCase3IntroBG69MaxAnimationTickIndex = 0;
                 }
                 animation = FindAnimationFromAnimId(0x74);
                 if(animation) {
-                    eUnknown_02002BBE++;
-                    if(eUnknown_02002BBE == gUnknown_08111E94[eUnknown_02002BBF]) {
-                        eUnknown_02002BBE = 0;
+                    eCase3IntroBG69MaxAnimationSubTick++;
+                    if(eCase3IntroBG69MaxAnimationSubTick == gCase3IntroBG69MaxAnimationTicks[eCase3IntroBG69MaxAnimationTickIndex]) {
+                        eCase3IntroBG69MaxAnimationSubTick = 0;
                         animation->animationInfo.xOrigin--;
-                        eUnknown_02002BBF++;
+                        eCase3IntroBG69MaxAnimationTickIndex++;
                     }
                     if(main->Bg256_pos_x > 140) {
                         if((main->Bg256_pos_x % 10) == 0)
@@ -984,7 +984,7 @@ void UpdateBackground() // BG256_main
             main->isBGScrolling = FALSE;
             return;
         }
-        if(main->currentBG == 0x43) {
+        if(main->currentBG == 0x43) { // case3_intro_lion_blue_yellow
             struct AnimationListEntry * animation = FindAnimationFromAnimId(0x73);
             if(animation) {
                 if(main->Bg256_pos_y > 120) {
@@ -997,23 +997,23 @@ void UpdateBackground() // BG256_main
                 }
             }
             if(main->Bg256_pos_y == 160) {
-                eUnknown_02002BC0 = 0;
-                eUnknown_02002BC1 = 5;
+                eCase3IntroBG67ScrollSubTick = 0;
+                eCase3IntroBG67ScrollTick = 5;
             } else {
                 if(main->Bg256_pos_y >= 156
-                && eUnknown_02002BC1) {
-                    eUnknown_02002BC0++;
-                    if(eUnknown_02002BC0 != eUnknown_02002BC1)
+                && eCase3IntroBG67ScrollTick) {
+                    eCase3IntroBG67ScrollSubTick++;
+                    if(eCase3IntroBG67ScrollSubTick != eCase3IntroBG67ScrollTick)
                         return;
-                    eUnknown_02002BC0 = 0;
-                    eUnknown_02002BC1--;
+                    eCase3IntroBG67ScrollSubTick = 0;
+                    eCase3IntroBG67ScrollTick--;
                 }
                 if(main->Bg256_pos_y < 40) {
-                    eUnknown_02002BC0++;
-                    if(eUnknown_02002BC0 < eUnknown_02002BC1)
+                    eCase3IntroBG67ScrollSubTick++;
+                    if(eCase3IntroBG67ScrollSubTick < eCase3IntroBG67ScrollTick)
                         return;
-                    eUnknown_02002BC0 = 0;
-                    eUnknown_02002BC1++;
+                    eCase3IntroBG67ScrollSubTick = 0;
+                    eCase3IntroBG67ScrollTick++;
                 }
             }
         }
@@ -1107,7 +1107,7 @@ void DecompressCurrentBGStripe(u32 bgId)
         else
             bgData += 0x200;
         if((flags & BG_MODE_SIZE_MASK) == BG_MODE_SIZE_240x160)
-            gMain.bgStripeDestPtr = eUnknown_02036500;
+            gMain.bgStripeDestPtr = eBGDecompBuffer2;
         else
             gMain.bgStripeDestPtr = eBGDecompBuffer;
     }

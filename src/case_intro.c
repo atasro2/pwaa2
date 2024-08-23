@@ -63,7 +63,7 @@ void AnimateSpotlight(struct Spotlight * spotlight, int spotlightId, struct Anim
                 if(spotlight->x >= Q_16_16(DISPLAY_WIDTH + 64))
                 {
                     spotlight->state++;
-                    spotlight->unk1 = Random() % 256;
+                    spotlight->respawnDelay = Random() % 256;
                 }
             }
             else
@@ -71,7 +71,7 @@ void AnimateSpotlight(struct Spotlight * spotlight, int spotlightId, struct Anim
                 if(spotlight->x <= Q_16_16(-64))
                 {
                     spotlight->state++;
-                    spotlight->unk1 = Random() % 256;
+                    spotlight->respawnDelay = Random() % 256;
                 }
             } 
             break;
@@ -83,7 +83,7 @@ void AnimateSpotlight(struct Spotlight * spotlight, int spotlightId, struct Anim
             }
 
             arg2->animationInfo.xOrigin = DISPLAY_WIDTH + 64;
-            if(spotlight->unk1-- < 0)
+            if(spotlight->respawnDelay-- < 0)
                 spotlight->state = 0;
             break;
         case 3: // _08017E0A
@@ -243,12 +243,12 @@ void InitNickelSamuraiZoominAnimation(void)
     gIORegisters.lcd_bg2pb = 0;
     gIORegisters.lcd_bg2pc = 0;
     gIORegisters.lcd_bg2pd = 0;
-    LZ77UnCompWram(gGfxCase3NickelSamuraiZoomin, eUnknown_02036500);
-    DmaCopy16(3, eUnknown_02036500, BG_CHAR_ADDR(1), 0x1300);
-    LZ77UnCompWram(gMapCase3NickelSamuraiZoomin, eUnknown_02036500);
-    DmaCopy16(3, eUnknown_02036500, gBG2MapBuffer, sizeof(gBG2MapBuffer));
-    LZ77UnCompWram(gPalCase3NickelSamuraiZoomin, eUnknown_02036500);
-    DmaCopy16(3, eUnknown_02036500, BG_PLTT, BG_PLTT_SIZE);
+    LZ77UnCompWram(gGfxCase3NickelSamuraiZoomin, eBGDecompBuffer2);
+    DmaCopy16(3, eBGDecompBuffer2, BG_CHAR_ADDR(1), 0x1300);
+    LZ77UnCompWram(gMapCase3NickelSamuraiZoomin, eBGDecompBuffer2);
+    DmaCopy16(3, eBGDecompBuffer2, gBG2MapBuffer, sizeof(gBG2MapBuffer));
+    LZ77UnCompWram(gPalCase3NickelSamuraiZoomin, eBGDecompBuffer2);
+    DmaCopy16(3, eBGDecompBuffer2, BG_PLTT, BG_PLTT_SIZE);
     *(u16*)BG_PLTT = 0xFFFF; // white backdrop
     UpdateNickelSamuraiZoominAnimation();
 }

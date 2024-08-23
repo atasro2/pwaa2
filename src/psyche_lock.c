@@ -11,6 +11,7 @@
 #include "case_data.h"
 #include "constants/animation.h"
 #include "constants/script.h"
+#include "constants/oam_allocations.h"
 
 u16 gPsycheLockChainPalettes[][16] = {
     {0x0000, 0x0842, 0x1084, 0x14a5, 0x18c6, 0x1ce8, 0x252a, 0x294b, 0x318d, 0x39ce, 0x4210, 0x4632, 0x4a53, 0x5295, 0x5ad6, 0x6318},
@@ -121,7 +122,7 @@ bool32 HavePsycheLockChainsFinishedAnimating(struct PsycheLockChains * chains)
 
 void LoadPsycheLockChainGraphics(void)
 {
-    gMain.unk30 = 0x7F;
+    gMain.currentBG2 = 0x7F;
     gIORegisters.lcd_bg0cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(28) | BGCNT_MOSAIC | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     gIORegisters.lcd_bg3cnt = BGCNT_PRIORITY(2) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     DmaFill16(3, 0, BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
@@ -328,7 +329,7 @@ _08016264: // psylock_move_whiteshock
     {
         case 0:
             PlaySE(0x7A);
-            gMain.unk30 = 0x7F;
+            gMain.currentBG2 = 0x7F;
             // invert palette colors
             for(i = 33; i < 256; i++)
             {
@@ -879,58 +880,58 @@ void AnimatePsycheLockStopBresentButtons(void)
             SetPsycheLockStopPresentButtonsState(0);
     }
     LoadPsycheLockButtonGraphics();
-    if(gMain.psycheLockStopPresentButtonsActive & 1)
+    if(gMain.psycheLockStopPresentButtonsActive & PSYLOCK_ENABLE_PRESENT)
     {
         // this code masks the y position with 0x1FF instead of 0xFF
         // causing the sprite to become affine for a couple of frames
-        gOamObjects[50].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-        gOamObjects[50].attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-64, FALSE, FALSE, 2);
-        gOamObjects[50].attr2 = SPRITE_ATTR2(0x190, 1, 5);
-        gOamObjects[51].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-        gOamObjects[51].attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-32, FALSE, FALSE, 2);
-        gOamObjects[51].attr2 = SPRITE_ATTR2(0x198, 1, 5);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT].attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-64, FALSE, FALSE, 2);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT].attr2 = SPRITE_ATTR2(0x190, 1, 5);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT+1].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT+1].attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-32, FALSE, FALSE, 2);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT+1].attr2 = SPRITE_ATTR2(0x198, 1, 5);
     }
     else
     {
-        gOamObjects[50].attr0 = SPRITE_ATTR0_CLEAR;
-        gOamObjects[51].attr0 = SPRITE_ATTR0_CLEAR;
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT].attr0 = SPRITE_ATTR0_CLEAR;
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT+1].attr0 = SPRITE_ATTR0_CLEAR;
     }
-    if(gMain.psycheLockStopPresentButtonsActive & 2)
+    if(gMain.psycheLockStopPresentButtonsActive & PSYLOCK_ENABLE_STOP)
     {
-        gOamObjects[48].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-        gOamObjects[48].attr1 = SPRITE_ATTR1_NONAFFINE(0, FALSE, FALSE, 2);
-        gOamObjects[48].attr2 = SPRITE_ATTR2(0x180, 1, 5);
-        gOamObjects[49].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-        gOamObjects[49].attr1 = SPRITE_ATTR1_NONAFFINE(32, FALSE, FALSE, 2);
-        gOamObjects[49].attr2 = SPRITE_ATTR2(0x188, 1, 5);
+        gOamObjects[OAM_IDX_PSYLOCK_STOP].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        gOamObjects[OAM_IDX_PSYLOCK_STOP].attr1 = SPRITE_ATTR1_NONAFFINE(0, FALSE, FALSE, 2);
+        gOamObjects[OAM_IDX_PSYLOCK_STOP].attr2 = SPRITE_ATTR2(0x180, 1, 5);
+        gOamObjects[OAM_IDX_PSYLOCK_STOP+1].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        gOamObjects[OAM_IDX_PSYLOCK_STOP+1].attr1 = SPRITE_ATTR1_NONAFFINE(32, FALSE, FALSE, 2);
+        gOamObjects[OAM_IDX_PSYLOCK_STOP+1].attr2 = SPRITE_ATTR2(0x188, 1, 5);
     }
     else
     {
-        gOamObjects[48].attr0 = SPRITE_ATTR0_CLEAR;
-        gOamObjects[49].attr0 = SPRITE_ATTR0_CLEAR;
+        gOamObjects[OAM_IDX_PSYLOCK_STOP].attr0 = SPRITE_ATTR0_CLEAR;
+        gOamObjects[OAM_IDX_PSYLOCK_STOP+1].attr0 = SPRITE_ATTR0_CLEAR;
     }
 }
 
 void SetPsycheLockPresentButtonOAMInCourtRecord(void)
 {
     LoadPsycheLockButtonGraphics();
-    if(gMain.psycheLockStopPresentButtonsActive & 1)
+    if(gMain.psycheLockStopPresentButtonsActive & PSYLOCK_ENABLE_PRESENT)
     {
-        gOamObjects[50].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-        gOamObjects[50].attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-54, FALSE, FALSE, 2);
-        gOamObjects[51].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
-        gOamObjects[51].attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-22, FALSE, FALSE, 2);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT].attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-54, FALSE, FALSE, 2);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT+1].attr0 = SPRITE_ATTR0(-gMain.psycheLockStopPresentButtonsY & 0x1FF, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
+        gOamObjects[OAM_IDX_PSYLOCK_PRESENT+1].attr1 = SPRITE_ATTR1_NONAFFINE(DISPLAY_WIDTH-22, FALSE, FALSE, 2);
     }
-    gOamObjects[48].attr0 = SPRITE_ATTR0_CLEAR;
-    gOamObjects[49].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_PSYLOCK_STOP].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_PSYLOCK_STOP+1].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
 void ClearPsycheLockStopPresentButtonsOAM(void)
 {
-    gOamObjects[50].attr0 = SPRITE_ATTR0_CLEAR;
-    gOamObjects[51].attr0 = SPRITE_ATTR0_CLEAR;
-    gOamObjects[48].attr0 = SPRITE_ATTR0_CLEAR;
-    gOamObjects[49].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_PSYLOCK_PRESENT].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_PSYLOCK_PRESENT+1].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_PSYLOCK_STOP].attr0 = SPRITE_ATTR0_CLEAR;
+    gOamObjects[OAM_IDX_PSYLOCK_STOP+1].attr0 = SPRITE_ATTR0_CLEAR;
 }
 
 bool32 IsPsycheLockStopPresentButtonsAnimating(void)
