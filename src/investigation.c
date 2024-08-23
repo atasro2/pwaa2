@@ -144,7 +144,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
     {
         if(!(main->gameStateFlags & 0x10))
         {
-            if(gScriptContext.flags & (SCRIPT_FULLSCREEN | 1) && gMain.currentBG2 != 0x7F)
+            if(gScriptContext.flags & (SCRIPT_FULLSCREEN | 1) && gMain.currentDisplayBG != 0x7F)
             {
                 /*
                 PauseBGM();
@@ -191,7 +191,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
     UpdateScrollPromptSprite(main, 1);
     if(gJoypad.pressedKeys & START_BUTTON)
     {
-        if(!(main->gameStateFlags & 0x10) && gMain.currentBG2 != 0x7F)
+        if(!(main->gameStateFlags & 0x10) && gMain.currentDisplayBG != 0x7F)
         {
             s:
             PauseBGM();
@@ -383,8 +383,8 @@ void InvestigationRoomInit(struct Main * main, struct InvestigationStruct * inve
         for(j = 0; j < 2; oam++, j++)
             oam->attr0 = SPRITE_ATTR0_CLEAR;
     }
-    oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
-    for(i = 0; i < 4; i++)
+    oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
+    for(i = 0; i < OAM_COUNT_INVESTIGATION_ACTIONS; i++)
     {
         oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
         oam->attr1 = SPRITE_ATTR1_NONAFFINE(i*60, FALSE, FALSE, 3);
@@ -421,7 +421,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
     
     if(gJoypad.pressedKeys & START_BUTTON
     && !(main->gameStateFlags & 0x10)
-    && gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)  && gMain.currentBG2 != 0x7F)
+    && gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)  && gMain.currentDisplayBG != 0x7F)
         goto s;
     else if(gJoypad.pressedKeys & R_BUTTON
     && !(main->gameStateFlags & 0x10)
@@ -449,7 +449,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
             case 1:
                 temp = 3;
                 if(gJoypad.pressedKeys & START_BUTTON
-                && !(main->gameStateFlags & 0x10) && gMain.currentBG2 != 0x7F)
+                && !(main->gameStateFlags & 0x10) && gMain.currentDisplayBG != 0x7F)
                 {
                     s:
                     PauseBGM();
@@ -725,7 +725,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
             }
             if(gJoypad.pressedKeys & START_BUTTON)
             {
-                if(!(main->gameStateFlags & 0x10) && gMain.currentBG2 != 0x7F)
+                if(!(main->gameStateFlags & 0x10) && gMain.currentDisplayBG != 0x7F)
                 {
                     PauseBGM();
                     DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
@@ -1043,7 +1043,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             {
                 if(gJoypad.pressedKeys & START_BUTTON)
                 {
-                    if(!(main->gameStateFlags & 0x10) && gMain.currentBG2 != 0x7F)
+                    if(!(main->gameStateFlags & 0x10) && gMain.currentDisplayBG != 0x7F)
                     {
                         PauseBGM();
                         DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
@@ -1242,7 +1242,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             {
                 if(!(main->gameStateFlags & 0x10))
                 {
-                    if((gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)) && gMain.currentBG2 != 0x7F)
+                    if((gScriptContext.flags & (SCRIPT_FULLSCREEN | 1)) && gMain.currentDisplayBG != 0x7F)
                     {
                         PauseBGM();
                         DmaCopy16(3, gOamObjects, &gSaveDataBuffer.oam, sizeof(gOamObjects));
@@ -1455,8 +1455,8 @@ void InvestigationPresent(struct Main * main, struct InvestigationStruct * inves
             if(investigation->inactiveActionButtonY == 0xE0
             && gScriptContext.textboxState == 0)
             {
-                oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
-                for(i = 0; i < 4; i++)
+                oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
+                for(i = 0; i < OAM_COUNT_INVESTIGATION_ACTIONS; i++)
                 {
                     oam->attr0 = 0x40E0;
                     oam->attr1 = i * 60 + 0xC000;

@@ -1326,7 +1326,7 @@ void UpdateAnimations(u32 arg0)
                         }
                     }
                 }
-                if(main->currentBG2 == 0x7F)
+                if(main->currentDisplayBG == 0x7F)
                     ChangeAnimationActivity(animation, 0);
             } else if(animation->animationInfo.animId >= 70 && animation->animationInfo.animId <= 99) {
                 if(arg0 != animation->bgId) {
@@ -1340,7 +1340,7 @@ void UpdateAnimations(u32 arg0)
                 if(main->blendMode == 0) {
                     if(gAnimation[1].animationInfo.personId == 32) {
                         if((gAnimation[1].flags & ANIM_INACTIVE)
-                        || main->currentBG2 == 0x7F
+                        || main->currentDisplayBG == 0x7F
                         || courtScroll->state != 0) {
                             ChangeAnimationActivity(animation, 0);
                         } else if(animation->flags & ANIM_INACTIVE){
