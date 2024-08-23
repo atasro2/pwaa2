@@ -2052,8 +2052,8 @@ bool32 Command41(struct ScriptContext * scriptCtx)
     struct OamAttrs *oam;
     scriptCtx->scriptPtr++;
     // this has to be outside of the loop, else the load order breaks...
-    oam = &gOamObjects[OAM_IDX_GENERAL_USE_1];
-    for(i = 0; i < OAM_COUNT_GENERAL_USE_1; i++)
+    oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
+    for(i = 0; i < OAM_COUNT_INVESTIGATION_ACTIONS; i++)
     {
         oam->attr0 = SPRITE_ATTR0((-32 & 255), ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
     // 64x32 sprite size

@@ -196,7 +196,7 @@ void CopyBGDataToVram(u32 bgId)
     main->Bg256_pos_x = 0;
     main->Bg256_pos_y = 0;
     main->currentBG = bgId;
-    main->currentBG2 = bgId;
+    main->currentDisplayBG = bgId;
     if(bgId == 0x80)
     {
         src = gMapSpeedlines;

@@ -1298,7 +1298,7 @@ void CourtRecordDetailSubMenu(struct Main * main, struct CourtRecord * courtReco
                 break;
             if(gMain.processCopy[GAME_PROCESS] == INVESTIGATION_PROCESS
             && gMain.processCopy[GAME_PROCESS_STATE] == INVESTIGATION_10) {
-                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.currentBG2 == 0x7F) {
+                if(gMain.psycheLockShownByScriptFlag != 2 && gMain.currentDisplayBG == 0x7F) {
                     SetPsycheLockAnimationStateReturnToNormalBackground();
                     UpdatePsycheLockAnimation();
                     ClearPsycheLockStopPresentButtonsOAM();

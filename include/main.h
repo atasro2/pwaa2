@@ -47,7 +47,7 @@ struct Main
     /* +0x02C */ u8 gottenEvidenceType; // unity: get_note_file / only written to 
     /* +0x02D */ u8 gottenEvidenceId; // unity: get_note_id
     /* +0x02E */ u16 currentBG; // unity AA4: Bg256_no? BG related code not in GlobalWork struct, this might be another struct on its own but i'm not sure
-    /* +0x030 */ u16 currentBG2; // unity AA4: Bg256_load_no?
+    /* +0x030 */ u16 currentDisplayBG; // unity AA4: Bg256_load_no?
     /* +0x032 */ s16 previousBG; // unity AA4: Bg256_no_old? probably wrong
     /* +0x034 */ s8 currentBgStripe; // maybe Bg256_rno_0?
     /* +0x035 */ u8 disableDetentionCenterMaskInDetentionCenter;
