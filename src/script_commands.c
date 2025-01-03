@@ -2696,11 +2696,12 @@ bool32 Command69(struct ScriptContext *scriptCtx)
     if(gInvestigation.pointerX == 0) {
         InitNickelSamuraiZoominAnimation();
         return 1;
-    } else if((s16)gInvestigation.pointerX >= 0) { // TODO: look further into the type for this
+    }
+    if(gInvestigation.pointerX < 32768) {
         UpdateNickelSamuraiZoominAnimation();
         if(gInvestigation.pointerX > 32)
             return 1;
-        gInvestigation.pointerX = SHRT_MIN;
+        gInvestigation.pointerX = 32768;
         return 1;
     }
     FinishNickelSamuraiZoominAnimation();
