@@ -1,0 +1,350 @@
+
+### gGfxPixAnimationChar01
+
+- name: animation01
+  animation_tiles:
+
+### gGfxSeqAnimationChar01
+
+- name: animation01
+  animation_sequence:
+
+### gGfxPixAnimationChar02
+
+- name: animation02
+  animation_tiles:
+
+### gGfxSeqAnimationChar02
+
+- name: animation02
+  animation_sequence:
+
+### gGfxPixAnimationChar03
+
+- name: animation03
+  animation_tiles:
+
+### gGfxSeqAnimationChar03
+
+- name: animation03
+  animation_sequence:
+
+### gGfxPixAnimationChar04
+
+- name: animation04
+  animation_tiles:
+
+### gGfxSeqAnimationChar04
+
+- name: animation04
+  animation_sequence:
+
+### gGfxPixAnimationChar05
+
+- name: animation05
+  animation_tiles:
+
+### gGfxSeqAnimationChar05
+
+- name: animation05
+  animation_sequence:
+
+### gGfxPixAnimationChar06
+
+- name: animation06
+  animation_tiles:
+
+### gGfxSeqAnimationChar06
+
+- name: animation06
+  animation_sequence:
+
+### gGfxPixAnimationChar07
+
+- name: animation07
+  animation_tiles:
+
+### gGfxSeqAnimationChar07
+
+- name: animation07
+  animation_sequence:
+
+### gGfxPixAnimationChar08
+
+- name: animation08
+  animation_tiles:
+
+### gGfxSeqAnimationChar08
+
+- name: animation08
+  animation_sequence:
+
+### gGfxPixAnimationChar09
+
+- name: animation09
+  animation_tiles:
+
+### gGfxSeqAnimationChar09
+
+- name: animation09
+  animation_sequence:
+
+### gGfxPixAnimationChar10
+
+- name: animation10
+  animation_tiles:
+
+### gGfxSeqAnimationChar10
+
+- name: animation10
+  animation_sequence:
+
+### gGfxPixAnimationChar11
+
+- name: animation11
+  animation_tiles:
+
+### gGfxSeqAnimationChar11
+
+- name: animation11
+  animation_sequence:
+
+### gGfxPixAnimationChar12
+
+- name: animation12
+  animation_tiles:
+
+### gGfxSeqAnimationChar12
+
+- name: animation12
+  animation_sequence:
+
+### gGfxPixAnimationChar13
+
+- name: animation13
+  animation_tiles:
+
+### gGfxSeqAnimationChar13
+
+- name: animation13
+  animation_sequence:
+
+### gGfxPixAnimationChar14
+
+- name: animation14
+  animation_tiles:
+
+### gGfxSeqAnimationChar14
+
+- name: animation14
+  animation_sequence:
+
+### gGfxPixAnimationChar15
+
+- name: animation15
+  animation_tiles:
+
+### gGfxSeqAnimationChar15
+
+- name: animation15
+  animation_sequence:
+
+### gGfxPixAnimationChar16
+
+- name: animation16
+  animation_tiles:
+
+### gGfxSeqAnimationChar16
+
+- name: animation16
+  animation_sequence:
+
+### gGfxPixAnimationChar17
+
+- name: animation17
+  animation_tiles:
+
+### gGfxSeqAnimationChar17
+
+- name: animation17
+  animation_sequence:
+
+### gGfxPixAnimationChar18
+
+- name: animation18
+  animation_tiles:
+
+### gGfxSeqAnimationChar18
+
+- name: animation18
+  animation_sequence:
+
+### gGfxPixAnimationChar19
+
+- name: animation19
+  animation_tiles:
+
+### gGfxSeqAnimationChar19
+
+- name: animation19
+  animation_sequence:
+
+### gGfxPixAnimationChar20
+
+- name: animation20
+  animation_tiles:
+
+### gGfxSeqAnimationChar20
+
+- name: animation20
+  animation_sequence:
+
+### gGfxPixAnimationChar21
+
+- name: animation21
+  animation_tiles:
+
+### gGfxSeqAnimationChar21
+
+- name: animation21
+  animation_sequence:
+
+### gGfxPixAnimationChar22
+
+- name: animation22
+  animation_tiles:
+
+### gGfxSeqAnimationChar22
+
+- name: animation22
+  animation_sequence:
+
+### gGfxPixAnimationChar23
+
+- name: animation23
+  animation_tiles:
+
+### gGfxSeqAnimationChar23
+
+- name: animation23
+  animation_sequence:
+
+### gGfxPixAnimationChar24
+
+- name: animation24
+  animation_tiles:
+
+### gGfxSeqAnimationChar24
+
+- name: animation24
+  animation_sequence:
+
+### gGfxPixAnimationChar25
+
+- name: animation25
+  animation_tiles:
+
+### gGfxSeqAnimationChar25
+
+- name: animation25
+  animation_sequence:
+
+### gGfxPixAnimationChar26
+
+- name: animation26
+  animation_tiles:
+
+### gGfxSeqAnimationChar26
+
+- name: animation26
+  animation_sequence:
+
+### gGfxPixAnimationChar27
+
+- name: animation27
+  animation_tiles:
+
+### gGfxSeqAnimationChar27
+
+- name: animation27
+  animation_sequence:
+
+### gGfxPixAnimationChar28
+
+- name: animation28
+  animation_tiles:
+
+### gGfxSeqAnimationChar28
+
+- name: animation28
+  animation_sequence:
+
+### gGfxPixAnimationChar29
+
+- name: animation29
+  animation_tiles:
+
+### gGfxSeqAnimationChar29
+
+- name: animation29
+  animation_sequence:
+
+### gGfxPixAnimationChar30
+
+- name: animation30
+  animation_tiles:
+
+### gGfxSeqAnimationChar30
+
+- name: animation30
+  animation_sequence:
+
+### gGfxPixAnimationChar31
+
+- name: animation31
+  animation_tiles:
+
+### gGfxSeqAnimationChar31
+
+- name: animation31
+  animation_sequence:
+
+### gGfxPixAnimationChar32
+
+- name: animation32
+  animation_tiles:
+
+### gGfxSeqAnimationChar32
+
+- name: animation32
+  animation_sequence:
+
+### gGfxPixAnimationChar33
+
+- name: animation33
+  animation_tiles:
+
+### gGfxSeqAnimationChar33
+
+- name: animation33
+  animation_sequence:
+
+### gGfxPixAnimationChar34
+
+- name: animation34
+  animation_tiles:
+
+### gGfxSeqAnimationChar34
+
+- name: animation34
+  animation_sequence:
+
+### gGfxPixAnimationChar35
+
+- name: animation35
+  animation_tiles:
+
+### gGfxSeqAnimationChar35
+
+- name: animation35
+  animation_sequence:

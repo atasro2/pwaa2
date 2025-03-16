@@ -64,6 +64,7 @@ Temporary Items
 *.striped
 tools/agbcc/
 tools/binutils/
+tools/venv/
 build/
 sound/songs/midi/*.s
 

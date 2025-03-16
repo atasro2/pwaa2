@@ -108,6 +108,7 @@ clean-tools:
 
 clean-assets:
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.striped' \) -exec rm {} +
+	rm -f assets.bin
 
 clean:
 	rm -f $(ROM) $(ELF) $(MAP)

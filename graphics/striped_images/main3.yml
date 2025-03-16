@@ -1,0 +1,534 @@
+
+### gGfx_BG021:
+- name: case1_photo_of_dustin_dead
+  striped:
+    bpp: 4
+
+### gGfx_BG022:
+- name: case1_photo_of_maggeys_name
+  striped:
+    bpp: 4
+
+### gGfx_BG023:
+- name: case1_maggey_with_dustin
+  striped:
+    bpp: 4
+
+### gGfx_BG024:
+- name: case1_maggey_spotting_richard
+  striped:
+    bpp: 4
+
+### gGfx_BG025:
+- name: case1_intro_richard_with_fire_extinguisher
+  striped:
+    bpp: 8
+
+### gGfx_BG026:
+- name: case1_intro_nightmare_2
+  striped:
+    bpp: 4
+
+### gGfx_BG027:
+- name: case1_intro_richard_looking
+  striped:
+    bpp: 8
+
+### gGfx_BG028:
+- name: kurain_village
+  striped:
+    bpp: 8
+
+### gGfx_BG029:
+- name: kurain_main_hall
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG030:
+- name: meeting_room
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG031:
+- name: winding_way
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG032:
+- name: kurain_spare_room_with_box
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG033:
+- name: kurain_spare_room
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG034:
+- name: hotti_clinic
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG035:
+- name: case2_intro_car
+  striped:
+    bpp: 8
+
+### gGfx_BG036:
+- name: case2_intro_car_crash
+  striped:
+    bpp: 8
+
+### gGfx_BG037:
+- name: case2_intro_phoenix_with_maya
+  striped:
+    bpp: 8
+
+### gGfx_BG038:
+- name: dummy_background_1
+  striped:
+    bpp: 4
+
+### gGfx_BG039:
+- name: case2_newspaper_car_crash_page_1
+  striped:
+    bpp: 4
+
+### gGfx_BG040:
+- name: case2_newspaper_car_crash_page_2
+  striped:
+    bpp: 4
+
+### gGfx_BG041:
+- name: case2_newspaper_car_crash_page_3
+  striped:
+    bpp: 4
+
+### gGfx_BG042:
+- name: case2_diagram_of_meeting_room
+  striped:
+    bpp: 4
+
+### gGfx_BG043:
+- name: case2_diagram_of_fey_manor
+  striped:
+    bpp: 4
+
+### gGfx_BG044:
+- name: case2_intro_car_lights
+  striped:
+    bpp: 4
+
+### gGfx_BG045:
+- name: pwaa1_dead_mia_in_office
+  striped:
+    bpp: 4
+
+### gGfx_BG046:
+- name: case2_maya_with_turner
+  striped:
+    bpp: 4
+
+### gGfx_BG047:
+- name: case2_mimi_in_hospital
+  striped:
+    bpp: 4
+
+### gGfx_BG048:
+- name: case2_mayas_robe
+  striped:
+    bpp: 4
+
+### gGfx_BG049:
+- name: case2_photo_of_incident
+  striped:
+    bpp: 4
+
+### gGfx_BG050:
+- name: case2_photo_of_attacker
+  striped:
+    bpp: 4
+
+### gGfx_BG051:
+- name: case2_photo_of_summoned_mia
+  striped:
+    bpp: 8
+
+### gGfx_BG052:
+- name: case2_pearl_fixing_urn
+  striped:
+    bpp: 4
+
+### gGfx_BG053:
+- name: case2_morgan_fey
+  striped:
+    bpp: 8
+
+### gGfx_BG054:
+- name: case2_ini_with_summoned_mimi
+  striped:
+    bpp: 4
+
+### gGfx_BG055:
+- name: case2_ini_with_sleeping_maya
+  striped:
+    bpp: 4
+
+### gGfx_BG056:
+- name: case2_box_behind_screen
+  striped:
+    bpp: 4
+
+### gGfx_BG057:
+- name: case2_turner_with_gun
+  striped:
+    bpp: 4
+
+### gGfx_BG058:
+- name: case2_maya_with_summoned_mia
+  striped:
+    bpp: 8
+
+### gGfx_BG059:
+- name: circus_tent
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG060:
+- name: circus_cafeteria
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG061:
+- name: mr_berrys_office
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG062:
+- name: berry_big_circus_entrance_day
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG063:
+- name: berry_big_circus_entrance_night
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG064:
+- name: circus_courtyard
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG065:
+- name: moes_room
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG066:
+- name: acros_room
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG067:
+- name: case3_intro_lion_blue_yellow
+  striped:
+    bpp: 4
+
+### gGfx_BG068:
+- name: case3_intro_lion_green_red
+  striped:
+    bpp: 4
+
+### gGfx_BG069:
+- name: case3_intro_circus
+  striped:
+    bpp: 8
+
+### gGfx_BG070:
+- name: case3_intro_maximillion
+  striped:
+    bpp: 8
+
+### gGfx_BG071:
+- name: case3_threatening_note_text
+  striped:
+    bpp: 4
+
+### gGfx_BG072:
+- name: case3_poster_of_maximillion
+  striped:
+    bpp: 8
+
+### gGfx_BG073:
+- name: case3_photo_of_maximillion_with_trophy
+  striped:
+    bpp: 8
+
+### gGfx_BG074:
+- name: case3_maximillion_with_contract
+  striped:
+    bpp: 4
+
+### gGfx_BG075:
+- name: case3_diagram_circus
+  striped:
+    bpp: 4
+
+### gGfx_BG076:
+- name: case3_photo_of_russell
+  striped:
+    bpp: 4
+
+### gGfx_BG077:
+- name: case3_dead_russell_outside
+  striped:
+    bpp: 4
+
+### gGfx_BG078:
+- name: case3_russell_about_to_get_hit
+  striped:
+    bpp: 4
+
+### gGfx_BG079:
+- name: case3_russell_getting_hit
+  striped:
+    bpp: 4
+
+### gGfx_BG080:
+- name: case3_bat_with_lion
+  striped:
+    bpp: 4
+
+### gGfx_BG081:
+- name: case3_ben_spotting_max
+  striped:
+    bpp: 4
+
+### gGfx_BG082:
+- name: case3_acro_spotting_statue
+  striped:
+    bpp: 4
+
+### gGfx_BG083:
+- name: case3_bust_of_maximillion
+  striped:
+    bpp: 8
+
+### gGfx_BG084:
+- name: case3_acro_dropping_statue
+  striped:
+    bpp: 4
+
+### gGfx_BG085:
+- name: case3_max_grabbing_bottle
+  striped:
+    bpp: 4
+
+### gGfx_BG086:
+- name: case3_acros_bottom_half_in_wheelchair
+  striped:
+    bpp: 4
+
+### gGfx_BG087:
+- name: case3_edgeworth_at_airport
+  striped:
+    bpp: 8
+
+### gGfx_BG088:
+- name: gatewater_hotel_ballroom
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG089:
+- name: gatewater_hotel_hallway
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG090:
+- name: matt_engardes_hotel_room
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG091:
+- name: juan_corridas_hotel_room
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG092:
+- name: dummy_background_2
+  striped:
+    bpp: 4
+
+### gGfx_BG093:
+- name: gatewater_hotel_lobby
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG094:
+- name: matt_engardes_house
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG095:
+- name: secret_room
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG096:
+- name: wine_cellar
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG120:
+- name: case4_intro_heroes_lined_up
+  striped:
+    bpp: 8
+
+### gGfx_BG121:
+- name: case4_intro_nickel_samurai_appears
+  striped:
+    bpp: 4
+
+### gGfx_BG122:
+- name: case4_intro_nickel_samurai_with_fan
+  striped:
+    bpp: 8
+
+### gGfx_BG097:
+- name: case4_over_the_clouds
+  striped:
+    bpp: 8
+
+### gGfx_BG098:
+- name: case4_jammin_ninja_poster
+  striped:
+    bpp: 8
+
+### gGfx_BG099:
+- name: airport
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG100:
+- name: case4_photo_of_juan_dead
+  striped:
+    bpp: 4
+
+### gGfx_BG101:
+- name: case4_diagram_hotel
+  striped:
+    bpp: 4
+
+### gGfx_BG102:
+- name: case4_photo_of_nickel_samurai_in_hall
+  striped:
+    bpp: 4
+
+### gGfx_BG103:
+- name: case4_nickel_samurai_poster
+  striped:
+    bpp: 8
+
+### gGfx_BG104:
+- name: case4_juan_finding_dead_celeste
+  striped:
+    bpp: 4
+
+### gGfx_BG105:
+- name: case4_adrian_puttin_on_costume
+  striped:
+    bpp: 4
+
+### gGfx_BG106:
+- name: case4_adrian_with_sleeping_matt
+  striped:
+    bpp: 4
+
+### gGfx_BG107:
+- name: case4_backdrop_of_matt_with_partner
+  striped:
+    bpp: 4
+
+### gGfx_BG108:
+- name: pwaa1_edgeworth_picking_up_gun
+  striped:
+    bpp: 4
+
+### gGfx_BG109:
+- name: case4_matt_getting_juice_from_shelly
+  striped:
+    bpp: 4
+
+### gGfx_BG110:
+- name: case4_franziska_entering
+  striped:
+    bpp: 8
+
+### gGfx_BG111:
+- name: case4_shelly_handing_over_bear
+  striped:
+    bpp: 4
+
+### gGfx_BG112:
+- name: case4_phoenix_with_maya_and_pearl
+  striped:
+    bpp: 8
+
+### gGfx_BG113:
+- name: case4_calling_card_with_drawing
+  striped:
+    bpp: 8
+
+### gGfx_BG114:
+- name: case4_phoenix_leaving_bad_end
+  striped:
+    bpp: 4
+
+### gGfx_BG115:
+- name: case4_adrian_finding_juan_with_juice
+  striped:
+    bpp: 4
+
+### gGfx_BG116:
+- name: case4_calling_card
+  striped:
+    bpp: 4
+
+### gGfx_BG117:
+- name: steel_samurai
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG118:
+- name: case4_tabloid_article
+  striped:
+    bpp: 4
+
+### gGfx_BG119:
+- name: pwaa1_class_trial_edgeworth
+  striped:
+    bpp: 4

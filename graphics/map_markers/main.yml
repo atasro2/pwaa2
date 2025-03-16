@@ -1,0 +1,64 @@
+
+### gPalMapMarkers:
+- name: palette
+  palette:
+
+### gGfxMapMarkersKiller:
+- name: killer
+  image:
+    bpp: 4
+
+### gGfxMapMarkersVictim:
+- name: victim
+  image:
+    bpp: 4
+
+### gGfxMapMarkersGreen:
+- name: green
+  image:
+    bpp: 4
+
+### gGfxMapMarkersDoubleDoorDiagram:
+- name: double_door_diagram
+  image:
+    bpp: 4
+
+### gGfxMapMarkersFoldingScreen:
+- name: folding_screen
+  image:
+    bpp: 4
+
+### gGfxMapMarkersRedDot:
+- name: red_dot
+  image:
+    bpp: 4
+
+### gGfxUnusedMapMarkersCase3MainGate:
+- name: case3_main_gate
+  image:
+    bpp: 4
+
+### gGfxUnusedMapMarkersGreen:
+- name: green
+  image:
+    bpp: 4
+
+### gGfxUnusedMapMarkersCase4BoatHorizontal:
+- name: case4_boat_horizontal
+  image:
+    bpp: 4
+
+### gGfxUnusedMapMarkersCase4BoatRentalShop:
+- name: case4_boat_rental_shop
+  image:
+    bpp: 4
+
+### gGfxUnusedMapMarkersCase4LottaSUV:
+- name: case4_lotta_suv
+  image:
+    bpp: 4
+
+### gGfxUnusedMapMarkersCase4BoatVertical:
+- name: case4_boat_vertical
+  image:
+    bpp: 4

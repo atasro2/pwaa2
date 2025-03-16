@@ -1,3 +1,8 @@
+assets.bin: $(shell tools/venv/bin/python3 tools/asset_blob.py dependencies graphics.yml)
+	tools/venv/bin/python3 tools/asset_blob.py blob graphics.yml $@ 0x130000 include/graphics.h
+
+include/graphics.h: assets.bin
+
 EVIDENCE_PROFILE_DESCRIPTIONS := graphics/evidence_profile_descriptions
 $(EVIDENCE_PROFILE_DESCRIPTIONS)/%.4bpp: $(EVIDENCE_PROFILE_DESCRIPTIONS)/%.png
 	$(GBAGFX) $< $@ -mwidth 4 -mheight 4

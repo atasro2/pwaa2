@@ -1,0 +1,49 @@
+# inspired by ansible
+- name: title_screen
+  palette:
+- name: title_screen
+  image:
+    bpp: 8
+  lz:
+    compressed: true
+    search: 8
+
+- name: unused_ascii_charset
+  image:
+    bpp: 4
+
+- name: evidence_profile_descriptions
+  palette:
+  src: evidence_profile_descriptions/
+
+- name: unused_testimony_characters
+  src: ui/trial/
+  image:
+    bpp: 4
+    mwidth: 2
+    mheight: 2
+
+# types:
+# - palette
+# - image (raw tiles)
+# - striped (striped image)
+# - tilemap (TODO: conversion)
+# - animation_tiles
+# - animation_sequence
+# - raw (include data as-is)
+# properties:
+# - lz (enable lz)
+#   - compressed
+#   - search
+# - source/src (specify source path/file)
+# - aliases (list of aliases)
+# others:
+# - include: path/to/file.yml (includes file)
+
+# semantics:
+# - file is always relative to location of yaml file
+# - if no "source" -> get name from value of type key, deduce extension from type key
+# - if "source" is present:
+#   - if "source" ends with /, prepend "source" and construct name as if no "source" is present
+#   - else use "source" as-is
+# add ".lz" if "compressed" is true

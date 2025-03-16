@@ -1,0 +1,81 @@
+
+### gGfx_BG000:
+- name: capcom_screen
+  striped:
+    bpp: 4
+
+### gGfx_BG001:
+- name: case1_intro_nightmare_1
+  striped:
+    bpp: 4
+
+### gGfx_BG002:
+- name: capcom_screen_bw
+  striped:
+    bpp: 4
+
+### gGfx_BG003:
+- name: defendant_lobby
+  striped:
+    bpp: 8
+  source: backgrounds/court/
+    
+
+### gGfx_BG004:
+- name: defense_side
+  striped:
+    bpp: 4
+  source: backgrounds/court/
+
+### gGfx_BG005:
+- name: prosecution_side
+  striped:
+    bpp: 4
+  source: backgrounds/court/
+
+### gGfx_BG006:
+- name: witness_backdrop
+  striped:
+    bpp: 4
+  source: backgrounds/court/
+
+### gGfx_BG007:
+- name: judge_seat
+  striped:
+    bpp: 8
+  source: backgrounds/court/
+
+### gGfx_BG008:
+- name: co_counsel
+  striped:
+    bpp: 8
+  source: backgrounds/court/
+
+### gGfx_BG009:
+- name: court_room
+  striped:
+    bpp: 8
+  source: backgrounds/court/
+
+### gGfx_BG010:
+- name: court_room_blue
+  striped:
+    bpp: 4
+
+### gGfx_BG011:
+- name: gavel_frame_1
+  striped:
+    bpp: 8
+  source: backgrounds/gavel/1
+
+### gGfx_BG012:
+- name: gavel_frame_2
+  striped:
+    bpp: 8
+  source: backgrounds/gavel/2
+
+### gGfx_BG013:
+- name: gavel_frame_3
+  striped:
+    bpp: 8
+  source: backgrounds/gavel/3

@@ -1,0 +1,857 @@
+# - include: profiles/main.yml
+# - include: evidence/main.yml
+
+### @ BEGIN EVIDENCE PROFILE PICTURES
+
+### gGfxEvidenceProfilePictures:
+- name: generic_autopsy_report
+  palette:
+  source: evidence/
+- name: generic_autopsy_report
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: generic_photo
+  palette:
+  source: evidence/
+- name: generic_photo
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: broken_glasses
+  palette:
+  source: evidence/
+- name: broken_glasses
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: dustins_baseball_glove
+  palette:
+  source: evidence/
+- name: dustins_baseball_glove
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: generic_letter
+  palette:
+  source: evidence/
+- name: generic_letter
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: phoenix_cellphone
+  palette:
+  source: evidence/
+- name: phoenix_cellphone
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: mayas_cellphone
+  palette:
+  source: evidence/
+- name: mayas_cellphone
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: maya_fey
+  palette:
+  source: profiles/
+- name: maya_fey
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: maggey_byrde
+  palette:
+  source: profiles/
+- name: maggey_byrde
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: richard_wellington
+  palette:
+  source: profiles/
+- name: richard_wellington
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: winston_payne
+  palette:
+  source: profiles/
+- name: winston_payne
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: dick_gumshoe
+  palette:
+  source: profiles/
+- name: dick_gumshoe
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: dustin_prince
+  palette:
+  source: profiles/
+- name: dustin_prince
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: phoenix_business_card
+  palette:
+  source: evidence/
+- name: phoenix_business_card
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: generic_newspaper_clipping
+  palette:
+  source: evidence/
+- name: generic_newspaper_clipping
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: meeting_room_screen
+  palette:
+  source: evidence/
+- name: meeting_room_screen
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: meeting_room_key
+  palette:
+  source: evidence/
+- name: meeting_room_key
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: dummy_00180848
+  palette:
+- name: dummy_00180848
+  image:
+    bpp: 4
+
+- name: greys_gun
+  palette:
+  source: evidence/
+- name: greys_gun
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: mayas_knife
+  palette:
+  source: evidence/
+- name: mayas_knife
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: mayas_robe
+  palette:
+  source: evidence/
+- name: mayas_robe
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: 001828C8
+  palette:
+  source: evidence/
+- name: 001828C8
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: kurain_sacred_urn
+  palette:
+  source: evidence/
+- name: kurain_sacred_urn
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: swatch_from_mayas_robe
+  palette:
+  source: evidence/
+- name: swatch_from_mayas_robe
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: pearls_ball
+  palette:
+  source: evidence/
+- name: pearls_ball
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: large_box
+  palette:
+  source: evidence/
+- name: large_box
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: dummy_00185168
+  palette:
+- name: dummy_00185168
+  image:
+    bpp: 4
+
+- name: magatama_discharged
+  palette:
+  source: evidence/
+- name: magatama_discharged
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: magatama_charged
+  palette:
+  source: evidence/
+- name: magatama_charged
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: newspaper_article
+  palette:
+  source: evidence/
+- name: newspaper_article
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: turner_grey
+  palette:
+  source: profiles/
+- name: turner_grey
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: pearl_fey
+  palette:
+  source: profiles/
+- name: pearl_fey
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: lotta_hart
+  palette:
+  source: profiles/
+- name: lotta_hart
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: morgan_fey
+  palette:
+  source: profiles/
+- name: morgan_fey
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: mimi_miney
+  palette:
+  source: profiles/
+- name: mimi_miney
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: ini_miney
+  palette:
+  source: profiles/
+- name: ini_miney
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: manfred_von_karma
+  palette:
+  source: profiles/
+- name: manfred_von_karma
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: mia_fey
+  palette:
+  source: profiles/
+- name: mia_fey
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: note_from_the_safe
+  palette:
+  source: evidence/
+- name: note_from_the_safe
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: dr_hotti
+  palette:
+  source: profiles/
+- name: dr_hotti
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: franziska_von_karma
+  palette:
+  source: profiles/
+- name: franziska_von_karma
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: ami_fey
+  palette:
+  source: profiles/
+- name: ami_fey
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: max_silk_hat
+  palette:
+  source: evidence/
+- name: max_silk_hat
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: max_poster
+  palette:
+  source: evidence/
+- name: max_poster
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: broken_bottle
+  palette:
+  source: evidence/
+- name: broken_bottle
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: trilo
+  palette:
+  source: evidence/
+- name: trilo
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: money
+  palette:
+  source: evidence/
+- name: money
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: engagement_ring
+  palette:
+  source: evidence/
+- name: engagement_ring
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: large_chest
+  palette:
+  source: evidence/
+- name: large_chest
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: pepper
+  palette:
+  source: evidence/
+- name: pepper
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: dummy_00191468
+  palette:
+- name: dummy_00191468
+  image:
+    bpp: 4
+
+- name: threatening_note_torn
+  palette:
+  source: evidence/
+- name: threatening_note_torn
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: threatening_note_full
+  palette:
+  source: evidence/
+- name: threatening_note_full
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: reginas_west
+  palette:
+  source: evidence/
+- name: reginas_west
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: leon
+  palette:
+  source: evidence/
+- name: leon
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: bloody_scarf
+  palette:
+  source: evidence/
+- name: bloody_scarf
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: playing_cards
+  palette:
+  source: evidence/
+- name: playing_cards
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: playing_card
+  palette:
+  source: evidence/
+- name: playing_card
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: regent
+  palette:
+  source: evidence/
+- name: regent
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: milk
+  palette:
+  source: evidence/
+- name: milk
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: moes_grapes
+  palette:
+  source: evidence/
+- name: moes_grapes
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: maximillion_galactica
+  palette:
+  source: profiles/
+- name: maximillion_galactica
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: regina_berry
+  palette:
+  source: profiles/
+- name: regina_berry
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: phoenix_badge
+  palette:
+  source: evidence/
+- name: phoenix_badge
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: ben
+  palette:
+  source: profiles/
+- name: ben
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: moe
+  palette:
+  source: profiles/
+- name: moe
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: acro
+  palette:
+  source: profiles/
+- name: acro
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: russell_berry
+  palette:
+  source: profiles/
+- name: russell_berry
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: bat
+  palette:
+  source: profiles/
+- name: bat
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: will_powers
+  palette:
+  source: profiles/
+- name: will_powers
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: wendy_oldbag
+  palette:
+  source: profiles/
+- name: wendy_oldbag
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: juan_corrida
+  palette:
+  source: profiles/
+- name: juan_corrida
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: matt_engarde
+  palette:
+  source: profiles/
+- name: matt_engarde
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: adrian_andrews
+  palette:
+  source: profiles/
+- name: adrian_andrews
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: celeste_inpax
+  palette:
+  source: profiles/
+- name: celeste_inpax
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: disguised_shelly_de_killer
+  palette:
+  source: profiles/
+- name: disguised_shelly_de_killer
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: shelly_de_killer
+  palette:
+  source: profiles/
+- name: shelly_de_killer
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: miles_edgeworth
+  palette:
+  source: profiles/
+- name: miles_edgeworth
+  image:
+    bpp: 4
+  source: profiles/
+
+- name: admission_ticket
+  palette:
+  source: evidence/
+- name: admission_ticket
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: transceiver
+  palette:
+  source: evidence/
+- name: transceiver
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: guitar_case
+  palette:
+  source: evidence/
+- name: guitar_case
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: tomato_juice
+  palette:
+  source: evidence/
+- name: tomato_juice
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: juans_autograph
+  palette:
+  source: evidence/
+- name: juans_autograph
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: gossip_column
+  palette:
+  source: evidence/
+- name: gossip_column
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: generic_envelope
+  palette:
+  source: evidence/
+- name: generic_envelope
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: shellys_calling_card
+  palette:
+  source: evidence/
+- name: shellys_calling_card
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: video_camera
+  palette:
+  source: evidence/
+- name: video_camera
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: imported_bear
+  palette:
+  source: evidence/
+- name: imported_bear
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: receipt
+  palette:
+  source: evidence/
+- name: receipt
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: bear_puzzle
+  palette:
+  source: evidence/
+- name: bear_puzzle
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: photo_of_celeste
+  palette:
+  source: evidence/
+- name: photo_of_celeste
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: 001A6188
+  palette:
+  source: evidence/
+- name: 001A6188
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: video_transmitter
+  palette:
+  source: evidence/
+- name: video_transmitter
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: shoe
+  palette:
+  source: evidence/
+- name: shoe
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: lottas_camera_case
+  palette:
+  source: evidence/
+- name: lottas_camera_case
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: frequency_detector
+  palette:
+  source: evidence/
+- name: frequency_detector
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: tracking_device
+  palette:
+  source: evidence/
+- name: tracking_device
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: gumshoes_coat
+  palette:
+  source: evidence/
+- name: gumshoes_coat
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: bellboy_uniform
+  palette:
+  source: evidence/
+- name: bellboy_uniform
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: gatewater_hotel_button
+  palette:
+  source: evidence/
+- name: gatewater_hotel_button
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: generic_video
+  palette:
+  source: evidence/
+- name: generic_video
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: shelly_pistol
+  palette:
+  source: evidence/
+- name: shelly_pistol
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: franziskas_whip
+  palette:
+  source: evidence/
+- name: franziskas_whip
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: bloody_button
+  palette:
+  source: evidence/
+- name: bloody_button
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: generic_affidavit
+  palette:
+  source: evidence/
+- name: generic_affidavit
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: bloody_knife
+  palette:
+  source: evidence/
+- name: bloody_knife
+  image:
+    bpp: 4
+  source: evidence/
+
+- name: bear_clock
+  palette:
+  source: evidence/
+- name: bear_clock
+  image:
+    bpp: 4
+  source: evidence/
+
+### @ END EVIDENCE PROFILE PICTURES

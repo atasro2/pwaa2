@@ -1,0 +1,1409 @@
+# - include: profiles/main.yml
+# - include: evidence/main.yml
+
+### @ BEGIN EVIDENCE PROFILE DESCRIPTIONS
+
+### gGfxProfilesMaggeyByrde_description:
+- name: maggey_byrde
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesWinstonPayne_description:
+- name: winston_payne
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesDickGumshoe_description:
+- name: dick_gumshoe
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesDustinPrince_description:
+- name: dustin_prince
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMayaFey0_description:
+- name: maya_fey_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxEvidencePhoenixBadge_description:
+- name: phoenix_badge
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePhoenixCellphone0_description:
+- name: phoenix_cellphone_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericAutopsyReport0_description:
+- name: generic_autopsy_report_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto0_description:
+- name: generic_photo_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBrokenGlasses_description:
+- name: broken_glasses
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto1_description:
+- name: generic_photo_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceDustinsBaseballGlove_description:
+- name: dustins_baseball_glove
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericLetter0_description:
+- name: generic_letter_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericLetter1_description:
+- name: generic_letter_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePhoenixCellphone1_description:
+- name: phoenix_cellphone_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePhoenixBusinessCard0_description:
+- name: phoenix_business_card_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePhoenixBusinessCard1_description:
+- name: phoenix_business_card_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMayasCellphone_description:
+- name: mayas_cellphone
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxProfilesRichardWellington_description:
+- name: richard_wellington
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesTurnerGrey0_description:
+- name: turner_grey_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesTurnerGrey1_description:
+- name: turner_grey_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesPearlFey0_description:
+- name: pearl_fey_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesPearlFey1_description:
+- name: pearl_fey_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMayaFey1_description:
+- name: maya_fey_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMayaFey2_description:
+- name: maya_fey_2
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMiaFey_description:
+- name: mia_fey
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesLottaHart0_description:
+- name: lotta_hart_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMorganFey0_description:
+- name: morgan_fey_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMorganFey1_description:
+- name: morgan_fey_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMimiMiney_description:
+- name: mimi_miney
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesIniMiney0_description:
+- name: ini_miney_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesIniMiney1_description:
+- name: ini_miney_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesFranziskaVonKarma0_description:
+- name: franziska_von_karma_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesAmiFey_description:
+- name: ami_fey
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesDrHotti_description:
+- name: dr_hotti
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxEvidenceGenericPhoto2_description:
+- name: generic_photo_2
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto3_description:
+- name: generic_photo_3
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericAutopsyReport1_description:
+- name: generic_autopsy_report_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericAutopsyReport2_description:
+- name: generic_autopsy_report_2
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceNewspaperArticle_description:
+- name: newspaper_article
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericNewspaperClipping0_description:
+- name: generic_newspaper_clipping_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericNewspaperClipping1_description:
+- name: generic_newspaper_clipping_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMagatamaDischarged_description:
+- name: magatama_discharged
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMagatamaCharged_description:
+- name: magatama_charged
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMeetingRoomScreen_description:
+- name: meeting_room_screen
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMeetingRoomKey_description:
+- name: meeting_room_key
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGreysGun_description:
+- name: greys_gun
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMayasKnife_description:
+- name: mayas_knife
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMayasRobe0_description:
+- name: mayas_robe_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMayasRobe1_description:
+- name: mayas_robe_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidence001828C80_description:
+- name: 001828C8_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidence001828C81_description:
+- name: 001828C8_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidence001828C82_description:
+- name: 001828C8_2
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceKurainSacredUrn0_description:
+- name: kurain_sacred_urn_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceKurainSacredUrn1_description:
+- name: kurain_sacred_urn_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceSwatchFromMayasRobe_description:
+- name: swatch_from_mayas_robe
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePearlsBall_description:
+- name: pearls_ball
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceLargeBox_description:
+- name: large_box
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxProfilesIniMiney2_description:
+- name: ini_miney_2
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxEvidenceNoteFromTheSafe0_description:
+- name: note_from_the_safe_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxProfilesMayaFey3_description:
+- name: maya_fey_3
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMaximillionGalactica_description:
+- name: maximillion_galactica
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesFranziskaVonKarma1_description:
+- name: franziska_von_karma_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesRussellBerry_description:
+- name: russell_berry
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesReginaBerry_description:
+- name: regina_berry
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesBen0_description:
+- name: ben_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesBen1_description:
+- name: ben_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMoe_description:
+- name: moe
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesAcro0_description:
+- name: acro_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesAcro1_description:
+- name: acro_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesBat_description:
+- name: bat
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxEvidenceGenericPhoto4_description:
+- name: generic_photo_4
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMaxSilkHat_description:
+- name: max_silk_hat
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto5_description:
+- name: generic_photo_5
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericLetter2_description:
+- name: generic_letter_2
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMaxPoster_description:
+- name: max_poster
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBrokenBottle_description:
+- name: broken_bottle
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceTrilo_description:
+- name: trilo
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMoney_description:
+- name: money
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericAutopsyReport3_description:
+- name: generic_autopsy_report_3
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceLargeChest_description:
+- name: large_chest
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePepper_description:
+- name: pepper
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceEngagementRing_description:
+- name: engagement_ring
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto6_description:
+- name: generic_photo_6
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto7_description:
+- name: generic_photo_7
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceThreateningNoteTorn_description:
+- name: threatening_note_torn
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceThreateningNoteFull0_description:
+- name: threatening_note_full_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceThreateningNoteFull1_description:
+- name: threatening_note_full_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceThreateningNoteFull2_description:
+- name: threatening_note_full_2
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceLeon_description:
+- name: leon
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceReginasWest_description:
+- name: reginas_west
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBloodyScarf_description:
+- name: bloody_scarf
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceRegent_description:
+- name: regent
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceThreateningNoteFull3_description:
+- name: threatening_note_full_3
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMilk_description:
+- name: milk
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePlayingCard_description:
+- name: playing_card
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePlayingCards_description:
+- name: playing_cards
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceMoesGrapes_description:
+- name: moes_grapes
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxProfilesWillPowers_description:
+- name: will_powers
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesWendyOldbag_description:
+- name: wendy_oldbag
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesLottaHart1_description:
+- name: lotta_hart_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesJuanCorrida_description:
+- name: juan_corrida
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMattEngarde0_description:
+- name: matt_engarde_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMattEngarde1_description:
+- name: matt_engarde_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesAdrianAndrews_description:
+- name: adrian_andrews
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesCelesteInpax0_description:
+- name: celeste_inpax_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesCelesteInpax1_description:
+- name: celeste_inpax_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesDisguisedShellyDeKiller_description:
+- name: disguised_shelly_de_killer
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesShellyDeKiller_description:
+- name: shelly_de_killer
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxProfilesMilesEdgeworth_description:
+- name: miles_edgeworth
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: profiles/
+
+
+### gGfxEvidenceAdmissionTicket_description:
+- name: admission_ticket
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceTransceiver0_description:
+- name: transceiver_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceTransceiver1_description:
+- name: transceiver_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceLottasCameraCase0_description:
+- name: lottas_camera_case_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceLottasCameraCase1_description:
+- name: lottas_camera_case_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto8_description:
+- name: generic_photo_8
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGuitarCase0_description:
+- name: guitar_case_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGuitarCase1_description:
+- name: guitar_case_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceTomatoJuice0_description:
+- name: tomato_juice_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBloodyButton_description:
+- name: bloody_button
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto9_description:
+- name: generic_photo_9
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericEnvelope0_description:
+- name: generic_envelope_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericEnvelope1_description:
+- name: generic_envelope_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceJuansAutograph_description:
+- name: juans_autograph
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGossipColumn_description:
+- name: gossip_column
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericAutopsyReport4_description:
+- name: generic_autopsy_report_4
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBloodyKnife_description:
+- name: bloody_knife
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto10_description:
+- name: generic_photo_10
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceShellysCallingCard_description:
+- name: shellys_calling_card
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceNoteFromTheSafe1_description:
+- name: note_from_the_safe_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceVideoCamera_description:
+- name: video_camera
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceVideoTransmitter_description:
+- name: video_transmitter
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceImportedBear_description:
+- name: imported_bear
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceReceipt_description:
+- name: receipt
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBearPuzzle0_description:
+- name: bear_puzzle_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBearPuzzle1_description:
+- name: bear_puzzle_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidencePhotoOfCeleste_description:
+- name: photo_of_celeste
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceNoteFromTheSafe2_description:
+- name: note_from_the_safe_2
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceNoteFromTheSafe3_description:
+- name: note_from_the_safe_3
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericAffidavit0_description:
+- name: generic_affidavit_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericAffidavit1_description:
+- name: generic_affidavit_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBearClock_description:
+- name: bear_clock
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceFrequencyDetector_description:
+- name: frequency_detector
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceShoe_description:
+- name: shoe
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBellboyUniform0_description:
+- name: bellboy_uniform_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceBellboyUniform1_description:
+- name: bellboy_uniform_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericVideo0_description:
+- name: generic_video_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericVideo1_description:
+- name: generic_video_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceShellyPistol0_description:
+- name: shelly_pistol_0
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceShellyPistol1_description:
+- name: shelly_pistol_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceFranziskasWhip_description:
+- name: franziskas_whip
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceTrackingDevice_description:
+- name: tracking_device
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGumshoesCoat_description:
+- name: gumshoes_coat
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGatewaterHotelButton_description:
+- name: gatewater_hotel_button
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceGenericPhoto11_description:
+- name: generic_photo_11
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+
+### gGfxEvidenceTomatoJuice1_description:
+- name: tomato_juice_1
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+  source: evidence/
+
+### @ END EVIDENCE PROFILE DESCRIPTIONS

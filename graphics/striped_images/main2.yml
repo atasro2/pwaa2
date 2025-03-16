@@ -1,0 +1,21 @@
+
+### gGfx_BG016:
+- name: speedlines
+  striped:
+    bpp: 4
+
+### gGfx_BG017:
+- name: detention_center
+  striped:
+    bpp: 8
+
+### gGfx_BG018:
+- name: wright_co_law_offices_day
+  striped:
+    bpp: 8
+  source: backgrounds/
+
+### gGfx_BG019:
+- name: police_station_lobby
+  striped:
+    bpp: 8

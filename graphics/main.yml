@@ -1,0 +1,560 @@
+- name: title_screen
+  palette:
+  aliases:
+  - superblah
+- name: title_screen
+  image:
+    bpp: 8
+  lz:
+    compressed: true
+- name: title_screen_demo
+  palette:
+- name: title_screen_demo
+  image:
+    bpp: 8
+  lz:
+    compressed: true
+- name: unused_ascii_charset
+  image:
+    bpp: 4
+- name: evidence_profile_descriptions
+  palette:
+  source: evidence_profile_descriptions/
+- name: save_game_tiles
+  image:
+    bpp: 4
+  source: ui/message_box/
+- name: nametags
+  image:
+    bpp: 4
+  source: ui/message_box/
+- name: detention_center_bottom_tiles
+  image:
+    bpp: 4
+- name: left_right_arrows
+  image:
+    bpp: 4
+  source: ui/
+- name: unk_13DC7C
+  image:
+    bpp: 4
+- name: unused_testimony_characters
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: action_buttons
+  image:
+    bpp: 4
+  source: ui/investigation/
+- name: controller_buttons
+  image:
+    bpp: 4
+  source: ui/court_record/
+- name: scroll_prompt
+  image:
+    bpp: 4
+  source: ui/investigation/
+- name: testimony_text_tiles
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: press_present_buttons
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: present_back_text
+  image:
+    bpp: 4
+  source: ui/court_record/
+- name: profiles_text
+  image:
+    bpp: 4
+  source: ui/court_record/
+- name: evidence_text
+  image:
+    bpp: 4
+  source: ui/court_record/
+- name: examine_cursor
+  image:
+    bpp: 4
+  source: ui/investigation/
+- name: checkmark
+  image:
+    bpp: 4
+  source: ui/investigation/
+- name: game_over_doors
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: not_guilty1
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: guilty1
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: guilty_not_guilty2
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: game_over_text
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: new_game_continue
+  image:
+    bpp: 4
+  source: ui/
+- name: confetti
+  image:
+    bpp: 4
+  source: ui/trial/
+- name: witness_bench_1
+  image:
+    bpp: 4
+- name: witness_bench_2
+  image:
+    bpp: 4
+- name: counsel_bench_1
+  image:
+    bpp: 4
+- name: counsel_bench_2
+  image:
+    bpp: 4
+- name: counsel_bench_3
+  image:
+    bpp: 4
+- name: counsel_bench_4
+  image:
+    bpp: 4
+- name: stop_button
+  image:
+    bpp: 4
+  source: ui/investigation/
+- name: psyche_lock
+  image:
+    bpp: 4
+  source: ui/investigation/
+- name: healthbar_frame_1
+  image:
+    bpp: 4
+  source: ui/
+- name: healthbar_frame_2
+  image:
+    bpp: 4
+  source: ui/
+- name: healthbar_frame_3
+  image:
+    bpp: 4
+  source: ui/
+- name: healthbar_progress
+  image:
+    bpp: 4
+  source: ui/
+
+- name: psyche_lock_chain_tileset
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_01
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_02
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_03
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_04
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_05
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_06
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_07
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_08
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_09
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_10
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_11
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_12
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_13
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_14
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_15
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_16
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_17
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_18
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_19
+  tilemap:
+  lz:
+    compressed: true
+- name: psyche_lock_chain_animation_20
+  tilemap:
+  lz:
+    compressed: true
+
+- name: unk_14DA60
+  palette:
+
+- name: unk_14DA80
+  palette:
+
+- name: unk_194100
+  palette:
+
+##########################################################
+# ZZZZZZZ
+##########################################################
+
+### gPalActionButtons:
+- name: action_buttons_0
+  palette:
+  source: ui/investigation/
+- name: action_buttons_1
+  palette:
+  source: ui/investigation/
+
+### gPalCourtRecordActionText:
+- name: controls_blurb
+  palette:
+  source: ui/court_record/
+
+### gPalInvestigationScrollPrompt:
+- name: scroll_prompt
+  palette:
+  source: ui/investigation/
+
+### gPalTestimonyTextTiles:
+- name: testimony_text_tiles
+  palette:
+  source: ui/trial/
+
+### gPalPressPresentButtons:
+- name: press_present_buttons
+  palette:
+  source: ui/trial/
+
+### gPalExamineCursors:
+- name: examine_cursor_00
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_01
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_02
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_03
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_04
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_05
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_06
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_07
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_08
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_09
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_10
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_11
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_12
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_13
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_14
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_15
+  palette:
+  source: ui/investigation/
+- name: examine_cursor_16
+  palette:
+  source: ui/investigation/
+
+### gPalCheckmark:
+- name: checkmark
+  palette:
+  source: ui/investigation/
+
+### gPalGameOverDoors:
+- name: game_over_doors
+  palette:
+  source: ui/trial/
+
+### gPalGuilty:
+- name: guilty
+  palette:
+  source: ui/trial/
+
+### gPalNotGuilty:
+- name: not_guilty
+  palette:
+  source: ui/trial/
+
+### gPalGameOverText:
+- name: game_over_text
+  palette:
+  source: ui/trial/
+
+### gPalNewGameContinue:
+- name: new_game_continue_0
+  palette:
+  source: ui/
+- name: new_game_continue_1
+  palette:
+  source: ui/
+- name: new_game_continue_2
+  palette:
+  source: ui/
+- name: new_game_continue_3
+  palette:
+  source: ui/
+- name: new_game_continue_4
+  palette:
+  source: ui/
+- name: new_game_continue_5
+  palette:
+  source: ui/
+
+### gPalConfetti0:
+- name: confetti_0
+  palette:
+  source: ui/trial/
+
+### gPalConfetti1:
+- name: confetti_1
+  palette:
+  source: ui/trial/
+
+### gPalConfetti2:
+- name: confetti_2
+  palette:
+  source: ui/trial/
+
+### gPalConfetti3:
+- name: confetti_3
+  palette:
+  source: ui/trial/
+
+- name: unk_14E060
+  palette:
+
+- name: witness_bench
+  palette:
+
+- name: counsel_bench
+  palette:
+
+- name: case1_opening_purple_cloud_palettes
+  palette:
+
+### gPalInvestigationPsycheLock:
+- name: psyche_lock
+  palette:
+  source: ui/investigation/
+
+### gPalHPBarFrame:
+- name: healthbar_frame
+  palette:
+  source: ui/
+
+### gPalHPBarProgress:
+- name: healthbar_progress_1
+  palette:
+  source: ui/
+- name: healthbar_progress_2
+  palette:
+  source: ui/
+- name: healthbar_progress_3
+  palette:
+  source: ui/
+- name: healthbar_progress_4
+  palette:
+  source: ui/
+- name: healthbar_progress_5
+  palette:
+  source: ui/
+- name: healthbar_progress_6
+  palette:
+  source: ui/
+- name: healthbar_progress_7
+  palette:
+  source: ui/
+- name: healthbar_progress_8
+  palette:
+  source: ui/
+
+- name: episode_select_options
+  image:
+    bpp: 4
+  lz:
+    compressed: true
+
+- name: from_save_or_beginning_options
+  image:
+    bpp: 4
+
+- name: save_yes_no
+  image:
+    bpp: 4
+
+- include: evidence_profile_descriptions/main.yml
+- include: evidence_profile_pictures/main.yml
+
+### @ BEGIN CHARSETS
+
+- name: charset
+  palette:
+
+- name: charset
+  image:
+    bpp: 4
+
+### @ END CHARSETS
+
+### @ BEGIN TALK LOCATION CHOICES
+
+- name: choice_selected
+  palette:
+
+- name: choice_greyed_out
+  palette:
+
+- include: location_choices/main.yml
+
+- include: talk_choices/main.yml
+
+- include: map_markers/main.yml
+
+- include: striped_images/main1.yml
+
+- name: bustup_phoenix
+  palette:
+
+- name: bustup_phoenix
+  tilemap:
+
+- name: bustup_phoenix
+  image:
+    bpp: 4
+
+- name: bustup_edgeworth
+  palette:
+
+- name: bustup_edgeworth
+  tilemap:
+
+- name: bustup_edgeworth
+  image:
+    bpp: 4
+
+- include: striped_images/main2.yml
+
+- name: bustup_franziska
+  palette:
+
+- name: bustup_franziska
+  tilemap:
+
+- name: bustup_franziska
+  image:
+    bpp: 4
+
+- include: striped_images/main3.yml
+
+### @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+- name: nickel_samurai_case3_op_zoomin
+  image:
+    bpp: 8
+  lz:
+    compressed: true
+
+- name: nickel_samurai_case3_op_zoomin
+  tilemap:
+  lz:
+    compressed: true
+
+- name: nickel_samurai_case3_op_zoomin
+  palette:
+  lz:
+    compressed: true
+
+- name: speedlines_first_and_last_columns
+  image:
+    bpp: 4
+
+### gPalCourtScroll:
+- name: court_scroll
+  palette:
+  source: court_scrolls/
+
+### gGfxCourtScroll:
+- name: court_scroll
+  image:
+    bpp: 4
+  source: court_scrolls/
+
+- include: animations/main.yml

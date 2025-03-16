@@ -1,0 +1,461 @@
+- include: characters/main.yml
+
+### gGfxPixAnimationTileset01:
+- name: tileset01
+  animation_tiles:
+
+### gGfxSeqAnimation01:
+- name: animation01
+  animation_sequence:
+
+### gGfxSeqAnimation02:
+- name: animation02
+  animation_sequence:
+
+### gGfxSeqAnimation03:
+- name: animation03
+  animation_sequence:
+
+### gGfxSeqAnimation04:
+- name: animation04
+  animation_sequence:
+
+### gGfxSeqAnimation05:
+- name: animation05
+  animation_sequence:
+
+### gGfxSeqAnimation06:
+- name: animation06
+  animation_sequence:
+
+### gGfxSeqAnimation07:
+- name: animation07
+  animation_sequence:
+
+### gGfxSeqAnimation08:
+- name: animation08
+  animation_sequence:
+
+### gGfxSeqAnimation09:
+- name: animation09
+  animation_sequence:
+
+### gGfxSeqAnimation10:
+- name: animation10
+  animation_sequence:
+
+### gGfxSeqAnimation11:
+- name: animation11
+  animation_sequence:
+
+### gGfxSeqAnimation12:
+- name: animation12
+  animation_sequence:
+
+### gGfxSeqAnimation13:
+- name: animation13
+  animation_sequence:
+
+### gGfxSeqAnimation14:
+- name: animation14
+  animation_sequence:
+
+### gGfxSeqAnimation15:
+- name: animation15
+  animation_sequence:
+
+### gGfxSeqAnimation16:
+- name: animation16
+  animation_sequence:
+
+### gGfxSeqAnimation17:
+- name: animation17
+  animation_sequence:
+
+### gGfxSeqAnimation18:
+- name: animation18
+  animation_sequence:
+
+### gGfxSeqAnimation19:
+- name: animation19
+  animation_sequence:
+
+### gGfxSeqAnimation20:
+- name: animation20
+  animation_sequence:
+
+### gGfxSeqAnimation21:
+- name: animation21
+  animation_sequence:
+
+### gGfxSeqAnimation22:
+- name: animation22
+  animation_sequence:
+
+### gGfxSeqAnimation23:
+- name: animation23
+  animation_sequence:
+
+### gGfxSeqAnimation24:
+- name: animation24
+  animation_sequence:
+
+### gGfxSeqAnimation25:
+- name: animation25
+  animation_sequence:
+
+### gGfxSeqAnimation26:
+- name: animation26
+  animation_sequence:
+
+### gGfxSeqAnimation27:
+- name: animation27
+  animation_sequence:
+
+### gGfxSeqAnimation28:
+- name: animation28
+  animation_sequence:
+
+### gGfxSeqAnimation29:
+- name: animation29
+  animation_sequence:
+
+### gGfxSeqAnimation30:
+- name: animation30
+  animation_sequence:
+
+### gGfxSeqAnimation31:
+- name: animation31
+  animation_sequence:
+
+### gGfxSeqAnimation32:
+- name: animation32
+  animation_sequence:
+
+### gGfxSeqAnimation33:
+- name: animation33
+  animation_sequence:
+
+### gGfxSeqAnimation34:
+- name: animation34
+  animation_sequence:
+
+### gGfxPixAnimationTileset02:
+- name: tileset02
+  animation_tiles:
+
+### gGfxSeqAnimation35:
+- name: animation35
+  animation_sequence:
+
+### gGfxSeqAnimation36:
+- name: animation36
+  animation_sequence:
+
+### gGfxSeqAnimation37:
+- name: animation37
+  animation_sequence:
+
+### gGfxSeqAnimation38:
+- name: animation38
+  animation_sequence:
+
+### gGfxSeqAnimation39:
+- name: animation39
+  animation_sequence:
+
+### gGfxSeqAnimation40:
+- name: animation40
+  animation_sequence:
+
+### gGfxSeqAnimation41:
+- name: animation41
+  animation_sequence:
+
+### gGfxSeqAnimation42:
+- name: animation42
+  animation_sequence:
+
+### gGfxSeqAnimation43:
+- name: animation43
+  animation_sequence:
+
+### gGfxSeqAnimation44:
+- name: animation44
+  animation_sequence:
+
+### gGfxSeqAnimation45:
+- name: animation45
+  animation_sequence:
+
+### gGfxSeqAnimation46:
+- name: animation46
+  animation_sequence:
+
+### gGfxSeqAnimation47:
+- name: animation47
+  animation_sequence:
+
+### gGfxSeqAnimation48:
+- name: animation48
+  animation_sequence:
+
+### gGfxSeqAnimation49:
+- name: animation49
+  animation_sequence:
+
+### gGfxSeqAnimation50:
+- name: animation50
+  animation_sequence:
+
+### gGfxSeqAnimation51:
+- name: animation51
+  animation_sequence:
+
+### gGfxSeqAnimation52:
+- name: animation52
+  animation_sequence:
+
+### gGfxSeqAnimation53:
+- name: animation53
+  animation_sequence:
+
+### gGfxSeqAnimation54:
+- name: animation54
+  animation_sequence:
+
+### gGfxSeqAnimation55:
+- name: animation55
+  animation_sequence:
+
+### gGfxSeqAnimation56:
+- name: animation56
+  animation_sequence:
+
+### gGfxSeqAnimation57:
+- name: animation57
+  animation_sequence:
+
+### gGfxSeqAnimation58:
+- name: animation58
+  animation_sequence:
+
+### gGfxSeqAnimation59:
+- name: animation59
+  animation_sequence:
+
+### gGfxSeqAnimation60:
+- name: animation60
+  animation_sequence:
+
+### gGfxSeqAnimation61:
+- name: animation61
+  animation_sequence:
+
+### gGfxSeqAnimation62:
+- name: animation62
+  animation_sequence:
+
+### gGfxSeqAnimation63:
+- name: animation63
+  animation_sequence:
+
+### gGfxSeqAnimation64:
+- name: animation64
+  animation_sequence:
+
+### gGfxSeqAnimation65:
+- name: animation65
+  animation_sequence:
+
+### gGfxSeqAnimation66:
+- name: animation66
+  animation_sequence:
+
+### gGfxSeqAnimation67:
+- name: animation67
+  animation_sequence:
+
+### gGfxSeqAnimation68:
+- name: animation68
+  animation_sequence:
+
+### gGfxSeqAnimation69:
+- name: animation69
+  animation_sequence:
+
+### gGfxSeqAnimation70:
+- name: animation70
+  animation_sequence:
+
+### gGfxSeqAnimation71:
+- name: animation71
+  animation_sequence:
+
+### gGfxSeqAnimation72:
+- name: animation72
+  animation_sequence:
+
+### gGfxSeqAnimation73:
+- name: animation73
+  animation_sequence:
+
+### gGfxSeqAnimation74:
+- name: animation74
+  animation_sequence:
+
+### gGfxSeqAnimation75:
+- name: animation75
+  animation_sequence:
+
+### gGfxSeqAnimation76:
+- name: animation76
+  animation_sequence:
+
+### gGfxSeqAnimation77:
+- name: animation77
+  animation_sequence:
+
+### gGfxSeqAnimation78:
+- name: animation78
+  animation_sequence:
+
+### gGfxSeqAnimation79:
+- name: animation79
+  animation_sequence:
+
+### gGfxSeqAnimation80:
+- name: animation80
+  animation_sequence:
+
+### gGfxSeqAnimation81:
+- name: animation81
+  animation_sequence:
+
+### gGfxSeqAnimation82:
+- name: animation82
+  animation_sequence:
+
+### gGfxSeqAnimation83:
+- name: animation83
+  animation_sequence:
+
+### gGfxSeqAnimation84:
+- name: animation84
+  animation_sequence:
+
+### gGfxSeqAnimation85:
+- name: animation85
+  animation_sequence:
+
+### gGfxSeqAnimation86:
+- name: animation86
+  animation_sequence:
+
+### gGfxSeqAnimation87:
+- name: animation87
+  animation_sequence:
+
+### gGfxSeqAnimation88:
+- name: animation88
+  animation_sequence:
+
+### gGfxSeqAnimation89:
+- name: animation89
+  animation_sequence:
+
+### gGfxSeqAnimation90:
+- name: animation90
+  animation_sequence:
+
+### gGfxSeqAnimation91:
+- name: animation91
+  animation_sequence:
+
+### gGfxSeqAnimation92:
+- name: animation92
+  animation_sequence:
+
+### gGfxSeqAnimation93:
+- name: animation93
+  animation_sequence:
+
+### gGfxSeqAnimation94:
+- name: animation94
+  animation_sequence:
+
+### gGfxSeqAnimation95:
+- name: animation95
+  animation_sequence:
+
+### gGfxSeqAnimation96:
+- name: animation96
+  animation_sequence:
+
+### gGfxSeqAnimation97:
+- name: animation97
+  animation_sequence:
+
+### gGfxSeqAnimation98:
+- name: animation98
+  animation_sequence:
+
+### gGfxSeqAnimation99:
+- name: animation99
+  animation_sequence:
+
+### gGfxSeqAnimation100:
+- name: animation100
+  animation_sequence:
+
+### gGfxSeqAnimation101:
+- name: animation101
+  animation_sequence:
+
+### gGfxSeqAnimation102:
+- name: animation102
+  animation_sequence:
+
+### gGfxSeqAnimation103:
+- name: animation103
+  animation_sequence:
+
+### gGfxSeqAnimation104:
+- name: animation104
+  animation_sequence:
+
+### gGfxSeqAnimation105:
+- name: animation105
+  animation_sequence:
+
+### gGfxSeqAnimation106:
+- name: animation106
+  animation_sequence:
+
+### gGfxSeqAnimation107:
+- name: animation107
+  animation_sequence:
+
+### gGfxSeqAnimation108:
+- name: animation108
+  animation_sequence:
+
+### gGfxSeqAnimation109:
+- name: animation109
+  animation_sequence:
+
+### gGfxSeqAnimation110:
+- name: animation110
+  animation_sequence:
+
+### gGfxSeqAnimation111:
+- name: animation111
+  animation_sequence:
+
+### gGfxSeqAnimation112:
+- name: animation112
+  animation_sequence:
+
+### gGfxPixAnimationTileset03:
+- name: tileset03
+  animation_tiles:

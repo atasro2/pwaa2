@@ -1,0 +1,426 @@
+### gGfxTalkChoices:
+- name: 001EB3E8
+  image:
+    bpp: 4
+- name: 001EBBE8
+  image:
+    bpp: 4
+- name: 001EC3E8
+  image:
+    bpp: 4
+- name: 001ECBE8
+  image:
+    bpp: 4
+- name: 001ED3E8
+  image:
+    bpp: 4
+- name: 001EDBE8
+  image:
+    bpp: 4
+- name: 001EE3E8
+  image:
+    bpp: 4
+- name: 001EEBE8
+  image:
+    bpp: 4
+- name: 001EF3E8
+  image:
+    bpp: 4
+- name: 001EFBE8
+  image:
+    bpp: 4
+- name: 001F03E8
+  image:
+    bpp: 4
+- name: 001F0BE8
+  image:
+    bpp: 4
+- name: 001F13E8
+  image:
+    bpp: 4
+- name: 001F1BE8
+  image:
+    bpp: 4
+- name: 001F23E8
+  image:
+    bpp: 4
+- name: 001F2BE8
+  image:
+    bpp: 4
+- name: 001F33E8
+  image:
+    bpp: 4
+- name: 001F3BE8
+  image:
+    bpp: 4
+- name: 001F43E8
+  image:
+    bpp: 4
+- name: 001F4BE8
+  image:
+    bpp: 4
+- name: 001F53E8
+  image:
+    bpp: 4
+- name: 001F5BE8
+  image:
+    bpp: 4
+- name: 001F63E8
+  image:
+    bpp: 4
+- name: 001F6BE8
+  image:
+    bpp: 4
+- name: 001F73E8
+  image:
+    bpp: 4
+- name: 001F7BE8
+  image:
+    bpp: 4
+- name: 001F83E8
+  image:
+    bpp: 4
+- name: 001F8BE8
+  image:
+    bpp: 4
+- name: 001F93E8
+  image:
+    bpp: 4
+- name: 001F9BE8
+  image:
+    bpp: 4
+- name: 001FA3E8
+  image:
+    bpp: 4
+- name: 001FABE8
+  image:
+    bpp: 4
+- name: 001FB3E8
+  image:
+    bpp: 4
+- name: 001FBBE8
+  image:
+    bpp: 4
+- name: 001FC3E8
+  image:
+    bpp: 4
+- name: 001FCBE8
+  image:
+    bpp: 4
+- name: 001FD3E8
+  image:
+    bpp: 4
+- name: 001FDBE8
+  image:
+    bpp: 4
+- name: 001FE3E8
+  image:
+    bpp: 4
+- name: 001FEBE8
+  image:
+    bpp: 4
+- name: 001FF3E8
+  image:
+    bpp: 4
+- name: 001FFBE8
+  image:
+    bpp: 4
+- name: 002003E8
+  image:
+    bpp: 4
+- name: 00200BE8
+  image:
+    bpp: 4
+- name: 002013E8
+  image:
+    bpp: 4
+- name: 00201BE8
+  image:
+    bpp: 4
+- name: 002023E8
+  image:
+    bpp: 4
+- name: 00202BE8
+  image:
+    bpp: 4
+- name: 002033E8
+  image:
+    bpp: 4
+- name: 00203BE8
+  image:
+    bpp: 4
+- name: 002043E8
+  image:
+    bpp: 4
+- name: 00204BE8
+  image:
+    bpp: 4
+- name: 002053E8
+  image:
+    bpp: 4
+- name: 00205BE8
+  image:
+    bpp: 4
+- name: 002063E8
+  image:
+    bpp: 4
+- name: 00206BE8
+  image:
+    bpp: 4
+- name: 002073E8
+  image:
+    bpp: 4
+- name: 00207BE8
+  image:
+    bpp: 4
+- name: 002083E8
+  image:
+    bpp: 4
+- name: 00208BE8
+  image:
+    bpp: 4
+- name: 002093E8
+  image:
+    bpp: 4
+- name: 00209BE8
+  image:
+    bpp: 4
+- name: 0020A3E8
+  image:
+    bpp: 4
+- name: 0020ABE8
+  image:
+    bpp: 4
+- name: 0020B3E8
+  image:
+    bpp: 4
+- name: 0020BBE8
+  image:
+    bpp: 4
+- name: 0020C3E8
+  image:
+    bpp: 4
+- name: 0020CBE8
+  image:
+    bpp: 4
+- name: 0020D3E8
+  image:
+    bpp: 4
+- name: 0020DBE8
+  image:
+    bpp: 4
+- name: 0020E3E8
+  image:
+    bpp: 4
+- name: 0020EBE8
+  image:
+    bpp: 4
+- name: 0020F3E8
+  image:
+    bpp: 4
+- name: 0020FBE8
+  image:
+    bpp: 4
+- name: 002103E8
+  image:
+    bpp: 4
+- name: 00210BE8
+  image:
+    bpp: 4
+- name: 002113E8
+  image:
+    bpp: 4
+- name: 00211BE8
+  image:
+    bpp: 4
+- name: 002123E8
+  image:
+    bpp: 4
+- name: 00212BE8
+  image:
+    bpp: 4
+- name: 002133E8
+  image:
+    bpp: 4
+- name: 00213BE8
+  image:
+    bpp: 4
+- name: 002143E8
+  image:
+    bpp: 4
+- name: 00214BE8
+  image:
+    bpp: 4
+- name: 002153E8
+  image:
+    bpp: 4
+- name: 00215BE8
+  image:
+    bpp: 4
+- name: 002163E8
+  image:
+    bpp: 4
+- name: 00216BE8
+  image:
+    bpp: 4
+- name: 002173E8
+  image:
+    bpp: 4
+- name: 00217BE8
+  image:
+    bpp: 4
+- name: 002183E8
+  image:
+    bpp: 4
+- name: 00218BE8
+  image:
+    bpp: 4
+- name: 002193E8
+  image:
+    bpp: 4
+- name: 00219BE8
+  image:
+    bpp: 4
+- name: 0021A3E8
+  image:
+    bpp: 4
+- name: 0021ABE8
+  image:
+    bpp: 4
+- name: 0021B3E8
+  image:
+    bpp: 4
+- name: 0021BBE8
+  image:
+    bpp: 4
+- name: 0021C3E8
+  image:
+    bpp: 4
+- name: 0021CBE8
+  image:
+    bpp: 4
+- name: 0021D3E8
+  image:
+    bpp: 4
+- name: 0021DBE8
+  image:
+    bpp: 4
+- name: 0021E3E8
+  image:
+    bpp: 4
+- name: 0021EBE8
+  image:
+    bpp: 4
+- name: 0021F3E8
+  image:
+    bpp: 4
+- name: 0021FBE8
+  image:
+    bpp: 4
+- name: 002203E8
+  image:
+    bpp: 4
+- name: 00220BE8
+  image:
+    bpp: 4
+- name: 002213E8
+  image:
+    bpp: 4
+- name: 00221BE8
+  image:
+    bpp: 4
+- name: 002223E8
+  image:
+    bpp: 4
+- name: 00222BE8
+  image:
+    bpp: 4
+- name: 002233E8
+  image:
+    bpp: 4
+- name: 00223BE8
+  image:
+    bpp: 4
+- name: 002243E8
+  image:
+    bpp: 4
+- name: 00224BE8
+  image:
+    bpp: 4
+- name: 002253E8
+  image:
+    bpp: 4
+- name: 00225BE8
+  image:
+    bpp: 4
+- name: 002263E8
+  image:
+    bpp: 4
+- name: 00226BE8
+  image:
+    bpp: 4
+- name: 002273E8
+  image:
+    bpp: 4
+- name: 00227BE8
+  image:
+    bpp: 4
+- name: 002283E8
+  image:
+    bpp: 4
+- name: 00228BE8
+  image:
+    bpp: 4
+- name: 002293E8
+  image:
+    bpp: 4
+- name: 00229BE8
+  image:
+    bpp: 4
+- name: 0022A3E8
+  image:
+    bpp: 4
+- name: 0022ABE8
+  image:
+    bpp: 4
+- name: 0022B3E8
+  image:
+    bpp: 4
+- name: 0022BBE8
+  image:
+    bpp: 4
+- name: 0022C3E8
+  image:
+    bpp: 4
+- name: 0022CBE8
+  image:
+    bpp: 4
+- name: 0022D3E8
+  image:
+    bpp: 4
+- name: 0022DBE8
+  image:
+    bpp: 4
+- name: 0022E3E8
+  image:
+    bpp: 4
+- name: 0022EBE8
+  image:
+    bpp: 4
+- name: 0022F3E8
+  image:
+    bpp: 4
+- name: 0022FBE8
+  image:
+    bpp: 4
+- name: 002303E8
+  image:
+    bpp: 4
+- name: 00230BE8
+  image:
+    bpp: 4
+- name: 002313E8
+  image:
+    bpp: 4
+
+### @ END TALK LOCATION CHOICES
