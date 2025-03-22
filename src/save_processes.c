@@ -98,13 +98,13 @@ void ClearSaveProcess(struct Main *main)
     switch (main->process[GAME_PROCESS_STATE])
     {
     case 0:
-        DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
+        DmaCopy16(3, GFX_IMG_unused_ascii_charset, VRAM + 0x3800, 0x800);
         DmaCopy16(3, GetBGPalettePtr(0), PLTT, BG_PLTT_SIZE);
-        DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
-        DmaCopy16(3, gGfxSaveYesNo, OBJ_VRAM0 + 0x3C00, 0x800);
-        DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
-        DmaCopy16(3, gTextPal, OBJ_PLTT, 0x20);
-        DmaCopy16(3, gPalEvidenceProfileDesc, PLTT, 0x20);
+        DmaCopy16(3, GFX_IMG_save_game_tiles, VRAM, 0x1000);
+        DmaCopy16(3, GFX_IMG_save_yes_no, OBJ_VRAM0 + 0x3C00, 0x800);
+        DmaCopy16(3, GFX_PALETTE_choice_selected, OBJ_PLTT + 0x120, 0x40);
+        DmaCopy16(3, GFX_PALETTE_charset, OBJ_PLTT, 0x20);
+        DmaCopy16(3, GFX_PALETTE_evidence_profile_descriptions, PLTT, 0x20);
         gIORegisters.lcd_bg0cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(28) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
         gIORegisters.lcd_bg1cnt = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
         gIORegisters.lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
@@ -257,10 +257,10 @@ void SaveGameInit2(struct Main *main)
     DmaCopy16(3, gExaminationData, gSaveDataBuffer.examinationData, sizeof(gExaminationData));
     DmaCopy16(3, gTalkData, gSaveDataBuffer.talkData, sizeof(gTalkData));
     DmaCopy16(3, gLoadedPsycheLockedTalkSections, gSaveDataBuffer.loadedPsycheLockedTalkSections, sizeof(gLoadedPsycheLockedTalkSections));
-    DmaCopy16(3, gGfxNewGameContinue, OBJ_VRAM0 + 0x3800, 0x400);
-    DmaCopy16(3, gPalNewGameContinue, OBJ_PLTT + 0x100, 0xC0);
-    DmaCopy16(3, gGfxSaveYesNo, OBJ_VRAM0 + 0x3C00, 0x800);
-    DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+    DmaCopy16(3, GFX_IMG_new_game_continue, OBJ_VRAM0 + 0x3800, 0x400);
+    DmaCopy16(3, GFX_PALETTE_new_game_continue_0, OBJ_PLTT + 0x100, 0xC0);
+    DmaCopy16(3, GFX_IMG_save_yes_no, OBJ_VRAM0 + 0x3C00, 0x800);
+    DmaCopy16(3, GFX_PALETTE_choice_selected, OBJ_PLTT + 0x120, 0x40);
     DecompressBackgroundIntoBuffer(0xA);
     CopyBGDataToVram(0xA);
     main->animationFlags &= ~3;
@@ -461,7 +461,7 @@ void SaveGameExitSaveScreen(struct Main *main)
     RestoreAnimationsFromBuffer(gSaveDataBuffer.backupAnimations);
     gMain.animationFlags |= 3;
     DmaCopy16(3, gSaveDataBuffer.oam, gOamObjects, sizeof(gOamObjects));
-    DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT+0x100, 0x20);
+    DmaCopy16(3, &GFX_PALETTE_examine_cursor_00[0], OBJ_PLTT+0x100, 0x20);
     main->soundFlags = gSaveDataBuffer.main.soundFlags;
     RESTORE_PROCESS_PTR(main);
     if(main->process[GAME_PROCESS] == INVESTIGATION_PROCESS && main->process[GAME_PROCESS_VAR1] == 3)

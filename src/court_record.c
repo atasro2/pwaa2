@@ -26,782 +26,782 @@ struct EvidenceProfileData
 
 const struct EvidenceProfileData gEvidenceProfileData[] = {
     {
-        .descriptionTiles = gGfxProfilesMaggeyByrde_description,
+        .descriptionTiles = GFX_IMG_desc_maggey_byrde,
         .evidenceImageId = 0x8,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesWinstonPayne_description,
+        .descriptionTiles = GFX_IMG_desc_winston_payne,
         .evidenceImageId = 0xA,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesDickGumshoe_description,
+        .descriptionTiles = GFX_IMG_desc_dick_gumshoe,
         .evidenceImageId = 0xB,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesDustinPrince_description,
+        .descriptionTiles = GFX_IMG_desc_dustin_prince,
         .evidenceImageId = 0xC,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMayaFey0_description,
+        .descriptionTiles = GFX_IMG_desc_maya_fey_0,
         .evidenceImageId = 0x7,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePhoenixBadge_description,
+        .descriptionTiles = GFX_IMG_desc_phoenix_badge,
         .evidenceImageId = 0x3F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePhoenixCellphone0_description,
+        .descriptionTiles = GFX_IMG_desc_phoenix_cellphone_0,
         .evidenceImageId = 0x5,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericAutopsyReport0_description,
+        .descriptionTiles = GFX_IMG_desc_generic_autopsy_report_0,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto0_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_0,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x1,
     },
     {
-        .descriptionTiles = gGfxEvidenceBrokenGlasses_description,
+        .descriptionTiles = GFX_IMG_desc_broken_glasses,
         .evidenceImageId = 0x2,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto1_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_1,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x2,
     },
     {
-        .descriptionTiles = gGfxEvidenceDustinsBaseballGlove_description,
+        .descriptionTiles = GFX_IMG_desc_dustins_baseball_glove,
         .evidenceImageId = 0x3,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericLetter0_description,
+        .descriptionTiles = GFX_IMG_desc_generic_letter_0,
         .evidenceImageId = 0x4,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericLetter1_description,
+        .descriptionTiles = GFX_IMG_desc_generic_letter_1,
         .evidenceImageId = 0x4,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePhoenixCellphone1_description,
+        .descriptionTiles = GFX_IMG_desc_phoenix_cellphone_1,
         .evidenceImageId = 0x5,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePhoenixBusinessCard0_description,
+        .descriptionTiles = GFX_IMG_desc_phoenix_business_card_0,
         .evidenceImageId = 0xD,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePhoenixBusinessCard1_description,
+        .descriptionTiles = GFX_IMG_desc_phoenix_business_card_1,
         .evidenceImageId = 0xD,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMayasCellphone_description,
+        .descriptionTiles = GFX_IMG_desc_mayas_cellphone,
         .evidenceImageId = 0x6,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesRichardWellington_description,
+        .descriptionTiles = GFX_IMG_desc_richard_wellington,
         .evidenceImageId = 0x9,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesTurnerGrey0_description,
+        .descriptionTiles = GFX_IMG_desc_turner_grey_0,
         .evidenceImageId = 0x1E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesTurnerGrey1_description,
+        .descriptionTiles = GFX_IMG_desc_turner_grey_1,
         .evidenceImageId = 0x1E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesPearlFey0_description,
+        .descriptionTiles = GFX_IMG_desc_pearl_fey_0,
         .evidenceImageId = 0x1F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesPearlFey1_description,
+        .descriptionTiles = GFX_IMG_desc_pearl_fey_1,
         .evidenceImageId = 0x1F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMayaFey1_description,
+        .descriptionTiles = GFX_IMG_desc_maya_fey_1,
         .evidenceImageId = 0x7,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMayaFey2_description,
+        .descriptionTiles = GFX_IMG_desc_maya_fey_2,
         .evidenceImageId = 0x7,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMiaFey_description,
+        .descriptionTiles = GFX_IMG_desc_mia_fey,
         .evidenceImageId = 0x25,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesLottaHart0_description,
+        .descriptionTiles = GFX_IMG_desc_lotta_hart_0,
         .evidenceImageId = 0x20,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMorganFey0_description,
+        .descriptionTiles = GFX_IMG_desc_morgan_fey_0,
         .evidenceImageId = 0x21,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMorganFey1_description,
+        .descriptionTiles = GFX_IMG_desc_morgan_fey_1,
         .evidenceImageId = 0x21,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMimiMiney_description,
+        .descriptionTiles = GFX_IMG_desc_mimi_miney,
         .evidenceImageId = 0x22,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesIniMiney0_description,
+        .descriptionTiles = GFX_IMG_desc_ini_miney_0,
         .evidenceImageId = 0x23,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesIniMiney1_description,
+        .descriptionTiles = GFX_IMG_desc_ini_miney_1,
         .evidenceImageId = 0x23,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesFranziskaVonKarma0_description,
+        .descriptionTiles = GFX_IMG_desc_franziska_von_karma_0,
         .evidenceImageId = 0x28,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesAmiFey_description,
+        .descriptionTiles = GFX_IMG_desc_ami_fey,
         .evidenceImageId = 0x29,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesDrHotti_description,
+        .descriptionTiles = GFX_IMG_desc_dr_hotti,
         .evidenceImageId = 0x27,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto2_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_2,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x3,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto3_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_3,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x4,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericAutopsyReport1_description,
+        .descriptionTiles = GFX_IMG_desc_generic_autopsy_report_1,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericAutopsyReport2_description,
+        .descriptionTiles = GFX_IMG_desc_generic_autopsy_report_2,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceNewspaperArticle_description,
+        .descriptionTiles = GFX_IMG_desc_newspaper_article,
         .evidenceImageId = 0x1D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericNewspaperClipping0_description,
+        .descriptionTiles = GFX_IMG_desc_generic_newspaper_clipping_0,
         .evidenceImageId = 0xE,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericNewspaperClipping1_description,
+        .descriptionTiles = GFX_IMG_desc_generic_newspaper_clipping_1,
         .evidenceImageId = 0xE,
         .evidenceDetailId = 0x8,
     },
     {
-        .descriptionTiles = gGfxEvidenceMagatamaDischarged_description,
+        .descriptionTiles = GFX_IMG_desc_magatama_discharged,
         .evidenceImageId = 0x1B,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMagatamaCharged_description,
+        .descriptionTiles = GFX_IMG_desc_magatama_charged,
         .evidenceImageId = 0x1C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMeetingRoomScreen_description,
+        .descriptionTiles = GFX_IMG_desc_meeting_room_screen,
         .evidenceImageId = 0xF,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMeetingRoomKey_description,
+        .descriptionTiles = GFX_IMG_desc_meeting_room_key,
         .evidenceImageId = 0x10,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGreysGun_description,
+        .descriptionTiles = GFX_IMG_desc_greys_gun,
         .evidenceImageId = 0x12,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMayasKnife_description,
+        .descriptionTiles = GFX_IMG_desc_mayas_knife,
         .evidenceImageId = 0x13,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMayasRobe0_description,
+        .descriptionTiles = GFX_IMG_desc_mayas_robe_0,
         .evidenceImageId = 0x14,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMayasRobe1_description,
+        .descriptionTiles = GFX_IMG_desc_mayas_robe_1,
         .evidenceImageId = 0x14,
         .evidenceDetailId = 0x5,
     },
     {
-        .descriptionTiles = gGfxEvidence001828C80_description,
+        .descriptionTiles = GFX_IMG_desc_001828C8_0,
         .evidenceImageId = 0x15,
         .evidenceDetailId = 0x6,
     },
     {
-        .descriptionTiles = gGfxEvidence001828C81_description,
+        .descriptionTiles = GFX_IMG_desc_001828C8_1,
         .evidenceImageId = 0x15,
         .evidenceDetailId = 0x6,
     },
     {
-        .descriptionTiles = gGfxEvidence001828C82_description,
+        .descriptionTiles = GFX_IMG_desc_001828C8_2,
         .evidenceImageId = 0x15,
         .evidenceDetailId = 0x7,
     },
     {
-        .descriptionTiles = gGfxEvidenceKurainSacredUrn0_description,
+        .descriptionTiles = GFX_IMG_desc_kurain_sacred_urn_0,
         .evidenceImageId = 0x16,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceKurainSacredUrn1_description,
+        .descriptionTiles = GFX_IMG_desc_kurain_sacred_urn_1,
         .evidenceImageId = 0x16,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceSwatchFromMayasRobe_description,
+        .descriptionTiles = GFX_IMG_desc_swatch_from_mayas_robe,
         .evidenceImageId = 0x17,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePearlsBall_description,
+        .descriptionTiles = GFX_IMG_desc_pearls_ball,
         .evidenceImageId = 0x18,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceLargeBox_description,
+        .descriptionTiles = GFX_IMG_desc_large_box,
         .evidenceImageId = 0x19,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesIniMiney2_description,
+        .descriptionTiles = GFX_IMG_desc_ini_miney_2,
         .evidenceImageId = 0x23,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceNoteFromTheSafe0_description,
+        .descriptionTiles = GFX_IMG_desc_note_from_the_safe_0,
         .evidenceImageId = 0x26,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMayaFey3_description,
+        .descriptionTiles = GFX_IMG_desc_maya_fey_3,
         .evidenceImageId = 0x7,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMaximillionGalactica_description,
+        .descriptionTiles = GFX_IMG_desc_maximillion_galactica,
         .evidenceImageId = 0x3D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesFranziskaVonKarma1_description,
+        .descriptionTiles = GFX_IMG_desc_franziska_von_karma_1,
         .evidenceImageId = 0x28,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesRussellBerry_description,
+        .descriptionTiles = GFX_IMG_desc_russell_berry,
         .evidenceImageId = 0x43,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesReginaBerry_description,
+        .descriptionTiles = GFX_IMG_desc_regina_berry,
         .evidenceImageId = 0x3E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesBen0_description,
+        .descriptionTiles = GFX_IMG_desc_ben_0,
         .evidenceImageId = 0x40,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesBen1_description,
+        .descriptionTiles = GFX_IMG_desc_ben_1,
         .evidenceImageId = 0x40,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMoe_description,
+        .descriptionTiles = GFX_IMG_desc_moe,
         .evidenceImageId = 0x41,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesAcro0_description,
+        .descriptionTiles = GFX_IMG_desc_acro_0,
         .evidenceImageId = 0x42,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesAcro1_description,
+        .descriptionTiles = GFX_IMG_desc_acro_1,
         .evidenceImageId = 0x42,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesBat_description,
+        .descriptionTiles = GFX_IMG_desc_bat,
         .evidenceImageId = 0x44,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto4_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_4,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x9,
     },
     {
-        .descriptionTiles = gGfxEvidenceMaxSilkHat_description,
+        .descriptionTiles = GFX_IMG_desc_max_silk_hat,
         .evidenceImageId = 0x2A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto5_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_5,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0xA,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericLetter2_description,
+        .descriptionTiles = GFX_IMG_desc_generic_letter_2,
         .evidenceImageId = 0x4,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMaxPoster_description,
+        .descriptionTiles = GFX_IMG_desc_max_poster,
         .evidenceImageId = 0x2B,
         .evidenceDetailId = 0xB,
     },
     {
-        .descriptionTiles = gGfxEvidenceBrokenBottle_description,
+        .descriptionTiles = GFX_IMG_desc_broken_bottle,
         .evidenceImageId = 0x2C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceTrilo_description,
+        .descriptionTiles = GFX_IMG_desc_trilo,
         .evidenceImageId = 0x2D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMoney_description,
+        .descriptionTiles = GFX_IMG_desc_money,
         .evidenceImageId = 0x2E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericAutopsyReport3_description,
+        .descriptionTiles = GFX_IMG_desc_generic_autopsy_report_3,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceLargeChest_description,
+        .descriptionTiles = GFX_IMG_desc_large_chest,
         .evidenceImageId = 0x30,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePepper_description,
+        .descriptionTiles = GFX_IMG_desc_pepper,
         .evidenceImageId = 0x31,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceEngagementRing_description,
+        .descriptionTiles = GFX_IMG_desc_engagement_ring,
         .evidenceImageId = 0x2F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto6_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_6,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0xC,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto7_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_7,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0xD,
     },
     {
-        .descriptionTiles = gGfxEvidenceThreateningNoteTorn_description,
+        .descriptionTiles = GFX_IMG_desc_threatening_note_torn,
         .evidenceImageId = 0x33,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceThreateningNoteFull0_description,
+        .descriptionTiles = GFX_IMG_desc_threatening_note_full_0,
         .evidenceImageId = 0x34,
         .evidenceDetailId = 0xE,
     },
     {
-        .descriptionTiles = gGfxEvidenceThreateningNoteFull1_description,
+        .descriptionTiles = GFX_IMG_desc_threatening_note_full_1,
         .evidenceImageId = 0x34,
         .evidenceDetailId = 0xF,
     },
     {
-        .descriptionTiles = gGfxEvidenceThreateningNoteFull2_description,
+        .descriptionTiles = GFX_IMG_desc_threatening_note_full_2,
         .evidenceImageId = 0x34,
         .evidenceDetailId = 0x10,
     },
     {
-        .descriptionTiles = gGfxEvidenceLeon_description,
+        .descriptionTiles = GFX_IMG_desc_leon,
         .evidenceImageId = 0x36,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceReginasWest_description,
+        .descriptionTiles = GFX_IMG_desc_reginas_west,
         .evidenceImageId = 0x35,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceBloodyScarf_description,
+        .descriptionTiles = GFX_IMG_desc_bloody_scarf,
         .evidenceImageId = 0x37,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceRegent_description,
+        .descriptionTiles = GFX_IMG_desc_regent,
         .evidenceImageId = 0x3A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceThreateningNoteFull3_description,
+        .descriptionTiles = GFX_IMG_desc_threatening_note_full_3,
         .evidenceImageId = 0x34,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMilk_description,
+        .descriptionTiles = GFX_IMG_desc_milk,
         .evidenceImageId = 0x3B,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePlayingCard_description,
+        .descriptionTiles = GFX_IMG_desc_playing_card,
         .evidenceImageId = 0x39,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePlayingCards_description,
+        .descriptionTiles = GFX_IMG_desc_playing_cards,
         .evidenceImageId = 0x38,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceMoesGrapes_description,
+        .descriptionTiles = GFX_IMG_desc_moes_grapes,
         .evidenceImageId = 0x3C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesWillPowers_description,
+        .descriptionTiles = GFX_IMG_desc_will_powers,
         .evidenceImageId = 0x45,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesWendyOldbag_description,
+        .descriptionTiles = GFX_IMG_desc_wendy_oldbag,
         .evidenceImageId = 0x46,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesLottaHart1_description,
+        .descriptionTiles = GFX_IMG_desc_lotta_hart_1,
         .evidenceImageId = 0x20,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesJuanCorrida_description,
+        .descriptionTiles = GFX_IMG_desc_juan_corrida,
         .evidenceImageId = 0x47,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMattEngarde0_description,
+        .descriptionTiles = GFX_IMG_desc_matt_engarde_0,
         .evidenceImageId = 0x48,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMattEngarde1_description,
+        .descriptionTiles = GFX_IMG_desc_matt_engarde_1,
         .evidenceImageId = 0x48,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesAdrianAndrews_description,
+        .descriptionTiles = GFX_IMG_desc_adrian_andrews,
         .evidenceImageId = 0x49,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesCelesteInpax0_description,
+        .descriptionTiles = GFX_IMG_desc_celeste_inpax_0,
         .evidenceImageId = 0x4A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesCelesteInpax1_description,
+        .descriptionTiles = GFX_IMG_desc_celeste_inpax_1,
         .evidenceImageId = 0x4A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesDisguisedShellyDeKiller_description,
+        .descriptionTiles = GFX_IMG_desc_disguised_shelly_de_killer,
         .evidenceImageId = 0x4B,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesShellyDeKiller_description,
+        .descriptionTiles = GFX_IMG_desc_shelly_de_killer,
         .evidenceImageId = 0x4C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxProfilesMilesEdgeworth_description,
+        .descriptionTiles = GFX_IMG_desc_miles_edgeworth,
         .evidenceImageId = 0x4D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceAdmissionTicket_description,
+        .descriptionTiles = GFX_IMG_desc_admission_ticket,
         .evidenceImageId = 0x4E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceTransceiver0_description,
+        .descriptionTiles = GFX_IMG_desc_transceiver_0,
         .evidenceImageId = 0x4F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceTransceiver1_description,
+        .descriptionTiles = GFX_IMG_desc_transceiver_1,
         .evidenceImageId = 0x4F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceLottasCameraCase0_description,
+        .descriptionTiles = GFX_IMG_desc_lottas_camera_case_0,
         .evidenceImageId = 0x5E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceLottasCameraCase1_description,
+        .descriptionTiles = GFX_IMG_desc_lottas_camera_case_1,
         .evidenceImageId = 0x5E,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto8_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_8,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x11,
     },
     {
-        .descriptionTiles = gGfxEvidenceGuitarCase0_description,
+        .descriptionTiles = GFX_IMG_desc_guitar_case_0,
         .evidenceImageId = 0x50,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGuitarCase1_description,
+        .descriptionTiles = GFX_IMG_desc_guitar_case_1,
         .evidenceImageId = 0x50,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceTomatoJuice0_description,
+        .descriptionTiles = GFX_IMG_desc_tomato_juice_0,
         .evidenceImageId = 0x51,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceBloodyButton_description,
+        .descriptionTiles = GFX_IMG_desc_bloody_button,
         .evidenceImageId = 0x67,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto9_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_9,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x12,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericEnvelope0_description,
+        .descriptionTiles = GFX_IMG_desc_generic_envelope_0,
         .evidenceImageId = 0x54,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericEnvelope1_description,
+        .descriptionTiles = GFX_IMG_desc_generic_envelope_1,
         .evidenceImageId = 0x54,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceJuansAutograph_description,
+        .descriptionTiles = GFX_IMG_desc_juans_autograph,
         .evidenceImageId = 0x52,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGossipColumn_description,
+        .descriptionTiles = GFX_IMG_desc_gossip_column,
         .evidenceImageId = 0x53,
         .evidenceDetailId = 0x13,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericAutopsyReport4_description,
+        .descriptionTiles = GFX_IMG_desc_generic_autopsy_report_4,
         .evidenceImageId = 0x0,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceBloodyKnife_description,
+        .descriptionTiles = GFX_IMG_desc_bloody_knife,
         .evidenceImageId = 0x69,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto10_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_10,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x14,
     },
     {
-        .descriptionTiles = gGfxEvidenceShellysCallingCard_description,
+        .descriptionTiles = GFX_IMG_desc_shellys_calling_card,
         .evidenceImageId = 0x55,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceNoteFromTheSafe1_description,
+        .descriptionTiles = GFX_IMG_desc_note_from_the_safe_1,
         .evidenceImageId = 0x26,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceVideoCamera_description,
+        .descriptionTiles = GFX_IMG_desc_video_camera,
         .evidenceImageId = 0x56,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceVideoTransmitter_description,
+        .descriptionTiles = GFX_IMG_desc_video_transmitter,
         .evidenceImageId = 0x5C,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceImportedBear_description,
+        .descriptionTiles = GFX_IMG_desc_imported_bear,
         .evidenceImageId = 0x57,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceReceipt_description,
+        .descriptionTiles = GFX_IMG_desc_receipt,
         .evidenceImageId = 0x58,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceBearPuzzle0_description,
+        .descriptionTiles = GFX_IMG_desc_bear_puzzle_0,
         .evidenceImageId = 0x59,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceBearPuzzle1_description,
+        .descriptionTiles = GFX_IMG_desc_bear_puzzle_1,
         .evidenceImageId = 0x59,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidencePhotoOfCeleste_description,
+        .descriptionTiles = GFX_IMG_desc_photo_of_celeste,
         .evidenceImageId = 0x5A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceNoteFromTheSafe2_description,
+        .descriptionTiles = GFX_IMG_desc_note_from_the_safe_2,
         .evidenceImageId = 0x26,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceNoteFromTheSafe3_description,
+        .descriptionTiles = GFX_IMG_desc_note_from_the_safe_3,
         .evidenceImageId = 0x26,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericAffidavit0_description,
+        .descriptionTiles = GFX_IMG_desc_generic_affidavit_0,
         .evidenceImageId = 0x68,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericAffidavit1_description,
+        .descriptionTiles = GFX_IMG_desc_generic_affidavit_1,
         .evidenceImageId = 0x68,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceBearClock_description,
+        .descriptionTiles = GFX_IMG_desc_bear_clock,
         .evidenceImageId = 0x6A,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceFrequencyDetector_description,
+        .descriptionTiles = GFX_IMG_desc_frequency_detector,
         .evidenceImageId = 0x5F,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceShoe_description,
+        .descriptionTiles = GFX_IMG_desc_shoe,
         .evidenceImageId = 0x5D,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceBellboyUniform0_description,
+        .descriptionTiles = GFX_IMG_desc_bellboy_uniform_0,
         .evidenceImageId = 0x62,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceBellboyUniform1_description,
+        .descriptionTiles = GFX_IMG_desc_bellboy_uniform_1,
         .evidenceImageId = 0x62,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericVideo0_description,
+        .descriptionTiles = GFX_IMG_desc_generic_video_0,
         .evidenceImageId = 0x64,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericVideo1_description,
+        .descriptionTiles = GFX_IMG_desc_generic_video_1,
         .evidenceImageId = 0x64,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceShellyPistol0_description,
+        .descriptionTiles = GFX_IMG_desc_shelly_pistol_0,
         .evidenceImageId = 0x65,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceShellyPistol1_description,
+        .descriptionTiles = GFX_IMG_desc_shelly_pistol_1,
         .evidenceImageId = 0x65,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceFranziskasWhip_description,
+        .descriptionTiles = GFX_IMG_desc_franziskas_whip,
         .evidenceImageId = 0x66,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceTrackingDevice_description,
+        .descriptionTiles = GFX_IMG_desc_tracking_device,
         .evidenceImageId = 0x60,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGumshoesCoat_description,
+        .descriptionTiles = GFX_IMG_desc_gumshoes_coat,
         .evidenceImageId = 0x61,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGatewaterHotelButton_description,
+        .descriptionTiles = GFX_IMG_desc_gatewater_hotel_button,
         .evidenceImageId = 0x63,
         .evidenceDetailId = 0x0,
     },
     {
-        .descriptionTiles = gGfxEvidenceGenericPhoto11_description,
+        .descriptionTiles = GFX_IMG_desc_generic_photo_11,
         .evidenceImageId = 0x1,
         .evidenceDetailId = 0x15,
     },
     {
-        .descriptionTiles = gGfxEvidenceTomatoJuice1_description,
+        .descriptionTiles = GFX_IMG_desc_tomato_juice_1,
         .evidenceImageId = 0x51,
         .evidenceDetailId = 0x0,
     },
@@ -1261,14 +1261,14 @@ void CourtRecordChangeRecord(struct Main * main, struct CourtRecord * courtRecor
         if(courtRecord->flags & COURT_RECORD_VIEW_PROFILES)
         {
             courtRecord->flags &= ~COURT_RECORD_VIEW_PROFILES;
-            DmaCopy16(3, gGfx4bppProfileTextTiles, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
+            DmaCopy16(3, GFX_IMG_profiles_text, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
             courtRecord->displayItemCount = courtRecord->evidenceCount;
             courtRecord->displayItemList = courtRecord->evidenceList;
         }
         else
         {
             courtRecord->flags |= COURT_RECORD_VIEW_PROFILES;
-            DmaCopy16(3, gGfxEvidenceText, OBJ_VRAM0+0x3500, 0x200);
+            DmaCopy16(3, GFX_IMG_evidence_text, OBJ_VRAM0+0x3500, 0x200);
             courtRecord->displayItemCount = courtRecord->profileCount;
             courtRecord->displayItemList = courtRecord->profileList;
         }
@@ -1614,9 +1614,9 @@ void CourtRecordTakeThatSpecial(struct Main * main, struct CourtRecord * courtRe
                     temp2 = 6;
                 }
                 offset = gEvidenceProfileData[temp2].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-                temp = (uintptr_t)gGfxEvidenceProfilePictures + offset; //! Evil, uses a u32 for this pointer keep in mind and also global define
+                temp = (uintptr_t)GFX_PALETTE_generic_autopsy_report + offset; //! Evil, uses a u32 for this pointer keep in mind and also global define
                 DmaCopy16(3, temp, OBJ_PLTT+0x20, 0x20);
-                temp = (uintptr_t)gGfxEvidenceProfilePictures + offset + 0x20;
+                temp = (uintptr_t)GFX_PALETTE_generic_autopsy_report + offset + 0x20;
                 DmaCopy16(3, temp, OBJ_VRAM0+0x1000, TILE_SIZE_4BPP * 64);
                 oam->attr0 = SPRITE_ATTR0(16, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
                 oam->attr1 = SPRITE_ATTR1_NONAFFINE(88, FALSE, FALSE, 3);
@@ -1806,22 +1806,22 @@ void UpdateCourtRecordArrows(struct CourtRecord * courtRecord)
         courtRecord->recordArrowCounter = 0;
         courtRecord->recordArrowFrame++;
         courtRecord->recordArrowFrame &= 3;
-        DmaCopy16(3, gGfx4bppTestimonyArrows + sCourtRecordLeftArrowTileIndexes[courtRecord->recordArrowFrame] * 32, OBJ_VRAM0+0x3400, TILE_SIZE_4BPP*4);
-        DmaCopy16(3, gGfx4bppTestimonyArrows + sCourtRecordRightArrowTileIndexes[courtRecord->recordArrowFrame] * 32, OBJ_VRAM0+0x3480, TILE_SIZE_4BPP*4);
+        DmaCopy16(3, GFX_IMG_left_right_arrows + sCourtRecordLeftArrowTileIndexes[courtRecord->recordArrowFrame] * 32, OBJ_VRAM0+0x3400, TILE_SIZE_4BPP*4);
+        DmaCopy16(3, GFX_IMG_left_right_arrows + sCourtRecordRightArrowTileIndexes[courtRecord->recordArrowFrame] * 32, OBJ_VRAM0+0x3480, TILE_SIZE_4BPP*4);
     }
 }
 
 void LoadEvidenceWindowGraphics(void)
 {
     SlideInBG2Window(1, 0xC);
-    DmaCopy16(3, gGfx4bppTestimonyArrows, OBJ_VRAM0+0x3400, TILE_SIZE_4BPP*4);
-    DmaCopy16(3, gGfx4bppTestimonyArrows + TILE_SIZE_4BPP*4 * 3, OBJ_VRAM0+0x3480, TILE_SIZE_4BPP*4);
-    DmaCopy16(3, gGfx4bppControllerButtons, OBJ_VRAM0+0x3800, TILE_SIZE_4BPP*16);
-    DmaCopy16(3, gGfx4bppPresentBackTextTiles, OBJ_VRAM0+0x3A00, TILE_SIZE_4BPP*16);
-    DmaCopy16(3, gGfx4bppProfileTextTiles, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
-    DmaCopy16(3, gPalCrossExaminationUI, OBJ_PLTT+0x60, 0x20);
-    DmaCopy16(3, gPalCourtRecordActionText, OBJ_PLTT+0x80, 0x20);
-    DmaCopy16(3, gPalEvidenceProfileDesc, OBJ_PLTT+0x40, 0x20);
+    DmaCopy16(3, GFX_IMG_left_right_arrows, OBJ_VRAM0+0x3400, TILE_SIZE_4BPP*4);
+    DmaCopy16(3, GFX_IMG_left_right_arrows + TILE_SIZE_4BPP*4 * 3, OBJ_VRAM0+0x3480, TILE_SIZE_4BPP*4);
+    DmaCopy16(3, GFX_IMG_controller_buttons, OBJ_VRAM0+0x3800, TILE_SIZE_4BPP*16);
+    DmaCopy16(3, GFX_IMG_present_back_text, OBJ_VRAM0+0x3A00, TILE_SIZE_4BPP*16);
+    DmaCopy16(3, GFX_IMG_profiles_text, OBJ_VRAM0+0x3500, TILE_SIZE_4BPP*16);
+    DmaCopy16(3, GFX_PALETTE_unk_14DA80, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, GFX_PALETTE_controls_blurb, OBJ_PLTT+0x80, 0x20);
+    DmaCopy16(3, GFX_PALETTE_evidence_profile_descriptions, OBJ_PLTT+0x40, 0x20);
 }
 
 void UpdateRecordSprites(struct CourtRecord * courtRecord)
@@ -1874,9 +1874,9 @@ void LoadEvidenceGraphics(u32 evidenceId)
     u8 * src;
 
     offset = gEvidenceProfileData[evidenceId].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-    src = gGfxEvidenceProfilePictures + offset;
+    src = GFX_PALETTE_generic_autopsy_report + offset;
     DmaCopy16(3, src, OBJ_PLTT+0x20, 0x20);
-    src = gGfxEvidenceProfilePictures + offset + 0x20;
+    src = GFX_PALETTE_generic_autopsy_report + offset + 0x20;
     DmaCopy16(3, src, OBJ_VRAM0+0x5000, TILE_SIZE_4BPP * 64);
     src = gEvidenceProfileData[evidenceId].descriptionTiles;
     LZ77UnCompWram(src, eGeneralScratchpadBuffer);
@@ -2268,9 +2268,9 @@ void LoadItemPlateGfx(struct Main * main)
     u8 * src;
 
     offset = gEvidenceProfileData[main->itemPlateEvidenceId].evidenceImageId * (TILE_SIZE_4BPP * 64 + 0x20);
-    src = gGfxEvidenceProfilePictures + offset;
+    src = GFX_PALETTE_generic_autopsy_report + offset;
     DmaCopy16(3, src, OBJ_PLTT+0x20, 0x20);
-    src = gGfxEvidenceProfilePictures + offset + 0x20;
+    src = GFX_PALETTE_generic_autopsy_report + offset + 0x20;
     DmaCopy16(3, src, OBJ_VRAM0+0x1000, TILE_SIZE_4BPP * 64);
 }
 

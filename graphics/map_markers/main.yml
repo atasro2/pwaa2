@@ -39,7 +39,7 @@
     bpp: 4
 
 ### gGfxUnusedMapMarkersGreen:
-- name: green
+- name: unused_green
   image:
     bpp: 4
 

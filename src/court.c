@@ -92,10 +92,10 @@ void CourtInit(struct Main * main)
     ioRegs->lcd_bg1cnt = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
-    DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
-    DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
-    DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT+0x100, 0x20);
-    DmaCopy16(3, gPalEvidenceProfileDesc, OBJ_PLTT + 0x40, 0x20);
+    DmaCopy16(3, GFX_IMG_unused_ascii_charset, VRAM + 0x3800, 0x800);
+    DmaCopy16(3, GFX_IMG_save_game_tiles, VRAM, 0x1000);
+    DmaCopy16(3, &GFX_PALETTE_examine_cursor_00[0], OBJ_PLTT+0x100, 0x20);
+    DmaCopy16(3, GFX_PALETTE_evidence_profile_descriptions, OBJ_PLTT + 0x40, 0x20);
     DecompressBackgroundIntoBuffer(1);
     CopyBGDataToVram(1);
     CopyBGDataToVram(0x80);
@@ -253,8 +253,8 @@ void TestimonyProcess(struct Main * main)
 
 void TestimonyInit(struct Main * main)
 {
-    DmaCopy16(3, gGfx4bppTestimonyTextTiles, OBJ_VRAM0+0x3000, 0x800);
-    DmaCopy16(3, gPalTestimonyTextTiles, OBJ_PLTT+0xA0, 0x20);
+    DmaCopy16(3, GFX_IMG_testimony_text_tiles, OBJ_VRAM0+0x3000, 0x800);
+    DmaCopy16(3, GFX_PALETTE_testimony_text_tiles, OBJ_PLTT+0xA0, 0x20);
     gTestimony.timer = 0;
     main->process[GAME_PROCESS_STATE] = TESTIMONY_ANIM;
 }
@@ -388,10 +388,10 @@ void QuestioningProcess(struct Main * main)
 
 void QuestioningInit(struct Main * main)
 {
-    DmaCopy16(3, gGfxPressPresentButtons, OBJ_VRAM0+0x3000, 0x400);
-    DmaCopy16(3, gPalPressPresentButtons, OBJ_PLTT+0xA0, 0x20);
-    DmaCopy16(3, gGfx4bppTestimonyArrows, 0x1A0, 0x80); // ! WHAT, HOW
-    DmaCopy16(3, gGfx4bppTestimonyArrows + 12 * TILE_SIZE_4BPP, 0x220, 0x80); // ! WHAT, HOW
+    DmaCopy16(3, GFX_IMG_press_present_buttons, OBJ_VRAM0+0x3000, 0x400);
+    DmaCopy16(3, GFX_PALETTE_press_present_buttons, OBJ_PLTT+0xA0, 0x20);
+    DmaCopy16(3, GFX_IMG_left_right_arrows, 0x1A0, 0x80); // ! WHAT, HOW
+    DmaCopy16(3, GFX_IMG_left_right_arrows + 12 * TILE_SIZE_4BPP, 0x220, 0x80); // ! WHAT, HOW
     main->testimonyBeginningSection = gScriptContext.currentSection;
     gCourtRecord.recordArrowCounter = 0;
     gCourtRecord.recordArrowFrame++;
@@ -530,7 +530,7 @@ void QuestioningHoldIt(struct Main * main)
             if(gTestimony.timer == 0)
             {
                 SetCourtScrollPersonAnim(0, 1, PERSON_ANIM_PHOENIX, 0);
-                InitCourtScroll(gPalCourtScroll, 0x1E, 0x1F, 1);
+                InitCourtScroll(GFX_PALETTE_court_scroll, 0x1E, 0x1F, 1);
                 SlideTextbox(0);
                 main->process[GAME_PROCESS_VAR1]++;
                 break;
@@ -583,7 +583,7 @@ void QuestioningObjection(struct Main * main)
             if(gTestimony.timer == 0)
             {
                 SetCourtScrollPersonAnim(0, 1, PERSON_ANIM_PHOENIX, 0x12E0);
-                InitCourtScroll(gPalCourtScroll, 0x1E, 0x1F, 1);
+                InitCourtScroll(GFX_PALETTE_court_scroll, 0x1E, 0x1F, 1);
                 SlideTextbox(0);
                 main->process[GAME_PROCESS_VAR1]++;
                 break;
@@ -730,8 +730,8 @@ void VerdictProcess(struct Main * main)
             break;
         }
         case VERDICT_INIT_CONFETTI: { // B3C8
-            DmaCopy16(3, gGfxConfetti, OBJ_VRAM0+0x1F80, 0x20);
-            DmaCopy16(3, gPalConfetti0, OBJ_PLTT+0xA0, 0x80);
+            DmaCopy16(3, GFX_IMG_confetti, OBJ_VRAM0+0x1F80, 0x20);
+            DmaCopy16(3, GFX_PALETTE_confetti_0, OBJ_PLTT+0xA0, 0x80);
             main->process[GAME_PROCESS_STATE]++;
             break;
         }
@@ -874,8 +874,8 @@ void UpdateQuestioningMenuSprites(struct Main * main, struct TestimonyStruct * t
 
 void LoadWitnessBenchGraphics(void)
 {
-    DmaCopy16(3, gGfxWitnessBench1, OBJ_VRAM0+0x2000, 0x600);
-    DmaCopy16(3, gPalWitnessBench, OBJ_PLTT+0x140, 0x20);
+    DmaCopy16(3, GFX_IMG_witness_bench_1, OBJ_VRAM0+0x2000, 0x600);
+    DmaCopy16(3, GFX_PALETTE_witness_bench, OBJ_PLTT+0x140, 0x20);
 }
 
 void SetOAMForCourtBenchSpritesWitness(s32 x, s32 y, u8 clearOAM)
@@ -918,8 +918,8 @@ void SetOAMForCourtBenchSpritesWitness(s32 x, s32 y, u8 clearOAM)
 
 void LoadCounselBenchGraphics(void)
 {
-    DmaCopy16(3, gGfxCounselBench1, OBJ_VRAM0+0x2000, 0xD00);
-    DmaCopy16(3, gPalCounselBench, OBJ_PLTT+0x140, 0x20);
+    DmaCopy16(3, GFX_IMG_counsel_bench_1, OBJ_VRAM0+0x2000, 0xD00);
+    DmaCopy16(3, GFX_PALETTE_counsel_bench, OBJ_PLTT+0x140, 0x20);
 }
 
 void SetOAMForCourtBenchSpritesDefense(s32 x, s32 y, u8 clearOAM) {

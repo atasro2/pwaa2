@@ -243,11 +243,11 @@ void InitNickelSamuraiZoominAnimation(void)
     gIORegisters.lcd_bg2pb = 0;
     gIORegisters.lcd_bg2pc = 0;
     gIORegisters.lcd_bg2pd = 0;
-    LZ77UnCompWram(gGfxCase3NickelSamuraiZoomin, eBGDecompBuffer2);
+    LZ77UnCompWram(GFX_IMG_nickel_samurai_case3_op_zoomin, eBGDecompBuffer2);
     DmaCopy16(3, eBGDecompBuffer2, BG_CHAR_ADDR(1), 0x1300);
-    LZ77UnCompWram(gMapCase3NickelSamuraiZoomin, eBGDecompBuffer2);
+    LZ77UnCompWram(GFX_TILEMAP_nickel_samurai_case3_op_zoomin, eBGDecompBuffer2);
     DmaCopy16(3, eBGDecompBuffer2, gBG2MapBuffer, sizeof(gBG2MapBuffer));
-    LZ77UnCompWram(gPalCase3NickelSamuraiZoomin, eBGDecompBuffer2);
+    LZ77UnCompWram(GFX_PALETTE_nickel_samurai_case3_op_zoomin, eBGDecompBuffer2);
     DmaCopy16(3, eBGDecompBuffer2, BG_PLTT, BG_PLTT_SIZE);
     *(u16*)BG_PLTT = 0xFFFF; // white backdrop
     UpdateNickelSamuraiZoominAnimation();

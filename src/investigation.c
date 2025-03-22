@@ -78,15 +78,15 @@ void InvestigationInit(struct Main * main, struct InvestigationStruct * investig
     ioRegs->lcd_bg1cnt = BGCNT_PRIORITY(1) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(29) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg2cnt = BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(30) | BGCNT_16COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
     ioRegs->lcd_bg3cnt = BGCNT_PRIORITY(3) | BGCNT_CHARBASE(1) | BGCNT_SCREENBASE(31) | BGCNT_MOSAIC | BGCNT_256COLOR | BGCNT_WRAP | BGCNT_TXT256x256;
-    DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
-    DmaCopy16(3, gGfxSaveGameTiles, VRAM, 0x1000);
-    DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, gPalActionButtons, OBJ_PLTT+0xA0, 0x40);
-    DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
-    DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT+0xE0, 0x20);
-    DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
-    DmaCopy16(3, gPalExamineCursors, OBJ_PLTT+0x100, 0x20);
-    DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT+0x120, 0x40);
+    DmaCopy16(3, GFX_IMG_unused_ascii_charset, VRAM + 0x3800, 0x800);
+    DmaCopy16(3, GFX_IMG_save_game_tiles, VRAM, 0x1000);
+    DmaCopy16(3, GFX_IMG_action_buttons, OBJ_VRAM0 + 0x2000, 0x1000);
+    DmaCopy16(3, GFX_PALETTE_action_buttons_0, OBJ_PLTT+0xA0, 0x40);
+    DmaCopy16(3, GFX_IMG_scroll_prompt, OBJ_VRAM0 + 0x3000, 0x200);
+    DmaCopy16(3, GFX_PALETTE_scroll_prompt, OBJ_PLTT+0xE0, 0x20);
+    DmaCopy16(3, GFX_IMG_examine_cursor, OBJ_VRAM0 + 0x3200, 0x200);
+    DmaCopy16(3, GFX_PALETTE_examine_cursor_00, OBJ_PLTT+0x100, 0x20);
+    DmaCopy16(3, GFX_PALETTE_choice_selected, OBJ_PLTT+0x120, 0x40);
     oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
     for(i = 0; i < 4; i++)
     {
@@ -256,7 +256,7 @@ void InvestigationMain(struct Main * main, struct InvestigationStruct * investig
             StartAnimationBlend(0xC, 1);
             investigation->pointerColorCounter = 0;
             investigation->pointerColor = 0;
-            DmaCopy16(3, gPalExamineCursors, OBJ_PLTT+0x100, 0x20);
+            DmaCopy16(3, GFX_PALETTE_examine_cursor_00, OBJ_PLTT+0x100, 0x20);
         }
         main->process[GAME_PROCESS_STATE] = INVESTIGATION_INSPECT + investigation->selectedAction;
         main->process[GAME_PROCESS_VAR2] = 0;
@@ -576,7 +576,7 @@ void InvestigationInspect(struct Main * main, struct InvestigationStruct * inves
                     investigation->pointerColorCounter = 0;
                     investigation->pointerColor += 1;
                     investigation->pointerColor &= 0xF;
-                    DmaCopy16(3, gPalExamineCursors+investigation->pointerColor*32, OBJ_PLTT+0x100, 0x20);
+                    DmaCopy16(3, GFX_PALETTE_examine_cursor_00+investigation->pointerColor*32, OBJ_PLTT+0x100, 0x20);
                 }
                 break;
             case 2:
@@ -629,7 +629,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*moveLocations)*0x800;
-                    temp += (uintptr_t)gGfxLocationChoices;
+                    temp += (uintptr_t)GFX_IMG_001DE3E8;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++) // i * 4 fakematch
                     {
@@ -877,7 +877,7 @@ void InvestigationMove(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = *moveLocations*0x800; //TODO: label vs value?
-                    temp += (uintptr_t)gGfxLocationChoices;
+                    temp += (uintptr_t)GFX_IMG_001DE3E8;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -963,7 +963,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*icons) * 0x800;
-                    temp += (uintptr_t)gGfxTalkChoices;
+                    temp += (uintptr_t)GFX_IMG_001EB3E8;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -984,8 +984,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 }
                 icons++;
             }
-            DmaCopy16(3, gGfxCheckmark, OBJ_VRAM0+0x5400, 0x200);
-            DmaCopy16(3, gPalCheckmark, PLTT+0x360, 0x20);
+            DmaCopy16(3, GFX_IMG_checkmark, OBJ_VRAM0+0x5400, 0x200);
+            DmaCopy16(3, GFX_PALETTE_checkmark, PLTT+0x360, 0x20);
             if(investigation->previousSelectedOption) {
                 investigation->selectedOption = investigation->previousSelectedOption;
                 investigation->previousSelectedOption = 0;
@@ -1029,8 +1029,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
         }
         case 3:
         {
-            DmaCopy16(3, gGfxCheckmark, OBJ_VRAM0+0x5400, 0x200);
-            DmaCopy16(3, gPalCheckmark, OBJ_PLTT+0x160, 0x20);
+            DmaCopy16(3, GFX_IMG_checkmark, OBJ_VRAM0+0x5400, 0x200);
+            DmaCopy16(3, GFX_PALETTE_checkmark, OBJ_PLTT+0x160, 0x20);
             for(talkData = gTalkData; talkData->roomId != 0xFF; talkData++)
             {
                 if(main->currentRoomId == talkData->roomId
@@ -1149,8 +1149,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                         {
                             u16 blab = IsTalkSectionPsycheLocked(talkData->talkSection[i]);
                             if(blab) {
-                                DmaCopy16(3, gGfxInvestigationPsycheLock, OBJ_VRAM0+0x3000, 0x200);
-                                DmaCopy16(3, gPalInvestigationPsycheLock, OBJ_PLTT+0xE0, 0x20);
+                                DmaCopy16(3, GFX_IMG_psyche_lock, OBJ_VRAM0+0x3000, 0x200);
+                                DmaCopy16(3, GFX_PALETTE_psyche_lock, OBJ_PLTT+0xE0, 0x20);
                                 oam->attr0 = 0x16 + i * 30;
                                 oam->attr1 = 0x8024;
                                 oam->attr2 = 0x7180;
@@ -1227,8 +1227,8 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
             if(investigation->actionState == 0 && main->process[GAME_PROCESS_VAR2] > 12)
             {
 
-                DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0+0x3000, 0x200);
-                DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT+0xE0, 0x20);
+                DmaCopy16(3, GFX_IMG_scroll_prompt, OBJ_VRAM0+0x3000, 0x200);
+                DmaCopy16(3, GFX_PALETTE_scroll_prompt, OBJ_PLTT+0xE0, 0x20);
                 SET_PROCESS_PTR(INVESTIGATION_PROCESS, INVESTIGATION_MAIN, 0, 0, main);
                 investigation->inactiveActions += 1 << investigation->selectedAction;
                 investigation->selectedActionYOffset = 8;
@@ -1307,7 +1307,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                     {
                         investigation->activeOptions[i] = TRUE;
                         temp = (*icons) * 0x800;
-                        temp += (uintptr_t)gGfxTalkChoices;
+                        temp += (uintptr_t)GFX_IMG_001EB3E8;
                         DmaCopy16(3, temp, vram, 0x800);
                         for(j = 0; j < 2; j++)
                         {
@@ -1380,7 +1380,7 @@ void InvestigationTalk(struct Main * main, struct InvestigationStruct * investig
                 {
                     investigation->activeOptions[i] = TRUE;
                     temp = (*icons) * 0x800;
-                    temp += (uintptr_t)gGfxTalkChoices;
+                    temp += (uintptr_t)GFX_IMG_001EB3E8;
                     DmaCopy16(3, temp, vram, 0x800);
                     for(j = 0; j < 2; j++)
                     {
@@ -1773,13 +1773,13 @@ void ReloadInvestigationGraphics(void) {
     struct OamAttrs * oam;
     int i;
 
-    DmaCopy16(3, gGfx4bppInvestigationActions, OBJ_VRAM0 + 0x2000, 0x1000);
-    DmaCopy16(3, gPalActionButtons, OBJ_PLTT + 0xA0, 0x40);
-    DmaCopy16(3, gGfx4bppInvestigationScrollButton, OBJ_VRAM0 + 0x3000, 0x200);
-    DmaCopy16(3, gPalInvestigationScrollPrompt, OBJ_PLTT + 0xE0, 0x20);
-    DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x3200, 0x200);
-    DmaCopy16(3, gPalExamineCursors, OBJ_PLTT + 0x100, 0x20);
-    DmaCopy16(3, gPalChoiceSelected, OBJ_PLTT + 0x120, 0x40);
+    DmaCopy16(3, GFX_IMG_action_buttons, OBJ_VRAM0 + 0x2000, 0x1000);
+    DmaCopy16(3, GFX_PALETTE_action_buttons_0, OBJ_PLTT + 0xA0, 0x40);
+    DmaCopy16(3, GFX_IMG_scroll_prompt, OBJ_VRAM0 + 0x3000, 0x200);
+    DmaCopy16(3, GFX_PALETTE_scroll_prompt, OBJ_PLTT + 0xE0, 0x20);
+    DmaCopy16(3, GFX_IMG_examine_cursor, OBJ_VRAM0 + 0x3200, 0x200);
+    DmaCopy16(3, GFX_PALETTE_examine_cursor_00, OBJ_PLTT + 0x100, 0x20);
+    DmaCopy16(3, GFX_PALETTE_choice_selected, OBJ_PLTT + 0x120, 0x40);
     oam = &gOamObjects[OAM_IDX_INVESTIGATION_ACTIONS];
     for(i = 0; i < 4; i++) {
         oam->attr0 = SPRITE_ATTR0(224, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
@@ -2032,7 +2032,7 @@ void LoadLocationChoiceGraphics(void)
         destination += i*0x800;
         if(*roomptr != 0xFF)
 	    {
-            src = (void *)gGfxLocationChoices+*roomptr*0x800;
+            src = (void *)GFX_IMG_001DE3E8+*roomptr*0x800;
             DmaCopy16(3, src, destination, 0x800);
         }
         roomptr++;
@@ -2063,11 +2063,11 @@ void LoadTalkChoiceGraphics(void)
         destination += i*0x800;
         if(*icons != 0xFF)
 	    {
-            src = (void *)gGfxTalkChoices + *icons*0x800;
+            src = (void *)GFX_IMG_001EB3E8 + *icons*0x800;
             DmaCopy16(3, src, destination, 0x800);
         }
         icons++;
     }
-    DmaCopy16(3, gGfxCheckmark, (void *)VRAM+0x15400, 0x200);
-    DmaCopy16(3, gPalCheckmark, (void *)PLTT+0x360, 0x20);
+    DmaCopy16(3, GFX_IMG_checkmark, (void *)VRAM+0x15400, 0x200);
+    DmaCopy16(3, GFX_PALETTE_checkmark, (void *)PLTT+0x360, 0x20);
 }

@@ -51,12 +51,12 @@ u16 gPalHPBarGainLifePalettes[15][16] = {
 
 void LoadHPBarGraphics(void)
 {
-    DmaCopy16(3, gGfxHPBarProgress, OBJ_VRAM0+0x3780, 0x180);
-    DmaCopy16(3, gPalHPBarFrame, OBJ_PLTT+0x60, 0x20);
-    DmaCopy16(3, gPalHPBarProgress, OBJ_PLTT+0x80, 0x20);
-    DmaCopy16(3, gGfxHPBarFrame3, OBJ_VRAM0+0x2E00, 0x80);
-    DmaCopy16(3, gGfxHPBarFrame2, OBJ_VRAM0+0x2E80, 0x100);
-    DmaCopy16(3, gGfxHPBarFrame1, OBJ_VRAM0+0x2F80, 0x80);
+    DmaCopy16(3, GFX_IMG_healthbar_progress, OBJ_VRAM0+0x3780, 0x180);
+    DmaCopy16(3, GFX_PALETTE_healthbar_frame, OBJ_PLTT+0x60, 0x20);
+    DmaCopy16(3, GFX_PALETTE_healthbar_progress_1, OBJ_PLTT+0x80, 0x20);
+    DmaCopy16(3, GFX_IMG_healthbar_frame_3, OBJ_VRAM0+0x2E00, 0x80);
+    DmaCopy16(3, GFX_IMG_healthbar_frame_2, OBJ_VRAM0+0x2E80, 0x100);
+    DmaCopy16(3, GFX_IMG_healthbar_frame_1, OBJ_VRAM0+0x2F80, 0x80);
 }
 
 void sub_801720C(int xPos, int yPos)

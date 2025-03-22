@@ -4,7 +4,7 @@
 ### @ BEGIN EVIDENCE PROFILE DESCRIPTIONS
 
 ### gGfxProfilesMaggeyByrde_description:
-- name: maggey_byrde
+- name: desc_maggey_byrde
   image:
     bpp: 4
   lz:
@@ -13,7 +13,7 @@
 
 
 ### gGfxProfilesWinstonPayne_description:
-- name: winston_payne
+- name: desc_winston_payne
   image:
     bpp: 4
   lz:
@@ -22,7 +22,7 @@
 
 
 ### gGfxProfilesDickGumshoe_description:
-- name: dick_gumshoe
+- name: desc_dick_gumshoe
   image:
     bpp: 4
   lz:
@@ -31,7 +31,7 @@
 
 
 ### gGfxProfilesDustinPrince_description:
-- name: dustin_prince
+- name: desc_dustin_prince
   image:
     bpp: 4
   lz:
@@ -40,7 +40,7 @@
 
 
 ### gGfxProfilesMayaFey0_description:
-- name: maya_fey_0
+- name: desc_maya_fey_0
   image:
     bpp: 4
   lz:
@@ -49,7 +49,7 @@
 
 
 ### gGfxEvidencePhoenixBadge_description:
-- name: phoenix_badge
+- name: desc_phoenix_badge
   image:
     bpp: 4
   lz:
@@ -58,7 +58,7 @@
 
 
 ### gGfxEvidencePhoenixCellphone0_description:
-- name: phoenix_cellphone_0
+- name: desc_phoenix_cellphone_0
   image:
     bpp: 4
   lz:
@@ -67,7 +67,7 @@
 
 
 ### gGfxEvidenceGenericAutopsyReport0_description:
-- name: generic_autopsy_report_0
+- name: desc_generic_autopsy_report_0
   image:
     bpp: 4
   lz:
@@ -76,7 +76,7 @@
 
 
 ### gGfxEvidenceGenericPhoto0_description:
-- name: generic_photo_0
+- name: desc_generic_photo_0
   image:
     bpp: 4
   lz:
@@ -85,7 +85,7 @@
 
 
 ### gGfxEvidenceBrokenGlasses_description:
-- name: broken_glasses
+- name: desc_broken_glasses
   image:
     bpp: 4
   lz:
@@ -94,7 +94,7 @@
 
 
 ### gGfxEvidenceGenericPhoto1_description:
-- name: generic_photo_1
+- name: desc_generic_photo_1
   image:
     bpp: 4
   lz:
@@ -103,7 +103,7 @@
 
 
 ### gGfxEvidenceDustinsBaseballGlove_description:
-- name: dustins_baseball_glove
+- name: desc_dustins_baseball_glove
   image:
     bpp: 4
   lz:
@@ -112,7 +112,7 @@
 
 
 ### gGfxEvidenceGenericLetter0_description:
-- name: generic_letter_0
+- name: desc_generic_letter_0
   image:
     bpp: 4
   lz:
@@ -121,7 +121,7 @@
 
 
 ### gGfxEvidenceGenericLetter1_description:
-- name: generic_letter_1
+- name: desc_generic_letter_1
   image:
     bpp: 4
   lz:
@@ -130,7 +130,7 @@
 
 
 ### gGfxEvidencePhoenixCellphone1_description:
-- name: phoenix_cellphone_1
+- name: desc_phoenix_cellphone_1
   image:
     bpp: 4
   lz:
@@ -139,7 +139,7 @@
 
 
 ### gGfxEvidencePhoenixBusinessCard0_description:
-- name: phoenix_business_card_0
+- name: desc_phoenix_business_card_0
   image:
     bpp: 4
   lz:
@@ -148,7 +148,7 @@
 
 
 ### gGfxEvidencePhoenixBusinessCard1_description:
-- name: phoenix_business_card_1
+- name: desc_phoenix_business_card_1
   image:
     bpp: 4
   lz:
@@ -157,7 +157,7 @@
 
 
 ### gGfxEvidenceMayasCellphone_description:
-- name: mayas_cellphone
+- name: desc_mayas_cellphone
   image:
     bpp: 4
   lz:
@@ -166,7 +166,7 @@
 
 
 ### gGfxProfilesRichardWellington_description:
-- name: richard_wellington
+- name: desc_richard_wellington
   image:
     bpp: 4
   lz:
@@ -175,7 +175,7 @@
 
 
 ### gGfxProfilesTurnerGrey0_description:
-- name: turner_grey_0
+- name: desc_turner_grey_0
   image:
     bpp: 4
   lz:
@@ -184,7 +184,7 @@
 
 
 ### gGfxProfilesTurnerGrey1_description:
-- name: turner_grey_1
+- name: desc_turner_grey_1
   image:
     bpp: 4
   lz:
@@ -193,7 +193,7 @@
 
 
 ### gGfxProfilesPearlFey0_description:
-- name: pearl_fey_0
+- name: desc_pearl_fey_0
   image:
     bpp: 4
   lz:
@@ -202,7 +202,7 @@
 
 
 ### gGfxProfilesPearlFey1_description:
-- name: pearl_fey_1
+- name: desc_pearl_fey_1
   image:
     bpp: 4
   lz:
@@ -211,7 +211,7 @@
 
 
 ### gGfxProfilesMayaFey1_description:
-- name: maya_fey_1
+- name: desc_maya_fey_1
   image:
     bpp: 4
   lz:
@@ -220,7 +220,7 @@
 
 
 ### gGfxProfilesMayaFey2_description:
-- name: maya_fey_2
+- name: desc_maya_fey_2
   image:
     bpp: 4
   lz:
@@ -229,7 +229,7 @@
 
 
 ### gGfxProfilesMiaFey_description:
-- name: mia_fey
+- name: desc_mia_fey
   image:
     bpp: 4
   lz:
@@ -238,7 +238,7 @@
 
 
 ### gGfxProfilesLottaHart0_description:
-- name: lotta_hart_0
+- name: desc_lotta_hart_0
   image:
     bpp: 4
   lz:
@@ -247,7 +247,7 @@
 
 
 ### gGfxProfilesMorganFey0_description:
-- name: morgan_fey_0
+- name: desc_morgan_fey_0
   image:
     bpp: 4
   lz:
@@ -256,7 +256,7 @@
 
 
 ### gGfxProfilesMorganFey1_description:
-- name: morgan_fey_1
+- name: desc_morgan_fey_1
   image:
     bpp: 4
   lz:
@@ -265,7 +265,7 @@
 
 
 ### gGfxProfilesMimiMiney_description:
-- name: mimi_miney
+- name: desc_mimi_miney
   image:
     bpp: 4
   lz:
@@ -274,7 +274,7 @@
 
 
 ### gGfxProfilesIniMiney0_description:
-- name: ini_miney_0
+- name: desc_ini_miney_0
   image:
     bpp: 4
   lz:
@@ -283,7 +283,7 @@
 
 
 ### gGfxProfilesIniMiney1_description:
-- name: ini_miney_1
+- name: desc_ini_miney_1
   image:
     bpp: 4
   lz:
@@ -292,7 +292,7 @@
 
 
 ### gGfxProfilesFranziskaVonKarma0_description:
-- name: franziska_von_karma_0
+- name: desc_franziska_von_karma_0
   image:
     bpp: 4
   lz:
@@ -301,7 +301,7 @@
 
 
 ### gGfxProfilesAmiFey_description:
-- name: ami_fey
+- name: desc_ami_fey
   image:
     bpp: 4
   lz:
@@ -310,7 +310,7 @@
 
 
 ### gGfxProfilesDrHotti_description:
-- name: dr_hotti
+- name: desc_dr_hotti
   image:
     bpp: 4
   lz:
@@ -319,7 +319,7 @@
 
 
 ### gGfxEvidenceGenericPhoto2_description:
-- name: generic_photo_2
+- name: desc_generic_photo_2
   image:
     bpp: 4
   lz:
@@ -328,7 +328,7 @@
 
 
 ### gGfxEvidenceGenericPhoto3_description:
-- name: generic_photo_3
+- name: desc_generic_photo_3
   image:
     bpp: 4
   lz:
@@ -337,7 +337,7 @@
 
 
 ### gGfxEvidenceGenericAutopsyReport1_description:
-- name: generic_autopsy_report_1
+- name: desc_generic_autopsy_report_1
   image:
     bpp: 4
   lz:
@@ -346,7 +346,7 @@
 
 
 ### gGfxEvidenceGenericAutopsyReport2_description:
-- name: generic_autopsy_report_2
+- name: desc_generic_autopsy_report_2
   image:
     bpp: 4
   lz:
@@ -355,7 +355,7 @@
 
 
 ### gGfxEvidenceNewspaperArticle_description:
-- name: newspaper_article
+- name: desc_newspaper_article
   image:
     bpp: 4
   lz:
@@ -364,7 +364,7 @@
 
 
 ### gGfxEvidenceGenericNewspaperClipping0_description:
-- name: generic_newspaper_clipping_0
+- name: desc_generic_newspaper_clipping_0
   image:
     bpp: 4
   lz:
@@ -373,7 +373,7 @@
 
 
 ### gGfxEvidenceGenericNewspaperClipping1_description:
-- name: generic_newspaper_clipping_1
+- name: desc_generic_newspaper_clipping_1
   image:
     bpp: 4
   lz:
@@ -382,7 +382,7 @@
 
 
 ### gGfxEvidenceMagatamaDischarged_description:
-- name: magatama_discharged
+- name: desc_magatama_discharged
   image:
     bpp: 4
   lz:
@@ -391,7 +391,7 @@
 
 
 ### gGfxEvidenceMagatamaCharged_description:
-- name: magatama_charged
+- name: desc_magatama_charged
   image:
     bpp: 4
   lz:
@@ -400,7 +400,7 @@
 
 
 ### gGfxEvidenceMeetingRoomScreen_description:
-- name: meeting_room_screen
+- name: desc_meeting_room_screen
   image:
     bpp: 4
   lz:
@@ -409,7 +409,7 @@
 
 
 ### gGfxEvidenceMeetingRoomKey_description:
-- name: meeting_room_key
+- name: desc_meeting_room_key
   image:
     bpp: 4
   lz:
@@ -418,7 +418,7 @@
 
 
 ### gGfxEvidenceGreysGun_description:
-- name: greys_gun
+- name: desc_greys_gun
   image:
     bpp: 4
   lz:
@@ -427,7 +427,7 @@
 
 
 ### gGfxEvidenceMayasKnife_description:
-- name: mayas_knife
+- name: desc_mayas_knife
   image:
     bpp: 4
   lz:
@@ -436,7 +436,7 @@
 
 
 ### gGfxEvidenceMayasRobe0_description:
-- name: mayas_robe_0
+- name: desc_mayas_robe_0
   image:
     bpp: 4
   lz:
@@ -445,7 +445,7 @@
 
 
 ### gGfxEvidenceMayasRobe1_description:
-- name: mayas_robe_1
+- name: desc_mayas_robe_1
   image:
     bpp: 4
   lz:
@@ -454,7 +454,7 @@
 
 
 ### gGfxEvidence001828C80_description:
-- name: 001828C8_0
+- name: desc_001828C8_0
   image:
     bpp: 4
   lz:
@@ -463,7 +463,7 @@
 
 
 ### gGfxEvidence001828C81_description:
-- name: 001828C8_1
+- name: desc_001828C8_1
   image:
     bpp: 4
   lz:
@@ -472,7 +472,7 @@
 
 
 ### gGfxEvidence001828C82_description:
-- name: 001828C8_2
+- name: desc_001828C8_2
   image:
     bpp: 4
   lz:
@@ -481,7 +481,7 @@
 
 
 ### gGfxEvidenceKurainSacredUrn0_description:
-- name: kurain_sacred_urn_0
+- name: desc_kurain_sacred_urn_0
   image:
     bpp: 4
   lz:
@@ -490,7 +490,7 @@
 
 
 ### gGfxEvidenceKurainSacredUrn1_description:
-- name: kurain_sacred_urn_1
+- name: desc_kurain_sacred_urn_1
   image:
     bpp: 4
   lz:
@@ -499,7 +499,7 @@
 
 
 ### gGfxEvidenceSwatchFromMayasRobe_description:
-- name: swatch_from_mayas_robe
+- name: desc_swatch_from_mayas_robe
   image:
     bpp: 4
   lz:
@@ -508,7 +508,7 @@
 
 
 ### gGfxEvidencePearlsBall_description:
-- name: pearls_ball
+- name: desc_pearls_ball
   image:
     bpp: 4
   lz:
@@ -517,7 +517,7 @@
 
 
 ### gGfxEvidenceLargeBox_description:
-- name: large_box
+- name: desc_large_box
   image:
     bpp: 4
   lz:
@@ -526,7 +526,7 @@
 
 
 ### gGfxProfilesIniMiney2_description:
-- name: ini_miney_2
+- name: desc_ini_miney_2
   image:
     bpp: 4
   lz:
@@ -535,7 +535,7 @@
 
 
 ### gGfxEvidenceNoteFromTheSafe0_description:
-- name: note_from_the_safe_0
+- name: desc_note_from_the_safe_0
   image:
     bpp: 4
   lz:
@@ -544,7 +544,7 @@
 
 
 ### gGfxProfilesMayaFey3_description:
-- name: maya_fey_3
+- name: desc_maya_fey_3
   image:
     bpp: 4
   lz:
@@ -553,7 +553,7 @@
 
 
 ### gGfxProfilesMaximillionGalactica_description:
-- name: maximillion_galactica
+- name: desc_maximillion_galactica
   image:
     bpp: 4
   lz:
@@ -562,7 +562,7 @@
 
 
 ### gGfxProfilesFranziskaVonKarma1_description:
-- name: franziska_von_karma_1
+- name: desc_franziska_von_karma_1
   image:
     bpp: 4
   lz:
@@ -571,7 +571,7 @@
 
 
 ### gGfxProfilesRussellBerry_description:
-- name: russell_berry
+- name: desc_russell_berry
   image:
     bpp: 4
   lz:
@@ -580,7 +580,7 @@
 
 
 ### gGfxProfilesReginaBerry_description:
-- name: regina_berry
+- name: desc_regina_berry
   image:
     bpp: 4
   lz:
@@ -589,7 +589,7 @@
 
 
 ### gGfxProfilesBen0_description:
-- name: ben_0
+- name: desc_ben_0
   image:
     bpp: 4
   lz:
@@ -598,7 +598,7 @@
 
 
 ### gGfxProfilesBen1_description:
-- name: ben_1
+- name: desc_ben_1
   image:
     bpp: 4
   lz:
@@ -607,7 +607,7 @@
 
 
 ### gGfxProfilesMoe_description:
-- name: moe
+- name: desc_moe
   image:
     bpp: 4
   lz:
@@ -616,7 +616,7 @@
 
 
 ### gGfxProfilesAcro0_description:
-- name: acro_0
+- name: desc_acro_0
   image:
     bpp: 4
   lz:
@@ -625,7 +625,7 @@
 
 
 ### gGfxProfilesAcro1_description:
-- name: acro_1
+- name: desc_acro_1
   image:
     bpp: 4
   lz:
@@ -634,7 +634,7 @@
 
 
 ### gGfxProfilesBat_description:
-- name: bat
+- name: desc_bat
   image:
     bpp: 4
   lz:
@@ -643,7 +643,7 @@
 
 
 ### gGfxEvidenceGenericPhoto4_description:
-- name: generic_photo_4
+- name: desc_generic_photo_4
   image:
     bpp: 4
   lz:
@@ -652,7 +652,7 @@
 
 
 ### gGfxEvidenceMaxSilkHat_description:
-- name: max_silk_hat
+- name: desc_max_silk_hat
   image:
     bpp: 4
   lz:
@@ -661,7 +661,7 @@
 
 
 ### gGfxEvidenceGenericPhoto5_description:
-- name: generic_photo_5
+- name: desc_generic_photo_5
   image:
     bpp: 4
   lz:
@@ -670,7 +670,7 @@
 
 
 ### gGfxEvidenceGenericLetter2_description:
-- name: generic_letter_2
+- name: desc_generic_letter_2
   image:
     bpp: 4
   lz:
@@ -679,7 +679,7 @@
 
 
 ### gGfxEvidenceMaxPoster_description:
-- name: max_poster
+- name: desc_max_poster
   image:
     bpp: 4
   lz:
@@ -688,7 +688,7 @@
 
 
 ### gGfxEvidenceBrokenBottle_description:
-- name: broken_bottle
+- name: desc_broken_bottle
   image:
     bpp: 4
   lz:
@@ -697,7 +697,7 @@
 
 
 ### gGfxEvidenceTrilo_description:
-- name: trilo
+- name: desc_trilo
   image:
     bpp: 4
   lz:
@@ -706,7 +706,7 @@
 
 
 ### gGfxEvidenceMoney_description:
-- name: money
+- name: desc_money
   image:
     bpp: 4
   lz:
@@ -715,7 +715,7 @@
 
 
 ### gGfxEvidenceGenericAutopsyReport3_description:
-- name: generic_autopsy_report_3
+- name: desc_generic_autopsy_report_3
   image:
     bpp: 4
   lz:
@@ -724,7 +724,7 @@
 
 
 ### gGfxEvidenceLargeChest_description:
-- name: large_chest
+- name: desc_large_chest
   image:
     bpp: 4
   lz:
@@ -733,7 +733,7 @@
 
 
 ### gGfxEvidencePepper_description:
-- name: pepper
+- name: desc_pepper
   image:
     bpp: 4
   lz:
@@ -742,7 +742,7 @@
 
 
 ### gGfxEvidenceEngagementRing_description:
-- name: engagement_ring
+- name: desc_engagement_ring
   image:
     bpp: 4
   lz:
@@ -751,7 +751,7 @@
 
 
 ### gGfxEvidenceGenericPhoto6_description:
-- name: generic_photo_6
+- name: desc_generic_photo_6
   image:
     bpp: 4
   lz:
@@ -760,7 +760,7 @@
 
 
 ### gGfxEvidenceGenericPhoto7_description:
-- name: generic_photo_7
+- name: desc_generic_photo_7
   image:
     bpp: 4
   lz:
@@ -769,7 +769,7 @@
 
 
 ### gGfxEvidenceThreateningNoteTorn_description:
-- name: threatening_note_torn
+- name: desc_threatening_note_torn
   image:
     bpp: 4
   lz:
@@ -778,7 +778,7 @@
 
 
 ### gGfxEvidenceThreateningNoteFull0_description:
-- name: threatening_note_full_0
+- name: desc_threatening_note_full_0
   image:
     bpp: 4
   lz:
@@ -787,7 +787,7 @@
 
 
 ### gGfxEvidenceThreateningNoteFull1_description:
-- name: threatening_note_full_1
+- name: desc_threatening_note_full_1
   image:
     bpp: 4
   lz:
@@ -796,7 +796,7 @@
 
 
 ### gGfxEvidenceThreateningNoteFull2_description:
-- name: threatening_note_full_2
+- name: desc_threatening_note_full_2
   image:
     bpp: 4
   lz:
@@ -805,7 +805,7 @@
 
 
 ### gGfxEvidenceLeon_description:
-- name: leon
+- name: desc_leon
   image:
     bpp: 4
   lz:
@@ -814,7 +814,7 @@
 
 
 ### gGfxEvidenceReginasWest_description:
-- name: reginas_west
+- name: desc_reginas_west
   image:
     bpp: 4
   lz:
@@ -823,7 +823,7 @@
 
 
 ### gGfxEvidenceBloodyScarf_description:
-- name: bloody_scarf
+- name: desc_bloody_scarf
   image:
     bpp: 4
   lz:
@@ -832,7 +832,7 @@
 
 
 ### gGfxEvidenceRegent_description:
-- name: regent
+- name: desc_regent
   image:
     bpp: 4
   lz:
@@ -841,7 +841,7 @@
 
 
 ### gGfxEvidenceThreateningNoteFull3_description:
-- name: threatening_note_full_3
+- name: desc_threatening_note_full_3
   image:
     bpp: 4
   lz:
@@ -850,7 +850,7 @@
 
 
 ### gGfxEvidenceMilk_description:
-- name: milk
+- name: desc_milk
   image:
     bpp: 4
   lz:
@@ -859,7 +859,7 @@
 
 
 ### gGfxEvidencePlayingCard_description:
-- name: playing_card
+- name: desc_playing_card
   image:
     bpp: 4
   lz:
@@ -868,7 +868,7 @@
 
 
 ### gGfxEvidencePlayingCards_description:
-- name: playing_cards
+- name: desc_playing_cards
   image:
     bpp: 4
   lz:
@@ -877,7 +877,7 @@
 
 
 ### gGfxEvidenceMoesGrapes_description:
-- name: moes_grapes
+- name: desc_moes_grapes
   image:
     bpp: 4
   lz:
@@ -886,7 +886,7 @@
 
 
 ### gGfxProfilesWillPowers_description:
-- name: will_powers
+- name: desc_will_powers
   image:
     bpp: 4
   lz:
@@ -895,7 +895,7 @@
 
 
 ### gGfxProfilesWendyOldbag_description:
-- name: wendy_oldbag
+- name: desc_wendy_oldbag
   image:
     bpp: 4
   lz:
@@ -904,7 +904,7 @@
 
 
 ### gGfxProfilesLottaHart1_description:
-- name: lotta_hart_1
+- name: desc_lotta_hart_1
   image:
     bpp: 4
   lz:
@@ -913,7 +913,7 @@
 
 
 ### gGfxProfilesJuanCorrida_description:
-- name: juan_corrida
+- name: desc_juan_corrida
   image:
     bpp: 4
   lz:
@@ -922,7 +922,7 @@
 
 
 ### gGfxProfilesMattEngarde0_description:
-- name: matt_engarde_0
+- name: desc_matt_engarde_0
   image:
     bpp: 4
   lz:
@@ -931,7 +931,7 @@
 
 
 ### gGfxProfilesMattEngarde1_description:
-- name: matt_engarde_1
+- name: desc_matt_engarde_1
   image:
     bpp: 4
   lz:
@@ -940,7 +940,7 @@
 
 
 ### gGfxProfilesAdrianAndrews_description:
-- name: adrian_andrews
+- name: desc_adrian_andrews
   image:
     bpp: 4
   lz:
@@ -949,7 +949,7 @@
 
 
 ### gGfxProfilesCelesteInpax0_description:
-- name: celeste_inpax_0
+- name: desc_celeste_inpax_0
   image:
     bpp: 4
   lz:
@@ -958,7 +958,7 @@
 
 
 ### gGfxProfilesCelesteInpax1_description:
-- name: celeste_inpax_1
+- name: desc_celeste_inpax_1
   image:
     bpp: 4
   lz:
@@ -967,7 +967,7 @@
 
 
 ### gGfxProfilesDisguisedShellyDeKiller_description:
-- name: disguised_shelly_de_killer
+- name: desc_disguised_shelly_de_killer
   image:
     bpp: 4
   lz:
@@ -976,7 +976,7 @@
 
 
 ### gGfxProfilesShellyDeKiller_description:
-- name: shelly_de_killer
+- name: desc_shelly_de_killer
   image:
     bpp: 4
   lz:
@@ -985,7 +985,7 @@
 
 
 ### gGfxProfilesMilesEdgeworth_description:
-- name: miles_edgeworth
+- name: desc_miles_edgeworth
   image:
     bpp: 4
   lz:
@@ -994,7 +994,7 @@
 
 
 ### gGfxEvidenceAdmissionTicket_description:
-- name: admission_ticket
+- name: desc_admission_ticket
   image:
     bpp: 4
   lz:
@@ -1003,7 +1003,7 @@
 
 
 ### gGfxEvidenceTransceiver0_description:
-- name: transceiver_0
+- name: desc_transceiver_0
   image:
     bpp: 4
   lz:
@@ -1012,7 +1012,7 @@
 
 
 ### gGfxEvidenceTransceiver1_description:
-- name: transceiver_1
+- name: desc_transceiver_1
   image:
     bpp: 4
   lz:
@@ -1021,7 +1021,7 @@
 
 
 ### gGfxEvidenceLottasCameraCase0_description:
-- name: lottas_camera_case_0
+- name: desc_lottas_camera_case_0
   image:
     bpp: 4
   lz:
@@ -1030,7 +1030,7 @@
 
 
 ### gGfxEvidenceLottasCameraCase1_description:
-- name: lottas_camera_case_1
+- name: desc_lottas_camera_case_1
   image:
     bpp: 4
   lz:
@@ -1039,7 +1039,7 @@
 
 
 ### gGfxEvidenceGenericPhoto8_description:
-- name: generic_photo_8
+- name: desc_generic_photo_8
   image:
     bpp: 4
   lz:
@@ -1048,7 +1048,7 @@
 
 
 ### gGfxEvidenceGuitarCase0_description:
-- name: guitar_case_0
+- name: desc_guitar_case_0
   image:
     bpp: 4
   lz:
@@ -1057,7 +1057,7 @@
 
 
 ### gGfxEvidenceGuitarCase1_description:
-- name: guitar_case_1
+- name: desc_guitar_case_1
   image:
     bpp: 4
   lz:
@@ -1066,7 +1066,7 @@
 
 
 ### gGfxEvidenceTomatoJuice0_description:
-- name: tomato_juice_0
+- name: desc_tomato_juice_0
   image:
     bpp: 4
   lz:
@@ -1075,7 +1075,7 @@
 
 
 ### gGfxEvidenceBloodyButton_description:
-- name: bloody_button
+- name: desc_bloody_button
   image:
     bpp: 4
   lz:
@@ -1084,7 +1084,7 @@
 
 
 ### gGfxEvidenceGenericPhoto9_description:
-- name: generic_photo_9
+- name: desc_generic_photo_9
   image:
     bpp: 4
   lz:
@@ -1093,7 +1093,7 @@
 
 
 ### gGfxEvidenceGenericEnvelope0_description:
-- name: generic_envelope_0
+- name: desc_generic_envelope_0
   image:
     bpp: 4
   lz:
@@ -1102,7 +1102,7 @@
 
 
 ### gGfxEvidenceGenericEnvelope1_description:
-- name: generic_envelope_1
+- name: desc_generic_envelope_1
   image:
     bpp: 4
   lz:
@@ -1111,7 +1111,7 @@
 
 
 ### gGfxEvidenceJuansAutograph_description:
-- name: juans_autograph
+- name: desc_juans_autograph
   image:
     bpp: 4
   lz:
@@ -1120,7 +1120,7 @@
 
 
 ### gGfxEvidenceGossipColumn_description:
-- name: gossip_column
+- name: desc_gossip_column
   image:
     bpp: 4
   lz:
@@ -1129,7 +1129,7 @@
 
 
 ### gGfxEvidenceGenericAutopsyReport4_description:
-- name: generic_autopsy_report_4
+- name: desc_generic_autopsy_report_4
   image:
     bpp: 4
   lz:
@@ -1138,7 +1138,7 @@
 
 
 ### gGfxEvidenceBloodyKnife_description:
-- name: bloody_knife
+- name: desc_bloody_knife
   image:
     bpp: 4
   lz:
@@ -1147,7 +1147,7 @@
 
 
 ### gGfxEvidenceGenericPhoto10_description:
-- name: generic_photo_10
+- name: desc_generic_photo_10
   image:
     bpp: 4
   lz:
@@ -1156,7 +1156,7 @@
 
 
 ### gGfxEvidenceShellysCallingCard_description:
-- name: shellys_calling_card
+- name: desc_shellys_calling_card
   image:
     bpp: 4
   lz:
@@ -1165,7 +1165,7 @@
 
 
 ### gGfxEvidenceNoteFromTheSafe1_description:
-- name: note_from_the_safe_1
+- name: desc_note_from_the_safe_1
   image:
     bpp: 4
   lz:
@@ -1174,7 +1174,7 @@
 
 
 ### gGfxEvidenceVideoCamera_description:
-- name: video_camera
+- name: desc_video_camera
   image:
     bpp: 4
   lz:
@@ -1183,7 +1183,7 @@
 
 
 ### gGfxEvidenceVideoTransmitter_description:
-- name: video_transmitter
+- name: desc_video_transmitter
   image:
     bpp: 4
   lz:
@@ -1192,7 +1192,7 @@
 
 
 ### gGfxEvidenceImportedBear_description:
-- name: imported_bear
+- name: desc_imported_bear
   image:
     bpp: 4
   lz:
@@ -1201,7 +1201,7 @@
 
 
 ### gGfxEvidenceReceipt_description:
-- name: receipt
+- name: desc_receipt
   image:
     bpp: 4
   lz:
@@ -1210,7 +1210,7 @@
 
 
 ### gGfxEvidenceBearPuzzle0_description:
-- name: bear_puzzle_0
+- name: desc_bear_puzzle_0
   image:
     bpp: 4
   lz:
@@ -1219,7 +1219,7 @@
 
 
 ### gGfxEvidenceBearPuzzle1_description:
-- name: bear_puzzle_1
+- name: desc_bear_puzzle_1
   image:
     bpp: 4
   lz:
@@ -1228,7 +1228,7 @@
 
 
 ### gGfxEvidencePhotoOfCeleste_description:
-- name: photo_of_celeste
+- name: desc_photo_of_celeste
   image:
     bpp: 4
   lz:
@@ -1237,7 +1237,7 @@
 
 
 ### gGfxEvidenceNoteFromTheSafe2_description:
-- name: note_from_the_safe_2
+- name: desc_note_from_the_safe_2
   image:
     bpp: 4
   lz:
@@ -1246,7 +1246,7 @@
 
 
 ### gGfxEvidenceNoteFromTheSafe3_description:
-- name: note_from_the_safe_3
+- name: desc_note_from_the_safe_3
   image:
     bpp: 4
   lz:
@@ -1255,7 +1255,7 @@
 
 
 ### gGfxEvidenceGenericAffidavit0_description:
-- name: generic_affidavit_0
+- name: desc_generic_affidavit_0
   image:
     bpp: 4
   lz:
@@ -1264,7 +1264,7 @@
 
 
 ### gGfxEvidenceGenericAffidavit1_description:
-- name: generic_affidavit_1
+- name: desc_generic_affidavit_1
   image:
     bpp: 4
   lz:
@@ -1273,7 +1273,7 @@
 
 
 ### gGfxEvidenceBearClock_description:
-- name: bear_clock
+- name: desc_bear_clock
   image:
     bpp: 4
   lz:
@@ -1282,7 +1282,7 @@
 
 
 ### gGfxEvidenceFrequencyDetector_description:
-- name: frequency_detector
+- name: desc_frequency_detector
   image:
     bpp: 4
   lz:
@@ -1291,7 +1291,7 @@
 
 
 ### gGfxEvidenceShoe_description:
-- name: shoe
+- name: desc_shoe
   image:
     bpp: 4
   lz:
@@ -1300,7 +1300,7 @@
 
 
 ### gGfxEvidenceBellboyUniform0_description:
-- name: bellboy_uniform_0
+- name: desc_bellboy_uniform_0
   image:
     bpp: 4
   lz:
@@ -1309,7 +1309,7 @@
 
 
 ### gGfxEvidenceBellboyUniform1_description:
-- name: bellboy_uniform_1
+- name: desc_bellboy_uniform_1
   image:
     bpp: 4
   lz:
@@ -1318,7 +1318,7 @@
 
 
 ### gGfxEvidenceGenericVideo0_description:
-- name: generic_video_0
+- name: desc_generic_video_0
   image:
     bpp: 4
   lz:
@@ -1327,7 +1327,7 @@
 
 
 ### gGfxEvidenceGenericVideo1_description:
-- name: generic_video_1
+- name: desc_generic_video_1
   image:
     bpp: 4
   lz:
@@ -1336,7 +1336,7 @@
 
 
 ### gGfxEvidenceShellyPistol0_description:
-- name: shelly_pistol_0
+- name: desc_shelly_pistol_0
   image:
     bpp: 4
   lz:
@@ -1345,7 +1345,7 @@
 
 
 ### gGfxEvidenceShellyPistol1_description:
-- name: shelly_pistol_1
+- name: desc_shelly_pistol_1
   image:
     bpp: 4
   lz:
@@ -1354,7 +1354,7 @@
 
 
 ### gGfxEvidenceFranziskasWhip_description:
-- name: franziskas_whip
+- name: desc_franziskas_whip
   image:
     bpp: 4
   lz:
@@ -1363,7 +1363,7 @@
 
 
 ### gGfxEvidenceTrackingDevice_description:
-- name: tracking_device
+- name: desc_tracking_device
   image:
     bpp: 4
   lz:
@@ -1372,7 +1372,7 @@
 
 
 ### gGfxEvidenceGumshoesCoat_description:
-- name: gumshoes_coat
+- name: desc_gumshoes_coat
   image:
     bpp: 4
   lz:
@@ -1381,7 +1381,7 @@
 
 
 ### gGfxEvidenceGatewaterHotelButton_description:
-- name: gatewater_hotel_button
+- name: desc_gatewater_hotel_button
   image:
     bpp: 4
   lz:
@@ -1390,7 +1390,7 @@
 
 
 ### gGfxEvidenceGenericPhoto11_description:
-- name: generic_photo_11
+- name: desc_generic_photo_11
   image:
     bpp: 4
   lz:
@@ -1399,7 +1399,7 @@
 
 
 ### gGfxEvidenceTomatoJuice1_description:
-- name: tomato_juice_1
+- name: desc_tomato_juice_1
   image:
     bpp: 4
   lz:

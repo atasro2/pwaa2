@@ -319,7 +319,7 @@ void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16 bgId, u16 intensity, u16 
     u16 * benchpal;
     u32 i;
     bgId -= 4;
-    benchpal = bgId < 2 ? (u16*)gPalCounselBench : (u16*)gPalWitnessBench;
+    benchpal = bgId < 2 ? (u16*)GFX_PALETTE_counsel_bench : (u16*)GFX_PALETTE_witness_bench;
     DmaCopy16(3, benchpal, pal, 0x20);
     for(i = 0; i < 0x10; i++) {
         pal[i] = AdjustColorByMode(pal[i], intensity, mode);
@@ -330,8 +330,8 @@ void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16 bgId, u16 intensity, u16 
 void LoadAndAdjustAnimation10PaletteByMode(u16 intensity, u16 mode)
 {
     u16 pal[0x10];
-    u32 * framedata = (u32*)gGfxSeqAnimation10;
-    u16 * spritepal = (u16*)(gGfxPixAnimationTileset01 + 4 + *(framedata+1));
+    u32 * framedata = (u32*)GFX_ANIMATION_SEQUENCE_animation10;
+    u16 * spritepal = (u16*)(GFX_ANIMATION_TILES_tileset01 + 4 + *(framedata+1));
     u32 i;
     DmaCopy16(3, spritepal, pal, 0x20);
     for(i = 0; i < 0x10; i++) {
@@ -570,7 +570,7 @@ void SetTextboxNametag(u32 nametagId, u32 rightSide)
     j = (nametagId % 5);
     i *= 0x800;
     j *= 0xC0;
-    tiles = gGfx4bppNametags + j + i;
+    tiles = GFX_IMG_nametags + j + i;
     DmaCopy16(3, tiles, VRAM+0xA80, 0xC0);
     DmaCopy16(3, tiles+0x400, VRAM+0xB40, 0xC0);
     if(rightSide)

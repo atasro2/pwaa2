@@ -6,7 +6,7 @@ extern struct FlowerPetal gFlowerPetals[8];
 
 extern u8 * gPsycheLockChainTilemaps[];
 
-extern u8 gGfxPsycheLockChainsTiles[];
+extern u8 GFX_IMG_psyche_lock_chain_tileset[];
 
 // ??
 extern void LoadAndAdjustBGPaletteByMode(u16,u16,u16);

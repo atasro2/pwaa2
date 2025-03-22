@@ -27,26 +27,26 @@ s16 gPsycheLockLockPositions[] = { // pairs of psychelock X/Y coordinates
 };
 
 u8 * gPsycheLockChainTilemaps[] = {
-    gMapPsycheLockChains01,
-    gMapPsycheLockChains02,
-    gMapPsycheLockChains03,
-    gMapPsycheLockChains04,
-    gMapPsycheLockChains05,
-    gMapPsycheLockChains06,
-    gMapPsycheLockChains07,
-    gMapPsycheLockChains08,
-    gMapPsycheLockChains09,
-    gMapPsycheLockChains10,
-    gMapPsycheLockChains11,
-    gMapPsycheLockChains12,
-    gMapPsycheLockChains13,
-    gMapPsycheLockChains14,
-    gMapPsycheLockChains15,
-    gMapPsycheLockChains16,
-    gMapPsycheLockChains17,
-    gMapPsycheLockChains18,
-    gMapPsycheLockChains19,
-    gMapPsycheLockChains20
+    GFX_TILEMAP_psyche_lock_chain_animation_01,
+    GFX_TILEMAP_psyche_lock_chain_animation_02,
+    GFX_TILEMAP_psyche_lock_chain_animation_03,
+    GFX_TILEMAP_psyche_lock_chain_animation_04,
+    GFX_TILEMAP_psyche_lock_chain_animation_05,
+    GFX_TILEMAP_psyche_lock_chain_animation_06,
+    GFX_TILEMAP_psyche_lock_chain_animation_07,
+    GFX_TILEMAP_psyche_lock_chain_animation_08,
+    GFX_TILEMAP_psyche_lock_chain_animation_09,
+    GFX_TILEMAP_psyche_lock_chain_animation_10,
+    GFX_TILEMAP_psyche_lock_chain_animation_11,
+    GFX_TILEMAP_psyche_lock_chain_animation_12,
+    GFX_TILEMAP_psyche_lock_chain_animation_13,
+    GFX_TILEMAP_psyche_lock_chain_animation_14,
+    GFX_TILEMAP_psyche_lock_chain_animation_15,
+    GFX_TILEMAP_psyche_lock_chain_animation_16,
+    GFX_TILEMAP_psyche_lock_chain_animation_17,
+    GFX_TILEMAP_psyche_lock_chain_animation_18,
+    GFX_TILEMAP_psyche_lock_chain_animation_19,
+    GFX_TILEMAP_psyche_lock_chain_animation_20
 };
 void CopyPsycheLockChainBlocksToBGMapBuffer(struct PsycheLockChains * chains);
 
@@ -128,7 +128,7 @@ void LoadPsycheLockChainGraphics(void)
     DmaFill16(3, 0, BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
     DmaFill16(3, 0, BG_SCREEN_ADDR(31), BG_SCREEN_SIZE);
     m4aSoundVSyncOff();
-    LZ77UnCompVram(gGfxPsycheLockChainsTiles, BG_CHAR_ADDR(1));
+    LZ77UnCompVram(GFX_IMG_psyche_lock_chain_tileset, BG_CHAR_ADDR(1));
     m4aSoundVSyncOn();
     DmaCopy16(3, gPsycheLockChainPalettes[0], BG_PLTT+0x1C0, 0x20);
     DmaCopy16(3, gPsycheLockChainPalettes[1], BG_PLTT+0x1E0, 0x20);
@@ -823,10 +823,10 @@ void SetPsycheLockStopPresentButtonsState(u32 state)
 
 void LoadPsycheLockButtonGraphics(void)
 {
-    DmaCopy16(3, gGfxInvestigationStopButton, OBJ_VRAM0+0x3000, 0x200);
+    DmaCopy16(3, GFX_IMG_stop_button, OBJ_VRAM0+0x3000, 0x200);
     // Only load Present button graphics
-    DmaCopy16(3, gGfxPressPresentButtons+0x200, OBJ_VRAM0+0x3200, 0x200);
-    DmaCopy16(3, gPalPressPresentButtons, OBJ_PLTT+0xA0, 0x20);
+    DmaCopy16(3, GFX_IMG_press_present_buttons+0x200, OBJ_VRAM0+0x3200, 0x200);
+    DmaCopy16(3, GFX_PALETTE_press_present_buttons, OBJ_PLTT+0xA0, 0x20);
 }
 
 void AnimatePsycheLockStopBresentButtons(void)

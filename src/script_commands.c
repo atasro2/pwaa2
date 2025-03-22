@@ -34,9 +34,9 @@ const u8 gSoundCueTable[] = {
    probably left over from when the scroll
    was more than a single graphic */
 u8 * const gCourtScrollGfxPointers[] = {
-    gPalCourtScroll,
-    gPalCourtScroll,
-    gPalCourtScroll,
+    GFX_PALETTE_court_scroll,
+    GFX_PALETTE_court_scroll,
+    GFX_PALETTE_court_scroll,
 };
 
 const u8 gTextboxDownArrowTileIndexes[] = {
@@ -133,7 +133,7 @@ bool32 Command02(struct ScriptContext * scriptCtx)
         if(scriptCtx->currentToken == 7)
         {
             scriptCtx->scriptPtr++;
-            DmaCopy16(3, &gCharSet[226*0x80], OBJ_VRAM0 + 0x1F80, 0x80);
+            DmaCopy16(3, &GFX_IMG_charset[226*0x80], OBJ_VRAM0 + 0x1F80, 0x80);
             scriptCtx->fullscreenCursorPos = 0;
             scriptCtx->flags |= SCRIPT_FULLSCREEN;
             scriptCtx->prevTextSpeed = scriptCtx->textSpeed;
@@ -993,10 +993,10 @@ bool32 Command29(struct ScriptContext *scriptCtx)
     }
     else if (*scriptCtx->scriptPtr == 4)
     {
-        DmaCopy16(3, gGfxPressPresentButtons, OBJ_VRAM0 + 0x3000, 0x400);
-        DmaCopy16(3, gPalPressPresentButtons, OBJ_PLTT+0xA0, 0x20);
-        DmaCopy16(3, gGfx4bppTestimonyArrows, 0x1A0, 0x80);
-        DmaCopy16(3, gGfx4bppTestimonyArrows + 12 * TILE_SIZE_4BPP, 0x220, 0x80);
+        DmaCopy16(3, GFX_IMG_press_present_buttons, OBJ_VRAM0 + 0x3000, 0x400);
+        DmaCopy16(3, GFX_PALETTE_press_present_buttons, OBJ_PLTT+0xA0, 0x20);
+        DmaCopy16(3, GFX_IMG_left_right_arrows, 0x1A0, 0x80);
+        DmaCopy16(3, GFX_IMG_left_right_arrows + 12 * TILE_SIZE_4BPP, 0x220, 0x80);
         gTestimony.pressPromptY = 0xE0;
         gTestimony.presentPromptY = 0xE0;
         gTestimony.displayState = 0;
@@ -1269,63 +1269,63 @@ struct MapMarkerSprite
 
 const struct MapMarkerSprite sMapMarkerSprites[] = {
     {
-        .tiles = gGfxMapMarkersKiller,
+        .tiles = GFX_IMG_killer,
         .size = 0x80,
         .attr0 = 0x0000,
         .attr1 = 0x4000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gGfxMapMarkersVictim,
+        .tiles = GFX_IMG_victim,
         .size = 0x80,
         .attr0 = 0x0000,
         .attr1 = 0x4000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gGfxMapMarkersGreen,
+        .tiles = GFX_IMG_green,
         .size = 0x80,
         .attr0 = 0x0000,
         .attr1 = 0x4000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gGfxMapMarkersDoubleDoorDiagram,
+        .tiles = GFX_IMG_double_door_diagram,
         .size = 0x400,
         .attr0 = 0x8000,
         .attr1 = 0xc000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gGfxMapMarkersFoldingScreen,
+        .tiles = GFX_IMG_folding_screen,
         .size = 0x100,
         .attr0 = 0x8000,
         .attr1 = 0x8000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gGfxMapMarkersFoldingScreen+0x100,
+        .tiles = GFX_IMG_folding_screen+0x100,
         .size = 0x100,
         .attr0 = 0x8000,
         .attr1 = 0x8000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gGfxMapMarkersFoldingScreen+0x200,
+        .tiles = GFX_IMG_folding_screen+0x200,
         .size = 0x100,
         .attr0 = 0x8000,
         .attr1 = 0x8000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gGfxMapMarkersGreen,
+        .tiles = GFX_IMG_green,
         .size = 0x80,
         .attr0 = 0x0000,
         .attr1 = 0x4000,
         .attr2 = 0x0000,
     },
     {
-        .tiles = gGfxMapMarkersRedDot,
+        .tiles = GFX_IMG_red_dot,
         .size = 0x20,
         .attr0 = 0x0000,
         .attr1 = 0x0000,
@@ -1353,7 +1353,7 @@ bool32 Command39(struct ScriptContext *scriptCtx)
             mapMarker->id = id;
             mapMarker->vramPtr = scriptCtx->mapMarkerVramPtr;
             DmaCopy16(3, sMapMarkerSprites[id].tiles, mapMarker->vramPtr, size = sMapMarkerSprites[id].size); // weird shit going on here
-            DmaCopy16(3, gPalMapMarkers, OBJ_PLTT + 0xC0, 0x20);
+            DmaCopy16(3, GFX_PALETTE_palette, OBJ_PLTT + 0xC0, 0x20);
             mapMarker->oamIdx = oamIdx;
             oamObject = &gOamObjects[oamIdx];
 
@@ -1474,8 +1474,8 @@ bool32 Command3D(struct ScriptContext *scriptCtx)
 bool32 Command3E(struct ScriptContext *scriptCtx)
 {
     scriptCtx->scriptPtr++;
-    DmaCopy16(3, gGfxExamineCursor, OBJ_VRAM0 + 0x1F80, 0x80);
-    DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT + 0x100, 0x20);
+    DmaCopy16(3, GFX_IMG_examine_cursor, OBJ_VRAM0 + 0x1F80, 0x80);
+    DmaCopy16(3, &GFX_PALETTE_examine_cursor_00[0], OBJ_PLTT + 0x100, 0x20);
     gInvestigation.pointerX = 0xF0;
     gInvestigation.pointerY = 0x30;
     gInvestigation.pointerColorCounter = 0;
@@ -1975,7 +1975,7 @@ bool32 Command3F(struct ScriptContext *scriptCtx)
             else
                 ChangeScriptSection(spotselect->defaultSection);
             scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
-            DmaCopy16(3, &gPalExamineCursors[0], OBJ_PLTT + 0x100, 0x20);
+            DmaCopy16(3, &GFX_PALETTE_examine_cursor_00[0], OBJ_PLTT + 0x100, 0x20);
             PlaySE(SE001_MENU_CONFIRM);
             scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
             gOamObjects[OAM_IDX_POINTER].attr0 = SPRITE_ATTR0(investigation->pointerY, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_SQUARE);
@@ -1989,7 +1989,7 @@ bool32 Command3F(struct ScriptContext *scriptCtx)
             investigation->pointerColorCounter = 0;
             investigation->pointerColor++;
             investigation->pointerColor &= 0xF;
-            DmaCopy16(3, &gPalExamineCursors[investigation->pointerColor * 0x20], OBJ_PLTT + 0x100, 0x20);
+            DmaCopy16(3, &GFX_PALETTE_examine_cursor_00[investigation->pointerColor * 0x20], OBJ_PLTT + 0x100, 0x20);
         }
     }
     scriptCtx->flags |= SCRIPT_SPOTSELECT_SELECTION_MADE;
@@ -2108,15 +2108,15 @@ bool32 Command44(struct ScriptContext * scriptCtx)
     BACKUP_PROCESS();
     if(*scriptCtx->scriptPtr) 
     {
-        DmaCopy16(3, gGfxGuilty1, OBJ_VRAM0+0x3400, 0x1000);
-        DmaCopy16(3, gPalGuilty, OBJ_PLTT+0xA0, 0x20);
+        DmaCopy16(3, GFX_IMG_guilty1, OBJ_VRAM0+0x3400, 0x1000);
+        DmaCopy16(3, GFX_PALETTE_guilty, OBJ_PLTT+0xA0, 0x20);
         SET_PROCESS(VERDICT_PROCESS,0,0,0);
     }
     else 
     {
-        DmaCopy16(3, gGfxNotGuilty1, OBJ_VRAM0+0x3400, 0x800);
-        DmaCopy16(3, gGfxGuiltyNotGuilty2, OBJ_VRAM0+0x3C00, 0x800);
-        DmaCopy16(3, gPalNotGuilty, OBJ_PLTT+0xA0, 0x20);
+        DmaCopy16(3, GFX_IMG_not_guilty1, OBJ_VRAM0+0x3400, 0x800);
+        DmaCopy16(3, GFX_IMG_guilty_not_guilty2, OBJ_VRAM0+0x3C00, 0x800);
+        DmaCopy16(3, GFX_PALETTE_not_guilty, OBJ_PLTT+0xA0, 0x20);
         SET_PROCESS(VERDICT_PROCESS,0,0,1);
     }
     scriptCtx->scriptPtr++;
@@ -2145,18 +2145,18 @@ bool32 Command46(struct ScriptContext * scriptCtx)
         default:
         case 0:
             gMain.horizontolBGScrollSpeed = 14;
-            r6 = gPal_BG014_BustupPhoenix;
-            r3 = (u16 *)gMap_BG014_BustupPhoenix;
+            r6 = GFX_PALETTE_bustup_phoenix;
+            r3 = (u16 *)GFX_TILEMAP_bustup_phoenix;
             break;
         case 1:
             gMain.horizontolBGScrollSpeed = -14;
-            r6 = gPal_BG015_BustupEdgeworth;
-            r3 = (u16 *)gMap_BG015_BustupEdgeworth;
+            r6 = GFX_PALETTE_bustup_edgeworth;
+            r3 = (u16 *)GFX_TILEMAP_bustup_edgeworth;
             break;
         case 2:
             gMain.horizontolBGScrollSpeed = -14;
-            r6 = gPal_BG020_BustupFranziska;
-            r3 = (u16 *)gMap_BG020_BustupFranziska;
+            r6 = GFX_PALETTE_bustup_franziska;
+            r3 = (u16 *)GFX_TILEMAP_bustup_franziska;
             break;
     }
     xOffset = 0;

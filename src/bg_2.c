@@ -76,7 +76,7 @@ void EnableDetentionCenterMask(bool16 enable)
         map += 6;
     }
     if(enable) {
-        DmaCopy16(3, gGfxDetentionCenterBottomTiles, VRAM+0x1000, 0x60);
+        DmaCopy16(3, GFX_IMG_detention_center_bottom_tiles, VRAM+0x1000, 0x60);
         gIORegisters.lcd_bg0cnt &= ~0x3;
         gIORegisters.lcd_bg0cnt |= BGCNT_PRIORITY(2);
         gIORegisters.lcd_dispcnt |= DISPCNT_BG0_ON;
@@ -159,16 +159,16 @@ void CopyBGDataToVram(u32 bgId)
         }
     }
     if(gScriptContext.flags & 0x40) {
-        src = gPal_BG014_BustupPhoenix;
+        src = GFX_PALETTE_bustup_phoenix;
         dst = (void *)PLTT+0x1C0;
         DmaCopy16(3, src, dst, 0x20);
-        src = gPal_BG015_BustupEdgeworth;
+        src = GFX_PALETTE_bustup_edgeworth;
         dst = (void *)PLTT+0x1E0;
         DmaCopy16(3, src, dst, 0x20);
-        src = gPal_BG020_BustupFranziska;
+        src = GFX_PALETTE_bustup_franziska;
         dst = (void *)PLTT+0x1A0;
         DmaCopy16(3, src, dst, 0x20);
-        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eSpeedlineDecompBuffer, 0x500);
+        DmaCopy16(3, GFX_IMG_speedlines_first_and_last_columns, eSpeedlineDecompBuffer, 0x500);
         src = eSpeedlineDecompBuffer;
         dst = (void *)VRAM+0x8B00;
         DmaCopy16(3, src, dst, 0x5000);
@@ -227,7 +227,7 @@ void CopyBGDataToVram(u32 bgId)
         for(i = 0; i < 20; i++, j++)
             gBG3MapBuffer[i * 0x20 + 0x3F] = j | 0x2000;
         main->isBGScrolling = TRUE;
-        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eSpeedlineDecompBuffer, 0x500);
+        DmaCopy16(3, GFX_IMG_speedlines_first_and_last_columns, eSpeedlineDecompBuffer, 0x500);
     }
     if(tempBgCtrl & 0x8000)
     {

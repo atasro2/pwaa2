@@ -609,7 +609,7 @@ void UpdateBackground() // BG256_main
     u32 unk1;
     if(main->currentBG == 0x1A) {
         struct AnimationListEntry * animation;
-        DmaCopy16(3, gPalCase1OpeningPurpleClouds + ((main->frameCounter / 10) % 15) * 0x20, PLTT+0x40, 0x20);
+        DmaCopy16(3, GFX_PALETTE_case1_opening_purple_cloud_palettes + ((main->frameCounter / 10) % 15) * 0x20, PLTT+0x40, 0x20);
         if((animation = FindAnimationFromAnimId(0x65))) {
             if((main->frameCounter % 7) == 1) {
                 if(animation->animationInfo.yOrigin < 0x70) {

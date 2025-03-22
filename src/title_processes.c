@@ -67,12 +67,12 @@ void TitleScreenProcess(struct Main *main)
         SET_PROCESS_PTR(TITLE_SCREEN_PROCESS, 1, 0, 0, main);
         break;
     case 1:
-        DmaCopy16(3, gUnusedAsciiCharSet, VRAM + 0x3800, 0x800);
-        DmaCopy16(3, gPalTitleScreen, PLTT, 0x200);
-        LZ77UnCompWram(gGfx8lzTitleScreen, eBGDecompBuffer);
+        DmaCopy16(3, GFX_IMG_unused_ascii_charset, VRAM + 0x3800, 0x800);
+        DmaCopy16(3, GFX_PALETTE_title_screen, PLTT, 0x200);
+        LZ77UnCompWram(GFX_IMG_title_screen, eBGDecompBuffer);
         DmaCopy16(3, eBGDecompBuffer, BG_CHAR_ADDR(1), 30*20*TILE_SIZE_8BPP);
-        DmaCopy16(3, gPalNewGameContinue, OBJ_PLTT + 0x40, 0xC0);
-        DmaCopy16(3, gGfxNewGameContinue, OBJ_VRAM0 + 0x400, 0x400);
+        DmaCopy16(3, GFX_PALETTE_new_game_continue_0, OBJ_PLTT + 0x40, 0xC0);
+        DmaCopy16(3, GFX_IMG_new_game_continue, OBJ_VRAM0 + 0x400, 0x400);
         oam = &gOamObjects[OAM_IDX_TITLE_SCREEN_OPTIONS];
         oam->attr0 = SPRITE_ATTR0(112, ST_OAM_AFFINE_OFF, ST_OAM_OBJ_NORMAL, FALSE, ST_OAM_4BPP, ST_OAM_H_RECTANGLE);
         oam->attr1 = SPRITE_ATTR1_NONAFFINE(88, FALSE, FALSE, 2);

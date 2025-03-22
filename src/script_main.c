@@ -165,7 +165,7 @@ u8 gUnknown_081122EC[12] = { // unused
 void LoadCurrentScriptIntoRam(void)
 {
     u32 i;
-    DmaCopy16(3, gTextPal, OBJ_PLTT, 0x20);
+    DmaCopy16(3, GFX_PALETTE_charset, OBJ_PLTT, 0x20);
 
     for (i = 0; i < ARRAY_COUNT(gTextBoxCharacters); i++)
     {
@@ -356,7 +356,7 @@ static void PutCharInTextbox(u32 characterCode, u32 y, u32 x)
 {
     uintptr_t i;
     uintptr_t temp = characterCode*0x80;
-    temp += (uintptr_t)gCharSet;
+    temp += (uintptr_t)GFX_IMG_charset;
     if(gScriptContext.textColor)
     {
         u8 * vram;
@@ -561,7 +561,7 @@ void RedrawTextboxCharacters(void)
         {
             u32 temp = theCharacter->state & 0x7FFF;
             temp *= 0x80;
-            temp += (u32)gCharSet; //! why tho
+            temp += (u32)GFX_IMG_charset; //! why tho
             if(theCharacter->color)
             {
                 u32 j;
