@@ -149,13 +149,16 @@ def load_asset_yaml_file(path: str) -> list:
     with open(path) as f:
         data = yaml.load(f, Loader=yamlLoader)
     ret = []
+    my_yamls = [path]
     for x in data:
         if x.get("include"):
             realpath = os.path.join(prefix, x.get("include"))
-            ret += load_asset_yaml_file(realpath)
+            x, all_yamls = load_asset_yaml_file(realpath)
+            ret += x
+            my_yamls += all_yamls
         else:
             ret.append(handle_entry(x, curpath=prefix))
-    return ret
+    return ret, my_yamls
 
 def build_make_stuff(x: Dict[str, str]) -> str:
     ret = ""
@@ -175,7 +178,7 @@ def build_header_stuff(offset: int, labels: list[str]) -> str:
     return ret
 
 if __name__ == "__main__":
-    x = load_asset_yaml_file(sys.argv[2])
+    x, all_yamls = load_asset_yaml_file(sys.argv[2])
     # print("############################################")
     # print("############################################")
     # print("############################################")
@@ -189,6 +192,8 @@ if __name__ == "__main__":
     if sys.argv[1] == "dependencies":
         for e in x:
             print(e["target"])
+        for e in all_yamls:
+            print(e)
     elif sys.argv[1] == "rules":
         for e in x:
             r = build_make_stuff(e)

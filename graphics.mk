@@ -1,6 +1,11 @@
 assets.bin: $(shell tools/venv/bin/python3 tools/asset_blob.py dependencies graphics.yml)
 	tools/venv/bin/python3 tools/asset_blob.py blob graphics.yml $@ 0x08130000 include/graphics.h
 
+%.pix: $(shell tools/venv/bin/python3 tools/animation_blob.py dependencies $(.animation,.yml,$<))
+	tools/venv/bin/python3 tools/asset_blob.py blob $(.animation,.yml,$<) $@
+
+%.seq: %.pix
+
 include/graphics.h: assets.bin
 
 EVIDENCE_PROFILE_DESCRIPTIONS := graphics/evidence_profile_descriptions
