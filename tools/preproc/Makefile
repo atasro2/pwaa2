@@ -10,6 +10,9 @@ HEADERS := asm_file.h c_file.h char_util.h preproc.h string_parser.h \
 
 .PHONY: clean
 
+all: preproc
+	@:
+
 preproc: $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 

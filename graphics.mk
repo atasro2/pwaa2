@@ -1,12 +1,16 @@
-assets.bin: $(shell tools/venv/bin/python3 tools/asset_blob.py dependencies graphics.yml)
-	tools/venv/bin/python3 tools/asset_blob.py blob graphics.yml $@ 0x08130000 include/graphics.h
+graphics.d: graphics.yml 
+	$(VENV)/python $(ASSET_BLOB) dependencies $< assets.bin $(patsubst %.yml,%.d,$<)
 
-%.pix: $(shell tools/venv/bin/python3 tools/animation_blob.py dependencies $(.animation,.yml,$<))
-	tools/venv/bin/python3 tools/asset_blob.py blob $(.animation,.yml,$<) $@
+assets.bin:
+	$(VENV)/python $(ASSET_BLOB) blob graphics.yml $@ 0x08130000 include/graphics.h
 
-%.seq: %.pix
 
-include/graphics.h: assets.bin
+ifeq ($(MAKECMDGOALS),rom)
+-include graphics.d
+else ifeq ($(MAKECMDGOALS),assets.bin)
+-include graphics.d
+endif
+#include/graphics.h: assets.bin
 
 EVIDENCE_PROFILE_DESCRIPTIONS := graphics/evidence_profile_descriptions
 $(EVIDENCE_PROFILE_DESCRIPTIONS)/%.4bpp: $(EVIDENCE_PROFILE_DESCRIPTIONS)/%.png

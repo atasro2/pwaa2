@@ -8,11 +8,14 @@ GBAGFX := tools/gbagfx/gbagfx
 SCANINC := tools/scaninc/scaninc
 PREPROC := tools/preproc/preproc
 MID := tools/mid2agb/mid2agb
+ASSET_BLOB := tools/asset_blob/asset_blob.py
+
+REQUIREMENTS_TXT = tools/requirements.txt
 
 include config.mk
 
 
-TOOLDIRS := $(filter-out tools/agbcc tools/binutils,$(wildcard tools/*))
+TOOLDIRS := $(filter-out tools/requirements.txt tools/asset_blob tools/agbcc tools/binutils, $(wildcard tools/*))
 TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
@@ -85,7 +88,9 @@ MAP = $(ROM:.gba=.map)
 TITLE := GYAKUTEN_SA2
 GAMECODE := A3GJ
 
-all: rom
+all: venv tools
+	@$(MAKE) assets.bin
+	@$(MAKE) rom
 
 tools: $(TOOLDIRS)
 
@@ -100,15 +105,18 @@ endif
 compare:
 	@$(MAKE) COMPARE=1
 
-realclean: clean clean-tools clean-assets
+realclean: clean clean-tools clean-assets clean-venv clean-deps
 mostlyclean: clean clean-assets
 
+clean-deps:
+	find . \( -iname '*.d' \) -exec rm {} +
 clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 clean-assets:
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.striped' \) -exec rm {} +
 	rm -f assets.bin
+	rm -f include/graphics.h
 
 clean:
 	rm -f $(ROM) $(ELF) $(MAP)
@@ -198,3 +206,4 @@ endif
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
 	$(AS) $(ASFLAGS) -o $@ $<
 
+include Makefile.venv

@@ -65,8 +65,11 @@ Temporary Items
 tools/agbcc/
 tools/binutils/
 tools/venv/
+.venv/
 build/
 sound/songs/midi/*.s
+assets.bin
+*.d
 
 # =========================
 # Misc

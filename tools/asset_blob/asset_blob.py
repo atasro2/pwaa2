@@ -190,10 +190,11 @@ if __name__ == "__main__":
     # print("############################################")
     # print("############################################")
     if sys.argv[1] == "dependencies":
-        for e in x:
-            print(e["target"])
-        for e in all_yamls:
-            print(e)
+        with open(sys.argv[4], "w") as o:
+            for e in x:
+                o.write(f"{sys.argv[3]} {sys.argv[4]}: " + e["target"] + "\n")
+            for e in all_yamls:
+                o.write(f"{sys.argv[3]} {sys.argv[4]}: " + e + "\n")
     elif sys.argv[1] == "rules":
         for e in x:
             r = build_make_stuff(e)
