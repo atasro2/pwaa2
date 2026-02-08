@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # there is no need to install wget, libc, gcc, zlib1g, tar or xz-utils. all of there come with the runner by default
+      - name: Install packages
+        run: sudo apt install libpng-dev
+        # build-essential and git are already installed, maybe install arm-none-eabi toolchain at some other point
       - name: Fetch repo
         uses: actions/checkout@master
       
