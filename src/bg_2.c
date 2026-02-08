@@ -83,7 +83,6 @@ void EnableDetentionCenterMask(bool16 enable)
     }
 }
 
-/*
 void CopyBGDataToVram(u32 bgId)
 {
     struct Main * main = &gMain; // r8
@@ -97,6 +96,9 @@ void CopyBGDataToVram(u32 bgId)
     u32 tempSize;
     u32 i, j;
 
+    u32 sp4;
+    u32 swap;
+    
     if(bgId == 0x56)
         main->Bg256_scroll_y = 0;
     if(bgId == 0x57)
@@ -221,7 +223,6 @@ void CopyBGDataToVram(u32 bgId)
         dst = gBG3MapBuffer;
         DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
         j = 0x258;
-        j++;j--;
         for(i = 0; i < 20; i++, j++)
             gBG3MapBuffer[i * 0x20 + 0x20] = j | 0x2000;
         for(i = 0; i < 20; i++, j++)
@@ -229,6 +230,7 @@ void CopyBGDataToVram(u32 bgId)
         main->isBGScrolling = TRUE;
         DmaCopy16(3, GFX_IMG_speedlines_first_and_last_columns, eSpeedlineDecompBuffer, 0x500);
     }
+    
     if(tempBgCtrl & 0x8000)
     {
         tempBgCtrl = gBackgroundTable[bgId].controlBits; 
@@ -255,6 +257,9 @@ void CopyBGDataToVram(u32 bgId)
     }
     else
         tempBgCtrl = gBackgroundTable[bgId].controlBits;
+    
+    sp4 = tempBgCtrl;
+    
     bgData = gBackgroundTable[bgId].bgData + 0x28;
     if(tempBgCtrl & BG_MODE_4BPP)
     {
@@ -271,11 +276,13 @@ void CopyBGDataToVram(u32 bgId)
         ioReg->lcd_bg3cnt |= BGCNT_256COLOR;
         DmaCopy16(3, bgData, BG_PLTT, 0x200);
     }
-    *(u16*)&REG_DISPCNT = *(u16*)&ioReg->lcd_dispcnt;
-    *(u16*)&REG_BG3CNT = *(u16*)&ioReg->lcd_bg3cnt;
+    *(u16*)&REG_DISPCNT = ioReg->lcd_dispcnt;
+    *(u16*)&REG_BG3CNT = ioReg->lcd_bg3cnt;
     *(u32*)&REG_BG3HOFS = *(u32*)&ioReg->lcd_bg3hofs;
     main->Bg256_dir = tempBgCtrl;
+    
     bgData = (gBackgroundTable[bgId].controlBits & BG_MODE_SIZE_MASK) == BG_MODE_SIZE_240x160 ? eBGDecompBuffer2 : eBGDecompBuffer;
+    
     if((tempBgCtrl & BG_MODE_SIZE_MASK) == 0)
     {
         if((tempBgCtrl & BG_MODE_SPECIAL_SPEEDLINE) == 0)
@@ -386,24 +393,24 @@ void CopyBGDataToVram(u32 bgId)
                 for(j = 0; j < 32; j++)
                     gBG3MapBuffer[i * 0x2A0 + j] = 0x276 | 0x2000;
             }
-            tempPtr = BG_CHAR_ADDR(1);
+            tempBgCtrl = (u32)BG_CHAR_ADDR(1);
             for(i = 0; i < 20; i++)
             {
-                DmaCopy16(3, bgData, tempPtr, 0x7C0 >> is4bpp);
+                DmaCopy16(3, bgData, tempBgCtrl, 0x7C0 >> is4bpp);
                 bgData += tempSize >> is4bpp;
-                tempPtr += 0x7C0 >> is4bpp; 
+                tempBgCtrl += 0x7C0 >> is4bpp; 
             }
         }
         src = gBG3MapBuffer;
         dst = (void*)BG_SCREEN_ADDR(31);
         DmaCopy16(3, src, dst, 0x800);
     }
-    if(tempBgCtrl & 0x100) {
+    if(sp4 & 0x100) {
         for(i = 0; i < 0x400; i++)
             gBG3MapBuffer[i] |= 0x400;
         for(i = 0; i < 32; i++) {
             for(j = 0; j < 16; j++) {
-                u32 swap;
+                
                 swap = gBG3MapBuffer[i * 32 + j];
                 gBG3MapBuffer[i * 32 + j] = gBG3MapBuffer[i * 32 + (31 - j)];
                 gBG3MapBuffer[i * 32 + (31 - j)] = swap;
@@ -413,12 +420,11 @@ void CopyBGDataToVram(u32 bgId)
         dst = BG_SCREEN_ADDR(31);
         DmaCopy16(3, src, dst, BG_SCREEN_SIZE);
     } 
-    if(tempBgCtrl & 0x200) {
+    if(sp4 & 0x200) {
         for(i = 0; i < 0x400; i++)
             gBG3MapBuffer[i] |= 0x800;
         for(i = 0; i < 11; i++) {
             for(j = 0; j < 32; j++) {
-                u32 swap;
                 swap = gBG3MapBuffer[i * 32 + j];
                 gBG3MapBuffer[i * 32 + j] = gBG3MapBuffer[(21-i) * 32 + j];
                 gBG3MapBuffer[(21-i) * 32 + j] = swap;
@@ -455,7 +461,7 @@ void CopyBGDataToVram(u32 bgId)
             else
                 LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 0);
             if(main->currentBG == 4 || main->currentBG == 5 || main->currentBG == 6) {
-                if(main->effectType == 0xFFFE)
+                if(main->effectType == 0xFFFE) 
                     LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 1);
                 else
                     LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 0);
@@ -463,5 +469,3 @@ void CopyBGDataToVram(u32 bgId)
         }
     }
 }
-*/
-
