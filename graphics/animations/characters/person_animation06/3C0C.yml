@@ -1,0 +1,85 @@
+sheet: sheet-1556C
+arrangements:
+  '24':
+    pal_mode: 1
+    sprites:
+    - part: 33
+      x: 48
+      y: 0
+      palette: 0
+    - part: 34
+      x: -16
+      y: 0
+      palette: 0
+    - part: 35
+      x: -32
+      y: 32
+      palette: 0
+    - part: 36
+      x: -32
+      y: 0
+      palette: 0
+    - part: 37
+      x: -40
+      y: 32
+      palette: 0
+    - part: 38
+      x: -32
+      y: -24
+      palette: 0
+    - part: 39
+      x: -32
+      y: -8
+      palette: 0
+    - part: 40
+      x: 40
+      y: -32
+      palette: 0
+    - part: 41
+      x: 56
+      y: -16
+      palette: 0
+    - part: 42
+      x: 88
+      y: -16
+      palette: 0
+    - part: 43
+      x: 56
+      y: -24
+      palette: 0
+    - part: 44
+      x: -24
+      y: -40
+      palette: 0
+    - part: 45
+      x: 8
+      y: -40
+      palette: 0
+    - part: 46
+      x: 0
+      y: -56
+      palette: 0
+    - part: 47
+      x: -16
+      y: -48
+      palette: 0
+    - part: 48
+      x: -24
+      y: -32
+      palette: 0
+  '92':
+    pal_mode: 1
+    sprites:
+frames:
+- duration: 1
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24

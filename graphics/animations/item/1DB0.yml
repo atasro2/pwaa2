@@ -1,0 +1,49 @@
+sheet: sheet-8D68
+arrangements:
+  '24':
+    pal_mode: 1
+    sprites:
+    - part: 0
+      x: -44
+      y: -73
+      palette: 0
+    - part: 1
+      x: -52
+      y: -73
+      palette: 0
+    - part: 2
+      x: -60
+      y: -65
+      palette: 0
+    - part: 3
+      x: -36
+      y: -49
+      palette: 0
+    - part: 4
+      x: -36
+      y: -17
+      palette: 0
+    - part: 5
+      x: -36
+      y: -1
+      palette: 0
+    - part: 6
+      x: -68
+      y: -49
+      palette: 0
+  '56':
+    pal_mode: 1
+    sprites:
+frames:
+- duration: 1
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24

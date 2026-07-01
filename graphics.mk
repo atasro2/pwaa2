@@ -1,14 +1,13 @@
-graphics.d: graphics.yml 
+graphics.d: graphics.yml | venv
 	$(VENV)/python $(ASSET_BLOB) dependencies $< assets.bin $@
 
-assets.bin:
+assets.bin: 
 	$(VENV)/python $(ASSET_BLOB) blob graphics.yml $@ 0x08130000 include/graphics.h
 
-ifeq ($(MAKECMDGOALS),rom)
+include/graphics.h: assets.bin
+	@:
+
 -include graphics.d
-else ifeq ($(MAKECMDGOALS),assets.bin)
--include graphics.d
-endif
 
 EVIDENCE_PROFILE_DESCRIPTIONS := graphics/evidence_profile_descriptions
 $(EVIDENCE_PROFILE_DESCRIPTIONS)/%.4bpp: $(EVIDENCE_PROFILE_DESCRIPTIONS)/%.png

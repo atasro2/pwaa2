@@ -1,0 +1,10 @@
+gfx: sheet-5F74.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 0
+    y: 0
+    w: 64
+    h: 64
+    p: 0

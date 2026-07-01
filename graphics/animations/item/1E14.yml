@@ -1,0 +1,78 @@
+sheet: sheet-95EC
+arrangements:
+  '32':
+    pal_mode: 1
+    sprites:
+    - part: 0
+      x: -96
+      y: 56
+      palette: 0
+    - part: 1
+      x: -104
+      y: 56
+      palette: 0
+    - part: 2
+      x: -120
+      y: 56
+      palette: 0
+    - part: 3
+      x: -120
+      y: 48
+      palette: 0
+    - part: 4
+      x: -88
+      y: 48
+      palette: 0
+    - part: 5
+      x: -88
+      y: 32
+      palette: 0
+    - part: 6
+      x: -80
+      y: 32
+      palette: 0
+    - part: 7
+      x: -80
+      y: 16
+      palette: 0
+    - part: 8
+      x: -88
+      y: 0
+      palette: 0
+    - part: 9
+      x: -120
+      y: 16
+      palette: 0
+    - part: 10
+      x: -120
+      y: -16
+      palette: 0
+  '80':
+    pal_mode: 1
+    sprites:
+    - part: 11
+      x: 0
+      y: 0
+      palette: 0
+  '88':
+    pal_mode: 1
+    sprites:
+frames:
+- duration: 16
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 32
+- duration: 16
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 80
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 32

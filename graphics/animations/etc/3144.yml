@@ -1,0 +1,25 @@
+sheet: sheet-39F60
+arrangements:
+  '24':
+    pal_mode: 1
+    sprites:
+    - part: 0
+      x: -120
+      y: 48
+      palette: 0
+  '32':
+    pal_mode: 1
+    sprites:
+frames:
+- duration: 2
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24

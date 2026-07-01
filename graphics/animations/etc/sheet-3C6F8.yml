@@ -1,0 +1,15 @@
+gfx: sheet-3C6F8.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 0
+    y: 0
+    w: 16
+    h: 32
+    p: 0
+  - x: 16
+    y: 0
+    w: 8
+    h: 32
+    p: 0

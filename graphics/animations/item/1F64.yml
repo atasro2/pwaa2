@@ -1,0 +1,135 @@
+sheet: sheet-A164
+arrangements:
+  '80':
+    pal_mode: 1
+    sprites:
+    - part: 0
+      x: -4
+      y: -4
+      palette: 0
+  '88':
+    pal_mode: 1
+    sprites:
+    - part: 1
+      x: -8
+      y: -8
+      palette: 0
+  '96':
+    pal_mode: 1
+    sprites:
+    - part: 2
+      x: -12
+      y: -12
+      palette: 0
+    - part: 3
+      x: 4
+      y: -12
+      palette: 0
+    - part: 4
+      x: -12
+      y: 4
+      palette: 0
+    - part: 5
+      x: 4
+      y: 4
+      palette: 0
+  '116':
+    pal_mode: 1
+    sprites:
+    - part: 6
+      x: -12
+      y: -12
+      palette: 0
+    - part: 7
+      x: 4
+      y: -12
+      palette: 0
+    - part: 8
+      x: -12
+      y: 4
+      palette: 0
+    - part: 9
+      x: 4
+      y: 4
+      palette: 0
+  '136':
+    pal_mode: 1
+    sprites:
+    - part: 10
+      x: -12
+      y: -12
+      palette: 0
+    - part: 11
+      x: 4
+      y: -12
+      palette: 0
+    - part: 12
+      x: -12
+      y: 4
+      palette: 0
+    - part: 13
+      x: 4
+      y: 4
+      palette: 0
+  '156':
+    pal_mode: 1
+    sprites:
+    - part: 14
+      x: -4
+      y: -4
+      palette: 0
+frames:
+- duration: 8
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 80
+- duration: 4
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 88
+- duration: 4
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 96
+- duration: 6
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 116
+- duration: 8
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 136
+- duration: 6
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 156
+- duration: 6
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 80
+- duration: 2
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 156
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 80

@@ -1,0 +1,3 @@
+[submodule "tools/pwaanim"]
+	path = tools/pwaanim
+	url = git@github.com:atasro2/pwaanim.git

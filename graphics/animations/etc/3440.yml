@@ -1,0 +1,53 @@
+sheet: sheet-3B860
+arrangements:
+  '24':
+    pal_mode: 1
+    sprites:
+    - part: 0
+      x: 64
+      y: -8
+      palette: 0
+    - part: 1
+      x: 64
+      y: 24
+      palette: 0
+    - part: 2
+      x: 72
+      y: 32
+      palette: 0
+    - part: 3
+      x: 72
+      y: 48
+      palette: 0
+    - part: 4
+      x: 80
+      y: 8
+      palette: 0
+    - part: 5
+      x: 80
+      y: 0
+      palette: 0
+    - part: 6
+      x: 56
+      y: 8
+      palette: 0
+    - part: 7
+      x: 48
+      y: 16
+      palette: 0
+  '60':
+    pal_mode: 1
+    sprites:
+frames:
+- duration: 1
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24

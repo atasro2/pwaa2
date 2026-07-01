@@ -1,0 +1,45 @@
+gfx: sheet-8B44.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 80
+    y: 0
+    w: 16
+    h: 16
+    p: 1
+  - x: 96
+    y: 0
+    w: 16
+    h: 16
+    p: 1
+  - x: 112
+    y: 0
+    w: 16
+    h: 16
+    p: 1
+  - x: 0
+    y: 0
+    w: 16
+    h: 16
+    p: 1
+  - x: 16
+    y: 0
+    w: 16
+    h: 16
+    p: 1
+  - x: 32
+    y: 0
+    w: 16
+    h: 16
+    p: 1
+  - x: 48
+    y: 0
+    w: 16
+    h: 16
+    p: 1
+  - x: 64
+    y: 0
+    w: 16
+    h: 16
+    p: 1

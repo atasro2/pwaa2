@@ -1,0 +1,20 @@
+gfx: sheet-4101C.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 32
+    y: 0
+    w: 16
+    h: 32
+    p: 0
+  - x: 32
+    y: 32
+    w: 8
+    h: 16
+    p: 0
+  - x: 0
+    y: 0
+    w: 32
+    h: 64
+    p: 0

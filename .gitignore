@@ -62,6 +62,8 @@ Temporary Items
 *.8bpp
 *.gbapal
 *.striped
+*.pix
+*.seq
 tools/agbcc/
 tools/binutils/
 tools/venv/
@@ -71,6 +73,7 @@ sound/songs/midi/*.s
 include/graphics.h
 assets.bin
 *.d
+include/autogen/*.h
 
 # =========================
 # Misc

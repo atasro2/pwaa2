@@ -80,6 +80,20 @@ def handle_animation_sequence(name: str, file: str, parameters: dict) -> tuple:
         "label": label,
     }
 
+def handle_animation(name: str, file: str, parameters: dict) -> tuple:
+    # target: str = f"{file}.seq {file}.pix {file}.h"
+    # dependency: str = "%s.bin" % file
+    return [{
+        "target": f"{file}.pix",
+        # "dependency": dependency,
+        "label": "GFX_ANIMATION_TILES_%s" % name,
+        "header": f"autogen/{name}.h",
+    },{
+        "target": f"{file}.seq",
+        # "dependency": dependency,
+        "label": "GFX_ANIMATION_SEQUENCE_%s" % name,
+    }]
+
 def handle_raw(name: str, file: str, parameters: dict) -> tuple:
     target: str = file
     # dependency: str = "%s.bin" % file
@@ -95,8 +109,9 @@ etype_map: Dict[str, Callable[[str, str], tuple]] = {
     "image": handle_image,
     "striped": handle_striped,
     "tilemap": handle_tilemap,
-    "animation_tiles": handle_animation_tiles,
-    "animation_sequence": handle_animation_sequence,
+    "animation" : handle_animation,
+#    "animation_tiles": handle_animation_tiles,
+#    "animation_sequence": handle_animation_sequence,
     "raw": handle_raw,
 }
 
@@ -122,24 +137,32 @@ def handle_entry(data: dict, curpath: str) -> tuple:
     # explicit params
     parameters = data[etype]
     r = etype_map[etype](name, file, parameters)
+    if not isinstance(r, list):
+        r = [r]
+    ret = []
     # outputs
-    rules = dict()
-    target = None
-    if r.get("buildparams"):
-        rules[r["target"]] = "$(GBAGFX) $< $@ %s" % r["buildparams"]
-    if lz_enabled:
-        lztarget = r["target"] + ".lz"
-        if lz_search:
-            rules[lztarget] = "$(GBAGFX) $< $@ -search %d" % lz_search
-        target = lztarget
-    else:
-        target = r["target"]
-    ret = {
-        "target": target,
-        "dependency": r.get("dependency"),
-        "labels": [r["label"]] + aliases,
-        "rules": rules,
-    }
+    for asset in r:
+        rules = dict()
+        target = None
+        if asset.get("buildparams"):
+            rules[asset["target"]] = "$(GBAGFX) $< $@ %s" % asset["buildparams"]
+        if lz_enabled:
+            lztarget = asset["target"] + ".lz"
+            if lz_search:
+                rules[lztarget] = "$(GBAGFX) $< $@ -search %d" % lz_search
+            target = lztarget
+        else:
+            target = asset["target"]
+        includes = []
+        if asset.get("header"):
+            includes = [asset["header"]]
+        ret.append({
+            "target": target,
+            "dependency": asset.get("dependency"),
+            "labels": [asset["label"]] + aliases,
+            "includes": includes,
+            "rules": rules,
+        })
     return ret
 
 def load_asset_yaml_file(path: str) -> list:
@@ -157,7 +180,11 @@ def load_asset_yaml_file(path: str) -> list:
             ret += x
             my_yamls += all_yamls
         else:
-            ret.append(handle_entry(x, curpath=prefix))
+            entries = handle_entry(x, curpath=prefix)
+            if isinstance(entries, list):
+                ret.extend(entries)
+            else:
+                ret.append(entries)
     return ret, my_yamls
 
 def build_make_stuff(x: Dict[str, str]) -> str:
@@ -169,11 +196,13 @@ def build_make_stuff(x: Dict[str, str]) -> str:
            ret += "%s: %s\n\t%s\n" % (target, x["dependency"], recipe)
     return ret if len(ret) else None
 
-def build_header_stuff(offset: int, labels: list[str]) -> str:
+def build_header_stuff(offset: int, labels: list[str], includes: list[str]) -> str:
     ret = ""
     offs = hex(offset).upper()
     for l in labels:
         ret += "#define %s ((u8*)(GFX_BASE_ADDR + %s))\n" % (l, offs)
+    for i in includes:
+        ret += "#include \"%s\" \n" % (i)
     ret += "\n"
     return ret
 
@@ -209,7 +238,7 @@ if __name__ == "__main__":
                     while o.tell() % 4:
                         o.write(bytes(0))
                     current_offset = o.tell()
-                    output_header.write(build_header_stuff(current_offset, e["labels"]))
+                    output_header.write(build_header_stuff(current_offset, e["labels"], e["includes"]))
                     with open(e["target"], "rb") as f:
                         o.write(f.read())
                 output_header.write("#endif\n")

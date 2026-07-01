@@ -46,16 +46,18 @@ public:
     SourceFile(SourceFile&&) = delete;
     SourceFile& operator =(SourceFile const&) = delete;
     SourceFile& operator =(SourceFile&&) = delete;
-    bool HasIncbins();
     const std::set<std::string>& GetIncbins();
+    const std::set<Incgfx>& GetIncgfxs();
     const std::set<std::string>& GetIncludes();
     std::string& GetSrcDir();
+    SourceFileType FileType();
 
 private:
     union InnerUnion {
         CFile c_file;
         struct AsmWrapper {
             std::set<std::string> asm_incbins;
+            std::set<Incgfx> asm_incgfxs;
             std::set<std::string> asm_includes;
         } asm_wrapper;
 

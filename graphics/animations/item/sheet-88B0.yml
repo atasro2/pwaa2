@@ -1,0 +1,10 @@
+gfx: sheet-88B0.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 0
+    y: 0
+    w: 16
+    h: 8
+    p: 0

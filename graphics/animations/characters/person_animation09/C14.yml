@@ -1,0 +1,296 @@
+sheet: sheet-4768
+arrangements:
+  '48':
+    pal_mode: 1
+    sprites:
+    - part: 28
+      x: 48
+      y: 56
+      palette: 0
+    - part: 27
+      x: 16
+      y: 0
+      palette: 0
+    - part: 29
+      x: -16
+      y: 16
+      palette: 0
+    - part: 30
+      x: -32
+      y: 64
+      palette: 0
+    - part: 31
+      x: 16
+      y: 64
+      palette: 0
+    - part: 32
+      x: 48
+      y: 24
+      palette: 0
+    - part: 33
+      x: -48
+      y: 0
+      palette: 0
+    - part: 35
+      x: -32
+      y: -16
+      palette: 0
+    - part: 36
+      x: -40
+      y: -16
+      palette: 0
+    - part: 34
+      x: -16
+      y: -16
+      palette: 0
+    - part: 37
+      x: -32
+      y: -48
+      palette: 0
+    - part: 38
+      x: 16
+      y: -16
+      palette: 0
+    - part: 39
+      x: 32
+      y: -16
+      palette: 0
+    - part: 40
+      x: -8
+      y: -56
+      palette: 0
+    - part: 41
+      x: -16
+      y: 0
+      palette: 0
+    - part: 42
+      x: -56
+      y: 32
+      palette: 0
+  '116':
+    pal_mode: 1
+    sprites:
+    - part: 27
+      x: 16
+      y: 1
+      palette: 0
+    - part: 29
+      x: -16
+      y: 17
+      palette: 0
+    - part: 28
+      x: 48
+      y: 57
+      palette: 0
+    - part: 30
+      x: -32
+      y: 65
+      palette: 0
+    - part: 31
+      x: 16
+      y: 65
+      palette: 0
+    - part: 32
+      x: 48
+      y: 25
+      palette: 0
+    - part: 33
+      x: -48
+      y: 1
+      palette: 0
+    - part: 42
+      x: -56
+      y: 33
+      palette: 0
+    - part: 45
+      x: -32
+      y: -47
+      palette: 0
+    - part: 46
+      x: -40
+      y: -15
+      palette: 0
+    - part: 47
+      x: -32
+      y: -15
+      palette: 0
+    - part: 48
+      x: 16
+      y: -15
+      palette: 0
+    - part: 49
+      x: -16
+      y: -15
+      palette: 0
+    - part: 50
+      x: 32
+      y: -15
+      palette: 0
+    - part: 51
+      x: -16
+      y: 1
+      palette: 0
+  '180':
+    pal_mode: 1
+    sprites:
+    - part: 27
+      x: 16
+      y: 0
+      palette: 0
+    - part: 29
+      x: -16
+      y: 16
+      palette: 0
+    - part: 30
+      x: -32
+      y: 64
+      palette: 0
+    - part: 31
+      x: 16
+      y: 64
+      palette: 0
+    - part: 32
+      x: 48
+      y: 24
+      palette: 0
+    - part: 33
+      x: -48
+      y: 0
+      palette: 0
+    - part: 28
+      x: 48
+      y: 56
+      palette: 0
+    - part: 35
+      x: -32
+      y: -16
+      palette: 0
+    - part: 36
+      x: -40
+      y: -16
+      palette: 0
+    - part: 37
+      x: -32
+      y: -48
+      palette: 0
+    - part: 34
+      x: -16
+      y: -16
+      palette: 0
+    - part: 38
+      x: 16
+      y: -16
+      palette: 0
+    - part: 39
+      x: 32
+      y: -16
+      palette: 0
+    - part: 40
+      x: -8
+      y: -56
+      palette: 0
+    - part: 52
+      x: -16
+      y: 0
+      palette: 0
+    - part: 42
+      x: -56
+      y: 32
+      palette: 0
+  '248':
+    pal_mode: 1
+    sprites:
+    - part: 27
+      x: 16
+      y: 0
+      palette: 0
+    - part: 29
+      x: -16
+      y: 16
+      palette: 0
+    - part: 30
+      x: -32
+      y: 64
+      palette: 0
+    - part: 28
+      x: 48
+      y: 56
+      palette: 0
+    - part: 31
+      x: 16
+      y: 64
+      palette: 0
+    - part: 32
+      x: 48
+      y: 24
+      palette: 0
+    - part: 33
+      x: -48
+      y: 0
+      palette: 0
+    - part: 42
+      x: -56
+      y: 32
+      palette: 0
+    - part: 45
+      x: -32
+      y: -48
+      palette: 0
+    - part: 46
+      x: -40
+      y: -16
+      palette: 0
+    - part: 47
+      x: -32
+      y: -16
+      palette: 0
+    - part: 48
+      x: 16
+      y: -16
+      palette: 0
+    - part: 49
+      x: -16
+      y: -16
+      palette: 0
+    - part: 50
+      x: 32
+      y: -16
+      palette: 0
+    - part: 53
+      x: -16
+      y: 0
+      palette: 0
+  '312':
+    pal_mode: 1
+    sprites:
+frames:
+- duration: 8
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 48
+- duration: 8
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 116
+- duration: 8
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 180
+- duration: 8
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 116
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 48

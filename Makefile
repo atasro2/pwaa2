@@ -9,11 +9,11 @@ SCANINC := tools/scaninc/scaninc
 PREPROC := tools/preproc/preproc
 MID := tools/mid2agb/mid2agb
 ASSET_BLOB := tools/asset_blob/asset_blob.py
+PWAANIM := tools/pwaanim/pwaanim
 
 REQUIREMENTS_TXT = tools/requirements.txt
 
 include config.mk
-
 
 TOOLDIRS := $(filter-out tools/requirements.txt tools/asset_blob tools/agbcc tools/binutils, $(wildcard tools/*))
 TOOLBASE = $(TOOLDIRS:tools/%=%)
@@ -38,6 +38,7 @@ C_SUBDIR = src
 ASM_SUBDIR = asm
 DATA_ASM_SUBDIR = data
 RODATA_ASM_SUBDIR = rodata
+AUTOGEN_HEADERS_SUBDIR = include/autogen
 MID_SUBDIR = sound/songs/midi
 
 C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
@@ -88,10 +89,8 @@ MAP = $(ROM:.gba=.map)
 TITLE := GYAKUTEN_SA2
 GAMECODE := A3GJ
 
-all: venv tools
-	@$(MAKE) assets.bin
-	@$(MAKE) rom
-
+all: rom
+ 
 tools: $(TOOLDIRS)
 
 $(TOOLDIRS):
@@ -114,7 +113,7 @@ clean-tools:
 	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
 
 clean-assets:
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.striped' \) -exec rm {} +
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.striped' -o -iname '*.pix' -o -iname '*.seq' \) -exec rm {} +
 	rm -f assets.bin
 	rm -f include/graphics.h
 
@@ -144,6 +143,7 @@ include graphics.mk
 %.gbapal: %.png ; $(GBAGFX) $< $@
 %.lz: % ; $(GBAGFX) $< $@
 %.rl: % ; $(GBAGFX) $< $@
+%.pix %.seq %.h: %.yml ; $(PWAANIM) -c $< -h $(AUTOGEN_HEADERS_SUBDIR)
 
 $(C_BUILDDIR)/agb_sram.o: CFLAGS := -O -mthumb-interwork
 
@@ -191,7 +191,7 @@ else
 $(C_BUILDDIR)/%.o: c_dep = $(shell $(SCANINC) -I include $(C_SUBDIR)/$*.c)
 endif
 	
-$(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
+$(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep) include/graphics.h
 	$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
 	@$(PREPROC) $(C_BUILDDIR)/$*.i | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
 	@echo | sed "i.text\n\t.align\t2, 0" >> $(C_BUILDDIR)/$*.s

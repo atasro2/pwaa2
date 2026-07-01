@@ -1,0 +1,10 @@
+gfx: sheet-174.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 0
+    y: 0
+    w: 16
+    h: 32
+    p: 0

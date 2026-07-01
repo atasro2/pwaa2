@@ -1,0 +1,40 @@
+gfx: sheet-8D68.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 0
+    y: 80
+    w: 16
+    h: 8
+    p: 0
+  - x: 24
+    y: 80
+    w: 8
+    h: 8
+    p: 0
+  - x: 0
+    y: 64
+    w: 32
+    h: 16
+    p: 0
+  - x: 32
+    y: 0
+    w: 8
+    h: 32
+    p: 0
+  - x: 32
+    y: 32
+    w: 8
+    h: 16
+    p: 0
+  - x: 16
+    y: 80
+    w: 8
+    h: 8
+    p: 0
+  - x: 0
+    y: 0
+    w: 32
+    h: 64
+    p: 0

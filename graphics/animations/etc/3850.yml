@@ -1,0 +1,37 @@
+sheet: sheet-3FACC
+arrangements:
+  '24':
+    pal_mode: 1
+    sprites:
+    - part: 0
+      x: 14
+      y: 8
+      palette: 0
+    - part: 1
+      x: 22
+      y: 24
+      palette: 0
+    - part: 2
+      x: -18
+      y: 16
+      palette: 0
+    - part: 3
+      x: -18
+      y: -16
+      palette: 0
+  '44':
+    pal_mode: 1
+    sprites:
+frames:
+- duration: 1
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 24

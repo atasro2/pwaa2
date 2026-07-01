@@ -352,8 +352,8 @@ void SetAnimationFrameOffset(struct AnimationListEntry *animation, u32 animOffse
             {
                 if (animation->animationInfo.animId <= 0x21)
                 {
-                    animation->animationInfo.animFrameDataStartPtr = GFX_ANIMATION_SEQUENCE_animation01 + animOffset; // ! These globals are defines *sob*
-                    animation->animationInfo.animGfxDataStartPtr = GFX_ANIMATION_TILES_tileset01;
+                    animation->animationInfo.animFrameDataStartPtr = GFX_ANIMATION_SEQUENCE_item + animOffset; // ! These globals are defines *sob*
+                    animation->animationInfo.animGfxDataStartPtr = GFX_ANIMATION_TILES_item;
                 }
                 else
                 {
@@ -361,14 +361,14 @@ void SetAnimationFrameOffset(struct AnimationListEntry *animation, u32 animOffse
                     {
                         return;
                     }
-                    animation->animationInfo.animFrameDataStartPtr = GFX_ANIMATION_SEQUENCE_animation35 + animOffset;
-                    animation->animationInfo.animGfxDataStartPtr = GFX_ANIMATION_TILES_tileset02;
+                    animation->animationInfo.animFrameDataStartPtr = GFX_ANIMATION_SEQUENCE_etc + animOffset;
+                    animation->animationInfo.animGfxDataStartPtr = GFX_ANIMATION_TILES_etc;
                 }
             }
             else
             {
-                animation->animationInfo.animFrameDataStartPtr = GFX_ANIMATION_SEQUENCE_animation35 + animOffset;
-                animation->animationInfo.animGfxDataStartPtr = GFX_ANIMATION_TILES_tileset02;
+                animation->animationInfo.animFrameDataStartPtr = GFX_ANIMATION_SEQUENCE_etc + animOffset;
+                animation->animationInfo.animGfxDataStartPtr = GFX_ANIMATION_TILES_etc;
             }
         }
         animation->flags |= (ANIM_PLAYING | ANIM_QUEUED_TILE_UPLOAD);

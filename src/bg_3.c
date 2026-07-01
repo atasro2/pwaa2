@@ -330,8 +330,8 @@ void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16 bgId, u16 intensity, u16 
 void LoadAndAdjustAnimation10PaletteByMode(u16 intensity, u16 mode)
 {
     u16 pal[0x10];
-    u32 * framedata = (u32*)GFX_ANIMATION_SEQUENCE_animation10;
-    u16 * spritepal = (u16*)(GFX_ANIMATION_TILES_tileset01 + 4 + *(framedata+1));
+    u32 * framedata = (u32*)(GFX_ANIMATION_SEQUENCE_item+ANIM_item_304);
+    u16 * spritepal = (u16*)(GFX_ANIMATION_TILES_item + 4 + *(framedata+1));
     u32 i;
     DmaCopy16(3, spritepal, pal, 0x20);
     for(i = 0; i < 0x10; i++) {

@@ -1,0 +1,95 @@
+sheet: sheet-29FE4
+arrangements:
+  '40':
+    pal_mode: 1
+    sprites:
+    - part: 0
+      x: 64
+      y: -24
+      palette: 0
+    - part: 1
+      x: 32
+      y: 8
+      palette: 0
+    - part: 2
+      x: 0
+      y: 8
+      palette: 0
+    - part: 3
+      x: 0
+      y: -24
+      palette: 0
+    - part: 4
+      x: -16
+      y: -24
+      palette: 0
+  '64':
+    pal_mode: 1
+    sprites:
+    - part: 5
+      x: -16
+      y: -24
+      palette: 0
+    - part: 6
+      x: 0
+      y: -24
+      palette: 0
+    - part: 7
+      x: 32
+      y: 8
+      palette: 0
+    - part: 8
+      x: 0
+      y: 8
+      palette: 0
+    - part: 9
+      x: 64
+      y: -24
+      palette: 0
+  '88':
+    pal_mode: 1
+    sprites:
+    - part: 10
+      x: -16
+      y: -24
+      palette: 0
+    - part: 11
+      x: 32
+      y: 8
+      palette: 0
+    - part: 12
+      x: 0
+      y: 8
+      palette: 0
+    - part: 13
+      x: 0
+      y: -24
+      palette: 0
+  '108':
+    pal_mode: 1
+    sprites:
+frames:
+- duration: 6
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 40
+- duration: 6
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 64
+- duration: 6
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 88
+- duration: 255
+  flag10: False
+  flag40: False
+  sfx:
+  action:
+  arrangement: 40

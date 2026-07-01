@@ -1,0 +1,40 @@
+gfx: sheet-3C804.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 0
+    y: 0
+    w: 16
+    h: 32
+    p: 0
+  - x: 0
+    y: 32
+    w: 8
+    h: 16
+    p: 0
+  - x: 0
+    y: 64
+    w: 16
+    h: 8
+    p: 0
+  - x: 8
+    y: 56
+    w: 8
+    h: 8
+    p: 0
+  - x: 8
+    y: 32
+    w: 8
+    h: 16
+    p: 0
+  - x: 8
+    y: 48
+    w: 8
+    h: 8
+    p: 0
+  - x: 0
+    y: 48
+    w: 8
+    h: 16
+    p: 0

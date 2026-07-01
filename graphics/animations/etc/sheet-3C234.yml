@@ -1,0 +1,15 @@
+gfx: sheet-3C234.png
+compressed: True
+width: 256
+height: 256
+parts:
+  - x: 0
+    y: 0
+    w: 32
+    h: 64
+    p: 0
+  - x: 0
+    y: 64
+    w: 32
+    h: 32
+    p: 0
