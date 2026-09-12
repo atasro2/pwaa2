@@ -20,8 +20,6 @@ SECTIONS {
         src/crt0.o(.text);
         src/main.o(.text);
         src/bg.o(.text);
-        src/bg_2.o(.text);
-        src/bg_3.o(.text);
         src/utils.o(.text);
         src/case_data.o(.text);
         src/investigation_segment_1_0.o(.text);
@@ -63,10 +61,9 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.rodata);
-	    src/bg.o(.rodata);
-	    src/bg_3.o(.rodata);
-	    src/utils.o(.rodata);
-	    src/case_data.o(.rodata);
+        src/bg.o(.rodata);
+        src/utils.o(.rodata);
+        src/case_data.o(.rodata);
         src/investigation_segment_1_0.o(.rodata);
         src/investigation_segment_1_2.o(.rodata);
         src/investigation_segment_2_0.o(.rodata);
@@ -75,12 +72,12 @@ SECTIONS {
         src/investigation_segment_3_2.o(.rodata);
         src/investigation_segment_3_4.o(.rodata);
         src/investigation_segment_3_6.o(.rodata);
-	    src/script_main.o(.rodata);
-	    src/script_commands.o(.rodata);
-	    src/gameover_process.o(.rodata);
-	    src/save_processes.o(.rodata);
-	    src/court_record.o(.rodata);
-	    src/animation.o(.rodata);
+        src/script_main.o(.rodata);
+        src/script_commands.o(.rodata);
+        src/gameover_process.o(.rodata);
+        src/save_processes.o(.rodata);
+        src/court_record.o(.rodata);
+        src/animation.o(.rodata);
         src/psyche_lock.o(.rodata);
         src/hp_bar.o(.rodata);
         src/m4a_tables.o(.rodata);
@@ -94,7 +91,6 @@ SECTIONS {
     {
         src/main.o(.data);
         src/bg.o(.data);
-        src/bg_3.o(.data);
         src/utils.o(.data);
         src/case_data.o(.data);
         src/script_main.o(.data);

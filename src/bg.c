@@ -1,8 +1,16 @@
+
 #include "global.h"
 #include "background.h"
+#include "script.h"
+#include "investigation.h"
+#include "graphics.h"
 #include "ewram.h"
 #include "animation.h"
 #include "graphics.h"
+#include "m4a.h"
+#include "constants/bg.h"
+#include "constants/process.h"
+
 /* was bg3 in pwaa1 */
 #include "data/background.h"
 
@@ -599,7 +607,7 @@ void bg256_up_scroll(struct Main * main, u32 arg0)
     main->Bg256_scroll_y %= 8;
 }
 
-void UpdateBackground() // BG256_main
+void UpdateBackgroundScroll() // BG256_main
 {
     struct AnimationListEntry * animation;
     struct Main * main = &gMain;
@@ -1115,4 +1123,1069 @@ void DecompressCurrentBGStripe(u32 bgId)
         gMain.bgStripeDestPtr += i;
     LZ77UnCompWram(bgData, gMain.bgStripeDestPtr);
     gMain.currentBgStripe++;
+}
+
+void DecompressBackgroundIntoBuffer(u32 bgId)
+{
+    u32 i;
+    u32 size;
+    u32 flags;
+    u8 * bgData;
+    u32 * ptr;
+    UpdateAnimations(gMain.previousBG);
+    bgId &= ~0x8000;
+    if(bgId == 0x80)
+        return;
+    bgData = (void*)gBackgroundTable[bgId].bgData;
+    ptr = (u32 *)bgData;
+    for(i = 1; i < 11; i++)
+        gMain.bgStripeOffsets[i] = *ptr++;
+    flags = gBackgroundTable[bgId].controlBits;
+    if(flags & BG_MODE_SIZE_480x160)
+        size = 0x1E00;
+    else if(flags & BG_MODE_SIZE_240x320)
+        size = 0x1E00;
+    else
+        size = 0xF00;
+    if(flags & BG_MODE_4BPP)
+        size /= 2;
+
+    if(flags & BG_MODE_4BPP)
+        bgData += 0x20;
+    else
+        bgData += 0x200;
+    bgData += gMain.bgStripeOffsets[1];
+    if(!(flags & 0xF)) {
+        gMain.bgStripeDestPtr = eBGDecompBuffer2;
+    }
+    else {
+        gMain.bgStripeDestPtr = eBGDecompBuffer;
+    }
+    m4aSoundVSyncOff();
+    LZ77UnCompWram(bgData, gMain.bgStripeDestPtr);
+    for(i = 2; i < 11; i++)
+    {
+        gMain.bgStripeDestPtr += size;
+        bgData = gBackgroundTable[bgId].bgData;
+        bgData += gMain.bgStripeOffsets[i];
+        LZ77UnCompWram(bgData, gMain.bgStripeDestPtr);
+    }
+    m4aSoundVSyncOn();
+}
+
+// leftover from GS1
+void LoadCase3IntroBackgrounds()
+{
+}
+
+void EnableDetentionCenterMask(bool16 enable)
+{
+    u16 i, j;
+    u16 r4;
+    u16 * map = &gBG0MapBuffer[0x202];
+    map += 0x20;
+    for(r4 = 0, i = 0; i < 3; r4++, i++) {
+        for(j = 0; j < 26; j++) {
+            if(enable)
+                *map++ = 0x2000 | (0x80 + r4);
+            else
+                *map++ = 0;
+        }
+        map += 6;
+    }
+    if(enable) {
+        DmaCopy16(3, gGfxDetentionCenterBottomTiles, VRAM+0x1000, 0x60);
+        gIORegisters.lcd_bg0cnt &= ~0x3;
+        gIORegisters.lcd_bg0cnt |= BGCNT_PRIORITY(2);
+        gIORegisters.lcd_dispcnt |= DISPCNT_BG0_ON;
+    }
+}
+
+void CopyBGDataToVram(u32 bgId)
+{
+    struct Main * main = &gMain; // r8
+    struct IORegisters * ioReg = &gIORegisters; // r9 sb
+    void * dst;
+    const void * src;
+    u8 * tempPtr;
+    u8 * bgData;
+    bool32 is4bpp;
+    u32 tempBgCtrl;
+    u32 tempSize;
+    u32 i, j;
+
+    u32 sp4;
+    u32 swap;
+
+    if(bgId == 0x56)
+        main->Bg256_scroll_y = 0;
+    if(bgId == 0x57)
+        main->Bg256_scroll_y = 0;
+    if(bgId == 0x11) {
+        if(main->disableDetentionCenterMaskInDetentionCenter == 1)
+            EnableDetentionCenterMask(FALSE);
+        else
+            EnableDetentionCenterMask(TRUE);
+    } else {
+        main->disableDetentionCenterMaskInDetentionCenter = 0;
+        EnableDetentionCenterMask(FALSE);
+    }
+    if(gMain.process[GAME_PROCESS] != INVESTIGATION_PROCESS) {
+        if(bgId == 4) {
+            LoadCounselBenchGraphics();
+            SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
+        } else if(bgId == 5) {
+            LoadCounselBenchGraphics();
+            SetOAMForCourtBenchSpritesProsecution(0x20, 0x80, 1);
+        } else if(bgId == 6) {
+            LoadWitnessBenchGraphics();
+            SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
+        } else if((bgId == 0x16 || bgId == 0x18)
+               && (gAnimation[1].flags & ANIM_ALLOCATED)
+               && gAnimation[1].animationInfo.personId == 0x10
+               && (!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
+            LoadWitnessBenchGraphics();
+            SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
+        } else if(bgId == 0x53
+               && (gAnimation[1].flags & ANIM_ALLOCATED)
+               && gAnimation[1].animationInfo.personId == 3
+               && (!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
+            LoadCounselBenchGraphics();
+            SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
+        } else if(bgId == 0x80
+               && (gAnimation[1].flags & ANIM_ALLOCATED)
+               && (gAnimation[1].flags & ANIM_QUEUED_PAL_UPLOAD)) {
+            switch(gAnimation[1].animationInfo.personId) {
+                case 3:
+                    LoadCounselBenchGraphics();
+                    SetOAMForCourtBenchSpritesDefense(0, 0x80, 1);
+                    break;
+                case 0x18:
+                    LoadWitnessBenchGraphics();
+                    SetOAMForCourtBenchSpritesWitness(0x18, 0x80, 1);
+                    break;
+                case 8:
+                    LoadCounselBenchGraphics();
+                    SetOAMForCourtBenchSpritesProsecution(0x18, 0x80, 1);
+                    break;
+                default:
+                    SetOAMForCourtBenchSpritesWitness(0, 0, 0);
+                    SetOAMForCourtBenchSpritesDefense(0, 0, 0);
+                    break;
+            }
+        } else {
+            SetOAMForCourtBenchSpritesWitness(0, 0, 0);
+            SetOAMForCourtBenchSpritesDefense(0, 0, 0);
+        }
+    }
+    if(gScriptContext.flags & 0x40) {
+        src = gPal_BG014_BustupPhoenix;
+        dst = (void *)PLTT+0x1C0;
+        DmaCopy16(3, src, dst, 0x20);
+        src = gPal_BG015_BustupEdgeworth;
+        dst = (void *)PLTT+0x1E0;
+        DmaCopy16(3, src, dst, 0x20);
+        src = gPal_BG020_BustupFranziska;
+        dst = (void *)PLTT+0x1A0;
+        DmaCopy16(3, src, dst, 0x20);
+        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eSpeedlineDecompBuffer, 0x500);
+        src = eSpeedlineDecompBuffer;
+        dst = (void *)VRAM+0x8B00;
+        DmaCopy16(3, src, dst, 0x5000);
+        src = gBG2MapBuffer;
+        dst = BG_SCREEN_ADDR(30);
+        DmaCopy16(3, src, dst, 0x580);
+        *(u16 *)REG_ADDR_BG2CNT = ioReg->lcd_bg2cnt;
+        if(main->currentBG == 0x80) {
+            *(u16 *)REG_ADDR_BG3CNT &= ~0x80;
+            DmaFill16(3, 0x2222, BG_CHAR_ADDR(1), 0x20);
+            dst = BG_SCREEN_ADDR(31);
+            DmaFill16(3, 0x0, dst, BG_SCREEN_SIZE);
+            MoveAnimationTilesToRam(0);
+            MoveSpritesToOAM();
+            return;
+        }
+    }
+    MoveAnimationTilesToRam(0);
+    MoveSpritesToOAM();
+    tempBgCtrl = bgId;
+    bgId &= ~0x8000;
+    ioReg->lcd_bg3vofs = 8;
+    ioReg->lcd_bg3hofs = 8;
+    main->isBGScrolling = FALSE;
+    main->Bg256_pos_x = 0;
+    main->Bg256_pos_y = 0;
+    main->currentBG = bgId;
+    main->currentDisplayBG = bgId;
+    if(bgId == 0x80)
+    {
+        src = gMapSpeedlines;
+        dst = gBG3MapBuffer;
+        DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
+        if(main->effectType == 0xFFFE) {
+            if(gAnimation[1].animationInfo.personId == 0x25)
+                LoadAndAdjustCounselWitnessBenchPaletteByMode(6, 0x20, 1);
+            DmaFill16(3, 0x1F, BG_PLTT+0x40, 0x1C0);
+            DmaFill16(3, 0x2222, BG_CHAR_ADDR(1), 0x9600);
+        } else {
+            DmaFill16(3, 0, BG_PLTT+0x40, 0x1C0);
+            DmaFill16(3, 0x2222, BG_CHAR_ADDR(1), 0x9600);
+        }
+        return;
+    }
+    i = gBackgroundTable[bgId].controlBits;
+    if(i & BG_MODE_SPECIAL_SPEEDLINE)
+    {
+        //u32 temp;
+        src = gMapSpeedlines;
+        dst = gBG3MapBuffer;
+        DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
+        j = 0x258;
+        for(i = 0; i < 20; i++, j++)
+            gBG3MapBuffer[i * 0x20 + 0x20] = j | 0x2000;
+        for(i = 0; i < 20; i++, j++)
+            gBG3MapBuffer[i * 0x20 + 0x3F] = j | 0x2000;
+        main->isBGScrolling = TRUE;
+        DmaCopy16(3, gGfxSpeedlinesFirstAndLastColumns, eSpeedlineDecompBuffer, 0x500);
+    }
+
+    if(tempBgCtrl & 0x8000)
+    {
+        tempBgCtrl = gBackgroundTable[bgId].controlBits;
+        if(tempBgCtrl & BG_MODE_VSCROLL_TOP)
+        {
+            tempBgCtrl &= ~BG_MODE_VSCROLL_TOP;
+            tempBgCtrl |= BG_MODE_VSCROLL_DOWN;
+        }
+        else if(tempBgCtrl & BG_MODE_VSCROLL_DOWN)
+        {
+            tempBgCtrl &= ~BG_MODE_VSCROLL_DOWN;
+            tempBgCtrl |= BG_MODE_VSCROLL_TOP;
+        }
+        else if(tempBgCtrl & BG_MODE_HSCROLL_RIGHT)
+        {
+            tempBgCtrl &= ~BG_MODE_HSCROLL_RIGHT;
+            tempBgCtrl |= BG_MODE_HSCROLL_LEFT;
+        }
+        else if(tempBgCtrl & BG_MODE_HSCROLL_LEFT)
+        {
+            tempBgCtrl &= ~BG_MODE_HSCROLL_LEFT;
+            tempBgCtrl |= BG_MODE_HSCROLL_RIGHT;
+        }
+    }
+    else
+        tempBgCtrl = gBackgroundTable[bgId].controlBits;
+
+    sp4 = tempBgCtrl;
+
+    bgData = gBackgroundTable[bgId].bgData + 0x28;
+    if(tempBgCtrl & BG_MODE_4BPP)
+    {
+        is4bpp = TRUE;
+        ioReg->lcd_bg3cnt &= ~BGCNT_256COLOR;
+        DmaCopy16(3, bgData, BG_PLTT+0x40, 0x20);
+        if(!(gScriptContext.flags & 0x40)) {
+            DmaFill16(3, 0, BG_CHAR_ADDR(1)+0x4EC0, 0x20);
+        }
+    }
+    else
+    {
+        is4bpp = FALSE;
+        ioReg->lcd_bg3cnt |= BGCNT_256COLOR;
+        DmaCopy16(3, bgData, BG_PLTT, 0x200);
+    }
+    *(u16*)&REG_DISPCNT = ioReg->lcd_dispcnt;
+    *(u16*)&REG_BG3CNT = ioReg->lcd_bg3cnt;
+    *(u32*)&REG_BG3HOFS = *(u32*)&ioReg->lcd_bg3hofs;
+    main->Bg256_dir = tempBgCtrl;
+
+    bgData = (gBackgroundTable[bgId].controlBits & BG_MODE_SIZE_MASK) == BG_MODE_SIZE_240x160 ? eBGDecompBuffer2 : eBGDecompBuffer;
+
+    if((tempBgCtrl & BG_MODE_SIZE_MASK) == 0)
+    {
+        if((tempBgCtrl & BG_MODE_SPECIAL_SPEEDLINE) == 0)
+        {
+            src = gMapSpeedlines;
+            dst = gBG3MapBuffer;
+            DmaCopy16(3, src, dst, sizeof(gMapSpeedlines));
+        }
+        src = gBG3MapBuffer;
+        dst = (void *)BG_SCREEN_ADDR(31);
+        DmaCopy16(3, src, dst, 0x800);
+        DmaCopy16(3, bgData, BG_CHAR_ADDR(1), 0x9600 >> is4bpp);
+    }
+    else
+    {
+        if(tempBgCtrl & (BG_MODE_SIZE_240x320 | BG_MODE_SIZE_240x240))
+        {
+            if(tempBgCtrl & BG_MODE_VSCROLL_TOP)
+            {
+                if(tempBgCtrl & BG_MODE_SIZE_240x320)
+                {
+                    bgData += 0x9600 >> is4bpp;
+                    main->Bg256_next_line = 0x12;
+                    main->Bg256_pos_y = 0xA0;
+                }
+                else
+                {
+                    bgData -= 0x4B00 >> is4bpp;
+                    main->Bg256_next_line = 0x8;
+                    main->Bg256_pos_y = 0x50;
+                }
+                DmaCopy16(3, bgData, BG_CHAR_ADDR(1), 0x9600 >> is4bpp);
+                bgData = eBGDecompBuffer + ((main->Bg256_next_line * 0x780) >> is4bpp); // lol gg good luck
+                bgData += 0x780 >> is4bpp;
+                DmaCopy16(3, bgData, BG_CHAR_ADDR(1) + (0x9600 >> is4bpp), 0x780 >> is4bpp);
+                main->Bg256_buff_pos = 0x13;
+                main->Bg256_stop_line = 0x26;
+                if(main->currentBG == 0x50)
+                    main->Bg256_stop_line = 6;
+                for(i = 0; i < 20; i++) {
+                    for(j = 0; j < 30; j++)
+                        gBG3MapBuffer[i * 32 + 33 + j] = (j + i * 30) | 0x2000;
+                }
+            }
+            else
+            {
+                DmaCopy16(3, bgData, BG_CHAR_ADDR(1), 0x9D80 >> is4bpp);
+                main->Bg256_pos_y = 0;
+                main->Bg256_buff_pos = 0;
+                main->Bg256_next_line = 0x15;
+                if(tempBgCtrl & BG_MODE_SIZE_240x320)
+                    main->Bg256_stop_line = 1;
+                else
+                    main->Bg256_stop_line = 0x20;
+                for(i = 0; i < 20; i++) {
+                    for(j = 0; j < 30; j++)
+                        gBG3MapBuffer[i * 32 + 33 + j] = (j + i * 30) | 0x2000;
+                }
+            }
+            for(i = 0; i < 2; i++)
+            {
+                for(j = 0; j < 30; j++)
+                    gBG3MapBuffer[(i * 0x2A0) + 1 + j] = (0x258 + j) | 0x2000;
+            }
+        }
+        else
+        {
+            tempSize = tempBgCtrl & BG_MODE_SIZE_480x160 ? 0xF00 : 0xB40;
+            if(tempBgCtrl & BG_MODE_HSCROLL_RIGHT)
+            {
+                main->Bg256_buff_pos = 0x1E;
+                main->Bg256_stop_line = 0x3A;
+                if(tempBgCtrl & BG_MODE_SIZE_480x160)
+                {
+                    bgData += 0x740;
+                    main->Bg256_next_line = 0x1C;
+                    main->Bg256_pos_x = 0xF0;
+                }
+                else
+                {
+                    bgData += 0x380;
+                    main->Bg256_next_line = 0xD;
+                    main->Bg256_pos_x = 0x78;
+                }
+                for(i = 0; i < 20; i++)
+                {
+                    for(j = 0; j < 31; j++)
+                        gBG3MapBuffer[i * 0x20 + j + 0x20] = (j + i * 0x1F) | 0x2000;
+                }
+            }
+            else if(tempBgCtrl & BG_MODE_HSCROLL_LEFT)
+            {
+                main->Bg256_next_line = 0x1F;
+                main->Bg256_pos_x = 0;
+                main->Bg256_buff_pos = 0;
+                if(tempBgCtrl & BG_MODE_SIZE_480x160)
+                    main->Bg256_stop_line = 1;
+                else
+                    main->Bg256_stop_line = 0x2F;
+                for(i = 0; i < 20; i++)
+                {
+                    for(j = 0; j < 31; j++)
+                        gBG3MapBuffer[i * 0x20 + j + 0x21] = (j + i * 0x1F) | 0x2000;
+                }
+            }
+            for(i = 0; i < 2; i++)
+            {
+                for(j = 0; j < 32; j++)
+                    gBG3MapBuffer[i * 0x2A0 + j] = 0x276 | 0x2000;
+            }
+            tempBgCtrl = (u32)BG_CHAR_ADDR(1);
+            for(i = 0; i < 20; i++)
+            {
+                DmaCopy16(3, bgData, tempBgCtrl, 0x7C0 >> is4bpp);
+                bgData += tempSize >> is4bpp;
+                tempBgCtrl += 0x7C0 >> is4bpp;
+            }
+        }
+        src = gBG3MapBuffer;
+        dst = (void*)BG_SCREEN_ADDR(31);
+        DmaCopy16(3, src, dst, 0x800);
+    }
+    if(sp4 & 0x100) {
+        for(i = 0; i < 0x400; i++)
+            gBG3MapBuffer[i] |= 0x400;
+        for(i = 0; i < 32; i++) {
+            for(j = 0; j < 16; j++) {
+                swap = gBG3MapBuffer[i * 32 + j];
+                gBG3MapBuffer[i * 32 + j] = gBG3MapBuffer[i * 32 + (31 - j)];
+                gBG3MapBuffer[i * 32 + (31 - j)] = swap;
+            }
+        }
+        src = gBG3MapBuffer;
+        dst = BG_SCREEN_ADDR(31);
+        DmaCopy16(3, src, dst, BG_SCREEN_SIZE);
+    }
+    if(sp4 & 0x200) {
+        for(i = 0; i < 0x400; i++)
+            gBG3MapBuffer[i] |= 0x800;
+        for(i = 0; i < 11; i++) {
+            for(j = 0; j < 32; j++) {
+                swap = gBG3MapBuffer[i * 32 + j];
+                gBG3MapBuffer[i * 32 + j] = gBG3MapBuffer[(21-i) * 32 + j];
+                gBG3MapBuffer[(21-i) * 32 + j] = swap;
+            }
+        }
+        src = gBG3MapBuffer;
+        dst = BG_SCREEN_ADDR(31);
+        DmaCopy16(3, src, dst, BG_SCREEN_SIZE);
+    }
+    if(main->currentBG == 0xA) {
+        switch(main->effectType) {
+            case 3:
+            case 7:
+                main->effectType = 0xFFFD;
+                break;
+            case 4:
+            case 8:
+                main->effectType = 0;
+                break;
+            case 5:
+                main->effectType = 0;
+                break;
+            case 6:
+                main->effectType = 0xFFFE;
+                break;
+        }
+        if(main->currentBG == 0xA) // ! ???
+            return;
+    }
+    if((!(main->process[GAME_PROCESS] == COURT_RECORD_PROCESS && main->process[GAME_PROCESS_STATE] == 0x5) || main->process[GAME_PROCESS_VAR1] == 0x4)) {
+        if(main->effectType == 0xFFFD || main->effectType == 0xFFFE) {
+            if(main->effectType == 0xFFFE)
+                LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 1);
+            else
+                LoadAndAdjustBGPaletteByMode(main->currentBG, 0x20, 0);
+            if(main->currentBG == 4 || main->currentBG == 5 || main->currentBG == 6) {
+                if(main->effectType == 0xFFFE)
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 1);
+                else
+                    LoadAndAdjustCounselWitnessBenchPaletteByMode(main->currentBG, 0x20, 0);
+            }
+        }
+    }
+}
+
+void CopyBGDataToVramAndScrollBG(u32 bgId)
+{
+    struct Main * main = &gMain;
+    u16 sp0 = main->previousBG;
+    bool32 r8 = main->isBGScrolling;
+    u16 sl = main->Bg256_pos_x;
+    u16 spC = main->Bg256_pos_y;
+    u8 r6 = main->horizontolBGScrollSpeed;
+    u8 r5 = main->verticalBGScrollSpeed;
+    u32 unk0;
+    CopyBGDataToVram(bgId);
+    main->previousBG = sp0;
+    main->isBGScrolling = r8;
+    main->horizontolBGScrollSpeed = r6;
+    main->verticalBGScrollSpeed = r5;
+    main->Bg256_scroll_x = main->Bg256_pos_x - sl;
+    main->Bg256_scroll_y = main->Bg256_pos_y - spC;
+    unk0 = gBackgroundTable[main->currentBG].controlBits;
+    if(unk0 & BG_MODE_SPECIAL_SPEEDLINE)
+        return;
+    unk0 &= BG_MODE_4BPP;
+    if(main->Bg256_scroll_x > 0)
+    {
+        main->Bg256_pos_x = sl;
+        main->Bg256_scroll_x *= -1;
+        if(gBackgroundTable[main->currentBG].controlBits & BG_MODE_SIZE_480x160)
+            unk0 |= 480;
+        else
+            unk0 |= 360;
+        bg256_right_scroll(main, unk0);
+    }
+    else if(main->Bg256_scroll_x < 0)
+    {
+        main->Bg256_pos_x = sl;
+        main->Bg256_scroll_x *= -1;
+        if(gBackgroundTable[main->currentBG].controlBits & BG_MODE_SIZE_480x160)
+            unk0 |= 480;
+        else
+            unk0 |= 360;
+        bg256_left_scroll(main, unk0);
+    }
+    else if(main->Bg256_scroll_y > 0)
+    {
+        main->Bg256_pos_y = spC;
+        main->Bg256_scroll_y *= -1;
+        if(gBackgroundTable[main->currentBG].controlBits & BG_MODE_SIZE_240x320)
+            unk0 |= 320;
+        else
+            unk0 |= 240;
+        bg256_down_scroll(main, unk0);
+    }
+    else if(main->Bg256_scroll_y < 0)
+    {
+        main->Bg256_pos_y = spC;
+        main->Bg256_scroll_y *= -1;
+        if(gBackgroundTable[main->currentBG].controlBits & BG_MODE_SIZE_240x320)
+            unk0 |= 320;
+        else
+            unk0 |= 240;
+        bg256_up_scroll(main, unk0);
+    }
+}
+
+u32 GetBGControlBits(u32 bgId)
+{
+    return gBackgroundTable[bgId].controlBits;
+}
+
+u8 * GetBGPalettePtr(u32 bgId)
+{
+    return gBackgroundTable[bgId].bgData + 0x28;
+}
+
+void SetTextboxSize(u32 arg0)
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    u16 * map;
+    u32 i;
+    switch(arg0)
+    {
+    case 0:
+        map = gBG1MapBuffer;
+        for(i = 0; i < 0x2C0; i++, map++)
+        {
+            *map = gTextboxTiles[i];
+        }
+        scriptCtx->textboxState = 0;
+        SetTextboxNametag(scriptCtx->textboxNameId & 0x7F, (u8)(scriptCtx->textboxNameId & 0x80));
+        break;
+    case 1:
+        scriptCtx->unused3A = 0;
+        scriptCtx->textboxYPos = 14;
+        scriptCtx->textboxState = 2;
+        SetTextboxNametag(0, FALSE);
+        break;
+    case 2:
+        map = gBG1MapBuffer;
+        for(i = 0; i < 0x1C0; i++, map++)
+        {
+            *map = gTextboxTiles[i];
+        }
+        map = gBG1MapBuffer + 0x1C0;
+        for(i = 0x1C0; i < 0x220; i++, map++)
+        {
+            *map = 0;
+        }
+        map = gBG1MapBuffer + 0x200;
+        for(i = 0x1C0; i < 0x1E0; i++, map++)
+        {
+            *map = gTextboxTiles[i];
+        }
+        scriptCtx->textboxState = 0;
+        break;
+    default:
+        break;
+    }
+}
+
+
+void UpdateTextbox()
+{
+    struct ScriptContext * scriptCtx = &gScriptContext;
+    u32 tiley;
+    u32 i;
+    switch(scriptCtx->textboxState)
+    {
+    case 0:
+    case 1:
+        break;
+    case 2:
+        scriptCtx->unused3A += 2;
+        if(scriptCtx->unused3A < 2)
+            break;
+        scriptCtx->unused3A = 0;
+        tiley = scriptCtx->textboxYPos * 32;
+        for(i = 0; i < 32; i++)
+        {
+            u16 * dest = &gBG1MapBuffer[tiley - 32 + i];
+            u16 * src = &gBG1MapBuffer[tiley + i];
+            *dest = *src;
+        }
+        for(i = 0; i < 32; i++)
+        {
+            u16 * dest = &gBG1MapBuffer[tiley + i];
+            u16 * src = &gBG1MapBuffer[tiley + 32 + i];
+            *dest = *src;
+        }
+        scriptCtx->textboxYPos--;
+        if(scriptCtx->textboxYPos == 0)
+        {
+            gMain.showTextboxCharacters = TRUE;
+            scriptCtx->textboxState = 0;
+        }
+        break;
+    case 3:
+        gIORegisters.lcd_bg1vofs += 4;
+        if(gIORegisters.lcd_bg1vofs < (u16)-80u)
+        {
+            gMain.advanceScriptContext = TRUE;
+            gMain.showTextboxCharacters = TRUE;
+            gIORegisters.lcd_bg1vofs = 0;
+            scriptCtx->textboxState = 0;
+        }
+        break;
+    case 4:
+        gIORegisters.lcd_bg1vofs -= 4;
+        if(gIORegisters.lcd_bg1vofs < (u16)-80u)
+        {
+            gIORegisters.lcd_dispcnt &= ~DISPCNT_BG1_ON;
+            scriptCtx->textboxState = 1;
+        }
+        break;
+    }
+}
+
+void CopyTextboxTilesToBG1MapBuffer()
+{
+    s32 i;
+    for(i = 0x1C0; i < 0x3C0; i++) {
+        gBG1MapBuffer[i] = gTextboxTiles[i];
+    }
+}
+
+void SlideTextbox(u32 slideUp)
+{
+    gMain.advanceScriptContext = 0;
+    gMain.showTextboxCharacters = 0;
+    CopyTextboxTilesToBG1MapBuffer();
+    SetTextboxNametag(0, FALSE);
+    if(slideUp == 1)
+    {
+        gScriptContext.textboxState = 3;
+        gInvestigation.actionState = 3;
+        gIORegisters.lcd_dispcnt |= DISPCNT_BG1_ON;
+        gBG1MapBuffer[622] = 9;
+        gBG1MapBuffer[623] = 9;
+    }
+    else if(slideUp == 2) {
+        gScriptContext.textboxState = 3;
+        gInvestigation.actionState = 3;
+    }
+    else
+    {
+        gScriptContext.textboxState = 4;
+        gInvestigation.actionState = 1;
+    }
+}
+
+u16 AdjustColorByMode(u16 color, u16 intensity, u16 mode)
+{
+    u16 r = (color & 0x1F);
+    u16 g = (color & 0x3E0) >> 5;
+    u16 b = (color & 0x7C00) >> 10;
+    u16 average = (r + g + b) / 3;
+
+    if(intensity > 32)
+        intensity = 32;
+    
+    switch(mode) {
+        // Fade to black
+        case 2:
+            r = (r * (32 - intensity)) / 32;
+            g = (g * (32 - intensity)) / 32;
+            b = (b * (32 - intensity)) / 32;
+            break;
+        // Fade to red
+        case 1:
+            r = (r * (32 - intensity) + intensity * 31) / 32;
+            g = (g * (32 - intensity)) / 32;
+            b = (b * (32 - intensity)) / 32;
+            break;
+        // Fade to grey
+        default:
+            r = (r * (32 - intensity) + intensity * average) / 32;
+            g = (g * (32 - intensity) + intensity * average) / 32;
+            b = (b * (32 - intensity) + intensity * average) / 32;
+    }
+    r &= 0x1F;
+    g &= 0x1F;
+    b &= 0x1F;
+    return (b << 10) | (g << 5) | (r);
+}
+
+void LoadAndAdjustBGPaletteByMode(u16 bgId, u16 intensity, u16 mode)
+{
+    u16 pal[0x100];
+    u32 i;
+    if(bgId == 0x80) {
+        for(i = 0x20; i < 0x100; i++) {
+            pal[i] = 0;
+            pal[i] = AdjustColorByMode(pal[i], intensity, mode);
+        }
+        DmaCopy16(3, pal+0x20, PLTT+0x40, 0x1C0);
+    } else {
+        u32 bits = GetBGControlBits(bgId);
+        u16 * bgpal = (u16 *)GetBGPalettePtr(bgId);
+        if(bits & 0x80000000) {
+            // 4bpp
+            DmaCopy16(3, bgpal, pal, 0x20);
+            for(i = 0; i < 0x10; i++) {
+                pal[i] = AdjustColorByMode(pal[i], intensity, mode);
+            }
+            DmaCopy16(3, pal, PLTT+0x40, 0x20);
+        } else {
+            // 8bpp
+            DmaCopy16(3, bgpal, pal, 0x200);
+            for(i = 0x20; i < 0x100; i++) {
+                pal[i] = AdjustColorByMode(pal[i], intensity, mode);
+            }
+            DmaCopy16(3, pal+0x20, PLTT+0x40, 0x1C0);
+        }
+    }
+}
+
+void LoadAndAdjustCurrentAnimation01PaletteByMode(u16 intensity, u16 mode) {
+    u16 pal[0x30];
+    u32 * gfx = (u32*)gAnimation[1].animationInfo.animGfxDataStartPtr;
+    u32 paletteCount = *gfx++;
+    s32 i;
+    do{
+    DmaCopy16(3, gfx, pal, 0x40);
+    }while(0);
+    for(i = 0; i < paletteCount*16; i++) {
+        pal[i] = AdjustColorByMode(pal[i], intensity, mode);
+    }
+    if(paletteCount == 3) {
+        DmaCopy16(3, pal, OBJ_PLTT+0x1A0, 0x60);
+    } else {
+        DmaCopy16(3, pal, OBJ_PLTT+0x1C0, paletteCount*0x20);
+    }
+}
+
+void LoadAndAdjustCounselWitnessBenchPaletteByMode(u16 bgId, u16 intensity, u16 mode)
+{
+    u16 pal[0x10];
+    u16 * benchpal;
+    u32 i;
+    bgId -= 4;
+    benchpal = bgId < 2 ? (u16*)gPalCounselBench : (u16*)gPalWitnessBench;
+    DmaCopy16(3, benchpal, pal, 0x20);
+    for(i = 0; i < 0x10; i++) {
+        pal[i] = AdjustColorByMode(pal[i], intensity, mode);
+    }
+    DmaCopy16(3, pal, OBJ_PLTT+0x140, 0x20);
+}
+
+void LoadAndAdjustAnimation10PaletteByMode(u16 intensity, u16 mode)
+{
+    u16 pal[0x10];
+    u32 * framedata = (u32*)gGfxSeqAnimation10;
+    u16 * spritepal = (u16*)(gGfxPixAnimationTileset01 + 4 + *(framedata+1));
+    u32 i;
+    DmaCopy16(3, spritepal, pal, 0x20);
+    for(i = 0; i < 0x10; i++) {
+        if(mode == 2) {
+            pal[i] = AdjustColorByMode(pal[i], 32,0);
+            pal[i] = AdjustColorByMode(pal[i], intensity, 2);
+        } else {
+            pal[i] = AdjustColorByMode(pal[i], intensity, mode);
+        }
+    }
+    DmaCopy16(3, pal, OBJ_PLTT+0x140, 0x20);
+}
+
+void SlideInBG2Window(u32 mode, u32 speed)
+{
+    struct CourtRecord * courtRecord = &gCourtRecord;
+    if(mode > 4) // is for save screens
+    {
+        courtRecord->windowIsSaveScreen = TRUE;
+        mode -= 4;
+    }
+    else
+    {
+        courtRecord->windowIsSaveScreen = FALSE;
+    }
+    courtRecord->windowMode = mode;
+    courtRecord->windowOffset = 0;
+    courtRecord->windowPrevX = courtRecord->windowX;
+    courtRecord->flags &= ~0x4;
+    switch(mode)
+    {
+    case 0:
+        break;
+    case 1:
+        courtRecord->windowScrollSpeed = speed;
+        courtRecord->windowTileX = 0;
+        courtRecord->windowX = 0x100;
+        break;
+    case 2:
+        courtRecord->windowScrollSpeed = -speed;
+        courtRecord->windowTileX = 31;
+        courtRecord->windowX = 0x110;
+        break;
+    case 3:
+        courtRecord->windowScrollSpeed = speed;
+        break;
+    case 4:
+        courtRecord->windowScrollSpeed = -speed;
+        break;
+    default:
+        break;
+    }
+}
+
+// St_bg2_main00
+void WindowDummy(struct CourtRecord * courtRecord)
+{
+
+}
+
+
+// St_bg2_main01
+void ScrollWindowWithPrevWindow(struct CourtRecord * courtRecord)
+{
+    u32 i;
+    courtRecord->windowOffset += courtRecord->windowScrollSpeed;
+    courtRecord->windowX -= courtRecord->windowScrollSpeed;
+    courtRecord->windowX &= 0x1FF;
+    courtRecord->windowPrevX -= courtRecord->windowScrollSpeed;
+    courtRecord->windowPrevX &= 0x1FF;
+    while(courtRecord->windowOffset >= 8)
+    {
+        courtRecord->windowOffset -= 8;
+        courtRecord->windowTileX++;
+        courtRecord->windowTileX &= 0x1F;
+        if(courtRecord->windowTileX == 0x1F)
+        {
+            courtRecord->windowOffset = 0;
+            courtRecord->windowScrollSpeed = 0;
+            courtRecord->windowX = 8;
+        }
+        for(i = 2; i < 12; i++)
+        {
+            DmaCopy16(3, &gBG2MapBuffer[i*0x20], gTilemapBuffer, 0x40);
+            DmaCopy16(3, gTilemapBuffer+1, &gBG2MapBuffer[i*0x20], 0x3E);
+        }
+        if(courtRecord->windowIsSaveScreen)
+        {
+            for(i = 0x40; i < 0x180; i += 0x20)
+            {
+                gBG2MapBuffer[i + 31] = gMapCourtRecordSaveWindow[courtRecord->windowTileX + i];
+            }
+        }
+        else
+        {
+            for(i = 0x40; i < 0x180; i += 0x20)
+            {
+                gBG2MapBuffer[i + 31] = gMapCourtRecordNormalWindow[courtRecord->windowTileX + i];
+            }
+        }
+    }
+    while(courtRecord->windowOffset <= -8)
+    {
+        courtRecord->windowOffset += 8;
+        courtRecord->windowTileX--;
+        courtRecord->windowTileX &= 0x1F;
+        if(courtRecord->windowTileX == 0)
+        {
+            courtRecord->windowOffset = 0;
+            courtRecord->windowScrollSpeed = 0;
+            courtRecord->windowX = 8;
+        }
+        for(i = 2; i < 12; i++)
+        {
+            DmaCopy16(3, &gBG2MapBuffer[i*0x20], gTilemapBuffer, 0x40);
+            DmaCopy16(3, gTilemapBuffer, &gBG2MapBuffer[i*0x20+1], 0x3E);
+        }
+        if(courtRecord->windowIsSaveScreen)
+        {
+            for(i = 0x40; i < 0x180; i += 0x20)
+            {
+                gBG2MapBuffer[i] = gMapCourtRecordSaveWindow[courtRecord->windowTileX + i];
+            }
+        }
+        else
+        {
+            for(i = 0x40; i < 0x180; i += 0x20)
+            {
+                gBG2MapBuffer[i] = gMapCourtRecordNormalWindow[courtRecord->windowTileX + i];
+            }
+        }
+    }
+}
+
+// St_bg2_main02
+void ScrollWindowWithoutPrevWindow(struct CourtRecord * courtRecord)
+{
+    u32 i;
+    courtRecord->windowOffset += courtRecord->windowScrollSpeed;
+    courtRecord->windowX -= courtRecord->windowScrollSpeed;
+    courtRecord->windowX &= 0x1FF;
+    while(courtRecord->windowOffset >= 8)
+    {
+        courtRecord->windowOffset -= 8;
+        courtRecord->windowTileX++;
+        courtRecord->windowTileX &= 0x1F;
+        if(courtRecord->windowTileX == 0x1F)
+        {
+            courtRecord->windowOffset = 0;
+            courtRecord->windowScrollSpeed = 0;
+        }
+        for(i = 2; i < 12; i++)
+        {
+            DmaCopy16(3, &gBG2MapBuffer[i*0x20], gTilemapBuffer, 0x40);
+            DmaCopy16(3, gTilemapBuffer+1, &gBG2MapBuffer[i*0x20], 0x3E);
+        }
+        for(i = 0x40; i < 0x180; i += 0x20)
+        {
+            gBG2MapBuffer[i+31] = 0;
+        }
+    }
+    while(courtRecord->windowOffset <= -8)
+    {
+        courtRecord->windowOffset += 8;
+        courtRecord->windowTileX--;
+        courtRecord->windowTileX &= 0x1F;
+        if(courtRecord->windowTileX == 0)
+        {
+            courtRecord->windowOffset = 0;
+            courtRecord->windowScrollSpeed = 0;
+        }
+        for(i = 2; i < 12; i++)
+        {
+            DmaCopy16(3, &gBG2MapBuffer[i*0x20], gTilemapBuffer, 0x40);
+            DmaCopy16(3, gTilemapBuffer, &gBG2MapBuffer[i*0x20+1], 0x3E);
+        }
+        for(i = 0x40; i < 0x180; i += 0x20)
+        {
+            gBG2MapBuffer[i] = 0;
+        }
+    }
+}
+
+// st_bg2_main_proc_tbl
+void (*gWindowFunctions[])(struct CourtRecord *) = {
+    WindowDummy,
+	ScrollWindowWithPrevWindow,
+	ScrollWindowWithPrevWindow,
+	ScrollWindowWithoutPrevWindow,
+	ScrollWindowWithoutPrevWindow,
+};
+
+void UpdateBG2Window(struct CourtRecord * courtRecord)
+{
+    if(gMain.blendMode == 0)
+    {
+        gWindowFunctions[courtRecord->windowMode](courtRecord);
+        gIORegisters.lcd_bg2hofs = courtRecord->windowOffset + 8;
+    }
+}
+
+u8 gSpeakerToNametagMap[56] = {
+    0x00, 0x01, 0x01, 0x02, 0x03, 0x0C, 0x0C, 0x09,
+    0x1F, 0x04, 0x05, 0x06, 0x00, 0x07, 0x0B, 0x0B,
+    0x0A, 0x08, 0x08, 0x0E, 0x10, 0x0F, 0x11, 0x12,
+    0x14, 0x0C, 0x13, 0x0D, 0x16, 0x15, 0x17, 0x19,
+    0x1A, 0x18, 0x1B, 0x20, 0x21, 0x22, 0x00, 0x23,
+    0x24, 0x2E, 0x00, 0x00, 0x00, 0x00, 0x1E, 0x29,
+    0x27, 0x28, 0x2A, 0x2B, 0x2C, 0x25, 0x2D, 0x00,
+};
+
+// Mess_win_name_set
+void SetTextboxNametag(u32 nametagId, u32 rightSide)
+{
+    u32 i;
+    u32 j;
+    void * tiles;
+    const u8 * tileId;
+    u16 * map;
+    u32 offset = rightSide;
+
+    /* begin wat */
+    gMain.currentSpeaker = nametagId;
+    gMain.currentNametagRightSide = rightSide;
+    nametagId = gSpeakerToNametagMap[nametagId];
+    /* end wat */
+    
+    // this reuses r0 instead of loading into r5
+    if(nametagId == 0)
+    {
+        for(i = 0x180; i < 0x1E0; i++)
+            gBG1MapBuffer[i] = gTextboxTiles[i];
+        return;
+    }
+    i = (nametagId / 5);
+    j = (nametagId % 5);
+    i *= 0x800;
+    j *= 0xC0;
+    tiles = gGfx4bppNametags + j + i;
+    DmaCopy16(3, tiles, VRAM+0xA80, 0xC0);
+    DmaCopy16(3, tiles+0x400, VRAM+0xB40, 0xC0);
+    if(rightSide)
+    {
+        offset = 24;
+        tileId = gNameTagTiles+18;
+    }
+    else
+    {
+        offset = 0;
+        tileId = gNameTagTiles+12;
+    }
+
+    map = gBG1MapBuffer + 0x1C0;
+    map += offset;
+    for(i = 0; i < 6; i++)
+    {
+        *map = *tileId;
+        map++;
+        tileId++;
+    }
+    map = gBG1MapBuffer + 0x180;
+    map += offset;
+    tileId = gNameTagTiles;
+    for(i = 0; i < 6; i++)
+    {
+        *map = *tileId;
+        map++;
+        tileId++;
+    }
+    map = gBG1MapBuffer + 0x1A0;
+    map += offset;
+    tileId = gNameTagTiles+6;
+    for(i = 0; i < 6; i++)
+    {
+        *map = *tileId;
+        map++;
+        tileId++;
+    }
+}
+
+void UpdateBGTilemaps()
+{
+    if(gMain.tilemapUpdateBits & 1)
+        DmaCopy16(3, gBG0MapBuffer, BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+    if(gMain.tilemapUpdateBits & 2)
+        DmaCopy16(3, gBG1MapBuffer, BG_SCREEN_ADDR(29), BG_SCREEN_SIZE);
+    if(gMain.tilemapUpdateBits & 4)
+        DmaCopy16(3, gBG2MapBuffer, BG_SCREEN_ADDR(30), BG_SCREEN_SIZE);
+    if(gMain.tilemapUpdateBits & 8)
+        DmaCopy16(3, gBG3MapBuffer, BG_SCREEN_ADDR(31), BG_SCREEN_SIZE);
 }
