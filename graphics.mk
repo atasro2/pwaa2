@@ -1,8 +1,8 @@
 graphics.d: graphics.yml | venv
 	$(VENV)/python $(ASSET_BLOB) dependencies $< assets.bin $@
 
-assets.bin: 
-	$(VENV)/python $(ASSET_BLOB) blob graphics.yml $@ 0x08130000 include/graphics.h
+assets.bin: graphics.yml | venv
+	$(VENV)/python $(ASSET_BLOB) blob $< $@ 0x08130000 include/graphics.h
 
 include/graphics.h: assets.bin
 	@:
